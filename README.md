@@ -12,7 +12,8 @@ be ported if some really important stuff is added / fixed.
 
 Where to get it?
 ================
-For the time being at GitHub: https://github.com/szymach/CpChart
+For the time being at [GitHub](https://github.com/szymach/CpChart).
+
 Will add it to packagist later.
 
 
@@ -24,10 +25,16 @@ How to install it?
 
 References
 ==========
-The original pChart: website http://www.pchart.net/ 
-Composer: https://getcomposer.org/
+[The original pChart website](http://www.pchart.net/)
+
+[Composer](https://getcomposer.org/)
+
 PHP Framework Interoperability Group at GitHub on PHP coding standards:
-https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
-https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
-https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
-https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
+
+[PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
+
+[PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
+
+[PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
+
+[PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)

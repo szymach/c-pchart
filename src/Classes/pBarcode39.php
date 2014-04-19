@@ -1,19 +1,19 @@
 <?php
 namespace CpChart\Classes;
 
- /*
-     pBarcode39 - class to create barcodes (39B)
+/*
+    pBarcode39 - class to create barcodes (39B)
 
-     Version     : 2.1.4
-     Made by     : Jean-Damien POGOLOTTI
-     Last Update : 19/01/2014
+    Version     : 2.1.4
+    Made by     : Jean-Damien POGOLOTTI
+    Last Update : 19/01/2014
 
-     This file can be distributed under the license you can find at :
+    This file can be distributed under the license you can find at :
 
-                       http://www.pchart.net/license
+                      http://www.pchart.net/license
 
-     You can find the whole class documentation on the pChart web site.
- */
+    You can find the whole class documentation on the pChart web site.
+*/
 class pBarcode39
 {
     public $Codes;
