@@ -1,6 +1,8 @@
 # Created by http://www.gitignore.io
 
 ### NetBeans ###
+nbproject
+nbproject/*
 nbproject/private/
 nbproject/project.properties
 nbproject/project.xml
