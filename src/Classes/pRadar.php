@@ -1,4 +1,5 @@
 <?php
+namespace CpChart\Classes;
  /*
      pRadar - class to draw radar charts
 
@@ -24,14 +25,14 @@
  /* pRadar class definition */
  class pRadar
   {
-   var $pChartObject;
+   public $pChartObject;
 
    /* Class creator */
-   function pRadar()
+   public function __construct()
     { }
 
    /* Draw a radar chart */
-   function drawRadar($Object,$Values,$Format="")
+   public function drawRadar($Object,$Values,$Format="")
     {
      $this->pChartObject = $Object;
 
@@ -396,7 +397,7 @@
 
 
    /* Draw a radar chart */
-   function drawPolar($Object,$Values,$Format="")
+   public function drawPolar($Object,$Values,$Format="")
     {
      $this->pChartObject = $Object;
 
@@ -580,7 +581,7 @@
         {
          $LabelX = cos(deg2rad($i+$AxisRotation)) * ($EdgeHeight+$LabelPadding+$TicksLength) + $CenterX;
          $LabelY = sin(deg2rad($i+$AxisRotation)) * ($EdgeHeight+$LabelPadding+$TicksLength) + $CenterY;
-         $Label = $i."°";
+         $Label = $i."Â°";
 
          if ( $LabelPos == RADAR_LABELS_ROTATED )
           $Object->drawText($LabelX,$LabelY,$Label,array("Angle"=>(360-$i),"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
@@ -678,4 +679,3 @@
       }
     }
   }
-?>

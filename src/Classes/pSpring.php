@@ -1,4 +1,5 @@
 <?php
+namespace CpChart\Classes;
  /*
      pSpring - class to draw spring graphs
 
@@ -31,19 +32,19 @@
  /* pSpring class definition */
  class pSpring
   {
-   var $History;
-   var $pChartObject;
-   var $Data;
-   var $Links;
-   var $X1;
-   var $Y1;
-   var $X2;
-   var $Y2;
-   var $AutoComputeFreeZone;
-   var $Labels;
+   public $History;
+   public $pChartObject;
+   public $Data;
+   public $Links;
+   public $X1;
+   public $Y1;
+   public $X2;
+   public $Y2;
+   public $AutoComputeFreeZone;
+   public $Labels;
 
    /* Class creator */
-   function pSpring()
+   public function __construct()
     {
      /* Initialise data arrays */
      $this->Data = "";
@@ -83,7 +84,7 @@
     }
 
    /* Set default links options */
-   function setLinkDefaults($Settings="")
+   public function setLinkDefaults($Settings="")
     {
      if ( isset($Settings["R"]) )     { $this->Default["LinkR"] = $Settings["R"]; }
      if ( isset($Settings["G"]) )     { $this->Default["LinkG"] = $Settings["G"]; }
@@ -92,7 +93,7 @@
     }
 
    /* Set default links options */
-   function setLabelsSettings($Settings="")
+   public function setLabelsSettings($Settings="")
     {
      if ( isset($Settings["Type"]) )  { $this->Labels["Type"] = $Settings["Type"]; }
      if ( isset($Settings["R"]) )     { $this->Labels["R"] = $Settings["R"]; }
@@ -102,7 +103,7 @@
     }
 
    /* Auto compute the FreeZone size based on the number of connections */
-   function autoFreeZone()
+   public function autoFreeZone()
     {
      /* Check connections reciprocity */
      foreach($this->Data as $Key => $Settings)
@@ -116,7 +117,7 @@
     }
 
    /* Set link properties */
-   function linkProperties($FromNode,$ToNode,$Settings)
+   public function linkProperties($FromNode,$ToNode,$Settings)
     {
      if ( !isset($this->Data[$FromNode]) ) { return(0); }
      if ( !isset($this->Data[$ToNode]) )   { return(0); }
@@ -136,7 +137,7 @@
      $this->Links[$FromNode][$ToNode]["Ticks"] = $Ticks; $this->Links[$ToNode][$FromNode]["Ticks"] = $Ticks;
     }
 
-   function setNodeDefaults($Settings="")
+   public function setNodeDefaults($Settings="")
     {
      if ( isset($Settings["R"]) ) { $this->Default["R"]					= $Settings["R"]; }
      if ( isset($Settings["G"]) ) { $this->Default["G"]					= $Settings["G"]; }
@@ -158,7 +159,7 @@
     }
 
    /* Add a node */
-   function addNode($NodeID,$Settings="")
+   public function addNode($NodeID,$Settings="")
     {
      /* if the node already exists, ignore */
      if (isset($this->Data[$NodeID])) { return(0); }
@@ -209,7 +210,7 @@
     }
 
    /* Set color attribute for a list of nodes */
-   function setNodesColor($Nodes,$Settings="")
+   public function setNodesColor($Nodes,$Settings="")
     {
      if ( is_array($Nodes) )
       {
@@ -244,11 +245,11 @@
     }
 
    /* Returns all the nodes details */
-   function dumpNodes()
+   public function dumpNodes()
     { return($this->Data); }
 
    /* Check if a connection exists and create it if required */
-   function checkConnection($SourceID, $TargetID)
+   public function checkConnection($SourceID, $TargetID)
     {
      if ( isset($this->Data[$SourceID]["Connections"]) )
       {
@@ -258,7 +259,7 @@
      $this->Data[$SourceID]["Connections"][] = $TargetID;
     }
    /* Get the median linked nodes position */
-   function getMedianOffset($Key,$X,$Y)
+   public function getMedianOffset($Key,$X,$Y)
     {
      $Cpt = 1;
      if ( isset($this->Data[$Key]["Connections"]) )
@@ -277,7 +278,7 @@
     }
 
    /* Return the ID of the attached partner with the biggest weight */
-   function getBiggestPartner($Key)
+   public function getBiggestPartner($Key)
     {
      if ( !isset($this->Data[$Key]["Connections"]) ) { return(""); }
 
@@ -291,7 +292,7 @@
     }
 
    /* Do the initial node positions computing pass */
-   function firstPass($Algorithm)
+   public function firstPass($Algorithm)
     {
      $CenterX = ($this->X2 - $this->X1) / 2 + $this->X1;
      $CenterY = ($this->Y2 - $this->Y1) / 2 + $this->Y1;
@@ -437,7 +438,7 @@
     }
 
    /* Compute one pass */
-   function doPass()
+   public function doPass()
     {
      /* Compute vectors */
      foreach($this->Data as $Key => $Settings)
@@ -523,7 +524,7 @@
       }
     }
 
-   function lastPass()
+   public function lastPass()
     {
      /* Put everything inside the graph area */
      foreach($this->Data as $Key => $Settings)
@@ -599,7 +600,7 @@
     }
 
    /* Center the graph */
-   function center()
+   public function center()
     {
      /* Determine the real center */
      $TargetCenterX = ($this->X2 - $this->X1) / 2 + $this->X1;
@@ -634,7 +635,7 @@
     }
 
    /* Create the encoded string */
-   function drawSpring($Object,$Settings="")
+   public function drawSpring($Object,$Settings="")
     {
      $this->pChartObject = $Object;
 
@@ -834,17 +835,17 @@
     }
 
    /* Return the distance between two points */
-   function getDistance($X1,$Y1,$X2,$Y2)
+   public function getDistance($X1,$Y1,$X2,$Y2)
     { return (sqrt(($X2-$X1)*($X2-$X1)+($Y2-$Y1)*($Y2-$Y1))); }
 
    /* Return the angle made by a line and the X axis */
-   function getAngle($X1,$Y1,$X2,$Y2)
+   public function getAngle($X1,$Y1,$X2,$Y2)
     {
      $Opposite = $Y2 - $Y1; $Adjacent = $X2 - $X1;$Angle = rad2deg(atan2($Opposite,$Adjacent));
      if ($Angle > 0) { return($Angle); } else { return(360-abs($Angle)); }
     }
 
-   function intersect($X1,$Y1,$X2,$Y2,$X3,$Y3,$X4,$Y4)
+   public function intersect($X1,$Y1,$X2,$Y2,$X3,$Y3,$X4,$Y4)
     {
      $A = (($X3 * $Y4 - $X4 * $Y3) * ($X1 - $X2) - ($X1 * $Y2 - $X2 * $Y1) * ($X3 - $X4));
      $B = (($Y1 - $Y2) * ($X3 - $X4) - ($Y3 - $Y4) * ($X1 - $X2));

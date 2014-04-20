@@ -1,4 +1,5 @@
 <?php
+namespace CpChart\Classes;
  /*
      pSurface - class to draw surface charts
 
@@ -24,13 +25,13 @@
  /* pStock class definition */
  class pSurface
   {
-   var $pChartObject;
-   var $GridSizeX;
-   var $GridSizeY;
-   var $Points;
+   public $pChartObject;
+   public $GridSizeX;
+   public $GridSizeY;
+   public $Points;
 
    /* Class creator */
-   function pSurface($pChartObject)
+   public function pSurface($pChartObject)
     {
      $this->pChartObject = $pChartObject;
      $this->GridSize     = 10;
@@ -38,7 +39,7 @@
     }
 
    /* Define the grid size and initialise the 2D matrix */
-   function setGrid($XSize=10,$YSize=10)
+   public function setGrid($XSize=10,$YSize=10)
     {
      for($X=0; $X<=$XSize; $X++) { for($Y=0; $Y<=$YSize; $Y++) { $this->Points[$X][$Y]=UNKNOWN; } } 
 
@@ -47,7 +48,7 @@
     }
 
    /* Add a point on the grid */
-   function addPoint($X,$Y,$Value,$Force=TRUE)
+   public function addPoint($X,$Y,$Value,$Force=TRUE)
     {
      if ( $X < 0 || $X >$this->GridSizeX ) { return(0); }
      if ( $Y < 0 || $Y >$this->GridSizeY ) { return(0); }
@@ -61,7 +62,7 @@
     }
 
    /* Write the X labels */
-   function writeXLabels($Format="")
+   public function writeXLabels($Format="")
     {
      $R			= isset($Format["R"]) ? $Format["R"] : $this->pChartObject->FontColorR;
      $G			= isset($Format["G"]) ? $Format["G"] : $this->pChartObject->FontColorG;
@@ -108,7 +109,7 @@
     }
 
    /* Write the Y labels */
-   function writeYLabels($Format="")
+   public function writeYLabels($Format="")
     {
      $R			= isset($Format["R"]) ? $Format["R"] : $this->pChartObject->FontColorR;
      $G			= isset($Format["G"]) ? $Format["G"] : $this->pChartObject->FontColorG;
@@ -147,7 +148,7 @@
     }
 
    /* Draw the area arround the specified Threshold */
-   function drawContour($Threshold,$Format="")
+   public function drawContour($Threshold,$Format="")
     {
      $R		= isset($Format["R"]) ? $Format["R"] : 0;
      $G		= isset($Format["G"]) ? $Format["G"] : 0;
@@ -190,7 +191,7 @@
     }
 
    /* Draw the surface chart */
-   function drawSurface($Format="")
+   public function drawSurface($Format="")
     {
      $Palette		= isset($Format["Palette"]) ? $Format["Palette"] : NULL;
      $ShadeR1		= isset($Format["ShadeR1"]) ? $Format["ShadeR1"] : 77;
@@ -252,7 +253,7 @@
     }
 
    /* Compute the missing points */
-   function computeMissing()
+   public function computeMissing()
     {
      $Missing = "";
      for($X=0;$X<=$this->GridSizeX;$X++)
@@ -293,7 +294,7 @@
     }
 
    /* Return the nearest Neighbor distance of a point */
-   function getNearestNeighbor($Xp,$Yp)
+   public function getNearestNeighbor($Xp,$Yp)
     {
      $Nearest = UNKNOWN;
      for($X=0;$X<=$this->GridSizeX;$X++)
@@ -312,4 +313,3 @@
      return($Nearest);
     }
   }
-?>

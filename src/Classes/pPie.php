@@ -1,4 +1,5 @@
 <?php
+namespace CpChart\Classes;
  /*
      pPie - class to draw pie charts
 
@@ -31,12 +32,12 @@
  /* pPie class definition */
  class pPie
   {
-   var $pChartObject;
-   var $pDataObject;
-   var $LabelPos = "" ;
+   public $pChartObject;
+   public $pDataObject;
+   public $LabelPos = "" ;
 
    /* Class creator */
-   function pPie($Object,$pDataObject)
+   public function __construct($Object,$pDataObject)
     {
      /* Cache the pChart object reference */
      $this->pChartObject = $Object;
@@ -46,7 +47,7 @@
     }
 
    /* Draw a pie chart */
-   function draw2DPie($X,$Y,$Format="")
+   public function draw2DPie($X,$Y,$Format="")
     {
      $Radius		= isset($Format["Radius"]) ? $Format["Radius"] : 60;
      $Precision		= isset($Format["Precision"]) ? $Format["Precision"] : 0;
@@ -296,7 +297,7 @@
     }
 
    /* Draw a 3D pie chart */
-   function draw3DPie($X,$Y,$Format="")
+   public function draw3DPie($X,$Y,$Format="")
     {
      /* Rendering layout */
      $Radius		= isset($Format["Radius"]) ? $Format["Radius"] : 80;
@@ -697,7 +698,7 @@
     }
 
    /* Draw the legend of pie chart */
-   function drawPieLegend($X,$Y,$Format="")
+   public function drawPieLegend($X,$Y,$Format="")
     {
      $FontName		= isset($Format["FontName"]) ? $Format["FontName"] : $this->pChartObject->FontName;
      $FontSize		= isset($Format["FontSize"]) ? $Format["FontSize"] : $this->pChartObject->FontSize;
@@ -782,7 +783,7 @@
     }
 
    /* Set the color of the specified slice */
-   function setSliceColor($SliceID,$Format="")
+   public function setSliceColor($SliceID,$Format="")
     {
      $R		= isset($Format["R"]) ? $Format["R"] : 0;
      $G		= isset($Format["G"]) ? $Format["G"] : 0;
@@ -796,7 +797,7 @@
     }
 
    /* Internally used compute the label positions */
-   function writePieLabel($X,$Y,$Label,$Angle,$Settings,$Stacked,$Xc=0,$Yc=0,$Radius=0,$Reversed=FALSE)
+   public function writePieLabel($X,$Y,$Label,$Angle,$Settings,$Stacked,$Xc=0,$Yc=0,$Radius=0,$Reversed=FALSE)
     {
      $LabelOffset	= 30;
      $FontName		= $this->pChartObject->FontName;
@@ -847,7 +848,7 @@
     }
 
    /* Internally used to shift label positions */
-   function shift($StartAngle,$EndAngle,$Offset,$Reversed)
+   public function shift($StartAngle,$EndAngle,$Offset,$Reversed)
     {
      if ( $Reversed ) { $Offset = -$Offset; }
      foreach($this->LabelPos as $Key => $Settings)
@@ -857,7 +858,7 @@
     }
 
    /* Internally used to write the re-computed labels */
-   function writeShiftedLabels()
+   public function writeShiftedLabels()
     {
      if ( $this->LabelPos == "" ) { return(0); }
      foreach($this->LabelPos as $Key => $Settings)
@@ -883,7 +884,7 @@
     }
 
    /* Draw a ring chart */
-   function draw2DRing($X,$Y,$Format="")
+   public function draw2DRing($X,$Y,$Format="")
     {
      $OuterRadius	= isset($Format["Radius"]) ? $Format["Radius"] : 60;
      $Precision		= isset($Format["Precision"]) ? $Format["Precision"] : 0;
@@ -1091,7 +1092,7 @@
     }
 
    /* Draw a 3D ring chart */
-   function draw3DRing($X,$Y,$Format="")
+   public function draw3DRing($X,$Y,$Format="")
     {
      $OuterRadius	= isset($Format["OuterRadius"]) ? $Format["OuterRadius"] : 100;
      $Precision		= isset($Format["Precision"]) ? $Format["Precision"] : 0;
@@ -1452,7 +1453,7 @@
     }
 
   /* Serialize an array */
-  function arraySerialize($Data)
+  public function arraySerialize($Data)
    {
     $Result = "";
     foreach($Data as $Key => $Value)
@@ -1462,7 +1463,7 @@
    }
 
   /* Reverse an array */
-  function arrayReverse($Plots)
+  public function arrayReverse($Plots)
    {
     $Result = "";
 
@@ -1473,7 +1474,7 @@
    }
 
   /* Remove unused series & values */
-  function clean0Values($Data,$Palette,$DataSerie,$AbscissaSerie)
+  public function clean0Values($Data,$Palette,$DataSerie,$AbscissaSerie)
    {
     $NewPalette = ""; $NewData = ""; $NewAbscissa = "";
 
@@ -1497,4 +1498,3 @@
     return(array($Data,$NewPalette));
    }
   }
-?>

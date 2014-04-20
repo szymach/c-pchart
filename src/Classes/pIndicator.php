@@ -1,4 +1,5 @@
 <?php
+namespace CpChart\Classes;
  /*
      pIndicator - class to draw indicators
 
@@ -25,16 +26,16 @@
  /* pIndicator class definition */
  class pIndicator
   {
-   var $pChartObject;
+   public $pChartObject;
 
    /* Class creator */
-   function pIndicator($pChartObject)
+   public function pIndicator($pChartObject)
     {
      $this->pChartObject = $pChartObject;
     }
 
    /* Draw an indicator */
-   function draw($X,$Y,$Width,$Height,$Format="")
+   public function draw($X,$Y,$Width,$Height,$Format="")
     {
      $Values			= isset($Format["Values"]) ? $Format["Values"] : VOID;
      $IndicatorSections		= isset($Format["IndicatorSections"]) ? $Format["IndicatorSections"] : NULL;
@@ -238,4 +239,3 @@
      $this->pChartObject->Shadow = $RestoreShadow;
     }
   }
-?>
