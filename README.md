@@ -13,6 +13,9 @@ What was done:
 - Reorganized files a bit and refactored code for better readability. Also, basic annotations were added
 to functions.
 
+HOWEVER THIS IS WORK STILL IN PROGRESS AND SHOULD NOT BE USED YET.
+
+A tested and usable versions should appear in the following days.
 Where to get it?
 ================
 For the time being at [GitHub](https://github.com/szymach/CpChart).

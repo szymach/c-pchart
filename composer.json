@@ -1,10 +1,10 @@
 {
-    "name": "szymach/CpChart",
+    "name": "szymach/cp-chart",
     "license": "MIT",
     "type": "project",
     "description": "Port of \"pChart\" library into PHP5 standards with composer.phar support.",
     "keywords": ["pChart","composer","statistics","charts"],
-    "homepage": "https://github.com/szymach/CpChart",
+    "homepage": "https://github.com/szymach/cp-chart",
     "autoload": {
         "psr-4": { "CpChart": "src/" }
     },
