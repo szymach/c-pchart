@@ -131,8 +131,7 @@ class pScatter
                     $Data["Axis"][$AxisID]["Min"] = $ManualScale[$AxisID]["Min"];
                     $Data["Axis"][$AxisID]["Max"] = $ManualScale[$AxisID]["Max"];
                 } else { 
-                    echo "Manual scale boundaries not set."; 
-                    exit();                     
+                    throw new \Exception("Manual scale boundaries not set.");
                 }
             }
 

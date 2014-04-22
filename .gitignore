@@ -16,6 +16,7 @@ nbactions.xml
 nb-configuration.xml
 
 ### CpChart ###
-app/cache
-nbproject/private/private.xml
-nbproject/private/private.xml
+app/cache/*
+
+### vendor ###
+vendor/*

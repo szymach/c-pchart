@@ -659,10 +659,8 @@ class pImage extends pDraw
             }
         }
 
-        /* When the image map is returned to the client, the script ends
-         * Turned off, because of possible issues with frameworks 
-         */
-        //exit();
+        /* When the image map is returned to the client, the script ends */
+        exit();
     }
 
     /**
