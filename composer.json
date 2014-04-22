@@ -6,7 +6,7 @@
     "keywords": ["pChart","composer","statistics","charts"],
     "homepage": "https://github.com/szymach/cp-chart",
     "autoload": {
-        "psr-4": { "CpChart": "src/" }
+        "psr-4": { "CpChart/": "src/" }
     },
     "require": {
         "php": ">=5.3.3"
