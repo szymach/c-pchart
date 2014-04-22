@@ -1,109 +1,112 @@
 <?php
 namespace CpChart\Classes;
- /*
-     pDraw - class extension with drawing methods
+/*
+    pDraw - class extension with drawing methods
 
-     Version     : 2.1.4
-     Made by     : Jean-Damien POGOLOTTI
-     Last Update : 19/01/2014
+    Version     : 2.1.4
+    Made by     : Jean-Damien POGOLOTTI
+    Last Update : 19/01/2014
 
-     This file can be distributed under the license you can find at :
+    This file can be distributed under the license you can find at :
 
-                       http://www.pchart.net/license
+                      http://www.pchart.net/license
 
-     You can find the whole class documentation on the pChart web site.
- */
+    You can find the whole class documentation on the pChart web site.
+*/
 
- define("DIRECTION_VERTICAL"		, 690001);
- define("DIRECTION_HORIZONTAL"		, 690002);
+define("DIRECTION_VERTICAL"		, 690001);
+define("DIRECTION_HORIZONTAL"		, 690002);
 
- define("SCALE_POS_LEFTRIGHT"		, 690101);
- define("SCALE_POS_TOPBOTTOM"		, 690102);
+define("SCALE_POS_LEFTRIGHT"		, 690101);
+define("SCALE_POS_TOPBOTTOM"		, 690102);
 
- define("SCALE_MODE_FLOATING"		, 690201);
- define("SCALE_MODE_START0"		, 690202);
- define("SCALE_MODE_ADDALL"		, 690203);
- define("SCALE_MODE_ADDALL_START0"	, 690204);
- define("SCALE_MODE_MANUAL"		, 690205);
+define("SCALE_MODE_FLOATING"		, 690201);
+define("SCALE_MODE_START0"		, 690202);
+define("SCALE_MODE_ADDALL"		, 690203);
+define("SCALE_MODE_ADDALL_START0"	, 690204);
+define("SCALE_MODE_MANUAL"		, 690205);
 
- define("SCALE_SKIP_NONE"		, 690301);
- define("SCALE_SKIP_SAME"		, 690302);
- define("SCALE_SKIP_NUMBERS"		, 690303);
+define("SCALE_SKIP_NONE"		, 690301);
+define("SCALE_SKIP_SAME"		, 690302);
+define("SCALE_SKIP_NUMBERS"		, 690303);
 
- define("TEXT_ALIGN_TOPLEFT"		, 690401);
- define("TEXT_ALIGN_TOPMIDDLE"		, 690402);
- define("TEXT_ALIGN_TOPRIGHT"		, 690403);
- define("TEXT_ALIGN_MIDDLELEFT"		, 690404);
- define("TEXT_ALIGN_MIDDLEMIDDLE"	, 690405);
- define("TEXT_ALIGN_MIDDLERIGHT"	, 690406);
- define("TEXT_ALIGN_BOTTOMLEFT"		, 690407);
- define("TEXT_ALIGN_BOTTOMMIDDLE"	, 690408);
- define("TEXT_ALIGN_BOTTOMRIGHT"	, 690409);
+define("TEXT_ALIGN_TOPLEFT"		, 690401);
+define("TEXT_ALIGN_TOPMIDDLE"		, 690402);
+define("TEXT_ALIGN_TOPRIGHT"		, 690403);
+define("TEXT_ALIGN_MIDDLELEFT"		, 690404);
+define("TEXT_ALIGN_MIDDLEMIDDLE"	, 690405);
+define("TEXT_ALIGN_MIDDLERIGHT"         , 690406);
+define("TEXT_ALIGN_BOTTOMLEFT"		, 690407);
+define("TEXT_ALIGN_BOTTOMMIDDLE"	, 690408);
+define("TEXT_ALIGN_BOTTOMRIGHT"         , 690409);
 
- define("POSITION_TOP"                  , 690501);
- define("POSITION_BOTTOM"               , 690502);
+define("POSITION_TOP"                  , 690501);
+define("POSITION_BOTTOM"               , 690502);
 
- define("LABEL_POS_LEFT"		, 690601);
- define("LABEL_POS_CENTER"		, 690602);
- define("LABEL_POS_RIGHT"		, 690603);
- define("LABEL_POS_TOP"			, 690604);
- define("LABEL_POS_BOTTOM"		, 690605);
- define("LABEL_POS_INSIDE"		, 690606);
- define("LABEL_POS_OUTSIDE"		, 690607);
+define("LABEL_POS_LEFT"                 , 690601);
+define("LABEL_POS_CENTER"		, 690602);
+define("LABEL_POS_RIGHT"		, 690603);
+define("LABEL_POS_TOP"			, 690604);
+define("LABEL_POS_BOTTOM"		, 690605);
+define("LABEL_POS_INSIDE"		, 690606);
+define("LABEL_POS_OUTSIDE"		, 690607);
 
- define("ORIENTATION_HORIZONTAL"	, 690701);
- define("ORIENTATION_VERTICAL"		, 690702);
- define("ORIENTATION_AUTO"		, 690703);
+define("ORIENTATION_HORIZONTAL"         , 690701);
+define("ORIENTATION_VERTICAL"		, 690702);
+define("ORIENTATION_AUTO"		, 690703);
 
- define("LEGEND_NOBORDER"		, 690800);
- define("LEGEND_BOX"			, 690801);
- define("LEGEND_ROUND"			, 690802);
+define("LEGEND_NOBORDER"		, 690800);
+define("LEGEND_BOX"			, 690801);
+define("LEGEND_ROUND"			, 690802);
 
- define("LEGEND_VERTICAL"		, 690901);
- define("LEGEND_HORIZONTAL"		, 690902);
+define("LEGEND_VERTICAL"		, 690901);
+define("LEGEND_HORIZONTAL"		, 690902);
 
- define("LEGEND_FAMILY_BOX"		, 691051);
- define("LEGEND_FAMILY_CIRCLE"		, 691052);
- define("LEGEND_FAMILY_LINE"		, 691053);
+define("LEGEND_FAMILY_BOX"		, 691051);
+define("LEGEND_FAMILY_CIRCLE"		, 691052);
+define("LEGEND_FAMILY_LINE"		, 691053);
 
- define("DISPLAY_AUTO"			, 691001);
- define("DISPLAY_MANUAL"		, 691002);
+define("DISPLAY_AUTO"			, 691001);
+define("DISPLAY_MANUAL"                 , 691002);
 
- define("LABELING_ALL"			, 691011);
- define("LABELING_DIFFERENT"		, 691012);
+define("LABELING_ALL"			, 691011);
+define("LABELING_DIFFERENT"		, 691012);
 
- define("BOUND_MIN"			, 691021);
- define("BOUND_MAX"			, 691022);
- define("BOUND_BOTH"			, 691023);
+define("BOUND_MIN"			, 691021);
+define("BOUND_MAX"			, 691022);
+define("BOUND_BOTH"			, 691023);
 
- define("BOUND_LABEL_POS_TOP"		, 691031);
- define("BOUND_LABEL_POS_BOTTOM"	, 691032);
- define("BOUND_LABEL_POS_AUTO"		, 691033);
+define("BOUND_LABEL_POS_TOP"		, 691031);
+define("BOUND_LABEL_POS_BOTTOM"         , 691032);
+define("BOUND_LABEL_POS_AUTO"		, 691033);
 
- define("CAPTION_LEFT_TOP"		, 691041);
- define("CAPTION_RIGHT_BOTTOM"		, 691042);
+define("CAPTION_LEFT_TOP"		, 691041);
+define("CAPTION_RIGHT_BOTTOM"		, 691042);
 
- define("GRADIENT_SIMPLE"		, 691051);
- define("GRADIENT_EFFECT_CAN"		, 691052);
+define("GRADIENT_SIMPLE"		, 691051);
+define("GRADIENT_EFFECT_CAN"		, 691052);
 
- define("LABEL_TITLE_NOBACKGROUND"	, 691061);
- define("LABEL_TITLE_BACKGROUND"	, 691062);
+define("LABEL_TITLE_NOBACKGROUND"	, 691061);
+define("LABEL_TITLE_BACKGROUND"         , 691062);
 
- define("LABEL_POINT_NONE"		, 691071);
- define("LABEL_POINT_CIRCLE"		, 691072);
- define("LABEL_POINT_BOX"		, 691073);
+define("LABEL_POINT_NONE"		, 691071);
+define("LABEL_POINT_CIRCLE"		, 691072);
+define("LABEL_POINT_BOX"		, 691073);
 
- define("ZONE_NAME_ANGLE_AUTO"		, 691081);
+define("ZONE_NAME_ANGLE_AUTO"		, 691081);
 
- define("PI"		, 3.14159265);
- define("ALL"		, 69);
- define("NONE"		, 31);
- define("AUTO"		, 690000);
- define("OUT_OF_SIGHT"	, -10000000000000);
+define("PI"                             , 3.14159265);
+define("ALL"                            , 69);
+define("NONE"                           , 31);
+define("AUTO"                           , 690000);
+define("OUT_OF_SIGHT"                   , -10000000000000);
 
- class pDraw
- {
-    /* Returns the number of drawable series */
+class pDraw
+{
+    /**
+     * Returns the number of drawable series
+     * @return type
+     */
     public function countDrawableSeries()
     {
         $Results = 0;
@@ -115,7 +118,14 @@ namespace CpChart\Classes;
         return($Results);
     }
 
-    /* Fix box coordinates */
+    /**
+     * Fix box coordinates
+     * @param type $Xa
+     * @param type $Ya
+     * @param type $Xb
+     * @param type $Yb
+     * @return type
+     */
     public function fixBoxCoordinates($Xa,$Ya,$Xb,$Yb)
     {
         $X1 = min($Xa,$Xb); $Y1 = min($Ya,$Yb);
@@ -124,7 +134,11 @@ namespace CpChart\Classes;
         return(array($X1,$Y1,$X2,$Y2));
     }
 
-   /* Draw a polygon */
+   /**
+    * Draw a polygon
+    * @param type $Points
+    * @param type $Format
+    */
     public function drawPolygon($Points,$Format="")
     {
         $R		= isset($Format["R"]) ? $Format["R"] : 0;
@@ -144,2015 +158,2880 @@ namespace CpChart\Classes;
         /* Calling the ImageFilledPolygon() public function over the $Points array will round it */ 	
         $Backup = $Points;
 
-        if ( $Surrounding != null ) { $BorderR = $R+$Surrounding; $BorderG = $G+$Surrounding; $BorderB = $B+$Surrounding; }
+        if ( $Surrounding != null ) { 
+            $BorderR = $R+$Surrounding; 
+            $BorderG = $G+$Surrounding; 
+            $BorderB = $B+$Surrounding;            
+        }
 
-        if ( $SkipX != OUT_OF_SIGHT ) { $SkipX = floor($SkipX); }
-        if ( $SkipY != OUT_OF_SIGHT ) { $SkipY = floor($SkipY); }
+        if ( $SkipX != OUT_OF_SIGHT ) { 
+            $SkipX = floor($SkipX);             
+        }
+        if ( $SkipY != OUT_OF_SIGHT ) { 
+            $SkipY = floor($SkipY);            
+        }
 
         $RestoreShadow = $this->Shadow;
-        if ( !$NoFill )
-         {
-          if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-           {
-            $this->Shadow = false;
-            for($i=0;$i<=count($Points)-1;$i=$i+2)
-             { $Shadow[] = $Points[$i] + $this->ShadowX; $Shadow[] = $Points[$i+1] + $this->ShadowY; }
-            $this->drawPolygon($Shadow,array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa,"NoBorder"=>true));
-           }
+        if ( !$NoFill ) {
+            if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+                $this->Shadow = false;
+                for ($i=0;$i<=count($Points)-1;$i=$i+2) { 
+                    $Shadow[] = $Points[$i] + $this->ShadowX; 
+                    $Shadow[] = $Points[$i+1] + $this->ShadowY;
+                }
+                $this->drawPolygon(
+                    $Shadow,
+                    array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa,"NoBorder"=>true)
+                );
+            }
 
-          $FillColor = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
+            $FillColor = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
 
-          if ( count($Points) >= 6 )
-           { ImageFilledPolygon($this->Picture,$Points,count($Points)/2,$FillColor); }
-         }
+            if ( count($Points) >= 6 ) { 
+                ImageFilledPolygon($this->Picture,$Points,count($Points)/2,$FillColor);                 
+            }
+        }
 
-        if ( !$NoBorder )
-         {
-          $Points = $Backup;
+        if ( !$NoBorder ) {
+            $Points = $Backup;
 
-          if ( $NoFill )
-           $BorderSettings = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha);
-          else
-           $BorderSettings = array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha);
-
-          for($i=0;$i<=count($Points)-1;$i=$i+2)
-           {
-            if ( isset($Points[$i+2]) )
-             {
-              if ( !($Points[$i] == $Points[$i+2] && $Points[$i] == $SkipX ) && !($Points[$i+1] == $Points[$i+3] && $Points[$i+1] == $SkipY ) )
-               $this->drawLine($Points[$i],$Points[$i+1],$Points[$i+2],$Points[$i+3],$BorderSettings);
-             }
-            else
-             {
-              if ( !($Points[$i] == $Points[0] && $Points[$i] == $SkipX ) && !($Points[$i+1] == $Points[1] && $Points[$i+1] == $SkipY ) )
-               $this->drawLine($Points[$i],$Points[$i+1],$Points[0],$Points[1],$BorderSettings);
-             }
-           }
-         }
+            if ( $NoFill ) {
+                $BorderSettings = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha);
+            } else {
+                $BorderSettings = array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha);
+            }
+            
+            for($i=0;$i<=count($Points)-1;$i=$i+2) {
+                if ( isset($Points[$i+2]) ) {
+                  if ( !($Points[$i] == $Points[$i+2] && $Points[$i] == $SkipX ) && !($Points[$i+1] == $Points[$i+3] && $Points[$i+1] == $SkipY ) )
+                   $this->drawLine($Points[$i],$Points[$i+1],$Points[$i+2],$Points[$i+3],$BorderSettings);
+                } else {
+                    if (!($Points[$i] == $Points[0] && $Points[$i] == $SkipX ) 
+                        && !($Points[$i+1] == $Points[1] && $Points[$i+1] == $SkipY ) 
+                    ) {
+                        $this->drawLine($Points[$i],$Points[$i+1],$Points[0],$Points[1],$BorderSettings);
+                    }
+                }
+            }
+        }
 
         $this->Shadow = $RestoreShadow;
     }
 
-   /* Apply AALias correction to the rounded box boundaries */
-   public function offsetCorrection($Value,$Mode)
+    /* Apply AALias correction to the rounded box boundaries */
+    public function offsetCorrection($Value,$Mode)
     {
      $Value = round($Value,1);
 
-     if ( $Value == 0 && $Mode == 1 ) { return(.9); }
-     if ( $Value == 0 ) { return(0); }
+        if ( $Value == 0 && $Mode == 1 ) { 
+            return(.9);
+        }
+        if ( $Value == 0 ) { 
+            return(0);             
+        }
 
-     if ( $Mode == 1) 
-      { if ( $Value == 1 ) { return(.9); }; if ( $Value == .1 ) { return(.9); }; if ( $Value == .2 ) { return(.8); }; if ( $Value == .3 ) { return(.8); }; if ( $Value == .4 ) { return(.7); }; if ( $Value == .5 ) { return(.5); }; if ( $Value == .6 ) { return(.8); }; if ( $Value == .7 ) { return(.7); }; if ( $Value == .8 ) { return(.6); }; if ( $Value == .9 ) { return(.9); }; }
+        if ( $Mode == 1) { 
+            if ( $Value == 1 ) { return(.9); }; if ( $Value == .1 ) { return(.9); }; if ( $Value == .2 ) { return(.8); }; if ( $Value == .3 ) { return(.8); }; if ( $Value == .4 ) { return(.7); }; if ( $Value == .5 ) { return(.5); }; if ( $Value == .6 ) { return(.8); }; if ( $Value == .7 ) { return(.7); }; if ( $Value == .8 ) { return(.6); }; if ( $Value == .9 ) { return(.9); }; }
 
-     if ( $Mode == 2) 
-      { if ( $Value == 1 ) { return(.9); }; if ( $Value == .1 ) { return(.1); }; if ( $Value == .2 ) { return(.2); }; if ( $Value == .3 ) { return(.3); }; if ( $Value == .4 ) { return(.4); }; if ( $Value == .5 ) { return(.5); }; if ( $Value == .6 ) { return(.8); }; if ( $Value == .7 ) { return(.7); }; if ( $Value == .8 ) { return(.8); }; if ( $Value == .9 ) { return(.9); }; }
+        if ( $Mode == 2) 
+         { if ( $Value == 1 ) { return(.9); }; if ( $Value == .1 ) { return(.1); }; if ( $Value == .2 ) { return(.2); }; if ( $Value == .3 ) { return(.3); }; if ( $Value == .4 ) { return(.4); }; if ( $Value == .5 ) { return(.5); }; if ( $Value == .6 ) { return(.8); }; if ( $Value == .7 ) { return(.7); }; if ( $Value == .8 ) { return(.8); }; if ( $Value == .9 ) { return(.9); }; }
 
-     if ( $Mode == 3) 
-      { if ( $Value == 1 ) { return(.1); }; if ( $Value == .1 ) { return(.1); }; if ( $Value == .2 ) { return(.2); }; if ( $Value == .3 ) { return(.3); }; if ( $Value == .4 ) { return(.4); }; if ( $Value == .5 ) { return(.9); }; if ( $Value == .6 ) { return(.6); }; if ( $Value == .7 ) { return(.7); }; if ( $Value == .8 ) { return(.4); }; if ( $Value == .9 ) { return(.5); }; }
+        if ( $Mode == 3) 
+         { if ( $Value == 1 ) { return(.1); }; if ( $Value == .1 ) { return(.1); }; if ( $Value == .2 ) { return(.2); }; if ( $Value == .3 ) { return(.3); }; if ( $Value == .4 ) { return(.4); }; if ( $Value == .5 ) { return(.9); }; if ( $Value == .6 ) { return(.6); }; if ( $Value == .7 ) { return(.7); }; if ( $Value == .8 ) { return(.4); }; if ( $Value == .9 ) { return(.5); }; }
 
-     if ( $Mode == 4) 
-      { if ( $Value == 1 ) { return(-1); }; if ( $Value == .1 ) { return(.1); }; if ( $Value == .2 ) { return(.2); }; if ( $Value == .3 ) { return(.3); }; if ( $Value == .4 ) { return(.1); }; if ( $Value == .5 ) { return(-.1); }; if ( $Value == .6 ) { return(.8); }; if ( $Value == .7 ) { return(.1); }; if ( $Value == .8 ) { return(.1); }; if ( $Value == .9 ) { return(.1); }; }
+        if ( $Mode == 4) 
+         { if ( $Value == 1 ) { return(-1); }; if ( $Value == .1 ) { return(.1); }; if ( $Value == .2 ) { return(.2); }; if ( $Value == .3 ) { return(.3); }; if ( $Value == .4 ) { return(.1); }; if ( $Value == .5 ) { return(-.1); }; if ( $Value == .6 ) { return(.8); }; if ( $Value == .7 ) { return(.1); }; if ( $Value == .8 ) { return(.1); }; if ( $Value == .9 ) { return(.1); }; }
     }
 
-   /* Draw a rectangle with rounded corners */
-   public function drawRoundedRectangle($X1,$Y1,$X2,$Y2,$Radius,$Format="")
+    /* Draw a rectangle with rounded corners */
+    public function drawRoundedRectangle($X1,$Y1,$X2,$Y2,$Radius,$Format="")
     {
-     $R	    = isset($Format["R"]) ? $Format["R"] : 0;
-     $G	    = isset($Format["G"]) ? $Format["G"] : 0;
-     $B	    = isset($Format["B"]) ? $Format["B"] : 0;
-     $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $R	    = isset($Format["R"]) ? $Format["R"] : 0;
+        $G	    = isset($Format["G"]) ? $Format["G"] : 0;
+        $B	    = isset($Format["B"]) ? $Format["B"] : 0;
+        $Alpha      = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
 
-     list($X1,$Y1,$X2,$Y2) = $this->fixBoxCoordinates($X1,$Y1,$X2,$Y2);
+        list($X1,$Y1,$X2,$Y2) = $this->fixBoxCoordinates($X1,$Y1,$X2,$Y2);
 
-     if ( $X2 - $X1 < $Radius ) { $Radius = floor((($X2-$X1))/2); }
-     if ( $Y2 - $Y1 < $Radius ) { $Radius = floor((($Y2-$Y1))/2); }
+        if ( $X2 - $X1 < $Radius ) { $Radius = floor((($X2-$X1))/2); }
+        if ( $Y2 - $Y1 < $Radius ) { $Radius = floor((($Y2-$Y1))/2); }
 
-     $Color = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"NoBorder"=>true);
+        $Color = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"NoBorder"=>true);
 
-     if ( $Radius <= 0 ) { $this->drawRectangle($X1,$Y1,$X2,$Y2,$Color); return(0); }
+        if ( $Radius <= 0 ) { $this->drawRectangle($X1,$Y1,$X2,$Y2,$Color); return(0); }
 
-     if ( $this->Antialias )
-      {
-       $this->drawLine($X1+$Radius,$Y1,$X2-$Radius,$Y1,$Color);
-       $this->drawLine($X2,$Y1+$Radius,$X2,$Y2-$Radius,$Color);
-       $this->drawLine($X2-$Radius,$Y2,$X1+$Radius,$Y2,$Color);
-       $this->drawLine($X1,$Y1+$Radius,$X1,$Y2-$Radius,$Color);
-      }
-     else
-      {
-       $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
-       imageline($this->Picture,$X1+$Radius,$Y1,$X2-$Radius,$Y1,$Color);
-       imageline($this->Picture,$X2,$Y1+$Radius,$X2,$Y2-$Radius,$Color);
-       imageline($this->Picture,$X2-$Radius,$Y2,$X1+$Radius,$Y2,$Color);
-       imageline($this->Picture,$X1,$Y1+$Radius,$X1,$Y2-$Radius,$Color);
-      }
+        if ( $this->Antialias ) {
+            $this->drawLine($X1+$Radius,$Y1,$X2-$Radius,$Y1,$Color);
+            $this->drawLine($X2,$Y1+$Radius,$X2,$Y2-$Radius,$Color);
+            $this->drawLine($X2-$Radius,$Y2,$X1+$Radius,$Y2,$Color);
+            $this->drawLine($X1,$Y1+$Radius,$X1,$Y2-$Radius,$Color);
+        } else {
+            $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
+            imageline($this->Picture,$X1+$Radius,$Y1,$X2-$Radius,$Y1,$Color);
+            imageline($this->Picture,$X2,$Y1+$Radius,$X2,$Y2-$Radius,$Color);
+            imageline($this->Picture,$X2-$Radius,$Y2,$X1+$Radius,$Y2,$Color);
+            imageline($this->Picture,$X1,$Y1+$Radius,$X1,$Y2-$Radius,$Color);
+        }
 
-     $Step = 360 / (2 * PI * $Radius);
-     for($i=0;$i<=90;$i=$i+$Step)
-      {
-       $X = cos(($i+180)*PI/180) * $Radius + $X1 + $Radius;
-       $Y = sin(($i+180)*PI/180) * $Radius + $Y1 + $Radius;
-       $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+        $Step = 360 / (2 * PI * $Radius);
+        for($i=0;$i<=90;$i=$i+$Step) {
+            $X = cos(($i+180)*PI/180) * $Radius + $X1 + $Radius;
+            $Y = sin(($i+180)*PI/180) * $Radius + $Y1 + $Radius;
+            $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
 
-       $X = cos(($i+90)*PI/180) * $Radius + $X1 + $Radius;
-       $Y = sin(($i+90)*PI/180) * $Radius + $Y2 - $Radius;
-       $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+            $X = cos(($i+90)*PI/180) * $Radius + $X1 + $Radius;
+            $Y = sin(($i+90)*PI/180) * $Radius + $Y2 - $Radius;
+            $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
 
-       $X = cos($i*PI/180) * $Radius + $X2 - $Radius;
-       $Y = sin($i*PI/180) * $Radius + $Y2 - $Radius;
-       $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+            $X = cos($i*PI/180) * $Radius + $X2 - $Radius;
+            $Y = sin($i*PI/180) * $Radius + $Y2 - $Radius;
+            $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
 
-       $X = cos(($i+270)*PI/180) * $Radius + $X2 - $Radius;
-       $Y = sin(($i+270)*PI/180) * $Radius + $Y1 + $Radius;
-       $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
-      }
+            $X = cos(($i+270)*PI/180) * $Radius + $X2 - $Radius;
+            $Y = sin(($i+270)*PI/180) * $Radius + $Y1 + $Radius;
+            $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+        }
     }
 
-   /* Draw a rectangle with rounded corners */
-   public function drawRoundedFilledRectangle($X1,$Y1,$X2,$Y2,$Radius,$Format="")
+    /* Draw a rectangle with rounded corners */
+    public function drawRoundedFilledRectangle($X1,$Y1,$X2,$Y2,$Radius,$Format="")
     {
-     $R			= isset($Format["R"]) ? $Format["R"] : 0;
-     $G			= isset($Format["G"]) ? $Format["G"] : 0;
-     $B			= isset($Format["B"]) ? $Format["B"] : 0;
-     $BorderR		= isset($Format["BorderR"]) ? $Format["BorderR"] : -1;
-     $BorderG		= isset($Format["BorderG"]) ? $Format["BorderG"] : -1;
-     $BorderB		= isset($Format["BorderB"]) ? $Format["BorderB"] : -1;
-     $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $Surrounding	= isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
+        $R		= isset($Format["R"]) ? $Format["R"] : 0;
+        $G		= isset($Format["G"]) ? $Format["G"] : 0;
+        $B		= isset($Format["B"]) ? $Format["B"] : 0;
+        $BorderR	= isset($Format["BorderR"]) ? $Format["BorderR"] : -1;
+        $BorderG	= isset($Format["BorderG"]) ? $Format["BorderG"] : -1;
+        $BorderB	= isset($Format["BorderB"]) ? $Format["BorderB"] : -1;
+        $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $Surrounding	= isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
 
-     /* Temporary fix for AA issue */
-     $Y1 = floor($Y1); $Y2 = floor($Y2); $X1 = floor($X1); $X2 = floor($X2);
+        /* Temporary fix for AA issue */
+        $Y1 = floor($Y1); $Y2 = floor($Y2); $X1 = floor($X1); $X2 = floor($X2);
 
-     if ( $Surrounding != null ) { $BorderR = $R+$Surrounding; $BorderG = $G+$Surrounding; $BorderB = $B+$Surrounding; }
-     if ( $BorderR == -1 ) { $BorderR = $R; $BorderG = $G; $BorderB = $B; }
+        if ( $Surrounding != null ) { $BorderR = $R+$Surrounding; $BorderG = $G+$Surrounding; $BorderB = $B+$Surrounding; }
+        if ( $BorderR == -1 ) { $BorderR = $R; $BorderG = $G; $BorderB = $B; }
 
-     list($X1,$Y1,$X2,$Y2) = $this->fixBoxCoordinates($X1,$Y1,$X2,$Y2);
+        list($X1,$Y1,$X2,$Y2) = $this->fixBoxCoordinates($X1,$Y1,$X2,$Y2);
 
-     if ( $X2 - $X1 < $Radius*2 ) { $Radius = floor((($X2-$X1))/4); }
-     if ( $Y2 - $Y1 < $Radius*2 ) { $Radius = floor((($Y2-$Y1))/4); }
+        if ( $X2 - $X1 < $Radius*2 ) { $Radius = floor((($X2-$X1))/4); }
+        if ( $Y2 - $Y1 < $Radius*2 ) { $Radius = floor((($Y2-$Y1))/4); }
 
-     $RestoreShadow = $this->Shadow;
-     if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-      {
-       $this->Shadow = false;
-       $this->drawRoundedFilledRectangle($X1+$this->ShadowX,$Y1+$this->ShadowY,$X2+$this->ShadowX,$Y2+$this->ShadowY,$Radius,array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa));
-      }
-
-     $Color = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"NoBorder"=>true);
-
-     if ( $Radius <= 0 ) { $this->drawFilledRectangle($X1,$Y1,$X2,$Y2,$Color); return(0); }
-
-     $YTop    = $Y1+$Radius;
-     $YBottom = $Y2-$Radius;
-
-     $Step = 360 / (2 * PI * $Radius);
-     $Positions = ""; $Radius--; $MinY = ""; $MaxY = "";
-     for($i=0;$i<=90;$i=$i+$Step)
-      {
-       $Xp1 = cos(($i+180)*PI/180) * $Radius + $X1 + $Radius;
-       $Xp2 = cos(((90-$i)+270)*PI/180) * $Radius + $X2 - $Radius;
-       $Yp  = floor(sin(($i+180)*PI/180) * $Radius + $YTop);
-       if ( $MinY == "" || $Yp > $MinY ) { $MinY = $Yp; }
-
-       if ( $Xp1 <= floor($X1) )  { $Xp1++; }
-       if ( $Xp2 >= floor($X2) )  { $Xp2--; }
-       $Xp1++;
-
-       if ( !isset($Positions[$Yp]) )
-        { $Positions[$Yp]["X1"] = $Xp1; $Positions[$Yp]["X2"] = $Xp2; }
-       else
-        { $Positions[$Yp]["X1"] = ($Positions[$Yp]["X1"]+$Xp1)/2; $Positions[$Yp]["X2"] = ($Positions[$Yp]["X2"]+$Xp2)/2; }
-
-       $Xp1 = cos(($i+90)*PI/180) * $Radius + $X1 + $Radius;
-       $Xp2 = cos((90-$i)*PI/180) * $Radius + $X2 - $Radius;
-       $Yp  = floor(sin(($i+90)*PI/180) * $Radius + $YBottom);
-       if ( $MaxY == "" || $Yp < $MaxY ) { $MaxY = $Yp; }
-
-       if ( $Xp1 <= floor($X1) ) { $Xp1++; }
-       if ( $Xp2 >= floor($X2) ) { $Xp2--; }
-       $Xp1++;
-
-       if ( !isset($Positions[$Yp]) )
-        { $Positions[$Yp]["X1"] = $Xp1; $Positions[$Yp]["X2"] = $Xp2; }
-       else
-        { $Positions[$Yp]["X1"] = ($Positions[$Yp]["X1"]+$Xp1)/2; $Positions[$Yp]["X2"] = ($Positions[$Yp]["X2"]+$Xp2)/2; }
-      }
-
-     $ManualColor  = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
-     foreach($Positions as $Yp => $Bounds)
-      {
-       $X1 = $Bounds["X1"]; $X1Dec = $this->getFirstDecimal($X1); if ( $X1Dec != 0 ) { $X1 = floor($X1)+1; }
-       $X2 = $Bounds["X2"]; $X2Dec = $this->getFirstDecimal($X2); if ( $X2Dec != 0 ) { $X2 = floor($X2)-1; }
-       imageline($this->Picture,$X1,$Yp,$X2,$Yp,$ManualColor);
-      }
-     $this->drawFilledRectangle($X1,$MinY+1,floor($X2),$MaxY-1,$Color);
-
-     $Radius++;
-     $this->drawRoundedRectangle($X1,$Y1,$X2+1,$Y2-1,$Radius,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
-
-     $this->Shadow = $RestoreShadow;
-    }
-
-   /* Draw a rectangle with rounded corners */
-   public function drawRoundedFilledRectangle_deprecated($X1,$Y1,$X2,$Y2,$Radius,$Format="")
-    {
-     $R			= isset($Format["R"]) ? $Format["R"] : 0;
-     $G			= isset($Format["G"]) ? $Format["G"] : 0;
-     $B			= isset($Format["B"]) ? $Format["B"] : 0;
-     $BorderR		= isset($Format["BorderR"]) ? $Format["BorderR"] : -1;
-     $BorderG		= isset($Format["BorderG"]) ? $Format["BorderG"] : -1;
-     $BorderB		= isset($Format["BorderB"]) ? $Format["BorderB"] : -1;
-     $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $Surrounding	= isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
-
-     if ( $Surrounding != null ) { $BorderR = $R+$Surrounding; $BorderG = $G+$Surrounding; $BorderB = $B+$Surrounding; }
-     if ( $BorderR == -1 ) { $BorderR = $R; $BorderG = $G; $BorderB = $B; }
-
-     list($X1,$Y1,$X2,$Y2) = $this->fixBoxCoordinates($X1,$Y1,$X2,$Y2);
-
-     if ( $X2 - $X1 < $Radius ) { $Radius = floor((($X2-$X1)+2)/2); }
-     if ( $Y2 - $Y1 < $Radius ) { $Radius = floor((($Y2-$Y1)+2)/2); }
-
-     $RestoreShadow = $this->Shadow;
-     if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-      {
-       $this->Shadow = false;
-       $this->drawRoundedFilledRectangle($X1+$this->ShadowX,$Y1+$this->ShadowY,$X2+$this->ShadowX,$Y2+$this->ShadowY,$Radius,array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa));
-      }
-
-     if ( $this->getFirstDecimal($X2) >= 5 )  { $XOffset2 = 1; } else { $XOffset2 = 0; }
-     if ( $this->getFirstDecimal($X1) <= 5 )  { $XOffset1 = 1; } else { $XOffset1 = 0; }
-
-     if ( !$this->Antialias ) { $XOffset1 = 1; $XOffset2 = 1; }
-
-     $YTop    = floor($Y1+$Radius);
-     $YBottom = floor($Y2-$Radius);
-
-     $this->drawFilledRectangle($X1-$XOffset1,$YTop,$X2+$XOffset2,$YBottom,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"NoBorder"=>true));
-
-     $Step = 360 / (2 * PI * $Radius);
-     $Color  = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
-     $Color2 = $this->allocateColor($this->Picture,255,0,0,$Alpha);
-     $Drawn = "";
-
-     if ( $Alpha < 100 )  { $Drawn[$YTop] = false; }
-     if ( $Alpha < 100 )  { $Drawn[$YBottom] = true; }
-     
-     for($i=0;$i<=90;$i=$i+$Step)
-      {
-       $Xp1 = cos(($i+180)*PI/180) * $Radius + $X1 + $Radius;
-       $Xp2 = cos(((90-$i)+270)*PI/180) * $Radius + $X2 - $Radius;
-       $Yp  = sin(($i+180)*PI/180) * $Radius + $YTop;
-
-       if ( $this->getFirstDecimal($Xp1) > 5 )  { $XOffset1 = 1; } else { $XOffset1 = 0; }
-       if ( $this->getFirstDecimal($Xp2) > 5 )  { $XOffset2 = 1; } else { $XOffset2 = 0; }
-       if ( $this->getFirstDecimal($Yp) > 5 )  { $YOffset = 1; } else { $YOffset = 0; }
-
-       if ( !isset($Drawn[$Yp+$YOffset]) || $Alpha == 100 )
-        imageline($this->Picture,$Xp1+$XOffset1,$Yp+$YOffset,$Xp2+$XOffset2,$Yp+$YOffset,$Color);
-
-       $Drawn[$Yp+$YOffset] = $Xp2;
-
-       $Xp1 = cos(($i+90)*PI/180) * $Radius + $X1 + $Radius;
-       $Xp2 = cos((90-$i)*PI/180) * $Radius + $X2 - $Radius;
-       $Yp  = sin(($i+90)*PI/180) * $Radius + $YBottom;
-
-       if ( $this->getFirstDecimal($Xp1) > 7 )  { $XOffset1 = 1; } else { $XOffset1 = 0; }
-       if ( $this->getFirstDecimal($Xp2) > 7 )  { $XOffset2 = 1; } else { $XOffset2 = 0; }
-       if ( $this->getFirstDecimal($Yp) > 5 )  { $YOffset = 1; } else { $YOffset = 0; }
-
-       if ( !isset($Drawn[$Yp+$YOffset]) || $Alpha == 100 )
-        imageline($this->Picture,$Xp1+$XOffset1,$Yp+$YOffset,$Xp2+$XOffset2,$Yp+$YOffset,$Color);
-
-       $Drawn[$Yp+$YOffset] = $Xp2;
-      }
-
-     $this->drawRoundedRectangle($X1,$Y1,$X2,$Y2,$Radius,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
-
-     $this->Shadow = $RestoreShadow;
-    }
-
-   /* Draw a rectangle */
-   public function drawRectangle($X1,$Y1,$X2,$Y2,$Format="")
-    {
-     $R		= isset($Format["R"]) ? $Format["R"] : 0;
-     $G		= isset($Format["G"]) ? $Format["G"] : 0;
-     $B		= isset($Format["B"]) ? $Format["B"] : 0;
-     $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $Ticks	= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
-     $NoAngle	= isset($Format["NoAngle"]) ? $Format["NoAngle"] : false;
-
-     if ($X1 > $X2) { list($X1, $X2) = array($X2, $X1); }
-     if ($Y1 > $Y2) { list($Y1, $Y2) = array($Y2, $Y1); }
-
-     if ( $this->Antialias )
-      {
-       if ( $NoAngle )
-        {
-         $this->drawLine($X1+1,$Y1,$X2-1,$Y1,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-         $this->drawLine($X2,$Y1+1,$X2,$Y2-1,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-         $this->drawLine($X2-1,$Y2,$X1+1,$Y2,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-         $this->drawLine($X1,$Y1+1,$X1,$Y2-1,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-        }
-       else
-        {
-         $this->drawLine($X1+1,$Y1,$X2-1,$Y1,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-         $this->drawLine($X2,$Y1,$X2,$Y2,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-         $this->drawLine($X2-1,$Y2,$X1+1,$Y2,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-         $this->drawLine($X1,$Y1,$X1,$Y2,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-        }
-      }
-     else
-      {
-       $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
-       imagerectangle($this->Picture,$X1,$Y1,$X2,$Y2,$Color);
-      }
-    }
-
-   /* Draw a filled rectangle */
-   public function drawFilledRectangle($X1,$Y1,$X2,$Y2,$Format="")
-    {
-     $R			= isset($Format["R"]) ? $Format["R"] : 0;
-     $G			= isset($Format["G"]) ? $Format["G"] : 0;
-     $B			= isset($Format["B"]) ? $Format["B"] : 0;
-     $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $BorderR		= isset($Format["BorderR"]) ? $Format["BorderR"] : -1;
-     $BorderG		= isset($Format["BorderG"]) ? $Format["BorderG"] : -1;
-     $BorderB		= isset($Format["BorderB"]) ? $Format["BorderB"] : -1;
-     $BorderAlpha	= isset($Format["BorderAlpha"]) ? $Format["BorderAlpha"] : $Alpha;
-     $Surrounding	= isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
-     $Ticks		= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
-     $NoAngle		= isset($Format["NoAngle"]) ? $Format["NoAngle"] : null;
-     $Dash		= isset($Format["Dash"]) ? $Format["Dash"] : false;
-     $DashStep		= isset($Format["DashStep"]) ? $Format["DashStep"] : 4;
-     $DashR		= isset($Format["DashR"]) ? $Format["DashR"] : 0;
-     $DashG		= isset($Format["DashG"]) ? $Format["DashG"] : 0;
-     $DashB		= isset($Format["DashB"]) ? $Format["DashB"] : 0;
-     $NoBorder		= isset($Format["NoBorder"]) ? $Format["NoBorder"] : false;
-
-     if ( $Surrounding != null ) { $BorderR = $R+$Surrounding; $BorderG = $G+$Surrounding; $BorderB = $B+$Surrounding; }
-
-     if ($X1 > $X2) { list($X1, $X2) = array($X2, $X1); }
-     if ($Y1 > $Y2) { list($Y1, $Y2) = array($Y2, $Y1); }
-
-     $RestoreShadow = $this->Shadow;
-     if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-      {
-       $this->Shadow = false;
-       $this->drawFilledRectangle($X1+$this->ShadowX,$Y1+$this->ShadowY,$X2+$this->ShadowX,$Y2+$this->ShadowY,array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa,"Ticks"=>$Ticks,"NoAngle"=>$NoAngle));
-      }
-
-     $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
-     if ( $NoAngle )
-      {
-       imagefilledrectangle($this->Picture,ceil($X1)+1,ceil($Y1),floor($X2)-1,floor($Y2),$Color);
-       imageline($this->Picture,ceil($X1),ceil($Y1)+1,ceil($X1),floor($Y2)-1,$Color);
-       imageline($this->Picture,floor($X2),ceil($Y1)+1,floor($X2),floor($Y2)-1,$Color);
-      }
-     else
-      imagefilledrectangle($this->Picture,ceil($X1),ceil($Y1),floor($X2),floor($Y2),$Color);
-
-     if ( $Dash )
-      {
-       if ( $BorderR != -1 ) { $iX1=$X1+1; $iY1=$Y1+1; $iX2=$X2-1; $iY2=$Y2-1; } else { $iX1=$X1; $iY1=$Y1; $iX2=$X2; $iY2=$Y2; }
-
-       $Color = $this->allocateColor($this->Picture,$DashR,$DashG,$DashB,$Alpha);
-       $Y=$iY1-$DashStep;
-       for($X=$iX1; $X<=$iX2+($iY2-$iY1); $X=$X+$DashStep)
-        {
-         $Y=$Y+$DashStep;
-         if ( $X > $iX2 ) { $Xa = $X-($X-$iX2); $Ya = $iY1+($X-$iX2); } else { $Xa = $X; $Ya = $iY1; }
-         if ( $Y > $iY2 ) { $Xb = $iX1+($Y-$iY2); $Yb = $Y-($Y-$iY2); } else { $Xb = $iX1; $Yb = $Y; }
-         imageline($this->Picture,$Xa,$Ya,$Xb,$Yb,$Color);
-        }
-      }
-
-     if ( $this->Antialias && !$NoBorder )
-      {
-       if ( $X1 < ceil($X1) )
-        {
-         $AlphaA = $Alpha * (ceil($X1) - $X1);
-         $Color = $this->allocateColor($this->Picture,$R,$G,$B,$AlphaA);
-         imageline($this->Picture,ceil($X1)-1,ceil($Y1),ceil($X1)-1,floor($Y2),$Color);
+        $RestoreShadow = $this->Shadow;
+        if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+            $this->Shadow = false;
+            $this->drawRoundedFilledRectangle(
+                $X1+$this->ShadowX,
+                $Y1+$this->ShadowY,
+                $X2+$this->ShadowX,
+                $Y2+$this->ShadowY,
+                $Radius,
+                array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa)
+            );
         }
 
-       if ( $Y1 < ceil($Y1) )
-        {
-         $AlphaA = $Alpha * (ceil($Y1) - $Y1);
-         $Color = $this->allocateColor($this->Picture,$R,$G,$B,$AlphaA);
-         imageline($this->Picture,ceil($X1),ceil($Y1)-1,floor($X2),ceil($Y1)-1,$Color);
+        $Color = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"NoBorder"=>true);
+
+        if ( $Radius <= 0 ) { 
+            $this->drawFilledRectangle($X1,$Y1,$X2,$Y2,$Color); 
+            return(0);             
         }
 
-       if ( $X2 > floor($X2) )
-        {
-         $AlphaA = $Alpha * (.5-($X2 - floor($X2)));
-         $Color = $this->allocateColor($this->Picture,$R,$G,$B,$AlphaA);
-         imageline($this->Picture,floor($X2)+1,ceil($Y1),floor($X2)+1,floor($Y2),$Color);
-        } 
+        $YTop    = $Y1+$Radius;
+        $YBottom = $Y2-$Radius;
 
-       if ( $Y2 > floor($Y2) )
-        {
-         $AlphaA = $Alpha * (.5-($Y2 - floor($Y2)));
-         $Color = $this->allocateColor($this->Picture,$R,$G,$B,$AlphaA);
-         imageline($this->Picture,ceil($X1),floor($Y2)+1,floor($X2),floor($Y2)+1,$Color);
-        }
-      }
-
-     if ( $BorderR != -1 )
-      $this->drawRectangle($X1,$Y1,$X2,$Y2,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha,"Ticks"=>$Ticks,"NoAngle"=>$NoAngle));
-
-     $this->Shadow = $RestoreShadow;
-    }
-
-   /* Draw a rectangular marker of the specified size */
-   public function drawRectangleMarker($X,$Y,$Format="")
-    {
-     $Size = isset($Format["Size"]) ? $Format["Size"] : 4;
-
-     $HalfSize = floor($Size/2);
-     $this->drawFilledRectangle($X-$HalfSize,$Y-$HalfSize,$X+$HalfSize,$Y+$HalfSize,$Format);
-    }
-
-   /* Drawn a spline based on the bezier public function */
-   public function drawSpline($Coordinates,$Format="")
-    {
-     $R		= isset($Format["R"]) ? $Format["R"] : 0;
-     $G		= isset($Format["G"]) ? $Format["G"] : 0;
-     $B		= isset($Format["B"]) ? $Format["B"] : 0;
-     $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $Force	= isset($Format["Force"]) ? $Format["Force"] : 30;
-     $Forces	= isset($Format["Forces"]) ? $Format["Forces"] : null;
-     $ShowC	= isset($Format["ShowControl"]) ? $Format["ShowControl"] : false;
-     $Ticks	= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
-     $PathOnly	= isset($Format["PathOnly"]) ? $Format["PathOnly"] : false;
-     $Weight	= isset($Format["Weight"]) ? $Format["Weight"] : null;
-
-     $Cpt = null; $Mode = null; $Result = "";
-     for($i=1;$i<=count($Coordinates)-1;$i++)
-      {
-       $X1 = $Coordinates[$i-1][0]; $Y1 = $Coordinates[$i-1][1];
-       $X2 = $Coordinates[$i][0];   $Y2 = $Coordinates[$i][1];
-
-       if ( $Forces != null ) { $Force = $Forces[$i]; }
-
-       /* First segment */
-       if ( $i == 1 )
-        { $Xv1 = $X1; $Yv1 = $Y1; }
-       else
-        {
-         $Angle1 = $this->getAngle($XLast,$YLast,$X1,$Y1);
-         $Angle2 = $this->getAngle($X1,$Y1,$X2,$Y2);
-         $XOff = cos($Angle2 * PI / 180) * $Force + $X1;
-         $YOff = sin($Angle2 * PI / 180) * $Force + $Y1;
-
-         $Xv1 = cos($Angle1 * PI / 180) * $Force + $XOff;
-         $Yv1 = sin($Angle1 * PI / 180) * $Force + $YOff;
-        }
-
-       /* Last segment */
-       if ( $i == count($Coordinates)-1 )
-        { $Xv2 = $X2; $Yv2 = $Y2; }
-       else
-        {
-         $Angle1 = $this->getAngle($X2,$Y2,$Coordinates[$i+1][0],$Coordinates[$i+1][1]);
-         $Angle2 = $this->getAngle($X1,$Y1,$X2,$Y2);
-         $XOff = cos(($Angle2+180) * PI / 180) * $Force + $X2;
-         $YOff = sin(($Angle2+180) * PI / 180) * $Force + $Y2;
-
-         $Xv2 = cos(($Angle1+180) * PI / 180) * $Force + $XOff;
-         $Yv2 = sin(($Angle1+180) * PI / 180) * $Force + $YOff;
-        }
-
-       $Path = $this->drawBezier($X1,$Y1,$X2,$Y2,$Xv1,$Yv1,$Xv2,$Yv2,$Format);
-       if ($PathOnly) { $Result[] = $Path; }
-
-       $XLast = $X1; $YLast = $Y1;
-      }
-
-     return($Result);
-    }
-
-   /* Draw a bezier curve with two controls points */
-   public function drawBezier($X1,$Y1,$X2,$Y2,$Xv1,$Yv1,$Xv2,$Yv2,$Format="")
-    {
-     $R		= isset($Format["R"]) ? $Format["R"] : 0;
-     $G		= isset($Format["G"]) ? $Format["G"] : 0;
-     $B		= isset($Format["B"]) ? $Format["B"] : 0;
-     $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $ShowC	= isset($Format["ShowControl"]) ? $Format["ShowControl"] : false;
-     $Segments	= isset($Format["Segments"]) ? $Format["Segments"] : null;
-     $Ticks	= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
-     $NoDraw    = isset($Format["NoDraw"]) ? $Format["NoDraw"] : false;
-     $PathOnly  = isset($Format["PathOnly"]) ? $Format["PathOnly"] : false;
-     $Weight    = isset($Format["Weight"]) ? $Format["Weight"] : null;
-     $DrawArrow		= isset($Format["DrawArrow"]) ? $Format["DrawArrow"] : false;
-     $ArrowSize		= isset($Format["ArrowSize"]) ? $Format["ArrowSize"] : 10;
-     $ArrowRatio	= isset($Format["ArrowRatio"]) ? $Format["ArrowRatio"] : .5;
-     $ArrowTwoHeads	= isset($Format["ArrowTwoHeads"]) ? $Format["ArrowTwoHeads"] : false;
-
-     if ( $Segments == null )
-      {
-       $Length    = $this->getLength($X1,$Y1,$X2,$Y2);
-       $Precision = ($Length*125)/1000;
-      }
-     else
-      $Precision = $Segments;
-
-     $P[0]["X"] = $X1;  $P[0]["Y"] = $Y1;
-     $P[1]["X"] = $Xv1; $P[1]["Y"] = $Yv1;
-     $P[2]["X"] = $Xv2; $P[2]["Y"] = $Yv2;
-     $P[3]["X"] = $X2;  $P[3]["Y"] = $Y2;
-
-     /* Compute the bezier points */
-     $Q = ""; $ID = 0; $Path = "";
-     for($i=0;$i<=$Precision;$i=$i+1)
-      {
-       $u = $i / $Precision;
-
-       $C    = "";
-       $C[0] = (1 - $u) * (1 - $u) * (1 - $u);
-       $C[1] = ($u * 3) * (1 - $u) * (1 - $u);
-       $C[2] = 3 * $u * $u * (1 - $u);
-       $C[3] = $u * $u * $u;
-
-       for($j=0;$j<=3;$j++)
-        {
-         if ( !isset($Q[$ID]) ) { $Q[$ID] = ""; }
-         if ( !isset($Q[$ID]["X"]) ) { $Q[$ID]["X"] = 0; }
-         if ( !isset($Q[$ID]["Y"]) ) { $Q[$ID]["Y"] = 0; }
-
-         $Q[$ID]["X"] = $Q[$ID]["X"] + $P[$j]["X"] * $C[$j];
-         $Q[$ID]["Y"] = $Q[$ID]["Y"] + $P[$j]["Y"] * $C[$j];
-        }
-       $ID++;
-      }        
-     $Q[$ID]["X"] = $X2; $Q[$ID]["Y"] = $Y2;
-
-     if ( !$NoDraw )
-      {
-       /* Display the control points */
-       if ( $ShowC && !$PathOnly )
-        {
-         $Xv1 = floor($Xv1); $Yv1 = floor($Yv1); $Xv2 = floor($Xv2); $Yv2 = floor($Yv2);
-
-         $this->drawLine($X1,$Y1,$X2,$Y2,array("R"=>0,"G"=>0,"B"=>0,"Alpha"=>30));
-
-         $MyMarkerSettings = array("R"=>255,"G"=>0,"B"=>0,"BorderR"=>255,"BorderB"=>255,"BorderG"=>255,"Size"=>4);
-         $this->drawRectangleMarker($Xv1,$Yv1,$MyMarkerSettings);
-         $this->drawText($Xv1+4,$Yv1,"v1");
-         $MyMarkerSettings = array("R"=>0,"G"=>0,"B"=>255,"BorderR"=>255,"BorderB"=>255,"BorderG"=>255,"Size"=>4);
-         $this->drawRectangleMarker($Xv2,$Yv2,$MyMarkerSettings);
-         $this->drawText($Xv2+4,$Yv2,"v2");
-        }
-
-       /* Draw the bezier */
-       $LastX = null; $LastY = null; $Cpt = null; $Mode = null; $ArrowS = null;
-       foreach ($Q as $Key => $Point)
-        {
-         $X = $Point["X"]; $Y = $Point["Y"];
-
-         /* Get the first segment */
-         if ( $ArrowS == null && $LastX != null && $LastY != null )
-          { $ArrowS["X2"] = $LastX; $ArrowS["Y2"] = $LastY; $ArrowS["X1"] = $X; $ArrowS["Y1"] = $Y; }
-
-         if ( $LastX != null && $LastY != null && !$PathOnly)
-          list($Cpt,$Mode) = $this->drawLine($LastX,$LastY,$X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks,"Cpt"=>$Cpt,"Mode"=>$Mode,"Weight"=>$Weight));
-
-         /* Get the last segment */
-         $ArrowE["X1"] = $LastX; $ArrowE["Y1"] = $LastY; $ArrowE["X2"] = $X; $ArrowE["Y2"] = $Y;
-
-         $LastX = $X; $LastY = $Y;
-        }
-
-       if ( $DrawArrow && !$PathOnly )
-        {
-         $ArrowSettings = array("FillR"=>$R,"FillG"=>$G,"FillB"=>$B,"Alpha"=>$Alpha,"Size"=>$ArrowSize,"Ratio"=>$ArrowRatio);
-         if ( $ArrowTwoHeads )
-          $this->drawArrow($ArrowS["X1"],$ArrowS["Y1"],$ArrowS["X2"],$ArrowS["Y2"],$ArrowSettings);
-
-         $this->drawArrow($ArrowE["X1"],$ArrowE["Y1"],$ArrowE["X2"],$ArrowE["Y2"],$ArrowSettings);
-        }
-      }
-     return($Q);
-    }
-
-   /* Draw a line between two points */
-   public function drawLine($X1,$Y1,$X2,$Y2,$Format="")
-    {
-     $R		= isset($Format["R"]) ? $Format["R"] : 0;
-     $G		= isset($Format["G"]) ? $Format["G"] : 0;
-     $B		= isset($Format["B"]) ? $Format["B"] : 0;
-     $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $Ticks	= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
-     $Cpt	= isset($Format["Cpt"]) ? $Format["Cpt"] : 1;
-     $Mode	= isset($Format["Mode"]) ? $Format["Mode"] : 1;
-     $Weight	= isset($Format["Weight"]) ? $Format["Weight"] : null;
-     $Threshold	= isset($Format["Threshold"]) ? $Format["Threshold"] : null;
-
-     if ( $this->Antialias == false && $Ticks == null )
-      {
-       if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-        {
-         $ShadowColor = $this->allocateColor($this->Picture,$this->ShadowR,$this->ShadowG,$this->ShadowB,$this->Shadowa);
-         imageline($this->Picture,$X1+$this->ShadowX,$Y1+$this->ShadowY,$X2+$this->ShadowX,$Y2+$this->ShadowY,$ShadowColor);
-        }
-
-       $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
-       imageline($this->Picture,$X1,$Y1,$X2,$Y2,$Color);
-       return(0);
-      }
-
-     $Distance = sqrt(($X2-$X1)*($X2-$X1)+($Y2-$Y1)*($Y2-$Y1));  
-     if ( $Distance == 0 ) { return(-1); }
-
-     /* Derivative algorithm for overweighted lines, re-route to polygons primitives */
-     if ( $Weight != null )
-      {
-       $Angle        = $this->getAngle($X1,$Y1,$X2,$Y2);
-       $PolySettings = array ("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"BorderAlpha"=>$Alpha);
-
-       if ( $Ticks == null )
-        {
-         $Points   = ""; 
-         $Points[] = cos(deg2rad($Angle-90)) * $Weight + $X1; $Points[] = sin(deg2rad($Angle-90)) * $Weight + $Y1;
-         $Points[] = cos(deg2rad($Angle+90)) * $Weight + $X1; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Y1;
-         $Points[] = cos(deg2rad($Angle+90)) * $Weight + $X2; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Y2;
-         $Points[] = cos(deg2rad($Angle-90)) * $Weight + $X2; $Points[] = sin(deg2rad($Angle-90)) * $Weight + $Y2;
-
-         $this->drawPolygon($Points,$PolySettings);
-        }
-       else
-        {
-         for($i=0;$i<=$Distance;$i=$i+$Ticks*2)
-          {
-           $Xa = (($X2-$X1)/$Distance) * $i + $X1; $Ya = (($Y2-$Y1)/$Distance) * $i + $Y1;
-           $Xb = (($X2-$X1)/$Distance) * ($i+$Ticks) + $X1; $Yb = (($Y2-$Y1)/$Distance) * ($i+$Ticks) + $Y1;
-
-           $Points   = ""; 
-           $Points[] = cos(deg2rad($Angle-90)) * $Weight + $Xa; $Points[] = sin(deg2rad($Angle-90)) * $Weight + $Ya;
-           $Points[] = cos(deg2rad($Angle+90)) * $Weight + $Xa; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Ya;
-           $Points[] = cos(deg2rad($Angle+90)) * $Weight + $Xb; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Yb;
-           $Points[] = cos(deg2rad($Angle-90)) * $Weight + $Xb; $Points[] = sin(deg2rad($Angle-90)) * $Weight 	+ $Yb;
-
-           $this->drawPolygon($Points,$PolySettings);
-          }
-        }
-
-       return(1);
-      }
-
-     $XStep = ($X2-$X1) / $Distance;
-     $YStep = ($Y2-$Y1) / $Distance;
-
-     for($i=0;$i<=$Distance;$i++)
-      {
-       $X = $i * $XStep + $X1;
-       $Y = $i * $YStep + $Y1;
-
-       $Color = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha);
-
-       if ( $Threshold != null )
-        {
-         foreach($Threshold as $Key => $Parameters)
-          {
-           if ( $Y <= $Parameters["MinX"] && $Y >= $Parameters["MaxX"])
-            {
-             if ( isset($Parameters["R"]) ) { $RT = $Parameters["R"]; } else { $RT = 0; }
-             if ( isset($Parameters["G"]) ) { $GT = $Parameters["G"]; } else { $GT = 0; }
-             if ( isset($Parameters["B"]) ) { $BT = $Parameters["B"]; } else { $BT = 0; }
-             if ( isset($Parameters["Alpha"]) ) { $AlphaT = $Parameters["Alpha"]; } else { $AlphaT = 0; }
-             $Color = array("R"=>$RT,"G"=>$GT,"B"=>$BT,"Alpha"=>$AlphaT);
+        $Step = 360 / (2 * PI * $Radius);
+        $Positions = ""; 
+        $Radius--; 
+        $MinY = ""; 
+        $MaxY = "";
+        for ($i=0;$i<=90;$i=$i+$Step) {
+            $Xp1 = cos(($i+180)*PI/180) * $Radius + $X1 + $Radius;
+            $Xp2 = cos(((90-$i)+270)*PI/180) * $Radius + $X2 - $Radius;
+            $Yp  = floor(sin(($i+180)*PI/180) * $Radius + $YTop);
+            if ( $MinY == "" || $Yp > $MinY ) { 
+                $MinY = $Yp;                 
             }
-          }
+
+            if ( $Xp1 <= floor($X1) )  { 
+                $Xp1++;                 
+            }
+            if ( $Xp2 >= floor($X2) )  { 
+                $Xp2--;                 
+            }
+            $Xp1++;
+
+            if ( !isset($Positions[$Yp]) ) { 
+                $Positions[$Yp]["X1"] = $Xp1;
+                $Positions[$Yp]["X2"] = $Xp2;                 
+            } else { 
+                $Positions[$Yp]["X1"] = ($Positions[$Yp]["X1"]+$Xp1)/2; 
+                $Positions[$Yp]["X2"] = ($Positions[$Yp]["X2"]+$Xp2)/2;                 
+            }
+
+            $Xp1 = cos(($i+90)*PI/180) * $Radius + $X1 + $Radius;
+            $Xp2 = cos((90-$i)*PI/180) * $Radius + $X2 - $Radius;
+            $Yp  = floor(sin(($i+90)*PI/180) * $Radius + $YBottom);
+            if ( $MaxY == "" || $Yp < $MaxY ) { 
+                $MaxY = $Yp;                 
+            }
+
+            if ( $Xp1 <= floor($X1) ) { 
+                $Xp1++;
+            }
+            if ( $Xp2 >= floor($X2) ) { 
+                $Xp2--;                 
+            }
+            $Xp1++;
+
+            if ( !isset($Positions[$Yp]) ) { 
+                $Positions[$Yp]["X1"] = $Xp1; 
+                $Positions[$Yp]["X2"] = $Xp2;                 
+            } else { 
+                $Positions[$Yp]["X1"] = ($Positions[$Yp]["X1"]+$Xp1)/2; 
+                $Positions[$Yp]["X2"] = ($Positions[$Yp]["X2"]+$Xp2)/2;                 
+            }
         }
 
-       if ( $Ticks != null )
-        {
-         if ( $Cpt % $Ticks == 0 )
-          { $Cpt = 0; if ( $Mode == 1 ) { $Mode = 0; } else { $Mode = 1; } }
-
-         if ( $Mode == 1 )
-          $this->drawAntialiasPixel($X,$Y,$Color);
-
-         $Cpt++;
+        $ManualColor  = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
+        foreach($Positions as $Yp => $Bounds) {
+            $X1 = $Bounds["X1"]; 
+            $X1Dec = $this->getFirstDecimal($X1); 
+            if ( $X1Dec != 0 ) { $X1 = floor($X1)+1; }
+            $X2 = $Bounds["X2"]; 
+            $X2Dec = $this->getFirstDecimal($X2); 
+            if ( $X2Dec != 0 ) { $X2 = floor($X2)-1; }
+            imageline($this->Picture,$X1,$Yp,$X2,$Yp,$ManualColor);
         }
-       else
-        $this->drawAntialiasPixel($X,$Y,$Color);
-      }
+        $this->drawFilledRectangle($X1,$MinY+1,floor($X2),$MaxY-1,$Color);
 
-     return(array($Cpt,$Mode));
+        $Radius++;
+        $this->drawRoundedRectangle(
+            $X1,
+            $Y1,
+            $X2+1,
+            $Y2-1,
+            $Radius,
+            array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha)
+        );
+
+        $this->Shadow = $RestoreShadow;
     }
 
-   /* Draw a circle */
-   public function drawCircle($Xc,$Yc,$Height,$Width,$Format="")
+    /**
+     * Draw a rectangle with rounded corners
+     * @param type $X1
+     * @param type $Y1
+     * @param type $X2
+     * @param type $Y2
+     * @param type $Radius
+     * @param type $Format
+     */
+    public function drawRoundedFilledRectangle_deprecated($X1,$Y1,$X2,$Y2,$Radius,$Format="")
     {
-     $R	    = isset($Format["R"]) ? $Format["R"] : 0;
-     $G	    = isset($Format["G"]) ? $Format["G"] : 0;
-     $B	    = isset($Format["B"]) ? $Format["B"] : 0;
-     $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $Ticks = isset($Format["Ticks"]) ? $Format["Ticks"] : null;
+        $R			= isset($Format["R"]) ? $Format["R"] : 0;
+        $G			= isset($Format["G"]) ? $Format["G"] : 0;
+        $B			= isset($Format["B"]) ? $Format["B"] : 0;
+        $BorderR		= isset($Format["BorderR"]) ? $Format["BorderR"] : -1;
+        $BorderG		= isset($Format["BorderG"]) ? $Format["BorderG"] : -1;
+        $BorderB		= isset($Format["BorderB"]) ? $Format["BorderB"] : -1;
+        $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $Surrounding	= isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
 
-     $Height	= abs($Height);
-     $Width	= abs($Width);
-
-     if ( $Height == 0 ) { $Height = 1; }
-     if ( $Width == 0 )  { $Width = 1; }
-     $Xc = floor($Xc); $Yc = floor($Yc);
-
-     $RestoreShadow = $this->Shadow;
-     if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-      {
-       $this->Shadow = false;
-       $this->drawCircle($Xc+$this->ShadowX,$Yc+$this->ShadowY,$Height,$Width,array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa,"Ticks"=>$Ticks));
-      }
-
-     if ( $Width == 0 ) { $Width = $Height; }
-     if ( $R < 0 ) { $R = 0; } if ( $R > 255 ) { $R = 255; }
-     if ( $G < 0 ) { $G = 0; } if ( $G > 255 ) { $G = 255; }
-     if ( $B < 0 ) { $B = 0; } if ( $B > 255 ) { $B = 255; }
-
-     $Step = 360 / (2 * PI * max($Width,$Height));
-     $Mode = 1; $Cpt = 1;
-     for($i=0;$i<=360;$i=$i+$Step)
-      {
-       $X = cos($i*PI/180) * $Height + $Xc;
-       $Y = sin($i*PI/180) * $Width + $Yc;
-
-       if ( $Ticks != null )
-        {
-         if ( $Cpt % $Ticks == 0 )
-          { $Cpt = 0; if ( $Mode == 1 ) { $Mode = 0; } else { $Mode = 1; } }
-
-         if ( $Mode == 1 )
-          $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
-
-         $Cpt++;
+        if ( $Surrounding != null ) { 
+            $BorderR = $R+$Surrounding; 
+            $BorderG = $G+$Surrounding; 
+            $BorderB = $B+$Surrounding;             
         }
-       else
-        $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+        if ( $BorderR == -1 ) { $BorderR = $R; $BorderG = $G; $BorderB = $B; }
 
-      }
-     $this->Shadow = $RestoreShadow;
+        list($X1,$Y1,$X2,$Y2) = $this->fixBoxCoordinates($X1,$Y1,$X2,$Y2);
+
+        if ( $X2 - $X1 < $Radius ) { $Radius = floor((($X2-$X1)+2)/2); }
+        if ( $Y2 - $Y1 < $Radius ) { $Radius = floor((($Y2-$Y1)+2)/2); }
+
+        $RestoreShadow = $this->Shadow;
+        if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+            $this->Shadow = false;
+            $this->drawRoundedFilledRectangle(
+                $X1+$this->ShadowX,
+                $Y1+$this->ShadowY,
+                $X2+$this->ShadowX,
+                $Y2+$this->ShadowY,
+                $Radius,
+                array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa)
+            );
+        }
+
+        if ( $this->getFirstDecimal($X2) >= 5 )  { $XOffset2 = 1; } else { $XOffset2 = 0; }
+        if ( $this->getFirstDecimal($X1) <= 5 )  { $XOffset1 = 1; } else { $XOffset1 = 0; }
+
+        if ( !$this->Antialias ) { $XOffset1 = 1; $XOffset2 = 1; }
+
+        $YTop    = floor($Y1+$Radius);
+        $YBottom = floor($Y2-$Radius);
+        
+        $this->drawFilledRectangle(
+            $X1-$XOffset1,
+            $YTop,
+            $X2+$XOffset2,
+            $YBottom,
+            array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"NoBorder"=>true)
+        );
+
+        $Step = 360 / (2 * PI * $Radius);
+        $Color  = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
+        $Color2 = $this->allocateColor($this->Picture,255,0,0,$Alpha);
+        $Drawn = "";
+
+        if ( $Alpha < 100 )  { $Drawn[$YTop] = false; }
+        if ( $Alpha < 100 )  { $Drawn[$YBottom] = true; }
+     
+        for($i=0;$i<=90;$i=$i+$Step) {
+            $Xp1 = cos(($i+180)*PI/180) * $Radius + $X1 + $Radius;
+            $Xp2 = cos(((90-$i)+270)*PI/180) * $Radius + $X2 - $Radius;
+            $Yp  = sin(($i+180)*PI/180) * $Radius + $YTop;
+
+            if ( $this->getFirstDecimal($Xp1) > 5 )  { $XOffset1 = 1; } else { $XOffset1 = 0; }
+            if ( $this->getFirstDecimal($Xp2) > 5 )  { $XOffset2 = 1; } else { $XOffset2 = 0; }
+            if ( $this->getFirstDecimal($Yp) > 5 )  { $YOffset = 1; } else { $YOffset = 0; }
+
+            if ( !isset($Drawn[$Yp+$YOffset]) || $Alpha == 100 ) {
+                imageline($this->Picture,$Xp1+$XOffset1,$Yp+$YOffset,$Xp2+$XOffset2,$Yp+$YOffset,$Color);
+            }
+            $Drawn[$Yp+$YOffset] = $Xp2;
+
+            $Xp1 = cos(($i+90)*PI/180) * $Radius + $X1 + $Radius;
+            $Xp2 = cos((90-$i)*PI/180) * $Radius + $X2 - $Radius;
+            $Yp  = sin(($i+90)*PI/180) * $Radius + $YBottom;
+
+            if ( $this->getFirstDecimal($Xp1) > 7 )  { $XOffset1 = 1; } else { $XOffset1 = 0; }
+            if ( $this->getFirstDecimal($Xp2) > 7 )  { $XOffset2 = 1; } else { $XOffset2 = 0; }
+            if ( $this->getFirstDecimal($Yp) > 5 )  { $YOffset = 1; } else { $YOffset = 0; }
+
+            if ( !isset($Drawn[$Yp+$YOffset]) || $Alpha == 100 ) {
+                imageline($this->Picture,$Xp1+$XOffset1,$Yp+$YOffset,$Xp2+$XOffset2,$Yp+$YOffset,$Color);
+            }
+            $Drawn[$Yp+$YOffset] = $Xp2;
+        }
+
+        $this->drawRoundedRectangle(
+            $X1,
+            $Y1,
+            $X2,
+            $Y2,
+            $Radius,
+            array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha)
+        );
+
+        $this->Shadow = $RestoreShadow;
     }
 
-   /* Draw a filled circle */
-   public function drawFilledCircle($X,$Y,$Radius,$Format="")
+    /**
+     * Draw a rectangle
+     * @param type $X1
+     * @param type $Y1
+     * @param type $X2
+     * @param type $Y2
+     * @param type $Format
+     */
+    public function drawRectangle($X1,$Y1,$X2,$Y2,$Format="")
     {
-     $R			= isset($Format["R"]) ? $Format["R"] : 0;
-     $G			= isset($Format["G"]) ? $Format["G"] : 0;
-     $B			= isset($Format["B"]) ? $Format["B"] : 0;
-     $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $BorderR		= isset($Format["BorderR"]) ? $Format["BorderR"] : -1;
-     $BorderG		= isset($Format["BorderG"]) ? $Format["BorderG"] : -1;
-     $BorderB		= isset($Format["BorderB"]) ? $Format["BorderB"] : -1;
-     $BorderAlpha	= isset($Format["BorderAlpha"]) ? $Format["BorderAlpha"] : $Alpha;
-     $Ticks     	= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
-     $Surrounding 	= isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
+        $R	= isset($Format["R"]) ? $Format["R"] : 0;
+        $G	= isset($Format["G"]) ? $Format["G"] : 0;
+        $B	= isset($Format["B"]) ? $Format["B"] : 0;
+        $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $Ticks	= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
+        $NoAngle = isset($Format["NoAngle"]) ? $Format["NoAngle"] : false;
 
-     if ( $Radius == 0 ) { $Radius = 1; }
-     if ( $Surrounding != null ) { $BorderR = $R+$Surrounding; $BorderG = $G+$Surrounding; $BorderB = $B+$Surrounding; }
-     $X = floor($X); $Y = floor($Y);
+        if ($X1 > $X2) { list($X1, $X2) = array($X2, $X1); }
+        if ($Y1 > $Y2) { list($Y1, $Y2) = array($Y2, $Y1); }
 
-     $Radius = abs($Radius);
-
-     $RestoreShadow = $this->Shadow;
-     if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-      {
-       $this->Shadow = false;
-       $this->drawFilledCircle($X+$this->ShadowX,$Y+$this->ShadowY,$Radius,array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa,"Ticks"=>$Ticks));
-      }
-
-     $this->Mask  = "";
-     $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
-     for ($i=0; $i<=$Radius*2; $i++)
-      {
-       $Slice  = sqrt($Radius * $Radius - ($Radius - $i) * ($Radius - $i));
-       $XPos   = floor($Slice);
-       $YPos   = $Y + $i - $Radius;
-       $AAlias = $Slice - floor($Slice);
-
-       $this->Mask[$X-$XPos][$YPos] = true;
-       $this->Mask[$X+$XPos][$YPos] = true;
-       imageline($this->Picture,$X-$XPos,$YPos,$X+$XPos,$YPos,$Color);
-      }
-     if ( $this->Antialias )
-      $this->drawCircle($X,$Y,$Radius,$Radius,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-
-     $this->Mask = "";
-
-     if ( $BorderR != -1 )
-      $this->drawCircle($X,$Y,$Radius,$Radius,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha,"Ticks"=>$Ticks));
-
-     $this->Shadow	= $RestoreShadow;
+        if ( $this->Antialias ) {
+            if ( $NoAngle ) {
+                $this->drawLine($X1+1,$Y1,$X2-1,$Y1,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+                $this->drawLine($X2,$Y1+1,$X2,$Y2-1,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+                $this->drawLine($X2-1,$Y2,$X1+1,$Y2,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+                $this->drawLine($X1,$Y1+1,$X1,$Y2-1,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+             } else {
+                $this->drawLine($X1+1,$Y1,$X2-1,$Y1,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+                $this->drawLine($X2,$Y1,$X2,$Y2,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+                $this->drawLine($X2-1,$Y2,$X1+1,$Y2,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+                $this->drawLine($X1,$Y1,$X1,$Y2,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+             }
+        } else {
+            $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
+            imagerectangle($this->Picture,$X1,$Y1,$X2,$Y2,$Color);
+        }
     }
 
-   /* Write text */
-   public function drawText($X,$Y,$Text,$Format="")
+    /**
+     * Draw a filled rectangle
+     * @param type $X1
+     * @param type $Y1
+     * @param type $X2
+     * @param type $Y2
+     * @param type $Format
+     */
+    public function drawFilledRectangle($X1,$Y1,$X2,$Y2,$Format="")
     {
-     $R			= isset($Format["R"]) ? $Format["R"] : $this->FontColorR;
-     $G			= isset($Format["G"]) ? $Format["G"] : $this->FontColorG;
-     $B			= isset($Format["B"]) ? $Format["B"] : $this->FontColorB;
-     $Angle		= isset($Format["Angle"]) ? $Format["Angle"] : 0;
-     $Align		= isset($Format["Align"]) ? $Format["Align"] : TEXT_ALIGN_BOTTOMLEFT;
-     $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : $this->FontColorA;
-     $FontName		= isset($Format["FontName"]) ? $Format["FontName"] : $this->FontName;
-     $FontSize		= isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
-     $ShowOrigine	= isset($Format["ShowOrigine"]) ? $Format["ShowOrigine"] : false;
-     $TOffset		= isset($Format["TOffset"]) ? $Format["TOffset"] : 2;
-     $DrawBox		= isset($Format["DrawBox"]) ? $Format["DrawBox"] : false;
-     $DrawBoxBorder	= isset($Format["DrawBoxBorder"]) ? $Format["DrawBoxBorder"] : true;
-     $BorderOffset	= isset($Format["BorderOffset"]) ? $Format["BorderOffset"] : 6;
-     $BoxRounded	= isset($Format["BoxRounded"]) ? $Format["BoxRounded"] : false;
-     $RoundedRadius	= isset($Format["RoundedRadius"]) ? $Format["RoundedRadius"] : 6;
-     $BoxR		= isset($Format["BoxR"]) ? $Format["BoxR"] : 255;
-     $BoxG		= isset($Format["BoxG"]) ? $Format["BoxG"] : 255;
-     $BoxB		= isset($Format["BoxB"]) ? $Format["BoxB"] : 255;
-     $BoxAlpha		= isset($Format["BoxAlpha"]) ? $Format["BoxAlpha"] : 50;
-     $BoxSurrounding	= isset($Format["BoxSurrounding"]) ? $Format["BoxSurrounding"] : "";
-     $BoxBorderR	= isset($Format["BoxR"]) ? $Format["BoxR"] : 0;
-     $BoxBorderG	= isset($Format["BoxG"]) ? $Format["BoxG"] : 0;
-     $BoxBorderB	= isset($Format["BoxB"]) ? $Format["BoxB"] : 0;
-     $BoxBorderAlpha	= isset($Format["BoxAlpha"]) ? $Format["BoxAlpha"] : 50;
-     $NoShadow		= isset($Format["NoShadow"]) ? $Format["NoShadow"] : false;
+        $R		= isset($Format["R"]) ? $Format["R"] : 0;
+        $G		= isset($Format["G"]) ? $Format["G"] : 0;
+        $B		= isset($Format["B"]) ? $Format["B"] : 0;
+        $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $BorderR	= isset($Format["BorderR"]) ? $Format["BorderR"] : -1;
+        $BorderG	= isset($Format["BorderG"]) ? $Format["BorderG"] : -1;
+        $BorderB	= isset($Format["BorderB"]) ? $Format["BorderB"] : -1;
+        $BorderAlpha	= isset($Format["BorderAlpha"]) ? $Format["BorderAlpha"] : $Alpha;
+        $Surrounding	= isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
+        $Ticks		= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
+        $NoAngle	= isset($Format["NoAngle"]) ? $Format["NoAngle"] : null;
+        $Dash		= isset($Format["Dash"]) ? $Format["Dash"] : false;
+        $DashStep	= isset($Format["DashStep"]) ? $Format["DashStep"] : 4;
+        $DashR		= isset($Format["DashR"]) ? $Format["DashR"] : 0;
+        $DashG		= isset($Format["DashG"]) ? $Format["DashG"] : 0;
+        $DashB		= isset($Format["DashB"]) ? $Format["DashB"] : 0;
+        $NoBorder	= isset($Format["NoBorder"]) ? $Format["NoBorder"] : false;
 
-     $Shadow = $this->Shadow;
-     if ( $NoShadow ) { $this->Shadow = false; }
+        if ( $Surrounding != null ) { 
+            $BorderR = $R+$Surrounding; 
+            $BorderG = $G+$Surrounding; 
+            $BorderB = $B+$Surrounding;             
+        }
 
-     if ( $BoxSurrounding != "" ) { $BoxBorderR = $BoxR - $BoxSurrounding; $BoxBorderG = $BoxG - $BoxSurrounding; $BoxBorderB = $BoxB - $BoxSurrounding; $BoxBorderAlpha = $BoxAlpha; }
+        if ($X1 > $X2) { list($X1, $X2) = array($X2, $X1); }
+        if ($Y1 > $Y2) { list($Y1, $Y2) = array($Y2, $Y1); }
 
-     if ( $ShowOrigine )
-      {
-       $MyMarkerSettings = array("R"=>255,"G"=>0,"B"=>0,"BorderR"=>255,"BorderB"=>255,"BorderG"=>255,"Size"=>4);
-       $this->drawRectangleMarker($X,$Y,$MyMarkerSettings);
-      }
+        $RestoreShadow = $this->Shadow;
+        if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+            $this->Shadow = false;
+            $this->drawFilledRectangle(
+                $X1+$this->ShadowX,
+                $Y1+$this->ShadowY,
+                $X2+$this->ShadowX,
+                $Y2+$this->ShadowY,
+                array(
+                    "R"=>$this->ShadowR,
+                    "G"=>$this->ShadowG,
+                    "B"=>$this->ShadowB,
+                    "Alpha"=>$this->Shadowa,
+                    "Ticks"=>$Ticks,
+                    "NoAngle"=>$NoAngle
+                )
+            );
+        }
 
-     $TxtPos = $this->getTextBox($X,$Y,$FontName,$FontSize,$Angle,$Text);
+        $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
+        if ( $NoAngle ) {
+            imagefilledrectangle($this->Picture,ceil($X1)+1,ceil($Y1),floor($X2)-1,floor($Y2),$Color);
+            imageline($this->Picture,ceil($X1),ceil($Y1)+1,ceil($X1),floor($Y2)-1,$Color);
+            imageline($this->Picture,floor($X2),ceil($Y1)+1,floor($X2),floor($Y2)-1,$Color);
+        } else {
+            imagefilledrectangle($this->Picture,ceil($X1),ceil($Y1),floor($X2),floor($Y2),$Color);
+        }
+        if ( $Dash ) {
+            if ( $BorderR != -1 ) { 
+                $iX1=$X1+1; 
+                $iY1=$Y1+1; 
+                $iX2=$X2-1; 
+                $iY2=$Y2-1;               
+            } else { 
+                $iX1=$X1; 
+                $iY1=$Y1; 
+                $iX2=$X2; 
+                $iY2=$Y2;               
+            }
 
-     if ( $DrawBox && ($Angle == 0 || $Angle == 90 || $Angle == 180 || $Angle == 270))
-      {
-       $T[0]["X"]=0;$T[0]["Y"]=0;$T[1]["X"]=0;$T[1]["Y"]=0;$T[2]["X"]=0;$T[2]["Y"]=0;$T[3]["X"]=0;$T[3]["Y"]=0;
-       if ( $Angle == 0 ) { $T[0]["X"]=-$TOffset;$T[0]["Y"]=$TOffset;$T[1]["X"]=$TOffset;$T[1]["Y"]=$TOffset;$T[2]["X"]=$TOffset;$T[2]["Y"]=-$TOffset;$T[3]["X"]=-$TOffset;$T[3]["Y"]=-$TOffset; }
+            $Color = $this->allocateColor($this->Picture,$DashR,$DashG,$DashB,$Alpha);
+            $Y=$iY1-$DashStep;
+            for($X=$iX1; $X<=$iX2+($iY2-$iY1); $X=$X+$DashStep) {
+                $Y=$Y+$DashStep;
+                if ( $X > $iX2 ) { $Xa = $X-($X-$iX2); $Ya = $iY1+($X-$iX2); } else { $Xa = $X; $Ya = $iY1; }
+                if ( $Y > $iY2 ) { $Xb = $iX1+($Y-$iY2); $Yb = $Y-($Y-$iY2); } else { $Xb = $iX1; $Yb = $Y; }
+                imageline($this->Picture,$Xa,$Ya,$Xb,$Yb,$Color);
+            }
+        }
 
-       $X1 = min($TxtPos[0]["X"],$TxtPos[1]["X"],$TxtPos[2]["X"],$TxtPos[3]["X"]) - $BorderOffset + 3;
-       $Y1 = min($TxtPos[0]["Y"],$TxtPos[1]["Y"],$TxtPos[2]["Y"],$TxtPos[3]["Y"]) - $BorderOffset;
-       $X2 = max($TxtPos[0]["X"],$TxtPos[1]["X"],$TxtPos[2]["X"],$TxtPos[3]["X"]) + $BorderOffset + 3;
-       $Y2 = max($TxtPos[0]["Y"],$TxtPos[1]["Y"],$TxtPos[2]["Y"],$TxtPos[3]["Y"]) + $BorderOffset - 3;
+        if ( $this->Antialias && !$NoBorder ) {
+            if ( $X1 < ceil($X1) ) {
+                $AlphaA = $Alpha * (ceil($X1) - $X1);
+                $Color = $this->allocateColor($this->Picture,$R,$G,$B,$AlphaA);
+                imageline($this->Picture,ceil($X1)-1,ceil($Y1),ceil($X1)-1,floor($Y2),$Color);
+            }
 
-       $X1 = $X1 - $TxtPos[$Align]["X"] + $X + $T[0]["X"];
-       $Y1 = $Y1 - $TxtPos[$Align]["Y"] + $Y + $T[0]["Y"];
-       $X2 = $X2 - $TxtPos[$Align]["X"] + $X + $T[0]["X"];
-       $Y2 = $Y2 - $TxtPos[$Align]["Y"] + $Y + $T[0]["Y"];
+            if ( $Y1 < ceil($Y1) ) {
+                $AlphaA = $Alpha * (ceil($Y1) - $Y1);
+                $Color = $this->allocateColor($this->Picture,$R,$G,$B,$AlphaA);
+                imageline($this->Picture,ceil($X1),ceil($Y1)-1,floor($X2),ceil($Y1)-1,$Color);
+            }
 
-       $Settings = array("R"=>$BoxR,"G"=>$BoxG,"B"=>$BoxB,"Alpha"=>$BoxAlpha,"BorderR"=>$BoxBorderR,"BorderG"=>$BoxBorderG,"BorderB"=>$BoxBorderB,"BorderAlpha"=>$BoxBorderAlpha);
+            if ( $X2 > floor($X2) ) {
+                $AlphaA = $Alpha * (.5-($X2 - floor($X2)));
+                $Color = $this->allocateColor($this->Picture,$R,$G,$B,$AlphaA);
+                imageline($this->Picture,floor($X2)+1,ceil($Y1),floor($X2)+1,floor($Y2),$Color);
+            } 
 
-       if ( $BoxRounded )
-        { $this->drawRoundedFilledRectangle($X1,$Y1,$X2,$Y2,$RoundedRadius,$Settings); }
-       else
-        { $this->drawFilledRectangle($X1,$Y1,$X2,$Y2,$Settings); }
-      }
+            if ( $Y2 > floor($Y2) ) {
+                $AlphaA = $Alpha * (.5-($Y2 - floor($Y2)));
+                $Color = $this->allocateColor($this->Picture,$R,$G,$B,$AlphaA);
+                imageline($this->Picture,ceil($X1),floor($Y2)+1,floor($X2),floor($Y2)+1,$Color);
+            }
+        }
 
-     $X = $X - $TxtPos[$Align]["X"] + $X;
-     $Y = $Y - $TxtPos[$Align]["Y"] + $Y;
-
-     if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-      {
-       $C_ShadowColor = $this->allocateColor($this->Picture,$this->ShadowR,$this->ShadowG,$this->ShadowB,$this->Shadowa);
-       imagettftext($this->Picture,$FontSize,$Angle,$X+$this->ShadowX,$Y+$this->ShadowY,$C_ShadowColor,$FontName,$Text);
-      }
-
-     $C_TextColor = $this->AllocateColor($this->Picture,$R,$G,$B,$Alpha);
-     imagettftext($this->Picture,$FontSize,$Angle,$X,$Y,$C_TextColor,$FontName,$Text);
-
-     $this->Shadow = $Shadow;
-
-     return($TxtPos);
+        if ( $BorderR != -1 ) {
+            $this->drawRectangle(
+                $X1,
+                $Y1,
+                $X2,
+                $Y2,
+                array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha,"Ticks"=>$Ticks,"NoAngle"=>$NoAngle)
+            );
+        }
+        $this->Shadow = $RestoreShadow;
     }
 
-   /* Draw a gradient within a defined area */
-   public function drawGradientArea($X1,$Y1,$X2,$Y2,$Direction,$Format="")
+    /**
+     * Draw a rectangular marker of the specified size
+     * @param type $X
+     * @param type $Y
+     * @param type $Format
+     */
+    public function drawRectangleMarker($X,$Y,$Format="")
     {
-     $StartR	= isset($Format["StartR"]) ? $Format["StartR"] : 90;
-     $StartG	= isset($Format["StartG"]) ? $Format["StartG"] : 90;
-     $StartB	= isset($Format["StartB"]) ? $Format["StartB"] : 90;
-     $EndR	= isset($Format["EndR"]) ? $Format["EndR"] : 0;
-     $EndG	= isset($Format["EndG"]) ? $Format["EndG"] : 0;
-     $EndB	= isset($Format["EndB"]) ? $Format["EndB"] : 0;
-     $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $Levels	= isset($Format["Levels"]) ? $Format["Levels"] : null;
+        $Size = isset($Format["Size"]) ? $Format["Size"] : 4;
 
-     $Shadow = $this->Shadow;
-     $this->Shadow = false;
+        $HalfSize = floor($Size/2);
+        $this->drawFilledRectangle($X-$HalfSize,$Y-$HalfSize,$X+$HalfSize,$Y+$HalfSize,$Format);
+    }
 
-     if ( $StartR == $EndR && $StartG == $EndG && $StartB == $EndB )
-      {
-       $this->drawFilledRectangle($X1,$Y1,$X2,$Y2,array("R"=>$StartR,"G"=>$StartG,"B"=>$StartB,"Alpha"=>$Alpha));
-       return(0);
-      }
+    /**
+     * Drawn a spline based on the bezier public function
+     * @param type $Coordinates
+     * @param type $Format
+     * @return type
+     */
+    public function drawSpline($Coordinates,$Format="")
+    {
+        $R	= isset($Format["R"]) ? $Format["R"] : 0;
+        $G	= isset($Format["G"]) ? $Format["G"] : 0;
+        $B	= isset($Format["B"]) ? $Format["B"] : 0;
+        $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $Force	= isset($Format["Force"]) ? $Format["Force"] : 30;
+        $Forces	= isset($Format["Forces"]) ? $Format["Forces"] : null;
+        $ShowC	= isset($Format["ShowControl"]) ? $Format["ShowControl"] : false;
+        $Ticks	= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
+        $PathOnly = isset($Format["PathOnly"]) ? $Format["PathOnly"] : false;
+        $Weight	= isset($Format["Weight"]) ? $Format["Weight"] : null;
 
-     if ( $Levels != null )
-      { $EndR=$StartR+$Levels; $EndG=$StartG+$Levels; $EndB=$StartB+$Levels; }
+        $Cpt = null; $Mode = null; $Result = "";
+        for ($i=1;$i<=count($Coordinates)-1;$i++) {
+            $X1 = $Coordinates[$i-1][0]; $Y1 = $Coordinates[$i-1][1];
+            $X2 = $Coordinates[$i][0];   $Y2 = $Coordinates[$i][1];
 
-     if ($X1 > $X2) { list($X1, $X2) = array($X2, $X1); }
-     if ($Y1 > $Y2) { list($Y1, $Y2) = array($Y2, $Y1); }
+            if ( $Forces != null ) { $Force = $Forces[$i]; }
 
-     if ( $Direction == DIRECTION_VERTICAL )   { $Width = abs($Y2-$Y1); }
-     if ( $Direction == DIRECTION_HORIZONTAL ) { $Width = abs($X2-$X1); }
+            /* First segment */
+            if ( $i == 1 ) {
+                $Xv1 = $X1; 
+                $Yv1 = $Y1;             
+            } else {
+                $Angle1 = $this->getAngle($XLast,$YLast,$X1,$Y1);
+                $Angle2 = $this->getAngle($X1,$Y1,$X2,$Y2);
+                $XOff = cos($Angle2 * PI / 180) * $Force + $X1;
+                $YOff = sin($Angle2 * PI / 180) * $Force + $Y1;
 
-     $Step     = max(abs($EndR-$StartR),abs($EndG-$StartG),abs($EndB-$StartB));
-     $StepSize = $Width/$Step;
-     $RStep    = ($EndR-$StartR)/$Step;
-     $GStep    = ($EndG-$StartG)/$Step;
-     $BStep    = ($EndB-$StartB)/$Step;
+                $Xv1 = cos($Angle1 * PI / 180) * $Force + $XOff;
+                $Yv1 = sin($Angle1 * PI / 180) * $Force + $YOff;
+            }
 
-     $R=$StartR;$G=$StartG;$B=$StartB;
-     switch($Direction)
-      {
-       case DIRECTION_VERTICAL:
-        $StartY = $Y1; $EndY = floor($Y2)+1; $LastY2 = $StartY;
-        for($i=0;$i<=$Step;$i++)
-         {
-          $Y2 = floor($StartY + ($i * $StepSize));
+            /* Last segment */
+            if ( $i == count($Coordinates)-1 ) { 
+                $Xv2 = $X2; 
+                $Yv2 = $Y2;             
+            } else {
+                $Angle1 = $this->getAngle($X2,$Y2,$Coordinates[$i+1][0],$Coordinates[$i+1][1]);
+                $Angle2 = $this->getAngle($X1,$Y1,$X2,$Y2);
+                $XOff = cos(($Angle2+180) * PI / 180) * $Force + $X2;
+                $YOff = sin(($Angle2+180) * PI / 180) * $Force + $Y2;
 
-          if ($Y2 > $EndY) { $Y2 = $EndY; }
-          if (($Y1 != $Y2 && $Y1 < $Y2) || $Y2 == $EndY)
-           {
+                $Xv2 = cos(($Angle1+180) * PI / 180) * $Force + $XOff;
+                $Yv2 = sin(($Angle1+180) * PI / 180) * $Force + $YOff;
+            }
+
+            $Path = $this->drawBezier($X1,$Y1,$X2,$Y2,$Xv1,$Yv1,$Xv2,$Yv2,$Format);
+            if ($PathOnly) { 
+                $Result[] = $Path;                 
+            }
+
+            $XLast = $X1; $YLast = $Y1;
+        }
+
+        return($Result);
+    }
+
+   /**
+    * Draw a bezier curve with two controls points
+    * @param type $X1
+    * @param type $Y1
+    * @param type $X2
+    * @param type $Y2
+    * @param type $Xv1
+    * @param type $Yv1
+    * @param type $Xv2
+    * @param type $Yv2
+    * @param type $Format
+    * @return type
+    */
+    public function drawBezier($X1,$Y1,$X2,$Y2,$Xv1,$Yv1,$Xv2,$Yv2,$Format="")
+    {
+        $R	= isset($Format["R"]) ? $Format["R"] : 0;
+        $G	= isset($Format["G"]) ? $Format["G"] : 0;
+        $B	= isset($Format["B"]) ? $Format["B"] : 0;
+        $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $ShowC	= isset($Format["ShowControl"]) ? $Format["ShowControl"] : false;
+        $Segments = isset($Format["Segments"]) ? $Format["Segments"] : null;
+        $Ticks	= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
+        $NoDraw    = isset($Format["NoDraw"]) ? $Format["NoDraw"] : false;
+        $PathOnly  = isset($Format["PathOnly"]) ? $Format["PathOnly"] : false;
+        $Weight    = isset($Format["Weight"]) ? $Format["Weight"] : null;
+        $DrawArrow = isset($Format["DrawArrow"]) ? $Format["DrawArrow"] : false;
+        $ArrowSize = isset($Format["ArrowSize"]) ? $Format["ArrowSize"] : 10;
+        $ArrowRatio	= isset($Format["ArrowRatio"]) ? $Format["ArrowRatio"] : .5;
+        $ArrowTwoHeads	= isset($Format["ArrowTwoHeads"]) ? $Format["ArrowTwoHeads"] : false;
+
+        if ( $Segments == null ) {
+            $Length    = $this->getLength($X1,$Y1,$X2,$Y2);
+            $Precision = ($Length*125)/1000;
+        } else {
+            $Precision = $Segments;
+        }
+        $P[0]["X"] = $X1;  
+        $P[0]["Y"] = $Y1;
+        $P[1]["X"] = $Xv1; 
+        $P[1]["Y"] = $Yv1;
+        $P[2]["X"] = $Xv2; 
+        $P[2]["Y"] = $Yv2;
+        $P[3]["X"] = $X2;  
+        $P[3]["Y"] = $Y2;
+
+        /* Compute the bezier points */
+        $Q = ""; $ID = 0; $Path = "";
+        for ($i=0;$i<=$Precision;$i=$i+1) {
+            $u = $i / $Precision;
+
+            $C    = "";
+            $C[0] = (1 - $u) * (1 - $u) * (1 - $u);
+            $C[1] = ($u * 3) * (1 - $u) * (1 - $u);
+            $C[2] = 3 * $u * $u * (1 - $u);
+            $C[3] = $u * $u * $u;
+
+            for($j=0;$j<=3;$j++) {
+                if ( !isset($Q[$ID]) ) { $Q[$ID] = ""; }
+                if ( !isset($Q[$ID]["X"]) ) { $Q[$ID]["X"] = 0; }
+                if ( !isset($Q[$ID]["Y"]) ) { $Q[$ID]["Y"] = 0; }
+
+                $Q[$ID]["X"] = $Q[$ID]["X"] + $P[$j]["X"] * $C[$j];
+                $Q[$ID]["Y"] = $Q[$ID]["Y"] + $P[$j]["Y"] * $C[$j];
+            }
+            $ID++;
+        }        
+        $Q[$ID]["X"] = $X2; $Q[$ID]["Y"] = $Y2;
+
+        if ( !$NoDraw ) {
+            /* Display the control points */
+            if ( $ShowC && !$PathOnly ) {
+                $Xv1 = floor($Xv1); $Yv1 = floor($Yv1); $Xv2 = floor($Xv2); $Yv2 = floor($Yv2);
+
+                $this->drawLine($X1,$Y1,$X2,$Y2,array("R"=>0,"G"=>0,"B"=>0,"Alpha"=>30));
+
+                $MyMarkerSettings = array("R"=>255,"G"=>0,"B"=>0,"BorderR"=>255,"BorderB"=>255,"BorderG"=>255,"Size"=>4);
+                $this->drawRectangleMarker($Xv1,$Yv1,$MyMarkerSettings);
+                $this->drawText($Xv1+4,$Yv1,"v1");
+                $MyMarkerSettings = array("R"=>0,"G"=>0,"B"=>255,"BorderR"=>255,"BorderB"=>255,"BorderG"=>255,"Size"=>4);
+                $this->drawRectangleMarker($Xv2,$Yv2,$MyMarkerSettings);
+                $this->drawText($Xv2+4,$Yv2,"v2");
+            }
+
+            /* Draw the bezier */
+            $LastX = null; 
+            $LastY = null;
+            $Cpt = null; 
+            $Mode = null; 
+            $ArrowS = null;
+            foreach ($Q as $Key => $Point) {
+                $X = $Point["X"]; 
+                $Y = $Point["Y"];
+
+                /* Get the first segment */
+                if ( $ArrowS == null && $LastX != null && $LastY != null ) {
+                    $ArrowS["X2"] = $LastX; 
+                    $ArrowS["Y2"] = $LastY; 
+                    $ArrowS["X1"] = $X; 
+                    $ArrowS["Y1"] = $Y;                     
+                }
+
+                if ( $LastX != null && $LastY != null && !$PathOnly) {
+                    list($Cpt,$Mode) = $this->drawLine(
+                        $LastX,
+                        $LastY,
+                        $X,
+                        $Y,
+                        array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks,"Cpt"=>$Cpt,"Mode"=>$Mode,"Weight"=>$Weight)
+                    );
+                }
+                /* Get the last segment */
+                $ArrowE["X1"] = $LastX; 
+                $ArrowE["Y1"] = $LastY; 
+                $ArrowE["X2"] = $X; 
+                $ArrowE["Y2"] = $Y;
+
+                $LastX = $X; 
+                $LastY = $Y;
+            }
+
+            if ( $DrawArrow && !$PathOnly ) {
+                $ArrowSettings = array("FillR"=>$R,"FillG"=>$G,"FillB"=>$B,"Alpha"=>$Alpha,"Size"=>$ArrowSize,"Ratio"=>$ArrowRatio);
+                if ( $ArrowTwoHeads ) {
+                    $this->drawArrow($ArrowS["X1"],$ArrowS["Y1"],$ArrowS["X2"],$ArrowS["Y2"],$ArrowSettings);
+                }
+                $this->drawArrow($ArrowE["X1"],$ArrowE["Y1"],$ArrowE["X2"],$ArrowE["Y2"],$ArrowSettings);
+            }
+        }
+        return($Q);
+    }
+
+    /**
+     * Draw a line between two points
+     * @param type $X1
+     * @param type $Y1
+     * @param type $X2
+     * @param type $Y2
+     * @param type $Format
+     * @return type
+     */
+    public function drawLine($X1,$Y1,$X2,$Y2,$Format="")
+    {
+        $R	= isset($Format["R"]) ? $Format["R"] : 0;
+        $G	= isset($Format["G"]) ? $Format["G"] : 0;
+        $B	= isset($Format["B"]) ? $Format["B"] : 0;
+        $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $Ticks	= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
+        $Cpt	= isset($Format["Cpt"]) ? $Format["Cpt"] : 1;
+        $Mode	= isset($Format["Mode"]) ? $Format["Mode"] : 1;
+        $Weight	= isset($Format["Weight"]) ? $Format["Weight"] : null;
+        $Threshold = isset($Format["Threshold"]) ? $Format["Threshold"] : null;
+
+        if ( $this->Antialias == false && $Ticks == null ) {
+            if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+                $ShadowColor = $this->allocateColor(
+                    $this->Picture,
+                    $this->ShadowR,
+                    $this->ShadowG,
+                    $this->ShadowB,
+                    $this->Shadowa
+                );
+                imageline(
+                    $this->Picture,
+                    $X1+$this->ShadowX,
+                    $Y1+$this->ShadowY,
+                    $X2+$this->ShadowX,
+                    $Y2+$this->ShadowY,
+                    $ShadowColor
+                );
+            }
+
+            $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
+            imageline($this->Picture,$X1,$Y1,$X2,$Y2,$Color);
+            return(0);
+        }
+
+        $Distance = sqrt(($X2-$X1)*($X2-$X1)+($Y2-$Y1)*($Y2-$Y1));  
+        if ( $Distance == 0 ) { return(-1); }
+
+        /* Derivative algorithm for overweighted lines, re-route to polygons primitives */
+        if ( $Weight != null ) {
+            $Angle        = $this->getAngle($X1,$Y1,$X2,$Y2);
+            $PolySettings = array ("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"BorderAlpha"=>$Alpha);
+
+            if ( $Ticks == null ) {
+                $Points   = ""; 
+                $Points[] = cos(deg2rad($Angle-90)) * $Weight + $X1; $Points[] = sin(deg2rad($Angle-90)) * $Weight + $Y1;
+                $Points[] = cos(deg2rad($Angle+90)) * $Weight + $X1; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Y1;
+                $Points[] = cos(deg2rad($Angle+90)) * $Weight + $X2; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Y2;
+                $Points[] = cos(deg2rad($Angle-90)) * $Weight + $X2; $Points[] = sin(deg2rad($Angle-90)) * $Weight + $Y2;
+
+                $this->drawPolygon($Points,$PolySettings);
+            } else {
+                for($i=0;$i<=$Distance;$i=$i+$Ticks*2) {
+                    $Xa = (($X2-$X1)/$Distance) * $i + $X1; $Ya = (($Y2-$Y1)/$Distance) * $i + $Y1;
+                    $Xb = (($X2-$X1)/$Distance) * ($i+$Ticks) + $X1; $Yb = (($Y2-$Y1)/$Distance) * ($i+$Ticks) + $Y1;
+
+                    $Points   = ""; 
+                    $Points[] = cos(deg2rad($Angle-90)) * $Weight + $Xa; $Points[] = sin(deg2rad($Angle-90)) * $Weight + $Ya;
+                    $Points[] = cos(deg2rad($Angle+90)) * $Weight + $Xa; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Ya;
+                    $Points[] = cos(deg2rad($Angle+90)) * $Weight + $Xb; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Yb;
+                    $Points[] = cos(deg2rad($Angle-90)) * $Weight + $Xb; $Points[] = sin(deg2rad($Angle-90)) * $Weight 	+ $Yb;
+
+                    $this->drawPolygon($Points,$PolySettings);
+                }
+            }
+
+            return(1);
+        }
+
+        $XStep = ($X2-$X1) / $Distance;
+        $YStep = ($Y2-$Y1) / $Distance;
+
+        for($i=0;$i<=$Distance;$i++) {
+            $X = $i * $XStep + $X1;
+            $Y = $i * $YStep + $Y1;
+
             $Color = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha);
-            $this->drawFilledRectangle($X1,$Y1,$X2,$Y2,$Color);
-            $LastY2 = max($LastY2,$Y2);
-            $Y1 = $Y2+1;
-           }
-          $R = $R + $RStep; $G = $G + $GStep; $B = $B + $BStep;
-         }
-        if ( $LastY2 < $EndY && isset($Color)) { for ($i=$LastY2+1;$i<=$EndY;$i++) { $this->drawLine($X1,$i,$X2,$i,$Color); } }
-        break;
 
-       case DIRECTION_HORIZONTAL:
-        $StartX = $X1; $EndX = $X2;
-        for($i=0;$i<=$Step;$i++)
-         {
-          $X2 = floor($StartX + ($i * $StepSize));
+            if ( $Threshold != null ) {
+                foreach($Threshold as $Key => $Parameters) {
+                    if ( $Y <= $Parameters["MinX"] && $Y >= $Parameters["MaxX"]) {
+                      if ( isset($Parameters["R"]) ) { $RT = $Parameters["R"]; } else { $RT = 0; }
+                      if ( isset($Parameters["G"]) ) { $GT = $Parameters["G"]; } else { $GT = 0; }
+                      if ( isset($Parameters["B"]) ) { $BT = $Parameters["B"]; } else { $BT = 0; }
+                      if ( isset($Parameters["Alpha"]) ) { $AlphaT = $Parameters["Alpha"]; } else { $AlphaT = 0; }
+                      $Color = array("R"=>$RT,"G"=>$GT,"B"=>$BT,"Alpha"=>$AlphaT);
+                    }
+                }
+            }
 
-          if ($X2 > $EndX) { $X2 = $EndX; }
-          if (($X1 != $X2 && $X1 < $X2) || $X2 == $EndX)
-           {
-            $Color = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha);
-            $this->drawFilledRectangle($X1,$Y1,$X2,$Y2,$Color);
-            $X1 = $X2+1;
-           }
-          $R = $R + $RStep; $G = $G + $GStep; $B = $B + $BStep; 
-         }
-        if ( $X2 < $EndX && isset($Color)) { $this->drawFilledRectangle($X2,$Y1,$EndX,$Y2,$Color); }
-        break;
-      }
+            if ( $Ticks != null ) {
+                if ( $Cpt % $Ticks == 0 ) { 
+                    $Cpt = 0; 
+                    if ( $Mode == 1 ) {
+                        $Mode = 0;
+                    } else { 
+                        $Mode = 1;                         
+                    }                         
+                }
 
-     $this->Shadow = $Shadow;
-
-    }
-
-   /* Draw an aliased pixel */
-   public function drawAntialiasPixel($X,$Y,$Format="")
-    {
-     $R     = isset($Format["R"]) ? $Format["R"] : 0;
-     $G     = isset($Format["G"]) ? $Format["G"] : 0;
-     $B     = isset($Format["B"]) ? $Format["B"] : 0;
-     $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-
-     if ( $X < 0 || $Y < 0 || $X >= $this->XSize || $Y >= $this->YSize )
-      return(-1);
-
-     if ( $R < 0 ) { $R = 0; } if ( $R > 255 ) { $R = 255; }
-     if ( $G < 0 ) { $G = 0; } if ( $G > 255 ) { $G = 255; }
-     if ( $B < 0 ) { $B = 0; } if ( $B > 255 ) { $B = 255; }
-
-     if ( !$this->Antialias )
-      {
-       if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-        {
-         $ShadowColor = $this->allocateColor($this->Picture,$this->ShadowR,$this->ShadowG,$this->ShadowB,$this->Shadowa);
-         imagesetpixel($this->Picture,$X+$this->ShadowX,$Y+$this->ShadowY,$ShadowColor);
+                if ( $Mode == 1 ) {
+                    $this->drawAntialiasPixel($X,$Y,$Color);
+                }
+                $Cpt++;
+            } else {
+                $this->drawAntialiasPixel($X,$Y,$Color);
+            }
         }
 
-       $PlotColor = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
-       imagesetpixel($this->Picture,$X,$Y,$PlotColor);
-
-       return(0);
-      }
-
-     $Plot = "";
-     $Xi   = floor($X);
-     $Yi   = floor($Y);
-
-     if ( $Xi == $X && $Yi == $Y)
-      {
-       if ( $Alpha == 100 )
-        $this->drawAlphaPixel($X,$Y,100,$R,$G,$B);
-       else
-        $this->drawAlphaPixel($X,$Y,$Alpha,$R,$G,$B);
-      }
-     else
-      {
-       $Alpha1 = (((1 - ($X - floor($X))) * (1 - ($Y - floor($Y))) * 100) / 100) * $Alpha;
-       if ( $Alpha1 > $this->AntialiasQuality ) { $this->drawAlphaPixel($Xi,$Yi,$Alpha1,$R,$G,$B); }
-
-       $Alpha2 = ((($X - floor($X)) * (1 - ($Y - floor($Y))) * 100) / 100) * $Alpha;
-       if ( $Alpha2 > $this->AntialiasQuality ) { $this->drawAlphaPixel($Xi+1,$Yi,$Alpha2,$R,$G,$B); }
-
-       $Alpha3 = (((1 - ($X - floor($X))) * ($Y - floor($Y)) * 100) / 100) * $Alpha;
-       if ( $Alpha3 > $this->AntialiasQuality ) { $this->drawAlphaPixel($Xi,$Yi+1,$Alpha3,$R,$G,$B); }
-
-       $Alpha4 = ((($X - floor($X)) * ($Y - floor($Y)) * 100) / 100) * $Alpha;
-       if ( $Alpha4 > $this->AntialiasQuality ) { $this->drawAlphaPixel($Xi+1,$Yi+1,$Alpha4,$R,$G,$B); }
-      }
+        return(array($Cpt,$Mode));
     }
 
-   /* Draw a semi-transparent pixel */
-   public function drawAlphaPixel($X,$Y,$Alpha,$R,$G,$B)
+    /**
+     * Draw a circle 
+     * @param type $Xc
+     * @param type $Yc
+     * @param type $Height
+     * @param type $Width
+     * @param type $Format
+     */
+    public function drawCircle($Xc,$Yc,$Height,$Width,$Format="")
     {
-     if ( isset($this->Mask[$X])) { if ( isset($this->Mask[$X][$Y]) ) { return(0); } }
+        $R      = isset($Format["R"]) ? $Format["R"] : 0;
+        $G      = isset($Format["G"]) ? $Format["G"] : 0;
+        $B      = isset($Format["B"]) ? $Format["B"] : 0;
+        $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $Ticks = isset($Format["Ticks"]) ? $Format["Ticks"] : null;
 
-     if ( $X < 0 || $Y < 0 || $X >= $this->XSize || $Y >= $this->YSize )
-      return(-1);
+        $Height	= abs($Height);
+        $Width	= abs($Width);
 
-     if ( $R < 0 ) { $R = 0; } if ( $R > 255 ) { $R = 255; }
-     if ( $G < 0 ) { $G = 0; } if ( $G > 255 ) { $G = 255; }
-     if ( $B < 0 ) { $B = 0; } if ( $B > 255 ) { $B = 255; }
+        if ( $Height == 0 ) { $Height = 1; }
+        if ( $Width == 0 )  { $Width = 1; }
+        $Xc = floor($Xc); $Yc = floor($Yc);
 
-     if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-      {
-       $AlphaFactor = floor(($Alpha / 100) * $this->Shadowa);
-       $ShadowColor = $this->allocateColor($this->Picture,$this->ShadowR,$this->ShadowG,$this->ShadowB,$AlphaFactor);
-       imagesetpixel($this->Picture,$X+$this->ShadowX,$Y+$this->ShadowY,$ShadowColor);
-      }
+        $RestoreShadow = $this->Shadow;
+        if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+            $this->Shadow = false;
+            $this->drawCircle(
+                $Xc+$this->ShadowX,
+                $Yc+$this->ShadowY,
+                $Height,
+                $Width,
+                array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa,"Ticks"=>$Ticks)
+          );
+        }
 
-     $C_Aliased = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
-     imagesetpixel($this->Picture,$X,$Y,$C_Aliased);
+        if ( $Width == 0 ) { $Width = $Height; }
+        if ( $R < 0 ) { $R = 0; } if ( $R > 255 ) { $R = 255; }
+        if ( $G < 0 ) { $G = 0; } if ( $G > 255 ) { $G = 255; }
+        if ( $B < 0 ) { $B = 0; } if ( $B > 255 ) { $B = 255; }
+
+        $Step = 360 / (2 * PI * max($Width,$Height));
+        $Mode = 1;
+        $Cpt = 1;
+        for ($i=0;$i<=360;$i=$i+$Step) {
+            $X = cos($i*PI/180) * $Height + $Xc;
+            $Y = sin($i*PI/180) * $Width + $Yc;
+
+            if ( $Ticks != null ) {
+                if ( $Cpt % $Ticks == 0 ) { 
+                    $Cpt = 0; 
+                    if ( $Mode == 1 ) { $Mode = 0; } else { $Mode = 1; }                     
+                }
+
+                if ( $Mode == 1 ) {
+                    $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+                }
+                $Cpt++;
+            } else {
+                $this->drawAntialiasPixel($X,$Y,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+            }
+        }
+        $this->Shadow = $RestoreShadow;
     }
 
-   /* Convert apha to base 10 */
-   public function convertAlpha($AlphaValue)
+    /**
+     * Draw a filled circle
+     * @param type $X
+     * @param type $Y
+     * @param type $Radius
+     * @param type $Format
+     */
+    public function drawFilledCircle($X,$Y,$Radius,$Format="")
+    {
+        $R		= isset($Format["R"]) ? $Format["R"] : 0;
+        $G		= isset($Format["G"]) ? $Format["G"] : 0;
+        $B		= isset($Format["B"]) ? $Format["B"] : 0;
+        $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $BorderR	= isset($Format["BorderR"]) ? $Format["BorderR"] : -1;
+        $BorderG	= isset($Format["BorderG"]) ? $Format["BorderG"] : -1;
+        $BorderB	= isset($Format["BorderB"]) ? $Format["BorderB"] : -1;
+        $BorderAlpha	= isset($Format["BorderAlpha"]) ? $Format["BorderAlpha"] : $Alpha;
+        $Ticks     	= isset($Format["Ticks"]) ? $Format["Ticks"] : null;
+        $Surrounding 	= isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
+
+        if ( $Radius == 0 ) { $Radius = 1; }
+        if ( $Surrounding != null ) { 
+            $BorderR = $R+$Surrounding; 
+            $BorderG = $G+$Surrounding; 
+            $BorderB = $B+$Surrounding;             
+        }
+        $X = floor($X); $Y = floor($Y);
+
+        $Radius = abs($Radius);
+
+        $RestoreShadow = $this->Shadow;
+        if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+            $this->Shadow = false;
+            $this->drawFilledCircle(
+                $X+$this->ShadowX,
+                $Y+$this->ShadowY,
+                $Radius,
+                array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa,"Ticks"=>$Ticks)
+            );
+        }
+
+        $this->Mask  = "";
+        $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
+        for ($i=0; $i<=$Radius*2; $i++) {
+            $Slice  = sqrt($Radius * $Radius - ($Radius - $i) * ($Radius - $i));
+            $XPos   = floor($Slice);
+            $YPos   = $Y + $i - $Radius;
+            $AAlias = $Slice - floor($Slice);
+
+            $this->Mask[$X-$XPos][$YPos] = true;
+            $this->Mask[$X+$XPos][$YPos] = true;
+            imageline($this->Picture,$X-$XPos,$YPos,$X+$XPos,$YPos,$Color);
+        }
+        if ( $this->Antialias ) {
+            $this->drawCircle($X,$Y,$Radius,$Radius,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+        }
+        $this->Mask = "";
+
+        if ( $BorderR != -1 ) {
+            $this->drawCircle($X,$Y,$Radius,$Radius,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha,"Ticks"=>$Ticks));
+        }
+        $this->Shadow	= $RestoreShadow;
+    }
+
+    /**
+     *  Write text
+     * @param type $X
+     * @param type $Y
+     * @param type $Text
+     * @param type $Format
+     * @return type
+     */
+    public function drawText($X,$Y,$Text,$Format="")
+    {
+        $R		= isset($Format["R"]) ? $Format["R"] : $this->FontColorR;
+        $G		= isset($Format["G"]) ? $Format["G"] : $this->FontColorG;
+        $B		= isset($Format["B"]) ? $Format["B"] : $this->FontColorB;
+        $Angle		= isset($Format["Angle"]) ? $Format["Angle"] : 0;
+        $Align		= isset($Format["Align"]) ? $Format["Align"] : TEXT_ALIGN_BOTTOMLEFT;
+        $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : $this->FontColorA;
+        $FontName	= isset($Format["FontName"]) ? $Format["FontName"] : $this->FontName;
+        $FontSize	= isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
+        $ShowOrigine	= isset($Format["ShowOrigine"]) ? $Format["ShowOrigine"] : false;
+        $TOffset	= isset($Format["TOffset"]) ? $Format["TOffset"] : 2;
+        $DrawBox	= isset($Format["DrawBox"]) ? $Format["DrawBox"] : false;
+        $DrawBoxBorder	= isset($Format["DrawBoxBorder"]) ? $Format["DrawBoxBorder"] : true;
+        $BorderOffset	= isset($Format["BorderOffset"]) ? $Format["BorderOffset"] : 6;
+        $BoxRounded	= isset($Format["BoxRounded"]) ? $Format["BoxRounded"] : false;
+        $RoundedRadius	= isset($Format["RoundedRadius"]) ? $Format["RoundedRadius"] : 6;
+        $BoxR		= isset($Format["BoxR"]) ? $Format["BoxR"] : 255;
+        $BoxG		= isset($Format["BoxG"]) ? $Format["BoxG"] : 255;
+        $BoxB		= isset($Format["BoxB"]) ? $Format["BoxB"] : 255;
+        $BoxAlpha	= isset($Format["BoxAlpha"]) ? $Format["BoxAlpha"] : 50;
+        $BoxSurrounding	= isset($Format["BoxSurrounding"]) ? $Format["BoxSurrounding"] : "";
+        $BoxBorderR	= isset($Format["BoxR"]) ? $Format["BoxR"] : 0;
+        $BoxBorderG	= isset($Format["BoxG"]) ? $Format["BoxG"] : 0;
+        $BoxBorderB	= isset($Format["BoxB"]) ? $Format["BoxB"] : 0;
+        $BoxBorderAlpha	= isset($Format["BoxAlpha"]) ? $Format["BoxAlpha"] : 50;
+        $NoShadow	= isset($Format["NoShadow"]) ? $Format["NoShadow"] : false;
+
+        $Shadow = $this->Shadow;
+        if ( $NoShadow ) { $this->Shadow = false; }
+
+        if ( $BoxSurrounding != "" ) { 
+            $BoxBorderR = $BoxR - $BoxSurrounding; 
+            $BoxBorderG = $BoxG - $BoxSurrounding; 
+            $BoxBorderB = $BoxB - $BoxSurrounding; 
+            $BoxBorderAlpha = $BoxAlpha;             
+        }
+
+        if ( $ShowOrigine ) {
+            $MyMarkerSettings = array(
+                "R"=>255,
+                "G"=>0,
+                "B"=>0,
+                "BorderR"=>255,
+                "BorderB"=>255,
+                "BorderG"=>255,
+                "Size"=>4
+            );
+            $this->drawRectangleMarker($X,$Y,$MyMarkerSettings);
+        }
+
+        $TxtPos = $this->getTextBox($X,$Y,$FontName,$FontSize,$Angle,$Text);
+
+        if ($DrawBox && ($Angle == 0 || $Angle == 90 || $Angle == 180 || $Angle == 270)) {
+            $T[0]["X"]=0;
+            $T[0]["Y"]=0;
+            $T[1]["X"]=0;
+            $T[1]["Y"]=0;
+            $T[2]["X"]=0;
+            $T[2]["Y"]=0;
+            $T[3]["X"]=0;
+            $T[3]["Y"]=0;
+            if ( $Angle == 0 ) { 
+                $T[0]["X"]=-$TOffset;
+                $T[0]["Y"]=$TOffset;
+                $T[1]["X"]=$TOffset;
+                $T[1]["Y"]=$TOffset;
+                $T[2]["X"]=$TOffset;
+                $T[2]["Y"]=-$TOffset;
+                $T[3]["X"]=-$TOffset;
+                $T[3]["Y"]=-$TOffset;                 
+            }
+
+            $X1 = min($TxtPos[0]["X"],$TxtPos[1]["X"],$TxtPos[2]["X"],$TxtPos[3]["X"]) - $BorderOffset + 3;
+            $Y1 = min($TxtPos[0]["Y"],$TxtPos[1]["Y"],$TxtPos[2]["Y"],$TxtPos[3]["Y"]) - $BorderOffset;
+            $X2 = max($TxtPos[0]["X"],$TxtPos[1]["X"],$TxtPos[2]["X"],$TxtPos[3]["X"]) + $BorderOffset + 3;
+            $Y2 = max($TxtPos[0]["Y"],$TxtPos[1]["Y"],$TxtPos[2]["Y"],$TxtPos[3]["Y"]) + $BorderOffset - 3;
+
+            $X1 = $X1 - $TxtPos[$Align]["X"] + $X + $T[0]["X"];
+            $Y1 = $Y1 - $TxtPos[$Align]["Y"] + $Y + $T[0]["Y"];
+            $X2 = $X2 - $TxtPos[$Align]["X"] + $X + $T[0]["X"];
+            $Y2 = $Y2 - $TxtPos[$Align]["Y"] + $Y + $T[0]["Y"];
+
+            $Settings = array(
+                "R"=>$BoxR,
+                "G"=>$BoxG,
+                "B"=>$BoxB,
+                "Alpha"=>$BoxAlpha,
+                "BorderR"=>$BoxBorderR,
+                "BorderG"=>$BoxBorderG,
+                "BorderB"=>$BoxBorderB,
+                "BorderAlpha"=>$BoxBorderAlpha
+            );
+
+            if ( $BoxRounded ) { 
+                $this->drawRoundedFilledRectangle($X1,$Y1,$X2,$Y2,$RoundedRadius,$Settings);                 
+            } else { 
+                $this->drawFilledRectangle($X1,$Y1,$X2,$Y2,$Settings);              
+            }
+        }
+
+        $X = $X - $TxtPos[$Align]["X"] + $X;
+        $Y = $Y - $TxtPos[$Align]["Y"] + $Y;
+
+        if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+            $C_ShadowColor = $this->allocateColor(
+                $this->Picture,
+                $this->ShadowR,
+                $this->ShadowG,
+                $this->ShadowB,
+                $this->Shadowa
+            );
+            imagettftext(
+                $this->Picture,
+                $FontSize,
+                $Angle,
+                $X+$this->ShadowX,
+                $Y+$this->ShadowY,
+                $C_ShadowColor,
+                $FontName,
+                $Text
+            );
+        }
+
+        $C_TextColor = $this->AllocateColor($this->Picture,$R,$G,$B,$Alpha);
+        imagettftext($this->Picture,$FontSize,$Angle,$X,$Y,$C_TextColor,$FontName,$Text);
+
+        $this->Shadow = $Shadow;
+
+        return($TxtPos);
+    }
+
+    /**
+     * Draw a gradient within a defined area
+     * @param type $X1
+     * @param type $Y1
+     * @param type $X2
+     * @param type $Y2
+     * @param type $Direction
+     * @param type $Format
+     * @return type
+     */
+    public function drawGradientArea($X1,$Y1,$X2,$Y2,$Direction,$Format="")
+    {
+        $StartR	= isset($Format["StartR"]) ? $Format["StartR"] : 90;
+        $StartG	= isset($Format["StartG"]) ? $Format["StartG"] : 90;
+        $StartB	= isset($Format["StartB"]) ? $Format["StartB"] : 90;
+        $EndR	= isset($Format["EndR"]) ? $Format["EndR"] : 0;
+        $EndG	= isset($Format["EndG"]) ? $Format["EndG"] : 0;
+        $EndB	= isset($Format["EndB"]) ? $Format["EndB"] : 0;
+        $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $Levels	= isset($Format["Levels"]) ? $Format["Levels"] : null;
+
+        $Shadow = $this->Shadow;
+        $this->Shadow = false;
+
+        if ( $StartR == $EndR && $StartG == $EndG && $StartB == $EndB ) {
+          $this->drawFilledRectangle($X1,$Y1,$X2,$Y2,array("R"=>$StartR,"G"=>$StartG,"B"=>$StartB,"Alpha"=>$Alpha));
+          return(0);
+        }
+
+        if ( $Levels != null ) { 
+            $EndR=$StartR+$Levels; $EndG=$StartG+$Levels; $EndB=$StartB+$Levels;             
+        }
+
+        if ($X1 > $X2) { list($X1, $X2) = array($X2, $X1); }
+        if ($Y1 > $Y2) { list($Y1, $Y2) = array($Y2, $Y1); }
+
+        if ( $Direction == DIRECTION_VERTICAL )   { $Width = abs($Y2-$Y1); }
+        if ( $Direction == DIRECTION_HORIZONTAL ) { $Width = abs($X2-$X1); }
+
+        $Step     = max(abs($EndR-$StartR),abs($EndG-$StartG),abs($EndB-$StartB));
+        $StepSize = $Width/$Step;
+        $RStep    = ($EndR-$StartR)/$Step;
+        $GStep    = ($EndG-$StartG)/$Step;
+        $BStep    = ($EndB-$StartB)/$Step;
+
+        $R=$StartR;
+        $G=$StartG;
+        $B=$StartB;
+        switch($Direction) {
+            case DIRECTION_VERTICAL:
+                $StartY = $Y1; 
+                $EndY = floor($Y2)+1; 
+                $LastY2 = $StartY;
+                for ($i=0;$i<=$Step;$i++) {
+                    $Y2 = floor($StartY + ($i * $StepSize));
+
+                    if ($Y2 > $EndY) { $Y2 = $EndY; }
+                    if (($Y1 != $Y2 && $Y1 < $Y2) || $Y2 == $EndY) {
+                        $Color = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha);
+                        $this->drawFilledRectangle($X1,$Y1,$X2,$Y2,$Color);
+                        $LastY2 = max($LastY2,$Y2);
+                        $Y1 = $Y2+1;
+                    }
+                    $R = $R + $RStep; 
+                    $G = $G + $GStep; 
+                    $B = $B + $BStep;
+                }
+                if ( $LastY2 < $EndY && isset($Color)) { 
+                    for ($i=$LastY2+1;$i<=$EndY;$i++) { 
+                        $this->drawLine($X1,$i,$X2,$i,$Color);                      
+                    }                  
+                }
+                break;
+
+                case DIRECTION_HORIZONTAL:
+                    $StartX = $X1; $EndX = $X2;
+                    for ($i=0;$i<=$Step;$i++) {
+                        $X2 = floor($StartX + ($i * $StepSize));
+
+                        if ($X2 > $EndX) { 
+                            $X2 = $EndX;                             
+                        }
+                        if (($X1 != $X2 && $X1 < $X2) || $X2 == $EndX) {
+                            $Color = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha);
+                            $this->drawFilledRectangle($X1,$Y1,$X2,$Y2,$Color);
+                            $X1 = $X2+1;
+                        }
+                        $R = $R + $RStep; $G = $G + $GStep; $B = $B + $BStep; 
+                    }
+                    if ( $X2 < $EndX && isset($Color)) { 
+                        $this->drawFilledRectangle($X2,$Y1,$EndX,$Y2,$Color);                         
+                    }
+                break;
+        }
+
+        $this->Shadow = $Shadow;
+
+    }
+
+    /**
+     * Draw an aliased pixel
+     * @param type $X
+     * @param type $Y
+     * @param type $Format
+     * @return type
+     */
+    public function drawAntialiasPixel($X,$Y,$Format="")
+    {
+        $R     = isset($Format["R"]) ? $Format["R"] : 0;
+        $G     = isset($Format["G"]) ? $Format["G"] : 0;
+        $B     = isset($Format["B"]) ? $Format["B"] : 0;
+        $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+
+        if ( $X < 0 || $Y < 0 || $X >= $this->XSize || $Y >= $this->YSize )
+         return(-1);
+
+        if ( $R < 0 ) { $R = 0; } if ( $R > 255 ) { $R = 255; }
+        if ( $G < 0 ) { $G = 0; } if ( $G > 255 ) { $G = 255; }
+        if ( $B < 0 ) { $B = 0; } if ( $B > 255 ) { $B = 255; }
+
+        if ( !$this->Antialias ) {
+            if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+                $ShadowColor = $this->allocateColor(
+                    $this->Picture,
+                    $this->ShadowR,
+                    $this->ShadowG,
+                    $this->ShadowB,
+                    $this->Shadowa
+                );
+                imagesetpixel($this->Picture,$X+$this->ShadowX,$Y+$this->ShadowY,$ShadowColor);
+            }
+
+            $PlotColor = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
+            imagesetpixel($this->Picture,$X,$Y,$PlotColor);
+
+            return(0);
+        }
+
+        $Plot = "";
+        $Xi   = floor($X);
+        $Yi   = floor($Y);
+
+        if ( $Xi == $X && $Yi == $Y) {
+            if ( $Alpha == 100 ) {
+                $this->drawAlphaPixel($X,$Y,100,$R,$G,$B);
+            } else {
+                $this->drawAlphaPixel($X,$Y,$Alpha,$R,$G,$B);
+            }
+        } else {
+            $Alpha1 = (((1 - ($X - floor($X))) * (1 - ($Y - floor($Y))) * 100) / 100) * $Alpha;
+            if ( $Alpha1 > $this->AntialiasQuality ) { $this->drawAlphaPixel($Xi,$Yi,$Alpha1,$R,$G,$B); }
+
+            $Alpha2 = ((($X - floor($X)) * (1 - ($Y - floor($Y))) * 100) / 100) * $Alpha;
+            if ( $Alpha2 > $this->AntialiasQuality ) { $this->drawAlphaPixel($Xi+1,$Yi,$Alpha2,$R,$G,$B); }
+
+            $Alpha3 = (((1 - ($X - floor($X))) * ($Y - floor($Y)) * 100) / 100) * $Alpha;
+            if ( $Alpha3 > $this->AntialiasQuality ) { $this->drawAlphaPixel($Xi,$Yi+1,$Alpha3,$R,$G,$B); }
+
+            $Alpha4 = ((($X - floor($X)) * ($Y - floor($Y)) * 100) / 100) * $Alpha;
+            if ( $Alpha4 > $this->AntialiasQuality ) { $this->drawAlphaPixel($Xi+1,$Yi+1,$Alpha4,$R,$G,$B); }
+        }
+    }
+
+    /**
+     * Draw a semi-transparent pixel
+     * @param type $X
+     * @param type $Y
+     * @param type $Alpha
+     * @param type $R
+     * @param type $G
+     * @param type $B
+     * @return type
+     */
+    public function drawAlphaPixel($X,$Y,$Alpha,$R,$G,$B)
+    {
+        if ( isset($this->Mask[$X])) { 
+            if ( isset($this->Mask[$X][$Y]) ) { 
+                return(0);                 
+            }             
+        }
+
+        if ( $X < 0 || $Y < 0 || $X >= $this->XSize || $Y >= $this->YSize ) {
+            return(-1);
+        }
+        if ( $R < 0 ) { $R = 0; } if ( $R > 255 ) { $R = 255; }
+        if ( $G < 0 ) { $G = 0; } if ( $G > 255 ) { $G = 255; }
+        if ( $B < 0 ) { $B = 0; } if ( $B > 255 ) { $B = 255; }
+
+        if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+            $AlphaFactor = floor(($Alpha / 100) * $this->Shadowa);
+            $ShadowColor = $this->allocateColor(
+                $this->Picture,
+                $this->ShadowR,
+                $this->ShadowG,
+                $this->ShadowB,
+                $AlphaFactor
+            );
+            imagesetpixel($this->Picture,$X+$this->ShadowX,$Y+$this->ShadowY,$ShadowColor);
+        }
+
+        $C_Aliased = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
+        imagesetpixel($this->Picture,$X,$Y,$C_Aliased);
+    }
+
+   /**
+    * Convert apha to base 10
+    * @param type $AlphaValue
+    * @return type
+    */
+    public function convertAlpha($AlphaValue)
     { return((127/100)*(100-$AlphaValue)); }
 
-   /* Allocate a color with transparency */
-   public function allocateColor($Picture,$R,$G,$B,$Alpha=100)
+    /**
+     * Allocate a color with transparency
+     * @param type $Picture
+     * @param type $R
+     * @param type $G
+     * @param type $B
+     * @param type $Alpha
+     * @return type
+     */
+    public function allocateColor($Picture,$R,$G,$B,$Alpha=100)
     {
-     if ( $R < 0 ) { $R = 0; } if ( $R > 255 ) { $R = 255; }
-     if ( $G < 0 ) { $G = 0; } if ( $G > 255 ) { $G = 255; }
-     if ( $B < 0 ) { $B = 0; } if ( $B > 255 ) { $B = 255; }
-     if ( $Alpha < 0 )  { $Alpha = 0; }
-     if ( $Alpha > 100) { $Alpha = 100; }
+        if ( $R < 0 ) { $R = 0; } if ( $R > 255 ) { $R = 255; }
+        if ( $G < 0 ) { $G = 0; } if ( $G > 255 ) { $G = 255; }
+        if ( $B < 0 ) { $B = 0; } if ( $B > 255 ) { $B = 255; }
+        if ( $Alpha < 0 )  { $Alpha = 0; }
+        if ( $Alpha > 100) { $Alpha = 100; }
 
-     $Alpha = $this->convertAlpha($Alpha);
-     return(imagecolorallocatealpha($Picture,$R,$G,$B,$Alpha));
+        $Alpha = $this->convertAlpha($Alpha);
+        return(imagecolorallocatealpha($Picture,$R,$G,$B,$Alpha));
     }
 
-   /* Load a PNG file and draw it over the chart */
-   public function drawFromPNG($X,$Y,$FileName)
+    /**
+     * Load a PNG file and draw it over the chart
+     * @param type $X
+     * @param type $Y
+     * @param type $FileName
+     */
+    public function drawFromPNG($X,$Y,$FileName)
     { $this->drawFromPicture(1,$FileName,$X,$Y); }
 
-   /* Load a GIF file and draw it over the chart */
-   public function drawFromGIF($X,$Y,$FileName)
+    /**
+     * Load a GIF file and draw it over the chart
+     * @param type $X
+     * @param type $Y
+     * @param type $FileName
+     */
+    public function drawFromGIF($X,$Y,$FileName)
     { $this->drawFromPicture(2,$FileName,$X,$Y); }
 
-   /* Load a JPEG file and draw it over the chart */
-   public function drawFromJPG($X,$Y,$FileName)
+    /**
+     * Load a JPEG file and draw it over the chart
+     * @param type $X
+     * @param type $Y
+     * @param type $FileName
+     */
+    public function drawFromJPG($X,$Y,$FileName)
     { $this->drawFromPicture(3,$FileName,$X,$Y); }
 
-   public function getPicInfo($FileName)
+    /**
+     * 
+     * @param type $FileName
+     * @return type
+     */
+    public function getPicInfo($FileName)
     {
-     $Infos  = getimagesize($FileName);
-     $Width  = $Infos[0];
-     $Height = $Infos[1];
-     $Type   = $Infos["mime"];
+        $Infos  = getimagesize($FileName);
+        $Width  = $Infos[0];
+        $Height = $Infos[1];
+        $Type   = $Infos["mime"];
 
-     if ( $Type == "image/png") { $Type = 1; }
-     if ( $Type == "image/gif") { $Type = 2; }
-     if ( $Type == "image/jpeg ") { $Type = 3; }
+        if ( $Type == "image/png") { $Type = 1; }
+        if ( $Type == "image/gif") { $Type = 2; }
+        if ( $Type == "image/jpeg ") { $Type = 3; }
 
-     return(array($Width,$Height,$Type));
+        return(array($Width,$Height,$Type));
     }
 
-   /* Generic loader public function for external pictures */
-   public function drawFromPicture($PicType,$FileName,$X,$Y)
+    /**
+     * Generic loader public function for external pictures
+     * @param type $PicType
+     * @param type $FileName
+     * @param type $X
+     * @param type $Y
+     * @return type
+     */
+    public function drawFromPicture($PicType,$FileName,$X,$Y)
     {
-     if ( file_exists($FileName))
-      {
-       list($Width,$Height) = $this->getPicInfo($FileName);
+        if ( file_exists($FileName)) {
+            list($Width,$Height) = $this->getPicInfo($FileName);
 
-       if ( $PicType == 1 )
-        { $Raster = imagecreatefrompng($FileName); }
-       elseif ( $PicType == 2 )
-        { $Raster = imagecreatefromgif($FileName); }
-       elseif ( $PicType == 3 )
-        { $Raster = imagecreatefromjpeg($FileName); }
-       else
-        { return(0); }
+            if ( $PicType == 1 ) { 
+                $Raster = imagecreatefrompng($FileName);                 
+            } elseif ( $PicType == 2 ) { 
+                $Raster = imagecreatefromgif($FileName);
+            } elseif ( $PicType == 3 ) { 
+                $Raster = imagecreatefromjpeg($FileName);
+            } else { 
+                return(0);                         
+            }
 
 
-       $RestoreShadow = $this->Shadow;
-       if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-        {
-         $this->Shadow = false;
-         if ( $PicType == 3 )
-          $this->drawFilledRectangle($X+$this->ShadowX,$Y+$this->ShadowY,$X+$Width+$this->ShadowX,$Y+$Height+$this->ShadowY,array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa));
-         else
-          {
-           $TranparentID = imagecolortransparent($Raster);
-           for ($Xc=0;$Xc<=$Width-1;$Xc++)
-            {
-             for ($Yc=0;$Yc<=$Height-1;$Yc++)
-              {
-               $RGBa   = imagecolorat($Raster,$Xc,$Yc);
-               $Values = imagecolorsforindex($Raster,$RGBa);
-               if ( $Values["alpha"] < 120 )
-                {
-                 $AlphaFactor = floor(($this->Shadowa / 100) * ((100 / 127) * (127-$Values["alpha"])));
-                 $this->drawAlphaPixel($X+$Xc+$this->ShadowX,$Y+$Yc+$this->ShadowY,$AlphaFactor,$this->ShadowR,$this->ShadowG,$this->ShadowB);
+            $RestoreShadow = $this->Shadow;
+            if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+                $this->Shadow = false;
+                if ( $PicType == 3 ) {
+                    $this->drawFilledRectangle(
+                        $X+$this->ShadowX,
+                        $Y+$this->ShadowY,
+                        $X+$Width+$this->ShadowX,
+                        $Y+$Height+$this->ShadowY,
+                        array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa)
+                    );
+                } else {
+                    $TranparentID = imagecolortransparent($Raster);
+                    for ($Xc=0;$Xc<=$Width-1;$Xc++) {
+                        for ($Yc=0;$Yc<=$Height-1;$Yc++) {
+                            $RGBa   = imagecolorat($Raster,$Xc,$Yc);
+                            $Values = imagecolorsforindex($Raster,$RGBa);
+                            if ( $Values["alpha"] < 120 ) {
+                                $AlphaFactor = floor(($this->Shadowa / 100) * ((100 / 127) * (127-$Values["alpha"])));
+                                $this->drawAlphaPixel(
+                                    $X+$Xc+$this->ShadowX,
+                                    $Y+$Yc+$this->ShadowY,
+                                    $AlphaFactor,
+                                    $this->ShadowR,
+                                    $this->ShadowG,
+                                    $this->ShadowB
+                                );
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
-        }
-       $this->Shadow = $RestoreShadow;
+            $this->Shadow = $RestoreShadow;
 
-       imagecopy($this->Picture,$Raster,$X,$Y,0,0,$Width,$Height);
-       imagedestroy($Raster);
-      }
+            imagecopy($this->Picture,$Raster,$X,$Y,0,0,$Width,$Height);
+            imagedestroy($Raster);
+        }
     }
 
-   /* Draw an arrow */
-   public function drawArrow($X1,$Y1,$X2,$Y2,$Format="")
+    /**
+     * Draw an arrow
+     * @param type $X1
+     * @param type $Y1
+     * @param type $X2
+     * @param type $Y2
+     * @param type $Format
+     */
+    public function drawArrow($X1,$Y1,$X2,$Y2,$Format="")
     {
-     $FillR	= isset($Format["FillR"]) ? $Format["FillR"] : 0;
-     $FillG	= isset($Format["FillG"]) ? $Format["FillG"] : 0;
-     $FillB	= isset($Format["FillB"]) ? $Format["FillB"] : 0;
-     $BorderR	= isset($Format["BorderR"]) ? $Format["BorderR"] : $FillR;
-     $BorderG	= isset($Format["BorderG"]) ? $Format["BorderG"] : $FillG;
-     $BorderB	= isset($Format["BorderB"]) ? $Format["BorderB"] : $FillB;
-     $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $Size	= isset($Format["Size"]) ? $Format["Size"] : 10;
-     $Ratio	= isset($Format["Ratio"]) ? $Format["Ratio"] : .5;
-     $TwoHeads	= isset($Format["TwoHeads"]) ? $Format["TwoHeads"] : false;
-     $Ticks	= isset($Format["Ticks"]) ? $Format["Ticks"] : false;
+        $FillR	= isset($Format["FillR"]) ? $Format["FillR"] : 0;
+        $FillG	= isset($Format["FillG"]) ? $Format["FillG"] : 0;
+        $FillB	= isset($Format["FillB"]) ? $Format["FillB"] : 0;
+        $BorderR = isset($Format["BorderR"]) ? $Format["BorderR"] : $FillR;
+        $BorderG = isset($Format["BorderG"]) ? $Format["BorderG"] : $FillG;
+        $BorderB = isset($Format["BorderB"]) ? $Format["BorderB"] : $FillB;
+        $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $Size	= isset($Format["Size"]) ? $Format["Size"] : 10;
+        $Ratio	= isset($Format["Ratio"]) ? $Format["Ratio"] : .5;
+        $TwoHeads = isset($Format["TwoHeads"]) ? $Format["TwoHeads"] : false;
+        $Ticks	= isset($Format["Ticks"]) ? $Format["Ticks"] : false;
 
-     /* Calculate the line angle */
-     $Angle = $this->getAngle($X1,$Y1,$X2,$Y2);
+        /* Calculate the line angle */
+        $Angle = $this->getAngle($X1,$Y1,$X2,$Y2);
 
-     /* Override Shadow support, this will be managed internally */
-     $RestoreShadow = $this->Shadow;
-     if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 )
-      {
-       $this->Shadow = false;
-       $this->drawArrow($X1+$this->ShadowX,$Y1+$this->ShadowY,$X2+$this->ShadowX,$Y2+$this->ShadowY,array("FillR"=>$this->ShadowR,"FillG"=>$this->ShadowG,"FillB"=>$this->ShadowB,"Alpha"=>$this->Shadowa,"Size"=>$Size,"Ratio"=>$Ratio,"TwoHeads"=>$TwoHeads,"Ticks"=>$Ticks));
-      }
+        /* Override Shadow support, this will be managed internally */
+        $RestoreShadow = $this->Shadow;
+        if ( $this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0 ) {
+            $this->Shadow = false;
+            $this->drawArrow(
+                $X1+$this->ShadowX,
+                $Y1+$this->ShadowY,
+                $X2+$this->ShadowX,
+                $Y2+$this->ShadowY,
+                array(
+                    "FillR"=>$this->ShadowR,
+                    "FillG"=>$this->ShadowG,
+                    "FillB"=>$this->ShadowB,
+                    "Alpha"=>$this->Shadowa,
+                    "Size"=>$Size,
+                    "Ratio"=>$Ratio,
+                    "TwoHeads"=>$TwoHeads,
+                    "Ticks"=>$Ticks
+                )
+            );
+        }
 
-     /* Draw the 1st Head */
-     $TailX = cos(($Angle-180)*PI/180)*$Size+$X2;
-     $TailY = sin(($Angle-180)*PI/180)*$Size+$Y2;
+        /* Draw the 1st Head */
+        $TailX = cos(($Angle-180)*PI/180)*$Size+$X2;
+        $TailY = sin(($Angle-180)*PI/180)*$Size+$Y2;
 
-     $Points	= "";
-     $Points[]  = $X2; $Points[]  = $Y2;
-     $Points[]	= cos(($Angle-90)*PI/180)*$Size*$Ratio+$TailX; $Points[] = sin(($Angle-90)*PI/180)*$Size*$Ratio+$TailY;
-     $Points[]	= cos(($Angle-270)*PI/180)*$Size*$Ratio+$TailX; $Points[] = sin(($Angle-270)*PI/180)*$Size*$Ratio+$TailY;
-     $Points[]  = $X2; $Points[]  = $Y2;
+        $Points	= "";
+        $Points[]   = $X2; $Points[]  = $Y2;
+        $Points[]   = cos(($Angle-90)*PI/180)*$Size*$Ratio+$TailX; $Points[] = sin(($Angle-90)*PI/180)*$Size*$Ratio+$TailY;
+        $Points[]   = cos(($Angle-270)*PI/180)*$Size*$Ratio+$TailX; $Points[] = sin(($Angle-270)*PI/180)*$Size*$Ratio+$TailY;
+         $Points[]  = $X2; $Points[]  = $Y2;
 
-     /* Visual correction */
-     if ($Angle == 180 || $Angle == 360 ) { $Points[4] = $Points[2]; }
-     if ($Angle == 90 || $Angle == 270 ) { $Points[5] = $Points[3]; }
+        /* Visual correction */
+        if ($Angle == 180 || $Angle == 360 ) { 
+            $Points[4] = $Points[2];             
+        }
+        if ($Angle == 90 || $Angle == 270 ) {
+            $Points[5] = $Points[3];             
+        }
 
-     $ArrowColor = $this->allocateColor($this->Picture,$FillR,$FillG,$FillB,$Alpha);
-     ImageFilledPolygon($this->Picture,$Points,4,$ArrowColor);
+        $ArrowColor = $this->allocateColor($this->Picture,$FillR,$FillG,$FillB,$Alpha);
+        ImageFilledPolygon($this->Picture,$Points,4,$ArrowColor);
 
-     $this->drawLine($Points[0],$Points[1],$Points[2],$Points[3],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
-     $this->drawLine($Points[2],$Points[3],$Points[4],$Points[5],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
-     $this->drawLine($Points[0],$Points[1],$Points[4],$Points[5],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
+        $this->drawLine($Points[0],$Points[1],$Points[2],$Points[3],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
+        $this->drawLine($Points[2],$Points[3],$Points[4],$Points[5],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
+        $this->drawLine($Points[0],$Points[1],$Points[4],$Points[5],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
 
-     /* Draw the second head */
-     if ( $TwoHeads )
-      {
-       $Angle = $this->getAngle($X2,$Y2,$X1,$Y1);
+        /* Draw the second head */
+        if ( $TwoHeads ) {
+            $Angle = $this->getAngle($X2,$Y2,$X1,$Y1);
 
-       $TailX2 = cos(($Angle-180)*PI/180)*$Size+$X1;
-       $TailY2 = sin(($Angle-180)*PI/180)*$Size+$Y1;
+            $TailX2 = cos(($Angle-180)*PI/180)*$Size+$X1;
+            $TailY2 = sin(($Angle-180)*PI/180)*$Size+$Y1;
 
-       $Points   = "";
-       $Points[] = $X1; $Points[]  = $Y1;
-       $Points[] = cos(($Angle-90)*PI/180)*$Size*$Ratio+$TailX2; $Points[] = sin(($Angle-90)*PI/180)*$Size*$Ratio+$TailY2;
-       $Points[] = cos(($Angle-270)*PI/180)*$Size*$Ratio+$TailX2; $Points[] = sin(($Angle-270)*PI/180)*$Size*$Ratio+$TailY2;
-       $Points[] = $X1; $Points[]  = $Y1;
+            $Points   = "";
+            $Points[] = $X1; $Points[]  = $Y1;
+            $Points[] = cos(($Angle-90)*PI/180)*$Size*$Ratio+$TailX2; $Points[] = sin(($Angle-90)*PI/180)*$Size*$Ratio+$TailY2;
+            $Points[] = cos(($Angle-270)*PI/180)*$Size*$Ratio+$TailX2; $Points[] = sin(($Angle-270)*PI/180)*$Size*$Ratio+$TailY2;
+            $Points[] = $X1; $Points[]  = $Y1;
 
-       /* Visual correction */
-       if ($Angle == 180 || $Angle == 360 ) { $Points[4] = $Points[2]; }
-       if ($Angle == 90 || $Angle == 270 ) { $Points[5] = $Points[3]; }
+            /* Visual correction */
+            if ($Angle == 180 || $Angle == 360 ) { $Points[4] = $Points[2]; }
+            if ($Angle == 90 || $Angle == 270 ) { $Points[5] = $Points[3]; }
 
-       $ArrowColor = $this->allocateColor($this->Picture,$FillR,$FillG,$FillB,$Alpha);
-       ImageFilledPolygon($this->Picture,$Points,4,$ArrowColor);
+            $ArrowColor = $this->allocateColor($this->Picture,$FillR,$FillG,$FillB,$Alpha);
+            ImageFilledPolygon($this->Picture,$Points,4,$ArrowColor);
 
-       $this->drawLine($Points[0],$Points[1],$Points[2],$Points[3],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
-       $this->drawLine($Points[2],$Points[3],$Points[4],$Points[5],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
-       $this->drawLine($Points[0],$Points[1],$Points[4],$Points[5],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
+            $this->drawLine($Points[0],$Points[1],$Points[2],$Points[3],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
+            $this->drawLine($Points[2],$Points[3],$Points[4],$Points[5],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
+            $this->drawLine($Points[0],$Points[1],$Points[4],$Points[5],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
 
-       $this->drawLine($TailX,$TailY,$TailX2,$TailY2,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-      }
-     else
-      $this->drawLine($X1,$Y1,$TailX,$TailY,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-
-     /* Re-enable shadows */
-     $this->Shadow = $RestoreShadow;
+            $this->drawLine($TailX,$TailY,$TailX2,$TailY2,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+        } else {
+            $this->drawLine($X1,$Y1,$TailX,$TailY,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+        }
+        /* Re-enable shadows */
+        $this->Shadow = $RestoreShadow;
     }
 
-   /* Draw a label with associated arrow */
-   public function drawArrowLabel($X1,$Y1,$Text,$Format="")
+    /**
+     * Draw a label with associated arrow
+     * @param type $X1
+     * @param type $Y1
+     * @param type $Text
+     * @param type $Format
+     */
+    public function drawArrowLabel($X1,$Y1,$Text,$Format="")
     {
-     $FillR    = isset($Format["FillR"]) ? $Format["FillR"] : 0;
-     $FillG    = isset($Format["FillG"]) ? $Format["FillG"] : 0;
-     $FillB    = isset($Format["FillB"]) ? $Format["FillB"] : 0;
-     $BorderR  = isset($Format["BorderR"]) ? $Format["BorderR"] : $FillR;
-     $BorderG  = isset($Format["BorderG"]) ? $Format["BorderG"] : $FillG;
-     $BorderB  = isset($Format["BorderB"]) ? $Format["BorderB"] : $FillB;
-     $FontName = isset($Format["FontName"]) ? $Format["FontName"] : $this->FontName;
-     $FontSize = isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
-     $Alpha    = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $Length   = isset($Format["Length"]) ? $Format["Length"] : 50;
-     $Angle    = isset($Format["Angle"]) ? $Format["Angle"] : 315;
-     $Size     = isset($Format["Size"]) ? $Format["Size"] : 10;
-     $Position = isset($Format["Position"]) ? $Format["Position"] : POSITION_TOP;
-     $RoundPos = isset($Format["RoundPos"]) ? $Format["RoundPos"] : false;
-     $Ticks    = isset($Format["Ticks"]) ? $Format["Ticks"] : null;
+        $FillR    = isset($Format["FillR"]) ? $Format["FillR"] : 0;
+        $FillG    = isset($Format["FillG"]) ? $Format["FillG"] : 0;
+        $FillB    = isset($Format["FillB"]) ? $Format["FillB"] : 0;
+        $BorderR  = isset($Format["BorderR"]) ? $Format["BorderR"] : $FillR;
+        $BorderG  = isset($Format["BorderG"]) ? $Format["BorderG"] : $FillG;
+        $BorderB  = isset($Format["BorderB"]) ? $Format["BorderB"] : $FillB;
+        $FontName = isset($Format["FontName"]) ? $Format["FontName"] : $this->FontName;
+        $FontSize = isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
+        $Alpha    = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $Length   = isset($Format["Length"]) ? $Format["Length"] : 50;
+        $Angle    = isset($Format["Angle"]) ? $Format["Angle"] : 315;
+        $Size     = isset($Format["Size"]) ? $Format["Size"] : 10;
+        $Position = isset($Format["Position"]) ? $Format["Position"] : POSITION_TOP;
+        $RoundPos = isset($Format["RoundPos"]) ? $Format["RoundPos"] : false;
+        $Ticks    = isset($Format["Ticks"]) ? $Format["Ticks"] : null;
 
-     $Angle = $Angle % 360;
+        $Angle = $Angle % 360;
 
-     $X2 = sin(($Angle+180)*PI/180)*$Length+$X1;
-     $Y2 = cos(($Angle+180)*PI/180)*$Length+$Y1;
+        $X2 = sin(($Angle+180)*PI/180)*$Length+$X1;
+        $Y2 = cos(($Angle+180)*PI/180)*$Length+$Y1;
 
-     if ( $RoundPos && $Angle > 0 && $Angle < 180 ) { $Y2 = ceil($Y2); }
-     if ( $RoundPos && $Angle > 180 ) { $Y2 = floor($Y2); }
+        if ( $RoundPos && $Angle > 0 && $Angle < 180 ) { $Y2 = ceil($Y2); }
+        if ( $RoundPos && $Angle > 180 ) { $Y2 = floor($Y2); }
 
-     $this->drawArrow($X2,$Y2,$X1,$Y1,$Format);
+        $this->drawArrow($X2,$Y2,$X1,$Y1,$Format);
 
-     $Size	= imagettfbbox($FontSize,0,$FontName,$Text);
-     $TxtWidth	= max(abs($Size[2]-$Size[0]),abs($Size[0]-$Size[6]));
-     $TxtHeight	= max(abs($Size[1]-$Size[7]),abs($Size[3]-$Size[1]));
+        $Size	= imagettfbbox($FontSize,0,$FontName,$Text);
+        $TxtWidth	= max(abs($Size[2]-$Size[0]),abs($Size[0]-$Size[6]));
+        $TxtHeight	= max(abs($Size[1]-$Size[7]),abs($Size[3]-$Size[1]));
 
-     if ( $Angle > 0 && $Angle < 180 )
-      {
-       $this->drawLine($X2,$Y2,$X2-$TxtWidth,$Y2,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-       if ( $Position == POSITION_TOP )
-        $this->drawText($X2,$Y2-2,$Text,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Align"=>TEXT_ALIGN_BOTTOMRIGHT));
-       else
-        $this->drawText($X2,$Y2+4,$Text,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Align"=>TEXT_ALIGN_TOPRIGHT));
-      }
-     else
-      {
-       $this->drawLine($X2,$Y2,$X2+$TxtWidth,$Y2,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
-       if ( $Position == POSITION_TOP )
-        $this->drawText($X2,$Y2-2,$Text,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
-       else
-        $this->drawText($X2,$Y2+4,$Text,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Align"=>TEXT_ALIGN_TOPLEFT));
-      }
+        if ( $Angle > 0 && $Angle < 180 ) {
+            $this->drawLine(
+                $X2,
+                $Y2,
+                $X2-$TxtWidth,
+                $Y2,
+                array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Ticks"=>$Ticks)
+            );
+            if ( $Position == POSITION_TOP ) {
+                $this->drawText(
+                    $X2,
+                    $Y2-2,
+                    $Text,
+                    array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Align"=>TEXT_ALIGN_BOTTOMRIGHT)
+                );
+            } else {
+                $this->drawText(
+                    $X2,
+                    $Y2+4,
+                    $Text
+                    ,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Align"=>TEXT_ALIGN_TOPRIGHT)
+                );
+            }
+        } else {
+            $this->drawLine($X2,$Y2,$X2+$TxtWidth,$Y2,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
+            if ( $Position == POSITION_TOP ) {
+                $this->drawText($X2,$Y2-2,$Text,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha));
+            } else {
+                $this->drawText($X2,$Y2+4,$Text,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$Alpha,"Align"=>TEXT_ALIGN_TOPLEFT));
+            }
+        }
     }
 
-   /* Draw a progress bar filled with specified % */
-   public function drawProgress($X,$Y,$Percent,$Format="")
+    /**
+     * Draw a progress bar filled with specified %
+     * @param type $X
+     * @param type $Y
+     * @param type $Percent
+     * @param type $Format
+     */
+    public function drawProgress($X,$Y,$Percent,$Format="")
     {
-     if ( $Percent > 100 ) { $Percent = 100; }
-     if ( $Percent < 0 ) { $Percent = 0; }
+        if ( $Percent > 100 ) { $Percent = 100; }
+        if ( $Percent < 0 ) { $Percent = 0; }
 
-     $Width	= isset($Format["Width"]) ? $Format["Width"] : 200;
-     $Height	= isset($Format["Height"]) ? $Format["Height"] : 20;
-     $Orientation = isset($Format["Orientation"]) ? $Format["Orientation"] : ORIENTATION_HORIZONTAL;
-     $ShowLabel = isset($Format["ShowLabel"]) ? $Format["ShowLabel"] : false;
-     $LabelPos	= isset($Format["LabelPos"]) ? $Format["LabelPos"] : LABEL_POS_INSIDE;
-     $Margin    = isset($Format["Margin"]) ? $Format["Margin"] : 10;
-     $R		= isset($Format["R"]) ? $Format["R"] : 130;
-     $G		= isset($Format["G"]) ? $Format["G"] : 130;
-     $B		= isset($Format["B"]) ? $Format["B"] : 130;
-     $RFade	= isset($Format["RFade"]) ? $Format["RFade"] : -1;
-     $GFade	= isset($Format["GFade"]) ? $Format["GFade"] : -1;
-     $BFade	= isset($Format["BFade"]) ? $Format["BFade"] : -1;
-     $BorderR	= isset($Format["BorderR"]) ? $Format["BorderR"] : $R;
-     $BorderG	= isset($Format["BorderG"]) ? $Format["BorderG"] : $G;
-     $BorderB	= isset($Format["BorderB"]) ? $Format["BorderB"] : $B;
-     $BoxBorderR = isset($Format["BoxBorderR"]) ? $Format["BoxBorderR"] : 0;
-     $BoxBorderG = isset($Format["BoxBorderG"]) ? $Format["BoxBorderG"] : 0;
-     $BoxBorderB = isset($Format["BoxBorderB"]) ? $Format["BoxBorderB"] : 0;
-     $BoxBackR	= isset($Format["BoxBackR"]) ? $Format["BoxBackR"] : 255;
-     $BoxBackG	= isset($Format["BoxBackG"]) ? $Format["BoxBackG"] : 255;
-     $BoxBackB	= isset($Format["BoxBackB"]) ? $Format["BoxBackB"] : 255;
-     $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $Surrounding = isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
-     $BoxSurrounding = isset($Format["BoxSurrounding"]) ? $Format["BoxSurrounding"] : null;
-     $NoAngle	= isset($Format["NoAngle"]) ? $Format["NoAngle"] : false;
+        $Width	= isset($Format["Width"]) ? $Format["Width"] : 200;
+        $Height	= isset($Format["Height"]) ? $Format["Height"] : 20;
+        $Orientation = isset($Format["Orientation"]) ? $Format["Orientation"] : ORIENTATION_HORIZONTAL;
+        $ShowLabel  = isset($Format["ShowLabel"]) ? $Format["ShowLabel"] : false;
+        $LabelPos   = isset($Format["LabelPos"]) ? $Format["LabelPos"] : LABEL_POS_INSIDE;
+        $Margin     = isset($Format["Margin"]) ? $Format["Margin"] : 10;
+        $R          = isset($Format["R"]) ? $Format["R"] : 130;
+        $G          = isset($Format["G"]) ? $Format["G"] : 130;
+        $B          = isset($Format["B"]) ? $Format["B"] : 130;
+        $RFade	= isset($Format["RFade"]) ? $Format["RFade"] : -1;
+        $GFade	= isset($Format["GFade"]) ? $Format["GFade"] : -1;
+        $BFade	= isset($Format["BFade"]) ? $Format["BFade"] : -1;
+        $BorderR    = isset($Format["BorderR"]) ? $Format["BorderR"] : $R;
+        $BorderG    = isset($Format["BorderG"]) ? $Format["BorderG"] : $G;
+        $BorderB    = isset($Format["BorderB"]) ? $Format["BorderB"] : $B;
+        $BoxBorderR = isset($Format["BoxBorderR"]) ? $Format["BoxBorderR"] : 0;
+        $BoxBorderG = isset($Format["BoxBorderG"]) ? $Format["BoxBorderG"] : 0;
+        $BoxBorderB = isset($Format["BoxBorderB"]) ? $Format["BoxBorderB"] : 0;
+        $BoxBackR   = isset($Format["BoxBackR"]) ? $Format["BoxBackR"] : 255;
+        $BoxBackG   = isset($Format["BoxBackG"]) ? $Format["BoxBackG"] : 255;
+        $BoxBackB   = isset($Format["BoxBackB"]) ? $Format["BoxBackB"] : 255;
+        $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $Surrounding = isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
+        $BoxSurrounding = isset($Format["BoxSurrounding"]) ? $Format["BoxSurrounding"] : null;
+        $NoAngle    = isset($Format["NoAngle"]) ? $Format["NoAngle"] : false;
 
-     if ( $RFade != -1 && $GFade != -1 && $BFade != -1 )
-      {
-       $RFade = (($RFade-$R)/100)*$Percent+$R;
-       $GFade = (($GFade-$G)/100)*$Percent+$G;
-       $BFade = (($BFade-$B)/100)*$Percent+$B;
-      }
-
-     if ( $Surrounding != null ) { $BorderR = $R + $Surrounding; $BorderG = $G + $Surrounding; $BorderB = $B + $Surrounding; }
-     if ( $BoxSurrounding != null ) { $BoxBorderR = $BoxBackR + $Surrounding; $BoxBorderG = $BoxBackG + $Surrounding; $BoxBorderB = $BoxBackB + $Surrounding; }
-
-     if ( $Orientation == ORIENTATION_VERTICAL )
-      {
-       $InnerHeight = (($Height-2)/100)*$Percent;
-       $this->drawFilledRectangle($X,$Y,$X+$Width,$Y-$Height,array("R"=>$BoxBackR,"G"=>$BoxBackG,"B"=>$BoxBackB,"BorderR"=>$BoxBorderR,"BorderG"=>$BoxBorderG,"BorderB"=>$BoxBorderB,"NoAngle"=>$NoAngle));
-
-       $RestoreShadow = $this->Shadow; $this->Shadow  = false;
-       if ( $RFade != -1 && $GFade != -1 && $BFade != -1 )
-        {
-         $GradientOptions = array("StartR"=>$RFade,"StartG"=>$GFade,"StartB"=>$BFade,"EndR"=>$R,"EndG"=>$G,"EndB"=>$B);
-         $this->drawGradientArea($X+1,$Y-1,$X+$Width-1,$Y-$InnerHeight,DIRECTION_VERTICAL,$GradientOptions);
-
-         if ( $Surrounding )
-          $this->drawRectangle($X+1,$Y-1,$X+$Width-1,$Y-$InnerHeight,array("R"=>255,"G"=>255,"B"=>255,"Alpha"=>$Surrounding));
+        if ( $RFade != -1 && $GFade != -1 && $BFade != -1 ) {
+            $RFade = (($RFade-$R)/100)*$Percent+$R;
+            $GFade = (($GFade-$G)/100)*$Percent+$G;
+            $BFade = (($BFade-$B)/100)*$Percent+$B;
         }
-       else
-        $this->drawFilledRectangle($X+1,$Y-1,$X+$Width-1,$Y-$InnerHeight,array("R"=>$R,"G"=>$G,"B"=>$B,"BorderR"=>$BorderR,"BorderG"=>$BorderG,"BorderB"=>$BorderB));
 
-       $this->Shadow = $RestoreShadow;
-
-       if ( $ShowLabel && $LabelPos == LABEL_POS_BOTTOM )	{ $this->drawText($X+($Width/2),$Y+$Margin,$Percent."%",array("Align"=>TEXT_ALIGN_TOPMIDDLE)); }
-       if ( $ShowLabel && $LabelPos == LABEL_POS_TOP )		{ $this->drawText($X+($Width/2),$Y-$Height-$Margin,$Percent."%",array("Align"=>TEXT_ALIGN_BOTTOMMIDDLE)); }
-       if ( $ShowLabel && $LabelPos == LABEL_POS_INSIDE )	{ $this->drawText($X+($Width/2),$Y-$InnerHeight-$Margin,$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLELEFT,"Angle"=>90)); }
-       if ( $ShowLabel && $LabelPos == LABEL_POS_CENTER )	{ $this->drawText($X+($Width/2),$Y-($Height/2),$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLEMIDDLE,"Angle"=>90)); }
-      }
-     else
-      {
-       if ( $Percent == 100 )
-        $InnerWidth = $Width-1;
-       else
-        $InnerWidth = (($Width-2)/100)*$Percent;
-
-       $this->drawFilledRectangle($X,$Y,$X+$Width,$Y+$Height,array("R"=>$BoxBackR,"G"=>$BoxBackG,"B"=>$BoxBackB,"BorderR"=>$BoxBorderR,"BorderG"=>$BoxBorderG,"BorderB"=>$BoxBorderB,"NoAngle"=>$NoAngle));
-
-       $RestoreShadow = $this->Shadow; $this->Shadow  = false;
-       if ( $RFade != -1 && $GFade != -1 && $BFade != -1 )
-        {
-         $GradientOptions = array("StartR"=>$R,"StartG"=>$G,"StartB"=>$B,"EndR"=>$RFade,"EndG"=>$GFade,"EndB"=>$BFade);
-         $this->drawGradientArea($X+1,$Y+1,$X+$InnerWidth,$Y+$Height-1,DIRECTION_HORIZONTAL,$GradientOptions);
-
-         if ( $Surrounding )
-          $this->drawRectangle($X+1,$Y+1,$X+$InnerWidth,$Y+$Height-1,array("R"=>255,"G"=>255,"B"=>255,"Alpha"=>$Surrounding));
+        if ( $Surrounding != null ) { 
+            $BorderR = $R + $Surrounding;
+            $BorderG = $G + $Surrounding; 
+            $BorderB = $B + $Surrounding;             
         }
-       else
-        $this->drawFilledRectangle($X+1,$Y+1,$X+$InnerWidth,$Y+$Height-1,array("R"=>$R,"G"=>$G,"B"=>$B,"BorderR"=>$BorderR,"BorderG"=>$BorderG,"BorderB"=>$BorderB));
- 
-       $this->Shadow = $RestoreShadow;
+        if ( $BoxSurrounding != null ) { 
+            $BoxBorderR = $BoxBackR + $Surrounding; 
+            $BoxBorderG = $BoxBackG + $Surrounding; 
+            $BoxBorderB = $BoxBackB + $Surrounding;
+        }
 
-       if ( $ShowLabel && $LabelPos == LABEL_POS_LEFT )		{ $this->drawText($X-$Margin,$Y+($Height/2),$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLERIGHT)); }
-       if ( $ShowLabel && $LabelPos == LABEL_POS_RIGHT )	{ $this->drawText($X+$Width+$Margin,$Y+($Height/2),$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLELEFT)); }
-       if ( $ShowLabel && $LabelPos == LABEL_POS_CENTER )	{ $this->drawText($X+($Width/2),$Y+($Height/2),$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLEMIDDLE)); }
-       if ( $ShowLabel && $LabelPos == LABEL_POS_INSIDE )	{ $this->drawText($X+$InnerWidth+$Margin,$Y+($Height/2),$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLELEFT)); }
-      }
+        if ( $Orientation == ORIENTATION_VERTICAL ) {
+            $InnerHeight = (($Height-2)/100)*$Percent;
+            $this->drawFilledRectangle(
+                $X,
+                $Y,
+                $X+$Width,
+                $Y-$Height,
+                array(
+                    "R"=>$BoxBackR,
+                    "G"=>$BoxBackG,
+                    "B"=>$BoxBackB,
+                    "BorderR"=>$BoxBorderR,
+                    "BorderG"=>$BoxBorderG,
+                    "BorderB"=>$BoxBorderB,
+                    "NoAngle"=>$NoAngle
+                )
+            );
+
+            $RestoreShadow = $this->Shadow; $this->Shadow  = false;
+            if ( $RFade != -1 && $GFade != -1 && $BFade != -1 ) {
+                $GradientOptions = array(
+                    "StartR"=>$RFade,
+                    "StartG"=>$GFade,
+                    "StartB"=>$BFade,
+                    "EndR"=>$R,
+                    "EndG"=>$G,
+                    "EndB"=>$B
+                );
+                $this->drawGradientArea($X+1,$Y-1,$X+$Width-1,$Y-$InnerHeight,DIRECTION_VERTICAL,$GradientOptions);
+
+                if ( $Surrounding ) {
+                    $this->drawRectangle(
+                        $X+1,
+                        $Y-1,
+                        $X+$Width-1,
+                        $Y-$InnerHeight,
+                        array("R"=>255,"G"=>255,"B"=>255,"Alpha"=>$Surrounding)
+                    );
+                }
+            } else {
+                $this->drawFilledRectangle(
+                    $X+1,
+                    $Y-1,
+                    $X+$Width-1,
+                    $Y-$InnerHeight,
+                    array("R"=>$R,"G"=>$G,"B"=>$B,"BorderR"=>$BorderR,"BorderG"=>$BorderG,"BorderB"=>$BorderB)
+                );
+            }
+            $this->Shadow = $RestoreShadow;
+
+            if ( $ShowLabel && $LabelPos == LABEL_POS_BOTTOM ) { 
+                $this->drawText($X+($Width/2),$Y+$Margin,$Percent."%",array("Align"=>TEXT_ALIGN_TOPMIDDLE));                 
+            }
+            if ( $ShowLabel && $LabelPos == LABEL_POS_TOP ) { 
+                $this->drawText($X+($Width/2),$Y-$Height-$Margin,$Percent."%",array("Align"=>TEXT_ALIGN_BOTTOMMIDDLE));                 
+            }
+            if ( $ShowLabel && $LabelPos == LABEL_POS_INSIDE ) { 
+                $this->drawText($X+($Width/2),$Y-$InnerHeight-$Margin,$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLELEFT,"Angle"=>90));                 
+            }
+            if ( $ShowLabel && $LabelPos == LABEL_POS_CENTER ) { 
+                $this->drawText($X+($Width/2),$Y-($Height/2),$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLEMIDDLE,"Angle"=>90));
+            }
+        } else {
+            if ( $Percent == 100 ) {
+                $InnerWidth = $Width-1;
+            } else {
+                $InnerWidth = (($Width-2)/100)*$Percent;
+            }
+            $this->drawFilledRectangle(
+                $X,
+                $Y,
+                $X+$Width,
+                $Y+$Height,
+                array(
+                    "R"=>$BoxBackR,
+                    "G"=>$BoxBackG,
+                    "B"=>$BoxBackB,
+                    "BorderR"=>$BoxBorderR,
+                    "BorderG"=>$BoxBorderG,
+                    "BorderB"=>$BoxBorderB,
+                    "NoAngle"=>$NoAngle
+                )
+            );
+
+            $RestoreShadow = $this->Shadow; 
+            $this->Shadow  = false;
+            if ( $RFade != -1 && $GFade != -1 && $BFade != -1 ) {
+                $GradientOptions = array(
+                    "StartR"=>$R,
+                    "StartG"=>$G,
+                    "StartB"=>$B,
+                    "EndR"=>$RFade,
+                    "EndG"=>$GFade,
+                    "EndB"=>$BFade
+                );
+                $this->drawGradientArea($X+1,$Y+1,$X+$InnerWidth,$Y+$Height-1,DIRECTION_HORIZONTAL,$GradientOptions);
+
+                if ( $Surrounding ) {
+                    $this->drawRectangle($X+1,$Y+1,$X+$InnerWidth,$Y+$Height-1,array("R"=>255,"G"=>255,"B"=>255,"Alpha"=>$Surrounding));
+                }
+            } else {
+                $this->drawFilledRectangle(
+                    $X+1,
+                    $Y+1,
+                    $X+$InnerWidth,
+                    $Y+$Height-1,
+                    array("R"=>$R,"G"=>$G,"B"=>$B,"BorderR"=>$BorderR,"BorderG"=>$BorderG,"BorderB"=>$BorderB)
+                );
+            }
+            $this->Shadow = $RestoreShadow;
+
+            if ( $ShowLabel && $LabelPos == LABEL_POS_LEFT ) { 
+                $this->drawText($X-$Margin,$Y+($Height/2),$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLERIGHT));                 
+            }
+            if ( $ShowLabel && $LabelPos == LABEL_POS_RIGHT ) { 
+                $this->drawText($X+$Width+$Margin,$Y+($Height/2),$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLELEFT));                 
+            }
+            if ( $ShowLabel && $LabelPos == LABEL_POS_CENTER ) { 
+                $this->drawText($X+($Width/2),$Y+($Height/2),$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLEMIDDLE));                 
+            }
+            if ( $ShowLabel && $LabelPos == LABEL_POS_INSIDE ) { 
+                $this->drawText($X+$InnerWidth+$Margin,$Y+($Height/2),$Percent."%",array("Align"=>TEXT_ALIGN_MIDDLELEFT));                 
+            }
+        }
     }
 
-   /* Get the legend box size */
-   public function getLegendSize($Format="")
+    /**
+     * Get the legend box size
+     * @param type $Format
+     * @return type
+     */
+    public function getLegendSize($Format="")
     {
-     $FontName		= isset($Format["FontName"]) ? $Format["FontName"] : $this->FontName;
-     $FontSize		= isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
-     $BoxSize		= isset($Format["BoxSize"]) ? $Format["BoxSize"] : 5;
-     $Margin		= isset($Format["Margin"]) ? $Format["Margin"] : 5;
-     $Style		= isset($Format["Style"]) ? $Format["Style"] : LEGEND_ROUND;
-     $Mode		= isset($Format["Mode"]) ? $Format["Mode"] : LEGEND_VERTICAL;
-     $BoxWidth		= isset($Format["BoxWidth"]) ? $Format["BoxWidth"] : 5;
-     $BoxHeight		= isset($Format["BoxHeight"]) ? $Format["BoxHeight"] : 5;
-     $IconAreaWidth	= isset($Format["IconAreaWidth"]) ? $Format["IconAreaWidth"] : $BoxWidth;
-     $IconAreaHeight	= isset($Format["IconAreaHeight"]) ? $Format["IconAreaHeight"] : $BoxHeight;
-     $XSpacing		= isset($Format["XSpacing"]) ? $Format["XSpacing"] : 5;
+        $FontName	= isset($Format["FontName"]) ? $Format["FontName"] : $this->FontName;
+        $FontSize	= isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
+        $BoxSize	= isset($Format["BoxSize"]) ? $Format["BoxSize"] : 5;
+        $Margin		= isset($Format["Margin"]) ? $Format["Margin"] : 5;
+        $Style		= isset($Format["Style"]) ? $Format["Style"] : LEGEND_ROUND;
+        $Mode		= isset($Format["Mode"]) ? $Format["Mode"] : LEGEND_VERTICAL;
+        $BoxWidth	= isset($Format["BoxWidth"]) ? $Format["BoxWidth"] : 5;
+        $BoxHeight	= isset($Format["BoxHeight"]) ? $Format["BoxHeight"] : 5;
+        $IconAreaWidth	= isset($Format["IconAreaWidth"]) ? $Format["IconAreaWidth"] : $BoxWidth;
+        $IconAreaHeight	= isset($Format["IconAreaHeight"]) ? $Format["IconAreaHeight"] : $BoxHeight;
+        $XSpacing	= isset($Format["XSpacing"]) ? $Format["XSpacing"] : 5;
 
-     $Data = $this->DataSet->getData();
+        $Data = $this->DataSet->getData();
 
-     foreach($Data["Series"] as $SerieName => $Serie)
-      {
-       if ( $Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"] && isset($Serie["Picture"]))
-        {
-         list($PicWidth,$PicHeight) = $this->getPicInfo($Serie["Picture"]);
-         if ( $IconAreaWidth < $PicWidth ) { $IconAreaWidth = $PicWidth; }
-         if ( $IconAreaHeight < $PicHeight ) { $IconAreaHeight = $PicHeight; }
-        }
-      }
-
-     $YStep = max($this->FontSize,$IconAreaHeight) + 5;
-     $XStep = $IconAreaWidth + 5;
-     $XStep = $XSpacing;
-
-     $X=100; $Y=100;
-
-     $Boundaries = ""; $Boundaries["L"] = $X; $Boundaries["T"] = $Y; $Boundaries["R"] = 0; $Boundaries["B"] = 0; $vY = $Y; $vX = $X;
-     foreach($Data["Series"] as $SerieName => $Serie)
-      {
-       if ( $Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"] )
-        {
-         if ( $Mode == LEGEND_VERTICAL )
-          {
-           $BoxArray = $this->getTextBox($vX+$IconAreaWidth+4,$vY+$IconAreaHeight/2,$FontName,$FontSize,0,$Serie["Description"]);
-
-           if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$IconAreaHeight/2 ) { $Boundaries["T"] = $BoxArray[2]["Y"]+$IconAreaHeight/2; }
-           if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) { $Boundaries["R"] = $BoxArray[1]["X"]+2; }
-           if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$IconAreaHeight/2 ) { $Boundaries["B"] = $BoxArray[1]["Y"]+2+$IconAreaHeight/2; }
-
-           $Lines = preg_split("/\n/",$Serie["Description"]);
-           $vY = $vY + max($this->FontSize*count($Lines),$IconAreaHeight) + 5;
-          }
-         elseif ( $Mode == LEGEND_HORIZONTAL )
-          {
-           $Lines = preg_split("/\n/",$Serie["Description"]);
-           $Width = "";
-           foreach($Lines as $Key => $Value)
-            {
-             $BoxArray = $this->getTextBox($vX+$IconAreaWidth+6,$Y+$IconAreaHeight/2+(($this->FontSize+3)*$Key),$FontName,$FontSize,0,$Value);
-
-             if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$IconAreaHeight/2 ) { $Boundaries["T"] = $BoxArray[2]["Y"]+$IconAreaHeight/2; }
-             if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) { $Boundaries["R"] = $BoxArray[1]["X"]+2; }
-             if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$IconAreaHeight/2 ) { $Boundaries["B"] = $BoxArray[1]["Y"]+2+$IconAreaHeight/2; }
-
-             $Width[] = $BoxArray[1]["X"];
+        foreach ($Data["Series"] as $SerieName => $Serie) {
+            if ($Serie["isDrawable"] == true 
+                && $SerieName != $Data["Abscissa"] 
+                && isset($Serie["Picture"])
+            ) {
+                list($PicWidth,$PicHeight) = $this->getPicInfo($Serie["Picture"]);
+                if ( $IconAreaWidth < $PicWidth ) { $IconAreaWidth = $PicWidth; }
+                if ( $IconAreaHeight < $PicHeight ) { $IconAreaHeight = $PicHeight; }
             }
-
-           $vX=max($Width)+$XStep;
-          }
         }
-      }
-     $vY=$vY-$YStep; $vX=$vX-$XStep;
 
-     $TopOffset  = $Y - $Boundaries["T"];
-     if ( $Boundaries["B"]-($vY+$IconAreaHeight) < $TopOffset ) { $Boundaries["B"] = $vY+$IconAreaHeight+$TopOffset; }
+        $YStep = max($this->FontSize,$IconAreaHeight) + 5;
+        $XStep = $IconAreaWidth + 5;
+        $XStep = $XSpacing;
 
-     $Width  = ($Boundaries["R"]+$Margin) - ($Boundaries["L"]-$Margin);
-     $Height = ($Boundaries["B"]+$Margin) - ($Boundaries["T"]-$Margin);
+        $X=100;
+        $Y=100;
 
-     return(array("Width"=>$Width,"Height"=>$Height));
+        $Boundaries = ""; 
+        $Boundaries["L"] = $X; 
+        $Boundaries["T"] = $Y;
+        $Boundaries["R"] = 0; 
+        $Boundaries["B"] = 0;
+        $vY = $Y; 
+        $vX = $X;
+        foreach($Data["Series"] as $SerieName => $Serie) {
+            if ( $Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"] ) {
+                if ( $Mode == LEGEND_VERTICAL ) {
+                    $BoxArray = $this->getTextBox(
+                        $vX+$IconAreaWidth+4,
+                        $vY+$IconAreaHeight/2,
+                        $FontName,
+                        $FontSize,0,
+                        $Serie["Description"]
+                    );
+
+                    if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$IconAreaHeight/2 ) { 
+                        $Boundaries["T"] = $BoxArray[2]["Y"]+$IconAreaHeight/2;                         
+                    }
+                    if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) { 
+                        $Boundaries["R"] = $BoxArray[1]["X"]+2;
+                    }
+                    if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$IconAreaHeight/2 ) { 
+                        $Boundaries["B"] = $BoxArray[1]["Y"]+2+$IconAreaHeight/2;                         
+                    }
+
+                    $Lines = preg_split("/\n/",$Serie["Description"]);
+                    $vY = $vY + max($this->FontSize*count($Lines),$IconAreaHeight) + 5;
+                } elseif ( $Mode == LEGEND_HORIZONTAL ) {
+                    $Lines = preg_split("/\n/",$Serie["Description"]);
+                    $Width = "";
+                    foreach($Lines as $Key => $Value) {
+                        $BoxArray = $this->getTextBox(
+                            $vX+$IconAreaWidth+6,
+                            $Y+$IconAreaHeight/2+(($this->FontSize+3)*$Key),
+                            $FontName,
+                            $FontSize,
+                            0,
+                            $Value
+                        );
+
+                        if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$IconAreaHeight/2 ) { 
+                            $Boundaries["T"] = $BoxArray[2]["Y"]+$IconAreaHeight/2;                             
+                        }
+                        if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) { 
+                            $Boundaries["R"] = $BoxArray[1]["X"]+2;                             
+                        }
+                        if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$IconAreaHeight/2 ) { 
+                            $Boundaries["B"] = $BoxArray[1]["Y"]+2+$IconAreaHeight/2;                             
+                        }
+
+                        $Width[] = $BoxArray[1]["X"];
+                    }
+
+                    $vX=max($Width)+$XStep;
+                }
+            }
+        }
+        $vY=$vY-$YStep; 
+        $vX=$vX-$XStep;
+
+        $TopOffset  = $Y - $Boundaries["T"];
+        if ( $Boundaries["B"]-($vY+$IconAreaHeight) < $TopOffset ) { 
+            $Boundaries["B"] = $vY+$IconAreaHeight+$TopOffset;             
+        }
+
+        $Width  = ($Boundaries["R"]+$Margin) - ($Boundaries["L"]-$Margin);
+        $Height = ($Boundaries["B"]+$Margin) - ($Boundaries["T"]-$Margin);
+
+        return(array("Width"=>$Width,"Height"=>$Height));
     }
 
-   /* Draw the legend of the active series */
-   public function drawLegend($X,$Y,$Format="")
+    /**
+     * Draw the legend of the active series
+     * @param type $X
+     * @param type $Y
+     * @param type $Format
+     */
+    public function drawLegend($X,$Y,$Format="")
     {
-     $Family	= isset($Format["Family"]) ? $Format["Family"] : LEGEND_FAMILY_BOX;
-     $FontName	= isset($Format["FontName"]) ? $Format["FontName"] : $this->FontName;
-     $FontSize	= isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
-     $FontR	= isset($Format["FontR"]) ? $Format["FontR"] : $this->FontColorR;
-     $FontG	= isset($Format["FontG"]) ? $Format["FontG"] : $this->FontColorG;
-     $FontB	= isset($Format["FontB"]) ? $Format["FontB"] : $this->FontColorB;
-     $BoxWidth	= isset($Format["BoxWidth"]) ? $Format["BoxWidth"] : 5;
-     $BoxHeight	= isset($Format["BoxHeight"]) ? $Format["BoxHeight"] : 5;
-     $IconAreaWidth	= isset($Format["IconAreaWidth"]) ? $Format["IconAreaWidth"] : $BoxWidth;
-     $IconAreaHeight	= isset($Format["IconAreaHeight"]) ? $Format["IconAreaHeight"] : $BoxHeight;
-     $XSpacing	= isset($Format["XSpacing"]) ? $Format["XSpacing"] : 5;
-     $Margin	= isset($Format["Margin"]) ? $Format["Margin"] : 5;
-     $R		= isset($Format["R"]) ? $Format["R"] : 200;
-     $G		= isset($Format["G"]) ? $Format["G"] : 200;
-     $B		= isset($Format["B"]) ? $Format["B"] : 200;
-     $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $BorderR	= isset($Format["BorderR"]) ? $Format["BorderR"] : 255;
-     $BorderG	= isset($Format["BorderG"]) ? $Format["BorderG"] : 255;
-     $BorderB	= isset($Format["BorderB"]) ? $Format["BorderB"] : 255;
-     $Surrounding = isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
-     $Style	= isset($Format["Style"]) ? $Format["Style"] : LEGEND_ROUND;
-     $Mode	= isset($Format["Mode"]) ? $Format["Mode"] : LEGEND_VERTICAL;
+        $Family	= isset($Format["Family"]) ? $Format["Family"] : LEGEND_FAMILY_BOX;
+        $FontName = isset($Format["FontName"]) ? $Format["FontName"] : $this->FontName;
+        $FontSize = isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
+        $FontR	= isset($Format["FontR"]) ? $Format["FontR"] : $this->FontColorR;
+        $FontG	= isset($Format["FontG"]) ? $Format["FontG"] : $this->FontColorG;
+        $FontB	= isset($Format["FontB"]) ? $Format["FontB"] : $this->FontColorB;
+        $BoxWidth	= isset($Format["BoxWidth"]) ? $Format["BoxWidth"] : 5;
+        $BoxHeight	= isset($Format["BoxHeight"]) ? $Format["BoxHeight"] : 5;
+        $IconAreaWidth	= isset($Format["IconAreaWidth"]) ? $Format["IconAreaWidth"] : $BoxWidth;
+        $IconAreaHeight	= isset($Format["IconAreaHeight"]) ? $Format["IconAreaHeight"] : $BoxHeight;
+        $XSpacing	= isset($Format["XSpacing"]) ? $Format["XSpacing"] : 5;
+        $Margin	= isset($Format["Margin"]) ? $Format["Margin"] : 5;
+        $R      = isset($Format["R"]) ? $Format["R"] : 200;
+        $G      = isset($Format["G"]) ? $Format["G"] : 200;
+        $B      = isset($Format["B"]) ? $Format["B"] : 200;
+        $Alpha	= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $BorderR = isset($Format["BorderR"]) ? $Format["BorderR"] : 255;
+        $BorderG = isset($Format["BorderG"]) ? $Format["BorderG"] : 255;
+        $BorderB = isset($Format["BorderB"]) ? $Format["BorderB"] : 255;
+        $Surrounding = isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
+        $Style	= isset($Format["Style"]) ? $Format["Style"] : LEGEND_ROUND;
+        $Mode	= isset($Format["Mode"]) ? $Format["Mode"] : LEGEND_VERTICAL;
 
-     if ( $Surrounding != null ) { $BorderR = $R + $Surrounding; $BorderG = $G + $Surrounding; $BorderB = $B + $Surrounding; }
-
-     $Data = $this->DataSet->getData();
-
-     foreach($Data["Series"] as $SerieName => $Serie)
-      {
-       if ( $Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"] && isset($Serie["Picture"]))
-        {
-         list($PicWidth,$PicHeight) = $this->getPicInfo($Serie["Picture"]);
-         if ( $IconAreaWidth < $PicWidth ) { $IconAreaWidth = $PicWidth; }
-         if ( $IconAreaHeight < $PicHeight ) { $IconAreaHeight = $PicHeight; }
+        if ( $Surrounding != null ) { 
+            $BorderR = $R + $Surrounding; 
+            $BorderG = $G + $Surrounding; 
+            $BorderB = $B + $Surrounding;          
         }
-      }
 
-     $YStep = max($this->FontSize,$IconAreaHeight) + 5;
-     $XStep = $IconAreaWidth + 5;
-     $XStep = $XSpacing;
+        $Data = $this->DataSet->getData();
 
-     $Boundaries = ""; $Boundaries["L"] = $X; $Boundaries["T"] = $Y; $Boundaries["R"] = 0; $Boundaries["B"] = 0; $vY = $Y; $vX = $X;
-     foreach($Data["Series"] as $SerieName => $Serie)
-      {
-       if ( $Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"] )
-        {
-         if ( $Mode == LEGEND_VERTICAL )
-          {
-           $BoxArray = $this->getTextBox($vX+$IconAreaWidth+4,$vY+$IconAreaHeight/2,$FontName,$FontSize,0,$Serie["Description"]);
-
-           if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$IconAreaHeight/2 ) { $Boundaries["T"] = $BoxArray[2]["Y"]+$IconAreaHeight/2; }
-           if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) { $Boundaries["R"] = $BoxArray[1]["X"]+2; }
-           if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$IconAreaHeight/2 ) { $Boundaries["B"] = $BoxArray[1]["Y"]+2+$IconAreaHeight/2; }
-
-           $Lines = preg_split("/\n/",$Serie["Description"]);
-           $vY = $vY + max($this->FontSize*count($Lines),$IconAreaHeight) + 5;
-          }
-         elseif ( $Mode == LEGEND_HORIZONTAL )
-          {
-           $Lines = preg_split("/\n/",$Serie["Description"]);
-           $Width = "";
-           foreach($Lines as $Key => $Value)
-            {
-             $BoxArray = $this->getTextBox($vX+$IconAreaWidth+6,$Y+$IconAreaHeight/2+(($this->FontSize+3)*$Key),$FontName,$FontSize,0,$Value);
-
-             if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$IconAreaHeight/2 ) { $Boundaries["T"] = $BoxArray[2]["Y"]+$IconAreaHeight/2; }
-             if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) { $Boundaries["R"] = $BoxArray[1]["X"]+2; }
-             if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$IconAreaHeight/2 ) { $Boundaries["B"] = $BoxArray[1]["Y"]+2+$IconAreaHeight/2; }
-
-             $Width[] = $BoxArray[1]["X"];
+        foreach($Data["Series"] as $SerieName => $Serie) {
+            if ($Serie["isDrawable"] == true 
+                && $SerieName != $Data["Abscissa"] 
+                && isset($Serie["Picture"])
+            ) {
+                list($PicWidth,$PicHeight) = $this->getPicInfo($Serie["Picture"]);
+                if ( $IconAreaWidth < $PicWidth ) { $IconAreaWidth = $PicWidth; }
+                if ( $IconAreaHeight < $PicHeight ) { $IconAreaHeight = $PicHeight; }
             }
-
-           $vX=max($Width)+$XStep;
-          }
         }
-      }
-     $vY=$vY-$YStep; $vX=$vX-$XStep;
 
-     $TopOffset  = $Y - $Boundaries["T"];
-     if ( $Boundaries["B"]-($vY+$IconAreaHeight) < $TopOffset ) { $Boundaries["B"] = $vY+$IconAreaHeight+$TopOffset; }
+        $YStep = max($this->FontSize,$IconAreaHeight) + 5;
+        $XStep = $IconAreaWidth + 5;
+        $XStep = $XSpacing;
 
-     if ( $Style == LEGEND_ROUND )
-      $this->drawRoundedFilledRectangle($Boundaries["L"]-$Margin,$Boundaries["T"]-$Margin,$Boundaries["R"]+$Margin,$Boundaries["B"]+$Margin,$Margin,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"BorderR"=>$BorderR,"BorderG"=>$BorderG,"BorderB"=>$BorderB));
-     elseif ( $Style == LEGEND_BOX )
-      $this->drawFilledRectangle($Boundaries["L"]-$Margin,$Boundaries["T"]-$Margin,$Boundaries["R"]+$Margin,$Boundaries["B"]+$Margin,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"BorderR"=>$BorderR,"BorderG"=>$BorderG,"BorderB"=>$BorderB));
+        $Boundaries = ""; 
+        $Boundaries["L"] = $X; 
+        $Boundaries["T"] = $Y; 
+        $Boundaries["R"] = 0; 
+        $Boundaries["B"] = 0; 
+        $vY = $Y; 
+        $vX = $X;
+        foreach($Data["Series"] as $SerieName => $Serie) {
+            if ($Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"]) {
+                if ( $Mode == LEGEND_VERTICAL ) {
+                    $BoxArray = $this->getTextBox(
+                        $vX+$IconAreaWidth+4,
+                        $vY+$IconAreaHeight/2,
+                        $FontName,
+                        $FontSize,
+                        0,
+                        $Serie["Description"]
+                    );
 
-     $RestoreShadow = $this->Shadow; $this->Shadow = false;
-     foreach($Data["Series"] as $SerieName => $Serie)
-      {
-       if ( $Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"] )
-        {
-         $R = $Serie["Color"]["R"]; $G = $Serie["Color"]["G"]; $B = $Serie["Color"]["B"];
-         $Ticks = $Serie["Ticks"]; $Weight = $Serie["Weight"];
+                    if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$IconAreaHeight/2 ) { 
+                        $Boundaries["T"] = $BoxArray[2]["Y"]+$IconAreaHeight/2;                         
+                    }
+                    if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) { 
+                        $Boundaries["R"] = $BoxArray[1]["X"]+2;                         
+                    }
+                    if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$IconAreaHeight/2 ) { 
+                        $Boundaries["B"] = $BoxArray[1]["Y"]+2+$IconAreaHeight/2;                         
+                    }
 
-         if ( isset($Serie["Picture"]) )
-          {
-           $Picture = $Serie["Picture"];
-           list($PicWidth,$PicHeight) = $this->getPicInfo($Picture);
-           $PicX = $X+$IconAreaWidth/2; $PicY = $Y+$IconAreaHeight/2; 
+                    $Lines = preg_split("/\n/",$Serie["Description"]);
+                    $vY = $vY + max($this->FontSize*count($Lines),$IconAreaHeight) + 5;
+                } elseif ( $Mode == LEGEND_HORIZONTAL ) {
+                    $Lines = preg_split("/\n/",$Serie["Description"]);
+                    $Width = "";
+                    foreach($Lines as $Key => $Value) {
+                        $BoxArray = $this->getTextBox(
+                            $vX+$IconAreaWidth+6,
+                            $Y+$IconAreaHeight/2+(($this->FontSize+3)*$Key),
+                            $FontName,
+                            $FontSize,
+                            0,
+                            $Value
+                        );
 
-           $this->drawFromPNG($PicX-$PicWidth/2,$PicY-$PicHeight/2,$Picture);
-          }
-         else
-          {
-           if ( $Family == LEGEND_FAMILY_BOX )
-            {
-             if ( $BoxWidth != $IconAreaWidth ) { $XOffset = floor(($IconAreaWidth-$BoxWidth)/2); } else { $XOffset = 0; }
-             if ( $BoxHeight != $IconAreaHeight ) { $YOffset = floor(($IconAreaHeight-$BoxHeight)/2); } else { $YOffset = 0; }
+                        if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$IconAreaHeight/2 ) { 
+                            $Boundaries["T"] = $BoxArray[2]["Y"]+$IconAreaHeight/2;                           
+                        }
+                        if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) { 
+                            $Boundaries["R"] = $BoxArray[1]["X"]+2;                           
+                        }
+                        if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$IconAreaHeight/2 ) { 
+                            $Boundaries["B"] = $BoxArray[1]["Y"]+2+$IconAreaHeight/2;                           
+                        }
 
-             $this->drawFilledRectangle($X+1+$XOffset,$Y+1+$YOffset,$X+$BoxWidth+$XOffset+1,$Y+$BoxHeight+1+$YOffset,array("R"=>0,"G"=>0,"B"=>0,"Alpha"=>20));
-             $this->drawFilledRectangle($X+$XOffset,$Y+$YOffset,$X+$BoxWidth+$XOffset,$Y+$BoxHeight+$YOffset,array("R"=>$R,"G"=>$G,"B"=>$B,"Surrounding"=>20));
+                        $Width[] = $BoxArray[1]["X"];
+                    }
+
+                    $vX=max($Width)+$XStep;
+                }
             }
-           elseif ( $Family == LEGEND_FAMILY_CIRCLE )
-            {
-             $this->drawFilledCircle($X+1+$IconAreaWidth/2,$Y+1+$IconAreaHeight/2,min($IconAreaHeight/2,$IconAreaWidth/2),array("R"=>0,"G"=>0,"B"=>0,"Alpha"=>20));
-             $this->drawFilledCircle($X+$IconAreaWidth/2,$Y+$IconAreaHeight/2,min($IconAreaHeight/2,$IconAreaWidth/2),array("R"=>$R,"G"=>$G,"B"=>$B,"Surrounding"=>20));
-            }
-           elseif ( $Family == LEGEND_FAMILY_LINE )
-            {
-             $this->drawLine($X+1,$Y+1+$IconAreaHeight/2,$X+1+$IconAreaWidth,$Y+1+$IconAreaHeight/2,array("R"=>0,"G"=>0,"B"=>0,"Alpha"=>20,"Ticks"=>$Ticks,"Weight"=>$Weight));
-             $this->drawLine($X,$Y+$IconAreaHeight/2,$X+$IconAreaWidth,$Y+$IconAreaHeight/2,array("R"=>$R,"G"=>$G,"B"=>$B,"Ticks"=>$Ticks,"Weight"=>$Weight));
-            }
-          }
-
-         if ( $Mode == LEGEND_VERTICAL )
-          {
-           $Lines = preg_split("/\n/",$Serie["Description"]);
-           foreach($Lines as $Key => $Value)
-            $this->drawText($X+$IconAreaWidth+4,$Y+$IconAreaHeight/2+(($this->FontSize+3)*$Key),$Value,array("R"=>$FontR,"G"=>$FontG,"B"=>$FontB,"Align"=>TEXT_ALIGN_MIDDLELEFT,"FontSize"=>$FontSize,"FontName"=>$FontName));
-
-           $Y=$Y+max($this->FontSize*count($Lines),$IconAreaHeight) + 5;
-          }
-         elseif ( $Mode == LEGEND_HORIZONTAL )
-          {
-           $Lines = preg_split("/\n/",$Serie["Description"]);
-           $Width = "";
-           foreach($Lines as $Key => $Value)
-            {
-             $BoxArray = $this->drawText($X+$IconAreaWidth+4,$Y+$IconAreaHeight/2+(($this->FontSize+3)*$Key),$Value,array("R"=>$FontR,"G"=>$FontG,"B"=>$FontB,"Align"=>TEXT_ALIGN_MIDDLELEFT,"FontSize"=>$FontSize,"FontName"=>$FontName));
-             $Width[] = $BoxArray[1]["X"];
-            }
-           $X=max($Width)+2+$XStep;
-          }
         }
-      }
+        $vY=$vY-$YStep; 
+        $vX=$vX-$XStep;
+
+        $TopOffset  = $Y - $Boundaries["T"];
+        if ( $Boundaries["B"]-($vY+$IconAreaHeight) < $TopOffset ) { 
+            $Boundaries["B"] = $vY+$IconAreaHeight+$TopOffset;             
+        }
+
+        if ( $Style == LEGEND_ROUND ) {
+            $this->drawRoundedFilledRectangle(
+                $Boundaries["L"]-$Margin,$Boundaries["T"]-$Margin,
+                $Boundaries["R"]+$Margin,$Boundaries["B"]+$Margin,$Margin,
+                array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"BorderR"=>$BorderR,"BorderG"=>$BorderG,"BorderB"=>$BorderB)
+            );
+        } elseif ( $Style == LEGEND_BOX ) {
+            $this->drawFilledRectangle(
+                $Boundaries["L"]-$Margin,
+                $Boundaries["T"]-$Margin,
+                $Boundaries["R"]+$Margin,
+                $Boundaries["B"]+$Margin,
+                array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"BorderR"=>$BorderR,"BorderG"=>$BorderG,"BorderB"=>$BorderB)
+            );
+        }
+        
+        $RestoreShadow = $this->Shadow; 
+        $this->Shadow = false;
+        foreach($Data["Series"] as $SerieName => $Serie) {
+            if ($Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"]) {
+                $R = $Serie["Color"]["R"]; 
+                $G = $Serie["Color"]["G"]; 
+                $B = $Serie["Color"]["B"];
+                $Ticks = $Serie["Ticks"]; 
+                $Weight = $Serie["Weight"];
+
+                if ( isset($Serie["Picture"]) ) {
+                    $Picture = $Serie["Picture"];
+                    list($PicWidth,$PicHeight) = $this->getPicInfo($Picture);
+                    $PicX = $X+$IconAreaWidth/2; $PicY = $Y+$IconAreaHeight/2; 
+
+                    $this->drawFromPNG($PicX-$PicWidth/2,$PicY-$PicHeight/2,$Picture);
+                } else {
+                    if ( $Family == LEGEND_FAMILY_BOX ) {
+                        if ( $BoxWidth != $IconAreaWidth ) {
+                            $XOffset = floor(($IconAreaWidth-$BoxWidth)/2);                             
+                        } else { 
+                            $XOffset = 0;
+                        }
+                        if ( $BoxHeight != $IconAreaHeight ) { 
+                            $YOffset = floor(($IconAreaHeight-$BoxHeight)/2);                             
+                        } else { 
+                            $YOffset = 0;                             
+                        }
+
+                        $this->drawFilledRectangle(
+                            $X+1+$XOffset,
+                            $Y+1+$YOffset,
+                            $X+$BoxWidth+$XOffset+1,
+                            $Y+$BoxHeight+1+$YOffset,
+                            array("R"=>0,"G"=>0,"B"=>0,"Alpha"=>20)
+                        );
+                        $this->drawFilledRectangle(
+                            $X+$XOffset,
+                            $Y+$YOffset,
+                            $X+$BoxWidth+$XOffset,
+                            $Y+$BoxHeight+$YOffset,
+                            array("R"=>$R,"G"=>$G,"B"=>$B,"Surrounding"=>20)
+                        );
+                    } elseif ( $Family == LEGEND_FAMILY_CIRCLE ) {
+                        $this->drawFilledCircle(
+                            $X+1+$IconAreaWidth/2,
+                            $Y+1+$IconAreaHeight/2,
+                            min($IconAreaHeight/2,$IconAreaWidth/2),
+                            array("R"=>0,"G"=>0,"B"=>0,"Alpha"=>20)
+                        );
+                        $this->drawFilledCircle(
+                            $X+$IconAreaWidth/2,
+                            $Y+$IconAreaHeight/2,
+                            min($IconAreaHeight/2,$IconAreaWidth/2),
+                            array("R"=>$R,"G"=>$G,"B"=>$B,"Surrounding"=>20)
+                        );
+                    } elseif ( $Family == LEGEND_FAMILY_LINE ) {
+                        $this->drawLine(
+                            $X+1,
+                            $Y+1+$IconAreaHeight/2,
+                            $X+1+$IconAreaWidth,
+                            $Y+1+$IconAreaHeight/2,
+                            array("R"=>0,"G"=>0,"B"=>0,"Alpha"=>20,"Ticks"=>$Ticks,"Weight"=>$Weight)
+                        );
+                        $this->drawLine(
+                            $X,
+                            $Y+$IconAreaHeight/2,
+                            $X+$IconAreaWidth,
+                            $Y+$IconAreaHeight/2,
+                            array("R"=>$R,"G"=>$G,"B"=>$B,"Ticks"=>$Ticks,"Weight"=>$Weight)
+                        );
+                    }
+                }
+
+                if ( $Mode == LEGEND_VERTICAL ) {
+                    $Lines = preg_split("/\n/",$Serie["Description"]);
+                    foreach($Lines as $Key => $Value) {
+                        $this->drawText(
+                            $X+$IconAreaWidth+4,
+                            $Y+$IconAreaHeight/2+(($this->FontSize+3)*$Key),
+                            $Value,
+                            array(
+                                "R"=>$FontR,
+                                "G"=>$FontG,
+                                "B"=>$FontB,
+                                "Align"=>TEXT_ALIGN_MIDDLELEFT,
+                                "FontSize"=>$FontSize,
+                                "FontName"=>$FontName
+                            )
+                        );
+                    }
+                    $Y=$Y+max($this->FontSize*count($Lines),$IconAreaHeight) + 5;
+                } elseif ( $Mode == LEGEND_HORIZONTAL ) {
+                    $Lines = preg_split("/\n/",$Serie["Description"]);
+                    $Width = "";
+                    foreach($Lines as $Key => $Value) {
+                        $BoxArray = $this->drawText(
+                            $X+$IconAreaWidth+4,
+                            $Y+$IconAreaHeight/2+(($this->FontSize+3)*$Key),
+                            $Value,
+                            array(
+                                "R"=>$FontR,
+                                "G"=>$FontG,
+                                "B"=>$FontB,
+                                "Align"=>TEXT_ALIGN_MIDDLELEFT,
+                                "FontSize"=>$FontSize,
+                                "FontName"=>$FontName
+                            )
+                        );
+                        $Width[] = $BoxArray[1]["X"];
+                    }
+                    $X=max($Width)+2+$XStep;
+                }
+            }
+        }
 
 
-     $this->Shadow = $RestoreShadow;
+        $this->Shadow = $RestoreShadow;
     }
 
-   public function drawScale($Format="")
+    public function drawScale($Format="")
     {
-     $Pos		= isset($Format["Pos"]) ? $Format["Pos"] : SCALE_POS_LEFTRIGHT;
-     $Floating		= isset($Format["Floating"]) ? $Format["Floating"] : false;
-     $Mode		= isset($Format["Mode"]) ? $Format["Mode"] : SCALE_MODE_FLOATING;
-     $RemoveXAxis	= isset($Format["RemoveXAxis"]) ? $Format["RemoveXAxis"] : false;
-     $MinDivHeight	= isset($Format["MinDivHeight"]) ? $Format["MinDivHeight"] : 20;
-     $Factors		= isset($Format["Factors"]) ? $Format["Factors"] : array(1,2,5);
-     $ManualScale	= isset($Format["ManualScale"]) ? $Format["ManualScale"] : array("0"=>array("Min"=>-100,"Max"=>100));
-     $XMargin		= isset($Format["XMargin"]) ? $Format["XMargin"] : AUTO;
-     $YMargin		= isset($Format["YMargin"]) ? $Format["YMargin"] : 0;
-     $ScaleSpacing	= isset($Format["ScaleSpacing"]) ? $Format["ScaleSpacing"] : 15;
-     $InnerTickWidth	= isset($Format["InnerTickWidth"]) ? $Format["InnerTickWidth"] : 2;
-     $OuterTickWidth	= isset($Format["OuterTickWidth"]) ? $Format["OuterTickWidth"] : 2;
-     $DrawXLines	= isset($Format["DrawXLines"]) ? $Format["DrawXLines"] : true;
-     $DrawYLines	= isset($Format["DrawYLines"]) ? $Format["DrawYLines"] : ALL;
-     $GridTicks		= isset($Format["GridTicks"]) ? $Format["GridTicks"] : 4;
-     $GridR		= isset($Format["GridR"]) ? $Format["GridR"] : 255;
-     $GridG		= isset($Format["GridG"]) ? $Format["GridG"] : 255;
-     $GridB		= isset($Format["GridB"]) ? $Format["GridB"] : 255;
-     $GridAlpha		= isset($Format["GridAlpha"]) ? $Format["GridAlpha"] : 40;
-     $AxisRo		= isset($Format["AxisR"]) ? $Format["AxisR"] : 0;
-     $AxisGo		= isset($Format["AxisG"]) ? $Format["AxisG"] : 0;
-     $AxisBo		= isset($Format["AxisB"]) ? $Format["AxisB"] : 0;
-     $AxisAlpha		= isset($Format["AxisAlpha"]) ? $Format["AxisAlpha"] : 100;
-     $TickRo		= isset($Format["TickR"]) ? $Format["TickR"] : 0;
-     $TickGo		= isset($Format["TickG"]) ? $Format["TickG"] : 0;
-     $TickBo		= isset($Format["TickB"]) ? $Format["TickB"] : 0;
-     $TickAlpha		= isset($Format["TickAlpha"]) ? $Format["TickAlpha"] : 100;
-     $DrawSubTicks	= isset($Format["DrawSubTicks"]) ? $Format["DrawSubTicks"] : false;
-     $InnerSubTickWidth	= isset($Format["InnerSubTickWidth"]) ? $Format["InnerSubTickWidth"] : 0;
-     $OuterSubTickWidth	= isset($Format["OuterSubTickWidth"]) ? $Format["OuterSubTickWidth"] : 2;
-     $SubTickR		= isset($Format["SubTickR"]) ? $Format["SubTickR"] : 255;
-     $SubTickG		= isset($Format["SubTickG"]) ? $Format["SubTickG"] : 0;
-     $SubTickB		= isset($Format["SubTickB"]) ? $Format["SubTickB"] : 0;
-     $SubTickAlpha	= isset($Format["SubTickAlpha"]) ? $Format["SubTickAlpha"] : 100;
-     $AutoAxisLabels	= isset($Format["AutoAxisLabels"]) ? $Format["AutoAxisLabels"] : true;
-     $XReleasePercent	= isset($Format["XReleasePercent"]) ? $Format["XReleasePercent"] : 1;
-     $DrawArrows	= isset($Format["DrawArrows"]) ? $Format["DrawArrows"] : false;
-     $ArrowSize         = isset($Format["ArrowSize"]) ? $Format["ArrowSize"] : 8;
-     $CycleBackground	= isset($Format["CycleBackground"]) ? $Format["CycleBackground"] : false;
-     $BackgroundR1	= isset($Format["BackgroundR1"]) ? $Format["BackgroundR1"] : 255;
-     $BackgroundG1	= isset($Format["BackgroundG1"]) ? $Format["BackgroundG1"] : 255;
-     $BackgroundB1	= isset($Format["BackgroundB1"]) ? $Format["BackgroundB1"] : 255;
-     $BackgroundAlpha1	= isset($Format["BackgroundAlpha1"]) ? $Format["BackgroundAlpha1"] : 20;
-     $BackgroundR2	= isset($Format["BackgroundR2"]) ? $Format["BackgroundR2"] : 230;
-     $BackgroundG2	= isset($Format["BackgroundG2"]) ? $Format["BackgroundG2"] : 230;
-     $BackgroundB2	= isset($Format["BackgroundB2"]) ? $Format["BackgroundB2"] : 230;
-     $BackgroundAlpha2	= isset($Format["BackgroundAlpha2"]) ? $Format["BackgroundAlpha2"] : 20;
-     $LabelingMethod	= isset($Format["LabelingMethod"]) ? $Format["LabelingMethod"] : LABELING_ALL;
-     $LabelSkip		= isset($Format["LabelSkip"]) ? $Format["LabelSkip"] : 0;
-     $LabelRotation	= isset($Format["LabelRotation"]) ? $Format["LabelRotation"] : 0;
-     $RemoveSkippedAxis	= isset($Format["RemoveSkippedAxis"]) ? $Format["RemoveSkippedAxis"] : false;
-     $SkippedAxisTicks	= isset($Format["SkippedAxisTicks"]) ? $Format["SkippedAxisTicks"] : $GridTicks+2;
-     $SkippedAxisR	= isset($Format["SkippedAxisR"]) ? $Format["SkippedAxisR"] : $GridR;
-     $SkippedAxisG	= isset($Format["SkippedAxisG"]) ? $Format["SkippedAxisG"] : $GridG;
-     $SkippedAxisB	= isset($Format["SkippedAxisB"]) ? $Format["SkippedAxisB"] : $GridB;
-     $SkippedAxisAlpha	= isset($Format["SkippedAxisAlpha"]) ? $Format["SkippedAxisAlpha"] : $GridAlpha-30;
-     $SkippedTickR	= isset($Format["SkippedTickR"]) ? $Format["SkippedTickR"] : $TickRo;
-     $SkippedTickG	= isset($Format["SkippedTickG"]) ? $Format["SkippedTickG"] : $TickGo;
-     $SkippedTickB	= isset($Format["SkippedTicksB"]) ? $Format["SkippedTickB"] : $TickBo;
-     $SkippedTickAlpha	= isset($Format["SkippedTickAlpha"]) ? $Format["SkippedTickAlpha"] : $TickAlpha-80;
-     $SkippedInnerTickWidth	= isset($Format["SkippedInnerTickWidth"]) ? $Format["SkippedInnerTickWidth"] : 0;
-     $SkippedOuterTickWidth	= isset($Format["SkippedOuterTickWidth"]) ? $Format["SkippedOuterTickWidth"] : 2;
+        $Pos		= isset($Format["Pos"]) ? $Format["Pos"] : SCALE_POS_LEFTRIGHT;
+        $Floating	= isset($Format["Floating"]) ? $Format["Floating"] : false;
+        $Mode		= isset($Format["Mode"]) ? $Format["Mode"] : SCALE_MODE_FLOATING;
+        $RemoveXAxis	= isset($Format["RemoveXAxis"]) ? $Format["RemoveXAxis"] : false;
+        $MinDivHeight	= isset($Format["MinDivHeight"]) ? $Format["MinDivHeight"] : 20;
+        $Factors	= isset($Format["Factors"]) ? $Format["Factors"] : array(1,2,5);
+        $ManualScale	= isset($Format["ManualScale"]) ? $Format["ManualScale"] : array("0"=>array("Min"=>-100,"Max"=>100));
+        $XMargin	= isset($Format["XMargin"]) ? $Format["XMargin"] : AUTO;
+        $YMargin	= isset($Format["YMargin"]) ? $Format["YMargin"] : 0;
+        $ScaleSpacing	= isset($Format["ScaleSpacing"]) ? $Format["ScaleSpacing"] : 15;
+        $InnerTickWidth	= isset($Format["InnerTickWidth"]) ? $Format["InnerTickWidth"] : 2;
+        $OuterTickWidth	= isset($Format["OuterTickWidth"]) ? $Format["OuterTickWidth"] : 2;
+        $DrawXLines	= isset($Format["DrawXLines"]) ? $Format["DrawXLines"] : true;
+        $DrawYLines	= isset($Format["DrawYLines"]) ? $Format["DrawYLines"] : ALL;
+        $GridTicks	= isset($Format["GridTicks"]) ? $Format["GridTicks"] : 4;
+        $GridR		= isset($Format["GridR"]) ? $Format["GridR"] : 255;
+        $GridG		= isset($Format["GridG"]) ? $Format["GridG"] : 255;
+        $GridB		= isset($Format["GridB"]) ? $Format["GridB"] : 255;
+        $GridAlpha	= isset($Format["GridAlpha"]) ? $Format["GridAlpha"] : 40;
+        $AxisRo		= isset($Format["AxisR"]) ? $Format["AxisR"] : 0;
+        $AxisGo		= isset($Format["AxisG"]) ? $Format["AxisG"] : 0;
+        $AxisBo		= isset($Format["AxisB"]) ? $Format["AxisB"] : 0;
+        $AxisAlpha	= isset($Format["AxisAlpha"]) ? $Format["AxisAlpha"] : 100;
+        $TickRo		= isset($Format["TickR"]) ? $Format["TickR"] : 0;
+        $TickGo		= isset($Format["TickG"]) ? $Format["TickG"] : 0;
+        $TickBo		= isset($Format["TickB"]) ? $Format["TickB"] : 0;
+        $TickAlpha	= isset($Format["TickAlpha"]) ? $Format["TickAlpha"] : 100;
+        $DrawSubTicks	= isset($Format["DrawSubTicks"]) ? $Format["DrawSubTicks"] : false;
+        $InnerSubTickWidth = isset($Format["InnerSubTickWidth"]) ? $Format["InnerSubTickWidth"] : 0;
+        $OuterSubTickWidth = isset($Format["OuterSubTickWidth"]) ? $Format["OuterSubTickWidth"] : 2;
+        $SubTickR	= isset($Format["SubTickR"]) ? $Format["SubTickR"] : 255;
+        $SubTickG	= isset($Format["SubTickG"]) ? $Format["SubTickG"] : 0;
+        $SubTickB	= isset($Format["SubTickB"]) ? $Format["SubTickB"] : 0;
+        $SubTickAlpha	= isset($Format["SubTickAlpha"]) ? $Format["SubTickAlpha"] : 100;
+        $AutoAxisLabels	= isset($Format["AutoAxisLabels"]) ? $Format["AutoAxisLabels"] : true;
+        $XReleasePercent	= isset($Format["XReleasePercent"]) ? $Format["XReleasePercent"] : 1;
+        $DrawArrows	= isset($Format["DrawArrows"]) ? $Format["DrawArrows"] : false;
+        $ArrowSize      = isset($Format["ArrowSize"]) ? $Format["ArrowSize"] : 8;
+        $CycleBackground = isset($Format["CycleBackground"]) ? $Format["CycleBackground"] : false;
+        $BackgroundR1	= isset($Format["BackgroundR1"]) ? $Format["BackgroundR1"] : 255;
+        $BackgroundG1	= isset($Format["BackgroundG1"]) ? $Format["BackgroundG1"] : 255;
+        $BackgroundB1	= isset($Format["BackgroundB1"]) ? $Format["BackgroundB1"] : 255;
+        $BackgroundAlpha1 = isset($Format["BackgroundAlpha1"]) ? $Format["BackgroundAlpha1"] : 20;
+        $BackgroundR2	= isset($Format["BackgroundR2"]) ? $Format["BackgroundR2"] : 230;
+        $BackgroundG2	= isset($Format["BackgroundG2"]) ? $Format["BackgroundG2"] : 230;
+        $BackgroundB2	= isset($Format["BackgroundB2"]) ? $Format["BackgroundB2"] : 230;
+        $BackgroundAlpha2 = isset($Format["BackgroundAlpha2"]) ? $Format["BackgroundAlpha2"] : 20;
+        $LabelingMethod	= isset($Format["LabelingMethod"]) ? $Format["LabelingMethod"] : LABELING_ALL;
+        $LabelSkip      = isset($Format["LabelSkip"]) ? $Format["LabelSkip"] : 0;
+        $LabelRotation	= isset($Format["LabelRotation"]) ? $Format["LabelRotation"] : 0;
+        $RemoveSkippedAxis = isset($Format["RemoveSkippedAxis"]) ? $Format["RemoveSkippedAxis"] : false;
+        $SkippedAxisTicks = isset($Format["SkippedAxisTicks"]) ? $Format["SkippedAxisTicks"] : $GridTicks+2;
+        $SkippedAxisR	= isset($Format["SkippedAxisR"]) ? $Format["SkippedAxisR"] : $GridR;
+        $SkippedAxisG	= isset($Format["SkippedAxisG"]) ? $Format["SkippedAxisG"] : $GridG;
+        $SkippedAxisB	= isset($Format["SkippedAxisB"]) ? $Format["SkippedAxisB"] : $GridB;
+        $SkippedAxisAlpha = isset($Format["SkippedAxisAlpha"]) ? $Format["SkippedAxisAlpha"] : $GridAlpha-30;
+        $SkippedTickR	= isset($Format["SkippedTickR"]) ? $Format["SkippedTickR"] : $TickRo;
+        $SkippedTickG	= isset($Format["SkippedTickG"]) ? $Format["SkippedTickG"] : $TickGo;
+        $SkippedTickB	= isset($Format["SkippedTicksB"]) ? $Format["SkippedTickB"] : $TickBo;
+        $SkippedTickAlpha	= isset($Format["SkippedTickAlpha"]) ? $Format["SkippedTickAlpha"] : $TickAlpha-80;
+        $SkippedInnerTickWidth	= isset($Format["SkippedInnerTickWidth"]) ? $Format["SkippedInnerTickWidth"] : 0;
+        $SkippedOuterTickWidth	= isset($Format["SkippedOuterTickWidth"]) ? $Format["SkippedOuterTickWidth"] : 2;
 
-     /* Floating scale require X & Y margins to be set manually */
-     if ( $Floating && ( $XMargin == AUTO || $YMargin == 0 ) ) { $Floating = false; }
+        /* Floating scale require X & Y margins to be set manually */
+        if ( $Floating && ( $XMargin == AUTO || $YMargin == 0 ) ) {
+            $Floating = false;             
+        }
 
-     /* Skip a NOTICE event in case of an empty array */
-     if ( $DrawYLines == NONE || $DrawYLines == false ) { $DrawYLines = array("zarma"=>"31"); }
+        /* Skip a NOTICE event in case of an empty array */
+        if ( $DrawYLines == NONE || $DrawYLines == false ) {
+            $DrawYLines = array("zarma"=>"31");             
+        }
 
-     /* Define the color for the skipped elements */
-     $SkippedAxisColor = array("R"=>$SkippedAxisR,"G"=>$SkippedAxisG,"B"=>$SkippedAxisB,"Alpha"=>$SkippedAxisAlpha,"Ticks"=>$SkippedAxisTicks);
-     $SkippedTickColor = array("R"=>$SkippedTickR,"G"=>$SkippedTickG,"B"=>$SkippedTickB,"Alpha"=>$SkippedTickAlpha);
+        /* Define the color for the skipped elements */
+        $SkippedAxisColor = array(
+            "R"=>$SkippedAxisR,
+            "G"=>$SkippedAxisG,
+            "B"=>$SkippedAxisB,
+            "Alpha"=>$SkippedAxisAlpha,
+            "Ticks"=>$SkippedAxisTicks
+        );
+        $SkippedTickColor = array(
+            "R"=>$SkippedTickR,
+            "G"=>$SkippedTickG,
+            "B"=>$SkippedTickB,
+            "Alpha"=>$SkippedTickAlpha
+        );
 
-     $Data = $this->DataSet->getData();
-     if ( isset($Data["Abscissa"]) ) { $Abscissa = $Data["Abscissa"]; } else { $Abscissa = null; }
+        $Data = $this->DataSet->getData();
+        if ( isset($Data["Abscissa"]) ) { 
+            $Abscissa = $Data["Abscissa"];             
+        } else { 
+            $Abscissa = null;             
+        }
 
-     /* Unset the abscissa axis, needed if we display multiple charts on the same picture */
-     if ( $Abscissa != null )
-      {
-       foreach($Data["Axis"] as $AxisID => $Parameters)
-        { if ($Parameters["Identity"] == AXIS_X) { unset($Data["Axis"][$AxisID]); } }
-      }
-
-     /* Build the scale settings */
-     $GotXAxis = false;
-     foreach($Data["Axis"] as $AxisID => $AxisParameter)
-      {
-       if ( $AxisParameter["Identity"] == AXIS_X ) { $GotXAxis = true; }
-
-       if ( $Pos == SCALE_POS_LEFTRIGHT && $AxisParameter["Identity"] == AXIS_Y)
-        { $Height = $this->GraphAreaY2-$this->GraphAreaY1 - $YMargin*2; }
-       elseif ( $Pos == SCALE_POS_LEFTRIGHT && $AxisParameter["Identity"] == AXIS_X)
-        { $Height = $this->GraphAreaX2-$this->GraphAreaX1; }
-       elseif ( $Pos == SCALE_POS_TOPBOTTOM && $AxisParameter["Identity"] == AXIS_Y)
-        { $Height = $this->GraphAreaX2-$this->GraphAreaX1 - $YMargin*2;; }
-       else
-        { $Height = $this->GraphAreaY2-$this->GraphAreaY1; }
-
-       $AxisMin = ABSOLUTE_MAX; $AxisMax = OUT_OF_SIGHT;
-       if ( $Mode == SCALE_MODE_FLOATING || $Mode == SCALE_MODE_START0 )
-        {
-         foreach($Data["Series"] as $SerieID => $SerieParameter)
-          {
-           if ( $SerieParameter["Axis"] == $AxisID && $Data["Series"][$SerieID]["isDrawable"] && $Data["Abscissa"] != $SerieID)
-            {
-             $AxisMax = max($AxisMax,$Data["Series"][$SerieID]["Max"]);
-             $AxisMin = min($AxisMin,$Data["Series"][$SerieID]["Min"]);
+        /* Unset the abscissa axis, needed if we display multiple charts on the same picture */
+        if ( $Abscissa != null ) {
+            foreach($Data["Axis"] as $AxisID => $Parameters) { 
+                if ($Parameters["Identity"] == AXIS_X) { 
+                    unset($Data["Axis"][$AxisID]);                   
+                }               
             }
-          }
-         $AutoMargin = (($AxisMax-$AxisMin)/100)*$XReleasePercent;
-
-         $Data["Axis"][$AxisID]["Min"] = $AxisMin-$AutoMargin; $Data["Axis"][$AxisID]["Max"] = $AxisMax+$AutoMargin;
-         if ( $Mode == SCALE_MODE_START0 ) { $Data["Axis"][$AxisID]["Min"] = 0; }
         }
-       elseif ( $Mode == SCALE_MODE_MANUAL )
-        {
-         if ( isset($ManualScale[$AxisID]["Min"]) && isset($ManualScale[$AxisID]["Max"]) )
-          {
-           $Data["Axis"][$AxisID]["Min"] = $ManualScale[$AxisID]["Min"];
-           $Data["Axis"][$AxisID]["Max"] = $ManualScale[$AxisID]["Max"];
-          }
-         else
-          { echo "Manual scale boundaries not set."; exit(); }
-        }
-       elseif ( $Mode == SCALE_MODE_ADDALL || $Mode == SCALE_MODE_ADDALL_START0 )
-        {
-         $Series = "";
-         foreach($Data["Series"] as $SerieID => $SerieParameter)
-          { if ( $SerieParameter["Axis"] == $AxisID && $SerieParameter["isDrawable"] && $Data["Abscissa"] != $SerieID ) { $Series[$SerieID] = count($Data["Series"][$SerieID]["Data"]); } }
 
-         for ($ID=0;$ID<=max($Series)-1;$ID++)
-          {
-           $PointMin = 0; $PointMax = 0;
-           foreach($Series as $SerieID => $ValuesCount )
-            {
-             if (isset($Data["Series"][$SerieID]["Data"][$ID]) && $Data["Series"][$SerieID]["Data"][$ID] != null )
-              {
-               $Value = $Data["Series"][$SerieID]["Data"][$ID];
-               if ( $Value > 0 ) { $PointMax = $PointMax + $Value; } else { $PointMin = $PointMin + $Value; }
-              }
+        /* Build the scale settings */
+        $GotXAxis = false;
+        foreach($Data["Axis"] as $AxisID => $AxisParameter) {
+            if ( $AxisParameter["Identity"] == AXIS_X ) { $GotXAxis = true; }
+
+            if ( $Pos == SCALE_POS_LEFTRIGHT && $AxisParameter["Identity"] == AXIS_Y) { 
+                $Height = $this->GraphAreaY2-$this->GraphAreaY1 - $YMargin*2;
+            } elseif ( $Pos == SCALE_POS_LEFTRIGHT && $AxisParameter["Identity"] == AXIS_X) { 
+                $Height = $this->GraphAreaX2-$this->GraphAreaX1;              
+            } elseif ( $Pos == SCALE_POS_TOPBOTTOM && $AxisParameter["Identity"] == AXIS_Y) { 
+                $Height = $this->GraphAreaX2-$this->GraphAreaX1 - $YMargin*2;;                 
+            } else { 
+                $Height = $this->GraphAreaY2-$this->GraphAreaY1;                 
             }
-           $AxisMax = max($AxisMax,$PointMax);
-           $AxisMin = min($AxisMin,$PointMin);
-          }
-         $AutoMargin = (($AxisMax-$AxisMin)/100)*$XReleasePercent;
-         $Data["Axis"][$AxisID]["Min"] = $AxisMin-$AutoMargin; $Data["Axis"][$AxisID]["Max"] = $AxisMax+$AutoMargin;
-        }
-       $MaxDivs = floor($Height/$MinDivHeight);
 
-       if ( $Mode == SCALE_MODE_ADDALL_START0 ) { $Data["Axis"][$AxisID]["Min"] = 0; }
+            $AxisMin = ABSOLUTE_MAX; $AxisMax = OUT_OF_SIGHT;
+            if ( $Mode == SCALE_MODE_FLOATING || $Mode == SCALE_MODE_START0 ) {
+                foreach($Data["Series"] as $SerieID => $SerieParameter) {
+                    if ($SerieParameter["Axis"] == $AxisID 
+                        && $Data["Series"][$SerieID]["isDrawable"] 
+                        && $Data["Abscissa"] != $SerieID
+                    ) {
+                        $AxisMax = max($AxisMax,$Data["Series"][$SerieID]["Max"]);
+                        $AxisMin = min($AxisMin,$Data["Series"][$SerieID]["Min"]);
+                    }
+                }
+                $AutoMargin = (($AxisMax-$AxisMin)/100)*$XReleasePercent;
 
-       $Scale   = $this->computeScale($Data["Axis"][$AxisID]["Min"],$Data["Axis"][$AxisID]["Max"],$MaxDivs,$Factors,$AxisID);
+                $Data["Axis"][$AxisID]["Min"] = $AxisMin-$AutoMargin; 
+                $Data["Axis"][$AxisID]["Max"] = $AxisMax+$AutoMargin;
+                if ( $Mode == SCALE_MODE_START0 ) { 
+                    $Data["Axis"][$AxisID]["Min"] = 0;                     
+                }
+            } elseif ( $Mode == SCALE_MODE_MANUAL ) {
+                if ( isset($ManualScale[$AxisID]["Min"]) && isset($ManualScale[$AxisID]["Max"]) ) {
+                    $Data["Axis"][$AxisID]["Min"] = $ManualScale[$AxisID]["Min"];
+                    $Data["Axis"][$AxisID]["Max"] = $ManualScale[$AxisID]["Max"];
+                } else { 
+                    throw new \Exception("Manual scale boundaries not set.");            
+                }
+            } elseif ( $Mode == SCALE_MODE_ADDALL || $Mode == SCALE_MODE_ADDALL_START0 ) {
+                $Series = "";
+                foreach($Data["Series"] as $SerieID => $SerieParameter) { 
+                    if ($SerieParameter["Axis"] == $AxisID 
+                        && $SerieParameter["isDrawable"] 
+                        && $Data["Abscissa"] != $SerieID 
+                    ) { 
+                        $Series[$SerieID] = count($Data["Series"][$SerieID]["Data"]);
+                    }
+                }
 
-       $Data["Axis"][$AxisID]["Margin"]    = $AxisParameter["Identity"] == AXIS_X ? $XMargin : $YMargin;
-       $Data["Axis"][$AxisID]["ScaleMin"]  = $Scale["XMin"];
-       $Data["Axis"][$AxisID]["ScaleMax"]  = $Scale["XMax"];
-       $Data["Axis"][$AxisID]["Rows"]      = $Scale["Rows"];
-       $Data["Axis"][$AxisID]["RowHeight"] = $Scale["RowHeight"];
+                for ($ID=0;$ID<=max($Series)-1;$ID++) {
+                    $PointMin = 0; 
+                    $PointMax = 0;
+                    foreach($Series as $SerieID => $ValuesCount ) {
+                        if (isset($Data["Series"][$SerieID]["Data"][$ID]) 
+                            && $Data["Series"][$SerieID]["Data"][$ID] != null 
+                        ) {
+                            $Value = $Data["Series"][$SerieID]["Data"][$ID];
+                            if ( $Value > 0 ) { 
+                                $PointMax = $PointMax + $Value;                                 
+                            } else { 
+                                $PointMin = $PointMin + $Value;                                 
+                            }
+                        }
+                    }
+                    $AxisMax = max($AxisMax,$PointMax);
+                    $AxisMin = min($AxisMin,$PointMin);
+                }
+                $AutoMargin = (($AxisMax-$AxisMin)/100)*$XReleasePercent;
+                $Data["Axis"][$AxisID]["Min"] = $AxisMin-$AutoMargin; 
+                $Data["Axis"][$AxisID]["Max"] = $AxisMax+$AutoMargin;
+            }
+            $MaxDivs = floor($Height/$MinDivHeight);
 
-       if ( isset($Scale["Format"]) ) { $Data["Axis"][$AxisID]["Format"] = $Scale["Format"]; }
+            if ( $Mode == SCALE_MODE_ADDALL_START0 ) { 
+                $Data["Axis"][$AxisID]["Min"] = 0;
+            }
 
-       if ( !isset($Data["Axis"][$AxisID]["Display"]) ) { $Data["Axis"][$AxisID]["Display"] = null; }
-       if ( !isset($Data["Axis"][$AxisID]["Format"]) )  { $Data["Axis"][$AxisID]["Format"] = null; }
-       if ( !isset($Data["Axis"][$AxisID]["Unit"]) )    { $Data["Axis"][$AxisID]["Unit"] = null; }
-      }
+            $Scale = $this->computeScale(
+                $Data["Axis"][$AxisID]["Min"],
+                $Data["Axis"][$AxisID]["Max"],
+                $MaxDivs,$Factors,$AxisID
+            );
 
-     /* Still no X axis */
-     if ( $GotXAxis == false )
-      {
-       if ( $Abscissa != null )
-        {
-         $Points = count($Data["Series"][$Abscissa]["Data"]);
-         if ( $AutoAxisLabels )
-          $AxisName = isset($Data["Series"][$Abscissa]["Description"]) ? $Data["Series"][$Abscissa]["Description"] : null;
-         else
-          $AxisName = null;
-        }
-       else
-        {
-         $Points = 0;
-         $AxisName = isset($Data["XAxisName"]) ? $Data["XAxisName"] : null;
-         foreach($Data["Series"] as $SerieID => $SerieParameter)
-          { if ( $SerieParameter["isDrawable"] ) { $Points = max($Points,count($SerieParameter["Data"])); } }
-        }
+            $Data["Axis"][$AxisID]["Margin"]    = $AxisParameter["Identity"] == AXIS_X ? $XMargin : $YMargin;
+            $Data["Axis"][$AxisID]["ScaleMin"]  = $Scale["XMin"];
+            $Data["Axis"][$AxisID]["ScaleMax"]  = $Scale["XMax"];
+            $Data["Axis"][$AxisID]["Rows"]      = $Scale["Rows"];
+            $Data["Axis"][$AxisID]["RowHeight"] = $Scale["RowHeight"];
 
-       $AxisID = count($Data["Axis"]);
-       $Data["Axis"][$AxisID]["Identity"] = AXIS_X;
-       if ( $Pos == SCALE_POS_LEFTRIGHT ) { $Data["Axis"][$AxisID]["Position"] = AXIS_POSITION_BOTTOM; } else { $Data["Axis"][$AxisID]["Position"] = AXIS_POSITION_LEFT; }
-       if ( isset($Data["AbscissaName"]) ) { $Data["Axis"][$AxisID]["Name"] = $Data["AbscissaName"]; }
-       if ( $XMargin == AUTO )
-        {
-         if ( $Pos == SCALE_POS_LEFTRIGHT )
-          { $Height = $this->GraphAreaX2-$this->GraphAreaX1; }
-         else
-          { $Height = $this->GraphAreaY2-$this->GraphAreaY1; }
-
-         if ( $Points == 1 )
-          $Data["Axis"][$AxisID]["Margin"] = $Height / 2;
-         else
-          $Data["Axis"][$AxisID]["Margin"] = ($Height/$Points) / 2;
-        }
-       else
-        { $Data["Axis"][$AxisID]["Margin"] = $XMargin; }
-       $Data["Axis"][$AxisID]["Rows"] = $Points-1;
-       if ( !isset($Data["Axis"][$AxisID]["Display"]) ) { $Data["Axis"][$AxisID]["Display"] = null; }
-       if ( !isset($Data["Axis"][$AxisID]["Format"]) )  { $Data["Axis"][$AxisID]["Format"] = null; }
-       if ( !isset($Data["Axis"][$AxisID]["Unit"]) )    { $Data["Axis"][$AxisID]["Unit"] = null; }
-      }
-
-     /* Do we need to reverse the abscissa position? */
-     if ( $Pos != SCALE_POS_LEFTRIGHT )
-      {
-       if ( $Data["AbsicssaPosition"] == AXIS_POSITION_BOTTOM )
-        { $Data["AbsicssaPosition"] = AXIS_POSITION_LEFT; }
-       else
-        { $Data["AbsicssaPosition"] = AXIS_POSITION_RIGHT; }
-      }
-     $Data["Axis"][$AxisID]["Position"] = $Data["AbsicssaPosition"];
-
-     $this->DataSet->saveOrientation($Pos);
-     $this->DataSet->saveAxisConfig($Data["Axis"]);
-     $this->DataSet->saveYMargin($YMargin);
-
-     $FontColorRo = $this->FontColorR; $FontColorGo = $this->FontColorG; $FontColorBo = $this->FontColorB;
-
-     $AxisPos["L"] = $this->GraphAreaX1; $AxisPos["R"] = $this->GraphAreaX2; $AxisPos["T"] = $this->GraphAreaY1; $AxisPos["B"] = $this->GraphAreaY2;
-     foreach($Data["Axis"] as $AxisID => $Parameters)
-      {
-       if ( isset($Parameters["Color"]) )
-        {
-         $AxisR = $Parameters["Color"]["R"]; $AxisG = $Parameters["Color"]["G"]; $AxisB = $Parameters["Color"]["B"];
-         $TickR = $Parameters["Color"]["R"]; $TickG = $Parameters["Color"]["G"]; $TickB = $Parameters["Color"]["B"];
-         $this->setFontProperties(array("R"=>$Parameters["Color"]["R"],"G"=>$Parameters["Color"]["G"],"B"=>$Parameters["Color"]["B"]));
-        }
-       else
-        {
-         $AxisR = $AxisRo; $AxisG = $AxisGo; $AxisB = $AxisBo;
-         $TickR = $TickRo; $TickG = $TickGo; $TickB = $TickBo;
-         $this->setFontProperties(array("R"=>$FontColorRo,"G"=>$FontColorGo,"B"=>$FontColorBo));
+            if ( isset($Scale["Format"]) ) { 
+                $Data["Axis"][$AxisID]["Format"] = $Scale["Format"];
+            }
+            if ( !isset($Data["Axis"][$AxisID]["Display"]) ) { 
+                $Data["Axis"][$AxisID]["Display"] = null;                 
+            }
+            if ( !isset($Data["Axis"][$AxisID]["Format"]) )  { 
+                $Data["Axis"][$AxisID]["Format"] = null;                 
+            }
+            if ( !isset($Data["Axis"][$AxisID]["Unit"]) )    { 
+                $Data["Axis"][$AxisID]["Unit"] = null;                 
+            }
         }
 
-       $LastValue = "w00t"; $ID = 1;
-       if ( $Parameters["Identity"] == AXIS_X )
-        {
-         if ( $Pos == SCALE_POS_LEFTRIGHT )
-          {
-           if ( $Parameters["Position"] == AXIS_POSITION_BOTTOM )
-            {
-             if ( $LabelRotation == 0 )					{ $LabelAlign = TEXT_ALIGN_TOPMIDDLE; $YLabelOffset = 2; }
-             if ( $LabelRotation > 0 && $LabelRotation < 190 )		{ $LabelAlign = TEXT_ALIGN_MIDDLERIGHT; $YLabelOffset = 5; }
-             if ( $LabelRotation == 180 )				{ $LabelAlign = TEXT_ALIGN_BOTTOMMIDDLE; $YLabelOffset = 5; }
-             if ( $LabelRotation > 180 && $LabelRotation < 360 )	{ $LabelAlign = TEXT_ALIGN_MIDDLELEFT; $YLabelOffset = 2; }
+        /* Still no X axis */
+        if ( $GotXAxis == false ) {
+            if ( $Abscissa != null ) {
+                $Points = count($Data["Series"][$Abscissa]["Data"]);
+                if ( $AutoAxisLabels ) {
+                    $AxisName = isset($Data["Series"][$Abscissa]["Description"]) ? $Data["Series"][$Abscissa]["Description"] : null;
+                } else {
+                    $AxisName = null;
+                }
+            } else {
+                $Points = 0;
+                $AxisName = isset($Data["XAxisName"]) ? $Data["XAxisName"] : null;
+                foreach($Data["Series"] as $SerieID => $SerieParameter) { 
+                    if ( $SerieParameter["isDrawable"] ) { 
+                        $Points = max($Points,count($SerieParameter["Data"]));                         
+                    }                     
+                }
+            }
 
-             if ( !$RemoveXAxis )
-              {
-               if ( $Floating )
-                { $FloatingOffset = $YMargin; $this->drawLine($this->GraphAreaX1+$Parameters["Margin"],$AxisPos["B"],$this->GraphAreaX2-$Parameters["Margin"],$AxisPos["B"],array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)); }
-               else
-                { $FloatingOffset = 0; $this->drawLine($this->GraphAreaX1,$AxisPos["B"],$this->GraphAreaX2,$AxisPos["B"],array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)); }
+            $AxisID = count($Data["Axis"]);
+            $Data["Axis"][$AxisID]["Identity"] = AXIS_X;
+            if ( $Pos == SCALE_POS_LEFTRIGHT ) { 
+                $Data["Axis"][$AxisID]["Position"] = AXIS_POSITION_BOTTOM;                 
+            } else { 
+                $Data["Axis"][$AxisID]["Position"] = AXIS_POSITION_LEFT;
+            }
+            if ( isset($Data["AbscissaName"]) ) { 
+                $Data["Axis"][$AxisID]["Name"] = $Data["AbscissaName"];                 
+            }
+            if ( $XMargin == AUTO ) {
+                if ( $Pos == SCALE_POS_LEFTRIGHT ) { 
+                    $Height = $this->GraphAreaX2-$this->GraphAreaX1; 
+                    
+                } else { 
+                    $Height = $this->GraphAreaY2-$this->GraphAreaY1;                     
+                }
 
-               if ( $DrawArrows ) { $this->drawArrow($this->GraphAreaX2-$Parameters["Margin"],$AxisPos["B"],$this->GraphAreaX2+($ArrowSize*2),$AxisPos["B"],array("FillR"=>$AxisR,"FillG"=>$AxisG,"FillB"=>$AxisB,"Size"=>$ArrowSize)); }
-              }
+                if ( $Points == 1 ) {
+                    $Data["Axis"][$AxisID]["Margin"] = $Height / 2;
+                } else {
+                    $Data["Axis"][$AxisID]["Margin"] = ($Height/$Points) / 2;
+                }
+            } else { 
+                $Data["Axis"][$AxisID]["Margin"] = $XMargin;                 
+            }
+            $Data["Axis"][$AxisID]["Rows"] = $Points-1;
+            if ( !isset($Data["Axis"][$AxisID]["Display"]) ) { $Data["Axis"][$AxisID]["Display"] = null; }
+            if ( !isset($Data["Axis"][$AxisID]["Format"]) )  { $Data["Axis"][$AxisID]["Format"] = null; }
+            if ( !isset($Data["Axis"][$AxisID]["Unit"]) )    { $Data["Axis"][$AxisID]["Unit"] = null; }
+        }
 
-             $Width = ($this->GraphAreaX2 - $this->GraphAreaX1) - $Parameters["Margin"]*2;
+        /* Do we need to reverse the abscissa position? */
+        if ( $Pos != SCALE_POS_LEFTRIGHT ) {
+            if ( $Data["AbsicssaPosition"] == AXIS_POSITION_BOTTOM ) { 
+                $Data["AbsicssaPosition"] = AXIS_POSITION_LEFT;                 
+            } else {
+                $Data["AbsicssaPosition"] = AXIS_POSITION_RIGHT;                 
+            }
+        }
+        $Data["Axis"][$AxisID]["Position"] = $Data["AbsicssaPosition"];
 
-             if ($Parameters["Rows"] == 0 ) { $Step  = $Width; } else { $Step  = $Width / ($Parameters["Rows"]); }
+        $this->DataSet->saveOrientation($Pos);
+        $this->DataSet->saveAxisConfig($Data["Axis"]);
+        $this->DataSet->saveYMargin($YMargin);
+
+        $FontColorRo = $this->FontColorR; 
+        $FontColorGo = $this->FontColorG; 
+        $FontColorBo = $this->FontColorB;
+
+        $AxisPos["L"] = $this->GraphAreaX1; 
+        $AxisPos["R"] = $this->GraphAreaX2; 
+        $AxisPos["T"] = $this->GraphAreaY1; 
+        $AxisPos["B"] = $this->GraphAreaY2;
+        foreach($Data["Axis"] as $AxisID => $Parameters) {
+            if ( isset($Parameters["Color"]) ) {
+                $AxisR = $Parameters["Color"]["R"]; 
+                $AxisG = $Parameters["Color"]["G"]; 
+                $AxisB = $Parameters["Color"]["B"];
+                $TickR = $Parameters["Color"]["R"]; 
+                $TickG = $Parameters["Color"]["G"]; 
+                $TickB = $Parameters["Color"]["B"];
+                $this->setFontProperties(
+                    array(
+                        "R"=>$Parameters["Color"]["R"],
+                        "G"=>$Parameters["Color"]["G"],
+                        "B"=>$Parameters["Color"]["B"]
+                    )
+                );
+            } else {
+                $AxisR = $AxisRo; 
+                $AxisG = $AxisGo; 
+                $AxisB = $AxisBo;
+                $TickR = $TickRo; 
+                $TickG = $TickGo; 
+                $TickB = $TickBo;
+                $this->setFontProperties(array("R"=>$FontColorRo,"G"=>$FontColorGo,"B"=>$FontColorBo));
+            }
+
+            $LastValue = "w00t"; 
+            $ID = 1;
+            if ( $Parameters["Identity"] == AXIS_X ) {
+                if ( $Pos == SCALE_POS_LEFTRIGHT ) {
+                    if ( $Parameters["Position"] == AXIS_POSITION_BOTTOM ) {
+                        if ( $LabelRotation == 0 ) { 
+                            $LabelAlign = TEXT_ALIGN_TOPMIDDLE;
+                            $YLabelOffset = 2;                             
+                        }
+                        if ( $LabelRotation > 0 && $LabelRotation < 190 ) { 
+                            $LabelAlign = TEXT_ALIGN_MIDDLERIGHT; 
+                            $YLabelOffset = 5;                             
+                        }
+                        if ( $LabelRotation == 180 ) { 
+                            $LabelAlign = TEXT_ALIGN_BOTTOMMIDDLE;
+                            $YLabelOffset = 5;
+                        }
+                        if ( $LabelRotation > 180 && $LabelRotation < 360 ) { 
+                            $LabelAlign = TEXT_ALIGN_MIDDLELEFT; 
+                            $YLabelOffset = 2;                             
+                        }
+
+                        if ( !$RemoveXAxis ) {
+                            if ( $Floating ) { 
+                                $FloatingOffset = $YMargin; 
+                                $this->drawLine(
+                                    $this->GraphAreaX1+$Parameters["Margin"],
+                                    $AxisPos["B"],
+                                    $this->GraphAreaX2-$Parameters["Margin"],
+                                    $AxisPos["B"],
+                                    array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)
+                                );                                 
+                            }
+                            else { 
+                                $FloatingOffset = 0; 
+                                $this->drawLine(
+                                    $this->GraphAreaX1,
+                                    $AxisPos["B"],
+                                    $this->GraphAreaX2,
+                                    $AxisPos["B"],
+                                    array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)
+                                );
+                            }
+
+                            if ( $DrawArrows ) { 
+                                $this->drawArrow(
+                                    $this->GraphAreaX2-$Parameters["Margin"],
+                                    $AxisPos["B"],
+                                    $this->GraphAreaX2+($ArrowSize*2),
+                                    $AxisPos["B"],
+                                    array("FillR"=>$AxisR,"FillG"=>$AxisG,"FillB"=>$AxisB,"Size"=>$ArrowSize)
+                                );                                 
+                            }
+                        }
+
+                        $Width = ($this->GraphAreaX2 - $this->GraphAreaX1) - $Parameters["Margin"]*2;
+
+                        if ($Parameters["Rows"] == 0 ) { 
+                            $Step  = $Width;                             
+                        } else { 
+                            $Step  = $Width / ($Parameters["Rows"]);
+                        }
+
+                        $MaxBottom = $AxisPos["B"];
+                        for ($i=0;$i<=$Parameters["Rows"];$i++) {
+                            $XPos  = $this->GraphAreaX1 + $Parameters["Margin"] + $Step*$i;
+                            $YPos  = $AxisPos["B"];
+
+                            if ( $Abscissa != null ) { 
+                                if ( isset($Data["Series"][$Abscissa]["Data"][$i]) ) { 
+                                    $Value = $this->scaleFormat(
+                                        $Data["Series"][$Abscissa]["Data"][$i],
+                                        $Data["XAxisDisplay"],
+                                        $Data["XAxisFormat"],
+                                        $Data["XAxisUnit"]
+                                    );                                     
+                                } else { 
+                                    $Value = "";                                     
+                                }                                 
+                            } else {
+                                if (isset($Parameters["ScaleMin"]) && isset ($Parameters["RowHeight"])) {
+                                    $Value = $this->scaleFormat(
+                                        $Parameters["ScaleMin"] + $Parameters["RowHeight"]*$i,
+                                        $Data["XAxisDisplay"],
+                                        $Data["XAxisFormat"],
+                                        $Data["XAxisUnit"]
+                                    );
+                                } else {
+                                    $Value = $i;
+                                }
+                            }
+
+                            $ID++; 
+                            $Skipped = true;
+                            if ($this->isValidLabel($Value,$LastValue,$LabelingMethod,$ID,$LabelSkip) && !$RemoveXAxis) {
+                                $Bounds = $this->drawText(
+                                    $XPos,
+                                    $YPos+$OuterTickWidth+$YLabelOffset,
+                                    $Value,
+                                    array("Angle"=>$LabelRotation,"Align"=>$LabelAlign)
+                                );
+                                $TxtBottom = $YPos+$OuterTickWidth+2+($Bounds[0]["Y"]-$Bounds[2]["Y"]);
+                                $MaxBottom = max($MaxBottom,$TxtBottom);
+                                $LastValue = $Value;
+                                $Skipped   = false;
+                            }
+
+                            if ( $RemoveXAxis ) { 
+                                $Skipped = false;                                 
+                            }
+
+                            if ( $Skipped ) {
+                                if ( $DrawXLines && !$RemoveSkippedAxis ) { 
+                                    $this->drawLine(
+                                        $XPos,
+                                        $this->GraphAreaY1+$FloatingOffset,
+                                        $XPos,
+                                        $this->GraphAreaY2-$FloatingOffset,
+                                        $SkippedAxisColor
+                                    );                                     
+                                }
+                                if (($SkippedInnerTickWidth !=0 || $SkippedOuterTickWidth != 0) 
+                                    && !$RemoveXAxis 
+                                    && !$RemoveSkippedAxis
+                                ) { 
+                                    $this->drawLine(
+                                        $XPos,
+                                        $YPos-$SkippedInnerTickWidth,
+                                        $XPos,
+                                        $YPos+$SkippedOuterTickWidth,
+                                        $SkippedTickColor
+                                    );
+                                }
+                            } else {
+                                if ($DrawXLines 
+                                    && ($XPos != $this->GraphAreaX1 && $XPos != $this->GraphAreaX2) 
+                                ) {
+                                    $this->drawLine(
+                                        $XPos,
+                                        $this->GraphAreaY1+$FloatingOffset,
+                                        $XPos,
+                                        $this->GraphAreaY2-$FloatingOffset,
+                                        array("R"=>$GridR,"G"=>$GridG,"B"=>$GridB,"Alpha"=>$GridAlpha,"Ticks"=>$GridTicks)
+                                    );                                     
+                                }
+                                if (($InnerTickWidth !=0 || $OuterTickWidth != 0) && !$RemoveXAxis ) {
+                                    $this->drawLine(
+                                        $XPos,
+                                        $YPos-$InnerTickWidth,
+                                        $XPos,
+                                        $YPos+$OuterTickWidth,
+                                        array("R"=>$TickR,"G"=>$TickG,"B"=>$TickB,"Alpha"=>$TickAlpha)
+                                    );                                     
+                                }
+                            }
+                        }
+
+                        if ( isset($Parameters["Name"]) && !$RemoveXAxis) {
+                            $YPos   = $MaxBottom+2;
+                            $XPos   = $this->GraphAreaX1+($this->GraphAreaX2-$this->GraphAreaX1)/2;
+                            $Bounds = $this->drawText(
+                                $XPos,
+                                $YPos,
+                                $Parameters["Name"],
+                                array("Align"=>TEXT_ALIGN_TOPMIDDLE)
+                            );
+                            $MaxBottom = $Bounds[0]["Y"];
+
+                            $this->DataSet->Data["GraphArea"]["Y2"] = $MaxBottom + $this->FontSize;
+                        }
+
+                        $AxisPos["B"] = $MaxBottom + $ScaleSpacing;
+                    } elseif ( $Parameters["Position"] == AXIS_POSITION_TOP ) {
+                        if ( $LabelRotation == 0 ) { 
+                            $LabelAlign = TEXT_ALIGN_BOTTOMMIDDLE; 
+                            $YLabelOffset = 2;                             
+                        }
+                        if ( $LabelRotation > 0 && $LabelRotation < 190 ) { 
+                            $LabelAlign = TEXT_ALIGN_MIDDLELEFT; 
+                            $YLabelOffset = 2;                             
+                        }
+                        if ( $LabelRotation == 180 ) { 
+                            $LabelAlign = TEXT_ALIGN_TOPMIDDLE; 
+                            $YLabelOffset = 5;                             
+                        }
+                        if ( $LabelRotation > 180 && $LabelRotation < 360 ) { 
+                            $LabelAlign = TEXT_ALIGN_MIDDLERIGHT; 
+                            $YLabelOffset = 5;                             
+                        }
+
+                        if ( !$RemoveXAxis ) {
+                            if ( $Floating ) { 
+                                $FloatingOffset = $YMargin; 
+                                $this->drawLine(
+                                    $this->GraphAreaX1+$Parameters["Margin"],
+                                    $AxisPos["T"],
+                                    $this->GraphAreaX2-$Parameters["Margin"],
+                                    $AxisPos["T"],
+                                    array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)
+                                );                               
+                            } else { 
+                                $FloatingOffset = 0; 
+                                $this->drawLine(
+                                    $this->GraphAreaX1,
+                                    $AxisPos["T"],
+                                    $this->GraphAreaX2,
+                                    $AxisPos["T"],
+                                    array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)
+                                );                               
+                            }
+
+                            if ( $DrawArrows ) { 
+                                $this->drawArrow(
+                                    $this->GraphAreaX2-$Parameters["Margin"],
+                                    $AxisPos["T"],
+                                    $this->GraphAreaX2+($ArrowSize*2),
+                                    $AxisPos["T"],
+                                    array("FillR"=>$AxisR,"FillG"=>$AxisG,"FillB"=>$AxisB,"Size"=>$ArrowSize)
+                                 );
+                            }
+                        }
+
+                        $Width = ($this->GraphAreaX2 - $this->GraphAreaX1) - $Parameters["Margin"]*2;
+
+                        if ($Parameters["Rows"] == 0 ) { 
+                            $Step  = $Width;                             
+                        } else { 
+                            $Step  = $Width / $Parameters["Rows"];                             
+                        }
              
-             $MaxBottom = $AxisPos["B"];
-             for($i=0;$i<=$Parameters["Rows"];$i++)
-              {
-               $XPos  = $this->GraphAreaX1 + $Parameters["Margin"] + $Step*$i;
-               $YPos  = $AxisPos["B"];
+                        $MinTop = $AxisPos["T"];
+                        for($i=0;$i<=$Parameters["Rows"];$i++) {
+                            $XPos  = $this->GraphAreaX1 + $Parameters["Margin"] + $Step*$i;
+                            $YPos  = $AxisPos["T"];
 
-               if ( $Abscissa != null )
-                { if ( isset($Data["Series"][$Abscissa]["Data"][$i]) ) { $Value = $this->scaleFormat($Data["Series"][$Abscissa]["Data"][$i],$Data["XAxisDisplay"],$Data["XAxisFormat"],$Data["XAxisUnit"]); } else { $Value = ""; } }
-               else
-                {
-                 if ( isset($Parameters["ScaleMin"]) && isset ($Parameters["RowHeight"]) )
-                  $Value = $this->scaleFormat($Parameters["ScaleMin"] + $Parameters["RowHeight"]*$i,$Data["XAxisDisplay"],$Data["XAxisFormat"],$Data["XAxisUnit"]);
-                 else
-                  $Value = $i;
-                }
+                            if ( $Abscissa != null ) { 
+                                if ( isset($Data["Series"][$Abscissa]["Data"][$i]) ) { 
+                                    $Value = $this->scaleFormat(
+                                        $Data["Series"][$Abscissa]["Data"][$i],
+                                        $Data["XAxisDisplay"],
+                                        $Data["XAxisFormat"],
+                                        $Data["XAxisUnit"]
+                                    );                                     
+                                } else { 
+                                    $Value = "";
+                                }                                     
+                            } else {
+                                if ( isset($Parameters["ScaleMin"]) && isset ($Parameters["RowHeight"])) {
+                                    $Value = $this->scaleFormat(
+                                        $Parameters["ScaleMin"] + $Parameters["RowHeight"]*$i,
+                                        $Data["XAxisDisplay"],
+                                        $Data["XAxisFormat"],
+                                        $Data["XAxisUnit"]
+                                    );
+                                } else {
+                                    $Value = $i;
+                                }
+                            }
 
-               $ID++; $Skipped = true;
-               if ( $this->isValidLabel($Value,$LastValue,$LabelingMethod,$ID,$LabelSkip) && !$RemoveXAxis)
-                {
-                 $Bounds    = $this->drawText($XPos,$YPos+$OuterTickWidth+$YLabelOffset,$Value,array("Angle"=>$LabelRotation,"Align"=>$LabelAlign));
-                 $TxtBottom = $YPos+$OuterTickWidth+2+($Bounds[0]["Y"]-$Bounds[2]["Y"]);
-                 $MaxBottom = max($MaxBottom,$TxtBottom);
-                 $LastValue = $Value;
-                 $Skipped   = false;
-                }
+                            $ID++; 
+                            $Skipped = true;
+                            if ($this->isValidLabel($Value,$LastValue,$LabelingMethod,$ID,$LabelSkip) && !$RemoveXAxis) {
+                                $Bounds = $this->drawText(
+                                    $XPos,
+                                    $YPos-$OuterTickWidth-$YLabelOffset,
+                                    $Value,
+                                    array("Angle"=>$LabelRotation,"Align"=>$LabelAlign)
+                                );
+                                $TxtBox = $YPos-$OuterTickWidth-2-($Bounds[0]["Y"]-$Bounds[2]["Y"]);
+                                $MinTop = min($MinTop,$TxtBox);
+                                $LastValue = $Value;
+                                $Skipped   = false;
+                            }
 
-               if ( $RemoveXAxis ) { $Skipped   = false; }
+                            if ( $RemoveXAxis ) { 
+                                $Skipped   = false;                                 
+                            }
 
-               if ( $Skipped )
-                {
-                 if ( $DrawXLines && !$RemoveSkippedAxis ) { $this->drawLine($XPos,$this->GraphAreaY1+$FloatingOffset,$XPos,$this->GraphAreaY2-$FloatingOffset,$SkippedAxisColor); }
-                 if ( ($SkippedInnerTickWidth !=0 || $SkippedOuterTickWidth != 0) && !$RemoveXAxis && !$RemoveSkippedAxis) { $this->drawLine($XPos,$YPos-$SkippedInnerTickWidth,$XPos,$YPos+$SkippedOuterTickWidth,$SkippedTickColor); }
-                }
-               else
-                {
-                 if ( $DrawXLines && ($XPos != $this->GraphAreaX1 && $XPos != $this->GraphAreaX2) ) { $this->drawLine($XPos,$this->GraphAreaY1+$FloatingOffset,$XPos,$this->GraphAreaY2-$FloatingOffset,array("R"=>$GridR,"G"=>$GridG,"B"=>$GridB,"Alpha"=>$GridAlpha,"Ticks"=>$GridTicks)); }
-                 if ( ($InnerTickWidth !=0 || $OuterTickWidth != 0) && !$RemoveXAxis ) { $this->drawLine($XPos,$YPos-$InnerTickWidth,$XPos,$YPos+$OuterTickWidth,array("R"=>$TickR,"G"=>$TickG,"B"=>$TickB,"Alpha"=>$TickAlpha)); }
-                }
-              }
+                            if ( $Skipped ) {
+                                if ($DrawXLines && !$RemoveSkippedAxis) { 
+                                    $this->drawLine(
+                                        $XPos,
+                                        $this->GraphAreaY1+$FloatingOffset,
+                                        $XPos,
+                                        $this->GraphAreaY2-$FloatingOffset,
+                                        $SkippedAxisColor
+                                    );                                     
+                                }
+                                if (($SkippedInnerTickWidth !=0 || $SkippedOuterTickWidth != 0) 
+                                    && !$RemoveXAxis 
+                                    && !$RemoveSkippedAxis
+                                ) { 
+                                    $this->drawLine(
+                                        $XPos,
+                                        $YPos+$SkippedInnerTickWidth,
+                                        $XPos,
+                                        $YPos-$SkippedOuterTickWidth,
+                                        $SkippedTickColor
+                                    );
+                                }
+                            } else {
+                                if ( $DrawXLines ) { 
+                                    $this->drawLine(
+                                        $XPos,
+                                        $this->GraphAreaY1+$FloatingOffset,
+                                        $XPos,
+                                        $this->GraphAreaY2-$FloatingOffset,
+                                        array("R"=>$GridR,"G"=>$GridG,"B"=>$GridB,"Alpha"=>$GridAlpha,"Ticks"=>$GridTicks)
+                                    );                                     
+                                }
+                                if (($InnerTickWidth !=0 || $OuterTickWidth != 0) && !$RemoveXAxis ) { 
+                                    $this->drawLine(
+                                        $XPos,
+                                        $YPos+$InnerTickWidth,
+                                        $XPos,
+                                        $YPos-$OuterTickWidth,
+                                        array("R"=>$TickR,"G"=>$TickG,"B"=>$TickB,"Alpha"=>$TickAlpha)
+                                    );                                     
+                                }
+                            }
+                        }
 
-             if ( isset($Parameters["Name"]) && !$RemoveXAxis)
-              {
-               $YPos   = $MaxBottom+2;
-               $XPos   = $this->GraphAreaX1+($this->GraphAreaX2-$this->GraphAreaX1)/2;
-               $Bounds = $this->drawText($XPos,$YPos,$Parameters["Name"],array("Align"=>TEXT_ALIGN_TOPMIDDLE));
-               $MaxBottom = $Bounds[0]["Y"];
+                        if (isset($Parameters["Name"]) && !$RemoveXAxis ) {
+                            $YPos   = $MinTop-2;
+                            $XPos   = $this->GraphAreaX1+($this->GraphAreaX2-$this->GraphAreaX1)/2;
+                            $Bounds = $this->drawText($XPos,$YPos,$Parameters["Name"],array("Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+                            $MinTop = $Bounds[2]["Y"];
 
-               $this->DataSet->Data["GraphArea"]["Y2"] = $MaxBottom + $this->FontSize;
-              }
+                            $this->DataSet->Data["GraphArea"]["Y1"] = $MinTop;
+                        }
 
-             $AxisPos["B"] = $MaxBottom + $ScaleSpacing;
-            }
-           elseif ( $Parameters["Position"] == AXIS_POSITION_TOP )
-            {
-             if ( $LabelRotation == 0 )					{ $LabelAlign = TEXT_ALIGN_BOTTOMMIDDLE; $YLabelOffset = 2; }
-             if ( $LabelRotation > 0 && $LabelRotation < 190 )		{ $LabelAlign = TEXT_ALIGN_MIDDLELEFT; $YLabelOffset = 2; }
-             if ( $LabelRotation == 180 )				{ $LabelAlign = TEXT_ALIGN_TOPMIDDLE; $YLabelOffset = 5; }
-             if ( $LabelRotation > 180 && $LabelRotation < 360 )	{ $LabelAlign = TEXT_ALIGN_MIDDLERIGHT; $YLabelOffset = 5; }
+                        $AxisPos["T"] = $MinTop - $ScaleSpacing;
+                    }
+                } elseif ( $Pos == SCALE_POS_TOPBOTTOM ) {
+                    if ($Parameters["Position"] == AXIS_POSITION_LEFT) {
+                        if ( $LabelRotation == 0 ) { $LabelAlign = TEXT_ALIGN_MIDDLERIGHT; $XLabelOffset = -2; }
+                        if ( $LabelRotation > 0 && $LabelRotation < 190 ) { $LabelAlign = TEXT_ALIGN_MIDDLERIGHT; $XLabelOffset = -6; }
+                        if ( $LabelRotation == 180 ) { $LabelAlign = TEXT_ALIGN_MIDDLELEFT; $XLabelOffset = -2; }
+                        if ( $LabelRotation > 180 && $LabelRotation < 360 ) { $LabelAlign = TEXT_ALIGN_MIDDLELEFT; $XLabelOffset = -5; }
 
-             if ( !$RemoveXAxis )
-              {
-               if ( $Floating )
-                { $FloatingOffset = $YMargin; $this->drawLine($this->GraphAreaX1+$Parameters["Margin"],$AxisPos["T"],$this->GraphAreaX2-$Parameters["Margin"],$AxisPos["T"],array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)); }
-               else
-                { $FloatingOffset = 0; $this->drawLine($this->GraphAreaX1,$AxisPos["T"],$this->GraphAreaX2,$AxisPos["T"],array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)); }
+                        if ( !$RemoveXAxis ) {
+                            if ( $Floating ) { 
+                                $FloatingOffset = $YMargin; 
+                                $this->drawLine(
+                                    $AxisPos["L"],
+                                    $this->GraphAreaY1+$Parameters["Margin"],
+                                    $AxisPos["L"],
+                                    $this->GraphAreaY2-$Parameters["Margin"],
+                                    array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)
+                                );                                 
+                            } else { 
+                                $FloatingOffset = 0; 
+                                $this->drawLine(
+                                    $AxisPos["L"],
+                                    $this->GraphAreaY1,
+                                    $AxisPos["L"],
+                                    $this->GraphAreaY2,
+                                    array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)
+                                );                                 
+                            }
 
-               if ( $DrawArrows ) { $this->drawArrow($this->GraphAreaX2-$Parameters["Margin"],$AxisPos["T"],$this->GraphAreaX2+($ArrowSize*2),$AxisPos["T"],array("FillR"=>$AxisR,"FillG"=>$AxisG,"FillB"=>$AxisB,"Size"=>$ArrowSize)); }
-              }
-
-             $Width = ($this->GraphAreaX2 - $this->GraphAreaX1) - $Parameters["Margin"]*2;
-
-             if ($Parameters["Rows"] == 0 ) { $Step  = $Width; } else { $Step  = $Width / $Parameters["Rows"]; }
-             
-             $MinTop = $AxisPos["T"];
-             for($i=0;$i<=$Parameters["Rows"];$i++)
-              {
-               $XPos  = $this->GraphAreaX1 + $Parameters["Margin"] + $Step*$i;
-               $YPos  = $AxisPos["T"];
-
-               if ( $Abscissa != null )
-                { if ( isset($Data["Series"][$Abscissa]["Data"][$i]) ) { $Value = $this->scaleFormat($Data["Series"][$Abscissa]["Data"][$i],$Data["XAxisDisplay"],$Data["XAxisFormat"],$Data["XAxisUnit"]); } else { $Value = ""; } }
-               else
-                {
-                 if ( isset($Parameters["ScaleMin"]) && isset ($Parameters["RowHeight"]) )
-                  $Value = $this->scaleFormat($Parameters["ScaleMin"] + $Parameters["RowHeight"]*$i,$Data["XAxisDisplay"],$Data["XAxisFormat"],$Data["XAxisUnit"]);
-                 else
-                  $Value = $i;
-                }
-
-               $ID++; $Skipped = true;
-               if ( $this->isValidLabel($Value,$LastValue,$LabelingMethod,$ID,$LabelSkip) && !$RemoveXAxis)
-                {
-                 $Bounds = $this->drawText($XPos,$YPos-$OuterTickWidth-$YLabelOffset,$Value,array("Angle"=>$LabelRotation,"Align"=>$LabelAlign));
-                 $TxtBox = $YPos-$OuterTickWidth-2-($Bounds[0]["Y"]-$Bounds[2]["Y"]);
-                 $MinTop = min($MinTop,$TxtBox);
-                 $LastValue = $Value;
-                 $Skipped   = false;
-                }
-
-               if ( $RemoveXAxis ) { $Skipped   = false; }
-
-               if ( $Skipped )
-                {
-                 if ( $DrawXLines && !$RemoveSkippedAxis ) { $this->drawLine($XPos,$this->GraphAreaY1+$FloatingOffset,$XPos,$this->GraphAreaY2-$FloatingOffset,$SkippedAxisColor); }
-                 if ( ($SkippedInnerTickWidth !=0 || $SkippedOuterTickWidth != 0) && !$RemoveXAxis && !$RemoveSkippedAxis ) { $this->drawLine($XPos,$YPos+$SkippedInnerTickWidth,$XPos,$YPos-$SkippedOuterTickWidth,$SkippedTickColor); }
-                }
-               else
-                {
-                 if ( $DrawXLines ) { $this->drawLine($XPos,$this->GraphAreaY1+$FloatingOffset,$XPos,$this->GraphAreaY2-$FloatingOffset,array("R"=>$GridR,"G"=>$GridG,"B"=>$GridB,"Alpha"=>$GridAlpha,"Ticks"=>$GridTicks)); }
-                 if ( ($InnerTickWidth !=0 || $OuterTickWidth != 0) && !$RemoveXAxis ) { $this->drawLine($XPos,$YPos+$InnerTickWidth,$XPos,$YPos-$OuterTickWidth,array("R"=>$TickR,"G"=>$TickG,"B"=>$TickB,"Alpha"=>$TickAlpha)); }
-                }
-
-              }
-
-             if ( isset($Parameters["Name"]) && !$RemoveXAxis )
-              {
-               $YPos   = $MinTop-2;
-               $XPos   = $this->GraphAreaX1+($this->GraphAreaX2-$this->GraphAreaX1)/2;
-               $Bounds = $this->drawText($XPos,$YPos,$Parameters["Name"],array("Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
-               $MinTop = $Bounds[2]["Y"];
-
-               $this->DataSet->Data["GraphArea"]["Y1"] = $MinTop;
-              }
-
-             $AxisPos["T"] = $MinTop - $ScaleSpacing;
-            }
-          }
-         elseif ( $Pos == SCALE_POS_TOPBOTTOM )
-          {
-           if ( $Parameters["Position"] == AXIS_POSITION_LEFT )
-            {
-             if ( $LabelRotation == 0 )					{ $LabelAlign = TEXT_ALIGN_MIDDLERIGHT; $XLabelOffset = -2; }
-             if ( $LabelRotation > 0 && $LabelRotation < 190 )		{ $LabelAlign = TEXT_ALIGN_MIDDLERIGHT; $XLabelOffset = -6; }
-             if ( $LabelRotation == 180 )				{ $LabelAlign = TEXT_ALIGN_MIDDLELEFT; $XLabelOffset = -2; }
-             if ( $LabelRotation > 180 && $LabelRotation < 360 )	{ $LabelAlign = TEXT_ALIGN_MIDDLELEFT; $XLabelOffset = -5; }
-
-             if ( !$RemoveXAxis )
-              {
-               if ( $Floating )
-                { $FloatingOffset = $YMargin; $this->drawLine($AxisPos["L"],$this->GraphAreaY1+$Parameters["Margin"],$AxisPos["L"],$this->GraphAreaY2-$Parameters["Margin"],array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)); }
-               else
-                { $FloatingOffset = 0; $this->drawLine($AxisPos["L"],$this->GraphAreaY1,$AxisPos["L"],$this->GraphAreaY2,array("R"=>$AxisR,"G"=>$AxisG,"B"=>$AxisB,"Alpha"=>$AxisAlpha)); }
-
-               if ( $DrawArrows ) { $this->drawArrow($AxisPos["L"],$this->GraphAreaY2-$Parameters["Margin"],$AxisPos["L"],$this->GraphAreaY2+($ArrowSize*2),array("FillR"=>$AxisR,"FillG"=>$AxisG,"FillB"=>$AxisB,"Size"=>$ArrowSize)); }
-              }
+                            if ( $DrawArrows ) { $this->drawArrow($AxisPos["L"],$this->GraphAreaY2-$Parameters["Margin"],$AxisPos["L"],$this->GraphAreaY2+($ArrowSize*2),array("FillR"=>$AxisR,"FillG"=>$AxisG,"FillB"=>$AxisB,"Size"=>$ArrowSize)); }
+                        }
 
              $Height = ($this->GraphAreaY2 - $this->GraphAreaY1) - $Parameters["Margin"]*2;
 
@@ -2285,7 +3164,7 @@ namespace CpChart\Classes;
              $AxisPos["R"] = $MaxRight + $ScaleSpacing;
             }
           }
-        }
+            }
 
 
 
@@ -2482,17 +3361,26 @@ namespace CpChart\Classes;
             }
           }
         }
-      }
+        }
     }
 
-   public function isValidLabel($Value,$LastValue,$LabelingMethod,$ID,$LabelSkip)
+    /**
+     * 
+     * @param type $Value
+     * @param type $LastValue
+     * @param type $LabelingMethod
+     * @param type $ID
+     * @param type $LabelSkip
+     * @return type
+     */
+    public function isValidLabel($Value,$LastValue,$LabelingMethod,$ID,$LabelSkip)
     {
-     if ( $LabelingMethod == LABELING_DIFFERENT && $Value != $LastValue ) { return(true); }
-     if ( $LabelingMethod == LABELING_DIFFERENT && $Value == $LastValue ) { return(false); }
-     if ( $LabelingMethod == LABELING_ALL && $LabelSkip == 0 ) { return(true); }
-     if ( $LabelingMethod == LABELING_ALL && ($ID+$LabelSkip) % ($LabelSkip+1) != 1 ) { return(false); }
+        if ( $LabelingMethod == LABELING_DIFFERENT && $Value != $LastValue ) { return(true); }
+        if ( $LabelingMethod == LABELING_DIFFERENT && $Value == $LastValue ) { return(false); }
+        if ( $LabelingMethod == LABELING_ALL && $LabelSkip == 0 ) { return(true); }
+        if ( $LabelingMethod == LABELING_ALL && ($ID+$LabelSkip) % ($LabelSkip+1) != 1 ) { return(false); }
 
-     return(true);
+        return(true);
     }
 
    /* Compute the scale, check for the best visual factors */
