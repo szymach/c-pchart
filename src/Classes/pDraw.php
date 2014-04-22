@@ -10124,375 +10124,620 @@ class pDraw
                 $CaptionWidth,
                 ($TxtPos[1]["X"] - $TxtPos[0]["X"])+$VerticalMargin*2
             );
-            $CaptionHeight = $CaptionHeight + max(($TxtPos[0]["Y"] - $TxtPos[2]["Y"]),($SerieBoxSize+2)) + $HorizontalMargin;
+            $CaptionHeight = $CaptionHeight 
+                            + max(
+                                ($TxtPos[0]["Y"] - $TxtPos[2]["Y"]),
+                                ($SerieBoxSize+2)
+                            ) 
+                            + $HorizontalMargin;
         }
 
-     if ( $CaptionHeight <= 5 ) { $CaptionHeight = $CaptionHeight + $HorizontalMargin/2; }
-
-     if ( $DrawSerieColor ) { $CaptionWidth = $CaptionWidth + $SerieBoxSize + $SerieBoxSpacing; }
-
-     $BoxWidth = max($BoxWidth,$TitleWidth,$CaptionWidth);
-
-     $XMin = $X - 5 - floor(($BoxWidth-10) / 2);
-     $XMax = $X + 5 + floor(($BoxWidth-10) / 2);
-
-     $RestoreShadow = $this->Shadow;
-     if ( $this->Shadow == true )
-      {
-       $this->Shadow = false;
-
-       $Poly = "";
-       $Poly[] = $X+$this->ShadowX; $Poly[] = $Y+$this->ShadowX;
-       $Poly[] = $X+5+$this->ShadowX; $Poly[] = $Y-5+$this->ShadowX;
-       $Poly[] = $XMax+$this->ShadowX; $Poly[] = $Y-5+$this->ShadowX;
-
-       if ( $NoTitle )
-        {
-         $Poly[] = $XMax+$this->ShadowX; $Poly[] = $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2+$this->ShadowX;
-         $Poly[] = $XMin+$this->ShadowX; $Poly[] = $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2+$this->ShadowX;
-        }
-       else
-        {
-         $Poly[] = $XMax+$this->ShadowX; $Poly[] = $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3+$this->ShadowX;
-         $Poly[] = $XMin+$this->ShadowX; $Poly[] = $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3+$this->ShadowX;
+        if ( $CaptionHeight <= 5 ) { 
+            $CaptionHeight = $CaptionHeight + $HorizontalMargin/2;
         }
 
-       $Poly[] = $XMin+$this->ShadowX; $Poly[] = $Y-5+$this->ShadowX;
-       $Poly[] = $X-5+$this->ShadowX; $Poly[] = $Y-5+$this->ShadowX;
-       $this->drawPolygon($Poly,array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa));
-      }
-
-     /* Draw the background */
-     $GradientSettings = array("StartR"=>$GradientStartR,"StartG"=>$GradientStartG,"StartB"=>$GradientStartB,"EndR"=>$GradientEndR,"EndG"=>$GradientEndG,"EndB"=>$GradientEndB,"Alpha"=>$BoxAlpha);
-     if ( $NoTitle )
-      $this->drawGradientArea($XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMax,$Y-6,DIRECTION_VERTICAL,$GradientSettings);
-     else
-      $this->drawGradientArea($XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMax,$Y-6,DIRECTION_VERTICAL,$GradientSettings);
-     $Poly = ""; $Poly[] = $X; $Poly[] = $Y; $Poly[] = $X-5; $Poly[] = $Y-5; $Poly[] = $X+5; $Poly[] = $Y-5;
-     $this->drawPolygon($Poly,array("R"=>$GradientEndR,"G"=>$GradientEndG,"B"=>$GradientEndB,"Alpha"=>$BoxAlpha,"NoBorder"=>true));
-
-     /* Outer border */
-     $OuterBorderColor = $this->allocateColor($this->Picture,100,100,100,$BoxAlpha);
-     imageline($this->Picture,$XMin,$Y-5,$X-5,$Y-5,$OuterBorderColor);
-     imageline($this->Picture,$X,$Y,$X-5,$Y-5,$OuterBorderColor);
-     imageline($this->Picture,$X,$Y,$X+5,$Y-5,$OuterBorderColor);
-     imageline($this->Picture,$X+5,$Y-5,$XMax,$Y-5,$OuterBorderColor);
-     if ( $NoTitle )
-      {
-       imageline($this->Picture,$XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMin,$Y-5,$OuterBorderColor);
-       imageline($this->Picture,$XMax,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMax,$Y-5,$OuterBorderColor);
-       imageline($this->Picture,$XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMax,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$OuterBorderColor);
-      }
-     else
-      {
-       imageline($this->Picture,$XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMin,$Y-5,$OuterBorderColor);
-       imageline($this->Picture,$XMax,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMax,$Y-5,$OuterBorderColor);
-       imageline($this->Picture,$XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMax,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$OuterBorderColor);
-      }
-
-     /* Inner border */
-     $InnerBorderColor = $this->allocateColor($this->Picture,255,255,255,$BoxAlpha);
-     imageline($this->Picture,$XMin+1,$Y-6,$X-5,$Y-6,$InnerBorderColor);
-     imageline($this->Picture,$X,$Y-1,$X-5,$Y-6,$InnerBorderColor);
-     imageline($this->Picture,$X,$Y-1,$X+5,$Y-6,$InnerBorderColor);
-     imageline($this->Picture,$X+5,$Y-6,$XMax-1,$Y-6,$InnerBorderColor);
-     if ( $NoTitle )
-      {
-       imageline($this->Picture,$XMin+1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMin+1,$Y-6,$InnerBorderColor);
-       imageline($this->Picture,$XMax-1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMax-1,$Y-6,$InnerBorderColor);
-       imageline($this->Picture,$XMin+1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMax-1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$InnerBorderColor);
-      }
-     else
-      {
-       imageline($this->Picture,$XMin+1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMin+1,$Y-6,$InnerBorderColor);
-       imageline($this->Picture,$XMax-1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMax-1,$Y-6,$InnerBorderColor);
-       imageline($this->Picture,$XMin+1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMax-1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$InnerBorderColor);
-      }
-
-     /* Draw the separator line */
-     if ( $TitleMode == LABEL_TITLE_NOBACKGROUND && !$NoTitle )
-      {
-       $YPos    = $Y-7-$CaptionHeight-$HorizontalMargin-$HorizontalMargin/2;
-       $XMargin = $VerticalMargin / 2;
-       $this->drawLine($XMin+$XMargin,$YPos+1,$XMax-$XMargin,$YPos+1,array("R"=>$GradientEndR,"G"=>$GradientEndG,"B"=>$GradientEndB,"Alpha"=>$BoxAlpha));
-       $this->drawLine($XMin+$XMargin,$YPos,$XMax-$XMargin,$YPos,array("R"=>$GradientStartR,"G"=>$GradientStartG,"B"=>$GradientStartB,"Alpha"=>$BoxAlpha));
-      }
-     elseif ( $TitleMode == LABEL_TITLE_BACKGROUND )
-      {
-       $this->drawFilledRectangle($XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMax,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin+$HorizontalMargin/2,array("R"=>$TitleBackgroundR,"G"=>$TitleBackgroundG,"B"=>$TitleBackgroundB,"Alpha"=>$BoxAlpha));
-       imageline($this->Picture,$XMin+1,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin+$HorizontalMargin/2+1,$XMax-1,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin+$HorizontalMargin/2+1,$InnerBorderColor);
-      }
-
-     /* Write the description */
-     if ( !$NoTitle )
-      $this->drawText($XMin+$VerticalMargin,$Y-7-$CaptionHeight-$HorizontalMargin*2,$Title,array("Align"=>TEXT_ALIGN_BOTTOMLEFT,"R"=>$TitleR,"G"=>$TitleG,"B"=>$TitleB));
-
-     /* Write the value */
-     $YPos = $Y-5-$HorizontalMargin; $XPos = $XMin+$VerticalMargin+$SerieBoxSize+$SerieBoxSpacing;
-     foreach($Captions as $Key => $Caption)
-      {
-       $CaptionTxt    = $Caption["Caption"];
-       $TxtPos        = $this->getTextBox($XPos,$YPos,$FontName,$FontSize,0,$CaptionTxt);
-       $CaptionHeight = ($TxtPos[0]["Y"] - $TxtPos[2]["Y"]);
-
-       /* Write the serie color if needed */
-       if ( $DrawSerieColor )
-        {
-         $BoxSettings = array("R"=>$Caption["Format"]["R"],"G"=>$Caption["Format"]["G"],"B"=>$Caption["Format"]["B"],"Alpha"=>$Caption["Format"]["Alpha"],"BorderR"=>0,"BorderG"=>0,"BorderB"=>0);
-         $this->drawFilledRectangle($XMin+$VerticalMargin,$YPos-$SerieBoxSize,$XMin+$VerticalMargin+$SerieBoxSize,$YPos,$BoxSettings);
+        if ( $DrawSerieColor ) { 
+            $CaptionWidth = $CaptionWidth + $SerieBoxSize + $SerieBoxSpacing;
         }
 
-       $this->drawText($XPos,$YPos,$CaptionTxt,array("Align"=>TEXT_ALIGN_BOTTOMLEFT));
+        $BoxWidth = max($BoxWidth,$TitleWidth,$CaptionWidth);
 
-       $YPos = $YPos - $CaptionHeight - $HorizontalMargin;
-      }
+        $XMin = $X - 5 - floor(($BoxWidth-10) / 2);
+        $XMax = $X + 5 + floor(($BoxWidth-10) / 2);
 
-     $this->Shadow = $RestoreShadow;
-    }
+        $RestoreShadow = $this->Shadow;
+        if ( $this->Shadow == true ) {
+            $this->Shadow = false;
 
-   /* Draw a basic shape */
-   public function drawShape($X,$Y,$Shape,$PlotSize,$PlotBorder,$BorderSize,$R,$G,$B,$Alpha,$BorderR,$BorderG,$BorderB,$BorderAlpha)
-    {
-     if ( $Shape == SERIE_SHAPE_FILLEDCIRCLE )
-      {
-       if ( $PlotBorder ) { $this->drawFilledCircle($X,$Y,$PlotSize+$BorderSize,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha)); }
-       $this->drawFilledCircle($X,$Y,$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
-      }
-     elseif ( $Shape == SERIE_SHAPE_FILLEDSQUARE )
-      {
-       if ( $PlotBorder ) { $this->drawFilledRectangle($X-$PlotSize-$BorderSize,$Y-$PlotSize-$BorderSize,$X+$PlotSize+$BorderSize,$Y+$PlotSize+$BorderSize,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha)); }
-       $this->drawFilledRectangle($X-$PlotSize,$Y-$PlotSize,$X+$PlotSize,$Y+$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
-      }
-     elseif ( $Shape == SERIE_SHAPE_FILLEDTRIANGLE )
-      {
-       if ( $PlotBorder )
-        {
-         $Pos = ""; $Pos[]=$X; $Pos[]=$Y-$PlotSize-$BorderSize; $Pos[]=$X-$PlotSize-$BorderSize; $Pos[]=$Y+$PlotSize+$BorderSize; $Pos[]=$X+$PlotSize+$BorderSize; $Pos[]=$Y+$PlotSize+$BorderSize;
-         $this->drawPolygon($Pos,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha));
-        }
+            $Poly = "";
+            $Poly[] = $X+$this->ShadowX; 
+            $Poly[] = $Y+$this->ShadowX;
+            $Poly[] = $X+5+$this->ShadowX; 
+            $Poly[] = $Y-5+$this->ShadowX;
+            $Poly[] = $XMax+$this->ShadowX; 
+            $Poly[] = $Y-5+$this->ShadowX;
 
-       $Pos = ""; $Pos[]=$X; $Pos[]=$Y-$PlotSize; $Pos[]=$X-$PlotSize; $Pos[]=$Y+$PlotSize; $Pos[]=$X+$PlotSize; $Pos[]=$Y+$PlotSize;
-       $this->drawPolygon($Pos,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
-      }
-     elseif ( $Shape == SERIE_SHAPE_TRIANGLE )
-      {
-       $this->drawLine($X,$Y-$PlotSize,$X-$PlotSize,$Y+$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
-       $this->drawLine($X-$PlotSize,$Y+$PlotSize,$X+$PlotSize,$Y+$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
-       $this->drawLine($X+$PlotSize,$Y+$PlotSize,$X,$Y-$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
-      }
-     elseif ( $Shape == SERIE_SHAPE_SQUARE )
-      $this->drawRectangle($X-$PlotSize,$Y-$PlotSize,$X+$PlotSize,$Y+$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
-     elseif ( $Shape == SERIE_SHAPE_CIRCLE )
-      $this->drawCircle($X,$Y,$PlotSize,$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
-     elseif ( $Shape == SERIE_SHAPE_DIAMOND )
-      {
-       $Pos = ""; $Pos[]=$X-$PlotSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y-$PlotSize; $Pos[]=$X+$PlotSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y+$PlotSize;
-       $this->drawPolygon($Pos,array("NoFill"=>true,"BorderR"=>$R,"BorderG"=>$G,"BorderB"=>$B,"BorderAlpha"=>$Alpha));
-      }      
-     elseif ( $Shape == SERIE_SHAPE_FILLEDDIAMOND )
-      {
-       if ( $PlotBorder )
-        {
-         $Pos = ""; $Pos[]=$X-$PlotSize-$BorderSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y-$PlotSize-$BorderSize; $Pos[]=$X+$PlotSize+$BorderSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y+$PlotSize+$BorderSize;
-         $this->drawPolygon($Pos,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha));
-        }
-
-       $Pos = ""; $Pos[]=$X-$PlotSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y-$PlotSize; $Pos[]=$X+$PlotSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y+$PlotSize;
-       $this->drawPolygon($Pos,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
-      }      
-    }
-
-   public function drawPolygonChart($Points,$Format="")
-    {
-     $R			= isset($Format["R"]) ? $Format["R"] : 0;
-     $G			= isset($Format["G"]) ? $Format["G"] : 0;
-     $B			= isset($Format["B"]) ? $Format["B"] : 0;
-     $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-     $NoFill		= isset($Format["NoFill"]) ? $Format["NoFill"] : false;
-     $NoBorder		= isset($Format["NoBorder"]) ? $Format["NoBorder"] : false;
-     $BorderR		= isset($Format["BorderR"]) ? $Format["BorderR"] : $R;
-     $BorderG		= isset($Format["BorderG"]) ? $Format["BorderG"] : $G;
-     $BorderB		= isset($Format["BorderB"]) ? $Format["BorderB"] : $B;
-     $BorderAlpha 	= isset($Format["BorderAlpha"]) ? $Format["BorderAlpha"] : $Alpha / 2;
-     $Surrounding	= isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
-     $Threshold         = isset($Format["Threshold"]) ? $Format["Threshold"] : null;
-
-     if ( $Surrounding != null ) { $BorderR = $R+$Surrounding; $BorderG = $G+$Surrounding; $BorderB = $B+$Surrounding; }
-
-     $RestoreShadow = $this->Shadow;
-     $this->Shadow = false;
-
-     $AllIntegers = true;
-     for($i=0;$i<=count($Points)-2;$i=$i+2)
-      { if ( $this->getFirstDecimal($Points[$i+1]) != 0 ) { $AllIntegers = false; } }
-
-     /* Convert polygon to segments */
-     $Segments = "";
-     for($i=2;$i<=count($Points)-2;$i=$i+2)
-      { $Segments[] = array("X1"=>$Points[$i-2],"Y1"=>$Points[$i-1],"X2"=>$Points[$i],"Y2"=>$Points[$i+1]); }
-     $Segments[] = array("X1"=>$Points[$i-2],"Y1"=>$Points[$i-1],"X2"=>$Points[0],"Y2"=>$Points[1]);
-
-     /* Simplify straight lines */
-     $Result = ""; $inHorizon = false; $LastX = VOID;
-     foreach($Segments as $Key => $Pos)
-      {
-       if ( $Pos["Y1"] != $Pos["Y2"] )
-        {
-         if ( $inHorizon ) { $inHorizon = false; $Result[] = array("X1"=>$LastX,"Y1"=>$Pos["Y1"],"X2"=>$Pos["X1"],"Y2"=>$Pos["Y1"]); }
-
-         $Result[] = array("X1"=>$Pos["X1"],"Y1"=>$Pos["Y1"],"X2"=>$Pos["X2"],"Y2"=>$Pos["Y2"]);
-        }
-       else { if ( !$inHorizon ) { $inHorizon = true; $LastX = $Pos["X1"];} }
-      }
-     $Segments = $Result;
-
-     /* Do we have something to draw */
-     if ( $Segments == "" ) { return(0); }
-
-     /* For segments debugging purpose */
-     //foreach($Segments as $Key => $Pos)
-     // echo $Pos["X1"].",".$Pos["Y1"].",".$Pos["X2"].",".$Pos["Y2"]."\r\n";
-
-     /* Find out the min & max Y boundaries */
-     $MinY = OUT_OF_SIGHT; $MaxY = OUT_OF_SIGHT;
-     foreach($Segments as $Key => $Coords)
-      {
-       if ( $MinY == OUT_OF_SIGHT || $MinY > min($Coords["Y1"],$Coords["Y2"]) ) { $MinY = min($Coords["Y1"],$Coords["Y2"]); }
-       if ( $MaxY == OUT_OF_SIGHT || $MaxY < max($Coords["Y1"],$Coords["Y2"]) ) { $MaxY = max($Coords["Y1"],$Coords["Y2"]); }
-      }
-
-     if ( $AllIntegers ) { $YStep = 1; } else { $YStep = .5; }
-
-     $MinY = floor($MinY); $MaxY = floor($MaxY);
-
-     /* Scan each Y lines */
-     $DefaultColor = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
-     $DebugLine = 0; $DebugColor = $this->allocateColor($this->Picture,255,0,0,100);
-
-     $MinY = floor($MinY); $MaxY = floor($MaxY); $YStep = 1; 
-
-     if ( !$NoFill )
-      {
-       //if ( $DebugLine ) { $MinY = $DebugLine; $MaxY = $DebugLine; }
-       for($Y=$MinY;$Y<=$MaxY;$Y=$Y+$YStep)
-        {
-         $Intersections = ""; $LastSlope = null; $RestoreLast = "-";
-         foreach($Segments as $Key => $Coords)
-          {
-           $X1 = $Coords["X1"]; $X2 = $Coords["X2"]; $Y1 = $Coords["Y1"]; $Y2 = $Coords["Y2"];
-
-           if ( min($Y1,$Y2) <= $Y && max($Y1,$Y2) >= $Y )
-            {
-             if ( $Y1 == $Y2 )
-              { $X = $X1; }
-             else
-              { $X = $X1 + ( ($Y-$Y1)*$X2 - ($Y-$Y1)*$X1 ) / ($Y2-$Y1); }
-
-             $X = floor($X);
-
-             if ( $X2 == $X1 )
-              { $Slope = "!"; }
-             else
-              {
-               $SlopeC = ($Y2 - $Y1) / ($X2 - $X1);
-               if( $SlopeC == 0 )
-                { $Slope = "="; }
-               elseif( $SlopeC > 0 )
-                { $Slope = "+"; }
-               elseif ( $SlopeC < 0 )
-                { $Slope = "-"; }
-              }
-
-             if ( !is_array($Intersections) )
-              { $Intersections[] = $X; }
-             elseif( !in_array($X,$Intersections) )
-              { $Intersections[] = $X; }
-             elseif( in_array($X,$Intersections) )
-              {
-               if ($Y == $DebugLine) { echo $Slope."/".$LastSlope."(".$X.") "; }
-
-               if ( $Slope == "=" && $LastSlope == "-"  )                             { $Intersections[] = $X; }
-               if ( $Slope != $LastSlope && $LastSlope != "!" && $LastSlope != "=" )  { $Intersections[] = $X; }
-               if ( $Slope != $LastSlope && $LastSlope == "!" && $Slope == "+" )      { $Intersections[] = $X; }
-              }
-
-             if ( is_array($Intersections) && in_array($X,$Intersections) && $LastSlope == "=" && ($Slope == "-" )) { $Intersections[] = $X; }
-
-             $LastSlope = $Slope;
-            }
-          }
-         if ( $RestoreLast != "-" ) { $Intersections[] = $RestoreLast; echo "@".$Y."\r\n"; }
-
-         if ( is_array($Intersections) )
-          {
-           sort($Intersections);
-
-           if ($Y == $DebugLine) { print_r($Intersections); }
-
-           /* Remove null plots */
-           $Result = "";
-           for($i=0;$i<=count($Intersections)-1;$i=$i+2)
-            {
-             if ( isset($Intersections[$i+1]) )
-              { if ( $Intersections[$i] != $Intersections[$i+1] ) { $Result[] = $Intersections[$i]; $Result[] = $Intersections[$i+1]; } }
+            if ( $NoTitle ) {
+                $Poly[] = $XMax+$this->ShadowX; 
+                $Poly[] = $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2+$this->ShadowX;
+                $Poly[] = $XMin+$this->ShadowX; 
+                $Poly[] = $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2+$this->ShadowX;
+            } else {
+                $Poly[] = $XMax+$this->ShadowX; 
+                $Poly[] = $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3+$this->ShadowX;
+                $Poly[] = $XMin+$this->ShadowX; 
+                $Poly[] = $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3+$this->ShadowX;
             }
 
-           if ( is_array($Result) )
-            {
-             $Intersections = $Result;
+            $Poly[] = $XMin+$this->ShadowX; 
+            $Poly[] = $Y-5+$this->ShadowX;
+            $Poly[] = $X-5+$this->ShadowX; 
+            $Poly[] = $Y-5+$this->ShadowX;
+            $this->drawPolygon(
+                $Poly,
+                array(
+                    "R"=>$this->ShadowR,
+                    "G"=>$this->ShadowG,
+                    "B"=>$this->ShadowB,
+                    "Alpha"=>$this->Shadowa
+                )
+            );
+        }
 
-             $LastX = OUT_OF_SIGHT;
-             foreach($Intersections as $Key => $X)
-              {
-               if ( $LastX == OUT_OF_SIGHT )
-                $LastX = $X;
-               elseif ( $LastX != OUT_OF_SIGHT )
-                {
-                 if ( $this->getFirstDecimal($LastX) > 1 ) { $LastX++; }
+        /* Draw the background */
+        $GradientSettings = array(
+            "StartR"=>$GradientStartR,
+            "StartG"=>$GradientStartG,
+            "StartB"=>$GradientStartB,
+            "EndR"=>$GradientEndR,
+            "EndG"=>$GradientEndG,
+            "EndB"=>$GradientEndB,
+            "Alpha"=>$BoxAlpha
+        );
+        if ( $NoTitle ) {
+            $this->drawGradientArea(
+                $XMin,
+                $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,
+                $XMax,
+                $Y-6,
+                DIRECTION_VERTICAL,
+                $GradientSettings
+            );
+        } else {
+            $this->drawGradientArea(
+                $XMin,
+                $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,
+                $XMax,
+                $Y-6,
+                DIRECTION_VERTICAL,
+                $GradientSettings
+            );
+        }
+        $Poly = ""; 
+        $Poly[] = $X; 
+        $Poly[] = $Y;
+        $Poly[] = $X-5;
+        $Poly[] = $Y-5; 
+        $Poly[] = $X+5;
+        $Poly[] = $Y-5;
+        $this->drawPolygon(
+            $Poly,
+            array(
+                "R"=>$GradientEndR,
+                "G"=>$GradientEndG,
+                "B"=>$GradientEndB,
+                "Alpha"=>$BoxAlpha,
+                "NoBorder"=>true
+            )
+        );
 
-                 $Color = $DefaultColor;
-                 if ( $Threshold != null )
-                  {
-                   foreach($Threshold as $Key => $Parameters)
-                    {
-                     if ( $Y <= $Parameters["MinX"] && $Y >= $Parameters["MaxX"])
-                      {
-                       if ( isset($Parameters["R"]) ) { $R = $Parameters["R"]; } else { $R = 0; }
-                       if ( isset($Parameters["G"]) ) { $G = $Parameters["G"]; } else { $G = 0; }
-                       if ( isset($Parameters["B"]) ) { $B = $Parameters["B"]; } else { $B = 0; }
-                       if ( isset($Parameters["Alpha"]) ) { $Alpha = $Parameters["Alpha"]; } else { $Alpha = 100; }
-                       $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
-                      }
-                    }
-                  }
+        /* Outer border */
+        $OuterBorderColor = $this->allocateColor($this->Picture,100,100,100,$BoxAlpha);
+        imageline($this->Picture,$XMin,$Y-5,$X-5,$Y-5,$OuterBorderColor);
+        imageline($this->Picture,$X,$Y,$X-5,$Y-5,$OuterBorderColor);
+        imageline($this->Picture,$X,$Y,$X+5,$Y-5,$OuterBorderColor);
+        imageline($this->Picture,$X+5,$Y-5,$XMax,$Y-5,$OuterBorderColor);
+        if ( $NoTitle ) {
+          imageline($this->Picture,$XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMin,$Y-5,$OuterBorderColor);
+          imageline($this->Picture,$XMax,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMax,$Y-5,$OuterBorderColor);
+          imageline($this->Picture,$XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMax,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$OuterBorderColor);
+        } else {
+          imageline($this->Picture,$XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMin,$Y-5,$OuterBorderColor);
+          imageline($this->Picture,$XMax,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMax,$Y-5,$OuterBorderColor);
+          imageline($this->Picture,$XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMax,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$OuterBorderColor);
+        }
 
-                 imageline($this->Picture,$LastX,$Y,$X,$Y,$Color);
+        /* Inner border */
+        $InnerBorderColor = $this->allocateColor($this->Picture,255,255,255,$BoxAlpha);
+        imageline($this->Picture,$XMin+1,$Y-6,$X-5,$Y-6,$InnerBorderColor);
+        imageline($this->Picture,$X,$Y-1,$X-5,$Y-6,$InnerBorderColor);
+        imageline($this->Picture,$X,$Y-1,$X+5,$Y-6,$InnerBorderColor);
+        imageline($this->Picture,$X+5,$Y-6,$XMax-1,$Y-6,$InnerBorderColor);
+        if ( $NoTitle ) {
+           imageline($this->Picture,$XMin+1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMin+1,$Y-6,$InnerBorderColor);
+           imageline($this->Picture,$XMax-1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMax-1,$Y-6,$InnerBorderColor);
+           imageline($this->Picture,$XMin+1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMax-1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$InnerBorderColor);
+         } else {
+           imageline($this->Picture,$XMin+1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMin+1,$Y-6,$InnerBorderColor);
+           imageline($this->Picture,$XMax-1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMax-1,$Y-6,$InnerBorderColor);
+           imageline($this->Picture,$XMin+1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMax-1,$Y-4-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$InnerBorderColor);
+         }
 
-                 if ( $Y == $DebugLine) { imageline($this->Picture,$LastX,$Y,$X,$Y,$DebugColor); }
+        /* Draw the separator line */
+        if ( $TitleMode == LABEL_TITLE_NOBACKGROUND && !$NoTitle ) {
+            $YPos    = $Y-7-$CaptionHeight-$HorizontalMargin-$HorizontalMargin/2;
+            $XMargin = $VerticalMargin / 2;
+            $this->drawLine(
+                $XMin+$XMargin,
+                $YPos+1,
+                $XMax-$XMargin,
+                $YPos+1,
+                array(
+                    "R"=>$GradientEndR,
+                    "G"=>$GradientEndG,
+                    "B"=>$GradientEndB,
+                    "Alpha"=>$BoxAlpha
+                )
+            );
+            $this->drawLine(
+                $XMin+$XMargin,
+                $YPos,
+                $XMax-$XMargin,
+                $YPos,
+                array(
+                    "R"=>$GradientStartR,
+                    "G"=>$GradientStartG,
+                    "B"=>$GradientStartB,
+                    "Alpha"=>$BoxAlpha
+                )
+            );
+        } elseif ( $TitleMode == LABEL_TITLE_BACKGROUND ) {
+            $this->drawFilledRectangle(
+                $XMin,
+                $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,
+                $XMax,
+                $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin+$HorizontalMargin/2,
+                array(
+                    "R"=>$TitleBackgroundR,
+                    "G"=>$TitleBackgroundG,
+                    "B"=>$TitleBackgroundB,
+                    "Alpha"=>$BoxAlpha
+                )
+            );
+            imageline(
+                $this->Picture,
+                $XMin+1,
+                $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin+$HorizontalMargin/2+1,
+                $XMax-1,
+                $Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin+$HorizontalMargin/2+1,
+                $InnerBorderColor
+            );
+        }
 
-                 $LastX = OUT_OF_SIGHT;
+        /* Write the description */
+        if ( !$NoTitle )
+            $this->drawText(
+                $XMin+$VerticalMargin,
+                $Y-7-$CaptionHeight-$HorizontalMargin*2,
+                $Title,
+                array(
+                    "Align"=>TEXT_ALIGN_BOTTOMLEFT,
+                    "R"=>$TitleR,
+                    "G"=>$TitleG,
+                    "B"=>$TitleB
+                )
+            );
+
+            /* Write the value */
+            $YPos = $Y-5-$HorizontalMargin; 
+            $XPos = $XMin+$VerticalMargin+$SerieBoxSize+$SerieBoxSpacing;
+            foreach($Captions as $Key => $Caption) {
+                $CaptionTxt    = $Caption["Caption"];
+                $TxtPos        = $this->getTextBox($XPos,$YPos,$FontName,$FontSize,0,$CaptionTxt);
+                $CaptionHeight = ($TxtPos[0]["Y"] - $TxtPos[2]["Y"]);
+
+                /* Write the serie color if needed */
+                if ( $DrawSerieColor ) {
+                    $BoxSettings = array(
+                        "R"=>$Caption["Format"]["R"],
+                        "G"=>$Caption["Format"]["G"],
+                        "B"=>$Caption["Format"]["B"],
+                        "Alpha"=>$Caption["Format"]["Alpha"],
+                        "BorderR"=>0,
+                        "BorderG"=>0,
+                        "BorderB"=>0
+                    );
+                    $this->drawFilledRectangle(
+                        $XMin+$VerticalMargin,
+                        $YPos-$SerieBoxSize,
+                        $XMin+$VerticalMargin+$SerieBoxSize,
+                        $YPos,
+                        $BoxSettings
+                    );
                 }
-              }
+
+                $this->drawText($XPos,$YPos,$CaptionTxt,array("Align"=>TEXT_ALIGN_BOTTOMLEFT));
+
+                $YPos = $YPos - $CaptionHeight - $HorizontalMargin;
             }
-          }
-        }
-      }
 
-     /* Draw the polygon border, if required */
-     if ( !$NoBorder)
-      {
-       foreach($Segments as $Key => $Coords)
-        $this->drawLine($Coords["X1"],$Coords["Y1"],$Coords["X2"],$Coords["Y2"],array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha,"Threshold"=>$Threshold));
-      }
-
-     $this->Shadow = $RestoreShadow;
+        $this->Shadow = $RestoreShadow;
     }
 
-   /* Return the abscissa margin */
-   public function getAbscissaMargin($Data)
+    /**
+     * Draw a basic shape
+     * @param type $X
+     * @param type $Y
+     * @param type $Shape
+     * @param type $PlotSize
+     * @param type $PlotBorder
+     * @param type $BorderSize
+     * @param type $R
+     * @param type $G
+     * @param type $B
+     * @param type $Alpha
+     * @param type $BorderR
+     * @param type $BorderG
+     * @param type $BorderB
+     * @param type $BorderAlpha
+     */
+    public function drawShape(
+            $X,
+            $Y,
+            $Shape,
+            $PlotSize,
+            $PlotBorder,
+            $BorderSize,
+            $R,
+            $G,
+            $B,
+            $Alpha,
+            $BorderR,
+            $BorderG,
+            $BorderB,
+            $BorderAlpha
+    ) {
+        if ( $Shape == SERIE_SHAPE_FILLEDCIRCLE ) {
+            if ( $PlotBorder ) { $this->drawFilledCircle($X,$Y,$PlotSize+$BorderSize,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha)); }
+            $this->drawFilledCircle($X,$Y,$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+        } elseif ( $Shape == SERIE_SHAPE_FILLEDSQUARE ) {
+            if ( $PlotBorder ) { $this->drawFilledRectangle($X-$PlotSize-$BorderSize,$Y-$PlotSize-$BorderSize,$X+$PlotSize+$BorderSize,$Y+$PlotSize+$BorderSize,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha)); }
+            $this->drawFilledRectangle($X-$PlotSize,$Y-$PlotSize,$X+$PlotSize,$Y+$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+        } elseif ( $Shape == SERIE_SHAPE_FILLEDTRIANGLE ) {
+            if ( $PlotBorder ) {
+                $Pos = ""; $Pos[]=$X; $Pos[]=$Y-$PlotSize-$BorderSize; $Pos[]=$X-$PlotSize-$BorderSize; $Pos[]=$Y+$PlotSize+$BorderSize; $Pos[]=$X+$PlotSize+$BorderSize; $Pos[]=$Y+$PlotSize+$BorderSize;
+                $this->drawPolygon($Pos,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha));
+            }
+
+            $Pos = ""; $Pos[]=$X; $Pos[]=$Y-$PlotSize; $Pos[]=$X-$PlotSize; $Pos[]=$Y+$PlotSize; $Pos[]=$X+$PlotSize; $Pos[]=$Y+$PlotSize;
+            $this->drawPolygon($Pos,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+        } elseif ( $Shape == SERIE_SHAPE_TRIANGLE ) {
+            $this->drawLine($X,$Y-$PlotSize,$X-$PlotSize,$Y+$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+            $this->drawLine($X-$PlotSize,$Y+$PlotSize,$X+$PlotSize,$Y+$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+            $this->drawLine($X+$PlotSize,$Y+$PlotSize,$X,$Y-$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+        } elseif ( $Shape == SERIE_SHAPE_SQUARE ) {
+            $this->drawRectangle($X-$PlotSize,$Y-$PlotSize,$X+$PlotSize,$Y+$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+        } elseif ( $Shape == SERIE_SHAPE_CIRCLE ) {
+         $this->drawCircle($X,$Y,$PlotSize,$PlotSize,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+        } elseif ( $Shape == SERIE_SHAPE_DIAMOND ) {
+            $Pos = ""; $Pos[]=$X-$PlotSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y-$PlotSize; $Pos[]=$X+$PlotSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y+$PlotSize;
+            $this->drawPolygon($Pos,array("NoFill"=>true,"BorderR"=>$R,"BorderG"=>$G,"BorderB"=>$B,"BorderAlpha"=>$Alpha));
+        } elseif ( $Shape == SERIE_SHAPE_FILLEDDIAMOND ) {
+            if ( $PlotBorder ) {
+                $Pos = ""; $Pos[]=$X-$PlotSize-$BorderSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y-$PlotSize-$BorderSize; $Pos[]=$X+$PlotSize+$BorderSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y+$PlotSize+$BorderSize;
+                $this->drawPolygon($Pos,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha));
+            }
+
+            $Pos = ""; $Pos[]=$X-$PlotSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y-$PlotSize; $Pos[]=$X+$PlotSize; $Pos[]=$Y; $Pos[]=$X; $Pos[]=$Y+$PlotSize;
+            $this->drawPolygon($Pos,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha));
+        }      
+    }
+
+    /**
+     * 
+     * @param type $Points
+     * @param type $Format
+     * @return type
+     */
+    public function drawPolygonChart($Points,$Format="")
     {
-     foreach($Data["Axis"] as $AxisID => $Values) { if ( $Values["Identity"] == AXIS_X ) { return($Values["Margin"]); } }
-     return(0);
+        $R		= isset($Format["R"]) ? $Format["R"] : 0;
+        $G		= isset($Format["G"]) ? $Format["G"] : 0;
+        $B		= isset($Format["B"]) ? $Format["B"] : 0;
+        $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $NoFill		= isset($Format["NoFill"]) ? $Format["NoFill"] : false;
+        $NoBorder	= isset($Format["NoBorder"]) ? $Format["NoBorder"] : false;
+        $BorderR	= isset($Format["BorderR"]) ? $Format["BorderR"] : $R;
+        $BorderG	= isset($Format["BorderG"]) ? $Format["BorderG"] : $G;
+        $BorderB	= isset($Format["BorderB"]) ? $Format["BorderB"] : $B;
+        $BorderAlpha 	= isset($Format["BorderAlpha"]) ? $Format["BorderAlpha"] : $Alpha / 2;
+        $Surrounding	= isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
+        $Threshold        = isset($Format["Threshold"]) ? $Format["Threshold"] : null;
+
+        if ( $Surrounding != null ) { 
+            $BorderR = $R+$Surrounding; 
+            $BorderG = $G+$Surrounding; 
+            $BorderB = $B+$Surrounding;          
+        }
+
+        $RestoreShadow = $this->Shadow;
+        $this->Shadow = false;
+
+        $AllIntegers = true;
+        for($i=0;$i<=count($Points)-2;$i=$i+2) { 
+            if ( $this->getFirstDecimal($Points[$i+1]) != 0 ) { 
+                $AllIntegers = false;                 
+            }
+        }
+
+        /* Convert polygon to segments */
+        $Segments = "";
+        for ($i=2;$i<=count($Points)-2;$i=$i+2) { 
+            $Segments[] = array(
+                "X1"=>$Points[$i-2],
+                "Y1"=>$Points[$i-1],
+                "X2"=>$Points[$i],
+                "Y2"=>$Points[$i+1]
+            );             
+        }
+        $Segments[] = array(
+            "X1"=>$Points[$i-2],
+            "Y1"=>$Points[$i-1],
+            "X2"=>$Points[0],
+            "Y2"=>$Points[1]
+        );
+
+        /* Simplify straight lines */
+        $Result = ""; 
+        $inHorizon = false; 
+        $LastX = VOID;
+        foreach($Segments as $Key => $Pos) {
+            if ( $Pos["Y1"] != $Pos["Y2"] ) {
+                if ( $inHorizon ) { 
+                    $inHorizon = false; 
+                    $Result[] = array(
+                        "X1"=>$LastX,
+                        "Y1"=>$Pos["Y1"],
+                        "X2"=>$Pos["X1"],
+                        "Y2"=>$Pos["Y1"]
+                    );                     
+                }
+
+                $Result[] = array(
+                    "X1"=>$Pos["X1"],
+                    "Y1"=>$Pos["Y1"],
+                    "X2"=>$Pos["X2"],
+                    "Y2"=>$Pos["Y2"]
+                );
+            } else { 
+                if ( !$inHorizon ) { 
+                    $inHorizon = true; 
+                    $LastX = $Pos["X1"];                    
+                }                 
+            }
+        }
+        $Segments = $Result;
+
+        /* Do we have something to draw */
+        if ( $Segments == "" ) { 
+            return(0);             
+        }
+
+        /* For segments debugging purpose */
+        //foreach($Segments as $Key => $Pos)
+        // echo $Pos["X1"].",".$Pos["Y1"].",".$Pos["X2"].",".$Pos["Y2"]."\r\n";
+
+        /* Find out the min & max Y boundaries */
+        $MinY = OUT_OF_SIGHT; $MaxY = OUT_OF_SIGHT;
+        foreach($Segments as $Key => $Coords) {
+            if ($MinY == OUT_OF_SIGHT || $MinY > min($Coords["Y1"],$Coords["Y2"])) { 
+                $MinY = min($Coords["Y1"],$Coords["Y2"]);
+            }
+            if ($MaxY == OUT_OF_SIGHT || $MaxY < max($Coords["Y1"],$Coords["Y2"])) { 
+                $MaxY = max($Coords["Y1"],$Coords["Y2"]);                
+            }
+        }
+
+        if ( $AllIntegers ) { 
+            $YStep = 1;             
+        } else {
+            $YStep = .5;
+        }
+
+        $MinY = floor($MinY); 
+        $MaxY = floor($MaxY);
+
+        /* Scan each Y lines */
+        $DefaultColor = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
+        $DebugLine = 0; 
+        $DebugColor = $this->allocateColor($this->Picture,255,0,0,100);
+
+        $MinY = floor($MinY); 
+        $MaxY = floor($MaxY); 
+        $YStep = 1; 
+
+        if ( !$NoFill ) {
+            //if ( $DebugLine ) { $MinY = $DebugLine; $MaxY = $DebugLine; }
+            for ($Y=$MinY;$Y<=$MaxY;$Y=$Y+$YStep) {
+                $Intersections = ""; 
+                $LastSlope = null; 
+                $RestoreLast = "-";
+                foreach($Segments as $Key => $Coords) {
+                    $X1 = $Coords["X1"]; 
+                    $X2 = $Coords["X2"]; 
+                    $Y1 = $Coords["Y1"]; 
+                    $Y2 = $Coords["Y2"];
+
+                    if (min($Y1,$Y2) <= $Y && max($Y1,$Y2) >= $Y) {
+                        if ( $Y1 == $Y2 ) { 
+                            $X = $X1;
+                        } else { 
+                            $X = $X1 + ( ($Y-$Y1)*$X2 - ($Y-$Y1)*$X1 ) / ($Y2-$Y1);
+                        }
+
+                        $X = floor($X);
+
+                        if ( $X2 == $X1 ) { 
+                            $Slope = "!";                         
+                        } else {
+                            $SlopeC = ($Y2 - $Y1) / ($X2 - $X1);
+                            if( $SlopeC == 0 ) { 
+                                $Slope = "=";                                 
+                            } elseif( $SlopeC > 0 ) { 
+                                $Slope = "+";                                 
+                            } elseif ( $SlopeC < 0 ) { 
+                                $Slope = "-";                                 
+                            }
+                        }
+
+                        if ( !is_array($Intersections) ) { 
+                            $Intersections[] = $X;
+                        } elseif( !in_array($X,$Intersections) ) { 
+                            $Intersections[] = $X;
+                        } elseif( in_array($X,$Intersections) ) {
+                            if ($Y == $DebugLine) { 
+                                echo $Slope."/".$LastSlope."(".$X.") ";
+                            }
+
+                            if ( $Slope == "=" && $LastSlope == "-"  ) { 
+                                $Intersections[] = $X;
+                            }
+                            if ( $Slope != $LastSlope && $LastSlope != "!" && $LastSlope != "=" ) {
+                                $Intersections[] = $X;                                 
+                            }
+                            if ( $Slope != $LastSlope && $LastSlope == "!" && $Slope == "+" ) {
+                                $Intersections[] = $X;                                 
+                            }
+                        }
+
+                        if (is_array($Intersections) 
+                            && in_array($X,$Intersections) 
+                            && $LastSlope == "=" 
+                            && ($Slope == "-" )
+                        ) { 
+                            $Intersections[] = $X; 
+                            
+                        }
+
+                        $LastSlope = $Slope;
+                    }
+                }
+                if ( $RestoreLast != "-" ) { 
+                    $Intersections[] = $RestoreLast; 
+                    echo "@".$Y."\r\n";
+                }
+
+                if ( is_array($Intersections) ) {
+                    sort($Intersections);
+
+                    if ($Y == $DebugLine) { 
+                        print_r($Intersections);
+                    }
+
+                    /* Remove null plots */
+                    $Result = "";
+                    for($i=0;$i<=count($Intersections)-1;$i=$i+2) {
+                        if (isset($Intersections[$i+1])) { 
+                            if ( $Intersections[$i] != $Intersections[$i+1] ) { 
+                                $Result[] = $Intersections[$i]; 
+                                $Result[] = $Intersections[$i+1];
+                            }
+                        }
+                    }
+
+                    if ( is_array($Result) ) {
+                        $Intersections = $Result;
+
+                        $LastX = OUT_OF_SIGHT;
+                        foreach($Intersections as $Key => $X) {
+                            if ( $LastX == OUT_OF_SIGHT ) {
+                                $LastX = $X;
+                            } elseif ( $LastX != OUT_OF_SIGHT ) {
+                                if ( $this->getFirstDecimal($LastX) > 1 ) { 
+                                    $LastX++;                                     
+                                }
+
+                                $Color = $DefaultColor;
+                                if ( $Threshold != null ) {
+                                    foreach($Threshold as $Key => $Parameters) {
+                                        if ($Y <= $Parameters["MinX"] 
+                                            && $Y >= $Parameters["MaxX"]
+                                        ) {
+                                            if ( isset($Parameters["R"]) ) { 
+                                                $R = $Parameters["R"];
+                                            } else {
+                                                $R = 0;
+                                            }
+                                            if ( isset($Parameters["G"]) ) { 
+                                                $G = $Parameters["G"];
+                                            } else { 
+                                                $G = 0;
+                                            }
+                                            if ( isset($Parameters["B"]) ) { 
+                                                $B = $Parameters["B"];
+                                            } else { 
+                                                $B = 0;                                                 
+                                            }
+                                            if ( isset($Parameters["Alpha"]) ) { 
+                                                $Alpha = $Parameters["Alpha"];
+                                            } else { 
+                                                $Alpha = 100;                                                   
+                                            }
+                                            $Color = $this->allocateColor(
+                                                $this->Picture,$R,$G,$B,$Alpha
+                                            );
+                                        }
+                                    }
+                                }
+
+                                imageline($this->Picture,$LastX,$Y,$X,$Y,$Color);
+
+                                if ( $Y == $DebugLine) { 
+                                    imageline($this->Picture,$LastX,$Y,$X,$Y,$DebugColor);
+                                }
+
+                                $LastX = OUT_OF_SIGHT;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Draw the polygon border, if required */
+        if ( !$NoBorder) {
+            foreach($Segments as $Key => $Coords) {
+                $this->drawLine(
+                    $Coords["X1"],
+                    $Coords["Y1"],
+                    $Coords["X2"],
+                    $Coords["Y2"],
+                    array(
+                        "R"=>$BorderR,
+                        "G"=>$BorderG,
+                        "B"=>$BorderB,
+                        "Alpha"=>$BorderAlpha,
+                        "Threshold"=>$Threshold
+                    )
+                );
+            }
+        }
+
+        $this->Shadow = $RestoreShadow;
     }
 
-  }
+    /**
+     * Return the abscissa margin
+     * @param type $Data
+     * @return type
+     */
+    public function getAbscissaMargin($Data)
+    {
+        foreach($Data["Axis"] as $AxisID => $Values) { 
+            if ( $Values["Identity"] == AXIS_X ) {
+                return($Values["Margin"]);
+            }                 
+        }
+        return(0);
+    }
+}
