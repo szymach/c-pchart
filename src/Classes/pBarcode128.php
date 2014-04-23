@@ -33,12 +33,17 @@ namespace CpChart\Classes;
     {
         $this->Codes   = "";
         $this->Reverse = "";
-
-        $FileHandle = @fopen($BasePath."data/128B.db", "r");
-
+        if (file_exists($BasePath."data/128B.db", "r")) {
+            $FileHandle = @fopen($BasePath."data/128B.db", "r");
+            $filePath = $BasePath."data/128B.db";
+        } else {
+            $FileHandle = @fopen(__DIR__.'/../Resources/data/128B.db', "r");
+            $filePath = "/../Resources/data/128B.db";            
+        }
+        
         if (!$FileHandle) { 
             throw new \Exception(
-                "Cannot find barcode database (".$BasePath."128B.db)."
+                "Cannot find barcode database (".$filePath.")."
             );
         }
 

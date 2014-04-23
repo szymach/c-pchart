@@ -34,12 +34,17 @@ class pBarcode39
         $this->MOD43   = $EnableMOD43;
         $this->Codes   = "";
         $this->Reverse = "";
-
-        $FileHandle = @fopen($BasePath."data/39.db", "r");
+        if (file_exists($BasePath."data/39.db", "r")) {
+            $FileHandle = @fopen($BasePath."data/39.db", "r");
+            $filePath = $BasePath."data/39.db";
+        } else {
+            $FileHandle = @fopen(__DIR__.'/../Resources/data/39.db', "r");
+            $filePath = "/../Resources/data/39.db";            
+        }
 
         if (!$FileHandle) { 
             throw new \Exception(
-                "Cannot find barcode database (".$BasePath."data/39.db)."
+                "Cannot find barcode database (".$filePath.")."
             );
         }
 

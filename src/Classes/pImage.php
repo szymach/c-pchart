@@ -52,7 +52,7 @@ class pImage extends pDraw
     public $ScaleMinDivHeight = 20; // Minimum height for scame divs
 
     /* Font properties */
-    public $FontName	= "fonts/GeosansLight.ttf";	// Default font file
+    public $FontName	= "GeosansLight.ttf";           // Default font file
     public $FontSize	= 12;				// Default font size
     public $FontBox	= null;				// Return the bounding box of the last written string
     public $FontColorR	= 0;				// Default color settings
@@ -94,6 +94,9 @@ class pImage extends pDraw
         $DataSet = null,
         $TransparentBackground = false
     ) {
+        // set proper path for resources and the default font name
+        $this->fontName = $this->loadResource($this->fontName, 'font');
+        
         $this->TransparentBackground = $TransparentBackground;
 
         if ( $DataSet != null ) { 
@@ -274,11 +277,13 @@ class pImage extends pDraw
      */
     public function getTextBox_deprecated($X,$Y,$FontName,$FontSize,$Angle,$Text)
     {
+        $FontName  = $this->loadResource($FontName, 'font');
         $Size    = imagettfbbox($FontSize,$Angle,$FontName,$Text);
         $Width   = $this->getLength($Size[0],$Size[1],$Size[2],$Size[3])+1;
         $Height  = $this->getLength($Size[2],$Size[3],$Size[4],$Size[5])+1;
 
-        $RealPos[0]["X"] = $X; $RealPos[0]["Y"] = $Y;
+        $RealPos[0]["X"] = $X; 
+        $RealPos[0]["Y"] = $Y;
         $RealPos[1]["X"] = cos((360-$Angle)*PI/180)*$Width + $RealPos[0]["X"]; 
         $RealPos[1]["Y"] = sin((360-$Angle)*PI/180)*$Width + $RealPos[0]["Y"];
         $RealPos[2]["X"] = cos((270-$Angle)*PI/180)*$Height + $RealPos[1]["X"]; 
@@ -306,13 +311,14 @@ class pImage extends pDraw
      */
     public function getTextBox($X,$Y,$FontName,$FontSize,$Angle,$Text)
     {
+        $FontName  = $this->loadResource($FontName, 'font');
         $coords = imagettfbbox($FontSize, 0, $FontName, $Text);
 
         $a = deg2rad($Angle); 
         $ca = cos($a); 
         $sa = sin($a); 
         $RealPos = array();
-        for($i = 0; $i < 7; $i += 2) {
+        for ($i = 0; $i < 7; $i += 2) {
             $RealPos[$i/2]["X"] = $X + round($coords[$i] * $ca + $coords[$i+1] * $sa);
             $RealPos[$i/2]["Y"] = $Y + round($coords[$i+1] * $ca - $coords[$i] * $sa);
         }
@@ -352,16 +358,25 @@ class pImage extends pDraw
         $FontName   = isset($Format["FontName"]) ? $Format["FontName"] : null;
         $FontSize   = isset($Format["FontSize"]) ? $Format["FontSize"] : null;
 
-        if ( $R != -1)       {  $this->FontColorR = $R; }
-        if ( $G != -1)       {  $this->FontColorG = $G; }
-        if ( $B != -1)       {  $this->FontColorB = $B; }
-        if ( $Alpha != null) {  $this->FontColorA = $Alpha; }
+        if ( $R != -1)       { 
+            $this->FontColorR = $R;
+        }
+        if ( $G != -1)       {  
+            $this->FontColorG = $G;             
+        }
+        if ( $B != -1)       {  
+            $this->FontColorB = $B;
+        }
+        if ( $Alpha != null) {  
+            $this->FontColorA = $Alpha;             
+        }
 
-        if ( $FontName != null  )
-        $this->FontName = $FontName;
-
-        if ( $FontSize != null  )
-        $this->FontSize = $FontSize;
+        if ($FontName != null) {
+            $this->FontName = $this->loadResource($FontName, 'font');
+        }
+        if ($FontSize != null) {
+            $this->FontSize = $FontSize;
+        }
     }
 
     /**
@@ -405,20 +420,21 @@ class pImage extends pDraw
         $UniqueID="imageMap",
         $StorageFolder="tmp"
     ) {
-        $this->ImageMapIndex 		= $Name;
-        $this->ImageMapStorageMode		= $StorageMode;
+        $this->ImageMapIndex       = $Name;
+        $this->ImageMapStorageMode = $StorageMode;
 
-        if ($StorageMode == IMAGE_MAP_STORAGE_SESSION)
-        {
-        if(!isset($_SESSION)) { session_start(); }
-        $_SESSION[$this->ImageMapIndex]    = null;
-        }
-        elseif($StorageMode == IMAGE_MAP_STORAGE_FILE)
-        {
-        $this->ImageMapFileName 		= $UniqueID;
-        $this->ImageMapStorageFolder	= $StorageFolder;
+        if ($StorageMode == IMAGE_MAP_STORAGE_SESSION) {
+            if(!isset($_SESSION)) { 
+                session_start();                 
+            }
+            $_SESSION[$this->ImageMapIndex] = null;
+        } elseif($StorageMode == IMAGE_MAP_STORAGE_FILE) {
+            $this->ImageMapFileName 		= $UniqueID;
+            $this->ImageMapStorageFolder	= $StorageFolder;
 
-        if (file_exists($StorageFolder."/".$UniqueID.".map")) { unlink($StorageFolder."/".$UniqueID.".map"); }
+            if (file_exists($StorageFolder."/".$UniqueID.".map")) { 
+                unlink($StorageFolder."/".$UniqueID.".map");                 
+            }
         }
     }
 
@@ -479,11 +495,16 @@ class pImage extends pDraw
      */
     public function removeVOIDFromArray($SerieName, $Values)
     {
-        if ( !isset($this->DataSet->Data["Series"][$SerieName]) ) { return(-1); }
+        if ( !isset($this->DataSet->Data["Series"][$SerieName]) ) { 
+            return(-1);             
+        }
 
         $Result = "";
-        foreach($this->DataSet->Data["Series"][$SerieName]["Data"] as $Key => $Value)
-        { if ( $Value != VOID && isset($Values[$Key]) ) { $Result[] = $Values[$Key]; } }
+        foreach ($this->DataSet->Data["Series"][$SerieName]["Data"] as $Key => $Value) { 
+            if ( $Value != VOID && isset($Values[$Key]) ) { 
+                $Result[] = $Values[$Key];                 
+            }
+        }
         return($Result);
     }
 
@@ -504,7 +525,9 @@ class pImage extends pDraw
         }
 
         if ( $this->ImageMapStorageMode == IMAGE_MAP_STORAGE_SESSION ) {
-            if(!isset($_SESSION)) { return(-1); }
+            if (!isset($_SESSION)) { 
+                return(-1);                 
+            }
             if ( is_array($NewTitle) ) { 
                 $ID = 0; 
                 foreach($_SESSION[$this->ImageMapIndex] as $Key => $Settings) { 
@@ -525,7 +548,10 @@ class pImage extends pDraw
             $Handle    = @fopen($this->ImageMapStorageFolder."/".$this->ImageMapFileName.".map", "r");
             if ($Handle) {
             while (($Buffer = fgets($Handle, 4096)) !== false) {
-                $Fields      = preg_split("/".IMAGE_MAP_DELIMITER."/",str_replace(array(chr(10),chr(13)),"",$Buffer));
+                $Fields = preg_split(
+                    "/".IMAGE_MAP_DELIMITER."/",
+                    str_replace(array(chr(10),chr(13)),"",$Buffer)
+                );
                 $TempArray[] = array($Fields[0],$Fields[1],$Fields[2],$Fields[3],$Fields[4]);
             }
             fclose($Handle);
@@ -545,7 +571,10 @@ class pImage extends pDraw
                 }                     
             }
 
-             $Handle = fopen($this->ImageMapStorageFolder."/".$this->ImageMapFileName.".map", 'w');
+             $Handle = fopen(
+                 $this->ImageMapStorageFolder."/".$this->ImageMapFileName.".map", 
+                 'w'
+             );
              foreach($TempArray as $Key => $Settings) { 
                 fwrite(
                     $Handle, 
@@ -584,11 +613,17 @@ class pImage extends pDraw
             }
         } elseif( $this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE ) {
             $TempArray = "";
-            $Handle    = @fopen($this->ImageMapStorageFolder."/".$this->ImageMapFileName.".map", "r");
+            $Handle    = @fopen(
+                $this->ImageMapStorageFolder."/".$this->ImageMapFileName.".map",
+                "r"
+            );
             if ($Handle) {
                 while (($Buffer = fgets($Handle, 4096)) !== false) {
-                   $Fields      = preg_split("/".IMAGE_MAP_DELIMITER."/",str_replace(array(chr(10),chr(13)),"",$Buffer));
-                   $TempArray[] = array($Fields[0],$Fields[1],$Fields[2],$Fields[3],$Fields[4]);
+                    $Fields = preg_split(
+                            "/".IMAGE_MAP_DELIMITER."/",
+                            str_replace(array(chr(10),chr(13)),"",$Buffer)
+                    );
+                    $TempArray[] = array($Fields[0],$Fields[1],$Fields[2],$Fields[3],$Fields[4]);
                 }
                 fclose($Handle);
 
@@ -601,7 +636,10 @@ class pImage extends pDraw
                     }                         
                 }
 
-                $Handle = fopen($this->ImageMapStorageFolder."/".$this->ImageMapFileName.".map", 'w');
+                $Handle = fopen(
+                    $this->ImageMapStorageFolder."/".$this->ImageMapFileName.".map",
+                    'w'
+                );
                 foreach($TempArray as $Key => $Settings) { 
                     fwrite(
                         $Handle, 
@@ -672,9 +710,16 @@ class pImage extends pDraw
      */
     public function toHTMLColor($R,$G,$B)
     {
-        $R=intval($R); $G=intval($G); $B=intval($B);
-        $R=dechex($R<0?0:($R>255?255:$R)); $G=dechex($G<0?0:($G>255?255:$G));$B=dechex($B<0?0:($B>255?255:$B));
-        $Color="#".(strlen($R) < 2?'0':'').$R; $Color.=(strlen($G) < 2?'0':'').$G; $Color.= (strlen($B) < 2?'0':'').$B;
+        $R=intval($R); 
+        $G=intval($G); 
+        $B=intval($B);
+        $R=dechex($R<0?0:($R>255?255:$R)); 
+        $G=dechex($G<0?0:($G>255?255:$G));
+        $B=dechex($B<0?0:($B>255?255:$B));
+        $Color="#".(strlen($R) < 2?'0':'').$R; 
+        $Color.=(strlen($G) < 2?'0':'').$G; 
+        $Color.= (strlen($B) < 2?'0':'').$B;
+        
         return($Color);
     }
 
@@ -702,16 +747,16 @@ class pImage extends pDraw
      */
     public function drawAreaMirror($X,$Y,$Width,$Height,$Format="")
     {
-        $StartAlpha	= isset($Format["StartAlpha"]) ? $Format["StartAlpha"] : 80;
-        $EndAlpha	= isset($Format["EndAlpha"]) ? $Format["EndAlpha"] : 0;
+        $StartAlpha = isset($Format["StartAlpha"]) ? $Format["StartAlpha"] : 80;
+        $EndAlpha = isset($Format["EndAlpha"]) ? $Format["EndAlpha"] : 0;
 
         $AlphaStep = ($StartAlpha-$EndAlpha)/$Height;
 
         $Picture = imagecreatetruecolor($this->XSize,$this->YSize);
         imagecopy($Picture,$this->Picture,0,0,0,0,$this->XSize,$this->YSize);
 
-        for($i=1;$i<=$Height;$i++) {
-            if ( $Y+($i-1) < $this->YSize && $Y-$i > 0 ) { 
+        for ($i=1;$i<=$Height;$i++) {
+            if ($Y+($i-1) < $this->YSize && $Y-$i > 0) { 
                 imagecopymerge(
                     $Picture,
                     $this->Picture,

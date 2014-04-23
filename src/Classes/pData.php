@@ -293,15 +293,27 @@ class pData
      */
     public function setSerieDrawable($Series,$Drawable=true)
     {
-        if ( !is_array($Series) ) { $Series = $this->convertToArray($Series); }
-        foreach($Series as $Key => $Serie) { if (isset($this->Data["Series"][$Serie]) ) { $this->Data["Series"][$Serie]["isDrawable"] = $Drawable; } }
+        if ( !is_array($Series) ) { 
+            $Series = $this->convertToArray($Series);             
+        }
+        foreach($Series as $Key => $Serie) { 
+            if (isset($this->Data["Series"][$Serie]) ) { 
+                $this->Data["Series"][$Serie]["isDrawable"] = $Drawable;                 
+            }             
+        }
     }
 
     /* Set the icon associated to a given serie */
     public function setSeriePicture($Series,$Picture=null)
     {
-        if ( !is_array($Series) ) { $Series = $this->convertToArray($Series); }
-        foreach($Series as $Key => $Serie) { if (isset($this->Data["Series"][$Serie]) ) { $this->Data["Series"][$Serie]["Picture"] = $Picture; } }
+        if ( !is_array($Series) ) { 
+            $Series = $this->convertToArray($Series);
+        }
+        foreach($Series as $Key => $Serie) { 
+            if (isset($this->Data["Series"][$Serie]) ) { 
+                $this->Data["Series"][$Serie]["Picture"] = $Picture;
+            }                 
+        } 
     }
 
     /* Set the name of the X Axis */
@@ -713,6 +725,7 @@ class pData
     /* Load a palette file */
     public function loadPalette($FileName,$Overwrite=false)
     {
+        
         if ( !file_exists($FileName) ) { 
             return(-1);
         }
