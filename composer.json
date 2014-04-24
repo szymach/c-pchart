@@ -10,10 +10,5 @@
     },
     "require": {
         "php": ">=5.3.3"
-    },
-    "extra": {
-        "branch-alias": {
-            "master": "1.0"
-        }
     }
 }
