@@ -24,7 +24,7 @@ class pBarcode39
     public $MOD43;
 
     /**
-     * 
+     * Class constructor
      * @param type $BasePath
      * @param type $EnableMOD43
      * @throws \Exception

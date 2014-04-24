@@ -20,3 +20,5 @@ app/cache/*
 
 ### vendor ###
 vendor/*
+web
+web/*
