@@ -26,14 +26,13 @@ class pCache
      */
     public function __construct($Settings="")
     {
-        $CacheFolder	= isset($Settings["CacheFolder"]) ? $Settings["CacheFolder"] : "cache";
+        $CacheFolder	= isset($Settings["CacheFolder"]) ? $Settings["CacheFolder"] : __DIR__."/../../app/cache";
         $CacheIndex	= isset($Settings["CacheIndex"]) ? $Settings["CacheIndex"] : "index.db";
         $CacheDB	= isset($Settings["CacheDB"]) ? $Settings["CacheDB"] : "cache.db";
 
         $this->CacheFolder = $CacheFolder;
         $this->CacheIndex  = $CacheIndex;
         $this->CacheDB     = $CacheDB;
-
         if (!file_exists($this->CacheFolder."/".$this->CacheIndex)) { 
             touch($this->CacheFolder."/".$this->CacheIndex);             
         }
@@ -79,7 +78,6 @@ class pCache
         $TemporaryFile = $this->CacheFolder."/tmp_".rand(0,1000).".png";
         $Database      = $this->CacheFolder."/".$this->CacheDB;
         $Index         = $this->CacheFolder."/".$this->CacheIndex;
-
         /* Flush the picture to a temporary file */
         imagepng($pChartObject->Picture ,$TemporaryFile);
 
@@ -325,7 +323,7 @@ class pCache
         if ( $Picture == null ) { 
             return false;
         }
-
+        
         /* Flush the picture to a file */
         $Handle = fopen($Destination,"w");
         fwrite($Handle,$Picture);

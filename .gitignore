@@ -22,3 +22,6 @@ app/cache/*
 vendor/*
 web
 web/*
+
+### composer ###
+composer.phar

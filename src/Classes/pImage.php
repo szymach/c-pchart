@@ -95,7 +95,7 @@ class pImage extends pDraw
         $TransparentBackground = false
     ) {
         // set proper path for resources and the default font name
-        $this->FontName = $this->loadResource($this->FontName, 'fonts');
+        $this->FontName = $this->loadFont($this->FontName, 'fonts');
         
         $this->TransparentBackground = $TransparentBackground;
 
@@ -277,7 +277,7 @@ class pImage extends pDraw
      */
     public function getTextBox_deprecated($X,$Y,$FontName,$FontSize,$Angle,$Text)
     {
-        $FontName  = $this->loadResource($FontName, 'fonts');
+        $FontName  = $this->loadFont($FontName, 'fonts');
         $Size    = imagettfbbox($FontSize,$Angle,$FontName,$Text);
         $Width   = $this->getLength($Size[0],$Size[1],$Size[2],$Size[3])+1;
         $Height  = $this->getLength($Size[2],$Size[3],$Size[4],$Size[5])+1;
@@ -311,7 +311,7 @@ class pImage extends pDraw
      */
     public function getTextBox($X,$Y,$FontName,$FontSize,$Angle,$Text)
     {
-        $FontName  = $this->loadResource($FontName, 'fonts');
+        $FontName  = $this->loadFont($FontName, 'fonts');
         $coords = imagettfbbox($FontSize, 0, $FontName, $Text);
 
         $a = deg2rad($Angle); 
@@ -372,7 +372,7 @@ class pImage extends pDraw
         }
 
         if ($FontName != null) {
-            $this->FontName = $this->loadResource($FontName, 'fonts');
+            $this->FontName = $this->loadFont($FontName, 'fonts');
         }
         if ($FontSize != null) {
             $this->FontSize = $FontSize;

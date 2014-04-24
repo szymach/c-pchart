@@ -103,22 +103,22 @@ define("OUT_OF_SIGHT"                   , -10000000000000);
 
 class pDraw
 {
-    private $resourcesPath;
+    private $fontPath;
     
     /**
      * Set the path to the folder containing library resources (fonts, data, 
      * palletes). Must not end with '/'. If not specified, it defaults to
      * __DIR_.'/../Resources/'.
-     * @param string $resourcesPath
+     * @param string $fontPath
      * @throws \Exception
      */
-    public function setResourcesPath($resourcesPath = null)
+    public function setFontPath($fontPath = null)
     {
-        if ($resourcesPath === null) {
-            $this->resourcesPath = __DIR__.'/../Resources';
+        if ($fontPath === null) {
+            $this->fontPath = __DIR__.'/../Resources';
             return;
-        } elseif (file_exists($resourcesPath)) {
-            $this->resourcesPath = $resourcesPath;
+        } elseif (file_exists($fontPath)) {
+            $this->fontPath = $fontPath;
             return;
         }
         
@@ -132,15 +132,15 @@ class pDraw
      * @return type
      * @throws \Exception
      */
-    protected function loadResource($name, $type)
+    protected function loadFont($name, $type)
     {
-        if (empty($this->resourcesPath)) {
-            $this->setResourcesPath();
+        if (empty($this->fontPath)) {
+            $this->setFontPath();
         } 
         if (file_exists($name)) {
             return $name;
-        } elseif (file_exists($this->resourcesPath.'/'.$type.'/'.$name)) {
-            return $this->resourcesPath.'/'.$type.'/'.$name;
+        } elseif (file_exists($this->fontPath.'/'.$type.'/'.$name)) {
+            return $this->fontPath.'/'.$type.'/'.$name;
         }
         
         throw new \Exception(
@@ -1211,7 +1211,7 @@ class pDraw
         $Align		= isset($Format["Align"]) ? $Format["Align"] : TEXT_ALIGN_BOTTOMLEFT;
         $Alpha		= isset($Format["Alpha"]) ? $Format["Alpha"] : $this->FontColorA;
         $FontName	= isset($Format["FontName"]) 
-                        ? $this->loadResource($Format["FontName"], 'fonts') 
+                        ? $this->loadFont($Format["FontName"], 'fonts') 
                         : $this->FontName;
         $FontSize	= isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
         $ShowOrigine	= isset($Format["ShowOrigine"]) ? $Format["ShowOrigine"] : false;
@@ -1798,7 +1798,7 @@ class pDraw
         $BorderG  = isset($Format["BorderG"]) ? $Format["BorderG"] : $FillG;
         $BorderB  = isset($Format["BorderB"]) ? $Format["BorderB"] : $FillB;
         $FontName = isset($Format["FontName"]) 
-                    ? $this->loadResource($Format["FontName"], 'fonts') 
+                    ? $this->loadFont($Format["FontName"], 'fonts') 
                     : $this->FontName;
         $FontSize = isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
         $Alpha    = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
@@ -2045,7 +2045,7 @@ class pDraw
     public function getLegendSize($Format="")
     {
         $FontName	= isset($Format["FontName"]) 
-                        ? $this->loadResource($Format["FontName"], 'fonts') 
+                        ? $this->loadFont($Format["FontName"], 'fonts') 
                         : $this->FontName;
         $FontSize	= isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
         $BoxSize	= isset($Format["BoxSize"]) ? $Format["BoxSize"] : 5;
@@ -2162,7 +2162,7 @@ class pDraw
     {
         $Family	= isset($Format["Family"]) ? $Format["Family"] : LEGEND_FAMILY_BOX;
         $FontName = isset($Format["FontName"]) 
-                    ? $this->loadResource($Format["FontName"], 'fonts') 
+                    ? $this->loadFont($Format["FontName"], 'fonts') 
                     : $this->FontName;
         $FontSize = isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
         $FontR	= isset($Format["FontR"]) ? $Format["FontR"] : $this->FontColorR;
@@ -10130,7 +10130,7 @@ class pDraw
         $B			= isset($Format["B"]) ? $Format["B"] : $this->FontColorB;
         $Alpha			= isset($Format["Alpha"]) ? $Format["Alpha"] : $this->FontColorA;
         $FontName		= isset($Format["FontName"]) 
-                                ? $this->loadResource($Format["FontName"], 'fonts') 
+                                ? $this->loadFont($Format["FontName"], 'fonts') 
                                 : $this->FontName;
         $FontSize		= isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
         $TitleMode		= isset($Format["TitleMode"]) ? $Format["TitleMode"] : LABEL_TITLE_NOBACKGROUND;
