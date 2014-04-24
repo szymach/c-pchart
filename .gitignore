@@ -16,12 +16,14 @@ nbactions.xml
 nb-configuration.xml
 
 ### CpChart ###
+!app/
+!app/cache/
 app/cache/*
 
-### vendor ###
+### vendor / web ###
 vendor/*
 web
 web/*
 
-### composer ###
+### Composer ###
 composer.phar
