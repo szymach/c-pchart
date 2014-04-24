@@ -28,7 +28,7 @@ For composer installation, add:
 
 >"require": {
 
->> "szymach/c-pchart": "1.0"
+>> "szymach/c-pchart": "dev-master"
 
 > },
 
