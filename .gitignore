@@ -15,11 +15,6 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
-### CpChart ###
-!app/
-!app/cache/
-app/cache/*
-
 ### vendor / web ###
 vendor/*
 web
