@@ -43,7 +43,6 @@ statements (or you can prefix each class name with the namespace).
 You could also create a service for loading the classes without
 having to add all these by yourself.
 
-<code>
 
         require __DIR__.'/../vendor/autoload.php';
 
@@ -75,7 +74,6 @@ having to add all these by yourself.
         } catch (\Exception $ex) {
             echo 'There was an error: '.$ex->getMessage();
         }
-</code>
 
 Basically, it should work as defined in the pChart 2.0 documentation with added
 support for try/catch functionality. 
