@@ -20,9 +20,9 @@ How to install it?
 
 Manual download: 
 
-[GitHub](https://github.com/szymach/cp-chart)
+[GitHub](https://github.com/szymach/c-pchart)
 
-[Packagist](https://packagist.org/packages/szymach/cp-chart)
+[Packagist](https://packagist.org/packages/szymach/c-pchart)
 
 For composer installation, add:
 
