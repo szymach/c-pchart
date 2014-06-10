@@ -13,19 +13,9 @@ namespace CpChart\Classes;
 
     You can find the whole class documentation on the pChart web site.
 */
-
-define("TEXT_POS_TOP"      , 690001);
-define("TEXT_POS_RIGHT"    , 690002);
-
-/* pSplit class definition */
 class pSplit
 {
     public $pChartObject;
-
-    /**
-     * Class creator
-     */
-    public function __construct() { }
 
     /**
      * Create the encoded string

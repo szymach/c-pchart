@@ -24,7 +24,7 @@ class pCache
      * Constructor
      * @param string $Settings
      */
-    public function __construct($Settings="")
+    public function __construct($Settings = array())
     {
         $CacheFolder	= isset($Settings["CacheFolder"]) ? $Settings["CacheFolder"] : __DIR__."/../../app/cache";
         $CacheIndex	= isset($Settings["CacheIndex"]) ? $Settings["CacheIndex"] : "index.db";

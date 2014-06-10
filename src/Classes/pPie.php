@@ -13,28 +13,6 @@ namespace CpChart\Classes;
 
     You can find the whole class documentation on the pChart web site.
 */
-
-/**
- * To verify - line 304
- */
-
-
-/* Class return codes */
-define("PIE_NO_ABSCISSA"	, 140001);
-define("PIE_NO_DATASERIE"	, 140002);
-define("PIE_SUMISnull"		, 140003);
-define("PIE_RENDERED"		, 140000);
-
-define("PIE_LABEL_COLOR_AUTO"	, 140010);
-define("PIE_LABEL_COLOR_MANUAL", 140011);
-
-define("PIE_VALUE_NATURAL"	, 140020);
-define("PIE_VALUE_PERCENTAGE"	, 140021);
-
-define("PIE_VALUE_INSIDE"      , 140030);
-define("PIE_VALUE_OUTSIDE"     , 140031);
-
-/* pPie class definition */
 class pPie
 {
     public $pChartObject;
@@ -46,10 +24,10 @@ class pPie
      * @param type $Object
      * @param type $pDataObject
      */
-    public function __construct($Object,$pDataObject)
+    public function __construct($pChartObject, $pDataObject)
     {
         /* Cache the pChart object reference */
-        $this->pChartObject = $Object;
+        $this->pChartObject = $pChartObject;
 
         /* Cache the pData object reference */
         $this->pDataObject  = $pDataObject;

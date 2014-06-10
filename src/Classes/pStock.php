@@ -13,10 +13,6 @@ namespace CpChart\Classes;
 
      You can find the whole class documentation on the pChart web site.
  */
-
-define("STOCK_MISSING_SERIE"	, 180001);
-
-/* pStock class definition */
 class pStock
 {
     public $pChartObject;
@@ -27,7 +23,7 @@ class pStock
      * @param type $pChartObject
      * @param type $pDataObject
      */
-    public function __construct($pChartObject,$pDataObject)
+    public function __construct($pChartObject, $pDataObject)
     {
         $this->pChartObject = $pChartObject;
         $this->pDataObject  = $pDataObject;

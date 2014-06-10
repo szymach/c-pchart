@@ -13,25 +13,9 @@ namespace CpChart\Classes;
 
     You can find the whole class documentation on the pChart web site.
 */
-
-define("SEGMENT_HEIGHT_AUTO"		, 690001);
-
-define("RADAR_LAYOUT_STAR"		, 690011);
-define("RADAR_LAYOUT_CIRCLE"		, 690012);
-
-define("RADAR_LABELS_ROTATED"		, 690021);
-define("RADAR_LABELS_HORIZONTAL"	, 690022);
-
-/* pRadar class definition */
 class pRadar
 {
     public $pChartObject;
-
-    /**
-     * Class creator
-     */
-    public function __construct()
-    { }
 
     /**
      * Draw a radar chart

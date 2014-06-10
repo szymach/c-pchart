@@ -13,23 +13,6 @@ namespace CpChart\Classes;
 
      You can find the whole class documentation on the pChart web site.
 */
-
-define("NODE_TYPE_FREE"	, 690001);
-define("NODE_TYPE_CENTRAL"	, 690002);
-
-define("NODE_SHAPE_CIRCLE"	, 690011);
-define("NODE_SHAPE_TRIANGLE"	, 690012);
-define("NODE_SHAPE_SQUARE"	, 690013);
-
-define("ALGORITHM_RANDOM"	, 690021);
-define("ALGORITHM_WEIGHTED"	, 690022);
-define("ALGORITHM_CIRCULAR"	, 690023);
-define("ALGORITHM_CENTRAL"	, 690024);
-
-define("LABEL_CLASSIC"		, 690031);
-define("LABEL_LIGHT"		, 690032);
-
-/* pSpring class definition */
 class pSpring
 {
     public $History;

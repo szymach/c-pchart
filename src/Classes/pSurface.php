@@ -13,16 +13,6 @@ namespace CpChart\Classes;
 
     You can find the whole class documentation on the pChart web site.
 */
-
-define("UNKNOWN"		, 0.123456789);
-define("IGNORED"		, -1);
-
-define("LABEL_POSITION_LEFT"	, 880001);
-define("LABEL_POSITION_RIGHT"	, 880002);
-define("LABEL_POSITION_TOP"	, 880003);
-define("LABEL_POSITION_BOTTOM"	, 880004);
-
-/* pStock class definition */
 class pSurface
 {
     public $pChartObject;
@@ -33,8 +23,9 @@ class pSurface
     /**
      * Class creator
      * @param type $pChartObject
+     * @param type $pDataObject - added for compatibility with other classes
      */
-    public function __construct($pChartObject)
+    public function __construct($pChartObject, $pDataObject = null)
     {
         $this->pChartObject = $pChartObject;
         $this->GridSize     = 10;

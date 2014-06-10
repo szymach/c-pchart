@@ -1,5 +1,6 @@
 <?php
 namespace CpChart\Classes;
+
 /*
     pDraw - class extension with drawing methods
 
@@ -13,94 +14,6 @@ namespace CpChart\Classes;
 
     You can find the whole class documentation on the pChart web site.
 */
-
-define("DIRECTION_VERTICAL"		, 690001);
-define("DIRECTION_HORIZONTAL"		, 690002);
-
-define("SCALE_POS_LEFTRIGHT"		, 690101);
-define("SCALE_POS_TOPBOTTOM"		, 690102);
-
-define("SCALE_MODE_FLOATING"		, 690201);
-define("SCALE_MODE_START0"		, 690202);
-define("SCALE_MODE_ADDALL"		, 690203);
-define("SCALE_MODE_ADDALL_START0"	, 690204);
-define("SCALE_MODE_MANUAL"		, 690205);
-
-define("SCALE_SKIP_NONE"		, 690301);
-define("SCALE_SKIP_SAME"		, 690302);
-define("SCALE_SKIP_NUMBERS"		, 690303);
-
-define("TEXT_ALIGN_TOPLEFT"		, 690401);
-define("TEXT_ALIGN_TOPMIDDLE"		, 690402);
-define("TEXT_ALIGN_TOPRIGHT"		, 690403);
-define("TEXT_ALIGN_MIDDLELEFT"		, 690404);
-define("TEXT_ALIGN_MIDDLEMIDDLE"	, 690405);
-define("TEXT_ALIGN_MIDDLERIGHT"         , 690406);
-define("TEXT_ALIGN_BOTTOMLEFT"		, 690407);
-define("TEXT_ALIGN_BOTTOMMIDDLE"	, 690408);
-define("TEXT_ALIGN_BOTTOMRIGHT"         , 690409);
-
-define("POSITION_TOP"                  , 690501);
-define("POSITION_BOTTOM"               , 690502);
-
-define("LABEL_POS_LEFT"                 , 690601);
-define("LABEL_POS_CENTER"		, 690602);
-define("LABEL_POS_RIGHT"		, 690603);
-define("LABEL_POS_TOP"			, 690604);
-define("LABEL_POS_BOTTOM"		, 690605);
-define("LABEL_POS_INSIDE"		, 690606);
-define("LABEL_POS_OUTSIDE"		, 690607);
-
-define("ORIENTATION_HORIZONTAL"         , 690701);
-define("ORIENTATION_VERTICAL"		, 690702);
-define("ORIENTATION_AUTO"		, 690703);
-
-define("LEGEND_NOBORDER"		, 690800);
-define("LEGEND_BOX"			, 690801);
-define("LEGEND_ROUND"			, 690802);
-
-define("LEGEND_VERTICAL"		, 690901);
-define("LEGEND_HORIZONTAL"		, 690902);
-
-define("LEGEND_FAMILY_BOX"		, 691051);
-define("LEGEND_FAMILY_CIRCLE"		, 691052);
-define("LEGEND_FAMILY_LINE"		, 691053);
-
-define("DISPLAY_AUTO"			, 691001);
-define("DISPLAY_MANUAL"                 , 691002);
-
-define("LABELING_ALL"			, 691011);
-define("LABELING_DIFFERENT"		, 691012);
-
-define("BOUND_MIN"			, 691021);
-define("BOUND_MAX"			, 691022);
-define("BOUND_BOTH"			, 691023);
-
-define("BOUND_LABEL_POS_TOP"		, 691031);
-define("BOUND_LABEL_POS_BOTTOM"         , 691032);
-define("BOUND_LABEL_POS_AUTO"		, 691033);
-
-define("CAPTION_LEFT_TOP"		, 691041);
-define("CAPTION_RIGHT_BOTTOM"		, 691042);
-
-define("GRADIENT_SIMPLE"		, 691051);
-define("GRADIENT_EFFECT_CAN"		, 691052);
-
-define("LABEL_TITLE_NOBACKGROUND"	, 691061);
-define("LABEL_TITLE_BACKGROUND"         , 691062);
-
-define("LABEL_POINT_NONE"		, 691071);
-define("LABEL_POINT_CIRCLE"		, 691072);
-define("LABEL_POINT_BOX"		, 691073);
-
-define("ZONE_NAME_ANGLE_AUTO"		, 691081);
-
-define("PI"                             , 3.14159265);
-define("ALL"                            , 69);
-define("NONE"                           , 31);
-define("AUTO"                           , 690000);
-define("OUT_OF_SIGHT"                   , -10000000000000);
-
 class pDraw
 {
     private $fontPath;

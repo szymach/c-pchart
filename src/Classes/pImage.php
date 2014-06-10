@@ -15,21 +15,9 @@ You can find the whole class documentation on the pChart web site.
 */
 
 /* The GD extension is mandatory */
-if (!extension_loaded('gd') && !extension_loaded('gd2'))
-{
+if (!extension_loaded('gd') && !extension_loaded('gd2')) {
     throw new \Exception("GD extension must be loaded. \r\n");
 }
-
-/* Image map handling */
-define("IMAGE_MAP_STORAGE_FILE"	, 680001);
-define("IMAGE_MAP_STORAGE_SESSION"	, 680002);
-
-/* Last generated chart layout */
-define("CHART_LAST_LAYOUT_REGULAR"	, 680011);
-define("CHART_LAST_LAYOUT_STACKED"	, 680012);
-
-/* ImageMap string delimiter */
-define("IMAGE_MAP_DELIMITER"		, chr(1));
 
 class pImage extends pDraw
 {

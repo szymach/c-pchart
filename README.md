@@ -15,7 +15,10 @@ What was done:
 - Reorganized files a bit and refactored code for better readability. Also, basic annotations were added
 to functions.
 
-- Added a factory service for loading the libraries classes.
+- Added a factory service for loading the classes.
+
+- Moved all constants to a single file 'src/Resources/data/configuration.php'. This file is *required*
+for the library to function. If you use the factory class, the file is loaded automatically.
 
 How to install it?
 ================
@@ -45,18 +48,19 @@ or use the provided factory. An example below.
 
         require __DIR__.'/../vendor/autoload.php';
 
-        use CpChart\Services\chartFactory;
+        use CpChart\Services\pChartFactory;
 
         try {
-            // create a factory class
-            $factory = new chartFactory();
+            // create a factory class - it will load necessary files automatically,
+            // otherwise you will need to add them on your own
+            $factory = new pChartFactory();
             
             // create and populate the pData class
-            $myData = $factory->newData(array(VOID,3,4,3,5), "Serie 1");
+            $myData = $factory->newData(array(VOID, 3, 4, 3, 5), "Serie1");
 
             // create the image and set the data
-            $myPicture = $factory->newImage(700,230,$myData);
-            $myPicture->setGraphArea(60,40,670,190);
+            $myPicture = $factory->newImage(700, 230, $myData);
+            $myPicture->setGraphArea(60, 40, 670, 190);
             $myPicture->setFontProperties(array(
                 "FontName"=>"Forgotte.ttf",
                 "FontSize"=>11)
@@ -72,7 +76,8 @@ or use the provided factory. An example below.
         }
 
 Basically, it should work as defined in the pChart 2.0 documentation with added
-support for try/catch functionality. 
+support for try/catch functionality. The factory class has methods to load all types of 
+classes present in the pChart library.
 
 IMPORTANT! If you want to use any of the fonts or palletes files, provide only
 the name of the actual file, do not add the 'fonts' or 'palettes' folder to the

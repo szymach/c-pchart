@@ -13,23 +13,16 @@ namespace CpChart\Classes;
 
     You can find the whole class documentation on the pChart web site.
 */
-
-define("INDICATOR_CAPTION_DEFAULT"	, 700001);
-define("INDICATOR_CAPTION_EXTENDED"	, 700002);
-
-define("INDICATOR_CAPTION_INSIDE"	, 700011);
-define("INDICATOR_CAPTION_BOTTOM"	, 700012);
-
-define("INDICATOR_VALUE_BUBBLE"	, 700021);
-define("INDICATOR_VALUE_LABEL"		, 700022);
-
-/* pIndicator class definition */
 class pIndicator
 {
     public $pChartObject;
 
-    /* Class creator */
-    public function __construct($pChartObject)
+    /**
+     * Constructor
+     * @param type $pChartObject
+     * @param type $pDataObject - added for compatibility with other classes
+     */
+    public function __construct($pChartObject, $pDataObject = null)
     {
         $this->pChartObject = $pChartObject;
     }
