@@ -10,7 +10,7 @@ if (!extension_loaded('gd') && !extension_loaded('gd2')) {
 }
 
 // add constants required by the library classes
-require_once __DIR__.'/../resources/data/constants.php';
+require_once __DIR__.'/../Resources/data/constants.php';
 
 /**
  * A simple service class utilizing the Factory design pattern. It has three 
