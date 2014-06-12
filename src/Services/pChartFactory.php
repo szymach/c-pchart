@@ -28,17 +28,17 @@ class pChartFactory
      * pBubble, pPie, pScatter, pStock, pSurface and pIndicator. Otherwise the 
      * pChartObject and pDataObject parameters are redundant.
      * 
-     * @param string $chartName - name of the class to be loaded
+     * @param string $chartType - type of the chart to be loaded (for example 'pie', not 'pPie')
      * @param \CpChart\Classes\pImage $pChartObject
      * @param \CpChart\Classes\pData $pDataObject
      * @return \CpChart\Classes\$chartName
      */
     public function newChart(
-        $chartName,
+        $chartType,
         pImage $pChartObject = null, 
         pData $pDataObject = null
     ) {
-        $className = $this->namespace.$chartName;
+        $className = $this->namespace.'p'.ucfirst($chartType);
         return new $className($pChartObject, $pDataObject);
     }
     

@@ -17,7 +17,7 @@ to functions.
 
 - Added a factory service for loading the classes.
 
-- Moved all constants to a single file 'src/Resources/data/configuration.php'. This file is *required*
+- Moved all constants to a single file 'src/Resources/data/constants.php'. This file is *required*
 for the library to function. If you use the factory class, the file is loaded automatically.
 
 How to install it?
@@ -36,7 +36,7 @@ For composer installation, add:
 > },
 
 to your composer.json file and update your dependencies. After that, all
-classes are available under "CpChart\Classes" namespace (or "CpChart\Services")
+classes are available under "CpChart\Classes" namespace or "CpChart\Services"
 for the factory.
 
 How to use it?
@@ -61,11 +61,16 @@ or use the provided factory. An example below.
             // create the image and set the data
             $myPicture = $factory->newImage(700, 230, $myData);
             $myPicture->setGraphArea(60, 40, 670, 190);
-            $myPicture->setFontProperties(array(
-                "FontName"=>"Forgotte.ttf",
-                "FontSize"=>11)
+            $myPicture->setFontProperties(
+                array(
+                    "FontName" => "Forgotte.ttf",
+                    "FontSize" => 11
+                )
             );
             
+            // creating a pie chart - notice that you specify the type of chart, not class name
+            $pieChart = $factory->newChart("pie", $myPicture, $myData);
+
             // do the drawing
             $myPicture->drawScale();
             $myPicture->drawSplineChart();   
@@ -86,9 +91,11 @@ than the default, you need to add the full path to the file (ex. __DIR__.'/folde
 
 Changelog
 =========
-1.0 Stable version with basic functionality
+1.0 Stable version with basic functionality.
 
-1.1 Added factory service
+1.1 Added factory service.
+
+1.1.1 Changed chart loading via factory a bit (see class annotations)
 
 References
 ==========
