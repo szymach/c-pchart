@@ -23,10 +23,14 @@ class pChartFactory
     private $namespace = 'CpChart\Classes\\';
     
     /**
-     * Load a new chart class (bar, pie etc.). Some classes require instances of
+     * Loads a new chart class (scatter, pie etc.). Some classes require instances of
      * pImage and pData classes passed into their constructor. These classes are: 
      * pBubble, pPie, pScatter, pStock, pSurface and pIndicator. Otherwise the 
      * pChartObject and pDataObject parameters are redundant.
+     * 
+     * ATTENTION! SOME OF THE CHARTS NEED TO BE DRAWN VIA A METHOD FROM THE
+     * pIMAGE CLASS (ex. 'drawBarChart'), NOT THROUGH THIS METHOD! READ THE 
+     * DOCUMENTATION FOR MORE DETAILS.
      * 
      * @param string $chartType - type of the chart to be loaded (for example 'pie', not 'pPie')
      * @param \CpChart\Classes\pImage $pChartObject
@@ -38,8 +42,38 @@ class pChartFactory
         pImage $pChartObject = null, 
         pData $pDataObject = null
     ) {
+        $this->checkChartType($chartType);
         $className = $this->namespace.'p'.ucfirst($chartType);
+        if (!class_exists($className)) {
+            throw new \Exception('The requested chart class does not exist!');
+        }
         return new $className($pChartObject, $pDataObject);
+    }
+    
+    /**
+     * Checks if the requested chart type is created via one of the methods in
+     * the pDraw class, instead through a seperate class. If a method in pDraw
+     * exists, an exception with proper information is thrown.
+     * 
+     * @param string $chartType
+     * @throws \Exception
+     */
+    private function checkChartType($chartType)
+    {
+        $methods = array(
+            'draw'.ucfirst($chartType).'Chart',
+            'draw'.ucfirst($chartType)
+        );
+        foreach ($methods as $method) {
+            if (method_exists($this->namespace.'pImage', $method)) {
+                throw new \Exception(
+                    'The requested chart is not a seperate class, to draw it you'
+                  . ' need to call the "'.$method.'" method on the pImage object'
+                  . ' after populating it with data!'
+                  . ' Check the documentation on library\'s website for details.'
+                );
+            }
+        }
     }
     
     /**

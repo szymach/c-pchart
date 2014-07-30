@@ -20,7 +20,7 @@ to functions.
 - Moved all constants to a single file 'src/Resources/data/constants.php'. This file is *required*
 for the library to function. If you use the factory class, the file is loaded automatically.
 
-How to install it?
+Installation:
 ================
 
 [GitHub](https://github.com/szymach/c-pchart)
@@ -39,11 +39,11 @@ to your composer.json file and update your dependencies. After that, all
 classes are available under "CpChart\Classes" namespace or "CpChart\Services"
 for the factory.
 
-How to use it?
+Usage:
 ==============
 
 The main difference is that you can either load the class via the 'use' statement
-or use the provided factory. An example below.
+or use the provided factory. An example below. 
 
 
         require __DIR__.'/../vendor/autoload.php';
@@ -68,7 +68,9 @@ or use the provided factory. An example below.
                 )
             );
             
-            // creating a pie chart - notice that you specify the type of chart, not class name
+            // creating a pie chart - notice that you specify the type of chart, not class name.
+            // not all charts need to be created through this method (ex. the bar chart),
+            // some are created via the pImage class (check the documentation before drawing).
             $pieChart = $factory->newChart("pie", $myPicture, $myData);
 
             // do the drawing
@@ -96,6 +98,8 @@ Changelog
 1.1 Added factory service.
 
 1.1.1 Changed chart loading via factory a bit (see class annotations)
+
+1.1.2 Updated service class with Exception handling regarding missing / wrong class name
 
 References
 ==========
