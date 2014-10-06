@@ -9,9 +9,6 @@ if (!extension_loaded('gd') && !extension_loaded('gd2')) {
     throw new \Exception("GD extension must be loaded. \r\n");
 }
 
-// add constants required by the library classes
-require_once __DIR__.'/../Resources/data/constants.php';
-
 /**
  * A simple service class utilizing the Factory design pattern. It has three 
  * class specific methods, as well as a generic loader for the chart classes.
