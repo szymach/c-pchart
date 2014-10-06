@@ -9,9 +9,6 @@ if (!extension_loaded('gd') && !extension_loaded('gd2')) {
     throw new \Exception("GD extension must be loaded. \r\n");
 }
 
-// add constants required by the library classes
-require_once __DIR__.'/../Resources/data/constants.php';
-
 /**
  * A simple service class utilizing the Factory design pattern. It has three 
  * class specific methods, as well as a generic loader for the chart classes.
@@ -101,7 +98,7 @@ class pChartFactory
      * @param integer $YSize - length of the Y axis
      * @param \CpChart\Classes\pData $DataSet - pData class populated with points
      * @param boolean $TransparentBackground
-     * @return \CpChart\Services\pImage
+     * @return \CpChart\Classes\pImage
      */
     public function newImage(
         $XSize,

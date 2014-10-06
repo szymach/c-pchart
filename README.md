@@ -45,42 +45,43 @@ Usage:
 The main difference is that you can either load the class via the 'use' statement
 or use the provided factory. An example below. 
 
+```php
+require __DIR__.'/../vendor/autoload.php';
 
-        require __DIR__.'/../vendor/autoload.php';
+use CpChart\Services\pChartFactory;
 
-        use CpChart\Services\pChartFactory;
-
-        try {
-            // create a factory class - it will load necessary files automatically,
-            // otherwise you will need to add them on your own
-            $factory = new pChartFactory();
-            
-            // create and populate the pData class
-            $myData = $factory->newData(array(VOID, 3, 4, 3, 5), "Serie1");
-
-            // create the image and set the data
-            $myPicture = $factory->newImage(700, 230, $myData);
-            $myPicture->setGraphArea(60, 40, 670, 190);
-            $myPicture->setFontProperties(
-                array(
-                    "FontName" => "Forgotte.ttf",
-                    "FontSize" => 11
-                )
-            );
-            
-            // creating a pie chart - notice that you specify the type of chart, not class name.
-            // not all charts need to be created through this method (ex. the bar chart),
-            // some are created via the pImage class (check the documentation before drawing).
-            $pieChart = $factory->newChart("pie", $myPicture, $myData);
-
-            // do the drawing
-            $myPicture->drawScale();
-            $myPicture->drawSplineChart();   
-            $myPicture->Stroke();
+try {
+    // create a factory class - it will load necessary files automatically,
+    // otherwise you will need to add them on your own
+    $factory = new pChartFactory();
     
-        } catch (\Exception $ex) {
-            echo 'There was an error: '.$ex->getMessage();
-        }
+    // create and populate the pData class
+    $myData = $factory->newData(array(VOID, 3, 4, 3, 5), "Serie1");
+
+    // create the image and set the data
+    $myPicture = $factory->newImage(700, 230, $myData);
+    $myPicture->setGraphArea(60, 40, 670, 190);
+    $myPicture->setFontProperties(
+        array(
+            "FontName" => "Forgotte.ttf",
+            "FontSize" => 11
+        )
+    );
+    
+    // creating a pie chart - notice that you specify the type of chart, not class name.
+    // not all charts need to be created through this method (ex. the bar chart),
+    // some are created via the pImage class (check the documentation before drawing).
+    $pieChart = $factory->newChart("pie", $myPicture, $myData);
+
+    // do the drawing
+    $myPicture->drawScale();
+    $myPicture->drawSplineChart();   
+    $myPicture->Stroke();
+
+} catch (\Exception $ex) {
+    echo 'There was an error: '.$ex->getMessage();
+}
+```
 
 Basically, it should work as defined in the pChart 2.0 documentation with added
 support for try/catch functionality. The factory class has methods to load all types of 
