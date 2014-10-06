@@ -115,4 +115,4 @@ PHP Framework Interoperability Group at GitHub on PHP coding standards:
 
 [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
 
-[PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
+[PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
