@@ -101,7 +101,7 @@ class pChartFactory
      * @param integer $YSize - length of the Y axis
      * @param \CpChart\Classes\pData $DataSet - pData class populated with points
      * @param boolean $TransparentBackground
-     * @return \CpChart\Services\pImage
+     * @return \CpChart\Classes\pImage
      */
     public function newImage(
         $XSize,
