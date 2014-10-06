@@ -6,7 +6,8 @@
     "keywords": ["pChart","composer","statistics","charts", "c-pChart", "c-pchart", "pchart"],
     "homepage": "https://github.com/szymach/c-pchart",
     "autoload": {
-        "psr-4": { "CpChart\\": "src/" }
+        "psr-4": { "CpChart\\": "src/" },
+        "files": ["src/Resources/data/constants.php"]
     },
     "require": {
         "php": ">=5.3.3"
