@@ -18,7 +18,7 @@ to functions.
 - Added a factory service for loading the classes.
 
 - Moved all constants to a single file 'src/Resources/data/constants.php'. This file is *required*
-for the library to function. If you use the factory class, the file is loaded automatically.
+for the library to function. It is now loaded via Composer.
 
 Installation:
 ================
@@ -101,6 +101,8 @@ Changelog
 1.1.1 Changed chart loading via factory a bit (see class annotations)
 
 1.1.2 Updated service class with Exception handling regarding missing / wrong class name
+
+1.1.3 The file with classes constants are now loaded via Composer (thanks to ThaDafinser)
 
 References
 ==========
