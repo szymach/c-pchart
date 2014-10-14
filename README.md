@@ -98,11 +98,11 @@ Changelog
 
 1.1 Added factory service.
 
-1.1.1 Changed chart loading via factory a bit (see class annotations)
+1.1.1 Changed chart loading via factory a bit (see class annotations).
 
-1.1.2 Updated service class with Exception handling regarding missing / wrong class name
+1.1.2 Updated service class with Exception handling regarding missing / wrong class name.
 
-1.1.3 The file with classes constants are now loaded via Composer (thanks to ThaDafinser)
+1.1.3 The file with classes' constants is now loaded via Composer (thanks to ThaDafinser).
 
 References
 ==========
