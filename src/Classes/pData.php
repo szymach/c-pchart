@@ -836,12 +836,12 @@ class pData
     public function loadPalette($FileName,$Overwrite=false)
     {
         if (file_exists($FileName)) {
-            $FileHandle = @fopen($FileName, "r");
+            $fileHandle = @fopen($FileName, "r");
         } else {
-            $FileHandle = @fopen(__DIR__.'/../Resources/palettes/'.$FileName, "r");     
+            $fileHandle = @fopen(__DIR__.'/../Resources/palettes/'.$FileName, "r");     
         }
         
-        if (!($FileHandle) ) { 
+        if (!($fileHandle) ) { 
             throw new \Exception('The requested palette '.$FileName.' was not found!');
         }
         if ( $Overwrite ) { 
