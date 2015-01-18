@@ -4,16 +4,11 @@ namespace CpChart\Services;
 use CpChart\Classes\pData;
 use CpChart\Classes\pImage;
 
-// The GD extension is mandatory
-if (!extension_loaded('gd') && !extension_loaded('gd2')) {
-    throw new \Exception("GD extension must be loaded. \r\n");
-}
-
 /**
  * A simple service class utilizing the Factory design pattern. It has three 
  * class specific methods, as well as a generic loader for the chart classes.
  *
- * @author szymach
+ * @author szymach @ http://github.com/szymach
  */
 class pChartFactory
 {
@@ -30,8 +25,8 @@ class pChartFactory
      * DOCUMENTATION FOR MORE DETAILS.
      * 
      * @param string $chartType - type of the chart to be loaded (for example 'pie', not 'pPie')
-     * @param \CpChart\Classes\pImage $pChartObject
-     * @param \CpChart\Classes\pData $pDataObject
+     * @param pImage $pChartObject
+     * @param pData $pDataObject
      * @return \CpChart\Classes\$chartName
      */
     public function newChart(
@@ -78,7 +73,7 @@ class pChartFactory
      * 
      * @param array $points - points to be added to serie
      * @param string $serieName - name of the serie
-     * @return \CpChart\Classes\pData
+     * @return pData
      */
     public function newData(array $points = array(), $serieName = "Serie1")
     {
@@ -96,9 +91,9 @@ class pChartFactory
      * 
      * @param integer $XSize - length of the X axis
      * @param integer $YSize - length of the Y axis
-     * @param \CpChart\Classes\pData $DataSet - pData class populated with points
+     * @param pData $DataSet - pData class populated with points
      * @param boolean $TransparentBackground
-     * @return \CpChart\Classes\pImage
+     * @return pImage
      */
     public function newImage(
         $XSize,
@@ -123,7 +118,7 @@ class pChartFactory
      * @param string $number - number identifing the pBarcode class ("39" or "128")
      * @param string $BasePath - optional path for the file containing the class data
      * @param boolean $EnableMOD43
-     * @return \CpChart\Classes\pBarcode(39|128)
+     * @return pBarcode(39|128)
      * @throws \Exception
      */
     public function getBarcode($number, $BasePath = "", $EnableMOD43 = false)

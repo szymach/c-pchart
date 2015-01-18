@@ -2,19 +2,16 @@
     "name": "szymach/c-pchart",
     "license": "MIT",
     "type": "project",
-    "description": "Port of \"pChart\" library into PHP5 standards with composer.phar support.",
-    "keywords": ["pChart","composer","statistics","charts", "c-pChart", "c-pchart", "pchart"],
+    "description": "Port of \"pChart\" library into PHP 5.3.",
+    "keywords": ["pchart", "pChart","composer","statistics","charts", "c-pChart", "c-pchart"],
     "homepage": "https://github.com/szymach/c-pchart",
     "autoload": {
         "psr-4": { "CpChart\\": "src/" },
         "files": ["src/Resources/data/constants.php"]
     },
     "require": {
-        "php": ">=5.3.3"
-    },
-    "require-dev": {
-        "phpspec/phpspec": "~2.0",
-        "squizlabs/php_codesniffer": "~1.5.5"
+        "php": ">=5.3.3",
+        "ext-gd": "*"
     },
     "version": "1.1.4"
 }
