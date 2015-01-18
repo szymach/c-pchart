@@ -12,5 +12,9 @@
     "require": {
         "php": ">=5.3.3"
     },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0",
+        "squizlabs/php_codesniffer": "~1.5.5"
+    },
     "version": "1.1.3"
 }
