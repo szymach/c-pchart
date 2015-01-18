@@ -3,27 +3,17 @@ language: php
 cache:
   directories:
     - vendor
-    - bin
-
-env:
-  global:
-    - PROJECT_NAME=c-pchart
 
 php:
   - 5.4
-
-install:
-  - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-  - echo 'date.timezone = "Europe/Warsaw"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - echo "127.0.0.1 $PROJECT_NAME.dev" | sudo tee -a /etc/hosts
 
 before_script:
   - composer self-update -n
   - composer install -n --prefer-dist -v
 
 script:
-  - bin/phpcs --standard=PSR2 --encoding=UTF-8 --ignore="*.js" src/
-  - bin/phpspec run -f pretty
+  - vendor/bin/phpcs --standard=PSR2 --encoding=UTF-8 --ignore="*.js" src/
+  - vendor/bin/phpspec run -f pretty
 
 after_failure:
   - cat app/logs/dev.log
