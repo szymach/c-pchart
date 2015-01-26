@@ -2332,6 +2332,7 @@ class pDraw
         $Floating	= isset($Format["Floating"]) ? $Format["Floating"] : false;
         $Mode		= isset($Format["Mode"]) ? $Format["Mode"] : SCALE_MODE_FLOATING;
         $RemoveXAxis	= isset($Format["RemoveXAxis"]) ? $Format["RemoveXAxis"] : false;
+        $RemoveYAxiValues = isset($Format["RemoveYAxisValues"]) ? $Format["RemoveYAxisValues"] : FALSE;
         $MinDivHeight	= isset($Format["MinDivHeight"]) ? $Format["MinDivHeight"] : 20;
         $Factors	= isset($Format["Factors"]) ? $Format["Factors"] : array(1,2,5);
         $ManualScale	= isset($Format["ManualScale"]) ? $Format["ManualScale"] : array("0"=>array("Min"=>-100,"Max"=>100));
@@ -3392,10 +3393,12 @@ class pDraw
                                     array("R"=>$SubTickR,"G"=>$SubTickG,"B"=>$SubTickB,"Alpha"=>$SubTickAlpha)
                                 );
                             }
-                            $this->drawLine($XPos-$OuterTickWidth,$YPos,$XPos+$InnerTickWidth,$YPos,array("R"=>$TickR,"G"=>$TickG,"B"=>$TickB,"Alpha"=>$TickAlpha));
-                            $Bounds  = $this->drawText($XPos-$OuterTickWidth-2,$YPos,$Value,array("Align"=>TEXT_ALIGN_MIDDLERIGHT));
-                            $TxtLeft = $XPos-$OuterTickWidth-2-($Bounds[1]["X"]-$Bounds[0]["X"]);
-                            $MinLeft = min($MinLeft,$TxtLeft);
+                            if (!$RemoveYAxiValues) {
+                                $this->drawLine($XPos-$OuterTickWidth,$YPos,$XPos+$InnerTickWidth,$YPos,array("R"=>$TickR,"G"=>$TickG,"B"=>$TickB,"Alpha"=>$TickAlpha));
+                                $Bounds  = $this->drawText($XPos-$OuterTickWidth-2,$YPos,$Value,array("Align"=>TEXT_ALIGN_MIDDLERIGHT));
+                                $TxtLeft = $XPos-$OuterTickWidth-2-($Bounds[1]["X"]-$Bounds[0]["X"]);
+                                $MinLeft = min($MinLeft,$TxtLeft);
+                            }
 
                             $LastY = $YPos;
                         }
