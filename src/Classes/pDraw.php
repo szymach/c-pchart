@@ -2332,6 +2332,7 @@ class pDraw
         $Floating	= isset($Format["Floating"]) ? $Format["Floating"] : false;
         $Mode		= isset($Format["Mode"]) ? $Format["Mode"] : SCALE_MODE_FLOATING;
         $RemoveXAxis	= isset($Format["RemoveXAxis"]) ? $Format["RemoveXAxis"] : false;
+        $RemoveYAxis	= isset($Format["RemoveYAxis"]) ? $Format["RemoveYAxis"] : FALSE;
         $RemoveYAxiValues = isset($Format["RemoveYAxisValues"]) ? $Format["RemoveYAxisValues"] : FALSE;
         $MinDivHeight	= isset($Format["MinDivHeight"]) ? $Format["MinDivHeight"] : 20;
         $Factors	= isset($Format["Factors"]) ? $Format["Factors"] : array(1,2,5);
@@ -3295,7 +3296,7 @@ class pDraw
                 }
             }
 
-            if ( $Parameters["Identity"] == AXIS_Y ) {
+            if ( $Parameters["Identity"] == AXIS_Y  && !$RemoveYAxis) {
                 if ( $Pos == SCALE_POS_LEFTRIGHT ) {
                     if ( $Parameters["Position"] == AXIS_POSITION_LEFT ) {
 
