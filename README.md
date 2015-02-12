@@ -104,6 +104,10 @@ Changelog
 
 1.1.3 The file with classes' constants is now loaded via Composer (thanks to ThaDafinser).
 
+1.1.4 Fixed code-breaking typ (thanks to subtronic).
+
+1.1.5 Added an option to hide the X axis or only it's values (thanks to julien-gm).
+
 References
 ==========
 [The original pChart website](http://www.pchart.net/)
