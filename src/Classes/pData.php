@@ -48,8 +48,8 @@ class pData
 
     /**
      * Add a single point or an array to the given serie
-     * @param type $Values
-     * @param type $SerieName
+     * @param array $Values
+     * @param string $SerieName
      * @return int
      */
     public function addPoints($Values,$SerieName="Serie1")
