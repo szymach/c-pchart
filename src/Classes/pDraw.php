@@ -4943,7 +4943,7 @@ class pDraw
          }
 
         if ( $Mode == AXIS_FORMAT_CUSTOM ) { 
-            if ( function_exists($Format) ) { 
+            if ( is_callable($Format) ) { 
                 return(call_user_func($Format,$Value));                 
             }
         }
