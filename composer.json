@@ -13,5 +13,11 @@
         "php": ">=5.3.3",
         "ext-gd": "*"
     },
+    "require-dev" : {
+        "squizlabs/php_codesniffer": "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
     "version": "1.1.6"
 }
