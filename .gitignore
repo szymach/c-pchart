@@ -16,9 +16,11 @@ nbactions.xml
 nb-configuration.xml
 
 ### vendor / web ###
+bin/
 vendor/*
 web
 web/*
 
 ### Composer ###
 composer.phar
+composer.lock
