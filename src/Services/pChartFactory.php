@@ -3,7 +3,7 @@ namespace CpChart\Services;
 
 use CpChart\Classes\pData;
 use CpChart\Classes\pImage;
-use Exception;
+use CpChart\Exception\CpChartFactoryException;
 
 /**
  * A simple service class utilizing the Factory design pattern. It has three
@@ -22,7 +22,7 @@ class pChartFactory
      * pChartObject and pDataObject parameters are redundant.
      *
      * ATTENTION! SOME OF THE CHARTS NEED TO BE DRAWN VIA A METHOD FROM THE
-     * pIMAGE CLASS (ex. 'drawBarChart'), NOT THROUGH THIS METHOD! READ THE
+     * 'pImage' CLASS (ex. 'drawBarChart'), NOT THROUGH THIS METHOD! READ THE
      * DOCUMENTATION FOR MORE DETAILS.
      *
      * @param string $chartType - type of the chart to be loaded (for example 'pie', not 'pPie')
@@ -36,9 +36,11 @@ class pChartFactory
         pData $pDataObject = null
     ) {
         $this->checkChartType($chartType);
-        $className = $this->namespace.'p'.ucfirst($chartType);
+        $className = sprintf('%sp%s', $this->namespace, ucfirst($chartType));
         if (!class_exists($className)) {
-            throw new Exception('The requested chart class does not exist!');
+            throw new CpChartFactoryException(
+                'The requested chart class does not exist!'
+            );
         }
         return new $className($pChartObject, $pDataObject);
     }
@@ -59,7 +61,7 @@ class pChartFactory
         );
         foreach ($methods as $method) {
             if (method_exists($this->namespace.'pImage', $method)) {
-                throw new Exception(
+                throw new CpChartFactoryException(
                     'The requested chart is not a seperate class, to draw it you'
                   . ' need to call the "'.$method.'" method on the pImage object'
                   . ' after populating it with data!'
@@ -125,11 +127,11 @@ class pChartFactory
     public function getBarcode($number, $BasePath = "", $EnableMOD43 = false)
     {
         if ($number != "39" && $number != "128") {
-            throw new Exception(
+            throw new CpChartFactoryException(
                 'The barcode class for the provided number does not exist!'
             );
         }
-        $className = $this->namespace."pBarcode".$number;
+        $className = sprintf("%spBarcode%s", $this->namespace, $number);
         return new $className($BasePath, $EnableMOD43);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace CpChart\Classes;
 
+use Exception;
+
 /**
  *  pBarcode39 - class to create barcodes (39B)
  *
@@ -17,24 +19,46 @@ namespace CpChart\Classes;
  */
 class pBarcode39
 {
+    /**
+     * @var array
+     */
     public $Codes;
+
+    /**
+     * @var array
+     */
     public $Reverse;
+
+    /**
+     * @var string
+     */
     public $Result;
+
+    /**
+     * @var pImage
+     */
     public $pChartObject;
+
+    /**
+     * @var integer
+     */
     public $CRC;
+    
+    /**
+     * @var boolean
+     */
     public $MOD43;
 
     /**
-     * Class constructor
-     * @param type $BasePath
-     * @param type $EnableMOD43
-     * @throws \Exception
+     * @param string $BasePath
+     * @param boolean $EnableMOD43
+     * @throws Exception
      */
     public function __construct($BasePath = "", $EnableMOD43 = false)
     {
-        $this->MOD43 = $EnableMOD43;
-        $this->Codes = "";
-        $this->Reverse = "";
+        $this->MOD43 = (boolean) $EnableMOD43;
+        $this->Codes = array();
+        $this->Reverse = array();
         if (file_exists($BasePath . "data/39.db", "r")) {
             $FileHandle = @fopen($BasePath . "data/39.db", "r");
             $filePath = $BasePath . "data/39.db";
@@ -44,8 +68,8 @@ class pBarcode39
         }
 
         if (!$FileHandle) {
-            throw new \Exception(
-            "Cannot find barcode database (" . $filePath . ")."
+            throw new Exception(
+                "Cannot find barcode database (" . $filePath . ")."
             );
         }
 
@@ -62,9 +86,10 @@ class pBarcode39
 
     /**
      * Return the projected size of a barcode
-     * @param type $TextString
-     * @param type $Format
-     * @return type
+     * 
+     * @param string $TextString
+     * @param string $Format
+     * @return array
      */
     public function getSize($TextString, $Format = "")
     {
@@ -91,12 +116,13 @@ class pBarcode39
         $AreaWidth = max(abs($X1), abs($X2));
         $AreaHeight = max(abs($Y1), abs($Y2));
 
-        return(array("Width" => $AreaWidth, "Height" => $AreaHeight));
+        return array("Width" => $AreaWidth, "Height" => $AreaHeight);
     }
 
     /**
      * Create the encoded string
-     * @param type $Value
+     * 
+     * @param string $Value
      * @return string
      */
     public function encode39($Value)
@@ -128,13 +154,13 @@ class pBarcode39
 
     /**
      * Create the encoded string
-     * @param type $Object
+     * @param pImage $Object
      * @param type $Value
      * @param type $X
      * @param type $Y
      * @param type $Format
      */
-    public function draw($Object, $Value, $X, $Y, $Format = "")
+    public function draw(pImage $Object, $Value, $X, $Y, $Format = "")
     {
         $this->pChartObject = $Object;
 
@@ -217,6 +243,10 @@ class pBarcode39
         }
     }
 
+    /**
+     * @param string $string
+     * @return string
+     */
     public function checksum($string)
     {
         $checksum = 0;
@@ -229,19 +259,34 @@ class pBarcode39
         return substr($charset, ($checksum % 43), 1);
     }
 
+    /**
+     * @param string $value
+     * @param int $NbChar
+     * @return string
+     */
     public function left($value, $NbChar)
     {
         return substr($value, 0, $NbChar);
     }
 
+    /**
+     * @param string $value
+     * @param int $NbChar
+     * @return string
+     */
     public function right($value, $NbChar)
     {
         return substr($value, strlen($value) - $NbChar, $NbChar);
     }
 
+    /**
+     * @param string $value
+     * @param int $Depart
+     * @param int $NbChar
+     * @return string
+     */
     public function mid($value, $Depart, $NbChar)
     {
         return substr($value, $Depart - 1, $NbChar);
     }
-
 }

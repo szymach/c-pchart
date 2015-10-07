@@ -2,6 +2,8 @@
 
 namespace CpChart\Classes;
 
+use Exception;
+
 /**
  *  pBarcode128 - class to create barcodes (128B)
  *
@@ -17,22 +19,39 @@ namespace CpChart\Classes;
  */
 class pBarcode128
 {
+    /**
+     * @var array
+     */
     public $Codes;
+
+    /**
+     * @var array
+     */
     public $Reverse;
+
+    /**
+     * @var string
+     */
     public $Result;
+
+    /**
+     * @var pImage
+     */
     public $pChartObject;
+
+    /**
+     * @var integer
+     */
     public $CRC;
 
     /**
-     * Class constructor
-     *
      * @param string $BasePath
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct($BasePath = "")
     {
-        $this->Codes = "";
-        $this->Reverse = "";
+        $this->Codes = array();
+        $this->Reverse = array();
         if (file_exists($BasePath . "data/128B.db", "r")) {
             $FileHandle = @fopen($BasePath . "data/128B.db", "r");
             $filePath = $BasePath . "data/128B.db";
@@ -42,8 +61,8 @@ class pBarcode128
         }
 
         if (!$FileHandle) {
-            throw new \Exception(
-            "Cannot find barcode database (" . $filePath . ")."
+            throw new Exception(
+                sprintf("Cannot find barcode database (%s).", $filePath)
             );
         }
 
@@ -64,8 +83,8 @@ class pBarcode128
     /**
      * Return the projected size of a barcode
      *
-     * @param type $TextString
-     * @param type $Format
+     * @param string $TextString
+     * @param string $Format
      * @return array
      */
     public function getSize($TextString, $Format = "")
@@ -93,13 +112,13 @@ class pBarcode128
         $AreaWidth = max(abs($X1), abs($X2));
         $AreaHeight = max(abs($Y1), abs($Y2));
 
-        return(array("Width" => $AreaWidth, "Height" => $AreaHeight));
+        return array("Width" => $AreaWidth, "Height" => $AreaHeight);
     }
 
     /**
      *
-     * @param type $Value
-     * @param type $Format
+     * @param string $Value
+     * @param string $Format
      * @return string
      */
     public function encode128($Value, $Format = "")
@@ -121,18 +140,18 @@ class pBarcode128
         $this->Result = $this->Result . $this->Reverse[$this->CRC]["Code"];
         $this->Result = $this->Result . "1100011101011";
 
-        return($TextString);
+        return $TextString;
     }
 
     /**
      * Create the encoded string
-     * @param type $Object
-     * @param type $Value
-     * @param type $X
-     * @param type $Y
-     * @param type $Format
+     * @param pImage $Object
+     * @param string $Value
+     * @param int $X
+     * @param int $Y
+     * @param string $Format
      */
-    public function draw($Object, $Value, $X, $Y, $Format = "")
+    public function draw(pImage $Object, $Value, $X, $Y, $Format = "")
     {
         $this->pChartObject = $Object;
 
@@ -162,10 +181,8 @@ class pBarcode128
             $Y2 = $Y1 + sin($Angle * PI / 180) * (strlen($this->Result) + 20);
 
             if ($ShowLegend) {
-                $X3 = $X2 + cos(($Angle + 90) * PI / 180) 
-                    * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10);
-                $Y3 = $Y2 + sin(($Angle + 90) * PI / 180) 
-                    * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10);
+                $X3 = $X2 + cos(($Angle + 90) * PI / 180) * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10);
+                $Y3 = $Y2 + sin(($Angle + 90) * PI / 180) * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10);
             } else {
                 $X3 = $X2 + cos(($Angle + 90) * PI / 180) * ($Height + 20);
                 $Y3 = $Y2 + sin(($Angle + 90) * PI / 180) * ($Height + 20);
@@ -219,8 +236,8 @@ class pBarcode128
 
     /**
      *
-     * @param type $value
-     * @param type $NbChar
+     * @param string $value
+     * @param int $NbChar
      * @return string
      */
     public function left($value, $NbChar)
@@ -230,8 +247,8 @@ class pBarcode128
 
     /**
      *
-     * @param type $value
-     * @param type $NbChar
+     * @param string $value
+     * @param int $NbChar
      * @return type
      */
     public function right($value, $NbChar)
@@ -241,10 +258,10 @@ class pBarcode128
 
     /**
      *
-     * @param type $value
-     * @param type $Depart
-     * @param type $NbChar
-     * @return type
+     * @param string $value
+     * @param int $Depart
+     * @param int $NbChar
+     * @return string
      */
     public function mid($value, $Depart, $NbChar)
     {
