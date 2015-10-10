@@ -17,35 +17,226 @@ use Exception;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-class pDraw
+abstract class pDraw
 {
+    /**
+     * Width of the picture
+     * @var type
+     */
+    public $XSize;
+
+    /**
+     * Height of the picture
+     * @var type
+     */
+    public $YSize;
+
+    /**
+     * GD picture object
+     * @var resource
+     */
+    public $Picture;
+
+    /**
+     * Turn antialias on or off
+     * @var boolean
+     */
+    public $Antialias = true;
+
+    /**
+     * Quality of the antialiasing implementation (0-1)
+     * @var type
+     */
+    public $AntialiasQuality = 0;
+
+    /**
+     * Already drawn pixels mask (Filled circle implementation)
+     * @var array
+     */
+    public $Mask = array();
+
+    /**
+     * Just to know if we need to flush the alpha channels when rendering
+     * @var boolean
+     */
+    public $TransparentBackground = false;
+
+    /**
+     * Graph area X origin
+     * @var int
+     */
+    public $GraphAreaX1;
+
+    /**
+     * Graph area Y origin
+     * @var int
+     */
+    public $GraphAreaY1;
+
+    /**
+     * Graph area bottom right X position
+     * @var int
+     */
+    public $GraphAreaX2;
+
+    /**
+     * Graph area bottom right Y position
+     * @var int
+     */
+    public $GraphAreaY2;
+
+    /**
+     * Minimum height for scale divs
+     * @var int
+     */
+    public $ScaleMinDivHeight = 20;
+
     /**
      * @var string
      */
-    private $fontPath;
+    public $FontName = "GeosansLight.ttf";
+
+    /**
+     * @var int
+     */
+    public $FontSize = 12;
+
+    /**
+     * Return the bounding box of the last written string
+     * @var array
+     */
+    public $FontBox;
+
+    /**
+     * @var int
+     */
+    public $FontColorR = 0;
+
+    /**
+     * @var int
+     */
+    public $FontColorG = 0;
+
+    /**
+     * @var int
+     */
+    public $FontColorB = 0;
+
+    /**
+     * @var int
+     */
+    public $FontColorA = 100;
+
+    /**
+     * Turn shadows on or off
+     * @var boolean
+     */
+    public $Shadow = false;
+
+    /**
+     * X Offset of the shadow
+     * @var int
+     */
+    public $ShadowX;
+
+    /**
+     * Y Offset of the shadow
+     * @var int
+     */
+    public $ShadowY;
+
+    /**
+     * R component of the shadow
+     * @var int
+     */
+    public $ShadowR;
+
+    /**
+     * G component of the shadow
+     * @var int
+     */
+    public $ShadowG;
+
+    /**
+     * B component of the shadow
+     * @var int
+     */
+    public $ShadowB;
+
+    /**
+     * Alpha level of the shadow
+     * @var int
+     */
+    public $Shadowa;
+
+    /**
+     * Array containing the image map
+     * @var array
+     */
+    public $ImageMap = array();
+
+    /**
+     * Name of the session array
+     * @var int
+     */
+    public $ImageMapIndex = "pChart";
+
+    /**
+     * Save the current imagemap storage mode
+     * @var int
+     */
+    public $ImageMapStorageMode;
+
+    /**
+     * Automatic deletion of the image map temp files
+     * @var boolean
+     */
+    public $ImageMapAutoDelete = true;
+
+    /**
+     * Attached dataset
+     * @var pData
+     */
+    public $DataSet;
+
+    /**
+     * Last generated chart info
+     * Last layout : regular or stacked
+     * @var int
+     */
+    public $LastChartLayout = CHART_LAST_LAYOUT_REGULAR;
+
+    /**
+     * @var string
+     */
+    private $resourcePath;
 
     public function __construct()
     {
-        $this->fontPath = sprintf('%s/../Resources', __DIR__);
+        $this->resourcePath = sprintf('%s/../Resources', __DIR__);
+        $this->FontName = $this->loadFont($this->FontName, 'fonts');
     }
 
     /**
      * Set the path to the folder containing library resources (fonts, data,
-     * palletes). Must not end with '/'. If not specified, it defaults to
-     * __DIR_.'/../Resources/'.
+     * palletes).
      *
-     * @param string $fontPath
+     * @param string $path
      * @throws Exception
      */
-    public function setFontPath($fontPath)
+    public function setResourcePath($path)
     {
-        $escapedPath = rtrim($fontPath, '/');
-        if (file_exists($escapedPath)) {
-            $this->fontPath = $escapedPath;
-            return;
+        $escapedPath = rtrim($path, '/');
+        if (!file_exists($escapedPath)) {
+            throw new Exception(
+                sprintf(
+                    "The path '%s' to resources' folder does not exist!",
+                    $escapedPath
+                )
+            );
         }
 
-        throw new Exception('The specified resources folder is not defined!');
+        $this->resourcePath = $escapedPath;
     }
 
     /**
@@ -61,7 +252,7 @@ class pDraw
             return $name;
         }
 
-        $path = sprintf('%s/%s/%s', $this->fontPath, $type, $name);
+        $path = sprintf('%s/%s/%s', $this->resourcePath, $type, $name);
         if (file_exists($path)) {
             return $path;
         }
@@ -2286,9 +2477,9 @@ class pDraw
                     $Y2 - 2,
                     $Text,
                     array(
-                        "R" => $BorderR, 
-                        "G" => $BorderG, 
-                        "B" => $BorderB, 
+                        "R" => $BorderR,
+                        "G" => $BorderG,
+                        "B" => $BorderB,
                         "Alpha" => $Alpha,
                         "Align" => TEXT_ALIGN_BOTTOMRIGHT
                     )
@@ -10156,7 +10347,7 @@ class pDraw
 
                 $AxisID = $Serie["Axis"];
                 $PosArray = $this->scaleComputeY(
-                    $Serie["Data"], 
+                    $Serie["Data"],
                     array("AxisID" => $Serie["Axis"])
                 );
 
@@ -10176,10 +10367,10 @@ class pDraw
                             );
                             if ($CaptionBox) {
                                 $this->drawFilledRectangle(
-                                    $StartX, 
-                                    $YPos, 
-                                    $EndX, 
-                                    $YPos + $CaptionHeight, 
+                                    $StartX,
+                                    $YPos,
+                                    $EndX,
+                                    $YPos + $CaptionHeight,
                                     array(
                                         "R" => $CaptionFillR,
                                         "G" => $CaptionFillG,
@@ -10193,16 +10384,16 @@ class pDraw
                             }
                             $this->drawLine(
                                 $StartX + 2,
-                                $YPos + ($CaptionHeight / 2), 
-                                $EndX - 2, 
+                                $YPos + ($CaptionHeight / 2),
+                                $EndX - 2,
                                 $YPos + ($CaptionHeight / 2),
                                 $CaptionSettings
                             );
                         } else {
                             $this->drawFilledRectangle(
-                                $this->GraphAreaX1 - $CaptionWidth + $XMargin - $CaptionMargin, 
+                                $this->GraphAreaX1 - $CaptionWidth + $XMargin - $CaptionMargin,
                                 $YPos,
-                                $this->GraphAreaX1 - $CaptionMargin + $XMargin, 
+                                $this->GraphAreaX1 - $CaptionMargin + $XMargin,
                                 $YPos + $CaptionHeight,
                                 array(
                                     "R" => $R,
@@ -10231,10 +10422,10 @@ class pDraw
 
                     if ($DrawBackground) {
                         $this->drawFilledRectangle(
-                            $StartX - 1, 
-                            $TopY - 1, 
+                            $StartX - 1,
+                            $TopY - 1,
                             $EndX + 1,
-                            $BottomY + 1, 
+                            $BottomY + 1,
                             array(
                                 "R" => $BackgroundR,
                                 "G" => $BackgroundG,
@@ -10247,7 +10438,7 @@ class pDraw
                         $this->drawRectangle(
                             $StartX - 1,
                             $TopY - 1,
-                            $EndX + 1, 
+                            $EndX + 1,
                             $BottomY + 1,
                             array(
                                 "R" => $BorderR,
@@ -10300,21 +10491,21 @@ class pDraw
 
                             if ($Slope >= 0) {
                                 $SlopeIndex = (100 / $MaxSlope) * $Slope;
-                                $R = (($PositiveSlopeEndR - $PositiveSlopeStartR) / 100) 
+                                $R = (($PositiveSlopeEndR - $PositiveSlopeStartR) / 100)
                                     * $SlopeIndex + $PositiveSlopeStartR
                                 ;
-                                $G = (($PositiveSlopeEndG - $PositiveSlopeStartG) / 100) 
+                                $G = (($PositiveSlopeEndG - $PositiveSlopeStartG) / 100)
                                     * $SlopeIndex + $PositiveSlopeStartG
                                 ;
-                                $B = (($PositiveSlopeEndB - $PositiveSlopeStartB) / 100) 
+                                $B = (($PositiveSlopeEndB - $PositiveSlopeStartB) / 100)
                                     * $SlopeIndex + $PositiveSlopeStartB
                                 ;
                             } elseif ($Slope < 0) {
                                 $SlopeIndex = (100 / abs($MinSlope)) * abs($Slope);
-                                $R = (($NegativeSlopeEndR - $NegativeSlopeStartR) / 100) 
+                                $R = (($NegativeSlopeEndR - $NegativeSlopeStartR) / 100)
                                     * $SlopeIndex + $NegativeSlopeStartR
                                 ;
-                                $G = (($NegativeSlopeEndG - $NegativeSlopeStartG) / 100) 
+                                $G = (($NegativeSlopeEndG - $NegativeSlopeStartG) / 100)
                                     * $SlopeIndex + $NegativeSlopeStartG
                                 ;
                                 $B = (($NegativeSlopeEndB - $NegativeSlopeStartB) / 100)
@@ -10334,17 +10525,17 @@ class pDraw
                                     "EndB" => $B
                                 );
                                 $this->drawGradientArea(
-                                    $LastX, 
-                                    $TopY, 
-                                    $X, 
-                                    $BottomY, 
+                                    $LastX,
+                                    $TopY,
+                                    $X,
+                                    $BottomY,
                                     DIRECTION_HORIZONTAL,
                                     $GradientSettings
                                 );
                             } elseif (!$ShadedSlopeBox || $LastColor == null) { // || $Slope == 0
                                 $this->drawFilledRectangle(
-                                    floor($LastX), 
-                                    $TopY, 
+                                    floor($LastX),
+                                    $TopY,
                                     floor($X),
                                     $BottomY,
                                     $Color
@@ -10379,9 +10570,9 @@ class pDraw
                             );
                             if ($CaptionBox) {
                                 $this->drawFilledRectangle(
-                                    $XPos, 
-                                    $StartY, 
-                                    $XPos + $CaptionHeight, 
+                                    $XPos,
+                                    $StartY,
+                                    $XPos + $CaptionHeight,
                                     $EndY,
                                     array(
                                         "R" => $CaptionFillR,
@@ -10396,9 +10587,9 @@ class pDraw
                             }
                             $this->drawLine(
                                 $XPos + ($CaptionHeight / 2),
-                                $StartY + 2, 
-                                $XPos + ($CaptionHeight / 2), 
-                                $EndY - 2, 
+                                $StartY + 2,
+                                $XPos + ($CaptionHeight / 2),
+                                $EndY - 2,
                                 $CaptionSettings
                             );
                         } else {
@@ -10406,7 +10597,7 @@ class pDraw
                                 $XPos,
                                 $StartY,
                                 $XPos + $CaptionHeight,
-                                $EndY, 
+                                $EndY,
                                 array(
                                     "R" => $R,
                                     "G" => $G,
@@ -10436,9 +10627,9 @@ class pDraw
                     if ($DrawBackground) {
                         $this->drawFilledRectangle(
                             $TopX - 1,
-                            $StartY - 1, 
+                            $StartY - 1,
                             $BottomX + 1,
-                            $EndY + 1, 
+                            $EndY + 1,
                             array(
                                 "R" => $BackgroundR,
                                 "G" => $BackgroundG,
@@ -10449,10 +10640,10 @@ class pDraw
                     }
                     if ($DrawBorder) {
                         $this->drawRectangle(
-                            $TopX - 1, 
-                            $StartY - 1, 
+                            $TopX - 1,
+                            $StartY - 1,
                             $BottomX + 1,
-                            $EndY + 1, 
+                            $EndY + 1,
                             array(
                                 "R" => $BorderR,
                                 "G" => $BorderG,
@@ -10503,13 +10694,13 @@ class pDraw
 
                             if ($Slope >= 0) {
                                 $SlopeIndex = (100 / $MaxSlope) * $Slope;
-                                $R = (($PositiveSlopeEndR - $PositiveSlopeStartR) / 100) 
+                                $R = (($PositiveSlopeEndR - $PositiveSlopeStartR) / 100)
                                     * $SlopeIndex + $PositiveSlopeStartR
                                 ;
-                                $G = (($PositiveSlopeEndG - $PositiveSlopeStartG) / 100) 
+                                $G = (($PositiveSlopeEndG - $PositiveSlopeStartG) / 100)
                                     * $SlopeIndex + $PositiveSlopeStartG
                                 ;
-                                $B = (($PositiveSlopeEndB - $PositiveSlopeStartB) / 100) 
+                                $B = (($PositiveSlopeEndB - $PositiveSlopeStartB) / 100)
                                     * $SlopeIndex + $PositiveSlopeStartB
                                 ;
                             } elseif ($Slope < 0) {
@@ -10517,10 +10708,10 @@ class pDraw
                                 $R = (($NegativeSlopeEndR - $NegativeSlopeStartR) / 100)
                                     * $SlopeIndex + $NegativeSlopeStartR
                                 ;
-                                $G = (($NegativeSlopeEndG - $NegativeSlopeStartG) / 100) 
+                                $G = (($NegativeSlopeEndG - $NegativeSlopeStartG) / 100)
                                     * $SlopeIndex + $NegativeSlopeStartG
                                 ;
-                                $B = (($NegativeSlopeEndB - $NegativeSlopeStartB) / 100) 
+                                $B = (($NegativeSlopeEndB - $NegativeSlopeStartB) / 100)
                                     * $SlopeIndex + $NegativeSlopeStartB
                                 ;
                             }
@@ -10538,19 +10729,19 @@ class pDraw
                                 );
 
                                 $this->drawGradientArea(
-                                    $TopX, 
+                                    $TopX,
                                     $LastY,
-                                    $BottomX, 
-                                    $Y, 
-                                    DIRECTION_VERTICAL, 
+                                    $BottomX,
+                                    $Y,
+                                    DIRECTION_VERTICAL,
                                     $GradientSettings
                                 );
                             } elseif (!$ShadedSlopeBox || $LastColor == null) {
                                 $this->drawFilledRectangle(
-                                    $TopX, 
-                                    floor($LastY), 
-                                    $BottomX, 
-                                    floor($Y), 
+                                    $TopX,
+                                    floor($LastY),
+                                    $BottomX,
+                                    floor($Y),
                                     $Color
                                 );
                             }
@@ -10781,10 +10972,10 @@ class pDraw
 
                 if ($DrawVerticalLine) {
                     $this->drawLine(
-                        $X, 
-                        $this->GraphAreaY1 + $Data["YMargin"], 
-                        $X, 
-                        $this->GraphAreaY2 - $Data["YMargin"], 
+                        $X,
+                        $this->GraphAreaY1 + $Data["YMargin"],
+                        $X,
+                        $this->GraphAreaY2 - $Data["YMargin"],
                         array(
                             "R" => $VerticalLineR,
                             "G" => $VerticalLineG,
@@ -10806,13 +10997,13 @@ class pDraw
                         $AxisFormat = $Data["Axis"][$AxisID]["Format"];
                         $AxisUnit = $Data["Axis"][$AxisID]["Unit"];
 
-                        if (isset($Data["Abscissa"]) 
+                        if (isset($Data["Abscissa"])
                             && isset($Data["Series"][$Data["Abscissa"]]["Data"][$Index])
                         ) {
                             $XLabel = $this->scaleFormat(
-                                $Data["Series"][$Data["Abscissa"]]["Data"][$Index], 
-                                $XAxisMode, 
-                                $XAxisFormat, 
+                                $Data["Series"][$Data["Abscissa"]]["Data"][$Index],
+                                $XAxisMode,
+                                $XAxisFormat,
                                 $XAxisUnit
                             );
                         } else {
@@ -10822,7 +11013,7 @@ class pDraw
                             $Description = $OverrideTitle;
                         } elseif (count($SeriesName) == 1) {
                             $Description = $Data["Series"][$SerieName]["Description"] . " - " . $XLabel;
-                        } elseif (isset($Data["Abscissa"]) 
+                        } elseif (isset($Data["Abscissa"])
                             && isset($Data["Series"][$Data["Abscissa"]]["Data"][$Index])
                         ) {
                             $Description = $XLabel;
@@ -10833,7 +11024,7 @@ class pDraw
                         $Serie["B"] = $Data["Series"][$SerieName]["Color"]["B"];
                         $Serie["Alpha"] = $Data["Series"][$SerieName]["Color"]["Alpha"];
 
-                        if (count($SeriesName) == 1 
+                        if (count($SeriesName) == 1
                             && isset($Data["Series"][$SerieName]["XOffset"])
                         ) {
                             $SerieOffset = $Data["Series"][$SerieName]["XOffset"];
@@ -10861,10 +11052,10 @@ class pDraw
                             $Value = 0;
                             $Done = false;
                             foreach ($Data["Series"] as $Name => $SerieLookup) {
-                                if ($SerieLookup["isDrawable"] == true 
+                                if ($SerieLookup["isDrawable"] == true
                                     && $Name != $Data["Abscissa"] && !$Done
                                 ) {
-                                    if (isset($Data["Series"][$Name]["Data"][$Index]) 
+                                    if (isset($Data["Series"][$Name]["Data"][$Index])
                                         && $Data["Series"][$Name]["Data"][$Index] != VOID
                                     ) {
                                         if ($Data["Series"][$Name]["Data"][$Index] >= 0 && $LookFor == "+") {
@@ -10891,8 +11082,8 @@ class pDraw
                         if ($DrawPoint == LABEL_POINT_CIRCLE) {
                             $this->drawFilledCircle(
                                 $X,
-                                $Y, 
-                                3, 
+                                $Y,
+                                3,
                                 array(
                                     "R" => 255,
                                     "G" => 255,
@@ -10904,10 +11095,10 @@ class pDraw
                             );
                         } elseif ($DrawPoint == LABEL_POINT_BOX) {
                             $this->drawFilledRectangle(
-                                $X - 2, 
-                                $Y - 2, 
-                                $X + 2, 
-                                $Y + 2, 
+                                $X - 2,
+                                $Y - 2,
+                                $X + 2,
+                                $Y + 2,
                                 array(
                                     "R" => 255,
                                     "G" => 255,
@@ -10932,10 +11123,10 @@ class pDraw
 
                 if ($DrawVerticalLine) {
                     $this->drawLine(
-                        $this->GraphAreaX1 + $Data["YMargin"], 
+                        $this->GraphAreaX1 + $Data["YMargin"],
                         $Y,
-                        $this->GraphAreaX2 - $Data["YMargin"], 
-                        $Y, 
+                        $this->GraphAreaX2 - $Data["YMargin"],
+                        $Y,
                         array(
                             "R" => $VerticalLineR,
                             "G" => $VerticalLineG,
@@ -10957,13 +11148,13 @@ class pDraw
                         $AxisFormat = $Data["Axis"][$AxisID]["Format"];
                         $AxisUnit = $Data["Axis"][$AxisID]["Unit"];
 
-                        if (isset($Data["Abscissa"]) 
+                        if (isset($Data["Abscissa"])
                             && isset($Data["Series"][$Data["Abscissa"]]["Data"][$Index])
                         ) {
                             $XLabel = $this->scaleFormat(
-                                $Data["Series"][$Data["Abscissa"]]["Data"][$Index], 
-                                $XAxisMode, 
-                                $XAxisFormat, 
+                                $Data["Series"][$Data["Abscissa"]]["Data"][$Index],
+                                $XAxisMode,
+                                $XAxisFormat,
                                 $XAxisUnit
                             );
                         } else {
@@ -10972,12 +11163,12 @@ class pDraw
                         if ($OverrideTitle != null) {
                             $Description = $OverrideTitle;
                         } elseif (count($SeriesName) == 1) {
-                            if (isset($Data["Abscissa"]) 
+                            if (isset($Data["Abscissa"])
                                 && isset($Data["Series"][$Data["Abscissa"]]["Data"][$Index])
                             ) {
                                 $Description = $Data["Series"][$SerieName]["Description"] . " - " . $XLabel;
                             }
-                        } elseif (isset($Data["Abscissa"]) 
+                        } elseif (isset($Data["Abscissa"])
                             && isset($Data["Series"][$Data["Abscissa"]]["Data"][$Index])
                         ) {
                             $Description = $XLabel;
@@ -11021,11 +11212,11 @@ class pDraw
                             $Value = 0;
                             $Done = false;
                             foreach ($Data["Series"] as $Name => $SerieLookup) {
-                                if ($SerieLookup["isDrawable"] == true 
-                                    && $Name != $Data["Abscissa"] 
+                                if ($SerieLookup["isDrawable"] == true
+                                    && $Name != $Data["Abscissa"]
                                     && !$Done
                                 ) {
-                                    if (isset($Data["Series"][$Name]["Data"][$Index]) 
+                                    if (isset($Data["Series"][$Name]["Data"][$Index])
                                         && $Data["Series"][$Name]["Data"][$Index] != VOID
                                     ) {
                                         if ($Data["Series"][$Name]["Data"][$Index] >= 0 && $LookFor == "+") {
@@ -11051,9 +11242,9 @@ class pDraw
 
                         if ($DrawPoint == LABEL_POINT_CIRCLE) {
                             $this->drawFilledCircle(
-                                $X, 
-                                $Y, 
-                                3, 
+                                $X,
+                                $Y,
+                                3,
                                 array(
                                     "R" => 255,
                                     "G" => 255,
@@ -11065,7 +11256,7 @@ class pDraw
                             );
                         } elseif ($DrawPoint == LABEL_POINT_BOX) {
                             $this->drawFilledRectangle(
-                                $X - 2, 
+                                $X - 2,
                                 $Y - 2,
                                 $X + 2,
                                 $Y + 2,
@@ -11142,19 +11333,19 @@ class pDraw
         $CaptionHeight = -$HorizontalMargin;
         foreach ($Captions as $Key => $Caption) {
             $TxtPos = $this->getTextBox(
-                $X, 
-                $Y, 
-                $FontName, 
-                $FontSize, 
-                0, 
+                $X,
+                $Y,
+                $FontName,
+                $FontSize,
+                0,
                 $Caption["Caption"]
             );
             $CaptionWidth = max(
-                $CaptionWidth, 
+                $CaptionWidth,
                 ($TxtPos[1]["X"] - $TxtPos[0]["X"]) + $VerticalMargin * 2
             );
             $CaptionHeight = $CaptionHeight + max(
-                ($TxtPos[0]["Y"] - $TxtPos[2]["Y"]), 
+                ($TxtPos[0]["Y"] - $TxtPos[2]["Y"]),
                 ($SerieBoxSize + 2)) + $HorizontalMargin;
         }
 
@@ -11200,7 +11391,7 @@ class pDraw
             $Poly[] = $X - 5 + $this->ShadowX;
             $Poly[] = $Y - 5 + $this->ShadowX;
             $this->drawPolygon(
-                $Poly, 
+                $Poly,
                 array(
                     "R" => $this->ShadowR,
                     "G" => $this->ShadowG,
@@ -11222,20 +11413,20 @@ class pDraw
         );
         if ($NoTitle) {
             $this->drawGradientArea(
-                $XMin, 
-                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2, 
-                $XMax, 
-                $Y - 6, 
-                DIRECTION_VERTICAL, 
+                $XMin,
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2,
+                $XMax,
+                $Y - 6,
+                DIRECTION_VERTICAL,
                 $GradientSettings
             );
         } else {
             $this->drawGradientArea(
-                $XMin, 
-                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, 
-                $XMax, 
-                $Y - 6, 
-                DIRECTION_VERTICAL, 
+                $XMin,
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3,
+                $XMax,
+                $Y - 6,
+                DIRECTION_VERTICAL,
                 $GradientSettings
             );
         }
@@ -11247,7 +11438,7 @@ class pDraw
         $Poly[] = $X + 5;
         $Poly[] = $Y - 5;
         $this->drawPolygon(
-            $Poly, 
+            $Poly,
             array(
                 "R" => $GradientEndR,
                 "G" => $GradientEndG,
@@ -11267,9 +11458,9 @@ class pDraw
             imageline($this->Picture, $XMin, $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2, $XMin, $Y - 5, $OuterBorderColor);
             imageline($this->Picture, $XMax, $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2, $XMax, $Y - 5, $OuterBorderColor);
             imageline(
-                $this->Picture, 
-                $XMin, 
-                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2, 
+                $this->Picture,
+                $XMin,
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2,
                 $XMax,
                 $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2,
                 $OuterBorderColor
@@ -11278,11 +11469,11 @@ class pDraw
             imageline($this->Picture, $XMin, $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, $XMin, $Y - 5, $OuterBorderColor);
             imageline($this->Picture, $XMax, $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, $XMax, $Y - 5, $OuterBorderColor);
             imageline(
-                $this->Picture, 
+                $this->Picture,
                 $XMin,
                 $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3,
                 $XMax,
-                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, 
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3,
                 $OuterBorderColor
             );
         }
@@ -11297,10 +11488,10 @@ class pDraw
             imageline($this->Picture, $XMin + 1, $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2, $XMin + 1, $Y - 6, $InnerBorderColor);
             imageline($this->Picture, $XMax - 1, $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2, $XMax - 1, $Y - 6, $InnerBorderColor);
             imageline(
-                $this->Picture, 
+                $this->Picture,
                 $XMin + 1,
-                $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2, 
-                $XMax - 1, 
+                $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2,
+                $XMax - 1,
                 $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2,
                 $InnerBorderColor
             );
@@ -11308,11 +11499,11 @@ class pDraw
             imageline($this->Picture, $XMin + 1, $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, $XMin + 1, $Y - 6, $InnerBorderColor);
             imageline($this->Picture, $XMax - 1, $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, $XMax - 1, $Y - 6, $InnerBorderColor);
             imageline(
-                $this->Picture, 
+                $this->Picture,
                 $XMin + 1,
-                $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, 
-                $XMax - 1, 
-                $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, 
+                $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3,
+                $XMax - 1,
+                $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3,
                 $InnerBorderColor
             );
         }
@@ -11322,10 +11513,10 @@ class pDraw
             $YPos = $Y - 7 - $CaptionHeight - $HorizontalMargin - $HorizontalMargin / 2;
             $XMargin = $VerticalMargin / 2;
             $this->drawLine(
-                $XMin + $XMargin, 
-                $YPos + 1, 
-                $XMax - $XMargin, 
-                $YPos + 1, 
+                $XMin + $XMargin,
+                $YPos + 1,
+                $XMax - $XMargin,
+                $YPos + 1,
                 array(
                     "R" => $GradientEndR,
                     "G" => $GradientEndG,
@@ -11334,9 +11525,9 @@ class pDraw
                 )
             );
             $this->drawLine(
-                $XMin + $XMargin, 
-                $YPos, 
-                $XMax - $XMargin, 
+                $XMin + $XMargin,
+                $YPos,
+                $XMax - $XMargin,
                 $YPos,
                 array(
                     "R" => $GradientStartR,
@@ -11347,10 +11538,10 @@ class pDraw
             );
         } elseif ($TitleMode == LABEL_TITLE_BACKGROUND) {
             $this->drawFilledRectangle(
-                $XMin, 
-                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, 
-                $XMax, 
-                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin + $HorizontalMargin / 2, 
+                $XMin,
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3,
+                $XMax,
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin + $HorizontalMargin / 2,
                 array(
                     "R" => $TitleBackgroundR,
                     "G" => $TitleBackgroundG,
@@ -11359,11 +11550,11 @@ class pDraw
                 )
             );
             imageline(
-                $this->Picture, 
-                $XMin + 1, 
-                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin + $HorizontalMargin / 2 + 1, 
-                $XMax - 1, 
-                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin + $HorizontalMargin / 2 + 1, 
+                $this->Picture,
+                $XMin + 1,
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin + $HorizontalMargin / 2 + 1,
+                $XMax - 1,
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin + $HorizontalMargin / 2 + 1,
                 $InnerBorderColor
             );
         }
@@ -11371,9 +11562,9 @@ class pDraw
         /* Write the description */
         if (!$NoTitle) {
             $this->drawText(
-                $XMin + $VerticalMargin, 
+                $XMin + $VerticalMargin,
                 $Y - 7 - $CaptionHeight - $HorizontalMargin * 2,
-                $Title, 
+                $Title,
                 array(
                     "Align" => TEXT_ALIGN_BOTTOMLEFT,
                     "R" => $TitleR,
@@ -11382,7 +11573,7 @@ class pDraw
                 )
             );
         }
-        
+
         /* Write the value */
         $YPos = $Y - 5 - $HorizontalMargin;
         $XPos = $XMin + $VerticalMargin + $SerieBoxSize + $SerieBoxSpacing;
@@ -11404,7 +11595,7 @@ class pDraw
                 );
                 $this->drawFilledRectangle(
                     $XMin + $VerticalMargin,
-                    $YPos - $SerieBoxSize, 
+                    $YPos - $SerieBoxSize,
                     $XMin + $VerticalMargin + $SerieBoxSize,
                     $YPos,
                     $BoxSettings
@@ -11437,27 +11628,27 @@ class pDraw
      * @param int | float $BorderAlpha
      */
     public function drawShape(
-        $X, 
-        $Y, 
-        $Shape, 
-        $PlotSize, 
-        $PlotBorder, 
+        $X,
+        $Y,
+        $Shape,
+        $PlotSize,
+        $PlotBorder,
         $BorderSize,
-        $R, 
-        $G, 
-        $B, 
+        $R,
+        $G,
+        $B,
         $Alpha,
         $BorderR,
         $BorderG,
-        $BorderB, 
+        $BorderB,
         $BorderAlpha
     ) {
         if ($Shape == SERIE_SHAPE_FILLEDCIRCLE) {
             if ($PlotBorder) {
                 $this->drawFilledCircle(
                     $X,
-                    $Y, 
-                    $PlotSize + $BorderSize, 
+                    $Y,
+                    $PlotSize + $BorderSize,
                     array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha)
                 );
             }
@@ -11466,17 +11657,17 @@ class pDraw
             if ($PlotBorder) {
                 $this->drawFilledRectangle(
                     $X - $PlotSize - $BorderSize,
-                    $Y - $PlotSize - $BorderSize, 
+                    $Y - $PlotSize - $BorderSize,
                     $X + $PlotSize + $BorderSize,
                     $Y + $PlotSize + $BorderSize,
                     array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha)
                 );
             }
             $this->drawFilledRectangle(
-                $X - $PlotSize, 
-                $Y - $PlotSize, 
-                $X + $PlotSize, 
-                $Y + $PlotSize, 
+                $X - $PlotSize,
+                $Y - $PlotSize,
+                $X + $PlotSize,
+                $Y + $PlotSize,
                 array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
             );
         } elseif ($Shape == SERIE_SHAPE_FILLEDTRIANGLE) {
@@ -11489,7 +11680,7 @@ class pDraw
                 $Pos[] = $X + $PlotSize + $BorderSize;
                 $Pos[] = $Y + $PlotSize + $BorderSize;
                 $this->drawPolygon(
-                    $Pos, 
+                    $Pos,
                     array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha)
                 );
             }
@@ -11504,29 +11695,29 @@ class pDraw
             $this->drawPolygon($Pos, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha));
         } elseif ($Shape == SERIE_SHAPE_TRIANGLE) {
             $this->drawLine(
-                $X, 
-                $Y - $PlotSize, 
-                $X - $PlotSize, 
+                $X,
+                $Y - $PlotSize,
+                $X - $PlotSize,
                 $Y + $PlotSize,
                 array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
             );
             $this->drawLine(
-                $X - $PlotSize, 
-                $Y + $PlotSize, 
-                $X + $PlotSize, 
-                $Y + $PlotSize, 
+                $X - $PlotSize,
+                $Y + $PlotSize,
+                $X + $PlotSize,
+                $Y + $PlotSize,
                 array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
             );
             $this->drawLine(
-                $X + $PlotSize, 
-                $Y + $PlotSize, 
-                $X, 
-                $Y - $PlotSize, 
+                $X + $PlotSize,
+                $Y + $PlotSize,
+                $X,
+                $Y - $PlotSize,
                 array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
             );
         } elseif ($Shape == SERIE_SHAPE_SQUARE) {
             $this->drawRectangle(
-                $X - $PlotSize, 
+                $X - $PlotSize,
                 $Y - $PlotSize,
                 $X + $PlotSize,
                 $Y + $PlotSize,
@@ -11534,9 +11725,9 @@ class pDraw
             );
         } elseif ($Shape == SERIE_SHAPE_CIRCLE) {
             $this->drawCircle(
-                $X, 
-                $Y, 
-                $PlotSize, 
+                $X,
+                $Y,
+                $PlotSize,
                 $PlotSize,
                 array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
             );
@@ -11551,7 +11742,7 @@ class pDraw
             $Pos[] = $X;
             $Pos[] = $Y + $PlotSize;
             $this->drawPolygon(
-                $Pos, 
+                $Pos,
                 array("NoFill" => true, "BorderR" => $R, "BorderG" => $G, "BorderB" => $B, "BorderAlpha" => $Alpha)
             );
         } elseif ($Shape == SERIE_SHAPE_FILLEDDIAMOND) {
@@ -11566,7 +11757,7 @@ class pDraw
                 $Pos[] = $X;
                 $Pos[] = $Y + $PlotSize + $BorderSize;
                 $this->drawPolygon(
-                    $Pos, 
+                    $Pos,
                     array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha)
                 );
             }
@@ -11762,8 +11953,8 @@ class pDraw
                             }
                         }
 
-                        if (is_array($Intersections) 
-                            && in_array($X, $Intersections) 
+                        if (is_array($Intersections)
+                            && in_array($X, $Intersections)
                             && $LastSlope == "="
                             && ($Slope == "-" )
                         ) {
@@ -11835,10 +12026,10 @@ class pDraw
                                                 $Alpha = 100;
                                             }
                                             $Color = $this->allocateColor(
-                                                $this->Picture, 
-                                                $R, 
-                                                $G, 
-                                                $B, 
+                                                $this->Picture,
+                                                $R,
+                                                $G,
+                                                $B,
                                                 $Alpha
                                             );
                                         }
@@ -11865,7 +12056,7 @@ class pDraw
                 $this->drawLine(
                     $Coords["X1"],
                     $Coords["Y1"],
-                    $Coords["X2"], 
+                    $Coords["X2"],
                     $Coords["Y2"],
                     array(
                         "R" => $BorderR,
@@ -11895,5 +12086,4 @@ class pDraw
         }
         return 0;
     }
-
 }
