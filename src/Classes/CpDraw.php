@@ -731,181 +731,6 @@ abstract class CpDraw
     }
 
     /**
-     * Draw a rectangle with rounded corners.
-     * @param int $X1
-     * @param int $Y1
-     * @param int $X2
-     * @param int $Y2
-     * @param int | float $Radius
-     * @param array $Format
-     */
-    public function drawRoundedFilledRectangle_deprecated($X1, $Y1, $X2, $Y2, $Radius, array $Format = array())
-    {
-        $R = isset($Format["R"]) ? $Format["R"] : 0;
-        $G = isset($Format["G"]) ? $Format["G"] : 0;
-        $B = isset($Format["B"]) ? $Format["B"] : 0;
-        $BorderR = isset($Format["BorderR"]) ? $Format["BorderR"] : -1;
-        $BorderG = isset($Format["BorderG"]) ? $Format["BorderG"] : -1;
-        $BorderB = isset($Format["BorderB"]) ? $Format["BorderB"] : -1;
-        $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-        $Surrounding = isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
-
-        if ($Surrounding != null) {
-            $BorderR = $R + $Surrounding;
-            $BorderG = $G + $Surrounding;
-            $BorderB = $B + $Surrounding;
-        }
-        if ($BorderR == -1) {
-            $BorderR = $R;
-            $BorderG = $G;
-            $BorderB = $B;
-        }
-
-        list($X1, $Y1, $X2, $Y2) = $this->fixBoxCoordinates($X1, $Y1, $X2, $Y2);
-
-        if ($X2 - $X1 < $Radius) {
-            $Radius = floor((($X2 - $X1) + 2) / 2);
-        }
-        if ($Y2 - $Y1 < $Radius) {
-            $Radius = floor((($Y2 - $Y1) + 2) / 2);
-        }
-
-        $RestoreShadow = $this->Shadow;
-        if ($this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0) {
-            $this->Shadow = false;
-            $this->drawRoundedFilledRectangle(
-                $X1 + $this->ShadowX,
-                $Y1 + $this->ShadowY,
-                $X2 + $this->ShadowX,
-                $Y2 + $this->ShadowY,
-                $Radius,
-                array(
-                    "R" => $this->ShadowR,
-                    "G" => $this->ShadowG,
-                    "B" => $this->ShadowB,
-                    "Alpha" => $this->Shadowa
-                )
-            );
-        }
-
-        if ($this->getFirstDecimal($X2) >= 5) {
-            $XOffset2 = 1;
-        } else {
-            $XOffset2 = 0;
-        }
-        if ($this->getFirstDecimal($X1) <= 5) {
-            $XOffset1 = 1;
-        } else {
-            $XOffset1 = 0;
-        }
-
-        if (!$this->Antialias) {
-            $XOffset1 = 1;
-            $XOffset2 = 1;
-        }
-
-        $YTop = floor($Y1 + $Radius);
-        $YBottom = floor($Y2 - $Radius);
-
-        $this->drawFilledRectangle(
-            $X1 - $XOffset1,
-            $YTop,
-            $X2 + $XOffset2,
-            $YBottom,
-            array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "NoBorder" => true)
-        );
-
-        $Step = 360 / (2 * PI * $Radius);
-        $Color = $this->allocateColor($this->Picture, $R, $G, $B, $Alpha);
-        $Color2 = $this->allocateColor($this->Picture, 255, 0, 0, $Alpha);
-        $Drawn = array();
-
-        if ($Alpha < 100) {
-            $Drawn[$YTop] = false;
-        }
-        if ($Alpha < 100) {
-            $Drawn[$YBottom] = true;
-        }
-
-        for ($i = 0; $i <= 90; $i = $i + $Step) {
-            $Xp1 = cos(($i + 180) * PI / 180) * $Radius + $X1 + $Radius;
-            $Xp2 = cos(((90 - $i) + 270) * PI / 180) * $Radius + $X2 - $Radius;
-            $Yp = sin(($i + 180) * PI / 180) * $Radius + $YTop;
-
-            if ($this->getFirstDecimal($Xp1) > 5) {
-                $XOffset1 = 1;
-            } else {
-                $XOffset1 = 0;
-            }
-            if ($this->getFirstDecimal($Xp2) > 5) {
-                $XOffset2 = 1;
-            } else {
-                $XOffset2 = 0;
-            }
-            if ($this->getFirstDecimal($Yp) > 5) {
-                $YOffset = 1;
-            } else {
-                $YOffset = 0;
-            }
-
-            if (!isset($Drawn[$Yp + $YOffset]) || $Alpha == 100) {
-                imageline(
-                    $this->Picture,
-                    $Xp1 + $XOffset1,
-                    $Yp + $YOffset,
-                    $Xp2 + $XOffset2,
-                    $Yp + $YOffset,
-                    $Color
-                );
-            }
-            $Drawn[$Yp + $YOffset] = $Xp2;
-
-            $Xp1 = cos(($i + 90) * PI / 180) * $Radius + $X1 + $Radius;
-            $Xp2 = cos((90 - $i) * PI / 180) * $Radius + $X2 - $Radius;
-            $Yp = sin(($i + 90) * PI / 180) * $Radius + $YBottom;
-
-            if ($this->getFirstDecimal($Xp1) > 7) {
-                $XOffset1 = 1;
-            } else {
-                $XOffset1 = 0;
-            }
-            if ($this->getFirstDecimal($Xp2) > 7) {
-                $XOffset2 = 1;
-            } else {
-                $XOffset2 = 0;
-            }
-            if ($this->getFirstDecimal($Yp) > 5) {
-                $YOffset = 1;
-            } else {
-                $YOffset = 0;
-            }
-
-            if (!isset($Drawn[$Yp + $YOffset]) || $Alpha == 100) {
-                imageline(
-                    $this->Picture,
-                    $Xp1 + $XOffset1,
-                    $Yp + $YOffset,
-                    $Xp2 + $XOffset2,
-                    $Yp + $YOffset,
-                    $Color
-                );
-            }
-            $Drawn[$Yp + $YOffset] = $Xp2;
-        }
-
-        $this->drawRoundedRectangle(
-            $X1,
-            $Y1,
-            $X2,
-            $Y2,
-            $Radius,
-            array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha)
-        );
-
-        $this->Shadow = $RestoreShadow;
-    }
-
-    /**
      * Draw a rectangle
      * @param int $X1
      * @param int $Y1
@@ -931,15 +756,63 @@ abstract class CpDraw
 
         if ($this->Antialias) {
             if ($NoAngle) {
-                $this->drawLine($X1 + 1, $Y1, $X2 - 1, $Y1, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks));
-                $this->drawLine($X2, $Y1 + 1, $X2, $Y2 - 1, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks));
-                $this->drawLine($X2 - 1, $Y2, $X1 + 1, $Y2, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks));
-                $this->drawLine($X1, $Y1 + 1, $X1, $Y2 - 1, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks));
+                $this->drawLine(
+                    $X1 + 1,
+                    $Y1,
+                    $X2 - 1,
+                    $Y1,
+                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                );
+                $this->drawLine(
+                    $X2,
+                    $Y1 + 1,
+                    $X2,
+                    $Y2 - 1,
+                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                );
+                $this->drawLine(
+                    $X2 - 1,
+                    $Y2,
+                    $X1 + 1,
+                    $Y2,
+                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                );
+                $this->drawLine(
+                    $X1,
+                    $Y1 + 1,
+                    $X1,
+                    $Y2 - 1,
+                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                );
             } else {
-                $this->drawLine($X1 + 1, $Y1, $X2 - 1, $Y1, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks));
-                $this->drawLine($X2, $Y1, $X2, $Y2, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks));
-                $this->drawLine($X2 - 1, $Y2, $X1 + 1, $Y2, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks));
-                $this->drawLine($X1, $Y1, $X1, $Y2, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks));
+                $this->drawLine(
+                    $X1 + 1,
+                    $Y1,
+                    $X2 - 1,
+                    $Y1,
+                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                );
+                $this->drawLine(
+                    $X2,
+                    $Y1,
+                    $X2,
+                    $Y2,
+                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                );
+                $this->drawLine(
+                    $X2 - 1,
+                    $Y2,
+                    $X1 + 1,
+                    $Y2,
+                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                );
+                $this->drawLine(
+                    $X1,
+                    $Y1,
+                    $X1,
+                    $Y2,
+                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                );
             }
         } else {
             $Color = $this->allocateColor($this->Picture, $R, $G, $B, $Alpha);
@@ -1539,7 +1412,8 @@ abstract class CpDraw
             $this->drawCircle(
                 $Xc + $this->ShadowX,
                 $Yc + $this->ShadowY,
-                $Height, $Width,
+                $Height,
+                $Width,
                 array(
                     "R" => $this->ShadowR,
                     "G" => $this->ShadowG,
@@ -2623,7 +2497,8 @@ abstract class CpDraw
                     $Y - 1,
                     $X + $Width - 1,
                     $Y - $InnerHeight,
-                    DIRECTION_VERTICAL, $GradientOptions
+                    DIRECTION_VERTICAL,
+                    $GradientOptions
                 );
 
                 if ($Surrounding) {
@@ -3184,6 +3059,10 @@ abstract class CpDraw
         $this->Shadow = $RestoreShadow;
     }
 
+    /**
+     * @param array $Format
+     * @throws Exception
+     */
     public function drawScale(array $Format = array())
     {
         $Pos = isset($Format["Pos"]) ? $Format["Pos"] : SCALE_POS_LEFTRIGHT;
@@ -3194,7 +3073,9 @@ abstract class CpDraw
         $RemoveYAxiValues = isset($Format["RemoveYAxisValues"]) ? $Format["RemoveYAxisValues"] : false;
         $MinDivHeight = isset($Format["MinDivHeight"]) ? $Format["MinDivHeight"] : 20;
         $Factors = isset($Format["Factors"]) ? $Format["Factors"] : array(1, 2, 5);
-        $ManualScale = isset($Format["ManualScale"]) ? $Format["ManualScale"] : array("0" => array("Min" => -100, "Max" => 100));
+        $ManualScale = isset($Format["ManualScale"])
+            ? $Format["ManualScale"] : array("0" => array("Min" => -100, "Max" => 100))
+        ;
         $XMargin = isset($Format["XMargin"]) ? $Format["XMargin"] : AUTO;
         $YMargin = isset($Format["YMargin"]) ? $Format["YMargin"] : 0;
         $ScaleSpacing = isset($Format["ScaleSpacing"]) ? $Format["ScaleSpacing"] : 15;
@@ -3596,7 +3477,9 @@ abstract class CpDraw
 
                             $ID++;
                             $Skipped = true;
-                            if ($this->isValidLabel($Value, $LastValue, $LabelingMethod, $ID, $LabelSkip) && !$RemoveXAxis) {
+                            if ($this->isValidLabel($Value, $LastValue, $LabelingMethod, $ID, $LabelSkip)
+                                && !$RemoveXAxis
+                            ) {
                                 $Bounds = $this->drawText(
                                     $XPos,
                                     $YPos + $OuterTickWidth + $YLabelOffset,
@@ -3618,7 +3501,8 @@ abstract class CpDraw
                                     $this->drawLine(
                                         $XPos,
                                         $this->GraphAreaY1 + $FloatingOffset,
-                                        $XPos, $this->GraphAreaY2 - $FloatingOffset,
+                                        $XPos,
+                                        $this->GraphAreaY2 - $FloatingOffset,
                                         $SkippedAxisColor
                                     );
                                 }
@@ -3722,7 +3606,8 @@ abstract class CpDraw
                                 $this->drawArrow(
                                     $this->GraphAreaX2 - $Parameters["Margin"],
                                     $AxisPos["T"],
-                                    $this->GraphAreaX2 + ($ArrowSize * 2), $AxisPos["T"],
+                                    $this->GraphAreaX2 + ($ArrowSize * 2),
+                                    $AxisPos["T"],
                                     array("FillR" => $AxisR, "FillG" => $AxisG, "FillB" => $AxisB, "Size" => $ArrowSize)
                                 );
                             }
@@ -3845,7 +3730,8 @@ abstract class CpDraw
                             $Bounds = $this->drawText(
                                 $XPos,
                                 $YPos,
-                                $Parameters["Name"], array("Align" => TEXT_ALIGN_BOTTOMMIDDLE)
+                                $Parameters["Name"],
+                                array("Align" => TEXT_ALIGN_BOTTOMMIDDLE)
                             );
                             $MinTop = $Bounds[2]["Y"];
 
@@ -4220,7 +4106,6 @@ abstract class CpDraw
             if ($Parameters["Identity"] == AXIS_Y && !$RemoveYAxis) {
                 if ($Pos == SCALE_POS_LEFTRIGHT) {
                     if ($Parameters["Position"] == AXIS_POSITION_LEFT) {
-
                         if ($Floating) {
                             $FloatingOffset = $XMargin;
                             $this->drawLine(
@@ -5409,11 +5294,11 @@ abstract class CpDraw
             }
 
             $this->drawFilledRectangle(
-                    $YPos1,
-                    $XPos1,
-                    $YPos2,
-                    $XPos2,
-                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                $YPos1,
+                $XPos1,
+                $YPos2,
+                $XPos2,
+                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
             );
 
             if ($Border) {
@@ -5765,11 +5650,11 @@ abstract class CpDraw
             }
 
             $this->drawFilledRectangle(
-                    $XPos1,
-                    $YPos1,
-                    $XPos2,
-                    $YPos2,
-                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                $XPos1,
+                $YPos1,
+                $XPos2,
+                $YPos2,
+                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
             );
             if ($Border) {
                 $this->drawLine(
@@ -5844,11 +5729,11 @@ abstract class CpDraw
             }
 
             $this->drawFilledRectangle(
-                    $XPos1,
-                    $YPos1,
-                    $XPos2,
-                    $YPos2,
-                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                $XPos1,
+                $YPos1,
+                $XPos2,
+                $YPos2,
+                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
             );
             if ($Border) {
                 $this->drawLine(
@@ -6171,7 +6056,8 @@ abstract class CpDraw
                 $Unit = $Data["Axis"][$AxisID]["Unit"];
 
                 $PosArray = $this->scaleComputeY(
-                        $Serie["Data"], array("AxisID" => $Serie["Axis"])
+                    $Serie["Data"],
+                    array("AxisID" => $Serie["Axis"])
                 );
 
                 if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
@@ -6480,7 +6366,8 @@ abstract class CpDraw
                                     floor($X) . "," . floor($Y) . "," . $SerieWeight,
                                     $this->toHTMLColor($R, $G, $B),
                                     $SerieDescription,
-                                    $this->scaleFormat($Serie["Data"][$Key],
+                                    $this->scaleFormat(
+                                        $Serie["Data"][$Key],
                                         $Mode,
                                         $Format,
                                         $Unit
@@ -8609,7 +8496,6 @@ abstract class CpDraw
         $Floating0Value = isset($Format["Floating0Value"]) ? $Format["Floating0Value"] : null;
         $Draw0Line = isset($Format["Draw0Line"]) ? $Format["Draw0Line"] : false;
         $DisplayValues = isset($Format["DisplayValues"]) ? $Format["DisplayValues"] : false;
-        $DisplayOrientation = isset($Format["DisplayOrientation"]) ? $Format["DisplayOrientation"] : ORIENTATION_HORIZONTAL;
         $DisplayOffset = isset($Format["DisplayOffset"]) ? $Format["DisplayOffset"] : 2;
         $DisplayColor = isset($Format["DisplayColor"]) ? $Format["DisplayColor"] : DISPLAY_MANUAL;
         $DisplayFont = isset($Format["DisplaySize"]) ? $Format["DisplaySize"] : $this->FontName;
@@ -8831,7 +8717,8 @@ abstract class CpDraw
                                             floor($X + $XOffset + $XSize - $XSpace),
                                             floor($Y1 + 1)
                                         ),
-                                        $this->toHTMLColor($R, $G, $B), $SerieDescription,
+                                        $this->toHTMLColor($R, $G, $B),
+                                        $SerieDescription,
                                         $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit)
                                     );
                                 }
@@ -8840,11 +8727,12 @@ abstract class CpDraw
                                     $this->addToImageMap(
                                         "RECT",
                                         sprintf(
-                                            "%s,%s,%s,%s",
+                                            "%s,%s,%s,%s,%s",
                                             floor($X + $XOffset + $XSpace),
                                             floor($Y1),
                                             floor($X + $XOffset + $XSize - $XSpace),
-                                            floor($Y2), $this->toHTMLColor($R, $G, $B)
+                                            floor($Y2),
+                                            $this->toHTMLColor($R, $G, $B)
                                         ),
                                         $SerieDescription,
                                         $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit)
@@ -8945,7 +8833,8 @@ abstract class CpDraw
                                                 $X + $XOffset + $XSpan + $XSpace,
                                                 $Y1,
                                                 $X + $XOffset + $XSize - $XSpace,
-                                                $Y2, DIRECTION_HORIZONTAL,
+                                                $Y2,
+                                                DIRECTION_HORIZONTAL,
                                                 $GradienColor2
                                             );
                                         }
@@ -9127,7 +9016,13 @@ abstract class CpDraw
                         if ($X2 != VOID) {
                             $BarWidth = $X2 - $X1;
                             if ($Serie["Data"][$Key] == 0) {
-                                $this->drawLine($X1, $Y + $YOffset + $YSpace, $X1, $Y + $YOffset + $YSize - $YSpace, $Color);
+                                $this->drawLine(
+                                    $X1,
+                                    $Y + $YOffset + $YSpace,
+                                    $X1,
+                                    $Y + $YOffset + $YSize - $YSpace,
+                                    $Color
+                                );
                                 if ($RecordImageMap) {
                                     $this->addToImageMap(
                                         "RECT",
@@ -10804,9 +10699,9 @@ abstract class CpDraw
 
                 $Color = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks);
 
-                $AxisID = $Serie["Axis"];
                 $PosArray = $this->scaleComputeY(
-                        $Serie["Data"], array("AxisID" => $Serie["Axis"])
+                    $Serie["Data"],
+                    array("AxisID" => $Serie["Axis"])
                 );
 
                 if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
@@ -11344,9 +11239,10 @@ abstract class CpDraw
                 $CaptionWidth,
                 ($TxtPos[1]["X"] - $TxtPos[0]["X"]) + $VerticalMargin * 2
             );
-            $CaptionHeight = $CaptionHeight + max(
-                ($TxtPos[0]["Y"] - $TxtPos[2]["Y"]),
-                ($SerieBoxSize + 2)) + $HorizontalMargin;
+            $CaptionHeight = $CaptionHeight
+                + max(($TxtPos[0]["Y"] - $TxtPos[2]["Y"]), ($SerieBoxSize + 2))
+                + $HorizontalMargin
+            ;
         }
 
         if ($CaptionHeight <= 5) {
@@ -11455,8 +11351,22 @@ abstract class CpDraw
         imageline($this->Picture, $X, $Y, $X + 5, $Y - 5, $OuterBorderColor);
         imageline($this->Picture, $X + 5, $Y - 5, $XMax, $Y - 5, $OuterBorderColor);
         if ($NoTitle) {
-            imageline($this->Picture, $XMin, $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2, $XMin, $Y - 5, $OuterBorderColor);
-            imageline($this->Picture, $XMax, $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2, $XMax, $Y - 5, $OuterBorderColor);
+            imageline(
+                $this->Picture,
+                $XMin,
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2,
+                $XMin,
+                $Y - 5,
+                $OuterBorderColor
+            );
+            imageline(
+                $this->Picture,
+                $XMax,
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2,
+                $XMax,
+                $Y - 5,
+                $OuterBorderColor
+            );
             imageline(
                 $this->Picture,
                 $XMin,
@@ -11466,8 +11376,22 @@ abstract class CpDraw
                 $OuterBorderColor
             );
         } else {
-            imageline($this->Picture, $XMin, $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, $XMin, $Y - 5, $OuterBorderColor);
-            imageline($this->Picture, $XMax, $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, $XMax, $Y - 5, $OuterBorderColor);
+            imageline(
+                $this->Picture,
+                $XMin,
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3,
+                $XMin,
+                $Y - 5,
+                $OuterBorderColor
+            );
+            imageline(
+                $this->Picture,
+                $XMax,
+                $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3,
+                $XMax,
+                $Y - 5,
+                $OuterBorderColor
+            );
             imageline(
                 $this->Picture,
                 $XMin,
@@ -11485,8 +11409,22 @@ abstract class CpDraw
         imageline($this->Picture, $X, $Y - 1, $X + 5, $Y - 6, $InnerBorderColor);
         imageline($this->Picture, $X + 5, $Y - 6, $XMax - 1, $Y - 6, $InnerBorderColor);
         if ($NoTitle) {
-            imageline($this->Picture, $XMin + 1, $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2, $XMin + 1, $Y - 6, $InnerBorderColor);
-            imageline($this->Picture, $XMax - 1, $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2, $XMax - 1, $Y - 6, $InnerBorderColor);
+            imageline(
+                $this->Picture,
+                $XMin + 1,
+                $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2,
+                $XMin + 1,
+                $Y - 6,
+                $InnerBorderColor
+            );
+            imageline(
+                $this->Picture,
+                $XMax - 1,
+                $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 2,
+                $XMax - 1,
+                $Y - 6,
+                $InnerBorderColor
+            );
             imageline(
                 $this->Picture,
                 $XMin + 1,
@@ -11496,8 +11434,22 @@ abstract class CpDraw
                 $InnerBorderColor
             );
         } else {
-            imageline($this->Picture, $XMin + 1, $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, $XMin + 1, $Y - 6, $InnerBorderColor);
-            imageline($this->Picture, $XMax - 1, $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3, $XMax - 1, $Y - 6, $InnerBorderColor);
+            imageline(
+                $this->Picture,
+                $XMin + 1,
+                $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3,
+                $XMin + 1,
+                $Y - 6,
+                $InnerBorderColor
+            );
+            imageline(
+                $this->Picture,
+                $XMax - 1,
+                $Y - 4 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3,
+                $XMax - 1,
+                $Y - 6,
+                $InnerBorderColor
+            );
             imageline(
                 $this->Picture,
                 $XMin + 1,
@@ -11652,7 +11604,12 @@ abstract class CpDraw
                     array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha)
                 );
             }
-            $this->drawFilledCircle($X, $Y, $PlotSize, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha));
+            $this->drawFilledCircle(
+                $X,
+                $Y,
+                $PlotSize,
+                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+            );
         } elseif ($Shape == SERIE_SHAPE_FILLEDSQUARE) {
             if ($PlotBorder) {
                 $this->drawFilledRectangle(
@@ -11743,7 +11700,13 @@ abstract class CpDraw
             $Pos[] = $Y + $PlotSize;
             $this->drawPolygon(
                 $Pos,
-                array("NoFill" => true, "BorderR" => $R, "BorderG" => $G, "BorderB" => $B, "BorderAlpha" => $Alpha)
+                array(
+                    "NoFill" => true,
+                    "BorderR" => $R,
+                    "BorderG" => $G,
+                    "BorderB" => $B,
+                    "BorderAlpha" => $Alpha
+                )
             );
         } elseif ($Shape == SERIE_SHAPE_FILLEDDIAMOND) {
             if ($PlotBorder) {
@@ -12079,7 +12042,7 @@ abstract class CpDraw
      */
     public function getAbscissaMargin(array $Data)
     {
-        foreach ($Data["Axis"] as $AxisID => $Values) {
+        foreach ($Data["Axis"] as $Values) {
             if ($Values["Identity"] == AXIS_X) {
                 return $Values["Margin"];
             }

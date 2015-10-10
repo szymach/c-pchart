@@ -135,10 +135,10 @@ class CpBubble
     public function drawBubbleChart($DataSeries, $WeightSeries, $Format = "")
     {
         $ForceAlpha = isset($Format["ForceAlpha"]) ? $Format["ForceAlpha"] : VOID;
-        $DrawBorder = isset($Format["DrawBorder"]) ? $Format["DrawBorder"] : TRUE;
+        $DrawBorder = isset($Format["DrawBorder"]) ? $Format["DrawBorder"] : true;
         $BorderWidth = isset($Format["BorderWidth"]) ? $Format["BorderWidth"] : 1;
         $Shape = isset($Format["Shape"]) ? $Format["Shape"] : BUBBLE_SHAPE_ROUND;
-        $Surrounding = isset($Format["Surrounding"]) ? $Format["Surrounding"] : NULL;
+        $Surrounding = isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
         $BorderR = isset($Format["BorderR"]) ? $Format["BorderR"] : 0;
         $BorderG = isset($Format["BorderG"]) ? $Format["BorderG"] : 0;
         $BorderB = isset($Format["BorderB"]) ? $Format["BorderB"] : 0;
@@ -196,7 +196,7 @@ class CpBubble
 
             if ($DrawBorder) {
                 if ($BorderWidth != 1) {
-                    if ($Surrounding != NULL) {
+                    if ($Surrounding != null) {
                         $BorderR = $Palette[$Key]["R"] + $Surrounding;
                         $BorderG = $Palette[$Key]["G"] + $Surrounding;
                         $BorderB = $Palette[$Key]["B"] + $Surrounding;
@@ -217,7 +217,7 @@ class CpBubble
                 } else {
                     $Color["BorderAlpha"] = $BorderAlpha;
 
-                    if ($Surrounding != NULL) {
+                    if ($Surrounding != null) {
                         $Color["BorderR"] = $Palette[$Key]["R"] + $Surrounding;
                         $Color["BorderG"] = $Palette[$Key]["G"] + $Surrounding;
                         $Color["BorderB"] = $Palette[$Key]["B"] + $Surrounding;
@@ -236,17 +236,21 @@ class CpBubble
                 $Weight = $Point + $Data["Series"][$WeightSeries[$Key]]["Data"][$iKey];
 
                 $PosArray = $this->pChartObject->scaleComputeY(
-                        $Point, array("AxisID" => $AxisID)
+                    $Point,
+                    array("AxisID" => $AxisID)
                 );
                 $WeightArray = $this->pChartObject->scaleComputeY(
-                        $Weight, array("AxisID" => $AxisID)
+                    $Weight,
+                    array("AxisID" => $AxisID)
                 );
 
                 if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
                     if ($XDivs == 0) {
                         $XStep = 0;
                     } else {
-                        $XStep = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1 - $XMargin * 2) / $XDivs;
+                        $XStep = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1 - $XMargin * 2)
+                            / $XDivs
+                        ;
                     }
                     $Y = floor($PosArray);
                     $CircleRadius = floor(abs($PosArray - $WeightArray) / 2);
@@ -328,7 +332,9 @@ class CpBubble
                     if ($XDivs == 0) {
                         $XStep = 0;
                     } else {
-                        $XStep = ($this->pChartObject->GraphAreaY2 - $this->pChartObject->GraphAreaY1 - $XMargin * 2) / $XDivs;
+                        $XStep = ($this->pChartObject->GraphAreaY2 - $this->pChartObject->GraphAreaY1 - $XMargin * 2)
+                            / $XDivs
+                        ;
                     }
                     $X = floor($PosArray);
                     $CircleRadius = floor(abs($PosArray - $WeightArray) / 2);
@@ -471,7 +477,9 @@ class CpBubble
                 if ($XDivs == 0) {
                     $XStep = 0;
                 } else {
-                    $XStep = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1 - $XMargin * 2) / $XDivs;
+                    $XStep = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1 - $XMargin * 2)
+                        / $XDivs
+                    ;
                 }
 
                 $X = floor($X + $Point * $XStep);
@@ -480,7 +488,9 @@ class CpBubble
                 if ($XDivs == 0) {
                     $YStep = 0;
                 } else {
-                    $YStep = ($this->pChartObject->GraphAreaY2 - $this->pChartObject->GraphAreaY1 - $XMargin * 2) / $XDivs;
+                    $YStep = ($this->pChartObject->GraphAreaY2 - $this->pChartObject->GraphAreaY1 - $XMargin * 2)
+                        / $XDivs
+                    ;
                 }
 
                 $X = floor($PosArray);
