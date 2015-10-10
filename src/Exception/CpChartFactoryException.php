@@ -8,5 +8,5 @@ use Exception;
  * @author Piotr Szymaszek
  */
 class CpChartFactoryException extends Exception
-{   
+{
 }

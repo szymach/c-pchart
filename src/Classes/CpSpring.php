@@ -13,7 +13,7 @@ namespace CpChart\Classes;
 
      You can find the whole class documentation on the pChart web site.
 */
-class pSpring
+class CpSpring
 {
     public $History;
     public $pChartObject;

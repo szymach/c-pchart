@@ -17,7 +17,7 @@ use Exception;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-abstract class pDraw
+abstract class CpDraw
 {
     /**
      * Width of the picture

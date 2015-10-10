@@ -11,14 +11,14 @@ use CpChart\Exception\CpChartFactoryException;
  *
  * @author szymach @ http://github.com/szymach
  */
-class pChartFactory
+class CpChartFactory
 {
     private $namespace = 'CpChart\Classes\\';
 
     /**
      * Loads a new chart class (scatter, pie etc.). Some classes require instances of
      * pImage and pData classes passed into their constructor. These classes are:
-     * pBubble, pPie, pScatter, pStock, pSurface and pIndicator. Otherwise the
+     * CpBubble, CpPie, CpScatter, CpStock, CpSurface and CpIndicator. Otherwise the
      * pChartObject and pDataObject parameters are redundant.
      *
      * ATTENTION! SOME OF THE CHARTS NEED TO BE DRAWN VIA A METHOD FROM THE
@@ -26,23 +26,23 @@ class pChartFactory
      * DOCUMENTATION FOR MORE DETAILS.
      *
      * @param string $chartType - type of the chart to be loaded (for example 'pie', not 'pPie')
-     * @param pImage $pChartObject
-     * @param pData $pDataObject
+     * @param CpImage $chartObject
+     * @param CpData $dataObject
      * @return \CpChart\Classes\$chartName
      */
     public function newChart(
         $chartType,
-        pImage $pChartObject = null,
-        pData $pDataObject = null
+        CpImage $chartObject = null,
+        CpData $dataObject = null
     ) {
         $this->checkChartType($chartType);
-        $className = sprintf('%sp%s', $this->namespace, ucfirst($chartType));
+        $className = sprintf('%sCp%s', $this->namespace, ucfirst($chartType));
         if (!class_exists($className)) {
             throw new CpChartFactoryException(
                 'The requested chart class does not exist!'
             );
         }
-        return new $className($pChartObject, $pDataObject);
+        return new $className($chartObject, $dataObject);
     }
 
     /**
@@ -63,9 +63,9 @@ class pChartFactory
             if (method_exists($this->namespace.'pImage', $method)) {
                 throw new CpChartFactoryException(
                     'The requested chart is not a seperate class, to draw it you'
-                  . ' need to call the "'.$method.'" method on the pImage object'
-                  . ' after populating it with data!'
-                  . ' Check the documentation on library\'s website for details.'
+                    . ' need to call the "'.$method.'" method on the pImage object'
+                    . ' after populating it with data!'
+                    . ' Check the documentation on library\'s website for details.'
                 );
             }
         }
@@ -80,7 +80,7 @@ class pChartFactory
      */
     public function newData(array $points = array(), $serieName = "Serie1")
     {
-        $className = $this->namespace.'pData';
+        $className = $this->namespace.'CpData';
         $data = new $className();
         if (count($points) > 0) {
             $data->addPoints($points, $serieName);
@@ -104,7 +104,7 @@ class pChartFactory
         pData $DataSet = null,
         $TransparentBackground = false
     ) {
-        $className = sprintf('%spImage', $this->namespace);
+        $className = sprintf('%sCpImage', $this->namespace);
         return new $className(
             $XSize,
             $YSize,
@@ -131,7 +131,7 @@ class pChartFactory
                 'The barcode class for the provided number does not exist!'
             );
         }
-        $className = sprintf("%spBarcode%s", $this->namespace, $number);
+        $className = sprintf("%sCpBarcode%s", $this->namespace, $number);
         return new $className($BasePath, $EnableMOD43);
     }
 }

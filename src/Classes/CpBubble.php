@@ -15,7 +15,7 @@ namespace CpChart\Classes;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-class pBubble
+class CpBubble
 {
     /**
      * @var pImage

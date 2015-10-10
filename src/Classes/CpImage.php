@@ -16,7 +16,7 @@ namespace CpChart\Classes;
  *
  * You can find the whole class documentation on the pChart web site.
  */
-class pImage extends pDraw
+class CpImage extends pDraw
 {
     /**
      * @param int $XSize
@@ -183,10 +183,7 @@ class pImage extends pDraw
     public function getLength($X1, $Y1, $X2, $Y2)
     {
         return sqrt(
-            pow(
-                max($X1, $X2) - min($X1, $X2), 2) + pow(max($Y1, $Y2) - min($Y1, $Y2),
-                2
-            )
+            pow(max($X1, $X2) - min($X1, $X2), 2) + pow(max($Y1, $Y2) - min($Y1, $Y2), 2)
         );
     }
 
@@ -369,8 +366,7 @@ class pImage extends pDraw
         $Title = null,
         $Message = null,
         $HTMLEncode = false
-    )
-    {
+    ) {
         if ($this->ImageMapStorageMode == null) {
             $this->initialiseImageMap();
         }

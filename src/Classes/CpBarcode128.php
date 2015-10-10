@@ -17,7 +17,7 @@ use Exception;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-class pBarcode128
+class CpBarcode128
 {
     /**
      * @var array
