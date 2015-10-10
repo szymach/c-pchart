@@ -1,5 +1,6 @@
 <?php
 namespace CpChart\Classes;
+
 /*
     pIndicator - class to draw indicators
 
@@ -57,14 +58,14 @@ class CpIndicator
         $Unit			= isset($Format["Unit"]) ? $Format["Unit"] : "";
 
         /* Convert the Values to display to an array if needed */
-        if ( !is_array($Values) ) { 
-            $Value = $Values; $Values = ""; 
-            $Values[] = $Value;             
+        if ( !is_array($Values) ) {
+            $Value = $Values; $Values = "";
+            $Values[] = $Value;
         }
 
         /* No section, let's die */
-        if ( $IndicatorSections == null ) { 
-            return(0);             
+        if ( $IndicatorSections == null ) {
+            return(0);
         }
 
         /* Determine indicator visual configuration */
@@ -85,12 +86,12 @@ class CpIndicator
             $X2 = $X1 + ($Settings["End"] - $Settings["Start"]) * $XScale;
 
             if ( $Key == 0 && $DrawLeftHead ) {
-                $Poly = ""; 
-                $Poly[] = $X1-1; 
-                $Poly[] = $Y; 
-                $Poly[] = $X1-1; 
-                $Poly[] = $Y+$Height; 
-                $Poly[] = $X1-1-$HeadSize; 
+                $Poly = "";
+                $Poly[] = $X1-1;
+                $Poly[] = $Y;
+                $Poly[] = $X1-1;
+                $Poly[] = $Y+$Height;
+                $Poly[] = $X1-1-$HeadSize;
                 $Poly[] = $Y+($Height/2);
                 $this->pChartObject->drawPolygon($Poly,$Color);
                 $this->pChartObject->drawLine($X1-2,$Y,$X1-2-$HeadSize,$Y+($Height/2),$Color);
@@ -115,8 +116,8 @@ class CpIndicator
                     sort($Break);
                     $Poly = ""; $Poly[] = $X1; $Poly[] = $Y; $LastPointWritten = false;
                     foreach($Break as $iKey => $Value) {
-                        if ( $Value-5 >= $X1 ) { 
-                            $Poly[] = $Value-5; $Poly[] = $Y;                             
+                        if ( $Value-5 >= $X1 ) {
+                            $Poly[] = $Value-5; $Poly[] = $Y;
                         } elseif ($X1 - ($Value-5) > 0 ) {
                             $Offset = $X1 - ($Value-5);
                             $Poly = ""; $Poly[] = $X1; $Poly[] = $Y + $Offset;
@@ -124,16 +125,16 @@ class CpIndicator
 
                         $Poly[] = $Value;   $Poly[] = $Y+5;
 
-                        if ( $Value+5 <= $X2 ) { 
-                            $Poly[] = $Value+5; $Poly[] = $Y;                            
+                        if ( $Value+5 <= $X2 ) {
+                            $Poly[] = $Value+5; $Poly[] = $Y;
                         } elseif (($Value+5) > $X2 ) {
                             $Offset = ($Value+5) - $X2;
                             $Poly[] = $X2; $Poly[] = $Y + $Offset;
                             $LastPointWritten = true;
                         }
                     }
-                    if ( !$LastPointWritten ) { 
-                        $Poly[] = $X2; $Poly[] = $Y;                         
+                    if ( !$LastPointWritten ) {
+                        $Poly[] = $X2; $Poly[] = $Y;
                     }
                     $Poly[] = $X2; $Poly[] = $Y+$Height;
                     $Poly[] = $X1; $Poly[] = $Y+$Height;
@@ -143,14 +144,14 @@ class CpIndicator
             } else {
                 $this->pChartObject->drawFilledRectangle($X1,$Y,$X2,$Y+$Height,$Color);
             }
-            
+
             if ( $Key == count($IndicatorSections)-1 && $DrawRightHead ) {
-                $Poly = ""; 
-                $Poly[] = $X2+1; 
-                $Poly[] = $Y; 
-                $Poly[] = $X2+1; 
-                $Poly[] = $Y+$Height; 
-                $Poly[] = $X2+1+$HeadSize; 
+                $Poly = "";
+                $Poly[] = $X2+1;
+                $Poly[] = $Y;
+                $Poly[] = $X2+1;
+                $Poly[] = $Y+$Height;
+                $Poly[] = $X2+1+$HeadSize;
                 $Poly[] = $Y+($Height/2);
                 $this->pChartObject->drawPolygon($Poly,$Color);
                 $this->pChartObject->drawLine($X2+1,$Y,$X2+1+$HeadSize,$Y+($Height/2),$Color);
@@ -166,12 +167,12 @@ class CpIndicator
                     $YOffset = $YOffset + ($TxtPos[0]["Y"] - $TxtPos[2]["Y"]) + $TextPadding*2;
                 }
                 $XOffset = $TextPadding;
-            } else { 
-                $YOffset = 0; 
-                $XOffset = 0;                 
+            } else {
+                $YOffset = 0;
+                $XOffset = 0;
             }
 
-            if ( $CaptionColorFactor == null ) { 
+            if ( $CaptionColorFactor == null ) {
                 $CaptionColor = array(
                     "Align"=>TEXT_ALIGN_TOPLEFT,
                     "FontName"=>$CaptionFontName,
@@ -181,7 +182,7 @@ class CpIndicator
                     "B"=>$CaptionB,
                     "Alpha"=>$CaptionAlpha
                 );
-            } else { 
+            } else {
                 $CaptionColor = array(
                     "Align"=>TEXT_ALIGN_TOPLEFT,
                     "FontName"=>$CaptionFontName,
@@ -189,7 +190,7 @@ class CpIndicator
                     "R"=>$Settings["R"]+$CaptionColorFactor,
                     "G"=>$Settings["G"]+$CaptionColorFactor,
                     "B"=>$Settings["B"]+$CaptionColorFactor
-                );                 
+                );
             }
 
             if ( $SubCaptionColorFactor == null ) {
@@ -212,7 +213,7 @@ class CpIndicator
                     "B"=>$Settings["B"]+$SubCaptionColorFactor
                 );
             }
-            
+
             $RestoreShadow = $this->pChartObject->Shadow;
             $this->pChartObject->Shadow = false;
 

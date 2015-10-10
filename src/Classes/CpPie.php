@@ -1,5 +1,6 @@
 <?php
 namespace CpChart\Classes;
+
 /*
     pPie - class to draw pie charts
 
@@ -74,21 +75,21 @@ class CpPie
         $Palette = $this->pDataObject->getPalette();
 
         /* Do we have an abscissa serie defined? */
-        if ( $Data["Abscissa"] == "" ) { 
+        if ( $Data["Abscissa"] == "" ) {
             return(PIE_NO_ABSCISSA);
         }
 
         /* Try to find the data serie */
         $DataSerie = "";
-        foreach ($Data["Series"] as $SerieName => $SerieData) { 
-            if ( $SerieName != $Data["Abscissa"]) { 
-                $DataSerie = $SerieName;                
-            }             
+        foreach ($Data["Series"] as $SerieName => $SerieData) {
+            if ( $SerieName != $Data["Abscissa"]) {
+                $DataSerie = $SerieName;
+            }
         }
 
         /* Do we have data to compute? */
-        if ( $DataSerie == "" ) { 
-            return(PIE_NO_DATASERIE);             
+        if ( $DataSerie == "" ) {
+            return(PIE_NO_DATASERIE);
         }
 
         /* Remove unused data */
@@ -98,22 +99,22 @@ class CpPie
         $SerieSum = $this->pDataObject->getSum($DataSerie);
 
         /* Do we have data to draw? */
-        if ( $SerieSum == 0 ) { 
-            return(PIE_SUMISnull);             
+        if ( $SerieSum == 0 ) {
+            return(PIE_SUMISNULL);
         }
 
         /* Dump the real number of data to draw */
         $Values = "";
-        foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) { 
-            if ($Value != 0) { 
-                $Values[] = $Value;                 
-            }             
+        foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) {
+            if ($Value != 0) {
+                $Values[] = $Value;
+            }
         }
 
         /* Compute the wasted angular space between series */
-        if (count($Values)==1) { 
-            $WastedAngular = 0;             
-        } else { 
+        if (count($Values)==1) {
+            $WastedAngular = 0;
+        } else {
             $WastedAngular = count($Values) * $DataGapAngle;
         }
 
@@ -140,9 +141,9 @@ class CpPie
                     "Alpha"=>$this->pChartObject->Shadowa
                 );
             } else {
-                if ( !isset($Palette[$ID]["R"]) ) { 
-                    $Color = $this->pChartObject->getRandomColor(); 
-                    $Palette[$ID] = $Color; 
+                if ( !isset($Palette[$ID]["R"]) ) {
+                    $Color = $this->pChartObject->getRandomColor();
+                    $Palette[$ID] = $Color;
                     $this->pDataObject->savePalette($ID,$Color);
                 }
                 $Settings = array(
@@ -156,23 +157,23 @@ class CpPie
             if ( !$SecondPass && !$Shadow ) {
                 if ( !$Border ) {
                     $Settings["Surrounding"] = 10;
-                } else { 
-                    $Settings["BorderR"] = $BorderR; 
-                    $Settings["BorderG"] = $BorderG; 
-                    $Settings["BorderB"] = $BorderB;                 
+                } else {
+                    $Settings["BorderR"] = $BorderR;
+                    $Settings["BorderG"] = $BorderG;
+                    $Settings["BorderB"] = $BorderB;
                 }
             }
 
             $Plots = "";
-            $EndAngle = $Offset+($Value*$ScaleFactor); 
-            if ( $EndAngle > 360 ) { 
-                $EndAngle = 360;            
+            $EndAngle = $Offset+($Value*$ScaleFactor);
+            if ( $EndAngle > 360 ) {
+                $EndAngle = 360;
             }
 
             $Angle = ($EndAngle - $Offset)/2 + $Offset;
-            if ($DataGapAngle == 0) { 
-                $X0 = $X; 
-                $Y0 = $Y;            
+            if ($DataGapAngle == 0) {
+                $X0 = $X;
+                $Y0 = $Y;
             } else {
                 $X0 = cos(($Angle-90)*PI/180) * $DataGapRadius + $X;
                 $Y0 = sin(($Angle-90)*PI/180) * $DataGapRadius + $Y;
@@ -193,7 +194,7 @@ class CpPie
             }
 
             $this->pChartObject->drawPolygon($Plots,$Settings);
-            if ( $RecordImageMap && !$Shadow ) { 
+            if ( $RecordImageMap && !$Shadow ) {
                 $this->pChartObject->addToImageMap(
                     "POLY",
                     $this->arraySerialize($Plots),
@@ -204,24 +205,24 @@ class CpPie
                     ),
                     $Data["Series"][$Data["Abscissa"]]["Data"][$Key],
                     $Value
-                );             
+                );
             }
 
             if ( $DrawLabels && !$Shadow && !$SecondPass ) {
-                if ( $LabelColor == PIE_LABEL_COLOR_AUTO ) { 
+                if ( $LabelColor == PIE_LABEL_COLOR_AUTO ) {
                     $Settings = array(
                         "FillR"=>$Palette[$ID]["R"],
                         "FillG"=>$Palette[$ID]["G"],
                         "FillB"=>$Palette[$ID]["B"],
                         "Alpha"=>$Palette[$ID]["Alpha"]
-                    );                
-                } else { 
+                    );
+                } else {
                     $Settings = array(
                         "FillR"=>$LabelR,
                         "FillG"=>$LabelG,
                         "FillB"=>$LabelB,
                         "Alpha"=>$LabelAlpha
-                    );                 
+                    );
                 }
 
                 $Angle = ($EndAngle - $Offset)/2 + $Offset;
@@ -243,7 +244,7 @@ class CpPie
         /* Second pass to smooth the angles */
         if ( $SecondPass ) {
             $Step = 360 / (2 * PI * $Radius);
-            $Offset = 0; 
+            $Offset = 0;
             $ID = 0;
             foreach($Values as $Key => $Value) {
                 $FirstPoint = true;
@@ -267,14 +268,14 @@ class CpPie
                     }
                 }
 
-                $EndAngle = $Offset+($Value*$ScaleFactor); 
-                if ( $EndAngle > 360 ) { 
-                    $EndAngle = 360;                     
+                $EndAngle = $Offset+($Value*$ScaleFactor);
+                if ( $EndAngle > 360 ) {
+                    $EndAngle = 360;
                 }
 
-                if ($DataGapAngle == 0) { 
-                    $X0 = $X; 
-                    $Y0 = $Y;                     
+                if ($DataGapAngle == 0) {
+                    $X0 = $X;
+                    $Y0 = $Y;
                 } else {
                     $Angle = ($EndAngle - $Offset)/2 + $Offset;
                     $X0 = cos(($Angle-90)*PI/180) * $DataGapRadius + $X;
@@ -286,10 +287,10 @@ class CpPie
                     $Xc = cos(($i-90)*PI/180) * $Radius + $X;
                     $Yc = sin(($i-90)*PI/180) * $Radius + $Y;
 
-                    if ( $FirstPoint ) { 
+                    if ( $FirstPoint ) {
                         $this->pChartObject->drawLine($Xc,$Yc,$X0,$Y0,$Settings);
-                    } 
-                    { // ??????????????????? 
+                    }
+                    { // ???????????????????
                         $FirstPoint = false;
                     }
 
@@ -298,13 +299,13 @@ class CpPie
                 $this->pChartObject->drawLine($Xc,$Yc,$X0,$Y0,$Settings);
 
                 if ( $DrawLabels && !$Shadow ) {
-                    if ( $LabelColor == PIE_LABEL_COLOR_AUTO ) { 
+                    if ( $LabelColor == PIE_LABEL_COLOR_AUTO ) {
                         $Settings = array(
                             "FillR"=>$Palette[$ID]["R"],
                             "FillG"=>$Palette[$ID]["G"],
                             "FillB"=>$Palette[$ID]["B"],
                             "Alpha"=>$Palette[$ID]["Alpha"]
-                        );                        
+                        );
                     } else {
                         $Settings = array(
                             "FillR"=>$LabelR,
@@ -333,7 +334,7 @@ class CpPie
 
         if ( $WriteValues != null && !$Shadow ) {
             $Step = 360 / (2 * PI * $Radius);
-            $Offset = 0; 
+            $Offset = 0;
             $ID = count($Values)-1;
             $Settings = array(
                 "Align"=>TEXT_ALIGN_MIDDLEMIDDLE,
@@ -343,9 +344,9 @@ class CpPie
                 "Alpha"=>$ValueAlpha
             );
             foreach($Values as $Key => $Value) {
-                $EndAngle = ($Value*$ScaleFactor) + $Offset; 
-                if ( (int)$EndAngle > 360 ) { 
-                    $EndAngle = 0;                     
+                $EndAngle = ($Value*$ScaleFactor) + $Offset;
+                if ( (int)$EndAngle > 360 ) {
+                    $EndAngle = 0;
                 }
                 $Angle = ($EndAngle - $Offset)/2 + $Offset;
 
@@ -368,8 +369,8 @@ class CpPie
             }
         }
 
-        if ( $DrawLabels && $LabelStacked ) { 
-            $this->writeShiftedLabels();             
+        if ( $DrawLabels && $LabelStacked ) {
+            $this->writeShiftedLabels();
         }
 
         $this->pChartObject->Shadow = $RestoreShadow;
@@ -414,7 +415,7 @@ class CpPie
         $RecordImageMap	= isset($Format["RecordImageMap"]) ? $Format["RecordImageMap"] : false;
 
         /* Error correction for overlaying rounded corners */
-        if ( $SkewFactor < .5 ) { 
+        if ( $SkewFactor < .5 ) {
             $SkewFactor = .5;
         }
 
@@ -423,21 +424,21 @@ class CpPie
         $Palette = $this->pDataObject->getPalette();
 
         /* Do we have an abscissa serie defined? */
-        if ( $Data["Abscissa"] == "" ) { 
+        if ( $Data["Abscissa"] == "" ) {
             return(PIE_NO_ABSCISSA);
         }
 
         /* Try to find the data serie */
         $DataSerie = "";
-        foreach ($Data["Series"] as $SerieName => $SerieData) { 
-            if ( $SerieName != $Data["Abscissa"]) { 
-                $DataSerie = $SerieName;                 
-            }             
+        foreach ($Data["Series"] as $SerieName => $SerieData) {
+            if ( $SerieName != $Data["Abscissa"]) {
+                $DataSerie = $SerieName;
+            }
         }
 
         /* Do we have data to compute? */
-        if ( $DataSerie == "" ) { 
-            return(PIE_NO_DATASERIE);             
+        if ( $DataSerie == "" ) {
+            return(PIE_NO_DATASERIE);
         }
 
         /* Remove unused data */
@@ -447,30 +448,30 @@ class CpPie
         $SerieSum = $this->pDataObject->getSum($DataSerie);
 
         /* Do we have data to draw? */
-        if ( $SerieSum == 0 ) { 
-            return(PIE_SUMISnull);             
+        if ( $SerieSum == 0 ) {
+            return(PIE_SUMISNULL);
         }
 
         /* Dump the real number of data to draw */
         $Values = "";
-        foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) { 
-            if ($Value != 0) { 
-                $Values[] = $Value;                 
-            }             
+        foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) {
+            if ($Value != 0) {
+                $Values[] = $Value;
+            }
         }
 
         /* Compute the wasted angular space between series */
-        if (count($Values)==1) { 
-            $WastedAngular = 0;             
-        } else { 
-            $WastedAngular = count($Values) * $DataGapAngle;             
+        if (count($Values)==1) {
+            $WastedAngular = 0;
+        } else {
+            $WastedAngular = count($Values) * $DataGapAngle;
         }
 
         /* Compute the scale */
         $ScaleFactor = (360 - $WastedAngular) / $SerieSum;
 
         $RestoreShadow = $this->pChartObject->Shadow;
-        if ( $this->pChartObject->Shadow ) { 
+        if ( $this->pChartObject->Shadow ) {
             $this->pChartObject->Shadow = false;
         }
 
@@ -478,16 +479,16 @@ class CpPie
         $Step   = 360 / (2 * PI * $Radius);
         $Offset = 360; $ID = count($Values)-1;
         $Values = array_reverse($Values);
-        $Slice  = 0; 
-        $Slices = ""; 
-        $SliceColors = ""; 
-        $Visible = ""; 
+        $Slice  = 0;
+        $Slices = "";
+        $SliceColors = "";
+        $Visible = "";
         $SliceAngle = "";
         foreach($Values as $Key => $Value) {
-            if ( !isset($Palette[$ID]["R"]) ) { 
-                $Color = $this->pChartObject->getRandomColor(); 
-                $Palette[$ID] = $Color; 
-                $this->pDataObject->savePalette($ID,$Color);                 
+            if ( !isset($Palette[$ID]["R"]) ) {
+                $Color = $this->pChartObject->getRandomColor();
+                $Palette[$ID] = $Color;
+                $this->pDataObject->savePalette($ID,$Color);
             }
             $Settings = array(
                 "R"=>$Palette[$ID]["R"],
@@ -499,52 +500,52 @@ class CpPie
             $SliceColors[$Slice] = $Settings;
 
             $StartAngle = $Offset;
-            $EndAngle   = $Offset-($Value*$ScaleFactor); 
-            if ( $EndAngle < 0 ) { 
-                $EndAngle = 0;                 
+            $EndAngle   = $Offset-($Value*$ScaleFactor);
+            if ( $EndAngle < 0 ) {
+                $EndAngle = 0;
             }
 
-            if ( $StartAngle > 180 ) { 
-                $Visible[$Slice]["Start"] = true;                 
-            } else { 
-                $Visible[$Slice]["Start"] = true;                 
+            if ( $StartAngle > 180 ) {
+                $Visible[$Slice]["Start"] = true;
+            } else {
+                $Visible[$Slice]["Start"] = true;
             }
-            if ( $EndAngle < 180 ) { 
-                $Visible[$Slice]["End"] = false;                 
-            } else { 
-                $Visible[$Slice]["End"] = true;                 
+            if ( $EndAngle < 180 ) {
+                $Visible[$Slice]["End"] = false;
+            } else {
+                $Visible[$Slice]["End"] = true;
             }
 
-            if ($DataGapAngle == 0) { 
-                $X0 = $X; 
-                $Y0 = $Y;                 
+            if ($DataGapAngle == 0) {
+                $X0 = $X;
+                $Y0 = $Y;
             } else {
                 $Angle = ($EndAngle - $Offset)/2 + $Offset;
                 $X0 = cos(($Angle-90)*PI/180) * $DataGapRadius + $X;
                 $Y0 = sin(($Angle-90)*PI/180) * $DataGapRadius*$SkewFactor + $Y;
             }
-            $Slices[$Slice][] = $X0; 
-            $Slices[$Slice][] = $Y0; 
+            $Slices[$Slice][] = $X0;
+            $Slices[$Slice][] = $Y0;
             $SliceAngle[$Slice][] = 0;
 
             for($i=$Offset;$i>=$EndAngle;$i=$i-$Step) {
                 $Xc = cos(($i-90)*PI/180) * $Radius + $X;
                 $Yc = sin(($i-90)*PI/180) * $Radius*$SkewFactor + $Y;
 
-                if ( ($SecondPass || $RestoreShadow ) && ( $i<90 )) { 
-                    $Yc++;                     
+                if ( ($SecondPass || $RestoreShadow ) && ( $i<90 )) {
+                    $Yc++;
                 }
-                if ( ($SecondPass || $RestoreShadow ) && ( $i>90 && $i<180 )) { 
-                    $Xc++;                     
+                if ( ($SecondPass || $RestoreShadow ) && ( $i>90 && $i<180 )) {
+                    $Xc++;
                 }
-                if ( ($SecondPass || $RestoreShadow ) && ( $i>180 && $i<270 )) { 
-                    $Xc++;                     
+                if ( ($SecondPass || $RestoreShadow ) && ( $i>180 && $i<270 )) {
+                    $Xc++;
                 }
-                if ( ($SecondPass || $RestoreShadow ) && ( $i>=270 )) { 
-                    $Xc++; $Yc++;                     
+                if ( ($SecondPass || $RestoreShadow ) && ( $i>=270 )) {
+                    $Xc++; $Yc++;
                 }
 
-                $Slices[$Slice][] = $Xc; $Slices[$Slice][] = $Yc; 
+                $Slices[$Slice][] = $Xc; $Slices[$Slice][] = $Yc;
                 $SliceAngle[$Slice][] = $i;
             }
 
@@ -555,9 +556,9 @@ class CpPie
         if ( $RestoreShadow && ($this->pChartObject->ShadowX != 0 || $this->pChartObject->ShadowY !=0 )) {
             foreach($Slices as $SliceID => $Plots) {
                 $ShadowPie = "";
-                for($i=0;$i<count($Plots);$i=$i+2) { 
-                    $ShadowPie[] = $Plots[$i]+$this->pChartObject->ShadowX; 
-                    $ShadowPie[] = $Plots[$i+1]+$this->pChartObject->ShadowY;                     
+                for($i=0;$i<count($Plots);$i=$i+2) {
+                    $ShadowPie[] = $Plots[$i]+$this->pChartObject->ShadowX;
+                    $ShadowPie[] = $Plots[$i+1]+$this->pChartObject->ShadowY;
                 }
 
                 $Settings = array(
@@ -573,9 +574,9 @@ class CpPie
             $Step = 360 / (2 * PI * $Radius);
             $Offset = 360;
             foreach ($Values as $Key => $Value) {
-                $EndAngle = $Offset-($Value*$ScaleFactor); 
-                if ( $EndAngle < 0 ) { 
-                    $EndAngle = 0;                     
+                $EndAngle = $Offset-($Value*$ScaleFactor);
+                if ( $EndAngle < 0 ) {
+                    $EndAngle = 0;
                 }
 
                 for ($i = $Offset; $i >= $EndAngle; $i = $i-$Step) {
@@ -591,16 +592,16 @@ class CpPie
 
         /* Draw the bottom pie splice */
         foreach($Slices as $SliceID => $Plots) {
-            $Settings = $SliceColors[$SliceID];  
+            $Settings = $SliceColors[$SliceID];
             $Settings["NoBorder"] = true;
             $this->pChartObject->drawPolygon($Plots,$Settings);
 
             if ( $SecondPass ) {
                 $Settings = $SliceColors[$SliceID];
-                if ( $Border ) { 
-                    $Settings["R"]+= 30; 
-                    $Settings["G"]+= 30; 
-                    $Settings["B"]+= 30;                    
+                if ( $Border ) {
+                    $Settings["R"]+= 30;
+                    $Settings["G"]+= 30;
+                    $Settings["B"]+= 30;
                 }
                 /* Empty error handling */
                 if ( isset($SliceAngle[$SliceID][1]) ) {
@@ -637,14 +638,14 @@ class CpPie
                       )
                 );
                 $Border = "";
-                $Border[] = $Plots[0]; 
-                $Border[] = $Plots[1]; 
-                $Border[] = $Plots[0]; 
+                $Border[] = $Plots[0];
+                $Border[] = $Plots[1];
+                $Border[] = $Plots[0];
                 $Border[] = $Plots[1] - $SliceHeight;
-                $Border[] = $Plots[2]; 
-                $Border[] = $Plots[3] - $SliceHeight; 
-                $Border[] = $Plots[2]; 
-                $Border[] = $Plots[3]; 
+                $Border[] = $Plots[2];
+                $Border[] = $Plots[3] - $SliceHeight;
+                $Border[] = $Plots[2];
+                $Border[] = $Plots[3];
                 $this->pChartObject->drawPolygon($Border,$Settings);
             }
         }
@@ -653,9 +654,9 @@ class CpPie
         $SliceColors = array_reverse($SliceColors);
         foreach($Slices as $SliceID => $Plots) {
             $Settings = $SliceColors[$SliceID];
-            $Settings["R"]+= 10; 
-            $Settings["G"]+= 10; 
-            $Settings["B"]+= 10; 
+            $Settings["R"]+= 10;
+            $Settings["G"]+= 10;
+            $Settings["B"]+= 10;
             $Settings["NoBorder"] = true;
             if ( $Visible[$SliceID]["End"] ) {
                 $this->pChartObject->drawLine(
@@ -667,14 +668,14 @@ class CpPie
                 );
 
                 $Border = "";
-                $Border[] = $Plots[0]; 
-                $Border[] = $Plots[1]; 
-                $Border[] = $Plots[0]; 
+                $Border[] = $Plots[0];
+                $Border[] = $Plots[1];
+                $Border[] = $Plots[0];
                 $Border[] = $Plots[1] - $SliceHeight;
-                $Border[] = $Plots[count($Plots)-2]; 
-                $Border[] = $Plots[count($Plots)-1] - $SliceHeight; 
-                $Border[] = $Plots[count($Plots)-2]; 
-                $Border[] = $Plots[count($Plots)-1]; 
+                $Border[] = $Plots[count($Plots)-2];
+                $Border[] = $Plots[count($Plots)-1] - $SliceHeight;
+                $Border[] = $Plots[count($Plots)-2];
+                $Border[] = $Plots[count($Plots)-1];
                 $this->pChartObject->drawPolygon($Border,$Settings);
             }
         }
@@ -682,9 +683,9 @@ class CpPie
         /* Draw the rounded edges */
         foreach($Slices as $SliceID => $Plots) {
             $Settings = $SliceColors[$SliceID];
-            $Settings["R"]+= 10; 
-            $Settings["G"]+= 10; 
-            $Settings["B"]+= 10; 
+            $Settings["R"]+= 10;
+            $Settings["G"]+= 10;
+            $Settings["B"]+= 10;
             $Settings["NoBorder"] = true;
 
             for ($j=2;$j<count($Plots)-2;$j=$j+2) {
@@ -701,12 +702,12 @@ class CpPie
 
             if ( $SecondPass ) {
                 $Settings = $SliceColors[$SliceID];
-                if ( $Border ) { 
-                    $Settings["R"]+= 30; 
-                    $Settings["G"]+= 30; 
-                    $Settings["B"]+= 30;                     
+                if ( $Border ) {
+                    $Settings["R"]+= 30;
+                    $Settings["G"]+= 30;
+                    $Settings["B"]+= 30;
                 }
-                
+
                 /* Empty error handling */
                 if ( isset($SliceAngle[$SliceID][1]) ) {
                     $Angle = $SliceAngle[$SliceID][1];
@@ -724,18 +725,18 @@ class CpPie
                     $this->pChartObject->drawLine($Xc,$Yc,$Xc,$Yc-$SliceHeight,$Settings);
                 }
 
-                if ( isset($SliceAngle[$SliceID][1]) 
-                    && $SliceAngle[$SliceID][1] > 270 
-                    && $SliceAngle[$SliceID][count($SliceAngle[$SliceID])-1] < 270 
+                if ( isset($SliceAngle[$SliceID][1])
+                    && $SliceAngle[$SliceID][1] > 270
+                    && $SliceAngle[$SliceID][count($SliceAngle[$SliceID])-1] < 270
                 ) {
                     $Xc = cos((270-90)*PI/180) * $Radius + $X;
                     $Yc = sin((270-90)*PI/180) * $Radius*$SkewFactor + $Y;
                     $this->pChartObject->drawLine($Xc,$Yc,$Xc,$Yc-$SliceHeight,$Settings);
                 }
 
-                if ( isset($SliceAngle[$SliceID][1]) 
-                    && $SliceAngle[$SliceID][1] > 90 
-                    && $SliceAngle[$SliceID][count($SliceAngle[$SliceID])-1] < 90 
+                if ( isset($SliceAngle[$SliceID][1])
+                    && $SliceAngle[$SliceID][1] > 90
+                    && $SliceAngle[$SliceID][count($SliceAngle[$SliceID])-1] < 90
                 ) {
                     $Xc = cos((0)*PI/180) * $Radius + $X;
                     $Yc = sin((0)*PI/180) * $Radius*$SkewFactor + $Y;
@@ -755,7 +756,7 @@ class CpPie
             }
             $this->pChartObject->drawPolygon($Top,$Settings);
 
-            if ( $RecordImageMap && !$Shadow ) { 
+            if ( $RecordImageMap && !$Shadow ) {
                 $this->pChartObject->addToImageMap(
                     "POLY",
                     $this->arraySerialize($Top),
@@ -766,7 +767,7 @@ class CpPie
                     ),
                     $Data["Series"][$Data["Abscissa"]]["Data"][count($Slices)-$SliceID-1],
                     $Values[$SliceID]
-                );                 
+                );
             }
         }
 
@@ -785,13 +786,13 @@ class CpPie
                         "Alpha"=>$this->pChartObject->Shadowa
                     );
                 } else {
-                    if ( $Border ) { 
+                    if ( $Border ) {
                         $Settings = array(
                             "R"=>$Palette[$ID]["R"]+30,
                             "G"=>$Palette[$ID]["G"]+30,
                             "B"=>$Palette[$ID]["B"]+30,
                             "Alpha"=>$Palette[$ID]["Alpha"]
-                        );                     
+                        );
                     } else {
                         $Settings = array(
                             "R"=>$Palette[$ID]["R"],
@@ -802,36 +803,36 @@ class CpPie
                     }
                 }
 
-                $EndAngle = $Offset-($Value*$ScaleFactor); 
-                if ( $EndAngle < 0 ) { 
-                    $EndAngle = 0;                     
+                $EndAngle = $Offset-($Value*$ScaleFactor);
+                if ( $EndAngle < 0 ) {
+                    $EndAngle = 0;
                 }
 
-                if ($DataGapAngle == 0) { 
-                    $X0 = $X; 
-                    $Y0 = $Y- $SliceHeight;                     
+                if ($DataGapAngle == 0) {
+                    $X0 = $X;
+                    $Y0 = $Y- $SliceHeight;
                 } else {
                     $Angle = ($EndAngle - $Offset)/2 + $Offset;
                     $X0 = cos(($Angle-90)*PI/180) * $DataGapRadius + $X;
                     $Y0 = sin(($Angle-90)*PI/180) * $DataGapRadius*$SkewFactor + $Y - $SliceHeight;
                 }
-                $Plots[] = $X0; 
+                $Plots[] = $X0;
                 $Plots[] = $Y0;
 
                 for($i=$Offset;$i>=$EndAngle;$i=$i-$Step) {
                     $Xc = cos(($i-90)*PI/180) * $Radius + $X;
                     $Yc = sin(($i-90)*PI/180) * $Radius*$SkewFactor + $Y - $SliceHeight;
 
-                    if ( $FirstPoint ) { 
-                        $this->pChartObject->drawLine($Xc,$Yc,$X0,$Y0,$Settings);                         
-                    } 
-                    { 
-                        $FirstPoint = false;                         
+                    if ( $FirstPoint ) {
+                        $this->pChartObject->drawLine($Xc,$Yc,$X0,$Y0,$Settings);
+                    }
+                    {
+                        $FirstPoint = false;
                     }
 
                     $this->pChartObject->drawAntialiasPixel($Xc,$Yc,$Settings);
-                    if ($i < 270 && $i > 90 ) { 
-                        $this->pChartObject->drawAntialiasPixel($Xc,$Yc+$SliceHeight,$Settings);                         
+                    if ($i < 270 && $i > 90 ) {
+                        $this->pChartObject->drawAntialiasPixel($Xc,$Yc+$SliceHeight,$Settings);
                     }
                 }
                 $this->pChartObject->drawLine($Xc,$Yc,$X0,$Y0,$Settings);
@@ -851,9 +852,9 @@ class CpPie
                 "Alpha"=>$ValueAlpha
             );
             foreach($Values as $Key => $Value) {
-                $EndAngle = $Offset-($Value*$ScaleFactor); 
-                if ( $EndAngle < 0 ) { 
-                    $EndAngle = 0;                     
+                $EndAngle = $Offset-($Value*$ScaleFactor);
+                if ( $EndAngle < 0 ) {
+                    $EndAngle = 0;
                 }
 
                 $Angle = ($EndAngle - $Offset)/2 + $Offset;
@@ -871,7 +872,7 @@ class CpPie
                 } elseif ( $WriteValues == PIE_VALUE_NATURAL ) {
                     $Display = $Value.$ValueSuffix;
                 }
-                
+
                 $this->pChartObject->drawText($Xc,$Yc,$Display,$Settings);
 
                 $Offset = $EndAngle - $DataGapAngle; $ID--;
@@ -882,25 +883,25 @@ class CpPie
             $Step = 360 / (2 * PI * $Radius);
             $Offset = 360; $ID = count($Values)-1;
             foreach($Values as $Key => $Value) {
-                if ( $LabelColor == PIE_LABEL_COLOR_AUTO ) { 
+                if ( $LabelColor == PIE_LABEL_COLOR_AUTO ) {
                     $Settings = array(
                         "FillR"=>$Palette[$ID]["R"],
                         "FillG"=>$Palette[$ID]["G"],
                         "FillB"=>$Palette[$ID]["B"],
                         "Alpha"=>$Palette[$ID]["Alpha"]
-                    );                    
-                } else { 
+                    );
+                } else {
                     $Settings = array(
                         "FillR"=>$LabelR,
                         "FillG"=>$LabelG,
                         "FillB"=>$LabelB,
                         "Alpha"=>$LabelAlpha
-                    );                     
+                    );
                 }
 
-                $EndAngle = $Offset-($Value*$ScaleFactor); 
-                if ( $EndAngle < 0 ) { 
-                    $EndAngle = 0;                     
+                $EndAngle = $Offset-($Value*$ScaleFactor);
+                if ( $EndAngle < 0 ) {
+                    $EndAngle = 0;
                 }
 
                 $Angle = ($EndAngle - $Offset)/2 + $Offset;
@@ -921,8 +922,8 @@ class CpPie
             }
         }
 
-        if ( $DrawLabels && $LabelStacked ) { 
-            $this->writeShiftedLabels();            
+        if ( $DrawLabels && $LabelStacked ) {
+            $this->writeShiftedLabels();
         }
 
         $this->pChartObject->Shadow = $RestoreShadow;
@@ -957,10 +958,10 @@ class CpPie
         $Style		= isset($Format["Style"]) ? $Format["Style"] : LEGEND_ROUND;
         $Mode		= isset($Format["Mode"]) ? $Format["Mode"] : LEGEND_VERTICAL;
 
-        if ( $Surrounding != null ) { 
-            $BorderR = $R + $Surrounding; 
-            $BorderG = $G + $Surrounding; 
-            $BorderB = $B + $Surrounding;             
+        if ( $Surrounding != null ) {
+            $BorderR = $R + $Surrounding;
+            $BorderG = $G + $Surrounding;
+            $BorderB = $B + $Surrounding;
         }
 
         $YStep = max($this->pChartObject->FontSize,$BoxSize) + 5;
@@ -971,50 +972,50 @@ class CpPie
         $Palette = $this->pDataObject->getPalette();
 
         /* Do we have an abscissa serie defined? */
-        if ( $Data["Abscissa"] == "" ) { 
-            return(PIE_NO_ABSCISSA);             
+        if ( $Data["Abscissa"] == "" ) {
+            return(PIE_NO_ABSCISSA);
         }
 
-        $Boundaries = ""; 
-        $Boundaries["L"] = $X; 
-        $Boundaries["T"] = $Y; 
-        $Boundaries["R"] = 0; 
-        $Boundaries["B"] = 0; 
-        $vY = $Y; 
+        $Boundaries = "";
+        $Boundaries["L"] = $X;
+        $Boundaries["T"] = $Y;
+        $Boundaries["R"] = 0;
+        $Boundaries["B"] = 0;
+        $vY = $Y;
         $vX = $X;
         foreach($Data["Series"][$Data["Abscissa"]]["Data"] as $Key => $Value) {
             $BoxArray = $this->pChartObject->getTextBox($vX+$BoxSize+4,$vY+$BoxSize/2,$FontName,$FontSize,0,$Value);
 
             if ( $Mode == LEGEND_VERTICAL ) {
-                if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$BoxSize/2 ) { 
-                    $Boundaries["T"] = $BoxArray[2]["Y"]+$BoxSize/2;                   
+                if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$BoxSize/2 ) {
+                    $Boundaries["T"] = $BoxArray[2]["Y"]+$BoxSize/2;
                 }
-                if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) { 
-                    $Boundaries["R"] = $BoxArray[1]["X"]+2;                   
+                if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) {
+                    $Boundaries["R"] = $BoxArray[1]["X"]+2;
                 }
-                if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$BoxSize/2 ) { 
+                if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$BoxSize/2 ) {
                     $Boundaries["B"] = $BoxArray[1]["Y"]+2+$BoxSize/2;
                 }
                 $vY=$vY+$YStep;
             } elseif ( $Mode == LEGEND_HORIZONTAL ) {
-                if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$BoxSize/2 ) { 
-                    $Boundaries["T"] = $BoxArray[2]["Y"]+$BoxSize/2;                     
+                if ( $Boundaries["T"] > $BoxArray[2]["Y"]+$BoxSize/2 ) {
+                    $Boundaries["T"] = $BoxArray[2]["Y"]+$BoxSize/2;
                 }
-                if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) { 
-                    $Boundaries["R"] = $BoxArray[1]["X"]+2;                     
+                if ( $Boundaries["R"] < $BoxArray[1]["X"]+2 ) {
+                    $Boundaries["R"] = $BoxArray[1]["X"]+2;
                 }
-                if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$BoxSize/2 ) { 
-                    $Boundaries["B"] = $BoxArray[1]["Y"]+2+$BoxSize/2;                     
+                if ( $Boundaries["B"] < $BoxArray[1]["Y"]+2+$BoxSize/2 ) {
+                    $Boundaries["B"] = $BoxArray[1]["Y"]+2+$BoxSize/2;
                 }
                 $vX=$Boundaries["R"]+$XStep;
             }
         }
-        $vY=$vY-$YStep; 
+        $vY=$vY-$YStep;
         $vX=$vX-$XStep;
 
         $TopOffset  = $Y - $Boundaries["T"];
-        if ( $Boundaries["B"]-($vY+$BoxSize) < $TopOffset ) { 
-            $Boundaries["B"] = $vY+$BoxSize+$TopOffset;             
+        if ( $Boundaries["B"]-($vY+$BoxSize) < $TopOffset ) {
+            $Boundaries["B"] = $vY+$BoxSize+$TopOffset;
         }
 
         if ( $Style == LEGEND_ROUND ) {
@@ -1149,38 +1150,38 @@ class CpPie
                 $Done = false;
                 foreach($this->LabelPos as $Key => $Settings) {
                     if ( !$Done ) {
-                        if ($Angle <= 90 
-                            && (($YTop >= $Settings["YTop"] && $YTop <= $Settings["YBottom"]) 
-                            || ($YBottom >= $Settings["YTop"] 
+                        if ($Angle <= 90
+                            && (($YTop >= $Settings["YTop"] && $YTop <= $Settings["YBottom"])
+                            || ($YBottom >= $Settings["YTop"]
                             && $YBottom <= $Settings["YBottom"]))
-                        ) { 
-                            $this->shift(0,180,-($Height+2),$Reversed); 
-                            $Done = true;                       
+                        ) {
+                            $this->shift(0,180,-($Height+2),$Reversed);
+                            $Done = true;
                         }
-                        if ( $Angle > 90 
-                            && $Angle <= 180 
-                            && (($YTop >= $Settings["YTop"] && $YTop <= $Settings["YBottom"]) 
-                            || ($YBottom >= $Settings["YTop"] 
+                        if ( $Angle > 90
+                            && $Angle <= 180
+                            && (($YTop >= $Settings["YTop"] && $YTop <= $Settings["YBottom"])
+                            || ($YBottom >= $Settings["YTop"]
                             && $YBottom <= $Settings["YBottom"]))
-                        ) { 
-                          $this->shift(0,180,-($Height+2),$Reversed); 
+                        ) {
+                          $this->shift(0,180,-($Height+2),$Reversed);
                           $Done = true;
                         }
-                        if ( $Angle > 180 && $Angle <= 270 
-                            && (($YTop >= $Settings["YTop"] && $YTop <= $Settings["YBottom"]) 
+                        if ( $Angle > 180 && $Angle <= 270
+                            && (($YTop >= $Settings["YTop"] && $YTop <= $Settings["YBottom"])
                             || ($YBottom >= $Settings["YTop"] && $YBottom <= $Settings["YBottom"]))
-                        ) { 
-                            $this->shift(180,360,($Height+2),$Reversed); 
-                            $Done = true;                             
-                        } 
-                        if ( $Angle > 270 
-                            && $Angle <= 360 
-                            && (($YTop >= $Settings["YTop"] && $YTop <= $Settings["YBottom"]) 
-                            || ($YBottom >= $Settings["YTop"] 
+                        ) {
+                            $this->shift(180,360,($Height+2),$Reversed);
+                            $Done = true;
+                        }
+                        if ( $Angle > 270
+                            && $Angle <= 360
+                            && (($YTop >= $Settings["YTop"] && $YTop <= $Settings["YBottom"])
+                            || ($YBottom >= $Settings["YTop"]
                             && $YBottom <= $Settings["YBottom"]))
-                        ) { 
-                            $this->shift(180,360,($Height+2),$Reversed); 
-                            $Done = true;                             
+                        ) {
+                            $this->shift(180,360,($Height+2),$Reversed);
+                            $Done = true;
                         }
                     }
                }
@@ -1196,10 +1197,10 @@ class CpPie
                 "X2"=>$X2,
                 "Y2"=>$Y2
             );
-            if ( $Angle <= 180 ) { 
+            if ( $Angle <= 180 ) {
                 $LabelSettings["X3"] = $Xc+$Radius+$LabelOffset;
             }
-            if ( $Angle > 180 )  { 
+            if ( $Angle > 180 )  {
                 $LabelSettings["X3"] = $Xc-$Radius-$LabelOffset;
             }
             $this->LabelPos[] = $LabelSettings;
@@ -1215,13 +1216,13 @@ class CpPie
      */
     public function shift($StartAngle,$EndAngle,$Offset,$Reversed)
     {
-        if ( $Reversed ) { 
+        if ( $Reversed ) {
             $Offset = -$Offset;
         }
         foreach($this->LabelPos as $Key => $Settings) {
-            if ( $Settings["Angle"] > $StartAngle && $Settings["Angle"] <= $EndAngle ) { 
-                $this->LabelPos[$Key]["YTop"] = $Settings["YTop"] + $Offset; 
-                $this->LabelPos[$Key]["YBottom"] = $Settings["YBottom"] + $Offset; 
+            if ( $Settings["Angle"] > $StartAngle && $Settings["Angle"] <= $EndAngle ) {
+                $this->LabelPos[$Key]["YTop"] = $Settings["YTop"] + $Offset;
+                $this->LabelPos[$Key]["YBottom"] = $Settings["YBottom"] + $Offset;
                 $this->LabelPos[$Key]["Y2"] = $Settings["Y2"] + $Offset;
             }
         }
@@ -1233,7 +1234,7 @@ class CpPie
      */
     public function writeShiftedLabels()
     {
-        if ( $this->LabelPos == "" ) { 
+        if ( $this->LabelPos == "" ) {
             return(0);
         }
         foreach($this->LabelPos as $Key => $Settings) {
@@ -1298,15 +1299,15 @@ class CpPie
 
         /* Try to find the data serie */
         $DataSerie = "";
-        foreach ($Data["Series"] as $SerieName => $SerieData) { 
-            if ( $SerieName != $Data["Abscissa"]) { 
-                $DataSerie = $SerieName;                 
-            }             
+        foreach ($Data["Series"] as $SerieName => $SerieData) {
+            if ( $SerieName != $Data["Abscissa"]) {
+                $DataSerie = $SerieName;
+            }
         }
 
         /* Do we have data to compute? */
-        if ( $DataSerie == "" ) { 
-            return(PIE_NO_DATASERIE);             
+        if ( $DataSerie == "" ) {
+            return(PIE_NO_DATASERIE);
         }
 
         /* Remove unused data */
@@ -1316,23 +1317,23 @@ class CpPie
         $SerieSum = $this->pDataObject->getSum($DataSerie);
 
         /* Do we have data to draw? */
-        if ( $SerieSum == 0 ) { 
-            return(PIE_SUMISnull);             
+        if ( $SerieSum == 0 ) {
+            return(PIE_SUMISNULL);
         }
 
         /* Dump the real number of data to draw */
         $Values = "";
-        foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) { 
-            if ($Value != 0) { 
-                $Values[] = $Value;                 
+        foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) {
+            if ($Value != 0) {
+                $Values[] = $Value;
             }
         }
 
         /* Compute the wasted angular space between series */
-        if (count($Values)==1) { 
-            $WastedAngular = 0;             
-        } else { 
-            $WastedAngular = 0;             
+        if (count($Values)==1) {
+            $WastedAngular = 0;
+        } else {
+            $WastedAngular = 0;
         } // count($Values)
 
         /* Compute the scale */
@@ -1348,7 +1349,7 @@ class CpPie
 
         /* Draw the polygon pie elements */
         $Step = 360 / (2 * PI * $OuterRadius);
-        $Offset = 0; 
+        $Offset = 0;
         $ID = 0;
         foreach($Values as $Key => $Value) {
             if ( $Shadow ) {
@@ -1360,10 +1361,10 @@ class CpPie
                 );
                 $BorderColor = $Settings;
             } else {
-                if ( !isset($Palette[$ID]["R"]) ) { 
-                    $Color = $this->pChartObject->getRandomColor(); 
-                    $Palette[$ID] = $Color; 
-                    $this->pDataObject->savePalette($ID,$Color);                     
+                if ( !isset($Palette[$ID]["R"]) ) {
+                    $Color = $this->pChartObject->getRandomColor();
+                    $Palette[$ID] = $Color;
+                    $this->pDataObject->savePalette($ID,$Color);
                 }
                 $Settings = array(
                     "R"=>$Palette[$ID]["R"],
@@ -1390,25 +1391,25 @@ class CpPie
                 $Xc = cos(($i-90)*PI/180) * $OuterRadius + $X;
                 $Yc = sin(($i-90)*PI/180) * $OuterRadius + $Y;
 
-                if ( !isset($Boundaries[0]["X1"]) ) { 
-                    $Boundaries[0]["X1"] = $Xc; 
-                    $Boundaries[0]["Y1"] = $Yc;                     
+                if ( !isset($Boundaries[0]["X1"]) ) {
+                    $Boundaries[0]["X1"] = $Xc;
+                    $Boundaries[0]["Y1"] = $Yc;
                 }
                 $AAPixels[] = array($Xc,$Yc);
 
-                if ( $i<90 ) { 
-                    $Yc++;                     
+                if ( $i<90 ) {
+                    $Yc++;
                 }
-                if ( $i>180 && $i<270 ) { 
-                    $Xc++;                     
+                if ( $i>180 && $i<270 ) {
+                    $Xc++;
                 }
-                if ( $i>=270 ) { 
-                    $Xc++; $Yc++;                     
+                if ( $i>=270 ) {
+                    $Xc++; $Yc++;
                 }
 
                 $Plots[] = $Xc; $Plots[] = $Yc;
             }
-            $Boundaries[1]["X1"] = $Xc; 
+            $Boundaries[1]["X1"] = $Xc;
             $Boundaries[1]["Y1"] = $Yc;
             $Lasti = $EndAngle;
 
@@ -1416,33 +1417,33 @@ class CpPie
                 $Xc = cos(($i-90)*PI/180) * ($InnerRadius-1) + $X;
                 $Yc = sin(($i-90)*PI/180) * ($InnerRadius-1) + $Y;
 
-                if ( !isset($Boundaries[1]["X2"]) ) { 
-                    $Boundaries[1]["X2"] = $Xc; 
-                    $Boundaries[1]["Y2"] = $Yc;                     
+                if ( !isset($Boundaries[1]["X2"]) ) {
+                    $Boundaries[1]["X2"] = $Xc;
+                    $Boundaries[1]["Y2"] = $Yc;
                 }
                 $AAPixels[] = array($Xc,$Yc);
 
                 $Xc = cos(($i-90)*PI/180) * $InnerRadius + $X;
                 $Yc = sin(($i-90)*PI/180) * $InnerRadius + $Y;
 
-                if ( $i<90 ) { 
-                    $Yc++;                     
+                if ( $i<90 ) {
+                    $Yc++;
                 }
-                if ( $i>180 && $i<270 ) { 
+                if ( $i>180 && $i<270 ) {
                     $Xc++;
                 }
-                if ( $i>=270 ) { 
+                if ( $i>=270 ) {
                     $Xc++; $Yc++;
                 }
 
-                $Plots[] = $Xc; 
+                $Plots[] = $Xc;
                 $Plots[] = $Yc;
             }
             $Boundaries[0]["X2"] = $Xc; $Boundaries[0]["Y2"] = $Yc;
 
             /* Draw the polygon */
             $this->pChartObject->drawPolygon($Plots,$Settings);
-            if ( $RecordImageMap && !$Shadow ) { 
+            if ( $RecordImageMap && !$Shadow ) {
                 $this->pChartObject->addToImageMap(
                     "POLY",
                     $this->arraySerialize($Plots),
@@ -1453,21 +1454,21 @@ class CpPie
                             ),
                     $Data["Series"][$Data["Abscissa"]]["Data"][$Key],
                     $Value
-                );                 
+                );
             }
 
             /* Smooth the edges using AA */
-            foreach($AAPixels as $iKey => $Pos ) { 
+            foreach($AAPixels as $iKey => $Pos ) {
                 $this->pChartObject->drawAntialiasPixel($Pos[0],$Pos[1],$BorderColor);
             }
             $this->pChartObject->drawLine($Boundaries[0]["X1"],$Boundaries[0]["Y1"],$Boundaries[0]["X2"],$Boundaries[0]["Y2"],$BorderColor);
             $this->pChartObject->drawLine($Boundaries[1]["X1"],$Boundaries[1]["Y1"],$Boundaries[1]["X2"],$Boundaries[1]["Y2"],$BorderColor);
 
             if ( $DrawLabels && !$Shadow ) {
-                if ( $LabelColor == PIE_LABEL_COLOR_AUTO ) { 
-                    $Settings = array("FillR"=>$Palette[$ID]["R"],"FillG"=>$Palette[$ID]["G"],"FillB"=>$Palette[$ID]["B"],"Alpha"=>$Palette[$ID]["Alpha"]);                    
-                } else { 
-                    $Settings = array("FillR"=>$LabelR,"FillG"=>$LabelG,"FillB"=>$LabelB,"Alpha"=>$LabelAlpha);                     
+                if ( $LabelColor == PIE_LABEL_COLOR_AUTO ) {
+                    $Settings = array("FillR"=>$Palette[$ID]["R"],"FillG"=>$Palette[$ID]["G"],"FillB"=>$Palette[$ID]["B"],"Alpha"=>$Palette[$ID]["Alpha"]);
+                } else {
+                    $Settings = array("FillR"=>$LabelR,"FillG"=>$LabelG,"FillB"=>$LabelB,"Alpha"=>$LabelAlpha);
                 }
 
                 $Angle = ($EndAngle - $Offset)/2 + $Offset;
@@ -1492,7 +1493,7 @@ class CpPie
             $Offset = 0;
             foreach($Values as $Key => $Value) {
                 $EndAngle = $Offset+($Value*$ScaleFactor);
-                if ( $EndAngle > 360 ) { 
+                if ( $EndAngle > 360 ) {
                     $EndAngle = 360;
                 }
 
@@ -1564,8 +1565,8 @@ class CpPie
         $RecordImageMap	= isset($Format["RecordImageMap"]) ? $Format["RecordImageMap"] : false;
 
         /* Error correction for overlaying rounded corners */
-        if ( $SkewFactor < .5 ) { 
-            $SkewFactor = .5;             
+        if ( $SkewFactor < .5 ) {
+            $SkewFactor = .5;
         }
 
         /* Data Processing */
@@ -1573,21 +1574,21 @@ class CpPie
         $Palette = $this->pDataObject->getPalette();
 
         /* Do we have an abscissa serie defined? */
-        if ( $Data["Abscissa"] == "" ) { 
-            return(PIE_NO_ABSCISSA);             
+        if ( $Data["Abscissa"] == "" ) {
+            return(PIE_NO_ABSCISSA);
         }
 
         /* Try to find the data serie */
         $DataSerie = "";
-        foreach ($Data["Series"] as $SerieName => $SerieData) { 
-            if ( $SerieName != $Data["Abscissa"]) { 
-                $DataSerie = $SerieName;                 
-            }             
+        foreach ($Data["Series"] as $SerieName => $SerieData) {
+            if ( $SerieName != $Data["Abscissa"]) {
+                $DataSerie = $SerieName;
+            }
         }
 
         /* Do we have data to compute? */
-        if ( $DataSerie == "" ) { 
-            return(PIE_NO_DATASERIE);             
+        if ( $DataSerie == "" ) {
+            return(PIE_NO_DATASERIE);
         }
 
         /* Remove unused data */
@@ -1597,15 +1598,15 @@ class CpPie
         $SerieSum = $this->pDataObject->getSum($DataSerie);
 
         /* Do we have data to draw? */
-        if ( $SerieSum == 0 ) { 
-            return(PIE_SUMISnull);             
+        if ( $SerieSum == 0 ) {
+            return(PIE_SUMISNULL);
         }
 
         /* Dump the real number of data to draw */
         $Values = "";
-        foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) { 
-            if ($Value != 0) { 
-                $Values[] = $Value;                 
+        foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) {
+            if ($Value != 0) {
+                $Values[] = $Value;
             }
         }
 
@@ -1731,19 +1732,19 @@ class CpPie
 
         /* Draw the inner vertical slices */
         foreach($Slices as $SliceID => $Plots) {
-            $Settings = $SliceColors[$SliceID];  
+            $Settings = $SliceColors[$SliceID];
             $Settings["NoBorder"] = true;
-            $Settings["R"] = $Settings["R"]+$Cf; 
-            $Settings["G"] = $Settings["G"]+$Cf; 
+            $Settings["R"] = $Settings["R"]+$Cf;
+            $Settings["G"] = $Settings["G"]+$Cf;
             $Settings["B"] = $Settings["B"]+$Cf;
 
-            $Outer = true; 
+            $Outer = true;
             $Inner = false;
-            $InnerPlotsA = ""; 
+            $InnerPlotsA = "";
             $InnerPlotsB = "";
             foreach($Plots["Angle"] as $ID => $Angle) {
-                if ( $Angle == VOID ) { 
-                    $Outer = false; 
+                if ( $Angle == VOID ) {
+                    $Outer = false;
                     $Inner = true;
                 } elseif( $Inner ) {
                     if (( $Angle < 90 || $Angle > 270 ) && isset($Plots["BottomPoly"][$ID*2]) ) {
@@ -1756,24 +1757,24 @@ class CpPie
                 }
             }
 
-            if ( $InnerPlotsA != "" ) { 
-                $InnerPlots = array_merge($InnerPlotsA,$this->arrayReverse($InnerPlotsB)); 
+            if ( $InnerPlotsA != "" ) {
+                $InnerPlots = array_merge($InnerPlotsA,$this->arrayReverse($InnerPlotsB));
                 $this->pChartObject->drawPolygon($InnerPlots,$Settings);
             }
          }
 
         /* Draw the splice top and left poly */
         foreach($Slices as $SliceID => $Plots) {
-            $Settings = $SliceColors[$SliceID];  
+            $Settings = $SliceColors[$SliceID];
             $Settings["NoBorder"] = true;
-            $Settings["R"] = $Settings["R"]+$Cf*1.5; 
-            $Settings["G"] = $Settings["G"]+$Cf*1.5; 
+            $Settings["R"] = $Settings["R"]+$Cf*1.5;
+            $Settings["G"] = $Settings["G"]+$Cf*1.5;
             $Settings["B"] = $Settings["B"]+$Cf*1.5;
 
             $StartAngle = $Plots["Angle"][0];
-            foreach($Plots["Angle"] as $Key =>$Angle) { 
-                if ($Angle == VOID) { 
-                    $EndAngle = $Plots["Angle"][$Key-1];                     
+            foreach($Plots["Angle"] as $Key =>$Angle) {
+                if ($Angle == VOID) {
+                    $EndAngle = $Plots["Angle"][$Key-1];
                 }
             }
 
@@ -1809,17 +1810,17 @@ class CpPie
 
         /* Draw the vertical edges (visible) */
         foreach($Slices as $SliceID => $Plots) {
-            $Settings = $SliceColors[$SliceID];  
+            $Settings = $SliceColors[$SliceID];
             $Settings["NoBorder"] = true;
-            $Settings["R"] = $Settings["R"]+$Cf; 
-            $Settings["G"] = $Settings["G"]+$Cf; 
+            $Settings["R"] = $Settings["R"]+$Cf;
+            $Settings["G"] = $Settings["G"]+$Cf;
             $Settings["B"] = $Settings["B"]+$Cf;
 
             $StartAngle = $Plots["Angle"][0];
-            foreach($Plots["Angle"] as $Key =>$Angle) { 
-                if ($Angle == VOID) { 
-                    $EndAngle = $Plots["Angle"][$Key-1];                     
-                }                 
+            foreach($Plots["Angle"] as $Key =>$Angle) {
+                if ($Angle == VOID) {
+                    $EndAngle = $Plots["Angle"][$Key-1];
+                }
             }
 
             if ( $StartAngle <= 270 && $StartAngle >= 90 ) {
@@ -1845,25 +1846,25 @@ class CpPie
 
         /* Draw the outer vertical slices */
         foreach($Slices as $SliceID => $Plots) {
-            $Settings = $SliceColors[$SliceID];  
+            $Settings = $SliceColors[$SliceID];
             $Settings["NoBorder"] = true;
-            $Settings["R"] = $Settings["R"]+$Cf; 
-            $Settings["G"] = $Settings["G"]+$Cf; 
+            $Settings["R"] = $Settings["R"]+$Cf;
+            $Settings["G"] = $Settings["G"]+$Cf;
             $Settings["B"] = $Settings["B"]+$Cf;
 
-            $Outer = true; 
+            $Outer = true;
             $Inner = false;
-            $OuterPlotsA = ""; 
-            $OuterPlotsB = ""; 
-            $InnerPlotsA = ""; 
+            $OuterPlotsA = "";
+            $OuterPlotsB = "";
+            $InnerPlotsA = "";
             $InnerPlotsB = "";
             foreach($Plots["Angle"] as $ID => $Angle) {
-                if ( $Angle == VOID ) { 
-                    $Outer = false; 
-                    $Inner = true;                   
+                if ( $Angle == VOID ) {
+                    $Outer = false;
+                    $Inner = true;
                 } elseif( $Outer ) {
-                    if ( ( $Angle > 90 && $Angle < 270 ) 
-                        && isset($Plots["BottomPoly"][$ID*2]) 
+                    if ( ( $Angle > 90 && $Angle < 270 )
+                        && isset($Plots["BottomPoly"][$ID*2])
                     ) {
                         $Xo = $Plots["BottomPoly"][$ID*2];
                         $Yo = $Plots["BottomPoly"][$ID*2+1];
@@ -1873,9 +1874,9 @@ class CpPie
                     }
                 }
             }
-            if ( $OuterPlotsA != "" ) { 
-                $OuterPlots = array_merge($OuterPlotsA,$this->arrayReverse($OuterPlotsB)); 
-                $this->pChartObject->drawPolygon($OuterPlots,$Settings);                 
+            if ( $OuterPlotsA != "" ) {
+                $OuterPlots = array_merge($OuterPlotsA,$this->arrayReverse($OuterPlotsB));
+                $this->pChartObject->drawPolygon($OuterPlots,$Settings);
             }
         }
 
@@ -1885,15 +1886,15 @@ class CpPie
 
         /* Draw the top pie splice */
         foreach($Slices as $SliceID => $Plots) {
-            $Settings = $SliceColors[$SliceID];  
+            $Settings = $SliceColors[$SliceID];
             $Settings["NoBorder"] = true;
-            $Settings["R"] = $Settings["R"]+$Cf*2; 
-            $Settings["G"] = $Settings["G"]+$Cf*2; 
+            $Settings["R"] = $Settings["R"]+$Cf*2;
+            $Settings["G"] = $Settings["G"]+$Cf*2;
             $Settings["B"] = $Settings["B"]+$Cf*2;
 
             $this->pChartObject->drawPolygon($Plots["TopPoly"],$Settings);
 
-            if ( $RecordImageMap ) { 
+            if ( $RecordImageMap ) {
                 $this->pChartObject->addToImageMap(
                     "POLY",
                     $this->arraySerialize($Plots["TopPoly"]),
@@ -1934,19 +1935,19 @@ class CpPie
             $Offset = 360;
             foreach($Values as $Key => $Value) {
                 $StartAngle = $Offset;
-                $EndAngle   = $Offset-($Value*$ScaleFactor); 
-                if ( $EndAngle < 0 ) { 
+                $EndAngle   = $Offset-($Value*$ScaleFactor);
+                if ( $EndAngle < 0 ) {
                     $EndAngle = 0;
                 }
 
-                if ( $LabelColor == PIE_LABEL_COLOR_AUTO ) { 
+                if ( $LabelColor == PIE_LABEL_COLOR_AUTO ) {
                     $Settings = array(
                         "FillR"=>$Palette[$ID]["R"],
                         "FillG"=>$Palette[$ID]["G"],
                         "FillB"=>$Palette[$ID]["B"],
                         "Alpha"=>$Palette[$ID]["Alpha"]
-                    );                    
-                } else { 
+                    );
+                } else {
                     $Settings = array("FillR"=>$LabelR,"FillG"=>$LabelG,"FillB"=>$LabelB,"Alpha"=>$LabelAlpha);
                 }
 
@@ -1984,12 +1985,12 @@ class CpPie
     public function arraySerialize($Data)
     {
         $Result = "";
-        foreach($Data as $Key => $Value) { 
-            if ($Result == "") { 
-                $Result = floor($Value);                 
-            } else { 
+        foreach($Data as $Key => $Value) {
+            if ($Result == "") {
+                $Result = floor($Value);
+            } else {
                 $Result = $Result.",".floor($Value);
-            }                 
+            }
         }
 
         return($Result);
@@ -2004,9 +2005,9 @@ class CpPie
     {
         $Result = "";
 
-        for ($i=count($Plots)-1;$i>=0;$i=$i-2) { 
-            $Result[] = $Plots[$i-1]; 
-            $Result[] = $Plots[$i];             
+        for ($i=count($Plots)-1;$i>=0;$i=$i-2) {
+            $Result[] = $Plots[$i-1];
+            $Result[] = $Plots[$i];
         }
 
         return($Result);
@@ -2025,10 +2026,10 @@ class CpPie
         $NewPalette = ""; $NewData = ""; $NewAbscissa = "";
 
         /* Remove unused series */
-        foreach($Data["Series"] as $SerieName => $SerieSettings) { 
-            if ( $SerieName != $DataSerie && $SerieName != $AbscissaSerie ) { 
-                unset($Data["Series"][$SerieName]);                 
-            }             
+        foreach($Data["Series"] as $SerieName => $SerieSettings) {
+            if ( $SerieName != $DataSerie && $SerieName != $AbscissaSerie ) {
+                unset($Data["Series"][$SerieName]);
+            }
         }
 
         /* Remove null values */
@@ -2036,8 +2037,8 @@ class CpPie
             if ($Value != 0 ) {
                 $NewData[]     = $Value;
                 $NewAbscissa[] = $Data["Series"][$AbscissaSerie]["Data"][$Key];
-                if ( isset($Palette[$Key]) ) { 
-                    $NewPalette[]  = $Palette[$Key];                     
+                if ( isset($Palette[$Key]) ) {
+                    $NewPalette[]  = $Palette[$Key];
                 }
             }
         }

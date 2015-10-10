@@ -194,8 +194,15 @@ class CpCache
                 if ($Settings[0] != $ID && $GeneratedTS > $TS) {
                     $CurrentPos = ftell($DBTempHandle);
                     fwrite(
-                        $IndexTempHandle, $PicID . "," . $CurrentPos . ","
-                        . $PicSize . "," . $GeneratedTS . "," . $Hits . "\r\n"
+                        $IndexTempHandle,
+                        sprintf(
+                            "%s,%s,%s,%s,%s\r\n",
+                            $PicID,
+                            $CurrentPos,
+                            $PicSize,
+                            $GeneratedTS,
+                            $Hits
+                        )
                     );
 
                     fseek($DBHandle, $DBPos);
@@ -258,8 +265,15 @@ class CpCache
                         $Handle = @fopen($Index, "r+");
                         fseek($Handle, $IndexPos);
                         fwrite(
-                            $Handle, $PicID . "," . $DBPos . "," . $PicSize
-                            . "," . $GeneratedTS . "," . $Hits . "\r\n"
+                            $Handle,
+                            sprintf(
+                                "%s,%s,%s,%s,%s\r\n",
+                                $PicID,
+                                $DBPos,
+                                $PicSize,
+                                $GeneratedTS,
+                                $Hits
+                            )
                         );
                         fclose($Handle);
                     }

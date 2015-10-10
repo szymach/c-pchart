@@ -39,11 +39,11 @@ class CpSurface
      */
     public function setGrid($XSize=10,$YSize=10)
     {
-        for ($X=0; $X<=$XSize; $X++) { 
-            for ($Y=0; $Y<=$YSize; $Y++) { 
-                $this->Points[$X][$Y]=UNKNOWN;                 
+        for ($X=0; $X<=$XSize; $X++) {
+            for ($Y=0; $Y<=$YSize; $Y++) {
+                $this->Points[$X][$Y]=UNKNOWN;
             }
-        } 
+        }
 
         $this->GridSizeX = $XSize;
         $this->GridSizeY = $YSize;
@@ -59,10 +59,10 @@ class CpSurface
      */
     public function addPoint($X,$Y,$Value,$Force=TRUE)
     {
-        if ( $X < 0 || $X >$this->GridSizeX ) { 
-            return(0);           
+        if ( $X < 0 || $X >$this->GridSizeX ) {
+            return(0);
         }
-        if ( $Y < 0 || $Y >$this->GridSizeY ) { 
+        if ( $Y < 0 || $Y >$this->GridSizeY ) {
             return(0);
         }
 
@@ -76,7 +76,7 @@ class CpSurface
     }
 
    /**
-    * Write the X labels 
+    * Write the X labels
     * @param type $Format
     * @return type
     */
@@ -92,10 +92,10 @@ class CpSurface
         $Labels		= isset($Format["Labels"]) ? $Format["Labels"] : null;
         $CountOffset	= isset($Format["CountOffset"]) ? $Format["CountOffset"] : 0;
 
-        if ( $Labels != null && !is_array($Labels) ) { 
-            $Label = $Labels; 
-            $Labels = ""; 
-            $Labels[] = $Label;             
+        if ( $Labels != null && !is_array($Labels) ) {
+            $Label = $Labels;
+            $Labels = "";
+            $Labels[] = $Label;
         }
 
         $X0    = $this->pChartObject->GraphAreaX1;
@@ -142,8 +142,8 @@ class CpSurface
         $Labels		= isset($Format["Labels"]) ? $Format["Labels"] : null;
         $CountOffset	= isset($Format["CountOffset"]) ? $Format["CountOffset"] : 0;
 
-        if ( $Labels != null && !is_array($Labels) ) { 
-            $Label = $Labels; $Labels = ""; 
+        if ( $Labels != null && !is_array($Labels) ) {
+            $Label = $Labels; $Labels = "";
             $Labels[] = $Label;
         }
 
@@ -151,12 +151,12 @@ class CpSurface
         $YSize = ($this->pChartObject->GraphAreaY2 - $this->pChartObject->GraphAreaY1) / ($this->GridSizeY+1);
 
         $Settings = array("Angle"=>$Angle,"R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha);
-        if ( $Position == LABEL_POSITION_LEFT ) { 
-            $XPos  = $this->pChartObject->GraphAreaX1 - $Padding; 
+        if ( $Position == LABEL_POSITION_LEFT ) {
+            $XPos  = $this->pChartObject->GraphAreaX1 - $Padding;
             $Settings["Align"] = TEXT_ALIGN_MIDDLERIGHT;
-        } elseif ( $Position == LABEL_POSITION_RIGHT ) { 
-            $XPos  = $this->pChartObject->GraphAreaX2 + $Padding; 
-            $Settings["Align"] = TEXT_ALIGN_MIDDLELEFT;             
+        } elseif ( $Position == LABEL_POSITION_RIGHT ) {
+            $XPos  = $this->pChartObject->GraphAreaX2 + $Padding;
+            $Settings["Align"] = TEXT_ALIGN_MIDDLELEFT;
         } else {
             return(-1);
         }
@@ -203,30 +203,30 @@ class CpSurface
                     $X2 = floor($X0+$X*$XSize+$XSize);
                     $Y2 = floor($Y0+$Y*$YSize+$YSize);
 
-                    if ($X > 0 
-                        && $this->Points[$X-1][$Y] != UNKNOWN 
-                        && $this->Points[$X-1][$Y] != IGNORED 
+                    if ($X > 0
+                        && $this->Points[$X-1][$Y] != UNKNOWN
+                        && $this->Points[$X-1][$Y] != IGNORED
                         && $this->Points[$X-1][$Y] < $Threshold
                     ) {
                         $this->pChartObject->drawLine($X1,$Y1,$X1,$Y2,$Color);
                     }
-                    if ($Y > 0 
-                        && $this->Points[$X][$Y-1] != UNKNOWN 
-                        && $this->Points[$X][$Y-1] != IGNORED 
+                    if ($Y > 0
+                        && $this->Points[$X][$Y-1] != UNKNOWN
+                        && $this->Points[$X][$Y-1] != IGNORED
                         && $this->Points[$X][$Y-1] < $Threshold
                     ) {
                         $this->pChartObject->drawLine($X1,$Y1,$X2,$Y1,$Color);
                     }
-                    if ($X < $this->GridSizeX 
-                        && $this->Points[$X+1][$Y] != UNKNOWN 
-                        && $this->Points[$X+1][$Y] != IGNORED 
+                    if ($X < $this->GridSizeX
+                        && $this->Points[$X+1][$Y] != UNKNOWN
+                        && $this->Points[$X+1][$Y] != IGNORED
                         && $this->Points[$X+1][$Y] < $Threshold
                     ) {
                         $this->pChartObject->drawLine($X2,$Y1,$X2,$Y2,$Color);
                     }
-                    if ($Y < $this->GridSizeY 
-                        && $this->Points[$X][$Y+1] != UNKNOWN 
-                        && $this->Points[$X][$Y+1] != IGNORED 
+                    if ($Y < $this->GridSizeY
+                        && $this->Points[$X][$Y+1] != UNKNOWN
+                        && $this->Points[$X][$Y+1] != IGNORED
                         && $this->Points[$X][$Y+1] < $Threshold
                     ) {
                         $this->pChartObject->drawLine($X1,$Y2,$X2,$Y2,$Color);
@@ -274,27 +274,27 @@ class CpSurface
                     $Y2 = floor($Y0+$Y*$YSize+$YSize);
 
                     if ( $Palette != null ) {
-                        if ( isset($Palette[$Value]) && isset($Palette[$Value]["R"]) ) { 
+                        if ( isset($Palette[$Value]) && isset($Palette[$Value]["R"]) ) {
                             $R = $Palette[$Value]["R"];
-                        } else { 
-                            $R = 0;                        
+                        } else {
+                            $R = 0;
                         }
-                        
-                        if ( isset($Palette[$Value]) && isset($Palette[$Value]["G"]) ) { 
-                            $G = $Palette[$Value]["G"];                             
-                        } else { 
+
+                        if ( isset($Palette[$Value]) && isset($Palette[$Value]["G"]) ) {
+                            $G = $Palette[$Value]["G"];
+                        } else {
                             $G = 0;
                         }
-                        
-                        if ( isset($Palette[$Value]) && isset($Palette[$Value]["B"]) ) { 
-                            $B = $Palette[$Value]["B"];                             
-                        } else { 
+
+                        if ( isset($Palette[$Value]) && isset($Palette[$Value]["B"]) ) {
+                            $B = $Palette[$Value]["B"];
+                        } else {
                             $B = 0;
                         }
-                        if ( isset($Palette[$Value]) && isset($Palette[$Value]["Alpha"]) ) { 
-                            $Alpha = $Palette[$Value]["Alpha"];                             
-                        } else { 
-                            $Alpha = 1000;                             
+                        if ( isset($Palette[$Value]) && isset($Palette[$Value]["Alpha"]) ) {
+                            $Alpha = $Palette[$Value]["Alpha"];
+                        } else {
+                            $Alpha = 1000;
                         }
                     } else {
                         $R = (($ShadeR2-$ShadeR1)/100)*$Value + $ShadeR1;
@@ -304,13 +304,13 @@ class CpSurface
                     }
 
                     $Settings = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha);
-                    if ( $Border ) { 
+                    if ( $Border ) {
                         $Settings["BorderR"] = $BorderR;
                         $Settings["BorderG"] = $BorderG;
-                        $Settings["BorderB"] = $BorderB;                         
+                        $Settings["BorderB"] = $BorderB;
                     }
-                    if ( $Surrounding != -1 ) { 
-                        $Settings["BorderR"] = $R+$Surrounding; 
+                    if ( $Surrounding != -1 ) {
+                        $Settings["BorderR"] = $R+$Surrounding;
                         $Settings["BorderG"] = $G+$Surrounding;
                         $Settings["BorderB"] = $B+$Surrounding;
                     }
@@ -347,11 +347,11 @@ class CpSurface
                 $Value = 0; $Points = 0;
                 for ($Xi=$X-$NearestNeighbor;$Xi<=$X+$NearestNeighbor;$Xi++) {
                     for ($Yi=$Y-$NearestNeighbor;$Yi<=$Y+$NearestNeighbor;$Yi++) {
-                        if ($Xi >=0 
-                            && $Yi >= 0 
-                            && $Xi <= $this->GridSizeX 
-                            && $Yi <= $this->GridSizeY 
-                            && $this->Points[$Xi][$Yi] != UNKNOWN 
+                        if ($Xi >=0
+                            && $Yi >= 0
+                            && $Xi <= $this->GridSizeX
+                            && $Yi <= $this->GridSizeY
+                            && $this->Points[$Xi][$Yi] != UNKNOWN
                             && $this->Points[$Xi][$Yi] != IGNORED
                         ) {
                             $Value = $Value + $this->Points[$Xi][$Yi]; $Points++;
@@ -359,8 +359,8 @@ class CpSurface
                     }
                 }
 
-                if ( $Points != 0 ) { 
-                    $this->Points[$X][$Y] = $Value / $Points;                   
+                if ( $Points != 0 ) {
+                    $this->Points[$X][$Y] = $Value / $Points;
                 }
             }
         }
@@ -381,7 +381,7 @@ class CpSurface
                     $DistanceX = max($Xp,$X)-min($Xp,$X);
                     $DistanceY = max($Yp,$Y)-min($Yp,$Y);
                     $Distance  = max($DistanceX,$DistanceY);
-                    if ( $Distance < $Nearest || $Nearest == UNKNOWN ) { 
+                    if ( $Distance < $Nearest || $Nearest == UNKNOWN ) {
                         $Nearest = $Distance;
                     }
                 }

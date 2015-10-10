@@ -43,7 +43,7 @@ class CpBarcode39
      * @var integer
      */
     public $CRC;
-    
+
     /**
      * @var boolean
      */
@@ -86,7 +86,7 @@ class CpBarcode39
 
     /**
      * Return the projected size of a barcode
-     * 
+     *
      * @param string $TextString
      * @param string $Format
      * @return array
@@ -121,7 +121,7 @@ class CpBarcode39
 
     /**
      * Create the encoded string
-     * 
+     *
      * @param string $Value
      * @return string
      */
@@ -190,8 +190,14 @@ class CpBarcode39
             $Y2 = $Y1 + sin($Angle * PI / 180) * (strlen($this->Result) + 20);
 
             if ($ShowLegend) {
-                $X3 = $X2 + cos(($Angle + 90) * PI / 180) * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10);
-                $Y3 = $Y2 + sin(($Angle + 90) * PI / 180) * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10);
+                $X3 = $X2
+                    + cos(($Angle + 90) * PI / 180)
+                    * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10)
+                ;
+                $Y3 = $Y2
+                    + sin(($Angle + 90) * PI / 180)
+                    * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10)
+                ;
             } else {
                 $X3 = $X2 + cos(($Angle + 90) * PI / 180) * ($Height + 20);
                 $Y3 = $Y2 + sin(($Angle + 90) * PI / 180) * ($Height + 20);

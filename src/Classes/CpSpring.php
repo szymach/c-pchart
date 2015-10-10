@@ -74,16 +74,16 @@ class CpSpring
      */
     public function setLinkDefaults($Settings="")
     {
-        if ( isset($Settings["R"]) ) { 
-            $this->Default["LinkR"] = $Settings["R"];             
+        if ( isset($Settings["R"]) ) {
+            $this->Default["LinkR"] = $Settings["R"];
         }
-        if ( isset($Settings["G"]) ) { 
-            $this->Default["LinkG"] = $Settings["G"];             
+        if ( isset($Settings["G"]) ) {
+            $this->Default["LinkG"] = $Settings["G"];
         }
-        if ( isset($Settings["B"]) ) { 
+        if ( isset($Settings["B"]) ) {
             $this->Default["LinkB"] = $Settings["B"];
         }
-        if ( isset($Settings["Alpha"]) ) { 
+        if ( isset($Settings["Alpha"]) ) {
             $this->Default["LinkAlpha"] = $Settings["Alpha"];
         }
     }
@@ -94,19 +94,19 @@ class CpSpring
      */
     public function setLabelsSettings($Settings="")
     {
-        if ( isset($Settings["Type"]) ) { 
+        if ( isset($Settings["Type"]) ) {
             $this->Labels["Type"] = $Settings["Type"];
         }
-        if ( isset($Settings["R"]) ) { 
+        if ( isset($Settings["R"]) ) {
             $this->Labels["R"] = $Settings["R"];
         }
-        if ( isset($Settings["G"]) ) { 
+        if ( isset($Settings["G"]) ) {
             $this->Labels["G"] = $Settings["G"];
         }
-        if ( isset($Settings["B"]) ) { 
+        if ( isset($Settings["B"]) ) {
             $this->Labels["B"] = $Settings["B"];
         }
-        if ( isset($Settings["Alpha"]) ) { 
+        if ( isset($Settings["Alpha"]) ) {
             $this->Labels["Alpha"] = $Settings["Alpha"];
         }
     }
@@ -118,10 +118,10 @@ class CpSpring
     {
         /* Check connections reciprocity */
         foreach($this->Data as $Key => $Settings) {
-            if ( isset($Settings["Connections"]) ) { 
+            if ( isset($Settings["Connections"]) ) {
                 $this->Data[$Key]["FreeZone"] = count($Settings["Connections"])*10 + 20;
-            } else { 
-                $this->Data[$Key]["FreeZone"] = 20;                 
+            } else {
+                $this->Data[$Key]["FreeZone"] = 20;
             }
         }
     }
@@ -135,11 +135,11 @@ class CpSpring
      */
     public function linkProperties($FromNode,$ToNode,$Settings)
     {
-        if ( !isset($this->Data[$FromNode]) ) { 
-            return(0);             
+        if ( !isset($this->Data[$FromNode]) ) {
+            return(0);
         }
-        if ( !isset($this->Data[$ToNode]) ){ 
-            return(0);             
+        if ( !isset($this->Data[$ToNode]) ){
+            return(0);
         }
 
         $R      = isset($Settings["R"]) ? $Settings["R"] : 0;
@@ -149,75 +149,75 @@ class CpSpring
         $Name   = isset($Settings["Name"]) ? $Settings["Name"] : null;
         $Ticks  = isset($Settings["Ticks"]) ? $Settings["Ticks"] : null;
 
-        $this->Links[$FromNode][$ToNode]["R"] = $R;         
+        $this->Links[$FromNode][$ToNode]["R"] = $R;
         $this->Links[$ToNode][$FromNode]["R"] = $R;
-        $this->Links[$FromNode][$ToNode]["G"] = $G;         
+        $this->Links[$FromNode][$ToNode]["G"] = $G;
         $this->Links[$ToNode][$FromNode]["G"] = $G;
-        $this->Links[$FromNode][$ToNode]["B"] = $B;         
+        $this->Links[$FromNode][$ToNode]["B"] = $B;
         $this->Links[$ToNode][$FromNode]["B"] = $B;
-        $this->Links[$FromNode][$ToNode]["Alpha"] = $Alpha; 
+        $this->Links[$FromNode][$ToNode]["Alpha"] = $Alpha;
         $this->Links[$ToNode][$FromNode]["Alpha"] = $Alpha;
-        $this->Links[$FromNode][$ToNode]["Name"] = $Name;   
+        $this->Links[$FromNode][$ToNode]["Name"] = $Name;
         $this->Links[$ToNode][$FromNode]["Name"] = $Name;
-        $this->Links[$FromNode][$ToNode]["Ticks"] = $Ticks; 
+        $this->Links[$FromNode][$ToNode]["Ticks"] = $Ticks;
         $this->Links[$ToNode][$FromNode]["Ticks"] = $Ticks;
     }
 
     /**
-     * 
+     *
      * @param type $Settings
      */
     public function setNodeDefaults($Settings="")
     {
-        if ( isset($Settings["R"]) ) { 
-            $this->Default["R"] = $Settings["R"];             
+        if ( isset($Settings["R"]) ) {
+            $this->Default["R"] = $Settings["R"];
         }
-        if ( isset($Settings["G"]) ) { 
+        if ( isset($Settings["G"]) ) {
             $this->Default["G"] = $Settings["G"];
         }
-        if ( isset($Settings["B"]) ) { 
+        if ( isset($Settings["B"]) ) {
             $this->Default["B"] = $Settings["B"];
         }
-        if ( isset($Settings["Alpha"]) ) { 
-            $this->Default["Alpha"] = $Settings["Alpha"];            
+        if ( isset($Settings["Alpha"]) ) {
+            $this->Default["Alpha"] = $Settings["Alpha"];
         }
-        if ( isset($Settings["BorderR"]) ) { 
+        if ( isset($Settings["BorderR"]) ) {
             $this->Default["BorderR"]   = $Settings["BorderR"];
         }
-        if ( isset($Settings["BorderG"]) ) { 
+        if ( isset($Settings["BorderG"]) ) {
             $this->Default["BorderG"]   = $Settings["BorderG"];
         }
-        if ( isset($Settings["BorderB"]) ) { 
+        if ( isset($Settings["BorderB"]) ) {
             $this->Default["BorderB"]   = $Settings["BorderB"];
         }
-        if ( isset($Settings["BorderAlpha"]) ) { 
+        if ( isset($Settings["BorderAlpha"]) ) {
             $this->Default["BorderAlpha"]   = $Settings["BorderAlpha"];
         }
-        if ( isset($Settings["Surrounding"]) ) { 
+        if ( isset($Settings["Surrounding"]) ) {
             $this->Default["Surrounding"]   = $Settings["Surrounding"];
         }
-        if ( isset($Settings["BackgroundR"]) ) { 
+        if ( isset($Settings["BackgroundR"]) ) {
             $this->Default["BackgroundR"]   = $Settings["BackgroundR"];
         }
-        if ( isset($Settings["BackgroundG"]) ) { 
+        if ( isset($Settings["BackgroundG"]) ) {
             $this->Default["BackgroundG"]   = $Settings["BackgroundG"];
         }
-        if ( isset($Settings["BackgroundB"]) ) { 
-            $this->Default["BackgroundB"]   = $Settings["BackgroundB"];             
+        if ( isset($Settings["BackgroundB"]) ) {
+            $this->Default["BackgroundB"]   = $Settings["BackgroundB"];
         }
-        if ( isset($Settings["BackgroundAlpha"]) ) { 
+        if ( isset($Settings["BackgroundAlpha"]) ) {
             $this->Default["BackgroundAlpha"]   = $Settings["BackgroundAlpha"];
         }
-        if ( isset($Settings["NodeType"]) ) { 
+        if ( isset($Settings["NodeType"]) ) {
             $this->Default["NodeType"]  = $Settings["NodeType"];
         }
-        if ( isset($Settings["Size"]) ) { 
+        if ( isset($Settings["Size"]) ) {
             $this->Default["Size"]  = $Settings["Size"];
         }
-        if ( isset($Settings["Shape"]) ) { 
+        if ( isset($Settings["Shape"]) ) {
             $this->Default["Shape"] = $Settings["Shape"];
         }
-        if ( isset($Settings["FreeZone"]) ) { 
+        if ( isset($Settings["FreeZone"]) ) {
             $this->Default["FreeZone"]  = $Settings["FreeZone"];
         }
     }
@@ -231,7 +231,7 @@ class CpSpring
     public function addNode($NodeID,$Settings="")
     {
         /* if the node already exists, ignore */
-        if (isset($this->Data[$NodeID])) { 
+        if (isset($this->Data[$NodeID])) {
             return(0);
         }
 
@@ -257,23 +257,23 @@ class CpSpring
         $Shape		= isset($Settings["Shape"]) ? $Settings["Shape"] : $this->Default["Shape"];
         $FreeZone	= isset($Settings["FreeZone"]) ? $Settings["FreeZone"] : $this->Default["FreeZone"];
 
-        if ( $Surrounding != null ) { 
-            $BorderR = $R + $Surrounding; 
+        if ( $Surrounding != null ) {
+            $BorderR = $R + $Surrounding;
             $BorderG = $G + $Surrounding;
-            $BorderB = $B + $Surrounding;          
+            $BorderB = $B + $Surrounding;
         }
 
-        $this->Data[$NodeID]["R"] = $R; 
-        $this->Data[$NodeID]["G"] = $G; 
-        $this->Data[$NodeID]["B"] = $B; 
+        $this->Data[$NodeID]["R"] = $R;
+        $this->Data[$NodeID]["G"] = $G;
+        $this->Data[$NodeID]["B"] = $B;
         $this->Data[$NodeID]["Alpha"] = $Alpha;
-        $this->Data[$NodeID]["BorderR"] = $BorderR; 
-        $this->Data[$NodeID]["BorderG"] = $BorderG; 
-        $this->Data[$NodeID]["BorderB"] = $BorderB; 
+        $this->Data[$NodeID]["BorderR"] = $BorderR;
+        $this->Data[$NodeID]["BorderG"] = $BorderG;
+        $this->Data[$NodeID]["BorderB"] = $BorderB;
         $this->Data[$NodeID]["BorderAlpha"] = $BorderAlpha;
-        $this->Data[$NodeID]["BackgroundR"]	= $BackgroundR; 
-        $this->Data[$NodeID]["BackgroundG"] = $BackgroundG; 
-        $this->Data[$NodeID]["BackgroundB"] = $BackgroundB; 
+        $this->Data[$NodeID]["BackgroundR"]	= $BackgroundR;
+        $this->Data[$NodeID]["BackgroundG"] = $BackgroundG;
+        $this->Data[$NodeID]["BackgroundB"] = $BackgroundB;
         $this->Data[$NodeID]["BackgroundAlpha"] = $BackgroundAlpha;
         $this->Data[$NodeID]["Name"]		= $Name;
         $this->Data[$NodeID]["Force"]		= $Force;
@@ -327,11 +327,11 @@ class CpSpring
     }
 
     /**
-     * Returns all the nodes details 
+     * Returns all the nodes details
      * @return type
      */
     public function dumpNodes()
-    { 
+    {
         return($this->Data);
     }
 
@@ -339,15 +339,15 @@ class CpSpring
     public function checkConnection($SourceID, $TargetID)
     {
         if ( isset($this->Data[$SourceID]["Connections"]) ) {
-            foreach ($this->Data[$SourceID]["Connections"] as $Key => $ConnectionID) { 
-                if ( $TargetID == $ConnectionID ) { 
-                    return true;                     
+            foreach ($this->Data[$SourceID]["Connections"] as $Key => $ConnectionID) {
+                if ( $TargetID == $ConnectionID ) {
+                    return true;
                 }
             }
         }
         $this->Data[$SourceID]["Connections"][] = $TargetID;
     }
-    
+
     /**
      * Get the median linked nodes position
      * @param type $Key
@@ -360,7 +360,7 @@ class CpSpring
         $Cpt = 1;
         if (isset($this->Data[$Key]["Connections"]) ) {
             foreach($this->Data[$Key]["Connections"] as $ID => $NodeID) {
-                if (isset($this->Data[$NodeID]["X"]) 
+                if (isset($this->Data[$NodeID]["X"])
                     && isset($this->Data[$NodeID]["Y"])
                 ) {
                     $X = $X + $this->Data[$NodeID]["X"];
@@ -379,15 +379,15 @@ class CpSpring
      */
     public function getBiggestPartner($Key)
     {
-        if (!isset($this->Data[$Key]["Connections"]) ) { 
-            return("");             
+        if (!isset($this->Data[$Key]["Connections"]) ) {
+            return("");
         }
 
         $MaxWeight = 0; $Result = "";
         foreach($this->Data[$Key]["Connections"] as $Key => $PeerID) {
-            if ( $this->Data[$PeerID]["Weight"] > $MaxWeight ) { 
-                $MaxWeight = $this->Data[$PeerID]["Weight"]; 
-                $Result = $PeerID;              
+            if ( $this->Data[$PeerID]["Weight"] > $MaxWeight ) {
+                $MaxWeight = $this->Data[$PeerID]["Weight"];
+                $Result = $PeerID;
             }
         }
         return($Result);
@@ -411,15 +411,15 @@ class CpSpring
             }
         }
 
-        if ( $this->AutoComputeFreeZone ) { 
+        if ( $this->AutoComputeFreeZone ) {
            $this->autoFreeZone();
         }
 
         /* Get the max number of connections */
         $MaxConnections = 0;
-        foreach ($this->Data as $Key => $Settings) { 
-           if (isset($Settings["Connections"]) ) { 
-               if ($MaxConnections < count($Settings["Connections"] ) ) { 
+        foreach ($this->Data as $Key => $Settings) {
+           if (isset($Settings["Connections"]) ) {
+               if ($MaxConnections < count($Settings["Connections"] ) ) {
                    $MaxConnections = count($Settings["Connections"]);
                }
            }
@@ -427,14 +427,14 @@ class CpSpring
 
         if ( $Algorithm == ALGORITHM_WEIGHTED ) {
             foreach($this->Data as $Key => $Settings) {
-                if ( $Settings["Type"] == NODE_TYPE_CENTRAL ) { 
-                    $this->Data[$Key]["X"] = $CenterX; 
+                if ( $Settings["Type"] == NODE_TYPE_CENTRAL ) {
+                    $this->Data[$Key]["X"] = $CenterX;
                     $this->Data[$Key]["Y"] = $CenterY;
                 }
                 if ( $Settings["Type"] == NODE_TYPE_FREE ) {
-                    if ( isset($Settings["Connections"]) ) { 
+                    if ( isset($Settings["Connections"]) ) {
                         $Connections = count($Settings["Connections"]);
-                    } else { 
+                    } else {
                         $Connections = 0;
                     }
 
@@ -458,15 +458,15 @@ class CpSpring
             $MaxConnections = $MaxConnections + 1;
             for ($i=$MaxConnections;$i>=0;$i--) {
                 foreach ($this->Data as $Key => $Settings) {
-                    if ( $Settings["Type"] == NODE_TYPE_CENTRAL ) { 
-                        $this->Data[$Key]["X"] = $CenterX; 
+                    if ( $Settings["Type"] == NODE_TYPE_CENTRAL ) {
+                        $this->Data[$Key]["X"] = $CenterX;
                         $this->Data[$Key]["Y"] = $CenterY;
                     }
                     if ( $Settings["Type"] == NODE_TYPE_FREE ) {
                         if ( isset($Settings["Connections"]) ) {
                             $Connections = count($Settings["Connections"]);
-                        } else { 
-                            $Connections = 0;                            
+                        } else {
+                            $Connections = 0;
                         }
 
                         if ( $Connections == $i ) {
@@ -479,15 +479,15 @@ class CpSpring
                                 while (!$Done && $Tries <= $Weight*2) {
                                     $Tries++;
                                     $Angle = floor(rand(0,$Weight)*$AngleDivision);
-                                    if (!isset($this->Data[$BiggestPartner]["Angular"][$Angle]) 
+                                    if (!isset($this->Data[$BiggestPartner]["Angular"][$Angle])
                                         || !isset($this->Data[$BiggestPartner]["Angular"])
                                     ) {
                                         $this->Data[$BiggestPartner]["Angular"][$Angle] = $Angle;
-                                        $Done = true; 
+                                        $Done = true;
                                     }
                                 }
-                                if ( !$Done ) { 
-                                    $Angle = rand(0,360); 
+                                if ( !$Done ) {
+                                    $Angle = rand(0,360);
                                     $this->Data[$BiggestPartner]["Angular"][$Angle] = $Angle;
                                 }
 
@@ -505,14 +505,14 @@ class CpSpring
             $MaxConnections = $MaxConnections + 1;
             for ($i=$MaxConnections;$i>=0;$i--) {
                 foreach ($this->Data as $Key => $Settings) {
-                    if ( $Settings["Type"] == NODE_TYPE_CENTRAL ) { 
-                        $this->Data[$Key]["X"] = $CenterX; 
+                    if ( $Settings["Type"] == NODE_TYPE_CENTRAL ) {
+                        $this->Data[$Key]["X"] = $CenterX;
                         $this->Data[$Key]["Y"] = $CenterY;
                     }
                     if ( $Settings["Type"] == NODE_TYPE_FREE ) {
-                        if (isset($Settings["Connections"])) { 
+                        if (isset($Settings["Connections"])) {
                             $Connections = count($Settings["Connections"]);
-                        } else { 
+                        } else {
                             $Connections = 0;
                         }
 
@@ -537,8 +537,8 @@ class CpSpring
                     $this->Data[$Key]["X"] = $CenterX + rand(-20,20);
                     $this->Data[$Key]["Y"] = $CenterY + rand(-20,20);
                 }
-                if ( $Settings["Type"] == NODE_TYPE_CENTRAL ) { 
-                    $this->Data[$Key]["X"] = $CenterX; 
+                if ( $Settings["Type"] == NODE_TYPE_CENTRAL ) {
+                    $this->Data[$Key]["X"] = $CenterX;
                     $this->Data[$Key]["Y"] = $CenterY;
                 }
             }
@@ -571,12 +571,12 @@ class CpSpring
                         /* Nodes too close, repulsion occurs */
                         if ( $Distance < $FreeZone ) {
                             $Force = log(pow(2,$FreeZone-$Distance));
-                            if ( $Force > 1 ) { 
+                            if ( $Force > 1 ) {
                                 $this->Data[$Key]["Vectors"][] = array(
                                     "Type"=>"R",
                                     "Angle"=>$Angle % 360,
                                     "Force"=>$Force
-                                );                               
+                                );
                             }
                         }
                     }
@@ -595,9 +595,9 @@ class CpSpring
 
                             if ( $Distance > $FreeZone ) {
                                 $Force = log(($Distance-$FreeZone)+1);
-                            } else { 
-                                $Force = log(($FreeZone-$Distance)+1); 
-                                ($Angle = $Angle + 180);                             
+                            } else {
+                                $Force = log(($FreeZone-$Distance)+1);
+                                ($Angle = $Angle + 180);
                             }
 
                             if ( $Force > 1 ) {
@@ -636,7 +636,7 @@ class CpSpring
     }
 
     /**
-     * 
+     *
      * @return type
      */
     public function lastPass()
@@ -693,18 +693,18 @@ class CpSpring
                         $Y2 = $this->Data[$NodeID]["Y"];
 
                         foreach($Links as $IDLinks => $Link) {
-                            $X3 = $Link["X1"]; 
-                            $Y3 = $Link["Y1"]; 
-                            $X4 = $Link["X2"]; 
+                            $X3 = $Link["X1"];
+                            $Y3 = $Link["Y1"];
+                            $X4 = $Link["X2"];
                             $Y4 = $Link["Y2"];
 
                             if ( !($X1 == $X3 && $X2 == $X4 && $Y1 == $Y3 && $Y2 == $Y4 ) ) {
                                 if ( $this->intersect($X1,$Y1,$X2,$Y2,$X3,$Y3,$X4,$Y4) ) {
-                                    if ( $Link["Source"] != $Settings["Name"] 
-                                        && $Link["Source"] != $this->Data[$NodeID]["Name"] 
-                                        && $Link["Destination"] != $Settings["Name"] 
+                                    if ( $Link["Source"] != $Settings["Name"]
+                                        && $Link["Source"] != $this->Data[$NodeID]["Name"]
+                                        && $Link["Destination"] != $Settings["Name"]
                                         && $Link["Destination"] != $this->Data[$NodeID]["Name"]
-                                    ) { 
+                                    ) {
                                         $Conflicts++;
                                     }
                                 }
@@ -779,7 +779,7 @@ class CpSpring
         $this->X2		= $Object->GraphAreaX2;
         $this->Y2		= $Object->GraphAreaY2;
 
-        $Conflicts = 1; 
+        $Conflicts = 1;
         $Jobs = 0; $this->History["MinimumConflicts"] = -1;
         while ($Conflicts != 0 && $Jobs < $Retries ) {
             $Jobs++;
@@ -789,16 +789,16 @@ class CpSpring
 
             /* Apply the vectors */
             if ( $Pass > 0 ) {
-                for ($i=0; $i<=$Pass; $i++) { 
+                for ($i=0; $i<=$Pass; $i++) {
                     $this->doPass();
                 }
             }
 
             $Conflicts = $this->lastPass();
-            if ( $this->History["MinimumConflicts"] == -1 
+            if ( $this->History["MinimumConflicts"] == -1
                 || $Conflicts < $this->History["MinimumConflicts"]
-            ) { 
-                $this->History["MinimumConflicts"] = $Conflicts; 
+            ) {
+                $this->History["MinimumConflicts"] = $Conflicts;
                 $this->History["Result"] = $this->Data;
             }
         }
@@ -818,15 +818,15 @@ class CpSpring
 
             if ( isset($Settings["Connections"]) ) {
                 foreach ($Settings["Connections"] as $ID => $NodeID) {
-                    if (!isset($Drawn[$Key])) { 
+                    if (!isset($Drawn[$Key])) {
                         $Drawn[$Key] = "";
                     }
-                    if (!isset($Drawn[$NodeID])) { 
+                    if (!isset($Drawn[$NodeID])) {
                         $Drawn[$NodeID] = "";
                     }
 
-                    if ( isset($this->Data[$NodeID]) 
-                        && !isset($Drawn[$Key][$NodeID]) 
+                    if ( isset($this->Data[$NodeID])
+                        && !isset($Drawn[$Key][$NodeID])
                         && !isset($Drawn[$NodeID][$Key])
                     ) {
                         $Color = array(
@@ -837,16 +837,16 @@ class CpSpring
                         );
 
                         if ($this->Links != "" ) {
-                            if (isset($this->Links[$Key][$NodeID]["R"])) { 
+                            if (isset($this->Links[$Key][$NodeID]["R"])) {
                                 $Color = array(
                                     "R"=>$this->Links[$Key][$NodeID]["R"],
                                     "G"=>$this->Links[$Key][$NodeID]["G"],
                                     "B"=>$this->Links[$Key][$NodeID]["B"],
                                     "Alpha"=>$this->Links[$Key][$NodeID]["Alpha"]
-                                );                         
+                                );
                             }
 
-                            if ( isset($this->Links[$Key][$NodeID]["Ticks"])) { 
+                            if ( isset($this->Links[$Key][$NodeID]["Ticks"])) {
                                 $Color["Ticks"] = $this->Links[$Key][$NodeID]["Ticks"];
                             }
                         }
@@ -857,7 +857,7 @@ class CpSpring
                         $Drawn[$Key][$NodeID] = true;
 
                         if ( isset($this->Links) && $this->Links != "" ) {
-                            if ( isset($this->Links[$Key][$NodeID]["Name"]) 
+                            if ( isset($this->Links[$Key][$NodeID]["Name"])
                                 || isset($this->Links[$NodeID][$Key]["Name"])
                             ) {
                                 $Name  = isset($this->Links[$Key][$NodeID]["Name"]) ? $this->Links[$Key][$NodeID]["Name"] : $this->Links[$NodeID][$Key]["Name"];
@@ -990,7 +990,7 @@ class CpSpring
      * @return type
      */
     public function getDistance($X1,$Y1,$X2,$Y2)
-    { 
+    {
         return (sqrt(($X2-$X1)*($X2-$X1)+($Y2-$Y1)*($Y2-$Y1)));
     }
 
@@ -1005,15 +1005,15 @@ class CpSpring
     public function getAngle($X1,$Y1,$X2,$Y2)
     {
         $Opposite = $Y2 - $Y1; $Adjacent = $X2 - $X1;$Angle = rad2deg(atan2($Opposite,$Adjacent));
-        if ($Angle > 0) { 
+        if ($Angle > 0) {
             return($Angle);
-        } else { 
+        } else {
             return(360-abs($Angle));
         }
     }
 
     /**
-     * 
+     *
      * @param type $X1
      * @param type $Y1
      * @param type $X2
@@ -1029,7 +1029,7 @@ class CpSpring
         $A = (($X3 * $Y4 - $X4 * $Y3) * ($X1 - $X2) - ($X1 * $Y2 - $X2 * $Y1) * ($X3 - $X4));
         $B = (($Y1 - $Y2) * ($X3 - $X4) - ($Y3 - $Y4) * ($X1 - $X2));
 
-        if ( $B == 0 ) { 
+        if ( $B == 0 ) {
             return false;
         }
         $Xi = $A / $B;
@@ -1041,11 +1041,11 @@ class CpSpring
         $Yi = $Xi * (($Y1 - $Y2)/$C) + (($X1 * $Y2 - $X2 * $Y1)/$C);
 
         if ( $Xi >= min($X1,$X2) && $Xi >= min($X3,$X4) && $Xi <= max($X1,$X2) && $Xi <= max($X3,$X4)) {
-            if ( $Yi >= min($Y1,$Y2) && $Yi >= min($Y3,$Y4) && $Yi <= max($Y1,$Y2) && $Yi <= max($Y3,$Y4)) { 
+            if ( $Yi >= min($Y1,$Y2) && $Yi >= min($Y3,$Y4) && $Yi <= max($Y1,$Y2) && $Yi <= max($Y3,$Y4)) {
                 return true;
             }
         }
 
-        return false;   
+        return false;
     }
 }

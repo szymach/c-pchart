@@ -181,8 +181,14 @@ class CpBarcode128
             $Y2 = $Y1 + sin($Angle * PI / 180) * (strlen($this->Result) + 20);
 
             if ($ShowLegend) {
-                $X3 = $X2 + cos(($Angle + 90) * PI / 180) * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10);
-                $Y3 = $Y2 + sin(($Angle + 90) * PI / 180) * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10);
+                $X3 = $X2
+                    + cos(($Angle + 90) * PI / 180)
+                    * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10)
+                ;
+                $Y3 = $Y2
+                    + sin(($Angle + 90) * PI / 180)
+                    * ($Height + $LegendOffset + $this->pChartObject->FontSize + 10)
+                ;
             } else {
                 $X3 = $X2 + cos(($Angle + 90) * PI / 180) * ($Height + 20);
                 $Y3 = $Y2 + sin(($Angle + 90) * PI / 180) * ($Height + 20);

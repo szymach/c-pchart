@@ -87,8 +87,8 @@ class CpRadar
         $RecordImageMap     = isset($Format["RecordImageMap"]) ? $Format["RecordImageMap"] : false;
 
         /* Cancel default tick length if ticks not enabled */
-        if ( $DrawTicks == false ) { 
-            $TicksLength = 0;             
+        if ( $DrawTicks == false ) {
+            $TicksLength = 0;
         }
 
         /* Data Processing */
@@ -97,13 +97,13 @@ class CpRadar
 
         /* Catch the number of required axis */
         $LabelSerie = $Data["Abscissa"];
-        if ( $LabelSerie != "" ) { 
-            $Points = count($Data["Series"][$LabelSerie]["Data"]);             
+        if ( $LabelSerie != "" ) {
+            $Points = count($Data["Series"][$LabelSerie]["Data"]);
         } else {
             $Points = 0;
-            foreach($Data["Series"] as $SerieName => $DataArray) { 
-                if ( count($DataArray["Data"]) > $Points ) { 
-                    $Points = count($DataArray["Data"]);                     
+            foreach($Data["Series"] as $SerieName => $DataArray) {
+                if ( count($DataArray["Data"]) > $Points ) {
+                    $Points = count($DataArray["Data"]);
                 }
             }
         }
@@ -124,8 +124,8 @@ class CpRadar
                 $Max = 0;
                 foreach($Data["Series"] as $SerieName => $DataArray) {
                     if ( $SerieName != $LabelSerie ) {
-                        if ( max($DataArray["Data"]) > $Max ) { 
-                            $Max = max($DataArray["Data"]);                             
+                        if ( max($DataArray["Data"]) > $Max ) {
+                            $Max = max($DataArray["Data"]);
                         }
                     }
                 }
@@ -137,12 +137,12 @@ class CpRadar
             $SegmentHeight = $Scale["RowHeight"];
         }
 
-        if ( $LabelMiddle && $SkipLabels == 1 ) { 
-            $Axisoffset = (360/$Points)/2;             
-        } elseif ( $LabelMiddle && $SkipLabels != 1 ) { 
-            $Axisoffset = (360/($Points/$SkipLabels))/2;             
-        } elseif ( !$LabelMiddle ) { 
-            $Axisoffset = 0;             
+        if ( $LabelMiddle && $SkipLabels == 1 ) {
+            $Axisoffset = (360/$Points)/2;
+        } elseif ( $LabelMiddle && $SkipLabels != 1 ) {
+            $Axisoffset = (360/($Points/$SkipLabels))/2;
+        } elseif ( !$LabelMiddle ) {
+            $Axisoffset = 0;
         }
 
         /* Background processing */
@@ -224,7 +224,7 @@ class CpRadar
         if ( $DrawAxisValues ) {
             if ( $LabelsBackground ) {
                 $Options = array(
-                    "DrawBox"=>true, 
+                    "DrawBox"=>true,
                     "Align"=>TEXT_ALIGN_MIDDLEMIDDLE,
                     "BoxR"=>$LabelsBGR,
                     "BoxG"=>$LabelsBGG,
@@ -234,8 +234,8 @@ class CpRadar
             } else {
                 $Options = array("Align"=>TEXT_ALIGN_MIDDLEMIDDLE);
             }
-            if ( $AxisBoxRounded ) { 
-                $Options["BoxRounded"] = true;                 
+            if ( $AxisBoxRounded ) {
+                $Options["BoxRounded"] = true;
             }
 
             $Options["FontName"] = $AxisFontName;
@@ -268,22 +268,22 @@ class CpRadar
             $EdgeX = cos(deg2rad($i+$AxisRotation)) * ($EdgeHeight+$TicksLength) + $CenterX;
             $EdgeY = sin(deg2rad($i+$AxisRotation)) * ($EdgeHeight+$TicksLength) + $CenterY;
 
-            if ($ID % $SkipLabels == 0) { 
+            if ($ID % $SkipLabels == 0) {
                 $Object->drawLine($CenterX,$CenterY,$EdgeX,$EdgeY,$Color);
-            } else { 
-                $Object->drawLine($CenterX,$CenterY,$EdgeX,$EdgeY,$ColorDotted);                 
+            } else {
+                $Object->drawLine($CenterX,$CenterY,$EdgeX,$EdgeY,$ColorDotted);
             }
 
             if ( $WriteLabels ) {
                 $LabelX = cos(deg2rad($i+$AxisRotation+$Axisoffset)) * ($EdgeHeight+$LabelPadding+$TicksLength) + $CenterX;
                 $LabelY = sin(deg2rad($i+$AxisRotation+$Axisoffset)) * ($EdgeHeight+$LabelPadding+$TicksLength) + $CenterY;
 
-                if ( $LabelSerie != "" ) { 
+                if ( $LabelSerie != "" ) {
                     $Label = isset($Data["Series"][$LabelSerie]["Data"][$ID]) ? $Data["Series"][$LabelSerie]["Data"][$ID] : "";
                 } else {
                     $Label = $ID;
                 }
-                
+
                 if ($ID % $SkipLabels == 0) {
                     if ( $LabelPos == RADAR_LABELS_ROTATED ) {
                         $Object->drawText(
@@ -296,28 +296,28 @@ class CpRadar
                             )
                         );
                     } else {
-                        if ( (floor($LabelX) == floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) { 
-                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_BOTTOMMIDDLE));                             
+                        if ( (floor($LabelX) == floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) {
+                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
                         }
-                        if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) { 
+                        if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) {
                             $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_BOTTOMLEFT));
                         }
-                        if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) == floor($CenterY)) ) { 
-                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_MIDDLELEFT));                             
+                        if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) == floor($CenterY)) ) {
+                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_MIDDLELEFT));
                         }
-                        if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) { 
-                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_TOPLEFT));                             
+                        if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) {
+                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_TOPLEFT));
                         }
-                        if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) { 
-                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_BOTTOMRIGHT));                             
+                        if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) {
+                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_BOTTOMRIGHT));
                         }
-                        if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) == floor($CenterY)) ) { 
-                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_MIDDLERIGHT));                             
+                        if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) == floor($CenterY)) ) {
+                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_MIDDLERIGHT));
                         }
-                        if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) { 
-                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_TOPRIGHT));                             
+                        if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) {
+                            $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_TOPRIGHT));
                         }
-                        if ( (floor($LabelX) == floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) { 
+                        if ( (floor($LabelX) == floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) {
                             $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_TOPMIDDLE));
                         }
                     }
@@ -346,7 +346,7 @@ class CpRadar
 
                     $Plot[$ID][] = array($X,$Y,$Value);
 
-                    if ( $RecordImageMap ) { 
+                    if ( $RecordImageMap ) {
                         $this->pChartObject->addToImageMap(
                             "CIRCLE",
                             floor($X).",".floor($Y).",".floor($PointRadius),
@@ -357,7 +357,7 @@ class CpRadar
                             ),
                             $DataS["Description"],
                             $Data["Series"][$LabelSerie]["Data"][$Key]." = ".$Value
-                        );                         
+                        );
                     }
                 }
                 $ID++;
@@ -386,9 +386,9 @@ class CpRadar
                     );
                 }
                 $PointsArray = "";
-                for ($i=0; $i<count($Points);$i++) { 
-                    $PointsArray[] = $Points[$i][0]; 
-                    $PointsArray[] = $Points[$i][1];                     
+                for ($i=0; $i<count($Points);$i++) {
+                    $PointsArray[] = $Points[$i][0];
+                    $PointsArray[] = $Points[$i][1];
                 }
                 $Object->drawPolygon($PointsArray,$Color);
             }
@@ -564,13 +564,13 @@ class CpRadar
         $Y2		= $Object->GraphAreaY2;
         $RecordImageMap	= isset($Format["RecordImageMap"]) ? $Format["RecordImageMap"] : false;
 
-        if ( $AxisBoxRounded ) { 
-            $DrawAxisValues = true;             
+        if ( $AxisBoxRounded ) {
+            $DrawAxisValues = true;
         }
 
         /* Cancel default tick length if ticks not enabled */
-        if ( $DrawTicks == false ) { 
-            $TicksLength = 0;             
+        if ( $DrawTicks == false ) {
+            $TicksLength = 0;
         }
 
         /* Data Processing */
@@ -579,14 +579,14 @@ class CpRadar
 
         /* Catch the number of required axis */
         $LabelSerie = $Data["Abscissa"];
-        if ( $LabelSerie != "" ) { 
-            $Points = count($Data["Series"][$LabelSerie]["Data"]);             
+        if ( $LabelSerie != "" ) {
+            $Points = count($Data["Series"][$LabelSerie]["Data"]);
         } else {
             $Points = 0;
-            foreach($Data["Series"] as $SerieName => $DataArray) { 
-                if ( count($DataArray["Data"]) > $Points ) { 
-                    $Points = count($DataArray["Data"]);                     
-                }                 
+            foreach($Data["Series"] as $SerieName => $DataArray) {
+                if ( count($DataArray["Data"]) > $Points ) {
+                    $Points = count($DataArray["Data"]);
+                }
             }
         }
 
@@ -598,7 +598,7 @@ class CpRadar
         if ( $WriteLabels ) {
             $EdgeHeight = $EdgeHeight - $FontSize - $LabelPadding - $TicksLength;
         }
-        
+
         /* Determine the scale if set to automatic */
         if ( $SegmentHeight == SEGMENT_HEIGHT_AUTO) {
             if ( $FixedMax != VOID ) {
@@ -607,8 +607,8 @@ class CpRadar
                 $Max = 0;
                 foreach($Data["Series"] as $SerieName => $DataArray) {
                     if ( $SerieName != $LabelSerie ) {
-                        if ( max($DataArray["Data"]) > $Max ) { 
-                            $Max = max($DataArray["Data"]);                         
+                        if ( max($DataArray["Data"]) > $Max ) {
+                            $Max = max($DataArray["Data"]);
                         }
                     }
                 }
@@ -658,7 +658,7 @@ class CpRadar
         if ( $DrawAxisValues ) {
             if ( $LabelsBackground ) {
                 $Options = array(
-                    "DrawBox"=>true, 
+                    "DrawBox"=>true,
                     "Align"=>TEXT_ALIGN_MIDDLEMIDDLE,
                     "BoxR"=>$LabelsBGR,
                     "BoxG"=>$LabelsBGG,
@@ -668,7 +668,7 @@ class CpRadar
             } else {
                 $Options = array("Align"=>TEXT_ALIGN_MIDDLEMIDDLE);
             }
-            
+
             if ( $AxisBoxRounded ) { $Options["BoxRounded"] = true; }
 
             $Options["FontName"] = $AxisFontName;
@@ -700,29 +700,29 @@ class CpRadar
                 if ( $LabelPos == RADAR_LABELS_ROTATED ) {
                     $Object->drawText($LabelX,$LabelY,$Label,array("Angle"=>(360-$i),"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
                 } else {
-                    if ( (floor($LabelX) == floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) { 
-                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_BOTTOMMIDDLE));                         
+                    if ( (floor($LabelX) == floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) {
+                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
                     }
-                    if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) { 
-                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_BOTTOMLEFT));                         
+                    if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) {
+                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_BOTTOMLEFT));
                     }
-                    if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) == floor($CenterY)) ) { 
-                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_MIDDLELEFT));                         
+                    if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) == floor($CenterY)) ) {
+                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_MIDDLELEFT));
                     }
-                    if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) { 
-                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_TOPLEFT));                         
+                    if ( (floor($LabelX) >  floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) {
+                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_TOPLEFT));
                     }
-                    if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) { 
-                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_BOTTOMRIGHT));                         
+                    if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) <  floor($CenterY)) ) {
+                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_BOTTOMRIGHT));
                     }
-                    if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) == floor($CenterY)) ) { 
-                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_MIDDLERIGHT));                         
+                    if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) == floor($CenterY)) ) {
+                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_MIDDLERIGHT));
                     }
-                    if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) { 
-                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_TOPRIGHT));                         
+                    if ( (floor($LabelX) <  floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) {
+                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_TOPRIGHT));
                     }
-                    if ( (floor($LabelX) == floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) { 
-                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_TOPMIDDLE));                         
+                    if ( (floor($LabelX) == floor($CenterX)) && (floor($LabelY) >  floor($CenterY)) ) {
+                        $Object->drawText($LabelX,$LabelY,$Label,array("Align"=>TEXT_ALIGN_TOPMIDDLE));
                     }
                 }
             }
@@ -747,7 +747,7 @@ class CpRadar
                     $X = cos(deg2rad($Angle+$AxisRotation)) * $Length  + $CenterX;
                     $Y = sin(deg2rad($Angle+$AxisRotation)) * $Length  + $CenterY;
 
-                    if ( $RecordImageMap ) { 
+                    if ( $RecordImageMap ) {
                         $this->pChartObject->addToImageMap(
                             "CIRCLE",floor($X).",".floor($Y).",".floor($PointRadius),
                             $this->pChartObject->toHTMLColor(
@@ -757,7 +757,7 @@ class CpRadar
                             ),
                             $DataSet["Description"],
                             $Data["Series"][$LabelSerie]["Data"][$Key]."&deg = ".$Value
-                        );                         
+                        );
                     }
 
                     $Plot[$ID][] = array($X,$Y,$Value);
@@ -788,9 +788,9 @@ class CpRadar
                     );
                 }
                 $PointsArray = "";
-                for ($i=0; $i<count($Points);$i++) { 
+                for ($i=0; $i<count($Points);$i++) {
                     $PointsArray[] = $Points[$i][0];
-                    $PointsArray[] = $Points[$i][1];                     
+                    $PointsArray[] = $Points[$i][1];
                 }
 
                 $Object->drawPolygon($PointsArray,$Color);

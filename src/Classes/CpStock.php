@@ -84,18 +84,18 @@ class CpStock
         $Data    = $this->pDataObject->getData();
         $Palette = $this->pDataObject->getPalette();
 
-        if ( $BoxUpSurrounding != null ) { 
-            $BoxUpBorderR = $BoxUpR + $BoxUpSurrounding; 
-            $BoxUpBorderG = $BoxUpG + $BoxUpSurrounding; 
+        if ( $BoxUpSurrounding != null ) {
+            $BoxUpBorderR = $BoxUpR + $BoxUpSurrounding;
+            $BoxUpBorderG = $BoxUpG + $BoxUpSurrounding;
             $BoxUpBorderB = $BoxUpB + $BoxUpSurrounding;
         }
-        if ( $BoxDownSurrounding != null ) { 
-            $BoxDownBorderR = $BoxDownR + $BoxDownSurrounding; 
-            $BoxDownBorderG = $BoxDownG + $BoxDownSurrounding; 
-            $BoxDownBorderB = $BoxDownB + $BoxDownSurrounding;             
+        if ( $BoxDownSurrounding != null ) {
+            $BoxDownBorderR = $BoxDownR + $BoxDownSurrounding;
+            $BoxDownBorderG = $BoxDownG + $BoxDownSurrounding;
+            $BoxDownBorderB = $BoxDownB + $BoxDownSurrounding;
         }
 
-        if ( $LineWidth != 1 ) { 
+        if ( $LineWidth != 1 ) {
             $LineOffset = $LineWidth / 2;
         }
         $BoxOffset = $BoxWidth / 2;
@@ -103,18 +103,18 @@ class CpStock
         $Data = $this->pChartObject->DataSet->getData();
         list($XMargin,$XDivs) = $this->pChartObject->scaleGetXSettings();
 
-        if (!isset($Data["Series"][$SerieOpen]) 
-            || !isset($Data["Series"][$SerieClose]) 
-            || !isset($Data["Series"][$SerieMin]) 
-            || !isset($Data["Series"][$SerieMax]) 
+        if (!isset($Data["Series"][$SerieOpen])
+            || !isset($Data["Series"][$SerieClose])
+            || !isset($Data["Series"][$SerieMin])
+            || !isset($Data["Series"][$SerieMax])
         ) {
             return(STOCK_MISSING_SERIE);
         }
         $Plots = "";
         foreach($Data["Series"][$SerieOpen]["Data"] as $Key => $Value) {
             $Point = "";
-            if (isset($Data["Series"][$SerieClose]["Data"][$Key]) 
-                || isset($Data["Series"][$SerieMin]["Data"][$Key]) 
+            if (isset($Data["Series"][$SerieClose]["Data"][$Key])
+                || isset($Data["Series"][$SerieMin]["Data"][$Key])
                 || isset($Data["Series"][$SerieMax]["Data"][$Key])
             ) {
                 $Point = array(
@@ -172,31 +172,31 @@ class CpStock
                     . "<BR>Close : ".$Data["Series"][$SerieClose]["Data"][$Key]
                     . "<BR>Min : ".$Data["Series"][$SerieMin]["Data"][$Key]
                     . "<BR>Max : ".$Data["Series"][$SerieMax]["Data"][$Key]."<BR>";
-            if ( $SerieMedian != null ) { 
+            if ( $SerieMedian != null ) {
                 $Values = $Values."Median : ".$Data["Series"][$SerieMedian]["Data"][$Key]."<BR>";
             }
-            if ( $PosArray[0] > $PosArray[1] ) { 
+            if ( $PosArray[0] > $PosArray[1] ) {
                 $ImageMapColor = $this->pChartObject->toHTMLColor($BoxUpR,$BoxUpG,$BoxUpB);
-            } else { 
+            } else {
                 $ImageMapColor = $this->pChartObject->toHTMLColor($BoxDownR,$BoxDownG,$BoxDownB);
-            } 
+            }
 
             if ( $Data["Orientation"] == SCALE_POS_LEFTRIGHT ) {
-                if ( $YZero > $this->pChartObject->GraphAreaY2-1 ) { 
-                    $YZero = $this->pChartObject->GraphAreaY2-1;                     
+                if ( $YZero > $this->pChartObject->GraphAreaY2-1 ) {
+                    $YZero = $this->pChartObject->GraphAreaY2-1;
                 }
-                if ( $YZero < $this->pChartObject->GraphAreaY1+1 ) { 
+                if ( $YZero < $this->pChartObject->GraphAreaY1+1 ) {
                     $YZero = $this->pChartObject->GraphAreaY1+1;
                 }
 
-                if ( $XDivs == 0 ) { 
-                    $XStep = 0;                     
-                } else { 
+                if ( $XDivs == 0 ) {
+                    $XStep = 0;
+                } else {
                     $XStep = ($this->pChartObject->GraphAreaX2-$this->pChartObject->GraphAreaX1-$XMargin*2)/$XDivs;
                 }
 
-                if ( $ShadowOnBoxesOnly ) { 
-                    $RestoreShadow = $this->pChartObject->Shadow; 
+                if ( $ShadowOnBoxesOnly ) {
+                    $RestoreShadow = $this->pChartObject->Shadow;
                     $this->pChartObject->Shadow = false;
                 }
 
@@ -205,12 +205,12 @@ class CpStock
                 } else {
                     $this->pChartObject->drawFilledRectangle($X-$LineOffset,$PosArray[2],$X+$LineOffset,$PosArray[3],$LineSettings);
                 }
-                
+
                 if ( $ExtremityWidth == 1 ) {
                     $this->pChartObject->drawLine($X-$ExtremityLength,$PosArray[2],$X+$ExtremityLength,$PosArray[2],$ExtremitySettings);
                     $this->pChartObject->drawLine($X-$ExtremityLength,$PosArray[3],$X+$ExtremityLength,$PosArray[3],$ExtremitySettings);
 
-                    if ( $RecordImageMap ) { 
+                    if ( $RecordImageMap ) {
                         $this->pChartObject->addToImageMap(
                             "RECT",
                             floor($X-$ExtremityLength).",".floor($PosArray[2])
@@ -237,7 +237,7 @@ class CpStock
                         $ExtremitySettings
                     );
 
-                    if ( $RecordImageMap ) { 
+                    if ( $RecordImageMap ) {
                         $this->pChartObject->addToImageMap(
                             "RECT",
                             floor($X-$ExtremityLength).",".floor($PosArray[2]-$ExtremityWidth)
@@ -250,7 +250,7 @@ class CpStock
                     }
                 }
 
-                if ( $ShadowOnBoxesOnly ) { 
+                if ( $ShadowOnBoxesOnly ) {
                     $this->pChartObject->Shadow = $RestoreShadow;
                 }
 
@@ -271,7 +271,7 @@ class CpStock
                         $BoxDownSettings
                     );
                 }
-                
+
                 if ( isset($PosArray[4]) ) {
                     $this->pChartObject->drawLine(
                         $X-$ExtremityLength,
@@ -283,15 +283,15 @@ class CpStock
                 }
                 $X = $X + $XStep;
             } elseif ( $Data["Orientation"] == SCALE_POS_TOPBOTTOM ) {
-                if ( $YZero > $this->pChartObject->GraphAreaX2-1 ) { 
+                if ( $YZero > $this->pChartObject->GraphAreaX2-1 ) {
                     $YZero = $this->pChartObject->GraphAreaX2-1;
                 }
                 if ( $YZero < $this->pChartObject->GraphAreaX1+1 ) {
                     $YZero = $this->pChartObject->GraphAreaX1+1;
                 }
 
-                if ( $XDivs == 0 ) { 
-                    $XStep = 0;                     
+                if ( $XDivs == 0 ) {
+                    $XStep = 0;
                 } else {
                     $XStep = ($this->pChartObject->GraphAreaY2-$this->pChartObject->GraphAreaY1-$XMargin*2)/$XDivs;
                 }
@@ -307,8 +307,8 @@ class CpStock
                         $LineSettings
                     );
                 }
-                if ( $ShadowOnBoxesOnly ) { 
-                    $RestoreShadow = $this->pChartObject->Shadow; 
+                if ( $ShadowOnBoxesOnly ) {
+                    $RestoreShadow = $this->pChartObject->Shadow;
                     $this->pChartObject->Shadow = false;
                 }
 
@@ -328,7 +328,7 @@ class CpStock
                         $ExtremitySettings
                     );
 
-                    if ( $RecordImageMap ) { 
+                    if ( $RecordImageMap ) {
                         $this->pChartObject->addToImageMap(
                             "RECT",
                             floor($PosArray[2]).",".floor($Y-$ExtremityLength)
@@ -354,7 +354,7 @@ class CpStock
                         $ExtremitySettings
                     );
 
-                    if ( $RecordImageMap ) { 
+                    if ( $RecordImageMap ) {
                         $this->pChartObject->addToImageMap(
                             "RECT",
                             floor($PosArray[2]-$ExtremityWidth).","
@@ -368,7 +368,7 @@ class CpStock
                     }
                 }
 
-                if ( $ShadowOnBoxesOnly ) { 
+                if ( $ShadowOnBoxesOnly ) {
                     $this->pChartObject->Shadow = $RestoreShadow;
                 }
 
