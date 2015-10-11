@@ -18,20 +18,20 @@ namespace CpChart\Classes;
 class CpBubble
 {
     /**
-     * @var pImage
+     * @var CpImage
      */
     public $pChartObject;
 
     /**
-     * @var pData
+     * @var CpData
      */
     public $pDataObject;
 
     /**
-     * @param pImage $pChartObject
-     * @param pData $pDataObject
+     * @param CpImage $pChartObject
+     * @param CpData $pDataObject
      */
-    public function __construct(pImage $pChartObject, pData $pDataObject)
+    public function __construct(CpImage $pChartObject, CpData $pDataObject)
     {
         $this->pChartObject = $pChartObject;
         $this->pDataObject = $pDataObject;

@@ -16,12 +16,12 @@ namespace CpChart\Classes;
  *
  * You can find the whole class documentation on the pChart web site.
  */
-class CpImage extends pDraw
+class CpImage extends CpDraw
 {
     /**
      * @param int $XSize
      * @param int $YSize
-     * @param pData $DataSet
+     * @param CpData $DataSet
      * @param boolean $TransparentBackground
      */
     public function __construct(
@@ -303,7 +303,7 @@ class CpImage extends pDraw
 
     /**
      * Attach a dataset to your pChart Object
-     * @param pData $DataSet
+     * @param CpData $DataSet
      */
     public function setDataSet(pData $DataSet)
     {

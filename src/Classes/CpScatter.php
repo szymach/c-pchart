@@ -741,7 +741,7 @@ class CpScatter
 
     /**
      * Draw a scatter plot chart
-     * @param type $Format
+     * @param array $Format
      */
     public function drawScatterPlotChart($Format=null)
     {
@@ -862,7 +862,7 @@ class CpScatter
 
     /**
      * Draw a scatter line chart
-     * @param type $Format
+     * @param array $Format
      */
     public function drawScatterLineChart($Format=null)
     {
@@ -951,7 +951,7 @@ class CpScatter
 
     /**
      * Draw a scatter spline chart
-     * @param type $Format
+     * @param array $Format
      */
     public function drawScatterSplineChart($Format=null)
     {
@@ -1121,7 +1121,7 @@ class CpScatter
      * Draw the legend of the active series
      * @param type $X
      * @param type $Y
-     * @param type $Format
+     * @param array $Format
      */
     public function drawScatterLegend($X,$Y,$Format="")
     {
@@ -1362,7 +1362,7 @@ class CpScatter
 
     /**
      * Get the legend box size
-     * @param type $Format
+     * @param array $Format
      * @return type
      */
     public function getScatterLegendSize($Format="")
@@ -1473,7 +1473,7 @@ class CpScatter
 
     /**
      * Draw the line of best fit
-     * @param type $Format
+     * @param array $Format
      */
     public function drawScatterBestFit($Format="")
     {
@@ -1560,7 +1560,7 @@ class CpScatter
      *
      * @param type $ScatterSerieID
      * @param type $Points
-     * @param type $Format
+     * @param array $Format
      * @return type
      */
     public function writeScatterLabel($ScatterSerieID,$Points,$Format="")
@@ -1669,7 +1669,7 @@ class CpScatter
     /**
      * Draw a Scatter threshold
      * @param type $Value
-     * @param type $Format
+     * @param array $Format
      * @return type
      */
     public function drawScatterThreshold($Value,$Format="")
@@ -1830,7 +1830,7 @@ class CpScatter
      * Draw a Scatter threshold area
      * @param type $Value1
      * @param type $Value2
-     * @param type $Format
+     * @param array $Format
      * @return type
      */
     public function drawScatterThresholdArea($Value1,$Value2,$Format="")

@@ -35,7 +35,7 @@ class CpBarcode39
     public $Result;
 
     /**
-     * @var pImage
+     * @var CpImage
      */
     public $pChartObject;
 
@@ -154,13 +154,13 @@ class CpBarcode39
 
     /**
      * Create the encoded string
-     * @param pImage $Object
+     * @param CpImage $Object
      * @param type $Value
      * @param type $X
      * @param type $Y
-     * @param type $Format
+     * @param array $Format
      */
-    public function draw(pImage $Object, $Value, $X, $Y, $Format = "")
+    public function draw(CpImage $Object, $Value, $X, $Y, $Format = "")
     {
         $this->pChartObject = $Object;
 

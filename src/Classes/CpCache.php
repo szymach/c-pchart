@@ -35,7 +35,7 @@ class CpCache
     /**
      * @param array $Settings
      */
-    public function __construct($Settings = array())
+    public function __construct(array $Settings = array())
     {
         $CacheFolder = isset($Settings["CacheFolder"]) ? $Settings["CacheFolder"] : __DIR__ . "/../../app/cache";
         $CacheIndex = isset($Settings["CacheIndex"]) ? $Settings["CacheIndex"] : "index.db";
@@ -70,7 +70,7 @@ class CpCache
     /**
      * Return the MD5 of the data array to clearly identify the chart
      *
-     * @param pData $Data
+     * @param CpData $Data
      * @param string $Marker
      * @return string
      */
@@ -83,7 +83,7 @@ class CpCache
      * Write the generated picture to the cache
      *
      * @param string $ID
-     * @param pImage $pChartObject
+     * @param CpImage $pChartObject
      */
     public function writeToCache($ID, pImage $pChartObject)
     {

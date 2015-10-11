@@ -21,7 +21,7 @@ class CpRadar
      * Draw a radar chart
      * @param type $Object
      * @param type $Values
-     * @param type $Format
+     * @param array $Format
      */
     public function drawRadar($Object,$Values,$Format="")
     {
@@ -501,7 +501,7 @@ class CpRadar
      * Draw a radar chart
      * @param type $Object
      * @param type $Values
-     * @param type $Format
+     * @param array $Format
      */
     public function drawPolar($Object,$Values,$Format="")
     {

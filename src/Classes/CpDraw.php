@@ -195,7 +195,7 @@ abstract class CpDraw
 
     /**
      * Attached dataset
-     * @var pData
+     * @var CpData
      */
     public $DataSet;
 
