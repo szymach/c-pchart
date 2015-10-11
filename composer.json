@@ -2,8 +2,8 @@
     "name": "szymach/c-pchart",
     "license": "MIT",
     "type": "project",
-    "description": "Port of \"pChart\" library into PHP 5.3.",
-    "keywords": ["pchart", "pChart","composer","statistics","charts", "c-pChart", "c-pchart"],
+    "description": "Port of \"pChart\" library into PHP 5",
+    "keywords": ["pchart", "pChart","statistics","charts", "c-pChart", "c-pchart"],
     "homepage": "https://github.com/szymach/c-pchart",
     "autoload": {
         "psr-4": { "CpChart\\": "src/" },
@@ -19,5 +19,5 @@
     "config": {
         "bin-dir": "bin"
     },
-    "version": "1.1.6"
+    "version": "2.0.0"
 }
