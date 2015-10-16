@@ -2,7 +2,7 @@
 
 /**
  * @filesource src/Resources/data/configuration.php
- * 
+ *
  * All the class constants moved into a single file for compatibility
  * with the factory service class. This file is *required* for the library
  * to function.
@@ -147,7 +147,7 @@ define("INDICATOR_VALUE_LABEL", 700022);
 /* Class return codes */
 define("PIE_NO_ABSCISSA", 140001);
 define("PIE_NO_DATASERIE", 140002);
-define("PIE_SUMISnull", 140003);
+define("PIE_SUMISNULL", 140003);
 define("PIE_RENDERED", 140000);
 define("PIE_LABEL_COLOR_AUTO", 140010);
 define("PIE_LABEL_COLOR_MANUAL", 140011);
