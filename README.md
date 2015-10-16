@@ -4,40 +4,42 @@ What is CpChart?
 A project bringing Composer support and some basic PHP 5 standards to pChart 2.0 library.
 The aim is to allow pChart integration into modern frameworks like Symfony2.
 
+This is the 2.0 version (currently in development and not to be considered stable), which
+aims to further update the code, but without changing the functionality if possible. For
+safety, you should use versions 1.*.
+
 What was done:
 
 - Made a full port of the library's functionality.
 
 - Defined and added namespaces to all classes.
 
-- Replaced all 'exit()' / 'die()' commands with 'throw' statements to allow a degree of error control.
+- Replaced all `exit()` / `die()` commands with `throw` statements to allow a degree of error control.
 
-- Reorganized files a bit and refactored code for better readability. Also, basic annotations were added
-to functions.
+- Set the code to PSR-2 standard and added annotations (as best as I could figure them out) to methods. 
+Also, typehinting was added to methods where possible, so some backwards compatibility breaks may occur.
 
 - Added a factory service for loading the classes.
 
-- Moved all constants to a single file 'src/Resources/data/constants.php'. This file is *required*
-for the library to function. It is now loaded via Composer.
+- Moved all constants to a single file `src/Resources/data/constants.php`. This file is *required*
+for the library to function and is now loaded via Composer.
 
-Installation:
+Installation via Composer:
 ================
-
-[GitHub](https://github.com/szymach/c-pchart)
-
-[Packagist](https://packagist.org/packages/szymach/c-pchart)
 
 For composer installation, add:
 
 >"require": {
 
-> "szymach/c-pchart": "1.*"
+>           "szymach/c-pchart": "~2.0@dev"
 
 > },
 
 to your composer.json file and update your dependencies. After that, all
-classes are available under "CpChart\Classes" namespace or "CpChart\Services"
+classes are available under `CpChart\Classes` namespace or `CpChart\Services`
 for the factory.
+
+If you want the stable version, replace `~2.0@dev` with `1.*`
 
 Usage:
 ==============
@@ -48,14 +50,15 @@ or use the provided factory. An example below.
 ```php
 require __DIR__.'/../vendor/autoload.php';
 
-use CpChart\Services\pChartFactory;
+use CpChart\Services\CpChartFactory;
+use Exception;
 
 try {
     // create a factory class - it will load necessary files automatically,
     // otherwise you will need to add them on your own
-    $factory = new pChartFactory();
+    $factory = new CpChartFactory();
     
-    // create and populate the pData class
+    // create and populate the CpData class
     $myData = $factory->newData(array(VOID, 3, 4, 3, 5), "Serie1");
 
     // create the image and set the data
@@ -70,7 +73,7 @@ try {
     
     // creating a pie chart - notice that you specify the type of chart, not class name.
     // not all charts need to be created through this method (ex. the bar chart),
-    // some are created via the pImage class (check the documentation before drawing).
+    // some are created via the CpImage class (check the documentation before drawing).
     $pieChart = $factory->newChart("pie", $myPicture, $myData);
 
     // do the drawing
@@ -78,7 +81,7 @@ try {
     $myPicture->drawSplineChart();   
     $myPicture->Stroke();
 
-} catch (\Exception $ex) {
+} catch (Exception $ex) {
     echo 'There was an error: '.$ex->getMessage();
 }
 ```
@@ -90,7 +93,7 @@ classes present in the pChart library.
 IMPORTANT! If you want to use any of the fonts or palletes files, provide only
 the name of the actual file, do not add the 'fonts' or 'palettes' folder to the
 string given into the function. If you want to load them from a different directory
-than the default, you need to add the full path to the file (ex. __DIR__.'/folder/to/my/palletes).
+than the default, you need to add the full path to the file (ex. `__DIR__.'/folder/to/my/palletes`).
 
 Changelog
 =========
@@ -108,6 +111,11 @@ Changelog
 
 1.1.5 Added an option to hide the X axis or only it's values (thanks to julien-gm).
 
+1.1.6 Added support for closures in formatting scale (thanks to funkjedi)
+
+2.0@dev Updated all classes to PSR-2 standard, added typehinting where possible, updated
+        annotations in methods to be as accurate as possible.
+
 References
 ==========
 [The original pChart website](http://www.pchart.net/)
@@ -123,3 +131,10 @@ PHP Framework Interoperability Group at GitHub on PHP coding standards:
 [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
 
 [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
+
+Links
+=====
+
+[GitHub](https://github.com/szymach/c-pchart)
+
+[Packagist](https://packagist.org/packages/szymach/c-pchart)
