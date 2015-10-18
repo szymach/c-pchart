@@ -3,7 +3,7 @@
 namespace CpChart\Classes;
 
 /**
- * pImage - The actual class to do most of the drawing. Extends the pDraw class
+ * CpImage - The actual class to do most of the drawing. Extends the pDraw class
  * with the bulk of drawing methods.
  *
  * Version     : 2.1.4
@@ -27,7 +27,7 @@ class CpImage extends CpDraw
     public function __construct(
         $XSize,
         $YSize,
-        pData $DataSet = null,
+        CpData $DataSet = null,
         $TransparentBackground = false
     ) {
         parent::__construct();
@@ -305,7 +305,7 @@ class CpImage extends CpDraw
      * Attach a dataset to your pChart Object
      * @param CpData $DataSet
      */
-    public function setDataSet(pData $DataSet)
+    public function setDataSet(CpData $DataSet)
     {
         $this->DataSet = $DataSet;
     }

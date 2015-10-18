@@ -15,5 +15,5 @@ before_script:
   - composer install -n --prefer-dist -v
 
 script:
-  - bin/phpcs --standard=PSR2 --encoding=UTF-8 --ignore="*.db" --ignore="*.color",  --ignore="*.ttf" src/
+  - bin/phpcs --standard=PSR2 --encoding=UTF-8 --ignore="*.db,*.color,*.ttf" src/
     

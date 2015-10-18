@@ -74,7 +74,7 @@ class CpCache
      * @param string $Marker
      * @return string
      */
-    public function getHash(pData $Data, $Marker = "")
+    public function getHash(CpData $Data, $Marker = "")
     {
         return md5($Marker . serialize($Data->Data));
     }
@@ -85,7 +85,7 @@ class CpCache
      * @param string $ID
      * @param CpImage $pChartObject
      */
-    public function writeToCache($ID, pImage $pChartObject)
+    public function writeToCache($ID, CpImage $pChartObject)
     {
         /* Compute the paths */
         $TemporaryFile = $this->CacheFolder . "/tmp_" . rand(0, 1000) . ".png";
