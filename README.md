@@ -1,5 +1,18 @@
-What is CpChart?
-===============
+Table of contents:
+==================
+* [About](#about)
+* [Contributing](#contributing)
+* [Installation](#installation-via-composer)
+* [Usage](#usage)
+    - [Draw a chart through CpImage class only](#draw-a-chart-through-cpimage-class-only)
+    - [Draw a chart with a dedicated class](#draw-a-chart-with-a-dedicated-class)
+    - [Notes](#notes)
+* [Changelog](#changelog)
+* [References](#references)
+* [Links](#links)
+
+About:
+=====
 
 A project bringing Composer support and some basic PHP 5 standards to pChart 2.0 library.
 The aim is to allow pChart integration into modern frameworks like Symfony2.
@@ -16,7 +29,7 @@ What was done:
 
 - Replaced all `exit()` / `die()` commands with `throw` statements to allow a degree of error control.
 
-- Set the code to PSR-2 standard and added annotations (as best as I could figure them out) to methods. 
+- Set the code to PSR-2 standard and added annotations (as best as I could figure them out) to methods.
 Also, typehinting was added to methods where possible, so some backwards compatibility breaks may occur.
 
 - Added a factory service for loading the classes.
@@ -24,28 +37,49 @@ Also, typehinting was added to methods where possible, so some backwards compati
 - Moved all constants to a single file `src/Resources/data/constants.php`. This file is *required*
 for the library to function and is now loaded via Composer.
 
-Installation via Composer:
-================
+Contributing:
+=============
+
+If you wish to contribute to the stable version, there is a branch called `legacy` to which you
+may submit pull requests. Otherwise feel free to use the `master` branch.
+
+Installation (via Composer):
+============================
 
 For composer installation, add:
 
->"require": {
+```json
+"require": {
+    "szymach/c-pchart": "~2.0@dev"
+},
+```
 
->           "szymach/c-pchart": "~2.0@dev"
+to your composer.json file and update your dependencies. Or you can run:
 
-> },
+```sh
+$ composer require szymach/c-pchart
+```
 
-to your composer.json file and update your dependencies. After that, all
-classes are available under `CpChart\Classes` namespace or `CpChart\Services`
-for the factory.
+in your project directory, where the composer.json file is.
 
-If you want the stable version, replace `~2.0@dev` with `1.*`
+After that, all classes are available under `CpChart\Classes` namespace or
+`CpChart\Services` for the factory.
+
+If you want the **stable version**, replace `~2.0@dev` with `1.*`
 
 Usage:
-==============
+======
 
-The main difference is that you can either load the class via the 'use' statement
-or use the provided factory. An example below. 
+Now you can autoload or use the classes via their namespaces. If you want to, you
+may utilize the provided factory class. Below are examples of how to use the library,
+the charts themselves are borrowed from the official documentation.
+
+Draw a chart through CpImage class only
+---------------------------------------
+
+Not all charts need to be created through a seperate class (ex. bar or spline charts),
+some are created via the CpImage class (check the official documentation before drawing).
+An example for a spline chart below:
 
 ```php
 require __DIR__.'/../vendor/autoload.php';
@@ -54,43 +88,174 @@ use CpChart\Services\CpChartFactory;
 use Exception;
 
 try {
-    // create a factory class - it will load necessary files automatically,
+    // Create a factory class - it will load necessary files automatically,
     // otherwise you will need to add them on your own
     $factory = new CpChartFactory();
-    
-    // create and populate the CpData class
-    $myData = $factory->newData(array(VOID, 3, 4, 3, 5), "Serie1");
+    $myData = $factory->newData(array(), "Serie1");
 
-    // create the image and set the data
+    // Create the image and set the data
     $myPicture = $factory->newImage(700, 230, $myData);
-    $myPicture->setGraphArea(60, 40, 670, 190);
-    $myPicture->setFontProperties(
-        array(
-            "FontName" => "Forgotte.ttf",
-            "FontSize" => 11
-        )
+    $myPicture->setShadow(
+        true,
+        array("X" => 1, "Y" => 1, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 20)
     );
-    
-    // creating a pie chart - notice that you specify the type of chart, not class name.
-    // not all charts need to be created through this method (ex. the bar chart),
-    // some are created via the CpImage class (check the documentation before drawing).
-    $pieChart = $factory->newChart("pie", $myPicture, $myData);
 
-    // do the drawing
-    $myPicture->drawScale();
-    $myPicture->drawSplineChart();   
+    // 1st spline drawn in white with control points visible
+    $firstCoordinates = array(array(40, 80), array(280, 60), array(340, 166), array(590, 120));
+    $fistSplineSettings = array("R" => 255, "G" => 255, "B" => 255, "ShowControl" => true);
+    $myPicture->drawSpline($firstCoordinates, $fistSplineSettings);
+
+    // 2nd spline dashed drawn in white with control points visible
+    $secondCoordinates = array(array(250, 50), array(250, 180), array(350, 180), array(350, 50));
+    $secondSplineSettings = array(
+        "R" => 255,
+        "G" => 255,
+        "B" => 255,
+        "ShowControl" => true,
+        "Ticks" => 4
+    );
+    $myPicture->drawSpline($secondCoordinates, $secondSplineSettings);
+
+    // Output the chart to the browser
+    $myPicture->Render("example.drawSpline.png");
     $myPicture->Stroke();
-
 } catch (Exception $ex) {
-    echo 'There was an error: '.$ex->getMessage();
+    echo sprintf('There was an error: %s', $ex->getMessage());
 }
 ```
 
-Basically, it should work as defined in the pChart 2.0 documentation with added
-support for try/catch functionality. The factory class has methods to load all types of 
+Draw a chart with a dedicated class:
+------------------------------------
+
+Some charts require using a dedicated class, which you can create via the factory.
+Notice that you specify the type of chart, not the class name. An example for a pie
+chart below:
+
+```php
+require __DIR__.'/../vendor/autoload.php';
+
+use CpChart\Classes\CpPie;
+use CpChart\Services\CpChartFactory;
+use Exception;
+
+try {
+    $factory = new CpChartFactory();
+
+    // Create and populate data
+    $myData = $factory->newData(array(40, 60, 15, 10, 6, 4), "ScoreA");
+    $myData->setSerieDescription("ScoreA", "Application A");
+
+    // Define the absissa serie
+    $myData->addPoints(array("<10", "10<>20", "20<>40", "40<>60", "60<>80", ">80"), "Labels");
+    $myData->setAbscissa("Labels");
+
+    // Create the image
+    $myPicture = $factory->newImage(700, 230, $myData);
+
+    // Draw a solid background
+    $backgroundSettings = array(
+        "R" => 173,
+        "G" => 152,
+        "B" => 217,
+        "Dash" => 1,
+        "DashR" => 193,
+        "DashG" => 172,
+        "DashB" => 237
+    );
+    $myPicture->drawFilledRectangle(0, 0, 700, 230, $backgroundSettings);
+
+    //Draw a gradient overlay
+    $gradientSettings = array(
+        "StartR" => 209,
+        "StartG" => 150,
+        "StartB" => 231,
+        "EndR" => 111,
+        "EndG" => 3,
+        "EndB" => 138,
+        "Alpha" => 50
+    );
+    $myPicture->drawGradientArea(0, 0, 700, 230, DIRECTION_VERTICAL, $gradientSettings);
+    $myPicture->drawGradientArea(
+        0,
+        0,
+        700,
+        20,
+        DIRECTION_VERTICAL,
+        array(
+            "StartR" => 0,
+            "StartG" => 0,
+            "StartB" => 0,
+            "EndR" => 50,
+            "EndG" => 50,
+            "EndB" => 50,
+            "Alpha" => 100
+        )
+    );
+
+    // Add a border to the picture
+    $myPicture->drawRectangle(0, 0, 699, 229, array("R" => 0, "G" => 0, "B" => 0));
+
+    // Write the picture title
+    $myPicture->setFontProperties(array("FontName" => "Silkscreen.ttf", "FontSize" => 6));
+    $myPicture->drawText(10, 13, "pPie - Draw 2D pie charts", array("R" => 255, "G" => 255, "B" => 255));
+
+    // Set the default font properties
+    $myPicture->setFontProperties(
+        array("FontName" => "Forgotte.ttf", "FontSize" => 10, "R" => 80, "G" => 80, "B" => 80)
+    );
+
+    // Enable shadow computing
+    $myPicture->setShadow(
+        true,
+        array("X" => 2, "Y" => 2, "R" => 150, "G" => 150, "B" => 150, "Alpha" => 100)
+    );
+    $myPicture->drawText(
+        140,
+        200,
+        "Single AA pass",
+        array("R" => 0, "G" => 0, "B" => 0, "Align" => TEXT_ALIGN_TOPMIDDLE)
+    );
+
+    // Create and draw the chart
+    /* @var $pieChart CpPie */
+    $pieChart = $factory->newChart("pie", $myPicture, $myData);
+    $pieChart->draw2DPie(140, 125, array("SecondPass" => false));
+    $pieChart->draw2DPie(340, 125, array("DrawLabels" => true, "Border" => true));
+    $pieChart->draw2DPie(
+        540,
+        125,
+        array(
+            "DataGapAngle" => 10,
+            "DataGapRadius" => 6,
+            "Border" => true,
+            "BorderR" => 255,
+            "BorderG" => 255,
+            "BorderB" => 255
+        )
+    );
+    $myPicture->drawText(
+        540,
+        200,
+        "Extended AA pass / Splitted",
+        array("R" => 0, "G" => 0, "B" => 0, "Align" => TEXT_ALIGN_TOPMIDDLE)
+    );
+
+    // Save the chart to a test directory and output it to a browser
+    $pieChart->pChartObject->Render("charts/example.draw2DPie.png");
+    $pieChart->pChartObject->stroke();
+} catch (Exception $ex) {
+    echo sprintf('There was an error: %s', $ex->getMessage());
+}
+```
+
+Notes:
+------
+
+Basically, all should work as defined in the pChart 2.0 documentation with added
+support for try/catch functionality. The factory class has methods to load all types of
 classes present in the pChart library.
 
-IMPORTANT! If you want to use any of the fonts or palletes files, provide only
+**IMPORTANT!** If you want to use any of the fonts or palletes files, provide only
 the name of the actual file, do not add the 'fonts' or 'palettes' folder to the
 string given into the function. If you want to load them from a different directory
 than the default, you need to add the full path to the file (ex. `__DIR__.'/folder/to/my/palletes`).
