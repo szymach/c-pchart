@@ -1,8 +1,8 @@
 <?php
 namespace CpChart\Services;
 
-use CpChart\Classes\pData;
-use CpChart\Classes\pImage;
+use CpChart\Classes\CpData;
+use CpChart\Classes\CpImage;
 use CpChart\Exception\CpChartFactoryException;
 
 /**
@@ -17,9 +17,9 @@ class CpChartFactory
 
     /**
      * Loads a new chart class (scatter, pie etc.). Some classes require instances of
-     * pImage and pData classes passed into their constructor. These classes are:
+     * pImage and CpData classes passed into their constructor. These classes are:
      * CpBubble, CpPie, CpScatter, CpStock, CpSurface and CpIndicator. Otherwise the
-     * pChartObject and pDataObject parameters are redundant.
+     * pChartObject and CpDataObject parameters are redundant.
      *
      * ATTENTION! SOME OF THE CHARTS NEED TO BE DRAWN VIA A METHOD FROM THE
      * 'pImage' CLASS (ex. 'drawBarChart'), NOT THROUGH THIS METHOD! READ THE
@@ -47,7 +47,7 @@ class CpChartFactory
 
     /**
      * Checks if the requested chart type is created via one of the methods in
-     * the pDraw class, instead through a seperate class. If a method in pDraw
+     * the CpDraw class, instead through a seperate class. If a method in CpDraw
      * exists, an exception with proper information is thrown.
      *
      * @param string $chartType
@@ -72,11 +72,11 @@ class CpChartFactory
     }
 
     /**
-     * Creates a new pData class with an option to pass the data to form a serie.
+     * Creates a new CpData class with an option to pass the data to form a serie.
      *
      * @param array $points - points to be added to serie
      * @param string $serieName - name of the serie
-     * @return pData
+     * @return CpData
      */
     public function newData(array $points = array(), $serieName = "Serie1")
     {
@@ -94,14 +94,14 @@ class CpChartFactory
      *
      * @param integer $XSize - length of the X axis
      * @param integer $YSize - length of the Y axis
-     * @param pData $DataSet - pData class populated with points
+     * @param CpData $DataSet - CpData class populated with points
      * @param boolean $TransparentBackground
      * @return pImage
      */
     public function newImage(
         $XSize,
         $YSize,
-        pData $DataSet = null,
+        CpData $DataSet = null,
         $TransparentBackground = false
     ) {
         $className = sprintf('%sCpImage', $this->namespace);
