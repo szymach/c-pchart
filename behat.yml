@@ -1,0 +1,9 @@
+---
+default: &default
+    suites:
+        charts:
+            paths: [ %paths.base%/features ]
+            contexts:
+                - CpChart\Behat\Context\FactoryContext
+                - CpChart\Behat\Context\PurgeContext:
+                    - %paths.base%
