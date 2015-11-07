@@ -3,27 +3,27 @@
 namespace CpChart\Behat\Context;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use CpChart\Behat\Fixtures\FixtureGenerator;
 use DirectoryIterator;
 
 /**
  * @author Piotr Szymaszek
  */
-class PurgeContext implements Context, SnippetAcceptingContext
+class PurgeContext implements Context
 {
-    private $outputFolderName = 'features/fixtures/output';
-
+    /**
+     * @var string
+     */
     private $outputFolderPath;
 
+    /**
+     * @param string $basePath
+     */
     public function __construct($basePath)
     {
-        $this->outputFolderPath = sprintf(
-            '%s/%s',
-            $basePath,
-            $this->outputFolderName
-        );
+        $this->outputFolderPath = FixtureGenerator::setFixturesPath($basePath);
     }
 
     /** @BeforeScenario */
@@ -49,7 +49,7 @@ class PurgeContext implements Context, SnippetAcceptingContext
                 }
                 unlink($file->getPathname());
             }
+            rmdir($this->outputFolderPath);
         }
-        rmdir($this->outputFolderPath);
     }
 }

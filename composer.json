@@ -14,8 +14,10 @@
         "ext-gd": "*"
     },
     "require-dev" : {
-        "squizlabs/php_codesniffer": "~2.3",
-        "behat/behat": "~3.0"
+        "behat/behat": "~3.0",
+        "behat/mink": "~1.7",
+        "bossa/phpspec2-expect": "~1.0",
+        "squizlabs/php_codesniffer": "~2.3"
     },
     "config": {
         "bin-dir": "bin"
