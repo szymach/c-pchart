@@ -2,7 +2,6 @@
 
 namespace CpChart\Behat\Context;
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use CpChart\Behat\Fixtures\FixtureGenerator;
 use CpChart\Classes\CpImage;
@@ -22,18 +21,17 @@ class DrawContext implements Context
      */
     public function __construct($basePath)
     {
-        $this->outputFolderPath = FixtureGenerator::setFixturesPath($basePath);
+        $this->outputFolderPath = FixtureGenerator::getFixturesPath($basePath);
     }
-    
+
     /**
-     * @Given I render and stroke the chart of type :chart
+     * @Given I render the chart of type :chart
      */
-    public function iRenderAndStrokeTheChartOfType(CpImage $chart)
+    public function iRenderTheChartOfType(CpImage $chart)
     {
         $chart->Render($this->getFilePath("example.png"));
-        $chart->Stroke();
     }
-    
+
     /**
      * @Then I should see a new file :filename in output folder
      */
@@ -41,7 +39,7 @@ class DrawContext implements Context
     {
         expect(file_exists($this->getFilePath($filename)))->toBe(true);
     }
-    
+
     private function getFilePath($filename)
     {
         return sprintf("%s/%s", $this->outputFolderPath, $filename);

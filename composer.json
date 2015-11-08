@@ -16,7 +16,9 @@
     "require-dev" : {
         "behat/behat": "~3.0",
         "behat/mink": "~1.7",
+        "behat/mink-goutte-driver": "~1.2",
         "bossa/phpspec2-expect": "~1.0",
+        "sensiolabs/behat-page-object-extension": "~2.0@dev",
         "squizlabs/php_codesniffer": "~2.3"
     },
     "config": {

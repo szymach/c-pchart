@@ -7,11 +7,12 @@ use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use CpChart\Behat\Fixtures\FixtureGenerator;
 use DirectoryIterator;
+use FilesystemIterator;
 
 /**
  * @author Piotr Szymaszek
  */
-class PurgeContext implements Context
+class DirectoryContext implements Context
 {
     /**
      * @var string
@@ -23,17 +24,30 @@ class PurgeContext implements Context
      */
     public function __construct($basePath)
     {
-        $this->outputFolderPath = FixtureGenerator::setFixturesPath($basePath);
+        $this->outputFolderPath = FixtureGenerator::getFixturesPath($basePath);
     }
 
-    /** @BeforeScenario */
+    /**
+     * @BeforeScenario
+     */
     public function before(BeforeScenarioScope $scope)
     {
         $this->deleteOutputFolder();
         mkdir($this->outputFolderPath);
     }
 
-    /** @AfterScenario */
+    /**
+     * @Given the output directory is empty
+     */
+    public function theOutputDirectoryIsEmpty()
+    {
+        $iterator = new FilesystemIterator($this->outputFolderPath);
+        expect($iterator->valid())->toBe(false);
+    }
+
+    /**
+     * @AfterScenario
+     */
     public function after(AfterScenarioScope $scope)
     {
         $this->deleteOutputFolder();

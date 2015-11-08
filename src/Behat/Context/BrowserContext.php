@@ -2,19 +2,25 @@
 
 namespace CpChart\Behat\Context;
 
-use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Behat\Context\Context;
-
 /**
  * @author Piotr Szymaszek
  */
-class BrowserContext implements Context
+class BrowserContext extends MinkAwarePageContext
 {
     /**
-     * @Then there should be a :headerName header with value :headerValue set in the response
+     * @Given I open the :name page
      */
-    public function thereShouldBeAHeaderSetInTheResponse($headerName, $headerValue)
+    public function iOpenTheIndexPage($name)
     {
-        throw new PendingException();
+        $this->getPage($name)->open();
+    }
+
+    /**
+     * @Then there should be a :name header with value :expectedValue set in the response
+     */
+    public function thereShouldBeAHeaderSetInTheResponse($name, $expectedValue)
+    {
+        $currentValue = $this->getSession()->getResponseHeader($name);
+        expect($currentValue === $expectedValue)->toBe(true);
     }
 }

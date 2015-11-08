@@ -2,10 +2,10 @@
 
 namespace CpChart\Behat\Context;
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use CpChart\Behat\Fixtures\FixtureGenerator;
+use CpChart\Classes\CpImage;
 
 class DataContext implements Context, SnippetAcceptingContext
 {
@@ -34,5 +34,16 @@ class DataContext implements Context, SnippetAcceptingContext
         }
         
         return $image;
+    }
+
+    /**
+     * @Then I should be able to create empty images of width :width and height :height
+     */
+    public function iShouldBeAbleToCreateEmptyImagesOfWidthAndHeight($width, $height)
+    {
+        $image = $this->fixturesGenerator->createEmptyImage($width, $height);
+        expect($image instanceof CpImage)->toBe(true);
+        expect($image->getWidth() == $width)->toBe(true);
+        expect($image->getHeight() == $height)->toBe(true);
     }
 }
