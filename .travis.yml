@@ -2,7 +2,6 @@ language: php
 
 cache:
   directories:
-    - vendor
     - bin
 
 sudo: false
@@ -13,9 +12,8 @@ php:
 before_script:
   - composer self-update -n
   - composer install -n --prefer-dist -v
-  - nohup php -S localhost:8080 -t features/fixtures/web > var/logs/server.log 2>&1 &
+  - nohup php -S localhost:8080 -t features/fixtures/web > server.log 2>&1 &
 
 script:
   - bin/phpcs --standard=PSR2 --encoding=UTF-8 --ignore="*.db,*.color,*.ttf" src/
   - bin/behat --no-snippets --verbose --profile=travis -vvv
-    

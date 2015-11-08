@@ -10,7 +10,7 @@ Feature: Basic functionality
         Given I render the chart of type "spline"
         Then I should see a new file "example.png" in output folder
 
-    Scenario: Outputing a chart to the browser
+    Scenario: Outputting a chart to the browser
         Given I open the "Index" page
         Then there should be a "Content-type" header with value "image/png" set in the response
 

@@ -605,13 +605,13 @@ abstract class CpBaseDraw
             if ($Value == .8) {
                 return .6;
             }
-            if (in_array($Value, [.4, .7])) {
+            if (in_array($Value, array(.4, .7))) {
                 return .7;
             }
-            if (in_array($Value, [.2, .3, .6])) {
+            if (in_array($Value, array(.2, .3, .6))) {
                 return .8;
             }
-            if (in_array($Value, [0, 1, .1, .9])) {
+            if (in_array($Value, array(0, 1, .1, .9))) {
                 return .9;
             }
         }
@@ -635,16 +635,16 @@ abstract class CpBaseDraw
             if ($Value == .7) {
                 return .7;
             }
-            if (in_array($Value, [.6, .8])) {
+            if (in_array($Value, array(.6, .8))) {
                 return .8;
             }
-            if (in_array($Value, [1, .9])) {
+            if (in_array($Value, array(1, .9))) {
                 return .9;
             }
         }
 
         if ($Mode == 3) {
-            if (in_array($Value, [1, .1])) {
+            if (in_array($Value, array(1, .1))) {
                 return .1;
             }
             if ($Value == .2) {
@@ -653,7 +653,7 @@ abstract class CpBaseDraw
             if ($Value == .3) {
                 return .3;
             }
-            if (in_array($Value, [.4, .8])) {
+            if (in_array($Value, array(.4, .8))) {
                 return .4;
             }
             if ($Value == .5) {
@@ -674,7 +674,7 @@ abstract class CpBaseDraw
             if ($Value == 1) {
                 return -1;
             }
-            if (in_array($Value, [.1, .4, .7, .8, .9])) {
+            if (in_array($Value, array(.1, .4, .7, .8, .9))) {
                 return .1;
             }
             if ($Value == .2) {
