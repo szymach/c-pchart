@@ -15,17 +15,17 @@ namespace CpChart\Classes;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-class CpIndicator
+class Indicator
 {
     /**
-     * @var CpImage
+     * @var Image
      */
     public $pChartObject;
 
     /**
-     * @param CpImage $pChartObject
+     * @param Image $pChartObject
      */
-    public function __construct(CpImage $pChartObject)
+    public function __construct(Image $pChartObject)
     {
         $this->pChartObject = $pChartObject;
     }

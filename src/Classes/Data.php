@@ -17,7 +17,7 @@ use Exception;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-class CpData
+class Data
 {
     /**
      * @var array

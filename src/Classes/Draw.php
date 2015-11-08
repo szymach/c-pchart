@@ -17,7 +17,7 @@ use Exception;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-abstract class CpDraw extends CpBaseDraw
+abstract class Draw extends BaseDraw
 {
     /**
      * Draw a polygon

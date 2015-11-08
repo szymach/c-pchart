@@ -15,10 +15,10 @@ namespace CpChart\Classes;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-class CpSurface
+class Surface
 {
     /**
-     * @var CpImage
+     * @var Image
      */
     public $pChartObject;
 
@@ -38,9 +38,9 @@ class CpSurface
     public $Points = array();
 
     /**
-     * @param CpImage $pChartObject
+     * @param Image $pChartObject
      */
-    public function __construct(CpImage $pChartObject)
+    public function __construct(Image $pChartObject)
     {
         $this->pChartObject = $pChartObject;
     }

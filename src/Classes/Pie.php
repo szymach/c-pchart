@@ -16,15 +16,15 @@ namespace CpChart\Classes;
  *  You can find the whole class documentation on the pChart web site.
  */
 
-class CpPie
+class Pie
 {
     /**
-     * @var CpImage
+     * @var Image
      */
     public $pChartObject;
 
     /**
-     * @var CpData
+     * @var Data
      */
     public $pDataObject;
 
@@ -34,10 +34,10 @@ class CpPie
     public $LabelPos = array();
 
     /**
-     * @param CpImage $pChartObject
-     * @param CpData $pDataObject
+     * @param Image $pChartObject
+     * @param Data $pDataObject
      */
-    public function __construct(CpImage $pChartObject, CpData $pDataObject)
+    public function __construct(Image $pChartObject, Data $pDataObject)
     {
         $this->pChartObject = $pChartObject;
         $this->pDataObject = $pDataObject;

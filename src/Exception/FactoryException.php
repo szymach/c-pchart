@@ -7,6 +7,6 @@ use Exception;
 /**
  * @author Piotr Szymaszek
  */
-class CpChartFactoryException extends Exception
+class FactoryException extends Exception
 {
 }

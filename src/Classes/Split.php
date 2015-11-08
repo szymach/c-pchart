@@ -15,20 +15,20 @@ namespace CpChart\Classes;
  *
  *    You can find the whole class documentation on the pChart web site.
  */
-class CpSplit
+class Split
 {
     /**
-     * @var CpImage
+     * @var Image
      */
     public $pChartObject;
 
     /**
      * Create the encoded string
-     * @param CpImage $Object
-     * @param CpData $Values
+     * @param Image $Object
+     * @param Data $Values
      * @param array $Format
      */
-    public function drawSplitPath(CpImage $Object, CpData $Values, array $Format = array())
+    public function drawSplitPath(Image $Object, Data $Values, array $Format = array())
     {
         $this->pChartObject = $Object;
 

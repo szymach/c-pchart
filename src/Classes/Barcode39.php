@@ -5,7 +5,7 @@ namespace CpChart\Classes;
 use Exception;
 
 /**
- *  pBarcode128 - class to create barcodes (128B)
+ *  pBarcode39 - class to create barcodes (39B)
  *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI
@@ -17,7 +17,7 @@ use Exception;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-class CpBarcode128
+class Barcode39
 {
     /**
      * @var array
@@ -35,7 +35,7 @@ class CpBarcode128
     public $Result;
 
     /**
-     * @var CpImage
+     * @var Image
      */
     public $pChartObject;
 
@@ -45,24 +45,31 @@ class CpBarcode128
     public $CRC;
 
     /**
+     * @var boolean
+     */
+    public $MOD43;
+
+    /**
      * @param string $BasePath
+     * @param boolean $EnableMOD43
      * @throws Exception
      */
-    public function __construct($BasePath = "")
+    public function __construct($BasePath = "", $EnableMOD43 = false)
     {
+        $this->MOD43 = (boolean) $EnableMOD43;
         $this->Codes = array();
         $this->Reverse = array();
-        if (file_exists($BasePath . "data/128B.db", "r")) {
-            $FileHandle = @fopen($BasePath . "data/128B.db", "r");
-            $filePath = $BasePath . "data/128B.db";
+        if (file_exists($BasePath . "data/39.db", "r")) {
+            $FileHandle = @fopen($BasePath . "data/39.db", "r");
+            $filePath = $BasePath . "data/39.db";
         } else {
-            $FileHandle = @fopen(__DIR__ . '/../Resources/data/128B.db', "r");
-            $filePath = "/../Resources/data/128B.db";
+            $FileHandle = @fopen(__DIR__ . '/../Resources/data/39.db', "r");
+            $filePath = "/../Resources/data/39.db";
         }
 
         if (!$FileHandle) {
             throw new Exception(
-                sprintf("Cannot find barcode database (%s).", $filePath)
+                "Cannot find barcode database (" . $filePath . ")."
             );
         }
 
@@ -72,10 +79,7 @@ class CpBarcode128
             $Buffer = str_replace(chr(13), "", $Buffer);
             $Values = preg_split("/;/", $Buffer);
 
-            $this->Codes[$Values[1]]["ID"] = $Values[0];
-            $this->Codes[$Values[1]]["Code"] = $Values[2];
-            $this->Reverse[$Values[0]]["Code"] = $Values[2];
-            $this->Reverse[$Values[0]]["Asc"] = $Values[1];
+            $this->Codes[$Values[0]] = $Values[1];
         }
         fclose($FileHandle);
     }
@@ -96,7 +100,7 @@ class CpBarcode128
         $FontSize = isset($Format["FontSize"]) ? $Format["FontSize"] : 12;
         $Height = isset($Format["Height"]) ? $Format["Height"] : 30;
 
-        $TextString = $this->encode128($TextString);
+        $TextString = $this->encode39($TextString);
         $BarcodeLength = strlen($this->Result);
 
         $WOffset = $DrawArea ? 20 : 0;
@@ -116,42 +120,47 @@ class CpBarcode128
     }
 
     /**
+     * Create the encoded string
      *
      * @param string $Value
-     * @param string $Format
      * @return string
      */
-    public function encode128($Value, $Format = "")
+    public function encode39($Value)
     {
-        $this->Result = "11010010000";
-        $this->CRC = 104;
+        $this->Result = "100101101101" . "0";
         $TextString = "";
-
         for ($i = 1; $i <= strlen($Value); $i++) {
             $CharCode = ord($this->mid($Value, $i, 1));
-            if (isset($this->Codes[$CharCode])) {
-                $this->Result = $this->Result . $this->Codes[$CharCode]["Code"];
-                $this->CRC = $this->CRC + $i * $this->Codes[$CharCode]["ID"];
+            if ($CharCode >= 97 && $CharCode <= 122) {
+                $CharCode = $CharCode - 32;
+            }
+
+            if (isset($this->Codes[chr($CharCode)])) {
+                $this->Result = $this->Result . $this->Codes[chr($CharCode)] . "0";
                 $TextString = $TextString . chr($CharCode);
             }
         }
-        $this->CRC = $this->CRC - floor($this->CRC / 103) * 103;
 
-        $this->Result = $this->Result . $this->Reverse[$this->CRC]["Code"];
-        $this->Result = $this->Result . "1100011101011";
+        if ($this->MOD43) {
+            $Checksum = $this->checksum($TextString);
+            $this->Result = $this->Result . $this->Codes[$Checksum] . "0";
+        }
+
+        $this->Result = $this->Result . "100101101101";
+        $TextString = "*" . $TextString . "*";
 
         return $TextString;
     }
 
     /**
      * Create the encoded string
-     * @param CpImage $Object
-     * @param string $Value
-     * @param int $X
-     * @param int $Y
-     * @param string $Format
+     * @param Image $Object
+     * @param type $Value
+     * @param type $X
+     * @param type $Y
+     * @param array $Format
      */
-    public function draw(CpImage $Object, $Value, $X, $Y, $Format = "")
+    public function draw(Image $Object, $Value, $X, $Y, $Format = "")
     {
         $this->pChartObject = $Object;
 
@@ -171,7 +180,7 @@ class CpBarcode128
         $AreaBorderG = isset($Format["AreaBorderG"]) ? $Format["AreaBorderG"] : $AreaG;
         $AreaBorderB = isset($Format["AreaBorderB"]) ? $Format["AreaBorderB"] : $AreaB;
 
-        $TextString = $this->encode128($Value);
+        $TextString = $this->encode39($Value);
 
         if ($DrawArea) {
             $X1 = $X + cos(($Angle - 135) * PI / 180) * 10;
@@ -241,7 +250,22 @@ class CpBarcode128
     }
 
     /**
-     *
+     * @param string $string
+     * @return string
+     */
+    public function checksum($string)
+    {
+        $checksum = 0;
+        $length = strlen($string);
+        $charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%';
+
+        for ($i = 0; $i < $length; ++$i) {
+            $checksum += strpos($charset, $string[$i]);
+        }
+        return substr($charset, ($checksum % 43), 1);
+    }
+
+    /**
      * @param string $value
      * @param int $NbChar
      * @return string
@@ -252,10 +276,9 @@ class CpBarcode128
     }
 
     /**
-     *
      * @param string $value
      * @param int $NbChar
-     * @return type
+     * @return string
      */
     public function right($value, $NbChar)
     {
@@ -263,7 +286,6 @@ class CpBarcode128
     }
 
     /**
-     *
      * @param string $value
      * @param int $Depart
      * @param int $NbChar

@@ -15,20 +15,20 @@ namespace CpChart\Classes;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-class CpRadar
+class Radar
 {
     /**
-     * @var CpImage
+     * @var Image
      */
     public $pChartObject;
 
     /**
      * Draw a radar chart
-     * @param CpImage $Object
-     * @param CpData $Values
+     * @param Image $Object
+     * @param Data $Values
      * @param array $Format
      */
-    public function drawRadar(CpImage $Object, CpData $Values, array $Format = array())
+    public function drawRadar(Image $Object, Data $Values, array $Format = array())
     {
         $this->pChartObject = $Object;
 
@@ -594,11 +594,11 @@ class CpRadar
 
     /**
      * Draw a radar chart
-     * @param CpImage $Object
-     * @param CpData $Values
+     * @param Image $Object
+     * @param Data $Values
      * @param array $Format
      */
-    public function drawPolar(CpImage $Object, CpData $Values, array $Format = array())
+    public function drawPolar(Image $Object, Data $Values, array $Format = array())
     {
         $this->pChartObject = $Object;
 

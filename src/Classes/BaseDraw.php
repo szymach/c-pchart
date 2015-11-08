@@ -4,12 +4,12 @@ namespace CpChart\Classes;
 
 /**
  * This class exists only to try and reduce the number of methods and properties
- * in the CpDraw class. Basically all methods not named 'drawX' were moved in here,
+ * in the Draw class. Basically all methods not named 'drawX' were moved in here,
  * as well as all the class fields.
  *
  * @author Piotr Szymaszek
  */
-abstract class CpBaseDraw
+abstract class BaseDraw
 {
     /**
      * Width of the picture
@@ -187,7 +187,7 @@ abstract class CpBaseDraw
 
     /**
      * Attached dataset
-     * @var CpData
+     * @var Data
      */
     public $DataSet;
 

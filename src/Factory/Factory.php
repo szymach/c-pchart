@@ -1,9 +1,9 @@
 <?php
-namespace CpChart\Services;
+namespace CpChart\Factory;
 
-use CpChart\Classes\CpData;
-use CpChart\Classes\CpImage;
-use CpChart\Exception\CpChartFactoryException;
+use CpChart\Classes\Data;
+use CpChart\Classes\Image;
+use CpChart\Exception\FactoryException;
 
 /**
  * A simple service class utilizing the Factory design pattern. It has three
@@ -11,34 +11,40 @@ use CpChart\Exception\CpChartFactoryException;
  *
  * @author szymach @ http://github.com/szymach
  */
-class CpChartFactory
+class Factory
 {
-    private $namespace = 'CpChart\Classes\\';
+    private $namespace;
 
+    public function __construct($namespace = 'CpChart\Classes')
+    {
+        $this->namespace = $namespace;
+    }
+    
     /**
      * Loads a new chart class (scatter, pie etc.). Some classes require instances of
-     * pImage and CpData classes passed into their constructor. These classes are:
+     * pImage and Data classes passed into their constructor. These classes are:
      * CpBubble, CpPie, CpScatter, CpStock, CpSurface and CpIndicator. Otherwise the
-     * pChartObject and CpDataObject parameters are redundant.
+     * pChartObject and DataObject parameters are redundant.
      *
      * ATTENTION! SOME OF THE CHARTS NEED TO BE DRAWN VIA A METHOD FROM THE
      * 'pImage' CLASS (ex. 'drawBarChart'), NOT THROUGH THIS METHOD! READ THE
      * DOCUMENTATION FOR MORE DETAILS.
      *
      * @param string $chartType - type of the chart to be loaded (for example 'pie', not 'pPie')
-     * @param CpImage $chartObject
-     * @param CpData $dataObject
+     * @param Image $chartObject
+     * @param Data $dataObject
      * @return \CpChart\Classes\$chartName
      */
     public function newChart(
         $chartType,
-        CpImage $chartObject = null,
-        CpData $dataObject = null
+        Image $chartObject = null,
+        Data $dataObject = null
     ) {
         $this->checkChartType($chartType);
-        $className = sprintf('%sCp%s', $this->namespace, ucfirst($chartType));
+        $className = $this->prependNamespace(ucfirst($chartType));
+        
         if (!class_exists($className)) {
-            throw new CpChartFactoryException(
+            throw new FactoryException(
                 'The requested chart class does not exist!'
             );
         }
@@ -55,13 +61,13 @@ class CpChartFactory
      */
     private function checkChartType($chartType)
     {
-        $methods = array(
-            'draw'.ucfirst($chartType).'Chart',
-            'draw'.ucfirst($chartType)
-        );
+        $chart = ucfirst($chartType);
+        $methods = array(sprintf('draw%sChart', $chart), sprintf('draw%s', $chart));
+        $imageObject = $this->prependNamespace('Image');
+        
         foreach ($methods as $method) {
-            if (method_exists($this->namespace.'pImage', $method)) {
-                throw new CpChartFactoryException(
+            if (method_exists($imageObject, $method)) {
+                throw new FactoryException(
                     'The requested chart is not a seperate class, to draw it you'
                     . ' need to call the "'.$method.'" method on the pImage object'
                     . ' after populating it with data!'
@@ -72,17 +78,17 @@ class CpChartFactory
     }
 
     /**
-     * Creates a new CpData class with an option to pass the data to form a serie.
+     * Creates a new Data class with an option to pass the data to form a serie.
      *
      * @param array $points - points to be added to serie
      * @param string $serieName - name of the serie
-     * @return CpData
+     * @return Data
      */
     public function newData(array $points = array(), $serieName = "Serie1")
     {
-        $className = $this->namespace.'CpData';
+        $className = $this->prependNamespace('Data');
         $data = new $className();
-        if (count($points) > 0) {
+        if (!empty($points)) {
             $data->addPoints($points, $serieName);
         }
         return $data;
@@ -94,17 +100,17 @@ class CpChartFactory
      *
      * @param integer $XSize - length of the X axis
      * @param integer $YSize - length of the Y axis
-     * @param CpData $DataSet - CpData class populated with points
+     * @param Data $DataSet - Data class populated with points
      * @param boolean $TransparentBackground
      * @return pImage
      */
     public function newImage(
         $XSize,
         $YSize,
-        CpData $DataSet = null,
+        Data $DataSet = null,
         $TransparentBackground = false
     ) {
-        $className = sprintf('%sCpImage', $this->namespace);
+        $className = $this->prependNamespace('Image');
         return new $className(
             $XSize,
             $YSize,
@@ -118,7 +124,7 @@ class CpChartFactory
      * the class name is contructed on the fly. Passing the constructor's parameters
      * is also available, but not mandatory.
      *
-     * @param string $number - number identifing the pBarcode class ("39" or "128")
+     * @param int $number - number identifing the pBarcode class ("39" or "128")
      * @param string $BasePath - optional path for the file containing the class data
      * @param boolean $EnableMOD43
      * @return pBarcode(39|128)
@@ -126,12 +132,18 @@ class CpChartFactory
      */
     public function getBarcode($number, $BasePath = "", $EnableMOD43 = false)
     {
-        if ($number != "39" && $number != "128") {
-            throw new CpChartFactoryException(
+        if ($number != 39 && $number != 128) {
+            throw new FactoryException(
                 'The barcode class for the provided number does not exist!'
             );
         }
-        $className = sprintf("%sCpBarcode%s", $this->namespace, $number);
+        $className = sprintf("%s%s", $this->prependNamespace('CpBarcode'), $number);
+
         return new $className($BasePath, $EnableMOD43);
+    }
+    
+    private function prependNamespace($class)
+    {
+        return sprintf('%s\%s', $this->namespace, $class);
     }
 }
