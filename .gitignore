@@ -1,26 +1,6 @@
-# Created by http://www.gitignore.io
-
-### NetBeans ###
-nbproject
-nbproject/*
-nbproject/private/
-nbproject/project.properties
-nbproject/project.xml
-nbproject/private/private.xml
-nbproject/private/private.properties
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-
-### vendor / web ###
-bin/
-vendor/*
-web
-web/*
-
-### Composer ###
 composer.phar
 composer.lock
+bin/
+features/fixtures/output
+vendor
+vendor/*
