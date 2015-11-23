@@ -3,11 +3,12 @@ language: php
 cache:
   directories:
     - bin
+    - vendor
 
 sudo: false
 
 php:
-  - 5.3
+  - 5.5
 
 before_script:
   - composer self-update -n

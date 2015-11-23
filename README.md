@@ -23,6 +23,8 @@ safety, you should use versions 1.*.
 
 What was done:
 
+- Updated the supported PHP version to 5.5.
+
 - Made a full port of the library's functionality.
 
 - Defined and added namespaces to all classes.
