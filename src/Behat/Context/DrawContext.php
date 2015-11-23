@@ -4,7 +4,7 @@ namespace CpChart\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use CpChart\Behat\Fixtures\FixtureGenerator;
-use CpChart\Classes\CpImage;
+use CpChart\Classes\Image;
 
 /**
  * @author Piotr Szymaszek
@@ -27,7 +27,7 @@ class DrawContext implements Context
     /**
      * @Given I render the chart of type :chart
      */
-    public function iRenderTheChartOfType(CpImage $chart)
+    public function iRenderTheChartOfType(Image $chart)
     {
         $chart->Render($this->getFilePath("example.png"));
     }
