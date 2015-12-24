@@ -2,9 +2,9 @@
 
 namespace CpChart\Behat\Fixtures;
 
-use CpChart\Classes\CpData;
-use CpChart\Classes\CpImage;
-use CpChart\Services\CpChartFactory;
+use CpChart\Chart\Data;
+use CpChart\Chart\Image;
+use CpChart\Factory\Factory;
 
 /**
  * @author Piotr Szymaszek
@@ -14,13 +14,13 @@ class FixtureGenerator
     const FIXTURE_FOLDER = 'features/fixtures/output';
 
     /**
-     * @var CpChartFactory
+     * @var Factory
      */
     private $factory;
 
     public function __construct()
     {
-        $this->factory = new CpChartFactory();
+        $this->factory = new Factory();
     }
 
     /**
@@ -39,8 +39,8 @@ class FixtureGenerator
     /**
      * @param int $width
      * @param int $height
-     * @param CpData $data
-     * @return CpImage
+     * @param Data $data
+     * @return Image
      */
     public function createEmptyImage($width = 700, $height = 400, $data = null)
     {
@@ -48,9 +48,9 @@ class FixtureGenerator
     }
 
     /**
-     * @param CpImage $image
+     * @param Image $image
      */
-    public function setSplineData(CpImage $image)
+    public function setSplineData(Image $image)
     {
         $coordinates = array(
             array(40, 80),

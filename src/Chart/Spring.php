@@ -1,6 +1,6 @@
 <?php
 
-namespace CpChart\Classes;
+namespace CpChart\Chart;
 
 /**
  *  pSpring - class to draw spring graphs
@@ -15,7 +15,7 @@ namespace CpChart\Classes;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-class CpSpring
+class Spring
 {
     /**
      * @var array
@@ -856,11 +856,11 @@ class CpSpring
 
     /**
      * Create the encoded string
-     * @param CpImage $Object
+     * @param Image $Object
      * @param string $Settings
      * @return array
      */
-    public function drawSpring(CpImage $Object, array $Settings = array())
+    public function drawSpring(Image $Object, array $Settings = array())
     {
         $this->pChartObject = $Object;
 

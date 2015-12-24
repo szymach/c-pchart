@@ -1,6 +1,6 @@
 <?php
 
-namespace CpChart\Classes;
+namespace CpChart\Chart;
 
 /**
  * pCache - speed up the rendering by caching up the pictures
@@ -15,7 +15,7 @@ namespace CpChart\Classes;
  *
  * You can find the whole class documentation on the pChart web site.
  */
-class CpCache
+class Cache
 {
     /**
      * @var string
@@ -70,11 +70,11 @@ class CpCache
     /**
      * Return the MD5 of the data array to clearly identify the chart
      *
-     * @param CpData $Data
+     * @param Data $Data
      * @param string $Marker
      * @return string
      */
-    public function getHash(CpData $Data, $Marker = "")
+    public function getHash(Data $Data, $Marker = "")
     {
         return md5($Marker . serialize($Data->Data));
     }
@@ -83,9 +83,9 @@ class CpCache
      * Write the generated picture to the cache
      *
      * @param string $ID
-     * @param CpImage $pChartObject
+     * @param Image $pChartObject
      */
-    public function writeToCache($ID, CpImage $pChartObject)
+    public function writeToCache($ID, Image $pChartObject)
     {
         /* Compute the paths */
         $TemporaryFile = $this->CacheFolder . "/tmp_" . rand(0, 1000) . ".png";
