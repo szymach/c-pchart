@@ -1,6 +1,6 @@
 <?php
 
-namespace CpChart\Classes;
+namespace CpChart\Chart;
 
 /**
  * pCache - speed up the rendering by caching up the pictures

@@ -2,8 +2,8 @@
 
 namespace CpChart\Behat\Fixtures;
 
-use CpChart\Classes\Data;
-use CpChart\Classes\Image;
+use CpChart\Chart\Data;
+use CpChart\Chart\Image;
 use CpChart\Factory\Factory;
 
 /**

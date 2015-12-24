@@ -1,6 +1,6 @@
 <?php
 
-namespace CpChart\Classes;
+namespace CpChart\Chart;
 
 /**
  * Image - The actual class to do most of the drawing. Extends the pDraw class

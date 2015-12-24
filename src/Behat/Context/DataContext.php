@@ -5,7 +5,7 @@ namespace CpChart\Behat\Context;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use CpChart\Behat\Fixtures\FixtureGenerator;
-use CpChart\Classes\Image;
+use CpChart\Chart\Image;
 
 class DataContext implements Context, SnippetAcceptingContext
 {

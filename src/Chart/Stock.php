@@ -1,6 +1,6 @@
 <?php
 
-namespace CpChart\Classes;
+namespace CpChart\Chart;
 
 /**
  *  pStock - class to draw stock charts

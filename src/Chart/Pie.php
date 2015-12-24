@@ -1,6 +1,6 @@
 <?php
 
-namespace CpChart\Classes;
+namespace CpChart\Chart;
 
 /**
  *  pPie - class to draw pie charts

@@ -1,6 +1,6 @@
 <?php
 
-namespace CpChart\Classes;
+namespace CpChart\Chart;
 
 /**
  *    pSplit - class to draw spline splitted charts

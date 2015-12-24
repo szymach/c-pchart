@@ -4,7 +4,7 @@ Table of contents:
 * [Contributing](#contributing)
 * [Installation](#installation-via-composer)
 * [Usage](#usage)
-    - [Draw a chart through CpImage class only](#draw-a-chart-through-cpimage-class-only)
+    - [Draw a chart through Image class only](#draw-a-chart-through-cpimage-class-only)
     - [Draw a chart with a dedicated class](#draw-a-chart-with-a-dedicated-class)
     - [Notes](#notes)
 * [Changelog](#changelog)
@@ -64,8 +64,8 @@ $ composer require szymach/c-pchart
 
 in your project directory, where the composer.json file is.
 
-After that, all classes are available under `CpChart\Classes` namespace or
-`CpChart\Services` for the factory.
+After that, all classes are available under `CpChart\Chart` namespace or
+`CpChart\Factory` for the factory.
 
 If you want the **stable version**, replace `~2.0@dev` with `1.*`
 
@@ -76,23 +76,23 @@ Now you can autoload or use the classes via their namespaces. If you want to, yo
 may utilize the provided factory class. Below are examples of how to use the library,
 the charts themselves are borrowed from the official documentation.
 
-Draw a chart through CpImage class only
+Draw a chart through Image class only
 ---------------------------------------
 
 Not all charts need to be created through a seperate class (ex. bar or spline charts),
-some are created via the CpImage class (check the official documentation before drawing).
+some are created via the Image class (check the official documentation before drawing).
 An example for a spline chart below:
 
 ```php
 require __DIR__.'/../vendor/autoload.php';
 
-use CpChart\Services\CpChartFactory;
+use CpChart\Factory\Factory;
 use Exception;
 
 try {
     // Create a factory class - it will load necessary files automatically,
     // otherwise you will need to add them on your own
-    $factory = new CpChartFactory();
+    $factory = new Factory();
     $myData = $factory->newData(array(), "Serie1");
 
     // Create the image and set the data
@@ -136,12 +136,12 @@ chart below:
 ```php
 require __DIR__.'/../vendor/autoload.php';
 
-use CpChart\Classes\CpPie;
-use CpChart\Services\CpChartFactory;
+use CpChart\Chart\Pie;
+use CpChart\Factory\Factory;
 use Exception;
 
 try {
-    $factory = new CpChartFactory();
+    $factory = new Factory();
 
     // Create and populate data
     $myData = $factory->newData(array(40, 60, 15, 10, 6, 4), "ScoreA");

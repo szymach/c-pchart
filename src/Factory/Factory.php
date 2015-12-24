@@ -1,10 +1,10 @@
 <?php
 namespace CpChart\Factory;
 
-use CpChart\Classes\Barcode128;
-use CpChart\Classes\Barcode39;
-use CpChart\Classes\Data;
-use CpChart\Classes\Image;
+use CpChart\Chart\Barcode128;
+use CpChart\Chart\Barcode39;
+use CpChart\Chart\Data;
+use CpChart\Chart\Image;
 use CpChart\Exception\ChartIsAMethodException;
 use CpChart\Exception\IncorrectBarcodeNumberException;
 use CpChart\Exception\NotSupportedChartException;
@@ -19,7 +19,7 @@ class Factory
 {
     private $namespace;
 
-    public function __construct($namespace = 'CpChart\Classes')
+    public function __construct($namespace = 'CpChart\Chart')
     {
         $this->namespace = $namespace;
     }
@@ -37,7 +37,7 @@ class Factory
      * @param string $chartType - type of the chart to be loaded (for example 'pie', not 'pPie')
      * @param Image $chartObject
      * @param Data $dataObject
-     * @return \CpChart\Classes\{$chartType}
+     * @return \CpChart\Chart\{$chartType}
      * @throws NotSupportedChartException
      */
     public function newChart(
