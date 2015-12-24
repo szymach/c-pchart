@@ -17,9 +17,9 @@ About:
 A project bringing Composer support and some basic PHP 5 standards to pChart 2.0 library.
 The aim is to allow pChart integration into modern frameworks like Symfony2.
 
-This is the 2.0 version (currently in development and not to be considered stable), which
-aims to further update the code, but without changing the functionality if possible. For
-safety, you should use versions 1.*.
+This is the 2.0 version, which aims to further update the code, but without changing 
+the functionality if possible. It will introduce some minor backwards compatibility breaks,
+so if that's a concern, use the 1.* version.
 
 What was done:
 
@@ -66,8 +66,6 @@ in your project directory, where the composer.json file is.
 
 After that, all classes are available under `CpChart\Chart` namespace or
 `CpChart\Factory` for the factory.
-
-If you want the **stable version**, replace `~2.0@dev` with `1.*`
 
 Usage:
 ======
@@ -280,8 +278,9 @@ Changelog
 
 1.1.6 Added support for closures in formatting scale (thanks to funkjedi)
 
-2.0@dev Updated all classes to PSR-2 standard, added typehinting where possible, updated
-        annotations in methods to be as accurate as possible.
+2.0 Updated all classes to PSR-2 standard, added typehinting where possible, updated
+    annotations in methods to be as accurate as possible. Added Behat testing and
+    restructed the namespaces into more sensible structure.
 
 References
 ==========
