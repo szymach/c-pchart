@@ -138,6 +138,23 @@ class Image extends Draw
         imagepng($this->Picture, $FileName);
     }
 
+    public function __toString()
+    {
+        if ($this->TransparentBackground) {
+            imagealphablending($this->Picture, false);
+            imagesavealpha($this->Picture, true);
+        }
+
+        ob_start();
+        imagepng($this->Picture);
+        return ob_get_clean();
+    }
+
+    public function toDataURI()
+    {
+        return 'data:image/png;base64,' . base64_encode($this->__toString());
+    }
+
     /**
      * Render the picture to a web browser stream
      * @param boolean $BrowserExpire
