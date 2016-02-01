@@ -1338,9 +1338,10 @@ class Pie
      */
     public function draw2DRing($X, $Y, array $Format = array())
     {
-        $OuterRadius = isset($Format["Radius"]) ? $Format["Radius"] : 60;
+        $OuterRadius = isset($Format["Radius"]) ? $Format["Radius"] : 60; // For compatibility
+        $OuterRadius = isset($Format["OuterRadius"]) ? $Format["OuterRadius"] : $OuterRadius;
         $Precision = isset($Format["Precision"]) ? $Format["Precision"] : 0;
-        $InnerRadius = isset($Format["Radius"]) ? $Format["Radius"] : 30;
+        $InnerRadius = isset($Format["InnerRadius"]) ? $Format["InnerRadius"] : 30;
         $Border = isset($Format["Border"]) ? $Format["Border"] : false;
         $BorderR = isset($Format["BorderR"]) ? $Format["BorderR"] : 255;
         $BorderG = isset($Format["BorderG"]) ? $Format["BorderG"] : 255;
