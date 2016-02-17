@@ -1,6 +1,7 @@
 Table of contents:
 ==================
 * [About](#about)
+* [License](#license)
 * [Contributing](#contributing)
 * [Installation](#installation-via-composer)
 * [Usage](#usage)
@@ -31,18 +32,26 @@ What was done:
 
 - Replaced all `exit()` / `die()` commands with `throw` statements to allow a degree of error control.
 
-- Set the code to PSR-2 standard and added annotations (as best as I could figure them out) to methods.
-Also, typehinting was added to methods where possible, so some backwards compatibility breaks may occur.
+- Refactored the code to meet PSR-2 standard and added annotations (as best as I could figure them out).
+to methods Also, typehinting was added to methods where possible, so some backwards compatibility breaks
+may occur.
 
 - Added a factory service for loading the classes.
 
 - Moved all constants to a single file `src/Resources/data/constants.php`. This file is *required*
 for the library to function and is now loaded via Composer.
 
+License:
+========
+
+It was previously stated that this package is on [MIT](https://opensource.org/licenses/MIT) license, which did not meet the requirements
+set by the original author. It is now under the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
+license, so if you wish to use it in a commercial project, you need to pay an [appropriate fee](http://www.pchart.net/license).
+
 Contributing:
 =============
 
-If you wish to contribute to the stable version, there is a branch called `legacy` to which you
+If you wish to contribute to the `1.*` version, there is a branch called `legacy` to which you
 may submit pull requests. Otherwise feel free to use the `master` branch.
 
 Installation (via Composer):
