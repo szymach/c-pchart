@@ -278,7 +278,7 @@ class Barcode39
     /**
      * @param string $value
      * @param int $NbChar
-     * @return string
+     * @return string|false
      */
     public function right($value, $NbChar)
     {

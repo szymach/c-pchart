@@ -255,7 +255,7 @@ class Barcode128
      *
      * @param string $value
      * @param int $NbChar
-     * @return type
+     * @return string
      */
     public function right($value, $NbChar)
     {
