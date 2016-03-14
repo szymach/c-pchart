@@ -2,6 +2,8 @@
 
 namespace CpChart\Chart;
 
+use Exception;
+
 /**
  * This class exists only to try and reduce the number of methods and properties
  * in the Draw class. Basically all methods not named 'drawX' were moved in here,
