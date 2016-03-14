@@ -1244,7 +1244,7 @@ class Data
 
     /**
      * Convert a string to a single elements array
-     * @param mxied $Value
+     * @param mixed $Value
      * @return array
      */
     public function convertToArray($Value)

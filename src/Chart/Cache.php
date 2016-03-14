@@ -139,6 +139,7 @@ class Cache
      * Remove with specified criterias.
      *
      * @param array $Settings
+     * @return int
      */
     public function dbRemoval(array $Settings)
     {

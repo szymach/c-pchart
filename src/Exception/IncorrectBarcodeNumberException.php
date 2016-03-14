@@ -7,7 +7,7 @@ use Exception;
 /**
  * @author Piotr Szymaszek
  */
-class IncorrectBarcodeNumberException
+class IncorrectBarcodeNumberException extends FactoryException
 {
     protected $message = 'The barcode class for the number %s does not exist!';
 

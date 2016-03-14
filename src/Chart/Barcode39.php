@@ -59,7 +59,7 @@ class Barcode39
         $this->MOD43 = (boolean) $EnableMOD43;
         $this->Codes = array();
         $this->Reverse = array();
-        if (file_exists($BasePath . "data/39.db", "r")) {
+        if (file_exists($BasePath . "data/39.db")) {
             $FileHandle = @fopen($BasePath . "data/39.db", "r");
             $filePath = $BasePath . "data/39.db";
         } else {
@@ -278,7 +278,7 @@ class Barcode39
     /**
      * @param string $value
      * @param int $NbChar
-     * @return string
+     * @return string|false
      */
     public function right($value, $NbChar)
     {

@@ -200,10 +200,6 @@ class Bubble
                         $BorderR = $Palette[$Key]["R"] + $Surrounding;
                         $BorderG = $Palette[$Key]["G"] + $Surrounding;
                         $BorderB = $Palette[$Key]["B"] + $Surrounding;
-                    } else {
-                        $BorderR = $BorderR;
-                        $BorderG = $BorderG;
-                        $BorderB = $BorderB;
                     }
                     if ($ForceAlpha != VOID) {
                         $BorderAlpha = $ForceAlpha / 2;
