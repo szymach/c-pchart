@@ -52,7 +52,7 @@ class Barcode128
     {
         $this->Codes = array();
         $this->Reverse = array();
-        if (file_exists($BasePath . "data/128B.db", "r")) {
+        if (file_exists($BasePath . "data/128B.db")) {
             $FileHandle = @fopen($BasePath . "data/128B.db", "r");
             $filePath = $BasePath . "data/128B.db";
         } else {
