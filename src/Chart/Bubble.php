@@ -438,8 +438,8 @@ class Bubble
         $AxisUnit = $Data["Axis"][$AxisID]["Unit"];
         $XStep = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1 - $XMargin * 2) / $XDivs;
 
-        $X = $this->pChartObject->GraphAreaX1 + $XMargin;
-        $Y = $this->pChartObject->GraphAreaY1 + $XMargin;
+        $X = $InitialX = $this->pChartObject->GraphAreaX1 + $XMargin;
+        $Y = $InitialY = $this->pChartObject->GraphAreaY1 + $XMargin;
 
         $Color = array(
             "R" => $Data["Series"][$SerieName]["Color"]["R"],
@@ -478,7 +478,7 @@ class Bubble
                     ;
                 }
 
-                $X = floor($X + $Point * $XStep);
+                $X = floor($InitialX + $Point * $XStep);
                 $Y = floor($PosArray);
             } else {
                 if ($XDivs == 0) {
@@ -490,7 +490,7 @@ class Bubble
                 }
 
                 $X = floor($PosArray);
-                $Y = floor($Y + $Point * $YStep);
+                $Y = floor($InitialY + $Point * $YStep);
             }
 
             if ($DrawPoint == LABEL_POINT_CIRCLE) {
