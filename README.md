@@ -5,7 +5,7 @@ Table of contents:
 * [Contributing](#contributing)
 * [Installation](#installation-via-composer)
 * [Usage](#usage)
-    - [Draw a chart through Image class only](#draw-a-chart-through-cpimage-class-only)
+    - [Draw a chart through Image class only](#draw-a-chart-through-image-class-only)
     - [Draw a chart with a dedicated class](#draw-a-chart-with-a-dedicated-class)
     - [Notes](#notes)
 * [Changelog](#changelog)
@@ -14,6 +14,10 @@ Table of contents:
 
 About:
 =====
+
+This project is no longer actively developed, since I do not use it personally and decided
+that I have already put enough work into modernizing it. Should any issues or errors arise,
+I will still try to resolve them as soon as I can, so the base support will still be maintained.
 
 A project bringing Composer support and some basic PHP 5 standards to pChart 2.0 library.
 The aim is to allow pChart integration into modern frameworks like Symfony2.
