@@ -1134,7 +1134,7 @@ abstract class Draw extends BaseDraw
             );
         }
 
-        $this->Mask = "";
+        $this->Mask = [];
         $Color = $this->allocateColor($this->Picture, $R, $G, $B, $Alpha);
         for ($i = 0; $i <= $Radius * 2; $i++) {
             $Slice = sqrt($Radius * $Radius - ($Radius - $i) * ($Radius - $i));
@@ -2457,7 +2457,7 @@ abstract class Draw extends BaseDraw
                     $Y = $Y + max($this->FontSize * count($Lines), $IconAreaHeight) + 5;
                 } elseif ($Mode == LEGEND_HORIZONTAL) {
                     $Lines = preg_split("/\n/", $Serie["Description"]);
-                    $Width = "";
+                    $Width = [];
                     foreach ($Lines as $Key => $Value) {
                         $BoxArray = $this->drawText(
                             $X + $IconAreaWidth + 4,
