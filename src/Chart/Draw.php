@@ -262,7 +262,7 @@ abstract class Draw extends BaseDraw
         $YBottom = $Y2 - $Radius;
 
         $Step = 360 / (2 * PI * $Radius);
-        $Positions = "";
+        $Positions = [];
         $Radius--;
         $MinY = null;
         $MaxY = null;
@@ -726,7 +726,7 @@ abstract class Draw extends BaseDraw
 
             for ($j = 0; $j <= 3; $j++) {
                 if (!isset($Q[$ID])) {
-                    $Q[$ID] = "";
+                    $Q[$ID] = [];
                 }
                 if (!isset($Q[$ID]["X"])) {
                     $Q[$ID]["X"] = 0;
@@ -7077,7 +7077,7 @@ abstract class Draw extends BaseDraw
                     if ($this->Shadow) {
                         $ShadowArea = array();
                         foreach ($Areas as $Key => $Points) {
-                            $ShadowArea[$Key] = "";
+                            $ShadowArea[$Key] = [];
                             foreach ($Points as $Key2 => $Value) {
                                 if ($Key2 % 2 == 0) {
                                     $ShadowArea[$Key][] = $Value + $this->ShadowX;
@@ -7209,7 +7209,7 @@ abstract class Draw extends BaseDraw
                     if ($this->Shadow) {
                         $ShadowArea = array();
                         foreach ($Areas as $Key => $Points) {
-                            $ShadowArea[$Key] = "";
+                            $ShadowArea[$Key] = [];
                             foreach ($Points as $Key2 => $Value) {
                                 if ($Key2 % 2 == 0) {
                                     $ShadowArea[$Key][] = $Value + $this->ShadowX;
@@ -8148,7 +8148,7 @@ abstract class Draw extends BaseDraw
                             }
 
                             if (!isset($LastY[$Key])) {
-                                $LastY[$Key] = "";
+                                $LastY[$Key] = [];
                             }
                             if (!isset($LastY[$Key][$Pos])) {
                                 $LastY[$Key][$Pos] = $YZero;
@@ -8386,7 +8386,7 @@ abstract class Draw extends BaseDraw
                             }
 
                             if (!isset($LastX[$Key])) {
-                                $LastX[$Key] = "";
+                                $LastX[$Key] = [];
                             }
                             if (!isset($LastX[$Key][$Pos])) {
                                 $LastX[$Key][$Pos] = $YZero;
@@ -8627,7 +8627,6 @@ abstract class Draw extends BaseDraw
         $this->Shadow = false;
 
         /* Build the offset data series */
-        $OffsetData = "";
         $OverallOffset = "";
         $SerieOrder = "";
         foreach ($Data["Series"] as $SerieName => $Serie) {
@@ -10182,7 +10181,7 @@ abstract class Draw extends BaseDraw
         if (!$NoFill) {
             //if ( $DebugLine ) { $MinY = $DebugLine; $MaxY = $DebugLine; }
             for ($Y = $MinY; $Y <= $MaxY; $Y = $Y + $YStep) {
-                $Intersections = "";
+                $Intersections = [];
                 $LastSlope = null;
                 $RestoreLast = "-";
                 foreach ($Segments as $Key => $Coords) {
