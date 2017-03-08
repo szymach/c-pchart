@@ -296,7 +296,7 @@ abstract class BaseDraw
     /**
      * Convert apha to base 10
      * @param int |float $AlphaValue
-     * @return int | float
+     * @return integer
      */
     public function convertAlpha($AlphaValue)
     {
@@ -504,7 +504,7 @@ abstract class BaseDraw
      *
      * @param int | float $Value1
      * @param int | float $Value2
-     * @return int | float
+     * @return double
      */
     public function modulo($Value1, $Value2)
     {
@@ -527,8 +527,8 @@ abstract class BaseDraw
     /**
      * @param mixed $Value
      * @param mixed $LastValue
-     * @param mixed $LabelingMethod
-     * @param mixed $ID
+     * @param integer $LabelingMethod
+     * @param integer $ID
      * @param boolean $LabelSkip
      * @return boolean
      */
@@ -574,16 +574,11 @@ abstract class BaseDraw
      * @param int $Ya
      * @param int $Xb
      * @param int $Yb
-     * @return array
+     * @return integer[]
      */
     public function fixBoxCoordinates($Xa, $Ya, $Xb, $Yb)
     {
-        return array(
-            min($Xa, $Xb),
-            min($Ya, $Yb),
-            max($Xa, $Xb),
-            max($Ya, $Yb)
-        );
+        return array(min($Xa, $Xb), min($Ya, $Yb), max($Xa, $Xb), max($Ya, $Yb));
     }
 
     /**

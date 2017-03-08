@@ -32,12 +32,13 @@ class Indicator
 
     /**
      * Draw an indicator
+     *
      * @param int $X
      * @param int $Y
      * @param int $Width
      * @param int $Height
      * @param array $Format
-     * @return null | int
+     * @return null|int
      */
     public function draw($X, $Y, $Width, $Height, array $Format = array())
     {

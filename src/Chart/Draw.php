@@ -126,9 +126,9 @@ abstract class Draw extends BaseDraw
      * @param int $Y1
      * @param int $X2
      * @param int $Y2
-     * @param int | float $Radius
+     * @param int|float $Radius
      * @param array $Format
-     * @return null | 0
+     * @return null|integer
      */
     public function drawRoundedRectangle($X1, $Y1, $X2, $Y2, $Radius, array $Format = array())
     {
@@ -192,9 +192,9 @@ abstract class Draw extends BaseDraw
      * @param int $Y1
      * @param int $X2
      * @param int $Y2
-     * @param int | float $Radius
+     * @param int|float $Radius
      * @param array $Format
-     * @return null | 0
+     * @return null|integer
      */
     public function drawRoundedFilledRectangle($X1, $Y1, $X2, $Y2, $Radius, array $Format = array())
     {
@@ -848,7 +848,7 @@ abstract class Draw extends BaseDraw
      * @param int $X2
      * @param int $Y2
      * @param array $Format
-     * @return array | int
+     * @return array|int
      */
     public function drawLine($X1, $Y1, $X2, $Y2, array $Format = array())
     {
@@ -995,8 +995,8 @@ abstract class Draw extends BaseDraw
      * Draw a circle
      * @param int $Xc
      * @param int $Yc
-     * @param int | float $Height
-     * @param int | float $Width
+     * @param int|float $Height
+     * @param int|float $Width
      * @param array $Format
      */
     public function drawCircle($Xc, $Yc, $Height, $Width, array $Format = array())
@@ -1088,7 +1088,7 @@ abstract class Draw extends BaseDraw
      * Draw a filled circle
      * @param int $X
      * @param int $Y
-     * @param int | float $Radius
+     * @param int|float $Radius
      * @param array $Format
      */
     public function drawFilledCircle($X, $Y, $Radius, array $Format = array())
@@ -1440,7 +1440,7 @@ abstract class Draw extends BaseDraw
      * @param int $X
      * @param int $Y
      * @param array $Format
-     * @return int | null
+     * @return int|null
      */
     public function drawAntialiasPixel($X, $Y, array $Format = array())
     {
@@ -1609,7 +1609,7 @@ abstract class Draw extends BaseDraw
      * @param string $FileName
      * @param int $X
      * @param int $Y
-     * @return null | 0
+     * @return null|integer
      */
     public function drawFromPicture($PicType, $FileName, $X, $Y)
     {
@@ -1949,7 +1949,7 @@ abstract class Draw extends BaseDraw
      * Draw a progress bar filled with specified %
      * @param int $X
      * @param int $Y
-     * @param int | float $Percent
+     * @param int|float $Percent
      * @param array $Format
      */
     public function drawProgress($X, $Y, $Percent, array $Format = array())
@@ -4114,7 +4114,7 @@ abstract class Draw extends BaseDraw
      * Draw an X threshold
      * @param mixed $Value
      * @param boolean $Format
-     * @return array | null | 0
+     * @return array|null|integer
      */
     public function drawXThreshold($Value, array $Format = array())
     {
@@ -4342,7 +4342,7 @@ abstract class Draw extends BaseDraw
      * @param mixed $Value1
      * @param mixed $Value2
      * @param array $Format
-     * @return array | null
+     * @return array|null
      */
     public function drawXThresholdArea($Value1, $Value2, array $Format = array())
     {
@@ -4562,7 +4562,7 @@ abstract class Draw extends BaseDraw
      * Draw an Y threshold with the computed scale
      * @param mixed $Value
      * @param array $Format
-     * @return array | int
+     * @return array|int
      */
     public function drawThreshold($Value, array $Format = array())
     {
@@ -4783,7 +4783,7 @@ abstract class Draw extends BaseDraw
      * @param mixed $Value1
      * @param mixed $Value2
      * @param array $Format
-     * @return array | int | null
+     * @return array|int|null
      */
     public function drawThresholdArea($Value1, $Value2, array $Format = array())
     {
@@ -6122,7 +6122,7 @@ abstract class Draw extends BaseDraw
      * @param string $SerieA
      * @param string $SerieB
      * @param array $Format
-     * @return null | 0
+     * @return null|integer
      */
     public function drawZoneChart($SerieA, $SerieB, array $Format = array())
     {
@@ -9889,11 +9889,11 @@ abstract class Draw extends BaseDraw
      * @param int $R
      * @param int $G
      * @param int $B
-     * @param int | float $Alpha
+     * @param int|float $Alpha
      * @param int $BorderR
      * @param int $BorderG
      * @param int $BorderB
-     * @param int | float $BorderAlpha
+     * @param int|float $BorderAlpha
      */
     public function drawShape(
         $X,

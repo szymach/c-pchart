@@ -1179,7 +1179,7 @@ class Pie
      * @param int $X
      * @param int $Y
      * @param string $Label
-     * @param int | float $Angle
+     * @param int|float $Angle
      * @param array $Settings
      * @param boolean $Stacked
      * @param int $Xc
@@ -1301,7 +1301,7 @@ class Pie
 
     /**
      * Internally used to write the re-computed labels
-     * @return null | int
+     * @return null|int
      */
     public function writeShiftedLabels()
     {
