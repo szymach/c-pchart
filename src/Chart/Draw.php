@@ -1155,7 +1155,7 @@ abstract class Draw extends BaseDraw
                 array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
             );
         }
-        $this->Mask = "";
+        $this->Mask = [];
 
         if ($BorderR != -1) {
             $this->drawCircle(
