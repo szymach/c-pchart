@@ -24,7 +24,7 @@ abstract class Draw extends BaseDraw
      * @param array $Points
      * @param array $Format
      */
-    public function drawPolygon(array $Points, array $Format = array())
+    public function drawPolygon(array $Points, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -66,13 +66,13 @@ abstract class Draw extends BaseDraw
                 }
                 $this->drawPolygon(
                     $Shadow,
-                    array(
+                    [
                         "R" => $this->ShadowR,
                         "G" => $this->ShadowG,
                         "B" => $this->ShadowB,
                         "Alpha" => $this->Shadowa,
                         "NoBorder" => true
-                    )
+                    ]
                 );
             }
 
@@ -87,14 +87,14 @@ abstract class Draw extends BaseDraw
             $Points = $Backup;
 
             if ($NoFill) {
-                $BorderSettings = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha);
+                $BorderSettings = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
             } else {
-                $BorderSettings = array(
+                $BorderSettings = [
                     "R" => $BorderR,
                     "G" => $BorderG,
                     "B" => $BorderB,
                     "Alpha" => $BorderAlpha
-                );
+                ];
             }
 
             for ($i = 0; $i <= count($Points) - 1; $i = $i + 2) {
@@ -130,7 +130,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return null|integer
      */
-    public function drawRoundedRectangle($X1, $Y1, $X2, $Y2, $Radius, array $Format = array())
+    public function drawRoundedRectangle($X1, $Y1, $X2, $Y2, $Radius, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -146,7 +146,7 @@ abstract class Draw extends BaseDraw
             $Radius = floor((($Y2 - $Y1)) / 2);
         }
 
-        $Color = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "NoBorder" => true);
+        $Color = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "NoBorder" => true];
 
         if ($Radius <= 0) {
             $this->drawRectangle($X1, $Y1, $X2, $Y2, $Color);
@@ -170,19 +170,19 @@ abstract class Draw extends BaseDraw
         for ($i = 0; $i <= 90; $i = $i + $Step) {
             $X = cos(($i + 180) * PI / 180) * $Radius + $X1 + $Radius;
             $Y = sin(($i + 180) * PI / 180) * $Radius + $Y1 + $Radius;
-            $this->drawAntialiasPixel($X, $Y, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha));
+            $this->drawAntialiasPixel($X, $Y, ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]);
 
             $X = cos(($i + 90) * PI / 180) * $Radius + $X1 + $Radius;
             $Y = sin(($i + 90) * PI / 180) * $Radius + $Y2 - $Radius;
-            $this->drawAntialiasPixel($X, $Y, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha));
+            $this->drawAntialiasPixel($X, $Y, ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]);
 
             $X = cos($i * PI / 180) * $Radius + $X2 - $Radius;
             $Y = sin($i * PI / 180) * $Radius + $Y2 - $Radius;
-            $this->drawAntialiasPixel($X, $Y, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha));
+            $this->drawAntialiasPixel($X, $Y, ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]);
 
             $X = cos(($i + 270) * PI / 180) * $Radius + $X2 - $Radius;
             $Y = sin(($i + 270) * PI / 180) * $Radius + $Y1 + $Radius;
-            $this->drawAntialiasPixel($X, $Y, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha));
+            $this->drawAntialiasPixel($X, $Y, ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]);
         }
     }
 
@@ -196,7 +196,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return null|integer
      */
-    public function drawRoundedFilledRectangle($X1, $Y1, $X2, $Y2, $Radius, array $Format = array())
+    public function drawRoundedFilledRectangle($X1, $Y1, $X2, $Y2, $Radius, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -242,16 +242,16 @@ abstract class Draw extends BaseDraw
                 $X2 + $this->ShadowX,
                 $Y2 + $this->ShadowY,
                 $Radius,
-                array(
+                [
                     "R" => $this->ShadowR,
                     "G" => $this->ShadowG,
                     "B" => $this->ShadowB,
                     "Alpha" => $this->Shadowa
-                )
+                ]
             );
         }
 
-        $Color = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "NoBorder" => true);
+        $Color = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "NoBorder" => true];
 
         if ($Radius <= 0) {
             $this->drawFilledRectangle($X1, $Y1, $X2, $Y2, $Color);
@@ -337,7 +337,7 @@ abstract class Draw extends BaseDraw
             $X2 + 1,
             $Y2 - 1,
             $Radius,
-            array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha)
+            ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha]
         );
 
         $this->Shadow = $RestoreShadow;
@@ -351,7 +351,7 @@ abstract class Draw extends BaseDraw
      * @param int $Y2
      * @param array $Format
      */
-    public function drawRectangle($X1, $Y1, $X2, $Y2, array $Format = array())
+    public function drawRectangle($X1, $Y1, $X2, $Y2, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -361,10 +361,10 @@ abstract class Draw extends BaseDraw
         $NoAngle = isset($Format["NoAngle"]) ? $Format["NoAngle"] : false;
 
         if ($X1 > $X2) {
-            list($X1, $X2) = array($X2, $X1);
+            list($X1, $X2) = [$X2, $X1];
         }
         if ($Y1 > $Y2) {
-            list($Y1, $Y2) = array($Y2, $Y1);
+            list($Y1, $Y2) = [$Y2, $Y1];
         }
 
         if ($this->Antialias) {
@@ -374,28 +374,28 @@ abstract class Draw extends BaseDraw
                     $Y1,
                     $X2 - 1,
                     $Y1,
-                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                    ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks]
                 );
                 $this->drawLine(
                     $X2,
                     $Y1 + 1,
                     $X2,
                     $Y2 - 1,
-                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                    ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks]
                 );
                 $this->drawLine(
                     $X2 - 1,
                     $Y2,
                     $X1 + 1,
                     $Y2,
-                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                    ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks]
                 );
                 $this->drawLine(
                     $X1,
                     $Y1 + 1,
                     $X1,
                     $Y2 - 1,
-                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                    ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks]
                 );
             } else {
                 $this->drawLine(
@@ -403,28 +403,28 @@ abstract class Draw extends BaseDraw
                     $Y1,
                     $X2 - 1,
                     $Y1,
-                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                    ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks]
                 );
                 $this->drawLine(
                     $X2,
                     $Y1,
                     $X2,
                     $Y2,
-                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                    ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks]
                 );
                 $this->drawLine(
                     $X2 - 1,
                     $Y2,
                     $X1 + 1,
                     $Y2,
-                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                    ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks]
                 );
                 $this->drawLine(
                     $X1,
                     $Y1,
                     $X1,
                     $Y2,
-                    array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                    ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks]
                 );
             }
         } else {
@@ -441,7 +441,7 @@ abstract class Draw extends BaseDraw
      * @param int $Y2
      * @param array $Format
      */
-    public function drawFilledRectangle($X1, $Y1, $X2, $Y2, array $Format = array())
+    public function drawFilledRectangle($X1, $Y1, $X2, $Y2, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -468,10 +468,10 @@ abstract class Draw extends BaseDraw
         }
 
         if ($X1 > $X2) {
-            list($X1, $X2) = array($X2, $X1);
+            list($X1, $X2) = [$X2, $X1];
         }
         if ($Y1 > $Y2) {
-            list($Y1, $Y2) = array($Y2, $Y1);
+            list($Y1, $Y2) = [$Y2, $Y1];
         }
 
         $RestoreShadow = $this->Shadow;
@@ -482,14 +482,14 @@ abstract class Draw extends BaseDraw
                 $Y1 + $this->ShadowY,
                 $X2 + $this->ShadowX,
                 $Y2 + $this->ShadowY,
-                array(
+                [
                     "R" => $this->ShadowR,
                     "G" => $this->ShadowG,
                     "B" => $this->ShadowB,
                     "Alpha" => $this->Shadowa,
                     "Ticks" => $Ticks,
                     "NoAngle" => $NoAngle
-                )
+                ]
             );
         }
 
@@ -568,14 +568,14 @@ abstract class Draw extends BaseDraw
                 $Y1,
                 $X2,
                 $Y2,
-                array(
+                [
                     "R" => $BorderR,
                     "G" => $BorderG,
                     "B" => $BorderB,
                     "Alpha" => $BorderAlpha,
                     "Ticks" => $Ticks,
                     "NoAngle" => $NoAngle
-                )
+                ]
             );
         }
         $this->Shadow = $RestoreShadow;
@@ -587,7 +587,7 @@ abstract class Draw extends BaseDraw
      * @param int $Y
      * @param array $Format
      */
-    public function drawRectangleMarker($X, $Y, array $Format = array())
+    public function drawRectangleMarker($X, $Y, array $Format = [])
     {
         $Size = isset($Format["Size"]) ? $Format["Size"] : 4;
 
@@ -601,7 +601,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return array
      */
-    public function drawSpline(array $Coordinates, array $Format = array())
+    public function drawSpline(array $Coordinates, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -616,7 +616,7 @@ abstract class Draw extends BaseDraw
 
         $Cpt = null;
         $Mode = null;
-        $Result = array();
+        $Result = [];
         for ($i = 1; $i <= count($Coordinates) - 1; $i++) {
             $X1 = $Coordinates[$i - 1][0];
             $Y1 = $Coordinates[$i - 1][1];
@@ -680,7 +680,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return array
      */
-    public function drawBezier($X1, $Y1, $X2, $Y2, $Xv1, $Yv1, $Xv2, $Yv2, array $Format = array())
+    public function drawBezier($X1, $Y1, $X2, $Y2, $Xv1, $Yv1, $Xv2, $Yv2, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -713,12 +713,12 @@ abstract class Draw extends BaseDraw
         $P[3]["Y"] = $Y2;
 
         /* Compute the bezier points */
-        $Q = array();
+        $Q = [];
         $ID = 0;
         for ($i = 0; $i <= $Precision; $i = $i + 1) {
             $u = $i / $Precision;
 
-            $C = array();
+            $C = [];
             $C[0] = (1 - $u) * (1 - $u) * (1 - $u);
             $C[1] = ($u * 3) * (1 - $u) * (1 - $u);
             $C[2] = 3 * $u * $u * (1 - $u);
@@ -751,9 +751,9 @@ abstract class Draw extends BaseDraw
                 $Xv2 = floor($Xv2);
                 $Yv2 = floor($Yv2);
 
-                $this->drawLine($X1, $Y1, $X2, $Y2, array("R" => 0, "G" => 0, "B" => 0, "Alpha" => 30));
+                $this->drawLine($X1, $Y1, $X2, $Y2, ["R" => 0, "G" => 0, "B" => 0, "Alpha" => 30]);
 
-                $MyMarkerSettings = array(
+                $MyMarkerSettings = [
                     "R" => 255,
                     "G" => 0,
                     "B" => 0,
@@ -761,10 +761,10 @@ abstract class Draw extends BaseDraw
                     "BorderB" => 255,
                     "BorderG" => 255,
                     "Size" => 4
-                );
+                ];
                 $this->drawRectangleMarker($Xv1, $Yv1, $MyMarkerSettings);
                 $this->drawText($Xv1 + 4, $Yv1, "v1");
-                $MyMarkerSettings = array(
+                $MyMarkerSettings = [
                     "R" => 0,
                     "G" => 0,
                     "B" => 255,
@@ -772,7 +772,7 @@ abstract class Draw extends BaseDraw
                     "BorderB" => 255,
                     "BorderG" => 255,
                     "Size" => 4
-                );
+                ];
                 $this->drawRectangleMarker($Xv2, $Yv2, $MyMarkerSettings);
                 $this->drawText($Xv2 + 4, $Yv2, "v2");
             }
@@ -782,7 +782,7 @@ abstract class Draw extends BaseDraw
             $LastY = null;
             $Cpt = null;
             $Mode = null;
-            $ArrowS = array();
+            $ArrowS = [];
             foreach ($Q as $Point) {
                 $X = $Point["X"];
                 $Y = $Point["Y"];
@@ -801,7 +801,7 @@ abstract class Draw extends BaseDraw
                         $LastY,
                         $X,
                         $Y,
-                        array(
+                        [
                             "R" => $R,
                             "G" => $G,
                             "B" => $B,
@@ -810,7 +810,7 @@ abstract class Draw extends BaseDraw
                             "Cpt" => $Cpt,
                             "Mode" => $Mode,
                             "Weight" => $Weight
-                        )
+                        ]
                     );
                 }
                 /* Get the last segment */
@@ -824,14 +824,14 @@ abstract class Draw extends BaseDraw
             }
 
             if ($DrawArrow && !$PathOnly) {
-                $ArrowSettings = array(
+                $ArrowSettings = [
                     "FillR" => $R,
                     "FillG" => $G,
                     "FillB" => $B,
                     "Alpha" => $Alpha,
                     "Size" => $ArrowSize,
                     "Ratio" => $ArrowRatio
-                );
+                ];
                 if ($ArrowTwoHeads) {
                     $this->drawArrow($ArrowS["X1"], $ArrowS["Y1"], $ArrowS["X2"], $ArrowS["Y2"], $ArrowSettings);
                 }
@@ -850,7 +850,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return array|int
      */
-    public function drawLine($X1, $Y1, $X2, $Y2, array $Format = array())
+    public function drawLine($X1, $Y1, $X2, $Y2, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -894,10 +894,10 @@ abstract class Draw extends BaseDraw
         /* Derivative algorithm for overweighted lines, re-route to polygons primitives */
         if ($Weight != null) {
             $Angle = $this->getAngle($X1, $Y1, $X2, $Y2);
-            $PolySettings = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "BorderAlpha" => $Alpha);
+            $PolySettings = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "BorderAlpha" => $Alpha];
 
             if ($Ticks == null) {
-                $Points = array();
+                $Points = [];
                 $Points[] = cos(deg2rad($Angle - 90)) * $Weight + $X1;
                 $Points[] = sin(deg2rad($Angle - 90)) * $Weight + $Y1;
                 $Points[] = cos(deg2rad($Angle + 90)) * $Weight + $X1;
@@ -915,7 +915,7 @@ abstract class Draw extends BaseDraw
                     $Xb = (($X2 - $X1) / $Distance) * ($i + $Ticks) + $X1;
                     $Yb = (($Y2 - $Y1) / $Distance) * ($i + $Ticks) + $Y1;
 
-                    $Points = array();
+                    $Points = [];
                     $Points[] = cos(deg2rad($Angle - 90)) * $Weight + $Xa;
                     $Points[] = sin(deg2rad($Angle - 90)) * $Weight + $Ya;
                     $Points[] = cos(deg2rad($Angle + 90)) * $Weight + $Xa;
@@ -939,7 +939,7 @@ abstract class Draw extends BaseDraw
             $X = $i * $XStep + $X1;
             $Y = $i * $YStep + $Y1;
 
-            $Color = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha);
+            $Color = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
 
             if ($Threshold != null) {
                 foreach ($Threshold as $Key => $Parameters) {
@@ -964,7 +964,7 @@ abstract class Draw extends BaseDraw
                         } else {
                             $AlphaT = 0;
                         }
-                        $Color = array("R" => $RT, "G" => $GT, "B" => $BT, "Alpha" => $AlphaT);
+                        $Color = ["R" => $RT, "G" => $GT, "B" => $BT, "Alpha" => $AlphaT];
                     }
                 }
             }
@@ -988,7 +988,7 @@ abstract class Draw extends BaseDraw
             }
         }
 
-        return array($Cpt, $Mode);
+        return [$Cpt, $Mode];
     }
 
     /**
@@ -999,7 +999,7 @@ abstract class Draw extends BaseDraw
      * @param int|float $Width
      * @param array $Format
      */
-    public function drawCircle($Xc, $Yc, $Height, $Width, array $Format = array())
+    public function drawCircle($Xc, $Yc, $Height, $Width, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -1027,13 +1027,13 @@ abstract class Draw extends BaseDraw
                 $Yc + $this->ShadowY,
                 $Height,
                 $Width,
-                array(
+                [
                     "R" => $this->ShadowR,
                     "G" => $this->ShadowG,
                     "B" => $this->ShadowB,
                     "Alpha" => $this->Shadowa,
                     "Ticks" => $Ticks
-                )
+                ]
             );
         }
 
@@ -1074,11 +1074,11 @@ abstract class Draw extends BaseDraw
                 }
 
                 if ($Mode == 1) {
-                    $this->drawAntialiasPixel($X, $Y, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha));
+                    $this->drawAntialiasPixel($X, $Y, ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]);
                 }
                 $Cpt++;
             } else {
-                $this->drawAntialiasPixel($X, $Y, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha));
+                $this->drawAntialiasPixel($X, $Y, ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]);
             }
         }
         $this->Shadow = $RestoreShadow;
@@ -1091,7 +1091,7 @@ abstract class Draw extends BaseDraw
      * @param int|float $Radius
      * @param array $Format
      */
-    public function drawFilledCircle($X, $Y, $Radius, array $Format = array())
+    public function drawFilledCircle($X, $Y, $Radius, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -1124,13 +1124,13 @@ abstract class Draw extends BaseDraw
                 $X + $this->ShadowX,
                 $Y + $this->ShadowY,
                 $Radius,
-                array(
+                [
                     "R" => $this->ShadowR,
                     "G" => $this->ShadowG,
                     "B" => $this->ShadowB,
                     "Alpha" => $this->Shadowa,
                     "Ticks" => $Ticks
-                )
+                ]
             );
         }
 
@@ -1152,7 +1152,7 @@ abstract class Draw extends BaseDraw
                 $Y,
                 $Radius,
                 $Radius,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks]
             );
         }
         $this->Mask = [];
@@ -1163,13 +1163,13 @@ abstract class Draw extends BaseDraw
                 $Y,
                 $Radius,
                 $Radius,
-                array(
+                [
                     "R" => $BorderR,
                     "G" => $BorderG,
                     "B" => $BorderB,
                     "Alpha" => $BorderAlpha,
                     "Ticks" => $Ticks
-                )
+                ]
             );
         }
         $this->Shadow = $RestoreShadow;
@@ -1183,7 +1183,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return array
      */
-    public function drawText($X, $Y, $Text, array $Format = array())
+    public function drawText($X, $Y, $Text, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : $this->FontColorR;
         $G = isset($Format["G"]) ? $Format["G"] : $this->FontColorG;
@@ -1223,7 +1223,7 @@ abstract class Draw extends BaseDraw
         }
 
         if ($ShowOrigine) {
-            $MyMarkerSettings = array(
+            $MyMarkerSettings = [
                 "R" => 255,
                 "G" => 0,
                 "B" => 0,
@@ -1231,7 +1231,7 @@ abstract class Draw extends BaseDraw
                 "BorderB" => 255,
                 "BorderG" => 255,
                 "Size" => 4
-            );
+            ];
             $this->drawRectangleMarker($X, $Y, $MyMarkerSettings);
         }
 
@@ -1267,7 +1267,7 @@ abstract class Draw extends BaseDraw
             $X2 = $X2 - $TxtPos[$Align]["X"] + $X + $T[0]["X"];
             $Y2 = $Y2 - $TxtPos[$Align]["Y"] + $Y + $T[0]["Y"];
 
-            $Settings = array(
+            $Settings = [
                 "R" => $BoxR,
                 "G" => $BoxG,
                 "B" => $BoxB,
@@ -1276,7 +1276,7 @@ abstract class Draw extends BaseDraw
                 "BorderG" => $BoxBorderG,
                 "BorderB" => $BoxBorderB,
                 "BorderAlpha" => $BoxBorderAlpha
-            );
+            ];
 
             if ($BoxRounded) {
                 $this->drawRoundedFilledRectangle($X1, $Y1, $X2, $Y2, $RoundedRadius, $Settings);
@@ -1326,7 +1326,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return null|integer
      */
-    public function drawGradientArea($X1, $Y1, $X2, $Y2, $Direction, array $Format = array())
+    public function drawGradientArea($X1, $Y1, $X2, $Y2, $Direction, array $Format = [])
     {
         $StartR = isset($Format["StartR"]) ? $Format["StartR"] : 90;
         $StartG = isset($Format["StartG"]) ? $Format["StartG"] : 90;
@@ -1346,7 +1346,7 @@ abstract class Draw extends BaseDraw
                 $Y1,
                 $X2,
                 $Y2,
-                array("R" => $StartR, "G" => $StartG, "B" => $StartB, "Alpha" => $Alpha)
+                ["R" => $StartR, "G" => $StartG, "B" => $StartB, "Alpha" => $Alpha]
             );
             return 0;
         }
@@ -1358,10 +1358,10 @@ abstract class Draw extends BaseDraw
         }
 
         if ($X1 > $X2) {
-            list($X1, $X2) = array($X2, $X1);
+            list($X1, $X2) = [$X2, $X1];
         }
         if ($Y1 > $Y2) {
-            list($Y1, $Y2) = array($Y2, $Y1);
+            list($Y1, $Y2) = [$Y2, $Y1];
         }
 
         if ($Direction == DIRECTION_VERTICAL) {
@@ -1392,7 +1392,7 @@ abstract class Draw extends BaseDraw
                         $Y2 = $EndY;
                     }
                     if (($Y1 != $Y2 && $Y1 < $Y2) || $Y2 == $EndY) {
-                        $Color = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha);
+                        $Color = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
                         $this->drawFilledRectangle($X1, $Y1, $X2, $Y2, $Color);
                         $LastY2 = max($LastY2, $Y2);
                         $Y1 = $Y2 + 1;
@@ -1418,7 +1418,7 @@ abstract class Draw extends BaseDraw
                         $X2 = $EndX;
                     }
                     if (($X1 != $X2 && $X1 < $X2) || $X2 == $EndX) {
-                        $Color = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha);
+                        $Color = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
                         $this->drawFilledRectangle($X1, $Y1, $X2, $Y2, $Color);
                         $X1 = $X2 + 1;
                     }
@@ -1442,7 +1442,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return int|null
      */
-    public function drawAntialiasPixel($X, $Y, array $Format = array())
+    public function drawAntialiasPixel($X, $Y, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -1635,12 +1635,12 @@ abstract class Draw extends BaseDraw
                         $Y + $this->ShadowY,
                         $X + $Width + $this->ShadowX,
                         $Y + $Height + $this->ShadowY,
-                        array(
+                        [
                             "R" => $this->ShadowR,
                             "G" => $this->ShadowG,
                             "B" => $this->ShadowB,
                             "Alpha" => $this->Shadowa
-                        )
+                        ]
                     );
                 } else {
                     $TranparentID = imagecolortransparent($Raster);
@@ -1680,7 +1680,7 @@ abstract class Draw extends BaseDraw
      * @param int $Y2
      * @param array $Format
      */
-    public function drawArrow($X1, $Y1, $X2, $Y2, array $Format = array())
+    public function drawArrow($X1, $Y1, $X2, $Y2, array $Format = [])
     {
         $FillR = isset($Format["FillR"]) ? $Format["FillR"] : 0;
         $FillG = isset($Format["FillG"]) ? $Format["FillG"] : 0;
@@ -1706,7 +1706,7 @@ abstract class Draw extends BaseDraw
                 $Y1 + $this->ShadowY,
                 $X2 + $this->ShadowX,
                 $Y2 + $this->ShadowY,
-                array(
+                [
                     "FillR" => $this->ShadowR,
                     "FillG" => $this->ShadowG,
                     "FillB" => $this->ShadowB,
@@ -1715,7 +1715,7 @@ abstract class Draw extends BaseDraw
                     "Ratio" => $Ratio,
                     "TwoHeads" => $TwoHeads,
                     "Ticks" => $Ticks
-                )
+                ]
             );
         }
 
@@ -1723,7 +1723,7 @@ abstract class Draw extends BaseDraw
         $TailX = cos(($Angle - 180) * PI / 180) * $Size + $X2;
         $TailY = sin(($Angle - 180) * PI / 180) * $Size + $Y2;
 
-        $Points = array();
+        $Points = [];
         $Points[] = $X2;
         $Points[] = $Y2;
         $Points[] = cos(($Angle - 90) * PI / 180) * $Size * $Ratio + $TailX;
@@ -1749,21 +1749,21 @@ abstract class Draw extends BaseDraw
             $Points[1],
             $Points[2],
             $Points[3],
-            array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha)
+            ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha]
         );
         $this->drawLine(
             $Points[2],
             $Points[3],
             $Points[4],
             $Points[5],
-            array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha)
+            ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha]
         );
         $this->drawLine(
             $Points[0],
             $Points[1],
             $Points[4],
             $Points[5],
-            array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha)
+            ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha]
         );
 
         /* Draw the second head */
@@ -1773,7 +1773,7 @@ abstract class Draw extends BaseDraw
             $TailX2 = cos(($Angle - 180) * PI / 180) * $Size + $X1;
             $TailY2 = sin(($Angle - 180) * PI / 180) * $Size + $Y1;
 
-            $Points = array();
+            $Points = [];
             $Points[] = $X1;
             $Points[] = $Y1;
             $Points[] = cos(($Angle - 90) * PI / 180) * $Size * $Ratio + $TailX2;
@@ -1799,21 +1799,21 @@ abstract class Draw extends BaseDraw
                 $Points[1],
                 $Points[2],
                 $Points[3],
-                array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha)
+                ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha]
             );
             $this->drawLine(
                 $Points[2],
                 $Points[3],
                 $Points[4],
                 $Points[5],
-                array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha)
+                ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha]
             );
             $this->drawLine(
                 $Points[0],
                 $Points[1],
                 $Points[4],
                 $Points[5],
-                array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha)
+                ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha]
             );
 
             $this->drawLine(
@@ -1821,7 +1821,7 @@ abstract class Draw extends BaseDraw
                 $TailY,
                 $TailX2,
                 $TailY2,
-                array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha, "Ticks" => $Ticks]
             );
         } else {
             $this->drawLine(
@@ -1829,7 +1829,7 @@ abstract class Draw extends BaseDraw
                 $Y1,
                 $TailX,
                 $TailY,
-                array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha, "Ticks" => $Ticks]
             );
         }
         /* Re-enable shadows */
@@ -1843,7 +1843,7 @@ abstract class Draw extends BaseDraw
      * @param string $Text
      * @param array $Format
      */
-    public function drawArrowLabel($X1, $Y1, $Text, array $Format = array())
+    public function drawArrowLabel($X1, $Y1, $Text, array $Format = [])
     {
         $FillR = isset($Format["FillR"]) ? $Format["FillR"] : 0;
         $FillG = isset($Format["FillG"]) ? $Format["FillG"] : 0;
@@ -1884,33 +1884,33 @@ abstract class Draw extends BaseDraw
                 $Y2,
                 $X2 - $TxtWidth,
                 $Y2,
-                array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha, "Ticks" => $Ticks]
             );
             if ($Position == POSITION_TOP) {
                 $this->drawText(
                     $X2,
                     $Y2 - 2,
                     $Text,
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $Alpha,
                         "Align" => TEXT_ALIGN_BOTTOMRIGHT
-                    )
+                    ]
                 );
             } else {
                 $this->drawText(
                     $X2,
                     $Y2 + 4,
                     $Text,
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $Alpha,
                         "Align" => TEXT_ALIGN_TOPRIGHT
-                    )
+                    ]
                 );
             }
         } else {
@@ -1919,27 +1919,27 @@ abstract class Draw extends BaseDraw
                 $Y2,
                 $X2 + $TxtWidth,
                 $Y2,
-                array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha, "Ticks" => $Ticks)
+                ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha, "Ticks" => $Ticks]
             );
             if ($Position == POSITION_TOP) {
                 $this->drawText(
                     $X2,
                     $Y2 - 2,
                     $Text,
-                    array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha)
+                    ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $Alpha]
                 );
             } else {
                 $this->drawText(
                     $X2,
                     $Y2 + 4,
                     $Text,
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $Alpha,
                         "Align" => TEXT_ALIGN_TOPLEFT
-                    )
+                    ]
                 );
             }
         }
@@ -1952,7 +1952,7 @@ abstract class Draw extends BaseDraw
      * @param int|float $Percent
      * @param array $Format
      */
-    public function drawProgress($X, $Y, $Percent, array $Format = array())
+    public function drawProgress($X, $Y, $Percent, array $Format = [])
     {
         if ($Percent > 100) {
             $Percent = 100;
@@ -2010,7 +2010,7 @@ abstract class Draw extends BaseDraw
                 $Y,
                 $X + $Width,
                 $Y - $Height,
-                array(
+                [
                     "R" => $BoxBackR,
                     "G" => $BoxBackG,
                     "B" => $BoxBackB,
@@ -2018,20 +2018,20 @@ abstract class Draw extends BaseDraw
                     "BorderG" => $BoxBorderG,
                     "BorderB" => $BoxBorderB,
                     "NoAngle" => $NoAngle
-                )
+                ]
             );
 
             $RestoreShadow = $this->Shadow;
             $this->Shadow = false;
             if ($RFade != -1 && $GFade != -1 && $BFade != -1) {
-                $GradientOptions = array(
+                $GradientOptions = [
                     "StartR" => $RFade,
                     "StartG" => $GFade,
                     "StartB" => $BFade,
                     "EndR" => $R,
                     "EndG" => $G,
                     "EndB" => $B
-                );
+                ];
                 $this->drawGradientArea(
                     $X + 1,
                     $Y - 1,
@@ -2047,7 +2047,7 @@ abstract class Draw extends BaseDraw
                         $Y - 1,
                         $X + $Width - 1,
                         $Y - $InnerHeight,
-                        array("R" => 255, "G" => 255, "B" => 255, "Alpha" => $Surrounding)
+                        ["R" => 255, "G" => 255, "B" => 255, "Alpha" => $Surrounding]
                     );
                 }
             } else {
@@ -2056,14 +2056,14 @@ abstract class Draw extends BaseDraw
                     $Y - 1,
                     $X + $Width - 1,
                     $Y - $InnerHeight,
-                    array(
+                    [
                         "R" => $R,
                         "G" => $G,
                         "B" => $B,
                         "BorderR" => $BorderR,
                         "BorderG" => $BorderG,
                         "BorderB" => $BorderB
-                    )
+                    ]
                 );
             }
             $this->Shadow = $RestoreShadow;
@@ -2073,7 +2073,7 @@ abstract class Draw extends BaseDraw
                     $X + ($Width / 2),
                     $Y + $Margin,
                     $Percent . "%",
-                    array("Align" => TEXT_ALIGN_TOPMIDDLE)
+                    ["Align" => TEXT_ALIGN_TOPMIDDLE]
                 );
             }
             if ($ShowLabel && $LabelPos == LABEL_POS_TOP) {
@@ -2081,7 +2081,7 @@ abstract class Draw extends BaseDraw
                     $X + ($Width / 2),
                     $Y - $Height - $Margin,
                     $Percent . "%",
-                    array("Align" => TEXT_ALIGN_BOTTOMMIDDLE)
+                    ["Align" => TEXT_ALIGN_BOTTOMMIDDLE]
                 );
             }
             if ($ShowLabel && $LabelPos == LABEL_POS_INSIDE) {
@@ -2089,7 +2089,7 @@ abstract class Draw extends BaseDraw
                     $X + ($Width / 2),
                     $Y - $InnerHeight - $Margin,
                     $Percent . "%",
-                    array("Align" => TEXT_ALIGN_MIDDLELEFT, "Angle" => 90)
+                    ["Align" => TEXT_ALIGN_MIDDLELEFT, "Angle" => 90]
                 );
             }
             if ($ShowLabel && $LabelPos == LABEL_POS_CENTER) {
@@ -2097,7 +2097,7 @@ abstract class Draw extends BaseDraw
                     $X + ($Width / 2),
                     $Y - ($Height / 2),
                     $Percent . "%",
-                    array("Align" => TEXT_ALIGN_MIDDLEMIDDLE, "Angle" => 90)
+                    ["Align" => TEXT_ALIGN_MIDDLEMIDDLE, "Angle" => 90]
                 );
             }
         } else {
@@ -2111,7 +2111,7 @@ abstract class Draw extends BaseDraw
                 $Y,
                 $X + $Width,
                 $Y + $Height,
-                array(
+                [
                     "R" => $BoxBackR,
                     "G" => $BoxBackG,
                     "B" => $BoxBackB,
@@ -2119,20 +2119,20 @@ abstract class Draw extends BaseDraw
                     "BorderG" => $BoxBorderG,
                     "BorderB" => $BoxBorderB,
                     "NoAngle" => $NoAngle
-                )
+                ]
             );
 
             $RestoreShadow = $this->Shadow;
             $this->Shadow = false;
             if ($RFade != -1 && $GFade != -1 && $BFade != -1) {
-                $GradientOptions = array(
+                $GradientOptions = [
                     "StartR" => $R,
                     "StartG" => $G,
                     "StartB" => $B,
                     "EndR" => $RFade,
                     "EndG" => $GFade,
                     "EndB" => $BFade
-                );
+                ];
                 $this->drawGradientArea(
                     $X + 1,
                     $Y + 1,
@@ -2148,7 +2148,7 @@ abstract class Draw extends BaseDraw
                         $Y + 1,
                         $X + $InnerWidth,
                         $Y + $Height - 1,
-                        array("R" => 255, "G" => 255, "B" => 255, "Alpha" => $Surrounding)
+                        ["R" => 255, "G" => 255, "B" => 255, "Alpha" => $Surrounding]
                     );
                 }
             } else {
@@ -2157,12 +2157,12 @@ abstract class Draw extends BaseDraw
                     $Y + 1,
                     $X + $InnerWidth,
                     $Y + $Height - 1,
-                    array(
+                    [
                         "R" => $R,
                         "G" => $G,
                         "B" => $B,
                         "BorderR" => $BorderR, "BorderG" => $BorderG, "BorderB" => $BorderB
-                    )
+                    ]
                 );
             }
             $this->Shadow = $RestoreShadow;
@@ -2172,7 +2172,7 @@ abstract class Draw extends BaseDraw
                     $X - $Margin,
                     $Y + ($Height / 2),
                     $Percent . "%",
-                    array("Align" => TEXT_ALIGN_MIDDLERIGHT)
+                    ["Align" => TEXT_ALIGN_MIDDLERIGHT]
                 );
             }
             if ($ShowLabel && $LabelPos == LABEL_POS_RIGHT) {
@@ -2180,7 +2180,7 @@ abstract class Draw extends BaseDraw
                     $X + $Width + $Margin,
                     $Y + ($Height / 2),
                     $Percent . "%",
-                    array("Align" => TEXT_ALIGN_MIDDLELEFT)
+                    ["Align" => TEXT_ALIGN_MIDDLELEFT]
                 );
             }
             if ($ShowLabel && $LabelPos == LABEL_POS_CENTER) {
@@ -2188,7 +2188,7 @@ abstract class Draw extends BaseDraw
                     $X + ($Width / 2),
                     $Y + ($Height / 2),
                     $Percent . "%",
-                    array("Align" => TEXT_ALIGN_MIDDLEMIDDLE)
+                    ["Align" => TEXT_ALIGN_MIDDLEMIDDLE]
                 );
             }
             if ($ShowLabel && $LabelPos == LABEL_POS_INSIDE) {
@@ -2196,7 +2196,7 @@ abstract class Draw extends BaseDraw
                     $X + $InnerWidth + $Margin,
                     $Y + ($Height / 2),
                     $Percent . "%",
-                    array("Align" => TEXT_ALIGN_MIDDLELEFT)
+                    ["Align" => TEXT_ALIGN_MIDDLELEFT]
                 );
             }
         }
@@ -2208,7 +2208,7 @@ abstract class Draw extends BaseDraw
      * @param int $Y
      * @param array $Format
      */
-    public function drawLegend($X, $Y, array $Format = array())
+    public function drawLegend($X, $Y, array $Format = [])
     {
         $Family = isset($Format["Family"]) ? $Format["Family"] : LEGEND_FAMILY_BOX;
         $FontName = isset($Format["FontName"]) ? $this->loadFont($Format["FontName"], 'fonts') : $this->FontName;
@@ -2260,7 +2260,7 @@ abstract class Draw extends BaseDraw
         $XStep = $IconAreaWidth + 5;
         $XStep = $XSpacing;
 
-        $Boundaries = array();
+        $Boundaries = [];
         $Boundaries["L"] = $X;
         $Boundaries["T"] = $Y;
         $Boundaries["R"] = 0;
@@ -2293,7 +2293,7 @@ abstract class Draw extends BaseDraw
                     $vY = $vY + max($this->FontSize * count($Lines), $IconAreaHeight) + 5;
                 } elseif ($Mode == LEGEND_HORIZONTAL) {
                     $Lines = preg_split("/\n/", $Serie["Description"]);
-                    $Width = array();
+                    $Width = [];
                     foreach ($Lines as $Key => $Value) {
                         $BoxArray = $this->getTextBox(
                             $vX + $IconAreaWidth + 6,
@@ -2336,7 +2336,7 @@ abstract class Draw extends BaseDraw
                 $Boundaries["R"] + $Margin,
                 $Boundaries["B"] + $Margin,
                 $Margin,
-                array(
+                [
                     "R" => $R,
                     "G" => $G,
                     "B" => $B,
@@ -2344,7 +2344,7 @@ abstract class Draw extends BaseDraw
                     "BorderR" => $BorderR,
                     "BorderG" => $BorderG,
                     "BorderB" => $BorderB
-                )
+                ]
             );
         } elseif ($Style == LEGEND_BOX) {
             $this->drawFilledRectangle(
@@ -2352,7 +2352,7 @@ abstract class Draw extends BaseDraw
                 $Boundaries["T"] - $Margin,
                 $Boundaries["R"] + $Margin,
                 $Boundaries["B"] + $Margin,
-                array(
+                [
                     "R" => $R,
                     "G" => $G,
                     "B" => $B,
@@ -2360,7 +2360,7 @@ abstract class Draw extends BaseDraw
                     "BorderR" => $BorderR,
                     "BorderG" => $BorderG,
                     "BorderB" => $BorderB
-                )
+                ]
             );
         }
 
@@ -2397,27 +2397,27 @@ abstract class Draw extends BaseDraw
                             $Y + 1 + $YOffset,
                             $X + $BoxWidth + $XOffset + 1,
                             $Y + $BoxHeight + 1 + $YOffset,
-                            array("R" => 0, "G" => 0, "B" => 0, "Alpha" => 20)
+                            ["R" => 0, "G" => 0, "B" => 0, "Alpha" => 20]
                         );
                         $this->drawFilledRectangle(
                             $X + $XOffset,
                             $Y + $YOffset,
                             $X + $BoxWidth + $XOffset,
                             $Y + $BoxHeight + $YOffset,
-                            array("R" => $R, "G" => $G, "B" => $B, "Surrounding" => 20)
+                            ["R" => $R, "G" => $G, "B" => $B, "Surrounding" => 20]
                         );
                     } elseif ($Family == LEGEND_FAMILY_CIRCLE) {
                         $this->drawFilledCircle(
                             $X + 1 + $IconAreaWidth / 2,
                             $Y + 1 + $IconAreaHeight / 2,
                             min($IconAreaHeight / 2, $IconAreaWidth / 2),
-                            array("R" => 0, "G" => 0, "B" => 0, "Alpha" => 20)
+                            ["R" => 0, "G" => 0, "B" => 0, "Alpha" => 20]
                         );
                         $this->drawFilledCircle(
                             $X + $IconAreaWidth / 2,
                             $Y + $IconAreaHeight / 2,
                             min($IconAreaHeight / 2, $IconAreaWidth / 2),
-                            array("R" => $R, "G" => $G, "B" => $B, "Surrounding" => 20)
+                            ["R" => $R, "G" => $G, "B" => $B, "Surrounding" => 20]
                         );
                     } elseif ($Family == LEGEND_FAMILY_LINE) {
                         $this->drawLine(
@@ -2425,14 +2425,14 @@ abstract class Draw extends BaseDraw
                             $Y + 1 + $IconAreaHeight / 2,
                             $X + 1 + $IconAreaWidth,
                             $Y + 1 + $IconAreaHeight / 2,
-                            array("R" => 0, "G" => 0, "B" => 0, "Alpha" => 20, "Ticks" => $Ticks, "Weight" => $Weight)
+                            ["R" => 0, "G" => 0, "B" => 0, "Alpha" => 20, "Ticks" => $Ticks, "Weight" => $Weight]
                         );
                         $this->drawLine(
                             $X,
                             $Y + $IconAreaHeight / 2,
                             $X + $IconAreaWidth,
                             $Y + $IconAreaHeight / 2,
-                            array("R" => $R, "G" => $G, "B" => $B, "Ticks" => $Ticks, "Weight" => $Weight)
+                            ["R" => $R, "G" => $G, "B" => $B, "Ticks" => $Ticks, "Weight" => $Weight]
                         );
                     }
                 }
@@ -2444,14 +2444,14 @@ abstract class Draw extends BaseDraw
                             $X + $IconAreaWidth + 4,
                             $Y + $IconAreaHeight / 2 + (($this->FontSize + 3) * $Key),
                             $Value,
-                            array(
+                            [
                                 "R" => $FontR,
                                 "G" => $FontG,
                                 "B" => $FontB,
                                 "Align" => TEXT_ALIGN_MIDDLELEFT,
                                 "FontSize" => $FontSize,
                                 "FontName" => $FontName
-                            )
+                            ]
                         );
                     }
                     $Y = $Y + max($this->FontSize * count($Lines), $IconAreaHeight) + 5;
@@ -2463,14 +2463,14 @@ abstract class Draw extends BaseDraw
                             $X + $IconAreaWidth + 4,
                             $Y + $IconAreaHeight / 2 + (($this->FontSize + 3) * $Key),
                             $Value,
-                            array(
+                            [
                                 "R" => $FontR,
                                 "G" => $FontG,
                                 "B" => $FontB,
                                 "Align" => TEXT_ALIGN_MIDDLELEFT,
                                 "FontSize" => $FontSize,
                                 "FontName" => $FontName
-                            )
+                            ]
                         );
                         $Width[] = $BoxArray[1]["X"];
                     }
@@ -2487,7 +2487,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @throws Exception
      */
-    public function drawScale(array $Format = array())
+    public function drawScale(array $Format = [])
     {
         $Pos = isset($Format["Pos"]) ? $Format["Pos"] : SCALE_POS_LEFTRIGHT;
         $Floating = isset($Format["Floating"]) ? $Format["Floating"] : false;
@@ -2496,9 +2496,9 @@ abstract class Draw extends BaseDraw
         $RemoveYAxis = isset($Format["RemoveYAxis"]) ? $Format["RemoveYAxis"] : false;
         $RemoveYAxiValues = isset($Format["RemoveYAxisValues"]) ? $Format["RemoveYAxisValues"] : false;
         $MinDivHeight = isset($Format["MinDivHeight"]) ? $Format["MinDivHeight"] : 20;
-        $Factors = isset($Format["Factors"]) ? $Format["Factors"] : array(1, 2, 5);
+        $Factors = isset($Format["Factors"]) ? $Format["Factors"] : [1, 2, 5];
         $ManualScale = isset($Format["ManualScale"])
-            ? $Format["ManualScale"] : array("0" => array("Min" => -100, "Max" => 100))
+            ? $Format["ManualScale"] : ["0" => ["Min" => -100, "Max" => 100]]
         ;
         $XMargin = isset($Format["XMargin"]) ? $Format["XMargin"] : AUTO;
         $YMargin = isset($Format["YMargin"]) ? $Format["YMargin"] : 0;
@@ -2563,23 +2563,23 @@ abstract class Draw extends BaseDraw
 
         /* Skip a NOTICE event in case of an empty array */
         if ($DrawYLines == NONE || $DrawYLines == false) {
-            $DrawYLines = array("zarma" => "31");
+            $DrawYLines = ["zarma" => "31"];
         }
 
         /* Define the color for the skipped elements */
-        $SkippedAxisColor = array(
+        $SkippedAxisColor = [
             "R" => $SkippedAxisR,
             "G" => $SkippedAxisG,
             "B" => $SkippedAxisB,
             "Alpha" => $SkippedAxisAlpha,
             "Ticks" => $SkippedAxisTicks
-        );
-        $SkippedTickColor = array(
+        ];
+        $SkippedTickColor = [
             "R" => $SkippedTickR,
             "G" => $SkippedTickG,
             "B" => $SkippedTickB,
             "Alpha" => $SkippedTickAlpha
-        );
+        ];
 
         $Data = $this->DataSet->getData();
         $Abscissa = null;
@@ -2641,7 +2641,7 @@ abstract class Draw extends BaseDraw
                     throw new Exception("Manual scale boundaries not set.");
                 }
             } elseif ($Mode == SCALE_MODE_ADDALL || $Mode == SCALE_MODE_ADDALL_START0) {
-                $Series = array();
+                $Series = [];
                 foreach ($Data["Series"] as $SerieID => $SerieParameter) {
                     if ($SerieParameter["Axis"] == $AxisID
                         && $SerieParameter["isDrawable"]
@@ -2794,11 +2794,11 @@ abstract class Draw extends BaseDraw
                 $TickG = $Parameters["Color"]["G"];
                 $TickB = $Parameters["Color"]["B"];
                 $this->setFontProperties(
-                    array(
+                    [
                         "R" => $Parameters["Color"]["R"],
                         "G" => $Parameters["Color"]["G"],
                         "B" => $Parameters["Color"]["B"]
-                    )
+                    ]
                 );
             } else {
                 $AxisR = $AxisRo;
@@ -2807,7 +2807,7 @@ abstract class Draw extends BaseDraw
                 $TickR = $TickRo;
                 $TickG = $TickGo;
                 $TickB = $TickBo;
-                $this->setFontProperties(array("R" => $FontColorRo, "G" => $FontColorGo, "B" => $FontColorBo));
+                $this->setFontProperties(["R" => $FontColorRo, "G" => $FontColorGo, "B" => $FontColorBo]);
             }
 
             $LastValue = "w00t";
@@ -2840,7 +2840,7 @@ abstract class Draw extends BaseDraw
                                     $AxisPos["B"],
                                     $this->GraphAreaX2 - $Parameters["Margin"],
                                     $AxisPos["B"],
-                                    array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                    ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                                 );
                             } else {
                                 $FloatingOffset = 0;
@@ -2849,7 +2849,7 @@ abstract class Draw extends BaseDraw
                                     $AxisPos["B"],
                                     $this->GraphAreaX2,
                                     $AxisPos["B"],
-                                    array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                    ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                                 );
                             }
 
@@ -2859,7 +2859,7 @@ abstract class Draw extends BaseDraw
                                     $AxisPos["B"],
                                     $this->GraphAreaX2 + ($ArrowSize * 2),
                                     $AxisPos["B"],
-                                    array("FillR" => $AxisR, "FillG" => $AxisG, "FillB" => $AxisB, "Size" => $ArrowSize)
+                                    ["FillR" => $AxisR, "FillG" => $AxisG, "FillB" => $AxisB, "Size" => $ArrowSize]
                                 );
                             }
                         }
@@ -2908,7 +2908,7 @@ abstract class Draw extends BaseDraw
                                     $XPos,
                                     $YPos + $OuterTickWidth + $YLabelOffset,
                                     $Value,
-                                    array("Angle" => $LabelRotation, "Align" => $LabelAlign)
+                                    ["Angle" => $LabelRotation, "Align" => $LabelAlign]
                                 );
                                 $TxtBottom = $YPos + $OuterTickWidth + 2 + ($Bounds[0]["Y"] - $Bounds[2]["Y"]);
                                 $MaxBottom = max($MaxBottom, $TxtBottom);
@@ -2951,13 +2951,13 @@ abstract class Draw extends BaseDraw
                                         $this->GraphAreaY1 + $FloatingOffset,
                                         $XPos,
                                         $this->GraphAreaY2 - $FloatingOffset,
-                                        array(
+                                        [
                                             "R" => $GridR,
                                             "G" => $GridG,
                                             "B" => $GridB,
                                             "Alpha" => $GridAlpha,
                                             "Ticks" => $GridTicks
-                                        )
+                                        ]
                                     );
                                 }
                                 if (($InnerTickWidth != 0 || $OuterTickWidth != 0) && !$RemoveXAxis) {
@@ -2966,7 +2966,7 @@ abstract class Draw extends BaseDraw
                                         $YPos - $InnerTickWidth,
                                         $XPos,
                                         $YPos + $OuterTickWidth,
-                                        array("R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha)
+                                        ["R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha]
                                     );
                                 }
                             }
@@ -2979,7 +2979,7 @@ abstract class Draw extends BaseDraw
                                 $XPos,
                                 $YPos,
                                 $Parameters["Name"],
-                                array("Align" => TEXT_ALIGN_TOPMIDDLE)
+                                ["Align" => TEXT_ALIGN_TOPMIDDLE]
                             );
                             $MaxBottom = $Bounds[0]["Y"];
 
@@ -3013,7 +3013,7 @@ abstract class Draw extends BaseDraw
                                     $AxisPos["T"],
                                     $this->GraphAreaX2 - $Parameters["Margin"],
                                     $AxisPos["T"],
-                                    array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                    ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                                 );
                             } else {
                                 $FloatingOffset = 0;
@@ -3022,7 +3022,7 @@ abstract class Draw extends BaseDraw
                                     $AxisPos["T"],
                                     $this->GraphAreaX2,
                                     $AxisPos["T"],
-                                    array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                    ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                                 );
                             }
 
@@ -3032,7 +3032,7 @@ abstract class Draw extends BaseDraw
                                     $AxisPos["T"],
                                     $this->GraphAreaX2 + ($ArrowSize * 2),
                                     $AxisPos["T"],
-                                    array("FillR" => $AxisR, "FillG" => $AxisG, "FillB" => $AxisB, "Size" => $ArrowSize)
+                                    ["FillR" => $AxisR, "FillG" => $AxisG, "FillB" => $AxisB, "Size" => $ArrowSize]
                                 );
                             }
                         }
@@ -3081,7 +3081,7 @@ abstract class Draw extends BaseDraw
                                     $XPos,
                                     $YPos - $OuterTickWidth - $YLabelOffset,
                                     $Value,
-                                    array("Angle" => $LabelRotation, "Align" => $LabelAlign)
+                                    ["Angle" => $LabelRotation, "Align" => $LabelAlign]
                                 );
                                 $TxtBox = $YPos - $OuterTickWidth - 2 - ($Bounds[0]["Y"] - $Bounds[2]["Y"]);
                                 $MinTop = min($MinTop, $TxtBox);
@@ -3122,13 +3122,13 @@ abstract class Draw extends BaseDraw
                                         $this->GraphAreaY1 + $FloatingOffset,
                                         $XPos,
                                         $this->GraphAreaY2 - $FloatingOffset,
-                                        array(
+                                        [
                                             "R" => $GridR,
                                             "G" => $GridG,
                                             "B" => $GridB,
                                             "Alpha" => $GridAlpha,
                                             "Ticks" => $GridTicks
-                                        )
+                                        ]
                                     );
                                 }
                                 if (($InnerTickWidth != 0 || $OuterTickWidth != 0) && !$RemoveXAxis) {
@@ -3137,12 +3137,12 @@ abstract class Draw extends BaseDraw
                                         $YPos + $InnerTickWidth,
                                         $XPos,
                                         $YPos - $OuterTickWidth,
-                                        array(
+                                        [
                                             "R" => $TickR,
                                             "G" => $TickG,
                                             "B" => $TickB,
                                             "Alpha" => $TickAlpha
-                                        )
+                                        ]
                                     );
                                 }
                             }
@@ -3155,7 +3155,7 @@ abstract class Draw extends BaseDraw
                                 $XPos,
                                 $YPos,
                                 $Parameters["Name"],
-                                array("Align" => TEXT_ALIGN_BOTTOMMIDDLE)
+                                ["Align" => TEXT_ALIGN_BOTTOMMIDDLE]
                             );
                             $MinTop = $Bounds[2]["Y"];
 
@@ -3191,7 +3191,7 @@ abstract class Draw extends BaseDraw
                                     $this->GraphAreaY1 + $Parameters["Margin"],
                                     $AxisPos["L"],
                                     $this->GraphAreaY2 - $Parameters["Margin"],
-                                    array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                    ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                                 );
                             } else {
                                 $FloatingOffset = 0;
@@ -3200,7 +3200,7 @@ abstract class Draw extends BaseDraw
                                     $this->GraphAreaY1,
                                     $AxisPos["L"],
                                     $this->GraphAreaY2,
-                                    array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                    ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                                 );
                             }
 
@@ -3210,12 +3210,12 @@ abstract class Draw extends BaseDraw
                                     $this->GraphAreaY2 - $Parameters["Margin"],
                                     $AxisPos["L"],
                                     $this->GraphAreaY2 + ($ArrowSize * 2),
-                                    array(
+                                    [
                                         "FillR" => $AxisR,
                                         "FillG" => $AxisG,
                                         "FillB" => $AxisB,
                                         "Size" => $ArrowSize
-                                    )
+                                    ]
                                 );
                             }
                         }
@@ -3264,7 +3264,7 @@ abstract class Draw extends BaseDraw
                                     $XPos - $OuterTickWidth + $XLabelOffset,
                                     $YPos,
                                     $Value,
-                                    array("Angle" => $LabelRotation, "Align" => $LabelAlign)
+                                    ["Angle" => $LabelRotation, "Align" => $LabelAlign]
                                 );
                                 $TxtBox = $XPos - $OuterTickWidth - 2 - ($Bounds[1]["X"] - $Bounds[0]["X"]);
                                 $MinLeft = min($MinLeft, $TxtBox);
@@ -3307,13 +3307,13 @@ abstract class Draw extends BaseDraw
                                         $YPos,
                                         $this->GraphAreaX2 - $FloatingOffset,
                                         $YPos,
-                                        array(
+                                        [
                                             "R" => $GridR,
                                             "G" => $GridG,
                                             "B" => $GridB,
                                             "Alpha" => $GridAlpha,
                                             "Ticks" => $GridTicks
-                                        )
+                                        ]
                                     );
                                 }
                                 if (($InnerTickWidth != 0 || $OuterTickWidth != 0) && !$RemoveXAxis) {
@@ -3322,7 +3322,7 @@ abstract class Draw extends BaseDraw
                                         $YPos,
                                         $XPos + $InnerTickWidth,
                                         $YPos,
-                                        array("R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha)
+                                        ["R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha]
                                     );
                                 }
                             }
@@ -3334,7 +3334,7 @@ abstract class Draw extends BaseDraw
                                 $XPos,
                                 $YPos,
                                 $Parameters["Name"],
-                                array("Align" => TEXT_ALIGN_BOTTOMMIDDLE, "Angle" => 90)
+                                ["Align" => TEXT_ALIGN_BOTTOMMIDDLE, "Angle" => 90]
                             );
                             $MinLeft = $Bounds[0]["X"];
 
@@ -3368,7 +3368,7 @@ abstract class Draw extends BaseDraw
                                     $this->GraphAreaY1 + $Parameters["Margin"],
                                     $AxisPos["R"],
                                     $this->GraphAreaY2 - $Parameters["Margin"],
-                                    array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                    ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                                 );
                             } else {
                                 $FloatingOffset = 0;
@@ -3377,7 +3377,7 @@ abstract class Draw extends BaseDraw
                                     $this->GraphAreaY1,
                                     $AxisPos["R"],
                                     $this->GraphAreaY2,
-                                    array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                    ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                                 );
                             }
 
@@ -3387,12 +3387,12 @@ abstract class Draw extends BaseDraw
                                     $this->GraphAreaY2 - $Parameters["Margin"],
                                     $AxisPos["R"],
                                     $this->GraphAreaY2 + ($ArrowSize * 2),
-                                    array(
+                                    [
                                         "FillR" => $AxisR,
                                         "FillG" => $AxisG,
                                         "FillB" => $AxisB,
                                         "Size" => $ArrowSize
-                                    )
+                                    ]
                                 );
                             }
                         }
@@ -3441,7 +3441,7 @@ abstract class Draw extends BaseDraw
                                     $XPos + $OuterTickWidth + $XLabelOffset,
                                     $YPos,
                                     $Value,
-                                    array("Angle" => $LabelRotation, "Align" => $LabelAlign)
+                                    ["Angle" => $LabelRotation, "Align" => $LabelAlign]
                                 );
                                 $TxtBox = $XPos + $OuterTickWidth + 2 + ($Bounds[1]["X"] - $Bounds[0]["X"]);
                                 $MaxRight = max($MaxRight, $TxtBox);
@@ -3482,13 +3482,13 @@ abstract class Draw extends BaseDraw
                                         $YPos,
                                         $this->GraphAreaX2 - $FloatingOffset,
                                         $YPos,
-                                        array(
+                                        [
                                             "R" => $GridR,
                                             "G" => $GridG,
                                             "B" => $GridB,
                                             "Alpha" => $GridAlpha,
                                             "Ticks" => $GridTicks
-                                        )
+                                        ]
                                     );
                                 }
                                 if (($InnerTickWidth != 0 || $OuterTickWidth != 0) && !$RemoveXAxis) {
@@ -3497,12 +3497,12 @@ abstract class Draw extends BaseDraw
                                         $YPos,
                                         $XPos - $InnerTickWidth,
                                         $YPos,
-                                        array(
+                                        [
                                             "R" => $TickR,
                                             "G" => $TickG,
                                             "B" => $TickB,
                                             "Alpha" => $TickAlpha
-                                        )
+                                        ]
                                     );
                                 }
                             }
@@ -3515,7 +3515,7 @@ abstract class Draw extends BaseDraw
                                 $XPos,
                                 $YPos,
                                 $Parameters["Name"],
-                                array("Align" => TEXT_ALIGN_BOTTOMMIDDLE, "Angle" => 270)
+                                ["Align" => TEXT_ALIGN_BOTTOMMIDDLE, "Angle" => 270]
                             );
                             $MaxRight = $Bounds[1]["X"];
 
@@ -3537,7 +3537,7 @@ abstract class Draw extends BaseDraw
                                 $this->GraphAreaY1 + $Parameters["Margin"],
                                 $AxisPos["L"],
                                 $this->GraphAreaY2 - $Parameters["Margin"],
-                                array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                             );
                         } else {
                             $FloatingOffset = 0;
@@ -3546,7 +3546,7 @@ abstract class Draw extends BaseDraw
                                 $this->GraphAreaY1,
                                 $AxisPos["L"],
                                 $this->GraphAreaY2,
-                                array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                             );
                         }
 
@@ -3556,12 +3556,12 @@ abstract class Draw extends BaseDraw
                                 $this->GraphAreaY1 + $Parameters["Margin"],
                                 $AxisPos["L"],
                                 $this->GraphAreaY1 - ($ArrowSize * 2),
-                                array(
+                                [
                                     "FillR" => $AxisR,
                                     "FillG" => $AxisG,
                                     "FillB" => $AxisB,
                                     "Size" => $ArrowSize
-                                )
+                                ]
                             );
                         }
 
@@ -3581,19 +3581,19 @@ abstract class Draw extends BaseDraw
                             );
 
                             if ($i % 2 == 1) {
-                                $BGColor = array(
+                                $BGColor = [
                                     "R" => $BackgroundR1,
                                     "G" => $BackgroundG1,
                                     "B" => $BackgroundB1,
                                     "Alpha" => $BackgroundAlpha1
-                                );
+                                ];
                             } else {
-                                $BGColor = array(
+                                $BGColor = [
                                     "R" => $BackgroundR2,
                                     "G" => $BackgroundG2,
                                     "B" => $BackgroundB2,
                                     "Alpha" => $BackgroundAlpha2
-                                );
+                                ];
                             }
                             if ($LastY != null
                                 && $CycleBackground
@@ -3614,13 +3614,13 @@ abstract class Draw extends BaseDraw
                                     $YPos,
                                     $this->GraphAreaX2 - $FloatingOffset,
                                     $YPos,
-                                    array(
+                                    [
                                         "R" => $GridR,
                                         "G" => $GridG,
                                         "B" => $GridB,
                                         "Alpha" => $GridAlpha,
                                         "Ticks" => $GridTicks
-                                    )
+                                    ]
                                 );
                             }
 
@@ -3630,12 +3630,12 @@ abstract class Draw extends BaseDraw
                                     $YPos - $SubTicksSize,
                                     $XPos + $InnerSubTickWidth,
                                     $YPos - $SubTicksSize,
-                                    array(
+                                    [
                                         "R" => $SubTickR,
                                         "G" => $SubTickG,
                                         "B" => $SubTickB,
                                         "Alpha" => $SubTickAlpha
-                                    )
+                                    ]
                                 );
                             }
                             if (!$RemoveYAxiValues) {
@@ -3644,13 +3644,13 @@ abstract class Draw extends BaseDraw
                                     $YPos,
                                     $XPos + $InnerTickWidth,
                                     $YPos,
-                                    array("R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha)
+                                    ["R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha]
                                 );
                                 $Bounds = $this->drawText(
                                     $XPos - $OuterTickWidth - 2,
                                     $YPos,
                                     $Value,
-                                    array("Align" => TEXT_ALIGN_MIDDLERIGHT)
+                                    ["Align" => TEXT_ALIGN_MIDDLERIGHT]
                                 );
                                 $TxtLeft = $XPos - $OuterTickWidth - 2 - ($Bounds[1]["X"] - $Bounds[0]["X"]);
                                 $MinLeft = min($MinLeft, $TxtLeft);
@@ -3666,7 +3666,7 @@ abstract class Draw extends BaseDraw
                                 $XPos,
                                 $YPos,
                                 $Parameters["Name"],
-                                array("Align" => TEXT_ALIGN_BOTTOMMIDDLE, "Angle" => 90)
+                                ["Align" => TEXT_ALIGN_BOTTOMMIDDLE, "Angle" => 90]
                             );
                             $MinLeft = $Bounds[2]["X"];
 
@@ -3682,7 +3682,7 @@ abstract class Draw extends BaseDraw
                                 $this->GraphAreaY1 + $Parameters["Margin"],
                                 $AxisPos["R"],
                                 $this->GraphAreaY2 - $Parameters["Margin"],
-                                array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                             );
                         } else {
                             $FloatingOffset = 0;
@@ -3691,7 +3691,7 @@ abstract class Draw extends BaseDraw
                                 $this->GraphAreaY1,
                                 $AxisPos["R"],
                                 $this->GraphAreaY2,
-                                array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                             );
                         }
 
@@ -3701,12 +3701,12 @@ abstract class Draw extends BaseDraw
                                 $this->GraphAreaY1 + $Parameters["Margin"],
                                 $AxisPos["R"],
                                 $this->GraphAreaY1 - ($ArrowSize * 2),
-                                array(
+                                [
                                     "FillR" => $AxisR,
                                     "FillG" => $AxisG,
                                     "FillB" => $AxisB,
                                     "Size" => $ArrowSize
-                                )
+                                ]
                             );
                         }
 
@@ -3726,19 +3726,19 @@ abstract class Draw extends BaseDraw
                             );
 
                             if ($i % 2 == 1) {
-                                $BGColor = array(
+                                $BGColor = [
                                     "R" => $BackgroundR1,
                                     "G" => $BackgroundG1,
                                     "B" => $BackgroundB1,
                                     "Alpha" => $BackgroundAlpha1
-                                );
+                                ];
                             } else {
-                                $BGColor = array(
+                                $BGColor = [
                                     "R" => $BackgroundR2,
                                     "G" => $BackgroundG2,
                                     "B" => $BackgroundB2,
                                     "Alpha" => $BackgroundAlpha2
-                                );
+                                ];
                             }
                             if ($LastY != null
                                 && $CycleBackground
@@ -3759,13 +3759,13 @@ abstract class Draw extends BaseDraw
                                     $YPos,
                                     $this->GraphAreaX2 - $FloatingOffset,
                                     $YPos,
-                                    array(
+                                    [
                                         "R" => $GridR,
                                         "G" => $GridG,
                                         "B" => $GridB,
                                         "Alpha" => $GridAlpha,
                                         "Ticks" => $GridTicks
-                                    )
+                                    ]
                                 );
                             }
 
@@ -3775,12 +3775,12 @@ abstract class Draw extends BaseDraw
                                     $YPos - $SubTicksSize,
                                     $XPos + $InnerSubTickWidth,
                                     $YPos - $SubTicksSize,
-                                    array(
+                                    [
                                         "R" => $SubTickR,
                                         "G" => $SubTickG,
                                         "B" => $SubTickB,
                                         "Alpha" => $SubTickAlpha
-                                    )
+                                    ]
                                 );
                             }
                             $this->drawLine(
@@ -3788,13 +3788,13 @@ abstract class Draw extends BaseDraw
                                 $YPos,
                                 $XPos + $OuterTickWidth,
                                 $YPos,
-                                array("R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha)
+                                ["R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha]
                             );
                             $Bounds = $this->drawText(
                                 $XPos + $OuterTickWidth + 2,
                                 $YPos,
                                 $Value,
-                                array("Align" => TEXT_ALIGN_MIDDLELEFT)
+                                ["Align" => TEXT_ALIGN_MIDDLELEFT]
                             );
                             $TxtLeft = $XPos + $OuterTickWidth + 2 + ($Bounds[1]["X"] - $Bounds[0]["X"]);
                             $MaxLeft = max($MaxLeft, $TxtLeft);
@@ -3809,7 +3809,7 @@ abstract class Draw extends BaseDraw
                                 $XPos,
                                 $YPos,
                                 $Parameters["Name"],
-                                array("Align" => TEXT_ALIGN_BOTTOMMIDDLE, "Angle" => 270)
+                                ["Align" => TEXT_ALIGN_BOTTOMMIDDLE, "Angle" => 270]
                             );
                             $MaxLeft = $Bounds[2]["X"];
 
@@ -3826,7 +3826,7 @@ abstract class Draw extends BaseDraw
                                 $AxisPos["T"],
                                 $this->GraphAreaX2 - $Parameters["Margin"],
                                 $AxisPos["T"],
-                                array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                             );
                         } else {
                             $FloatingOffset = 0;
@@ -3835,7 +3835,7 @@ abstract class Draw extends BaseDraw
                                 $AxisPos["T"],
                                 $this->GraphAreaX2,
                                 $AxisPos["T"],
-                                array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                             );
                         }
 
@@ -3845,12 +3845,12 @@ abstract class Draw extends BaseDraw
                                 $AxisPos["T"],
                                 $this->GraphAreaX2 + ($ArrowSize * 2),
                                 $AxisPos["T"],
-                                array(
+                                [
                                     "FillR" => $AxisR,
                                     "FillG" => $AxisG,
                                     "FillB" => $AxisB,
                                     "Size" => $ArrowSize
-                                )
+                                ]
                             );
                         }
 
@@ -3870,19 +3870,19 @@ abstract class Draw extends BaseDraw
                             );
 
                             if ($i % 2 == 1) {
-                                $BGColor = array(
+                                $BGColor = [
                                     "R" => $BackgroundR1,
                                     "G" => $BackgroundG1,
                                     "B" => $BackgroundB1,
                                     "Alpha" => $BackgroundAlpha1
-                                );
+                                ];
                             } else {
-                                $BGColor = array(
+                                $BGColor = [
                                     "R" => $BackgroundR2,
                                     "G" => $BackgroundG2,
                                     "B" => $BackgroundB2,
                                     "Alpha" => $BackgroundAlpha2
-                                );
+                                ];
                             }
                             if ($LastX != null
                                 && $CycleBackground
@@ -3903,13 +3903,13 @@ abstract class Draw extends BaseDraw
                                     $this->GraphAreaY1 + $FloatingOffset,
                                     $XPos,
                                     $this->GraphAreaY2 - $FloatingOffset,
-                                    array(
+                                    [
                                         "R" => $GridR,
                                         "G" => $GridG,
                                         "B" => $GridB,
                                         "Alpha" => $GridAlpha,
                                         "Ticks" => $GridTicks
-                                    )
+                                    ]
                                 );
                             }
 
@@ -3919,12 +3919,12 @@ abstract class Draw extends BaseDraw
                                     $YPos - $OuterSubTickWidth,
                                     $XPos + $SubTicksSize,
                                     $YPos + $InnerSubTickWidth,
-                                    array(
+                                    [
                                         "R" => $SubTickR,
                                         "G" => $SubTickG,
                                         "B" => $SubTickB,
                                         "Alpha" => $SubTickAlpha
-                                    )
+                                    ]
                                 );
                             }
                             $this->drawLine(
@@ -3932,13 +3932,13 @@ abstract class Draw extends BaseDraw
                                 $YPos - $OuterTickWidth,
                                 $XPos,
                                 $YPos + $InnerTickWidth,
-                                array("R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha)
+                                ["R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha]
                             );
                             $Bounds = $this->drawText(
                                 $XPos,
                                 $YPos - $OuterTickWidth - 2,
                                 $Value,
-                                array("Align" => TEXT_ALIGN_BOTTOMMIDDLE)
+                                ["Align" => TEXT_ALIGN_BOTTOMMIDDLE]
                             );
                             $TxtHeight = $YPos - $OuterTickWidth - 2 - ($Bounds[1]["Y"] - $Bounds[2]["Y"]);
                             $MinTop = min($MinTop, $TxtHeight);
@@ -3953,7 +3953,7 @@ abstract class Draw extends BaseDraw
                                 $XPos,
                                 $YPos,
                                 $Parameters["Name"],
-                                array("Align" => TEXT_ALIGN_BOTTOMMIDDLE)
+                                ["Align" => TEXT_ALIGN_BOTTOMMIDDLE]
                             );
                             $MinTop = $Bounds[2]["Y"];
 
@@ -3969,7 +3969,7 @@ abstract class Draw extends BaseDraw
                                 $AxisPos["B"],
                                 $this->GraphAreaX2 - $Parameters["Margin"],
                                 $AxisPos["B"],
-                                array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                             );
                         } else {
                             $FloatingOffset = 0;
@@ -3978,7 +3978,7 @@ abstract class Draw extends BaseDraw
                                 $AxisPos["B"],
                                 $this->GraphAreaX2,
                                 $AxisPos["B"],
-                                array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha)
+                                ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha]
                             );
                         }
 
@@ -3988,12 +3988,12 @@ abstract class Draw extends BaseDraw
                                 $AxisPos["B"],
                                 $this->GraphAreaX2 + ($ArrowSize * 2),
                                 $AxisPos["B"],
-                                array(
+                                [
                                     "FillR" => $AxisR,
                                     "FillG" => $AxisG,
                                     "FillB" => $AxisB,
                                     "Size" => $ArrowSize
-                                )
+                                ]
                             );
                         }
 
@@ -4013,19 +4013,19 @@ abstract class Draw extends BaseDraw
                             );
 
                             if ($i % 2 == 1) {
-                                $BGColor = array(
+                                $BGColor = [
                                     "R" => $BackgroundR1,
                                     "G" => $BackgroundG1,
                                     "B" => $BackgroundB1,
                                     "Alpha" => $BackgroundAlpha1
-                                );
+                                ];
                             } else {
-                                $BGColor = array(
+                                $BGColor = [
                                     "R" => $BackgroundR2,
                                     "G" => $BackgroundG2,
                                     "B" => $BackgroundB2,
                                     "Alpha" => $BackgroundAlpha2
-                                );
+                                ];
                             }
                             if ($LastX != null
                                 && $CycleBackground
@@ -4046,13 +4046,13 @@ abstract class Draw extends BaseDraw
                                     $this->GraphAreaY1 + $FloatingOffset,
                                     $XPos,
                                     $this->GraphAreaY2 - $FloatingOffset,
-                                    array(
+                                    [
                                         "R" => $GridR,
                                         "G" => $GridG,
                                         "B" => $GridB,
                                         "Alpha" => $GridAlpha,
                                         "Ticks" => $GridTicks
-                                    )
+                                    ]
                                 );
                             }
 
@@ -4062,12 +4062,12 @@ abstract class Draw extends BaseDraw
                                     $YPos - $OuterSubTickWidth,
                                     $XPos + $SubTicksSize,
                                     $YPos + $InnerSubTickWidth,
-                                    array(
+                                    [
                                         "R" => $SubTickR,
                                         "G" => $SubTickG,
                                         "B" => $SubTickB,
                                         "Alpha" => $SubTickAlpha
-                                    )
+                                    ]
                                 );
                             }
                             $this->drawLine(
@@ -4075,13 +4075,13 @@ abstract class Draw extends BaseDraw
                                 $YPos - $OuterTickWidth,
                                 $XPos,
                                 $YPos + $InnerTickWidth,
-                                array("R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha)
+                                ["R" => $TickR, "G" => $TickG, "B" => $TickB, "Alpha" => $TickAlpha]
                             );
                             $Bounds = $this->drawText(
                                 $XPos,
                                 $YPos + $OuterTickWidth + 2,
                                 $Value,
-                                array("Align" => TEXT_ALIGN_TOPMIDDLE)
+                                ["Align" => TEXT_ALIGN_TOPMIDDLE]
                             );
                             $TxtHeight = $YPos + $OuterTickWidth + 2 + ($Bounds[1]["Y"] - $Bounds[2]["Y"]);
                             $MaxBottom = max($MaxBottom, $TxtHeight);
@@ -4096,7 +4096,7 @@ abstract class Draw extends BaseDraw
                                 $XPos,
                                 $YPos,
                                 $Parameters["Name"],
-                                array("Align" => TEXT_ALIGN_TOPMIDDLE)
+                                ["Align" => TEXT_ALIGN_TOPMIDDLE]
                             );
                             $MaxBottom = $Bounds[0]["Y"];
 
@@ -4116,7 +4116,7 @@ abstract class Draw extends BaseDraw
      * @param boolean $Format
      * @return array|null|integer
      */
-    public function drawXThreshold($Value, array $Format = array())
+    public function drawXThreshold($Value, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 255;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -4171,7 +4171,7 @@ abstract class Draw extends BaseDraw
             return 0;
         }
 
-        $CaptionSettings = array(
+        $CaptionSettings = [
             "DrawBox" => $DrawBox,
             "DrawBoxBorder" => $DrawBoxBorder,
             "BorderOffset" => $BorderOffset,
@@ -4190,7 +4190,7 @@ abstract class Draw extends BaseDraw
             "G" => $CaptionG,
             "B" => $CaptionB,
             "Alpha" => $CaptionAlpha
-        );
+        ];
 
         if ($Caption == null) {
             $Caption = $Value;
@@ -4215,14 +4215,14 @@ abstract class Draw extends BaseDraw
                     $YPos1,
                     $XPos,
                     $YPos2,
-                    array(
+                    [
                         "R" => $R,
                         "G" => $G,
                         "B" => $B,
                         "Alpha" => $Alpha,
                         "Ticks" => $Ticks,
                         "Weight" => $Weight
-                    )
+                    ]
                 );
 
                 if ($Wide) {
@@ -4231,26 +4231,26 @@ abstract class Draw extends BaseDraw
                         $YPos1,
                         $XPos - 1,
                         $YPos2,
-                        array(
+                        [
                             "R" => $R,
                             "G" => $G,
                             "B" => $B,
                             "Alpha" => $Alpha / $WideFactor,
                             "Ticks" => $Ticks
-                        )
+                        ]
                     );
                     $this->drawLine(
                         $XPos + 1,
                         $YPos1,
                         $XPos + 1,
                         $YPos2,
-                        array(
+                        [
                             "R" => $R,
                             "G" => $G,
                             "B" => $B,
                             "Alpha" => $Alpha / $WideFactor,
                             "Ticks" => $Ticks
-                        )
+                        ]
                     );
                 }
 
@@ -4265,7 +4265,7 @@ abstract class Draw extends BaseDraw
                     $this->drawText($XPos, $Y, $Caption, $CaptionSettings);
                 }
 
-                return array("X" => $XPos);
+                return ["X" => $XPos];
             }
         } elseif ($Data["Orientation"] == SCALE_POS_TOPBOTTOM) {
             $XStep = (($this->GraphAreaY2 - $this->GraphAreaY1) - $XScale[0] * 2) / $XScale[1];
@@ -4281,14 +4281,14 @@ abstract class Draw extends BaseDraw
                     $XPos,
                     $YPos2,
                     $XPos,
-                    array(
+                    [
                         "R" => $R,
                         "G" => $G,
                         "B" => $B,
                         "Alpha" => $Alpha,
                         "Ticks" => $Ticks,
                         "Weight" => $Weight
-                    )
+                    ]
                 );
 
                 if ($Wide) {
@@ -4297,26 +4297,26 @@ abstract class Draw extends BaseDraw
                         $XPos - 1,
                         $YPos2,
                         $XPos - 1,
-                        array(
+                        [
                             "R" => $R,
                             "G" => $G,
                             "B" => $B,
                             "Alpha" => $Alpha / $WideFactor,
                             "Ticks" => $Ticks
-                        )
+                        ]
                     );
                     $this->drawLine(
                         $YPos1,
                         $XPos + 1,
                         $YPos2,
                         $XPos + 1,
-                        array(
+                        [
                             "R" => $R,
                             "G" => $G,
                             "B" => $B,
                             "Alpha" => $Alpha / $WideFactor,
                             "Ticks" => $Ticks
-                        )
+                        ]
                     );
                 }
 
@@ -4332,7 +4332,7 @@ abstract class Draw extends BaseDraw
                     $this->drawText($Y, $XPos, $Caption, $CaptionSettings);
                 }
 
-                return array("X" => $XPos);
+                return ["X" => $XPos];
             }
         }
     }
@@ -4344,7 +4344,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return array|null
      */
-    public function drawXThresholdArea($Value1, $Value2, array $Format = array())
+    public function drawXThresholdArea($Value1, $Value2, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 255;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -4401,7 +4401,7 @@ abstract class Draw extends BaseDraw
                 $YPos1,
                 $XPos2,
                 $YPos2,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]
             );
 
             if ($Border) {
@@ -4410,26 +4410,26 @@ abstract class Draw extends BaseDraw
                     $YPos1,
                     $XPos1,
                     $YPos2,
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $BorderAlpha,
                         "Ticks" => $BorderTicks
-                    )
+                    ]
                 );
                 $this->drawLine(
                     $XPos2,
                     $YPos1,
                     $XPos2,
                     $YPos2,
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $BorderAlpha,
                         "Ticks" => $BorderTicks
-                    )
+                    ]
                 );
             }
 
@@ -4457,14 +4457,14 @@ abstract class Draw extends BaseDraw
                     $XPos,
                     $YPos,
                     $AreaName,
-                    array(
+                    [
                         "R" => $NameR,
                         "G" => $NameG,
                         "B" => $NameB,
                         "Alpha" => $NameAlpha,
                         "Angle" => $NameAngle,
                         "Align" => TEXT_ALIGN_MIDDLEMIDDLE
-                    )
+                    ]
                 );
                 if ($DisableShadowOnArea) {
                     $this->Shadow = false;
@@ -4472,7 +4472,7 @@ abstract class Draw extends BaseDraw
             }
 
             $this->Shadow = $RestoreShadow;
-            return array("X1" => $XPos1, "X2" => $XPos2);
+            return ["X1" => $XPos1, "X2" => $XPos2];
         } elseif ($Data["Orientation"] == SCALE_POS_TOPBOTTOM) {
             $XStep = (($this->GraphAreaY2 - $this->GraphAreaY1) - $XScale[0] * 2) / $XScale[1];
             $XPos1 = $this->GraphAreaY1 + $XScale[0] + $XStep * $Value1;
@@ -4498,7 +4498,7 @@ abstract class Draw extends BaseDraw
                 $XPos1,
                 $YPos2,
                 $XPos2,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]
             );
 
             if ($Border) {
@@ -4507,26 +4507,26 @@ abstract class Draw extends BaseDraw
                     $XPos1,
                     $YPos2,
                     $XPos1,
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $BorderAlpha,
                         "Ticks" => $BorderTicks
-                    )
+                    ]
                 );
                 $this->drawLine(
                     $YPos1,
                     $XPos2,
                     $YPos2,
                     $XPos2,
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $BorderAlpha,
                         "Ticks" => $BorderTicks
-                    )
+                    ]
                 );
             }
 
@@ -4539,14 +4539,14 @@ abstract class Draw extends BaseDraw
                     $YPos,
                     $XPos,
                     $AreaName,
-                    array(
+                    [
                         "R" => $NameR,
                         "G" => $NameG,
                         "B" => $NameB,
                         "Alpha" => $NameAlpha,
                         "Angle" => 0,
                         "Align" => TEXT_ALIGN_MIDDLEMIDDLE
-                    )
+                    ]
                 );
                 if ($DisableShadowOnArea) {
                     $this->Shadow = false;
@@ -4554,7 +4554,7 @@ abstract class Draw extends BaseDraw
             }
 
             $this->Shadow = $RestoreShadow;
-            return array("X1" => $XPos1, "X2" => $XPos2);
+            return ["X1" => $XPos1, "X2" => $XPos2];
         }
     }
 
@@ -4564,7 +4564,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return array|int
      */
-    public function drawThreshold($Value, array $Format = array())
+    public function drawThreshold($Value, array $Format = [])
     {
         $AxisID = isset($Format["AxisID"]) ? $Format["AxisID"] : 0;
         $R = isset($Format["R"]) ? $Format["R"] : 255;
@@ -4606,7 +4606,7 @@ abstract class Draw extends BaseDraw
             return 0;
         }
 
-        $CaptionSettings = array(
+        $CaptionSettings = [
             "DrawBox" => $DrawBox,
             "DrawBoxBorder" => $DrawBoxBorder,
             "BorderOffset" => $BorderOffset,
@@ -4625,7 +4625,7 @@ abstract class Draw extends BaseDraw
             "G" => $CaptionG,
             "B" => $CaptionB,
             "Alpha" => $CaptionAlpha
-        );
+        ];
 
         $Data = $this->DataSet->getData();
         $AbscissaMargin = $this->getAbscissaMargin($Data);
@@ -4641,7 +4641,7 @@ abstract class Draw extends BaseDraw
         }
 
         if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
-            $YPos = $this->scaleComputeY($Value, array("AxisID" => $AxisID));
+            $YPos = $this->scaleComputeY($Value, ["AxisID" => $AxisID]);
             if ($YPos >= $this->GraphAreaY1 + $Data["Axis"][$AxisID]["Margin"]
                 && $YPos <= $this->GraphAreaY2 - $Data["Axis"][$AxisID]["Margin"]
             ) {
@@ -4653,14 +4653,14 @@ abstract class Draw extends BaseDraw
                     $YPos,
                     $X2,
                     $YPos,
-                    array(
+                    [
                         "R" => $R,
                         "G" => $G,
                         "B" => $B,
                         "Alpha" => $Alpha,
                         "Ticks" => $Ticks,
                         "Weight" => $Weight
-                    )
+                    ]
                 );
 
                 if ($Wide) {
@@ -4669,26 +4669,26 @@ abstract class Draw extends BaseDraw
                         $YPos - 1,
                         $X2,
                         $YPos - 1,
-                        array(
+                        [
                             "R" => $R,
                             "G" => $G,
                             "B" => $B,
                             "Alpha" => $Alpha / $WideFactor,
                             "Ticks" => $Ticks
-                        )
+                        ]
                     );
                     $this->drawLine(
                         $X1,
                         $YPos + 1,
                         $X2,
                         $YPos + 1,
-                        array(
+                        [
                             "R" => $R,
                             "G" => $G,
                             "B" => $B,
                             "Alpha" => $Alpha / $WideFactor,
                             "Ticks" => $Ticks
-                        )
+                        ]
                     );
                 }
 
@@ -4705,11 +4705,11 @@ abstract class Draw extends BaseDraw
                 }
             }
 
-            return array("Y" => $YPos);
+            return ["Y" => $YPos];
         }
 
         if ($Data["Orientation"] == SCALE_POS_TOPBOTTOM) {
-            $XPos = $this->scaleComputeY($Value, array("AxisID" => $AxisID));
+            $XPos = $this->scaleComputeY($Value, ["AxisID" => $AxisID]);
             if ($XPos >= $this->GraphAreaX1 + $Data["Axis"][$AxisID]["Margin"]
                     && $XPos <= $this->GraphAreaX2 - $Data["Axis"][$AxisID]["Margin"]
             ) {
@@ -4721,14 +4721,14 @@ abstract class Draw extends BaseDraw
                     $Y1,
                     $XPos,
                     $Y2,
-                    array(
+                    [
                         "R" => $R,
                         "G" => $G,
                         "B" => $B,
                         "Alpha" => $Alpha,
                         "Ticks" => $Ticks,
                         "Weight" => $Weight
-                    )
+                    ]
                 );
 
                 if ($Wide) {
@@ -4737,26 +4737,26 @@ abstract class Draw extends BaseDraw
                         $Y1,
                         $XPos - 1,
                         $Y2,
-                        array(
+                        [
                             "R" => $R,
                             "G" => $G,
                             "B" => $B,
                             "Alpha" => $Alpha / $WideFactor,
                             "Ticks" => $Ticks
-                        )
+                        ]
                     );
                     $this->drawLine(
                         $XPos + 1,
                         $Y1,
                         $XPos + 1,
                         $Y2,
-                        array(
+                        [
                             "R" => $R,
                             "G" => $G,
                             "B" => $B,
                             "Alpha" => $Alpha / $WideFactor,
                             "Ticks" => $Ticks
-                        )
+                        ]
                     );
                 }
 
@@ -4774,7 +4774,7 @@ abstract class Draw extends BaseDraw
                 }
             }
 
-            return array("Y" => $XPos);
+            return ["Y" => $XPos];
         }
     }
 
@@ -4785,7 +4785,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return array|int|null
      */
-    public function drawThresholdArea($Value1, $Value2, array $Format = array())
+    public function drawThresholdArea($Value1, $Value2, array $Format = [])
     {
         $AxisID = isset($Format["AxisID"]) ? $Format["AxisID"] : 0;
         $R = isset($Format["R"]) ? $Format["R"] : 255;
@@ -4808,7 +4808,7 @@ abstract class Draw extends BaseDraw
         $NoMargin = isset($Format["NoMargin"]) ? $Format["NoMargin"] : false;
 
         if ($Value1 > $Value2) {
-            list($Value1, $Value2) = array($Value2, $Value1);
+            list($Value1, $Value2) = [$Value2, $Value1];
         }
 
         $RestoreShadow = $this->Shadow;
@@ -4833,8 +4833,8 @@ abstract class Draw extends BaseDraw
         if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
             $XPos1 = $this->GraphAreaX1 + $AbscissaMargin;
             $XPos2 = $this->GraphAreaX2 - $AbscissaMargin;
-            $YPos1 = $this->scaleComputeY($Value1, array("AxisID" => $AxisID));
-            $YPos2 = $this->scaleComputeY($Value2, array("AxisID" => $AxisID));
+            $YPos1 = $this->scaleComputeY($Value1, ["AxisID" => $AxisID]);
+            $YPos2 = $this->scaleComputeY($Value2, ["AxisID" => $AxisID]);
 
             if ($YPos1 < $this->GraphAreaY1 + $Data["Axis"][$AxisID]["Margin"]) {
                 $YPos1 = $this->GraphAreaY1 + $Data["Axis"][$AxisID]["Margin"];
@@ -4854,7 +4854,7 @@ abstract class Draw extends BaseDraw
                 $YPos1,
                 $XPos2,
                 $YPos2,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]
             );
             if ($Border) {
                 $this->drawLine(
@@ -4862,26 +4862,26 @@ abstract class Draw extends BaseDraw
                     $YPos1,
                     $XPos2,
                     $YPos1,
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $BorderAlpha,
                         "Ticks" => $BorderTicks
-                    )
+                    ]
                 );
                 $this->drawLine(
                     $XPos1,
                     $YPos2,
                     $XPos2,
                     $YPos2,
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $BorderAlpha,
                         "Ticks" => $BorderTicks
-                    )
+                    ]
                 );
             }
 
@@ -4893,14 +4893,14 @@ abstract class Draw extends BaseDraw
                     $XPos,
                     $YPos,
                     $AreaName,
-                    array(
+                    [
                         "R" => $NameR,
                         "G" => $NameG,
                         "B" => $NameB,
                         "Alpha" => $NameAlpha,
                         "Angle" => 0,
                         "Align" => TEXT_ALIGN_MIDDLEMIDDLE
-                    )
+                    ]
                 );
                 if ($DisableShadowOnArea) {
                     $this->Shadow = false;
@@ -4908,12 +4908,12 @@ abstract class Draw extends BaseDraw
             }
 
             $this->Shadow = $RestoreShadow;
-            return array("Y1" => $YPos1, "Y2" => $YPos2);
+            return ["Y1" => $YPos1, "Y2" => $YPos2];
         } elseif ($Data["Orientation"] == SCALE_POS_TOPBOTTOM) {
             $YPos1 = $this->GraphAreaY1 + $AbscissaMargin;
             $YPos2 = $this->GraphAreaY2 - $AbscissaMargin;
-            $XPos1 = $this->scaleComputeY($Value1, array("AxisID" => $AxisID));
-            $XPos2 = $this->scaleComputeY($Value2, array("AxisID" => $AxisID));
+            $XPos1 = $this->scaleComputeY($Value1, ["AxisID" => $AxisID]);
+            $XPos2 = $this->scaleComputeY($Value2, ["AxisID" => $AxisID]);
 
             if ($XPos1 < $this->GraphAreaX1 + $Data["Axis"][$AxisID]["Margin"]) {
                 $XPos1 = $this->GraphAreaX1 + $Data["Axis"][$AxisID]["Margin"];
@@ -4933,7 +4933,7 @@ abstract class Draw extends BaseDraw
                 $YPos1,
                 $XPos2,
                 $YPos2,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]
             );
             if ($Border) {
                 $this->drawLine(
@@ -4941,26 +4941,26 @@ abstract class Draw extends BaseDraw
                     $YPos1,
                     $XPos1,
                     $YPos2,
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $BorderAlpha,
                         "Ticks" => $BorderTicks
-                    )
+                    ]
                 );
                 $this->drawLine(
                     $XPos2,
                     $YPos1,
                     $XPos2,
                     $YPos2,
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $BorderAlpha,
                         "Ticks" => $BorderTicks
-                    )
+                    ]
                 );
             }
 
@@ -4988,14 +4988,14 @@ abstract class Draw extends BaseDraw
                     $YPos,
                     $XPos,
                     $AreaName,
-                    array(
+                    [
                         "R" => $NameR,
                         "G" => $NameG,
                         "B" => $NameB,
                         "Alpha" => $NameAlpha,
                         "Angle" => $NameAngle,
                         "Align" => TEXT_ALIGN_MIDDLEMIDDLE
-                    )
+                    ]
                 );
                 if ($DisableShadowOnArea) {
                     $this->Shadow = false;
@@ -5003,7 +5003,7 @@ abstract class Draw extends BaseDraw
             }
 
             $this->Shadow = $RestoreShadow;
-            return array("Y1" => $XPos1, "Y2" => $XPos2);
+            return ["Y1" => $XPos1, "Y2" => $XPos2];
         }
     }
 
@@ -5011,7 +5011,7 @@ abstract class Draw extends BaseDraw
      * Draw a plot chart
      * @param array $Format
      */
-    public function drawPlotChart(array $Format = array())
+    public function drawPlotChart(array $Format = [])
     {
         $PlotSize = isset($Format["PlotSize"]) ? $Format["PlotSize"] : null;
         $PlotBorder = isset($Format["PlotBorder"]) ? $Format["PlotBorder"] : false;
@@ -5081,7 +5081,7 @@ abstract class Draw extends BaseDraw
                     $SerieDescription = $SerieName;
                 }
 
-                $PosArray = $this->scaleComputeY($Serie["Data"], array("AxisID" => $Serie["Axis"]));
+                $PosArray = $this->scaleComputeY($Serie["Data"], ["AxisID" => $Serie["Axis"]]);
 
                 $this->DataSet->Data["Series"][$SerieName]["XOffset"] = 0;
 
@@ -5099,7 +5099,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $Y) {
@@ -5108,12 +5108,12 @@ abstract class Draw extends BaseDraw
                                 $X,
                                 $Y - $DisplayOffset - $SerieWeight - $BorderSize - $PicOffset,
                                 $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit),
-                                array(
+                                [
                                     "R" => $DisplayR,
                                     "G" => $DisplayG,
                                     "B" => $DisplayB,
                                     "Align" => TEXT_ALIGN_BOTTOMMIDDLE
-                                )
+                                ]
                             );
                         }
                         if ($Y != VOID) {
@@ -5174,7 +5174,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $X) {
@@ -5183,13 +5183,13 @@ abstract class Draw extends BaseDraw
                                 $X + $DisplayOffset + $SerieWeight + $BorderSize + $PicOffset,
                                 $Y,
                                 $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit),
-                                array(
+                                [
                                     "Angle" => 270,
                                     "R" => $DisplayR,
                                     "G" => $DisplayG,
                                     "B" => $DisplayB,
                                     "Align" => TEXT_ALIGN_BOTTOMMIDDLE
-                                )
+                                ]
                             );
                         }
                         if ($X != VOID) {
@@ -5240,7 +5240,7 @@ abstract class Draw extends BaseDraw
      * Draw a spline chart
      * @param array $Format
      */
-    public function drawSplineChart(array $Format = array())
+    public function drawSplineChart(array $Format = [])
     {
         $BreakVoid = isset($Format["BreakVoid"]) ? $Format["BreakVoid"] : true;
         $VoidTicks = isset($Format["VoidTicks"]) ? $Format["VoidTicks"] : 4;
@@ -5270,22 +5270,22 @@ abstract class Draw extends BaseDraw
                 $Weight = $Serie["Weight"];
 
                 if ($BreakR == null) {
-                    $BreakSettings = array(
+                    $BreakSettings = [
                         "R" => $R,
                         "G" => $G,
                         "B" => $B,
                         "Alpha" => $Alpha,
                         "Ticks" => $VoidTicks
-                    );
+                    ];
                 } else {
-                    $BreakSettings = array(
+                    $BreakSettings = [
                         "R" => $BreakR,
                         "G" => $BreakG,
                         "B" => $BreakB,
                         "Alpha" => $Alpha,
                         "Ticks" => $VoidTicks,
                         "Weight" => $Weight
-                    );
+                    ];
                 }
                 if ($DisplayColor == DISPLAY_AUTO) {
                     $DisplayR = $R;
@@ -5306,7 +5306,7 @@ abstract class Draw extends BaseDraw
 
                 $PosArray = $this->scaleComputeY(
                     $Serie["Data"],
-                    array("AxisID" => $Serie["Axis"])
+                    ["AxisID" => $Serie["Axis"]]
                 );
 
                 $this->DataSet->Data["Series"][$SerieName]["XOffset"] = 0;
@@ -5318,12 +5318,12 @@ abstract class Draw extends BaseDraw
                         $XStep = ($this->GraphAreaX2 - $this->GraphAreaX1 - $XMargin * 2) / $XDivs;
                     }
                     $X = $this->GraphAreaX1 + $XMargin;
-                    $WayPoints = array();
+                    $WayPoints = [];
                     $Force = $XStep / 5;
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     $LastGoodY = null;
@@ -5336,12 +5336,12 @@ abstract class Draw extends BaseDraw
                                 $X,
                                 $Y - $DisplayOffset,
                                 $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit),
-                                array(
+                                [
                                     "R" => $DisplayR,
                                     "G" => $DisplayG,
                                     "B" => $DisplayB,
                                     "Align" => TEXT_ALIGN_BOTTOMMIDDLE
-                                )
+                                ]
                             );
                         }
                         if ($RecordImageMap && $Y != VOID) {
@@ -5357,7 +5357,7 @@ abstract class Draw extends BaseDraw
                         if ($Y == VOID && $LastY != null) {
                             $this->drawSpline(
                                 $WayPoints,
-                                array(
+                                [
                                     "Force" => $Force,
                                     "R" => $R,
                                     "G" => $G,
@@ -5365,9 +5365,9 @@ abstract class Draw extends BaseDraw
                                     "Alpha" => $Alpha,
                                     "Ticks" => $Ticks,
                                     "Weight" => $Weight
-                                )
+                                ]
                             );
-                            $WayPoints = array();
+                            $WayPoints = [];
                         }
 
                         if ($Y != VOID && $LastY == null && $LastGoodY != null && !$BreakVoid) {
@@ -5375,7 +5375,7 @@ abstract class Draw extends BaseDraw
                         }
 
                         if ($Y != VOID) {
-                            $WayPoints[] = array($X, $Y);
+                            $WayPoints[] = [$X, $Y];
                         }
                         if ($Y != VOID) {
                             $LastGoodY = $Y;
@@ -5391,7 +5391,7 @@ abstract class Draw extends BaseDraw
                     }
                     $this->drawSpline(
                         $WayPoints,
-                        array(
+                        [
                             "Force" => $Force,
                             "R" => $R,
                             "G" => $G,
@@ -5399,7 +5399,7 @@ abstract class Draw extends BaseDraw
                             "Alpha" => $Alpha,
                             "Ticks" => $Ticks,
                             "Weight" => $Weight
-                        )
+                        ]
                     );
                 } else {
                     if ($XDivs == 0) {
@@ -5408,12 +5408,12 @@ abstract class Draw extends BaseDraw
                         $YStep = ($this->GraphAreaY2 - $this->GraphAreaY1 - $XMargin * 2) / $XDivs;
                     }
                     $Y = $this->GraphAreaY1 + $XMargin;
-                    $WayPoints = array();
+                    $WayPoints = [];
                     $Force = $YStep / 5;
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     $LastGoodY = null;
@@ -5431,13 +5431,13 @@ abstract class Draw extends BaseDraw
                                     $Format,
                                     $Unit
                                 ),
-                                array(
+                                [
                                     "Angle" => 270,
                                     "R" => $DisplayR,
                                     "G" => $DisplayG,
                                     "B" => $DisplayB,
                                     "Align" => TEXT_ALIGN_BOTTOMMIDDLE
-                                )
+                                ]
                             );
                         }
                         if ($RecordImageMap && $X != VOID) {
@@ -5453,7 +5453,7 @@ abstract class Draw extends BaseDraw
                         if ($X == VOID && $LastX != null) {
                             $this->drawSpline(
                                 $WayPoints,
-                                array(
+                                [
                                     "Force" => $Force,
                                     "R" => $R,
                                     "G" => $G,
@@ -5461,9 +5461,9 @@ abstract class Draw extends BaseDraw
                                     "Alpha" => $Alpha,
                                     "Ticks" => $Ticks,
                                     "Weight" => $Weight
-                                )
+                                ]
                             );
-                            $WayPoints = array();
+                            $WayPoints = [];
                         }
 
                         if ($X != VOID && $LastX == null && $LastGoodX != null && !$BreakVoid) {
@@ -5471,7 +5471,7 @@ abstract class Draw extends BaseDraw
                         }
 
                         if ($X != VOID) {
-                            $WayPoints[] = array($X, $Y);
+                            $WayPoints[] = [$X, $Y];
                         }
                         if ($X != VOID) {
                             $LastGoodX = $X;
@@ -5487,7 +5487,7 @@ abstract class Draw extends BaseDraw
                     }
                     $this->drawSpline(
                         $WayPoints,
-                        array(
+                        [
                             "Force" => $Force,
                             "R" => $R,
                             "G" => $G,
@@ -5495,7 +5495,7 @@ abstract class Draw extends BaseDraw
                             "Alpha" => $Alpha,
                             "Ticks" => $Ticks,
                             "Weight" => $Weight
-                        )
+                        ]
                     );
                 }
             }
@@ -5506,7 +5506,7 @@ abstract class Draw extends BaseDraw
      * Draw a filled spline chart
      * @param array $Format
      */
-    public function drawFilledSplineChart(array $Format = array())
+    public function drawFilledSplineChart(array $Format = [])
     {
         $DisplayValues = isset($Format["DisplayValues"]) ? $Format["DisplayValues"] : false;
         $DisplayOffset = isset($Format["DisplayOffset"]) ? $Format["DisplayOffset"] : 2;
@@ -5541,21 +5541,21 @@ abstract class Draw extends BaseDraw
 
                 $PosArray = $this->scaleComputeY(
                     $Serie["Data"],
-                    array("AxisID" => $Serie["Axis"])
+                    ["AxisID" => $Serie["Axis"]]
                 );
                 if ($AroundZero) {
-                    $YZero = $this->scaleComputeY(0, array("AxisID" => $Serie["Axis"]));
+                    $YZero = $this->scaleComputeY(0, ["AxisID" => $Serie["Axis"]]);
                 }
 
                 if ($Threshold != null) {
                     foreach ($Threshold as $Key => $Params) {
                         $Threshold[$Key]["MinX"] = $this->scaleComputeY(
                             $Params["Min"],
-                            array("AxisID" => $Serie["Axis"])
+                            ["AxisID" => $Serie["Axis"]]
                         );
                         $Threshold[$Key]["MaxX"] = $this->scaleComputeY(
                             $Params["Max"],
-                            array("AxisID" => $Serie["Axis"])
+                            ["AxisID" => $Serie["Axis"]]
                         );
                     }
                 }
@@ -5569,7 +5569,7 @@ abstract class Draw extends BaseDraw
                         $XStep = ($this->GraphAreaX2 - $this->GraphAreaX1 - $XMargin * 2) / $XDivs;
                     }
                     $X = $this->GraphAreaX1 + $XMargin;
-                    $WayPoints = array();
+                    $WayPoints = [];
                     $Force = $XStep / 5;
 
                     if (!$AroundZero) {
@@ -5584,7 +5584,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $Y) {
@@ -5598,23 +5598,23 @@ abstract class Draw extends BaseDraw
                                     $Format,
                                     $Unit
                                 ),
-                                array(
+                                [
                                     "R" => $DisplayR,
                                     "G" => $DisplayG,
                                     "B" => $DisplayB,
                                     "Align" => TEXT_ALIGN_BOTTOMMIDDLE
-                                )
+                                ]
                             );
                         }
                         if ($Y == VOID) {
                             $Area = $this->drawSpline(
                                 $WayPoints,
-                                array("Force" => $Force, "PathOnly" => true)
+                                ["Force" => $Force, "PathOnly" => true]
                             );
 
                             if (count($Area)) {
                                 foreach ($Area as $key => $Points) {
-                                    $Corners = array();
+                                    $Corners = [];
                                     $Corners[] = $Area[$key][0]["X"];
                                     $Corners[] = $YZero;
                                     foreach ($Points as $subKey => $Point) {
@@ -5630,40 +5630,40 @@ abstract class Draw extends BaseDraw
 
                                     $this->drawPolygonChart(
                                         $Corners,
-                                        array(
+                                        [
                                             "R" => $R,
                                             "G" => $G,
                                             "B" => $B,
                                             "Alpha" => $Alpha / 2,
                                             "NoBorder" => true,
                                             "Threshold" => $Threshold
-                                        )
+                                        ]
                                     );
                                 }
                                 $this->drawSpline(
                                     $WayPoints,
-                                    array(
+                                    [
                                         "Force" => $Force,
                                         "R" => $R,
                                         "G" => $G,
                                         "B" => $B,
                                         "Alpha" => $Alpha,
                                         "Ticks" => $Ticks
-                                    )
+                                    ]
                                 );
                             }
 
-                            $WayPoints = array();
+                            $WayPoints = [];
                         } else {
-                            $WayPoints[] = array($X, $Y - .5); /* -.5 for AA visual fix */
+                            $WayPoints[] = [$X, $Y - .5]; /* -.5 for AA visual fix */
                         }
                         $X = $X + $XStep;
                     }
-                    $Area = $this->drawSpline($WayPoints, array("Force" => $Force, "PathOnly" => true));
+                    $Area = $this->drawSpline($WayPoints, ["Force" => $Force, "PathOnly" => true]);
 
                     if (count($Area)) {
                         foreach ($Area as $key => $Points) {
-                            $Corners = array();
+                            $Corners = [];
                             $Corners[] = $Area[$key][0]["X"];
                             $Corners[] = $YZero;
                             foreach ($Points as $subKey => $Point) {
@@ -5679,26 +5679,26 @@ abstract class Draw extends BaseDraw
 
                             $this->drawPolygonChart(
                                 $Corners,
-                                array(
+                                [
                                     "R" => $R,
                                     "G" => $G,
                                     "B" => $B,
                                     "Alpha" => $Alpha / 2,
                                     "NoBorder" => true,
                                     "Threshold" => $Threshold
-                                )
+                                ]
                             );
                         }
                         $this->drawSpline(
                             $WayPoints,
-                            array(
+                            [
                                 "Force" => $Force,
                                 "R" => $R,
                                 "G" => $G,
                                 "B" => $B,
                                 "Alpha" => $Alpha,
                                 "Ticks" => $Ticks
-                            )
+                            ]
                         );
                     }
                 } else {
@@ -5708,7 +5708,7 @@ abstract class Draw extends BaseDraw
                         $YStep = ($this->GraphAreaY2 - $this->GraphAreaY1 - $XMargin * 2) / $XDivs;
                     }
                     $Y = $this->GraphAreaY1 + $XMargin;
-                    $WayPoints = array();
+                    $WayPoints = [];
                     $Force = $YStep / 5;
 
                     if (!$AroundZero) {
@@ -5723,7 +5723,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $X) {
@@ -5732,24 +5732,24 @@ abstract class Draw extends BaseDraw
                                 $X + $DisplayOffset,
                                 $Y,
                                 $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit),
-                                array(
+                                [
                                     "Angle" => 270,
                                     "R" => $DisplayR,
                                     "G" => $DisplayG,
                                     "B" => $DisplayB,
                                     "Align" => TEXT_ALIGN_BOTTOMMIDDLE
-                                )
+                                ]
                             );
                         }
                         if ($X == VOID) {
                             $Area = $this->drawSpline(
                                 $WayPoints,
-                                array("Force" => $Force, "PathOnly" => true)
+                                ["Force" => $Force, "PathOnly" => true]
                             );
 
                             if (count($Area)) {
                                 foreach ($Area as $key => $Points) {
-                                    $Corners = array();
+                                    $Corners = [];
                                     $Corners[] = $YZero;
                                     $Corners[] = $Area[$key][0]["Y"];
                                     foreach ($Points as $subKey => $Point) {
@@ -5765,43 +5765,43 @@ abstract class Draw extends BaseDraw
 
                                     $this->drawPolygonChart(
                                         $Corners,
-                                        array(
+                                        [
                                             "R" => $R,
                                             "G" => $G,
                                             "B" => $B,
                                             "Alpha" => $Alpha / 2,
                                             "NoBorder" => true,
                                             "Threshold" => $Threshold
-                                        )
+                                        ]
                                     );
                                 }
                                 $this->drawSpline(
                                     $WayPoints,
-                                    array(
+                                    [
                                         "Force" => $Force,
                                         "R" => $R,
                                         "G" => $G,
                                         "B" => $B,
                                         "Alpha" => $Alpha,
                                         "Ticks" => $Ticks
-                                    )
+                                    ]
                                 );
                             }
 
-                            $WayPoints = array();
+                            $WayPoints = [];
                         } else {
-                            $WayPoints[] = array($X, $Y);
+                            $WayPoints[] = [$X, $Y];
                         }
                         $Y = $Y + $YStep;
                     }
                     $Area = $this->drawSpline(
                         $WayPoints,
-                        array("Force" => $Force, "PathOnly" => true)
+                        ["Force" => $Force, "PathOnly" => true]
                     );
 
                     if (count($Area)) {
                         foreach ($Area as $key => $Points) {
-                            $Corners = array();
+                            $Corners = [];
                             $Corners[] = $YZero;
                             $Corners[] = $Area[$key][0]["Y"];
                             foreach ($Points as $subKey => $Point) {
@@ -5817,26 +5817,26 @@ abstract class Draw extends BaseDraw
 
                             $this->drawPolygonChart(
                                 $Corners,
-                                array(
+                                [
                                     "R" => $R,
                                     "G" => $G,
                                     "B" => $B,
                                     "Alpha" => $Alpha / 2,
                                     "NoBorder" => true,
                                     "Threshold" => $Threshold
-                                )
+                                ]
                             );
                         }
                         $this->drawSpline(
                             $WayPoints,
-                            array(
+                            [
                                 "Force" => $Force,
                                 "R" => $R,
                                 "G" => $G,
                                 "B" => $B,
                                 "Alpha" => $Alpha,
                                 "Ticks" => $Ticks
-                            )
+                            ]
                         );
                     }
                 }
@@ -5848,7 +5848,7 @@ abstract class Draw extends BaseDraw
      * Draw a line chart
      * @param array $Format
      */
-    public function drawLineChart(array $Format = array())
+    public function drawLineChart(array $Format = [])
     {
         $BreakVoid = isset($Format["BreakVoid"]) ? $Format["BreakVoid"] : true;
         $VoidTicks = isset($Format["VoidTicks"]) ? $Format["VoidTicks"] : 4;
@@ -5890,23 +5890,23 @@ abstract class Draw extends BaseDraw
                 }
 
                 if ($BreakR == null) {
-                    $BreakSettings = array(
+                    $BreakSettings = [
                         "R" => $R,
                         "G" => $G,
                         "B" => $B,
                         "Alpha" => $Alpha,
                         "Ticks" => $VoidTicks,
                         "Weight" => $Weight
-                    );
+                    ];
                 } else {
-                    $BreakSettings = array(
+                    $BreakSettings = [
                         "R" => $BreakR,
                         "G" => $BreakG,
                         "B" => $BreakB,
                         "Alpha" => $Alpha,
                         "Ticks" => $VoidTicks,
                         "Weight" => $Weight
-                    );
+                    ];
                 }
                 if ($DisplayColor == DISPLAY_AUTO) {
                     $DisplayR = $R;
@@ -5927,7 +5927,7 @@ abstract class Draw extends BaseDraw
 
                 $PosArray = $this->scaleComputeY(
                     $Serie["Data"],
-                    array("AxisID" => $Serie["Axis"])
+                    ["AxisID" => $Serie["Axis"]]
                 );
 
                 $this->DataSet->Data["Series"][$SerieName]["XOffset"] = 0;
@@ -5944,7 +5944,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     $LastGoodY = null;
@@ -5967,12 +5967,12 @@ abstract class Draw extends BaseDraw
                                     $Format,
                                     $Unit
                                 ),
-                                array(
+                                [
                                     "R" => $DisplayR,
                                     "G" => $DisplayG,
                                     "B" => $DisplayB,
                                     "Align" => $Align
-                                )
+                                ]
                             );
                         }
 
@@ -5992,14 +5992,14 @@ abstract class Draw extends BaseDraw
                                 $LastY,
                                 $X,
                                 $Y,
-                                array(
+                                [
                                     "R" => $R,
                                     "G" => $G,
                                     "B" => $B,
                                     "Alpha" => $Alpha,
                                     "Ticks" => $Ticks,
                                     "Weight" => $Weight
-                                )
+                                ]
                             );
                         }
                         if ($Y != VOID && $LastY == null && $LastGoodY != null && !$BreakVoid) {
@@ -6037,7 +6037,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     $LastGoodY = null;
@@ -6053,13 +6053,13 @@ abstract class Draw extends BaseDraw
                                     $Format,
                                     $Unit
                                 ),
-                                array(
+                                [
                                     "Angle" => 270,
                                     "R" => $DisplayR,
                                     "G" => $DisplayG,
                                     "B" => $DisplayB,
                                     "Align" => TEXT_ALIGN_BOTTOMMIDDLE
-                                )
+                                ]
                             );
                         }
 
@@ -6079,14 +6079,14 @@ abstract class Draw extends BaseDraw
                                 $LastY,
                                 $X,
                                 $Y,
-                                array(
+                                [
                                     "R" => $R,
                                     "G" => $G,
                                     "B" => $B,
                                     "Alpha" => $Alpha,
                                     "Ticks" => $Ticks,
                                     "Weight" => $Weight
-                                )
+                                ]
                             );
                         }
                         if ($X != VOID && $LastX == null && $LastGoodY != null && !$BreakVoid) {
@@ -6124,7 +6124,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return null|integer
      */
-    public function drawZoneChart($SerieA, $SerieB, array $Format = array())
+    public function drawZoneChart($SerieA, $SerieB, array $Format = [])
     {
         $AxisID = isset($Format["AxisID"]) ? $Format["AxisID"] : 0;
         $LineR = isset($Format["LineR"]) ? $Format["LineR"] : 150;
@@ -6153,8 +6153,8 @@ abstract class Draw extends BaseDraw
         $Mode = $Data["Axis"][$AxisID]["Display"];
         $Format = $Data["Axis"][$AxisID]["Format"];
 
-        $PosArrayA = $this->scaleComputeY($SerieAData, array("AxisID" => $AxisID));
-        $PosArrayB = $this->scaleComputeY($SerieBData, array("AxisID" => $AxisID));
+        $PosArrayA = $this->scaleComputeY($SerieAData, ["AxisID" => $AxisID]);
+        $PosArrayB = $this->scaleComputeY($SerieBData, ["AxisID" => $AxisID]);
         if (count($PosArrayA) != count($PosArrayB)) {
             return 0;
         }
@@ -6171,8 +6171,8 @@ abstract class Draw extends BaseDraw
 
             $LastY1 = null;
             $LastY2 = null;
-            $BoundsA = array();
-            $BoundsB = array();
+            $BoundsA = [];
+            $BoundsB = [];
             foreach ($PosArrayA as $Key => $Y1) {
                 $Y2 = $PosArrayB[$Key];
 
@@ -6190,12 +6190,12 @@ abstract class Draw extends BaseDraw
             $Bounds = array_merge($BoundsA, $this->reversePlots($BoundsB));
             $this->drawPolygonChart(
                 $Bounds,
-                array(
+                [
                     "R" => $AreaR,
                     "G" => $AreaG,
                     "B" => $AreaB,
                     "Alpha" => $AreaAlpha
-                )
+                ]
             );
 
             for ($i = 0; $i <= count($BoundsA) - 4; $i = $i + 2) {
@@ -6204,26 +6204,26 @@ abstract class Draw extends BaseDraw
                     $BoundsA[$i + 1],
                     $BoundsA[$i + 2],
                     $BoundsA[$i + 3],
-                    array(
+                    [
                         "R" => $LineR,
                         "G" => $LineG,
                         "B" => $LineB,
                         "Alpha" => $LineAlpha,
                         "Ticks" => $LineTicks
-                    )
+                    ]
                 );
                 $this->drawLine(
                     $BoundsB[$i],
                     $BoundsB[$i + 1],
                     $BoundsB[$i + 2],
                     $BoundsB[$i + 3],
-                    array(
+                    [
                         "R" => $LineR,
                         "G" => $LineG,
                         "B" => $LineB,
                         "Alpha" => $LineAlpha,
                         "Ticks" => $LineTicks
-                    )
+                    ]
                 );
             }
         } else {
@@ -6238,8 +6238,8 @@ abstract class Draw extends BaseDraw
 
             $LastX1 = null;
             $LastX2 = null;
-            $BoundsA = array();
-            $BoundsB = array();
+            $BoundsA = [];
+            $BoundsB = [];
             foreach ($PosArrayA as $Key => $X1) {
                 $X2 = $PosArrayB[$Key];
 
@@ -6257,7 +6257,7 @@ abstract class Draw extends BaseDraw
             $Bounds = array_merge($BoundsA, $this->reversePlots($BoundsB));
             $this->drawPolygonChart(
                 $Bounds,
-                array("R" => $AreaR, "G" => $AreaG, "B" => $AreaB, "Alpha" => $AreaAlpha)
+                ["R" => $AreaR, "G" => $AreaG, "B" => $AreaB, "Alpha" => $AreaAlpha]
             );
 
             for ($i = 0; $i <= count($BoundsA) - 4; $i = $i + 2) {
@@ -6266,26 +6266,26 @@ abstract class Draw extends BaseDraw
                     $BoundsA[$i + 1],
                     $BoundsA[$i + 2],
                     $BoundsA[$i + 3],
-                    array(
+                    [
                         "R" => $LineR,
                         "G" => $LineG,
                         "B" => $LineB,
                         "Alpha" => $LineAlpha,
                         "Ticks" => $LineTicks
-                    )
+                    ]
                 );
                 $this->drawLine(
                     $BoundsB[$i],
                     $BoundsB[$i + 1],
                     $BoundsB[$i + 2],
                     $BoundsB[$i + 3],
-                    array(
+                    [
                         "R" => $LineR,
                         "G" => $LineG,
                         "B" => $LineB,
                         "Alpha" => $LineAlpha,
                         "Ticks" => $LineTicks
-                    )
+                    ]
                 );
             }
         }
@@ -6295,7 +6295,7 @@ abstract class Draw extends BaseDraw
      * Draw a step chart
      * @param array $Format
      */
-    public function drawStepChart(array $Format = array())
+    public function drawStepChart(array $Format = [])
     {
         $BreakVoid = isset($Format["BreakVoid"]) ? $Format["BreakVoid"] : false;
         $ReCenter = isset($Format["ReCenter"]) ? $Format["ReCenter"] : true;
@@ -6332,23 +6332,23 @@ abstract class Draw extends BaseDraw
                 }
 
                 if ($BreakR == null) {
-                    $BreakSettings = array(
+                    $BreakSettings = [
                         "R" => $R,
                         "G" => $G,
                         "B" => $B,
                         "Alpha" => $Alpha,
                         "Ticks" => $VoidTicks,
                         "Weight" => $Weight
-                    );
+                    ];
                 } else {
-                    $BreakSettings = array(
+                    $BreakSettings = [
                         "R" => $BreakR,
                         "G" => $BreakG,
                         "B" => $BreakB,
                         "Alpha" => $Alpha,
                         "Ticks" => $VoidTicks,
                         "Weight" => $Weight
-                    );
+                    ];
                 }
                 if ($DisplayColor == DISPLAY_AUTO) {
                     $DisplayR = $R;
@@ -6360,18 +6360,18 @@ abstract class Draw extends BaseDraw
                 $Mode = $Data["Axis"][$AxisID]["Display"];
                 $Format = $Data["Axis"][$AxisID]["Format"];
                 $Unit = $Data["Axis"][$AxisID]["Unit"];
-                $Color = array(
+                $Color = [
                     "R" => $R,
                     "G" => $G,
                     "B" => $B,
                     "Alpha" => $Alpha,
                     "Ticks" => $Ticks,
                     "Weight" => $Weight
-                );
+                ];
 
                 $PosArray = $this->scaleComputeY(
                     $Serie["Data"],
-                    array("AxisID" => $Serie["Axis"])
+                    ["AxisID" => $Serie["Axis"]]
                 );
 
                 $this->DataSet->Data["Series"][$SerieName]["XOffset"] = 0;
@@ -6388,7 +6388,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     $LastGoodY = null;
@@ -6407,7 +6407,7 @@ abstract class Draw extends BaseDraw
                                 $X,
                                 $Y - $Offset - $Weight,
                                 $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit),
-                                array("R" => $DisplayR, "G" => $DisplayG, "B" => $DisplayB, "Align" => $Align)
+                                ["R" => $DisplayR, "G" => $DisplayG, "B" => $DisplayB, "Align" => $Align]
                             );
                         }
 
@@ -6556,7 +6556,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     $LastGoodY = null;
@@ -6575,12 +6575,12 @@ abstract class Draw extends BaseDraw
                                 $X + $Offset + $Weight,
                                 $Y,
                                 $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit),
-                                array(
+                                [
                                     "R" => $DisplayR,
                                     "G" => $DisplayG,
                                     "B" => $DisplayB,
                                     "Align" => $Align
-                                )
+                                ]
                             );
                         }
 
@@ -6719,7 +6719,7 @@ abstract class Draw extends BaseDraw
      * Draw a step chart
      * @param array $Format
      */
-    public function drawFilledStepChart(array $Format = array())
+    public function drawFilledStepChart(array $Format = [])
     {
         $ReCenter = isset($Format["ReCenter"]) ? $Format["ReCenter"] : true;
         $DisplayValues = isset($Format["DisplayValues"]) ? $Format["DisplayValues"] : false;
@@ -6751,15 +6751,15 @@ abstract class Draw extends BaseDraw
                 $AxisID = $Serie["Axis"];
                 $Format = $Data["Axis"][$AxisID]["Format"];
 
-                $Color = array("R" => $R, "G" => $G, "B" => $B);
+                $Color = ["R" => $R, "G" => $G, "B" => $B];
                 if ($ForceTransparency != null) {
                     $Color["Alpha"] = $ForceTransparency;
                 } else {
                     $Color["Alpha"] = $Alpha;
                 }
 
-                $PosArray = $this->scaleComputeY($Serie["Data"], array("AxisID" => $Serie["Axis"]));
-                $YZero = $this->scaleComputeY(0, array("AxisID" => $Serie["Axis"]));
+                $PosArray = $this->scaleComputeY($Serie["Data"], ["AxisID" => $Serie["Axis"]]);
+                $YZero = $this->scaleComputeY(0, ["AxisID" => $Serie["Axis"]]);
 
                 $this->DataSet->Data["Series"][$SerieName]["XOffset"] = 0;
 
@@ -6786,12 +6786,12 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     $LastGoodY = null;
                     $LastGoodX = null;
-                    $Points = array();
+                    $Points = [];
                     $Init = false;
                     foreach ($PosArray as $Key => $Y) {
                         if ($Y == VOID && $LastX != null && $LastY != null && count($Points)) {
@@ -6802,7 +6802,7 @@ abstract class Draw extends BaseDraw
                             $Points[] = $X;
                             $Points[] = $YZero;
                             $this->drawPolygon($Points, $Color);
-                            $Points = array();
+                            $Points = [];
                         }
 
                         if ($Y != VOID && $LastX != null && $LastY != null) {
@@ -6868,12 +6868,12 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     $LastGoodY = null;
                     $LastGoodX = null;
-                    $Points = array();
+                    $Points = [];
                     foreach ($PosArray as $Key => $X) {
                         if ($X == VOID && $LastX != null && $LastY != null && count($Points)) {
                             $Points[] = $LastX;
@@ -6883,7 +6883,7 @@ abstract class Draw extends BaseDraw
                             $Points[] = $YZero;
                             $Points[] = $Y;
                             $this->drawPolygon($Points, $Color);
-                            $Points = array();
+                            $Points = [];
                         }
 
                         if ($X != VOID && $LastX != null && $LastY != null) {
@@ -6938,7 +6938,7 @@ abstract class Draw extends BaseDraw
      * Draw an area chart
      * @param array $Format
      */
-    public function drawAreaChart(array $Format = array())
+    public function drawAreaChart(array $Format = [])
     {
         $DisplayValues = isset($Format["DisplayValues"]) ? $Format["DisplayValues"] : false;
         $DisplayOffset = isset($Format["DisplayOffset"]) ? $Format["DisplayOffset"] : 2;
@@ -6973,18 +6973,18 @@ abstract class Draw extends BaseDraw
                 $Format = $Data["Axis"][$AxisID]["Format"];
                 $Unit = $Data["Axis"][$AxisID]["Unit"];
 
-                $PosArray = $this->scaleComputeY($Serie["Data"], array("AxisID" => $Serie["Axis"]));
-                $YZero = $this->scaleComputeY(0, array("AxisID" => $Serie["Axis"]));
+                $PosArray = $this->scaleComputeY($Serie["Data"], ["AxisID" => $Serie["Axis"]]);
+                $YZero = $this->scaleComputeY(0, ["AxisID" => $Serie["Axis"]]);
 
                 if ($Threshold != null) {
                     foreach ($Threshold as $Key => $Params) {
                         $Threshold[$Key]["MinX"] = $this->scaleComputeY(
                             $Params["Min"],
-                            array("AxisID" => $Serie["Axis"])
+                            ["AxisID" => $Serie["Axis"]]
                         );
                         $Threshold[$Key]["MaxX"] = $this->scaleComputeY(
                             $Params["Max"],
-                            array("AxisID" => $Serie["Axis"])
+                            ["AxisID" => $Serie["Axis"]]
                         );
                     }
                 }
@@ -6996,7 +6996,7 @@ abstract class Draw extends BaseDraw
                         $YZero = $this->GraphAreaY2 - 1;
                     }
 
-                    $Areas = array();
+                    $Areas = [];
                     $AreaID = 0;
                     $Areas[$AreaID][] = $this->GraphAreaX1 + $XMargin;
                     if ($AroundZero) {
@@ -7016,7 +7016,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $Y) {
@@ -7032,7 +7032,7 @@ abstract class Draw extends BaseDraw
                                 $X,
                                 $Y - $Offset,
                                 $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit),
-                                array("R" => $DisplayR, "G" => $DisplayG, "B" => $DisplayB, "Align" => $Align)
+                                ["R" => $DisplayR, "G" => $DisplayG, "B" => $DisplayB, "Align" => $Align]
                             );
                         }
 
@@ -7075,7 +7075,7 @@ abstract class Draw extends BaseDraw
 
                     /* Handle shadows in the areas */
                     if ($this->Shadow) {
-                        $ShadowArea = array();
+                        $ShadowArea = [];
                         foreach ($Areas as $Key => $Points) {
                             $ShadowArea[$Key] = [];
                             foreach ($Points as $Key2 => $Value) {
@@ -7090,24 +7090,24 @@ abstract class Draw extends BaseDraw
                         foreach ($ShadowArea as $Key => $Points) {
                             $this->drawPolygonChart(
                                 $Points,
-                                array(
+                                [
                                     "R" => $this->ShadowR,
                                     "G" => $this->ShadowG,
                                     "B" => $this->ShadowB,
                                     "Alpha" => $this->Shadowa
-                                )
+                                ]
                             );
                         }
                     }
 
                     $Alpha = $ForceTransparency != null ? $ForceTransparency : $Alpha;
-                    $Color = array(
+                    $Color = [
                         "R" => $R,
                         "G" => $G,
                         "B" => $B,
                         "Alpha" => $Alpha,
                         "Threshold" => $Threshold
-                    );
+                    ];
 
                     foreach ($Areas as $Key => $Points) {
                         $this->drawPolygonChart($Points, $Color);
@@ -7120,7 +7120,7 @@ abstract class Draw extends BaseDraw
                         $YZero = $this->GraphAreaX2 - 1;
                     }
 
-                    $Areas = array();
+                    $Areas = [];
                     $AreaID = 0;
                     if ($AroundZero) {
                         $Areas[$AreaID][] = $YZero;
@@ -7140,7 +7140,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $X) {
@@ -7156,13 +7156,13 @@ abstract class Draw extends BaseDraw
                                 $X + $Offset,
                                 $Y,
                                 $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit),
-                                array(
+                                [
                                     "Angle" => 270,
                                     "R" => $DisplayR,
                                     "G" => $DisplayG,
                                     "B" => $DisplayB,
                                     "Align" => $Align
-                                )
+                                ]
                             );
                         }
 
@@ -7207,7 +7207,7 @@ abstract class Draw extends BaseDraw
 
                     /* Handle shadows in the areas */
                     if ($this->Shadow) {
-                        $ShadowArea = array();
+                        $ShadowArea = [];
                         foreach ($Areas as $Key => $Points) {
                             $ShadowArea[$Key] = [];
                             foreach ($Points as $Key2 => $Value) {
@@ -7222,18 +7222,18 @@ abstract class Draw extends BaseDraw
                         foreach ($ShadowArea as $Key => $Points) {
                             $this->drawPolygonChart(
                                 $Points,
-                                array(
+                                [
                                     "R" => $this->ShadowR,
                                     "G" => $this->ShadowG,
                                     "B" => $this->ShadowB,
                                     "Alpha" => $this->Shadowa
-                                )
+                                ]
                             );
                         }
                     }
 
                     $Alpha = $ForceTransparency != null ? $ForceTransparency : $Alpha;
-                    $Color = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Threshold" => $Threshold);
+                    $Color = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Threshold" => $Threshold];
 
                     foreach ($Areas as $Key => $Points) {
                         $this->drawPolygonChart($Points, $Color);
@@ -7247,7 +7247,7 @@ abstract class Draw extends BaseDraw
      * Draw a bar chart
      * @param array $Format
      */
-    public function drawBarChart(array $Format = array())
+    public function drawBarChart(array $Format = [])
     {
         $Floating0Serie = isset($Format["Floating0Serie"]) ? $Format["Floating0Serie"] : null;
         $Floating0Value = isset($Format["Floating0Value"]) ? $Format["Floating0Value"] : null;
@@ -7327,13 +7327,13 @@ abstract class Draw extends BaseDraw
                 if ($InnerBorderR == -1) {
                     $InnerColor = null;
                 } else {
-                    $InnerColor = array(
+                    $InnerColor = [
                         "R" => $InnerBorderR,
                         "G" => $InnerBorderG,
                         "B" => $InnerBorderB
-                    );
+                    ];
                 }
-                $Color = array(
+                $Color = [
                     "R" => $R,
                     "G" => $G,
                     "B" => $B,
@@ -7341,7 +7341,7 @@ abstract class Draw extends BaseDraw
                     "BorderR" => $BorderR,
                     "BorderG" => $BorderG,
                     "BorderB" => $BorderB
-                );
+                ];
 
                 $AxisID = $Serie["Axis"];
                 $Mode = $Data["Axis"][$AxisID]["Display"];
@@ -7356,16 +7356,16 @@ abstract class Draw extends BaseDraw
 
                 $PosArray = $this->scaleComputeY(
                     $Serie["Data"],
-                    array("AxisID" => $Serie["Axis"])
+                    ["AxisID" => $Serie["Axis"]]
                 );
 
                 if ($Floating0Value != null) {
                     $YZero = $this->scaleComputeY(
                         $Floating0Value,
-                        array("AxisID" => $Serie["Axis"])
+                        ["AxisID" => $Serie["Axis"]]
                     );
                 } else {
-                    $YZero = $this->scaleComputeY(0, array("AxisID" => $Serie["Axis"]));
+                    $YZero = $this->scaleComputeY(0, ["AxisID" => $Serie["Axis"]]);
                 }
 
                 if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
@@ -7409,7 +7409,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
 
@@ -7422,7 +7422,7 @@ abstract class Draw extends BaseDraw
                                 $Value = 0;
                             }
 
-                            $YZero = $this->scaleComputeY($Value, array("AxisID" => $Serie["Axis"]));
+                            $YZero = $this->scaleComputeY($Value, ["AxisID" => $Serie["Axis"]]);
                             if ($YZero > $this->GraphAreaY2 - 1) {
                                 $YZero = $this->GraphAreaY2 - 1;
                             }
@@ -7439,7 +7439,7 @@ abstract class Draw extends BaseDraw
 
                         if ($OverrideColors != null) {
                             if (isset($OverrideColors[$ID])) {
-                                $Color = array(
+                                $Color = [
                                     "R" => $OverrideColors[$ID]["R"],
                                     "G" => $OverrideColors[$ID]["G"],
                                     "B" => $OverrideColors[$ID]["B"],
@@ -7447,7 +7447,7 @@ abstract class Draw extends BaseDraw
                                     "BorderR" => $OverrideColors[$ID]["BorderR"],
                                     "BorderG" => $OverrideColors[$ID]["BorderG"],
                                     "BorderB" => $OverrideColors[$ID]["BorderB"]
-                                );
+                                ];
                             } else {
                                 $Color = $this->getRandomColor();
                             }
@@ -7529,7 +7529,7 @@ abstract class Draw extends BaseDraw
 
                                         if ($GradientMode == GRADIENT_SIMPLE) {
                                             if ($Serie["Data"][$Key] >= 0) {
-                                                $GradienColor = array(
+                                                $GradienColor = [
                                                     "StartR" => $GradientStartR,
                                                     "StartG" => $GradientStartG,
                                                     "StartB" => $GradientStartB,
@@ -7537,9 +7537,9 @@ abstract class Draw extends BaseDraw
                                                     "EndG" => $GradientEndG,
                                                     "EndB" => $GradientEndB,
                                                     "Alpha" => $GradientAlpha
-                                                );
+                                                ];
                                             } else {
-                                                $GradienColor = array(
+                                                $GradienColor = [
                                                     "StartR" => $GradientEndR,
                                                     "StartG" => $GradientEndG,
                                                     "StartB" => $GradientEndB,
@@ -7547,7 +7547,7 @@ abstract class Draw extends BaseDraw
                                                     "EndG" => $GradientStartG,
                                                     "EndB" => $GradientStartB,
                                                     "Alpha" => $GradientAlpha
-                                                );
+                                                ];
                                             }
                                             $this->drawGradientArea(
                                                 $X + $XOffset + $XSpace,
@@ -7558,7 +7558,7 @@ abstract class Draw extends BaseDraw
                                                 $GradienColor
                                             );
                                         } elseif ($GradientMode == GRADIENT_EFFECT_CAN) {
-                                            $GradienColor1 = array(
+                                            $GradienColor1 = [
                                                 "StartR" => $GradientEndR,
                                                 "StartG" => $GradientEndG,
                                                 "StartB" => $GradientEndB,
@@ -7566,8 +7566,8 @@ abstract class Draw extends BaseDraw
                                                 "EndG" => $GradientStartG,
                                                 "EndB" => $GradientStartB,
                                                 "Alpha" => $GradientAlpha
-                                            );
-                                            $GradienColor2 = array(
+                                            ];
+                                            $GradienColor2 = [
                                                 "StartR" => $GradientStartR,
                                                 "StartG" => $GradientStartG,
                                                 "StartB" => $GradientStartB,
@@ -7575,7 +7575,7 @@ abstract class Draw extends BaseDraw
                                                 "EndG" => $GradientEndG,
                                                 "EndB" => $GradientEndB,
                                                 "Alpha" => $GradientAlpha
-                                            );
+                                            ];
                                             $XSpan = floor($XSize / 3);
 
                                             $this->drawGradientArea(
@@ -7600,7 +7600,7 @@ abstract class Draw extends BaseDraw
                                 }
 
                                 if ($Draw0Line) {
-                                    $Line0Color = array("R" => 0, "G" => 0, "B" => 0, "Alpha" => 20);
+                                    $Line0Color = ["R" => 0, "G" => 0, "B" => 0, "Alpha" => 20];
 
                                     if (abs($Y1 - $Y2) > 3) {
                                         $Line0Width = 3;
@@ -7647,14 +7647,14 @@ abstract class Draw extends BaseDraw
                                         $CenterX,
                                         $CenterY,
                                         $Caption,
-                                        array(
+                                        [
                                             "R" => $DisplayR,
                                             "G" => $DisplayG,
                                             "B" => $DisplayB,
                                             "Align" => TEXT_ALIGN_MIDDLEMIDDLE,
                                             "FontSize" => $DisplaySize,
                                             "Angle" => 90
-                                        )
+                                        ]
                                     );
                                 } else {
                                     if ($Serie["Data"][$Key] >= 0) {
@@ -7668,13 +7668,13 @@ abstract class Draw extends BaseDraw
                                         $X + $XOffset + $XSize / 2,
                                         $Y2 - $Offset,
                                         $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit),
-                                        array(
+                                        [
                                             "R" => $DisplayR,
                                             "G" => $DisplayG,
                                             "B" => $DisplayB,
                                             "Align" => $Align,
                                             "FontSize" => $DisplaySize
-                                        )
+                                        ]
                                     );
                                 }
 
@@ -7727,7 +7727,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
 
@@ -7740,7 +7740,7 @@ abstract class Draw extends BaseDraw
                                 $Value = 0;
                             }
 
-                            $YZero = $this->scaleComputeY($Value, array("AxisID" => $Serie["Axis"]));
+                            $YZero = $this->scaleComputeY($Value, ["AxisID" => $Serie["Axis"]]);
                             if ($YZero < $this->GraphAreaX1 + 1) {
                                 $YZero = $this->GraphAreaX1 + 1;
                             }
@@ -7756,7 +7756,7 @@ abstract class Draw extends BaseDraw
 
                         if ($OverrideColors != null) {
                             if (isset($OverrideColors[$ID])) {
-                                $Color = array(
+                                $Color = [
                                     "R" => $OverrideColors[$ID]["R"],
                                     "G" => $OverrideColors[$ID]["G"],
                                     "B" => $OverrideColors[$ID]["B"],
@@ -7764,7 +7764,7 @@ abstract class Draw extends BaseDraw
                                     "BorderR" => $OverrideColors[$ID]["BorderR"],
                                     "BorderG" => $OverrideColors[$ID]["BorderG"],
                                     "BorderB" => $OverrideColors[$ID]["BorderB"]
-                                );
+                                ];
                             } else {
                                 $Color = $this->getRandomColor();
                             }
@@ -7845,7 +7845,7 @@ abstract class Draw extends BaseDraw
 
                                         if ($GradientMode == GRADIENT_SIMPLE) {
                                             if ($Serie["Data"][$Key] >= 0) {
-                                                $GradienColor = array(
+                                                $GradienColor = [
                                                     "StartR" => $GradientStartR,
                                                     "StartG" => $GradientStartG,
                                                     "StartB" => $GradientStartB,
@@ -7853,9 +7853,9 @@ abstract class Draw extends BaseDraw
                                                     "EndG" => $GradientEndG,
                                                     "EndB" => $GradientEndB,
                                                     "Alpha" => $GradientAlpha
-                                                );
+                                                ];
                                             } else {
-                                                $GradienColor = array(
+                                                $GradienColor = [
                                                     "StartR" => $GradientEndR,
                                                     "StartG" => $GradientEndG,
                                                     "StartB" => $GradientEndB,
@@ -7863,7 +7863,7 @@ abstract class Draw extends BaseDraw
                                                     "EndG" => $GradientStartG,
                                                     "EndB" => $GradientStartB,
                                                     "Alpha" => $GradientAlpha
-                                                );
+                                                ];
                                             }
                                             $this->drawGradientArea(
                                                 $X1,
@@ -7874,7 +7874,7 @@ abstract class Draw extends BaseDraw
                                                 $GradienColor
                                             );
                                         } elseif ($GradientMode == GRADIENT_EFFECT_CAN) {
-                                            $GradienColor1 = array(
+                                            $GradienColor1 = [
                                                 "StartR" => $GradientEndR,
                                                 "StartG" => $GradientEndG,
                                                 "StartB" => $GradientEndB,
@@ -7882,8 +7882,8 @@ abstract class Draw extends BaseDraw
                                                 "EndG" => $GradientStartG,
                                                 "EndB" => $GradientStartB,
                                                 "Alpha" => $GradientAlpha
-                                            );
-                                            $GradienColor2 = array(
+                                            ];
+                                            $GradienColor2 = [
                                                 "StartR" => $GradientStartR,
                                                 "StartG" => $GradientStartG,
                                                 "StartB" => $GradientStartB,
@@ -7891,7 +7891,7 @@ abstract class Draw extends BaseDraw
                                                 "EndG" => $GradientEndG,
                                                 "EndB" => $GradientEndB,
                                                 "Alpha" => $GradientAlpha
-                                            );
+                                            ];
                                             $YSpan = floor($YSize / 3);
 
                                             $this->drawGradientArea(
@@ -7916,7 +7916,7 @@ abstract class Draw extends BaseDraw
                                 }
 
                                 if ($Draw0Line) {
-                                    $Line0Color = array("R" => 0, "G" => 0, "B" => 0, "Alpha" => 20);
+                                    $Line0Color = ["R" => 0, "G" => 0, "B" => 0, "Alpha" => 20];
 
                                     if (abs($X1 - $X2) > 3) {
                                         $Line0Width = 3;
@@ -7964,13 +7964,13 @@ abstract class Draw extends BaseDraw
                                         $CenterX,
                                         $CenterY,
                                         $Caption,
-                                        array(
+                                        [
                                             "R" => $DisplayR,
                                             "G" => $DisplayG,
                                             "B" => $DisplayB,
                                             "Align" => TEXT_ALIGN_MIDDLEMIDDLE,
                                             "FontSize" => $DisplaySize
-                                        )
+                                        ]
                                     );
                                 } else {
                                     if ($Serie["Data"][$Key] >= 0) {
@@ -7984,13 +7984,13 @@ abstract class Draw extends BaseDraw
                                         $X2 + $Offset,
                                         $Y + $YOffset + $YSize / 2,
                                         $Caption,
-                                        array(
+                                        [
                                             "R" => $DisplayR,
                                             "G" => $DisplayG,
                                             "B" => $DisplayB,
                                             "Align" => $Align,
                                             "FontSize" => $DisplaySize
-                                        )
+                                        ]
                                     );
                                 }
 
@@ -8010,7 +8010,7 @@ abstract class Draw extends BaseDraw
      * Draw a bar chart
      * @param array $Format
      */
-    public function drawStackedBarChart(array $Format = array())
+    public function drawStackedBarChart(array $Format = [])
     {
         $DisplayValues = isset($Format["DisplayValues"]) ? $Format["DisplayValues"] : false;
         $DisplayOrientation = isset($Format["DisplayOrientation"]) ? $Format["DisplayOrientation"] : ORIENTATION_AUTO;
@@ -8078,11 +8078,11 @@ abstract class Draw extends BaseDraw
                 if ($InnerBorderR == -1) {
                     $InnerColor = null;
                 } else {
-                    $InnerColor = array(
+                    $InnerColor = [
                         "R" => $InnerBorderR,
                         "G" => $InnerBorderG,
                         "B" => $InnerBorderB
-                    );
+                    ];
                 }
 
                 $AxisID = $Serie["Axis"];
@@ -8098,14 +8098,14 @@ abstract class Draw extends BaseDraw
 
                 $PosArray = $this->scaleComputeY(
                     $Serie["Data"],
-                    array("AxisID" => $Serie["Axis"]),
+                    ["AxisID" => $Serie["Axis"]],
                     true
                 );
-                $YZero = $this->scaleComputeY(0, array("AxisID" => $Serie["Axis"]));
+                $YZero = $this->scaleComputeY(0, ["AxisID" => $Serie["Axis"]]);
 
                 $this->DataSet->Data["Series"][$SerieName]["XOffset"] = 0;
 
-                $Color = array(
+                $Color = [
                     "TransCorner" => true,
                     "R" => $R,
                     "G" => $G,
@@ -8114,7 +8114,7 @@ abstract class Draw extends BaseDraw
                     "BorderR" => $BorderR,
                     "BorderG" => $BorderG,
                     "BorderB" => $BorderB
-                );
+                ];
 
                 if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
                     if ($YZero > $this->GraphAreaY2 - 1) {
@@ -8136,7 +8136,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $Height) {
@@ -8219,7 +8219,7 @@ abstract class Draw extends BaseDraw
                                     $this->Shadow = false;
 
                                     if ($GradientMode == GRADIENT_SIMPLE) {
-                                        $GradientColor = array(
+                                        $GradientColor = [
                                             "StartR" => $GradientStartR,
                                             "StartG" => $GradientStartG,
                                             "StartB" => $GradientStartB,
@@ -8227,7 +8227,7 @@ abstract class Draw extends BaseDraw
                                             "EndG" => $GradientEndG,
                                             "EndB" => $GradientEndB,
                                             "Alpha" => $GradientAlpha
-                                        );
+                                        ];
                                         $this->drawGradientArea(
                                             $X + $XOffset,
                                             $Y1 - 1 - $YSpaceUp + $YSpaceDown,
@@ -8237,7 +8237,7 @@ abstract class Draw extends BaseDraw
                                             $GradientColor
                                         );
                                     } elseif ($GradientMode == GRADIENT_EFFECT_CAN) {
-                                        $GradientColor1 = array(
+                                        $GradientColor1 = [
                                             "StartR" => $GradientEndR,
                                             "StartG" => $GradientEndG,
                                             "StartB" => $GradientEndB,
@@ -8245,8 +8245,8 @@ abstract class Draw extends BaseDraw
                                             "EndG" => $GradientStartG,
                                             "EndB" => $GradientStartB,
                                             "Alpha" => $GradientAlpha
-                                        );
-                                        $GradientColor2 = array(
+                                        ];
+                                        $GradientColor2 = [
                                             "StartR" => $GradientStartR,
                                             "StartG" => $GradientStartG,
                                             "StartB" => $GradientStartB,
@@ -8254,7 +8254,7 @@ abstract class Draw extends BaseDraw
                                             "EndG" => $GradientEndG,
                                             "EndB" => $GradientEndB,
                                             "Alpha" => $GradientAlpha
-                                        );
+                                        ];
                                         $XSpan = floor($XSize / 3);
 
                                         $this->drawGradientArea(
@@ -8311,14 +8311,14 @@ abstract class Draw extends BaseDraw
                                                 $Format,
                                                 $Unit
                                             ),
-                                            array(
+                                            [
                                                 "R" => $DisplayR,
                                                 "G" => $DisplayG,
                                                 "B" => $DisplayB,
                                                 "Align" => TEXT_ALIGN_MIDDLEMIDDLE,
                                                 "FontSize" => $DisplaySize,
                                                 "FontName" => $DisplayFont
-                                            )
+                                            ]
                                         );
                                         $Done = true;
                                     }
@@ -8337,7 +8337,7 @@ abstract class Draw extends BaseDraw
                                                 $Format,
                                                 $Unit
                                             ),
-                                            array(
+                                            [
                                                 "R" => $DisplayR,
                                                 "G" => $DisplayG,
                                                 "B" => $DisplayB,
@@ -8345,7 +8345,7 @@ abstract class Draw extends BaseDraw
                                                 "Align" => TEXT_ALIGN_MIDDLEMIDDLE,
                                                 "FontSize" => $DisplaySize,
                                                 "FontName" => $DisplayFont
-                                            )
+                                            ]
                                         );
                                     }
                                 }
@@ -8374,7 +8374,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $Width) {
@@ -8457,7 +8457,7 @@ abstract class Draw extends BaseDraw
                                     $this->Shadow = false;
 
                                     if ($GradientMode == GRADIENT_SIMPLE) {
-                                        $GradientColor = array(
+                                        $GradientColor = [
                                             "StartR" => $GradientStartR,
                                             "StartG" => $GradientStartG,
                                             "StartB" => $GradientStartB,
@@ -8465,7 +8465,7 @@ abstract class Draw extends BaseDraw
                                             "EndG" => $GradientEndG,
                                             "EndB" => $GradientEndB,
                                             "Alpha" => $GradientAlpha
-                                        );
+                                        ];
                                         $this->drawGradientArea(
                                             $X1 + $XSpaceLeft,
                                             $Y + $YOffset,
@@ -8475,7 +8475,7 @@ abstract class Draw extends BaseDraw
                                             $GradientColor
                                         );
                                     } elseif ($GradientMode == GRADIENT_EFFECT_CAN) {
-                                        $GradientColor1 = array(
+                                        $GradientColor1 = [
                                             "StartR" => $GradientEndR,
                                             "StartG" => $GradientEndG,
                                             "StartB" => $GradientEndB,
@@ -8483,8 +8483,8 @@ abstract class Draw extends BaseDraw
                                             "EndG" => $GradientStartG,
                                             "EndB" => $GradientStartB,
                                             "Alpha" => $GradientAlpha
-                                        );
-                                        $GradientColor2 = array(
+                                        ];
+                                        $GradientColor2 = [
                                             "StartR" => $GradientStartR,
                                             "StartG" => $GradientStartG,
                                             "StartB" => $GradientStartB,
@@ -8492,7 +8492,7 @@ abstract class Draw extends BaseDraw
                                             "EndG" => $GradientEndG,
                                             "EndB" => $GradientEndB,
                                             "Alpha" => $GradientAlpha
-                                        );
+                                        ];
                                         $YSpan = floor($YSize / 3);
 
                                         $this->drawGradientArea(
@@ -8546,14 +8546,14 @@ abstract class Draw extends BaseDraw
                                                 $Format,
                                                 $Unit
                                             ),
-                                            array(
+                                            [
                                                 "R" => $DisplayR,
                                                 "G" => $DisplayG,
                                                 "B" => $DisplayB,
                                                 "Align" => TEXT_ALIGN_MIDDLEMIDDLE,
                                                 "FontSize" => $DisplaySize,
                                                 "FontName" => $DisplayFont
-                                            )
+                                            ]
                                         );
                                         $Done = true;
                                     }
@@ -8572,7 +8572,7 @@ abstract class Draw extends BaseDraw
                                                 $Format,
                                                 $Unit
                                             ),
-                                            array(
+                                            [
                                                 "R" => $DisplayR,
                                                 "G" => $DisplayG,
                                                 "B" => $DisplayB,
@@ -8580,7 +8580,7 @@ abstract class Draw extends BaseDraw
                                                 "Align" => TEXT_ALIGN_MIDDLEMIDDLE,
                                                 "FontSize" => $DisplaySize,
                                                 "FontName" => $DisplayFont
-                                            )
+                                            ]
                                         );
                                     }
                                 }
@@ -8600,7 +8600,7 @@ abstract class Draw extends BaseDraw
      * Draw a stacked area chart
      * @param array $Format
      */
-    public function drawStackedAreaChart(array $Format = array())
+    public function drawStackedAreaChart(array $Format = [])
     {
         $DrawLine = isset($Format["DrawLine"]) ? $Format["DrawLine"] : false;
         $LineSurrounding = isset($Format["LineSurrounding"]) ? $Format["LineSurrounding"] : null;
@@ -8671,49 +8671,49 @@ abstract class Draw extends BaseDraw
                     $Alpha = $ForceTransparency;
                 }
 
-                $Color = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha);
+                $Color = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
 
                 if ($LineSurrounding != null) {
-                    $LineColor = array(
+                    $LineColor = [
                         "R" => $R + $LineSurrounding,
                         "G" => $G + $LineSurrounding,
                         "B" => $B + $LineSurrounding,
                         "Alpha" => $Alpha
-                    );
+                    ];
                 } elseif ($LineR != VOID) {
-                    $LineColor = array(
+                    $LineColor = [
                         "R" => $LineR,
                         "G" => $LineG,
                         "B" => $LineB,
                         "Alpha" => $LineAlpha
-                    );
+                    ];
                 } else {
                     $LineColor = $Color;
                 }
                 if ($PlotBorderSurrounding != null) {
-                    $PlotBorderColor = array(
+                    $PlotBorderColor = [
                         "R" => $R + $PlotBorderSurrounding,
                         "G" => $G + $PlotBorderSurrounding,
                         "B" => $B + $PlotBorderSurrounding,
                         "Alpha" => $PlotBorderAlpha
-                    );
+                    ];
                 } else {
-                    $PlotBorderColor = array(
+                    $PlotBorderColor = [
                         "R" => $PlotBorderR,
                         "G" => $PlotBorderG,
                         "B" => $PlotBorderB,
                         "Alpha" => $PlotBorderAlpha
-                    );
+                    ];
                 }
                 $AxisID = $Serie["Axis"];
                 $Format = $Data["Axis"][$AxisID]["Format"];
 
                 $PosArray = $this->scaleComputeY(
                     $Serie["Data"],
-                    array("AxisID" => $Serie["Axis"]),
+                    ["AxisID" => $Serie["Axis"]],
                     true
                 );
-                $YZero = $this->scaleComputeY(0, array("AxisID" => $Serie["Axis"]));
+                $YZero = $this->scaleComputeY(0, ["AxisID" => $Serie["Axis"]]);
 
                 $this->DataSet->Data["Series"][$SerieName]["XOffset"] = 0;
 
@@ -8734,11 +8734,11 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
 
-                    $Plots = array();
+                    $Plots = [];
                     $Plots[] = $X;
                     $Plots[] = $YZero;
                     foreach ($PosArray as $Key => $Height) {
@@ -8796,11 +8796,11 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
 
-                    $Plots = array();
+                    $Plots = [];
                     $Plots[] = $YZero;
                     $Plots[] = $Y;
                     foreach ($PosArray as $Key => $Height) {
@@ -8852,7 +8852,7 @@ abstract class Draw extends BaseDraw
      * Draw the derivative chart associated to the data series
      * @param array $Format
      */
-    public function drawDerivative(array $Format = array())
+    public function drawDerivative(array $Format = [])
     {
         $Offset = isset($Format["Offset"]) ? $Format["Offset"] : 10;
         $SerieSpacing = isset($Format["SerieSpacing"]) ? $Format["SerieSpacing"] : 3;
@@ -8915,7 +8915,7 @@ abstract class Draw extends BaseDraw
                 $AxisID = $Serie["Axis"];
                 $PosArray = $this->scaleComputeY(
                     $Serie["Data"],
-                    array("AxisID" => $Serie["Axis"])
+                    ["AxisID" => $Serie["Axis"]]
                 );
 
                 if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
@@ -8924,21 +8924,21 @@ abstract class Draw extends BaseDraw
                             $StartX = floor($this->GraphAreaX1 - $CaptionWidth + $XMargin - $CaptionMargin);
                             $EndX = floor($this->GraphAreaX1 - $CaptionMargin + $XMargin);
 
-                            $CaptionSettings = array(
+                            $CaptionSettings = [
                                 "R" => $R,
                                 "G" => $G,
                                 "B" => $B,
                                 "Alpha" => $Alpha,
                                 "Ticks" => $Ticks,
                                 "Weight" => $Weight
-                            );
+                            ];
                             if ($CaptionBox) {
                                 $this->drawFilledRectangle(
                                     $StartX,
                                     $YPos,
                                     $EndX,
                                     $YPos + $CaptionHeight,
-                                    array(
+                                    [
                                         "R" => $CaptionFillR,
                                         "G" => $CaptionFillG,
                                         "B" => $CaptionFillB,
@@ -8946,7 +8946,7 @@ abstract class Draw extends BaseDraw
                                         "BorderG" => $CaptionBorderG,
                                         "BorderB" => $CaptionBorderB,
                                         "Alpha" => $CaptionFillAlpha
-                                    )
+                                    ]
                                 );
                             }
                             $this->drawLine(
@@ -8962,14 +8962,14 @@ abstract class Draw extends BaseDraw
                                 $YPos,
                                 $this->GraphAreaX1 - $CaptionMargin + $XMargin,
                                 $YPos + $CaptionHeight,
-                                array(
+                                [
                                     "R" => $R,
                                     "G" => $G,
                                     "B" => $B,
                                     "BorderR" => $CaptionBorderR,
                                     "BorderG" => $CaptionBorderG,
                                     "BorderB" => $CaptionBorderB
-                                )
+                                ]
                             );
                         }
                     }
@@ -8993,12 +8993,12 @@ abstract class Draw extends BaseDraw
                             $TopY - 1,
                             $EndX + 1,
                             $BottomY + 1,
-                            array(
+                            [
                                 "R" => $BackgroundR,
                                 "G" => $BackgroundG,
                                 "B" => $BackgroundB,
                                 "Alpha" => $BackgroundAlpha
-                            )
+                            ]
                         );
                     }
                     if ($DrawBorder) {
@@ -9007,18 +9007,18 @@ abstract class Draw extends BaseDraw
                             $TopY - 1,
                             $EndX + 1,
                             $BottomY + 1,
-                            array(
+                            [
                                 "R" => $BorderR,
                                 "G" => $BorderG,
                                 "B" => $BorderB,
                                 "Alpha" => $BorderAlpha
-                            )
+                            ]
                         );
                     }
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
 
@@ -9080,17 +9080,17 @@ abstract class Draw extends BaseDraw
                                 ;
                             }
 
-                            $Color = array("R" => $R, "G" => $G, "B" => $B);
+                            $Color = ["R" => $R, "G" => $G, "B" => $B];
 
                             if ($ShadedSlopeBox && $LastColor != null) {// && $Slope != 0
-                                $GradientSettings = array(
+                                $GradientSettings = [
                                     "StartR" => $LastColor["R"],
                                     "StartG" => $LastColor["G"],
                                     "StartB" => $LastColor["B"],
                                     "EndR" => $R,
                                     "EndG" => $G,
                                     "EndB" => $B
-                                );
+                                ];
                                 $this->drawGradientArea(
                                     $LastX,
                                     $TopY,
@@ -9127,21 +9127,21 @@ abstract class Draw extends BaseDraw
                         $StartY = floor($this->GraphAreaY1 - $CaptionWidth + $XMargin - $CaptionMargin);
                         $EndY = floor($this->GraphAreaY1 - $CaptionMargin + $XMargin);
                         if ($CaptionLine) {
-                            $CaptionSettings = array(
+                            $CaptionSettings = [
                                 "R" => $R,
                                 "G" => $G,
                                 "B" => $B,
                                 "Alpha" => $Alpha,
                                 "Ticks" => $Ticks,
                                 "Weight" => $Weight
-                            );
+                            ];
                             if ($CaptionBox) {
                                 $this->drawFilledRectangle(
                                     $XPos,
                                     $StartY,
                                     $XPos + $CaptionHeight,
                                     $EndY,
-                                    array(
+                                    [
                                         "R" => $CaptionFillR,
                                         "G" => $CaptionFillG,
                                         "B" => $CaptionFillB,
@@ -9149,7 +9149,7 @@ abstract class Draw extends BaseDraw
                                         "BorderG" => $CaptionBorderG,
                                         "BorderB" => $CaptionBorderB,
                                         "Alpha" => $CaptionFillAlpha
-                                    )
+                                    ]
                                 );
                             }
                             $this->drawLine(
@@ -9165,14 +9165,14 @@ abstract class Draw extends BaseDraw
                                 $StartY,
                                 $XPos + $CaptionHeight,
                                 $EndY,
-                                array(
+                                [
                                     "R" => $R,
                                     "G" => $G,
                                     "B" => $B,
                                     "BorderR" => $CaptionBorderR,
                                     "BorderG" => $CaptionBorderG,
                                     "BorderB" => $CaptionBorderB
-                                )
+                                ]
                             );
                         }
                     }
@@ -9197,12 +9197,12 @@ abstract class Draw extends BaseDraw
                             $StartY - 1,
                             $BottomX + 1,
                             $EndY + 1,
-                            array(
+                            [
                                 "R" => $BackgroundR,
                                 "G" => $BackgroundG,
                                 "B" => $BackgroundB,
                                 "Alpha" => $BackgroundAlpha
-                            )
+                            ]
                         );
                     }
                     if ($DrawBorder) {
@@ -9211,18 +9211,18 @@ abstract class Draw extends BaseDraw
                             $StartY - 1,
                             $BottomX + 1,
                             $EndY + 1,
-                            array(
+                            [
                                 "R" => $BorderR,
                                 "G" => $BorderG,
                                 "B" => $BorderB,
                                 "Alpha" => $BorderAlpha
-                            )
+                            ]
                         );
                     }
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
 
@@ -9283,17 +9283,17 @@ abstract class Draw extends BaseDraw
                                 ;
                             }
 
-                            $Color = array("R" => $R, "G" => $G, "B" => $B);
+                            $Color = ["R" => $R, "G" => $G, "B" => $B];
 
                             if ($ShadedSlopeBox && $LastColor != null) {
-                                $GradientSettings = array(
+                                $GradientSettings = [
                                     "StartR" => $LastColor["R"],
                                     "StartG" => $LastColor["G"],
                                     "StartB" => $LastColor["B"],
                                     "EndR" => $R,
                                     "EndG" => $G,
                                     "EndB" => $B
-                                );
+                                ];
 
                                 $this->drawGradientArea(
                                     $TopX,
@@ -9336,7 +9336,7 @@ abstract class Draw extends BaseDraw
      * Draw the line of best fit
      * @param array $Format
      */
-    public function drawBestFit(array $Format = array())
+    public function drawBestFit(array $Format = [])
     {
         $OverrideTicks = isset($Format["Ticks"]) ? $Format["Ticks"] : null;
         $OverrideR = isset($Format["R"]) ? $Format["R"] : VOID;
@@ -9369,11 +9369,11 @@ abstract class Draw extends BaseDraw
                     $Alpha = $OverrideAlpha;
                 }
 
-                $Color = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks);
+                $Color = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks];
 
                 $PosArray = $this->scaleComputeY(
                     $Serie["Data"],
-                    array("AxisID" => $Serie["Axis"])
+                    ["AxisID" => $Serie["Axis"]]
                 );
 
                 if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
@@ -9386,7 +9386,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     $Sxy = 0;
@@ -9440,7 +9440,7 @@ abstract class Draw extends BaseDraw
 
                     if (!is_array($PosArray)) {
                         $Value = $PosArray;
-                        $PosArray = array();
+                        $PosArray = [];
                         $PosArray[0] = $Value;
                     }
                     $Sxy = 0;
@@ -9497,7 +9497,7 @@ abstract class Draw extends BaseDraw
      * @param array $Captions
      * @param array $Format
      */
-    public function drawLabelBox($X, $Y, $Title, array $Captions, array $Format = array())
+    public function drawLabelBox($X, $Y, $Title, array $Captions, array $Format = [])
     {
         $NoTitle = isset($Format["NoTitle"]) ? $Format["NoTitle"] : null;
         $BoxWidth = isset($Format["BoxWidth"]) ? $Format["BoxWidth"] : 50;
@@ -9578,7 +9578,7 @@ abstract class Draw extends BaseDraw
         if ($this->Shadow == true) {
             $this->Shadow = false;
 
-            $Poly = array();
+            $Poly = [];
             $Poly[] = $X + $this->ShadowX;
             $Poly[] = $Y + $this->ShadowX;
             $Poly[] = $X + 5 + $this->ShadowX;
@@ -9604,17 +9604,17 @@ abstract class Draw extends BaseDraw
             $Poly[] = $Y - 5 + $this->ShadowX;
             $this->drawPolygon(
                 $Poly,
-                array(
+                [
                     "R" => $this->ShadowR,
                     "G" => $this->ShadowG,
                     "B" => $this->ShadowB,
                     "Alpha" => $this->Shadowa
-                )
+                ]
             );
         }
 
         /* Draw the background */
-        $GradientSettings = array(
+        $GradientSettings = [
             "StartR" => $GradientStartR,
             "StartG" => $GradientStartG,
             "StartB" => $GradientStartB,
@@ -9622,7 +9622,7 @@ abstract class Draw extends BaseDraw
             "EndG" => $GradientEndG,
             "EndB" => $GradientEndB,
             "Alpha" => $BoxAlpha
-        );
+        ];
         if ($NoTitle) {
             $this->drawGradientArea(
                 $XMin,
@@ -9642,7 +9642,7 @@ abstract class Draw extends BaseDraw
                 $GradientSettings
             );
         }
-        $Poly = array();
+        $Poly = [];
         $Poly[] = $X;
         $Poly[] = $Y;
         $Poly[] = $X - 5;
@@ -9651,13 +9651,13 @@ abstract class Draw extends BaseDraw
         $Poly[] = $Y - 5;
         $this->drawPolygon(
             $Poly,
-            array(
+            [
                 "R" => $GradientEndR,
                 "G" => $GradientEndG,
                 "B" => $GradientEndB,
                 "Alpha" => $BoxAlpha,
                 "NoBorder" => true
-            )
+            ]
         );
 
         /* Outer border */
@@ -9785,24 +9785,24 @@ abstract class Draw extends BaseDraw
                 $YPos + 1,
                 $XMax - $XMargin,
                 $YPos + 1,
-                array(
+                [
                     "R" => $GradientEndR,
                     "G" => $GradientEndG,
                     "B" => $GradientEndB,
                     "Alpha" => $BoxAlpha
-                )
+                ]
             );
             $this->drawLine(
                 $XMin + $XMargin,
                 $YPos,
                 $XMax - $XMargin,
                 $YPos,
-                array(
+                [
                     "R" => $GradientStartR,
                     "G" => $GradientStartG,
                     "B" => $GradientStartB,
                     "Alpha" => $BoxAlpha
-                )
+                ]
             );
         } elseif ($TitleMode == LABEL_TITLE_BACKGROUND) {
             $this->drawFilledRectangle(
@@ -9810,12 +9810,12 @@ abstract class Draw extends BaseDraw
                 $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin * 3,
                 $XMax,
                 $Y - 5 - $TitleHeight - $CaptionHeight - $HorizontalMargin + $HorizontalMargin / 2,
-                array(
+                [
                     "R" => $TitleBackgroundR,
                     "G" => $TitleBackgroundG,
                     "B" => $TitleBackgroundB,
                     "Alpha" => $BoxAlpha
-                )
+                ]
             );
             imageline(
                 $this->Picture,
@@ -9833,12 +9833,12 @@ abstract class Draw extends BaseDraw
                 $XMin + $VerticalMargin,
                 $Y - 7 - $CaptionHeight - $HorizontalMargin * 2,
                 $Title,
-                array(
+                [
                     "Align" => TEXT_ALIGN_BOTTOMLEFT,
                     "R" => $TitleR,
                     "G" => $TitleG,
                     "B" => $TitleB
-                )
+                ]
             );
         }
 
@@ -9852,7 +9852,7 @@ abstract class Draw extends BaseDraw
 
             /* Write the serie color if needed */
             if ($DrawSerieColor) {
-                $BoxSettings = array(
+                $BoxSettings = [
                     "R" => $Caption["Format"]["R"],
                     "G" => $Caption["Format"]["G"],
                     "B" => $Caption["Format"]["B"],
@@ -9860,7 +9860,7 @@ abstract class Draw extends BaseDraw
                     "BorderR" => 0,
                     "BorderG" => 0,
                     "BorderB" => 0
-                );
+                ];
                 $this->drawFilledRectangle(
                     $XMin + $VerticalMargin,
                     $YPos - $SerieBoxSize,
@@ -9870,7 +9870,7 @@ abstract class Draw extends BaseDraw
                 );
             }
 
-            $this->drawText($XPos, $YPos, $CaptionTxt, array("Align" => TEXT_ALIGN_BOTTOMLEFT));
+            $this->drawText($XPos, $YPos, $CaptionTxt, ["Align" => TEXT_ALIGN_BOTTOMLEFT]);
 
             $YPos = $YPos - $CaptionHeight - $HorizontalMargin;
         }
@@ -9917,14 +9917,14 @@ abstract class Draw extends BaseDraw
                     $X,
                     $Y,
                     $PlotSize + $BorderSize,
-                    array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha)
+                    ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha]
                 );
             }
             $this->drawFilledCircle(
                 $X,
                 $Y,
                 $PlotSize,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]
             );
         } elseif ($Shape == SERIE_SHAPE_FILLEDSQUARE) {
             if ($PlotBorder) {
@@ -9933,7 +9933,7 @@ abstract class Draw extends BaseDraw
                     $Y - $PlotSize - $BorderSize,
                     $X + $PlotSize + $BorderSize,
                     $Y + $PlotSize + $BorderSize,
-                    array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha)
+                    ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha]
                 );
             }
             $this->drawFilledRectangle(
@@ -9941,11 +9941,11 @@ abstract class Draw extends BaseDraw
                 $Y - $PlotSize,
                 $X + $PlotSize,
                 $Y + $PlotSize,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]
             );
         } elseif ($Shape == SERIE_SHAPE_FILLEDTRIANGLE) {
             if ($PlotBorder) {
-                $Pos = array();
+                $Pos = [];
                 $Pos[] = $X;
                 $Pos[] = $Y - $PlotSize - $BorderSize;
                 $Pos[] = $X - $PlotSize - $BorderSize;
@@ -9954,39 +9954,39 @@ abstract class Draw extends BaseDraw
                 $Pos[] = $Y + $PlotSize + $BorderSize;
                 $this->drawPolygon(
                     $Pos,
-                    array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha)
+                    ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha]
                 );
             }
 
-            $Pos = array();
+            $Pos = [];
             $Pos[] = $X;
             $Pos[] = $Y - $PlotSize;
             $Pos[] = $X - $PlotSize;
             $Pos[] = $Y + $PlotSize;
             $Pos[] = $X + $PlotSize;
             $Pos[] = $Y + $PlotSize;
-            $this->drawPolygon($Pos, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha));
+            $this->drawPolygon($Pos, ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]);
         } elseif ($Shape == SERIE_SHAPE_TRIANGLE) {
             $this->drawLine(
                 $X,
                 $Y - $PlotSize,
                 $X - $PlotSize,
                 $Y + $PlotSize,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]
             );
             $this->drawLine(
                 $X - $PlotSize,
                 $Y + $PlotSize,
                 $X + $PlotSize,
                 $Y + $PlotSize,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]
             );
             $this->drawLine(
                 $X + $PlotSize,
                 $Y + $PlotSize,
                 $X,
                 $Y - $PlotSize,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]
             );
         } elseif ($Shape == SERIE_SHAPE_SQUARE) {
             $this->drawRectangle(
@@ -9994,7 +9994,7 @@ abstract class Draw extends BaseDraw
                 $Y - $PlotSize,
                 $X + $PlotSize,
                 $Y + $PlotSize,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]
             );
         } elseif ($Shape == SERIE_SHAPE_CIRCLE) {
             $this->drawCircle(
@@ -10002,10 +10002,10 @@ abstract class Draw extends BaseDraw
                 $Y,
                 $PlotSize,
                 $PlotSize,
-                array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha)
+                ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]
             );
         } elseif ($Shape == SERIE_SHAPE_DIAMOND) {
-            $Pos = array();
+            $Pos = [];
             $Pos[] = $X - $PlotSize;
             $Pos[] = $Y;
             $Pos[] = $X;
@@ -10016,17 +10016,17 @@ abstract class Draw extends BaseDraw
             $Pos[] = $Y + $PlotSize;
             $this->drawPolygon(
                 $Pos,
-                array(
+                [
                     "NoFill" => true,
                     "BorderR" => $R,
                     "BorderG" => $G,
                     "BorderB" => $B,
                     "BorderAlpha" => $Alpha
-                )
+                ]
             );
         } elseif ($Shape == SERIE_SHAPE_FILLEDDIAMOND) {
             if ($PlotBorder) {
-                $Pos = array();
+                $Pos = [];
                 $Pos[] = $X - $PlotSize - $BorderSize;
                 $Pos[] = $Y;
                 $Pos[] = $X;
@@ -10037,11 +10037,11 @@ abstract class Draw extends BaseDraw
                 $Pos[] = $Y + $PlotSize + $BorderSize;
                 $this->drawPolygon(
                     $Pos,
-                    array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha)
+                    ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB, "Alpha" => $BorderAlpha]
                 );
             }
 
-            $Pos = array();
+            $Pos = [];
             $Pos[] = $X - $PlotSize;
             $Pos[] = $Y;
             $Pos[] = $X;
@@ -10050,7 +10050,7 @@ abstract class Draw extends BaseDraw
             $Pos[] = $Y;
             $Pos[] = $X;
             $Pos[] = $Y + $PlotSize;
-            $this->drawPolygon($Pos, array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha));
+            $this->drawPolygon($Pos, ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha]);
         }
     }
 
@@ -10060,7 +10060,7 @@ abstract class Draw extends BaseDraw
      * @param array $Format
      * @return null|integer
      */
-    public function drawPolygonChart(array $Points, array $Format = array())
+    public function drawPolygonChart(array $Points, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -10092,44 +10092,44 @@ abstract class Draw extends BaseDraw
         }
 
         /* Convert polygon to segments */
-        $Segments = array();
+        $Segments = [];
         for ($i = 2; $i <= count($Points) - 2; $i = $i + 2) {
-            $Segments[] = array(
+            $Segments[] = [
                 "X1" => $Points[$i - 2],
                 "Y1" => $Points[$i - 1],
                 "X2" => $Points[$i],
                 "Y2" => $Points[$i + 1]
-            );
+            ];
         }
-        $Segments[] = array(
+        $Segments[] = [
             "X1" => $Points[$i - 2],
             "Y1" => $Points[$i - 1],
             "X2" => $Points[0],
             "Y2" => $Points[1]
-        );
+        ];
 
         /* Simplify straight lines */
-        $Result = array();
+        $Result = [];
         $inHorizon = false;
         $LastX = VOID;
         foreach ($Segments as $Key => $Pos) {
             if ($Pos["Y1"] != $Pos["Y2"]) {
                 if ($inHorizon) {
                     $inHorizon = false;
-                    $Result[] = array(
+                    $Result[] = [
                         "X1" => $LastX,
                         "Y1" => $Pos["Y1"],
                         "X2" => $Pos["X1"],
                         "Y2" => $Pos["Y1"]
-                    );
+                    ];
                 }
 
-                $Result[] = array(
+                $Result[] = [
                     "X1" => $Pos["X1"],
                     "Y1" => $Pos["Y1"],
                     "X2" => $Pos["X2"],
                     "Y2" => $Pos["Y2"]
-                );
+                ];
             } else {
                 if (!$inHorizon) {
                     $inHorizon = true;
@@ -10256,7 +10256,7 @@ abstract class Draw extends BaseDraw
                     }
 
                     /* Remove null plots */
-                    $Result = array();
+                    $Result = [];
                     for ($i = 0; $i <= count($Intersections) - 1; $i = $i + 2) {
                         if (isset($Intersections[$i + 1])) {
                             if ($Intersections[$i] != $Intersections[$i + 1]) {
@@ -10337,13 +10337,13 @@ abstract class Draw extends BaseDraw
                     $Coords["Y1"],
                     $Coords["X2"],
                     $Coords["Y2"],
-                    array(
+                    [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $BorderAlpha,
                         "Threshold" => $Threshold
-                    )
+                    ]
                 );
             }
         }

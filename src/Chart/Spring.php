@@ -20,27 +20,27 @@ class Spring
     /**
      * @var array
      */
-    public $History = array();
+    public $History = [];
 
     /**
      * @var array
      */
-    public $Data = array();
+    public $Data = [];
 
     /**
      * @var array
      */
-    public $Default = array();
+    public $Default = [];
 
     /**
      * @var array
      */
-    public $Labels = array();
+    public $Labels = [];
 
     /**
      * @var array
      */
-    public $Links = array();
+    public $Links = [];
 
     /**
      * @var type
@@ -109,7 +109,7 @@ class Spring
      * Set default links options
      * @param array $Settings
      */
-    public function setLinkDefaults(array $Settings = array())
+    public function setLinkDefaults(array $Settings = [])
     {
         if (isset($Settings["R"])) {
             $this->Default["LinkR"] = $Settings["R"];
@@ -129,7 +129,7 @@ class Spring
      * Set default links options
      * @param array $Settings
      */
-    public function setLabelsSettings(array $Settings = array())
+    public function setLabelsSettings(array $Settings = [])
     {
         if (isset($Settings["Type"])) {
             $this->Labels["Type"] = $Settings["Type"];
@@ -203,7 +203,7 @@ class Spring
     /**
      * @param array $Settings
      */
-    public function setNodeDefaults(array $Settings = array())
+    public function setNodeDefaults(array $Settings = [])
     {
         if (isset($Settings["R"])) {
             $this->Default["R"] = $Settings["R"];
@@ -264,7 +264,7 @@ class Spring
      * @param array $Settings
      * @return null|int
      */
-    public function addNode($NodeID, array $Settings = array())
+    public function addNode($NodeID, array $Settings = [])
     {
         /* if the node already exists, ignore */
         if (isset($this->Data[$NodeID])) {
@@ -335,7 +335,7 @@ class Spring
      * @param array|string $Nodes
      * @param array $Settings
      */
-    public function setNodesColor($Nodes, array $Settings = array())
+    public function setNodesColor($Nodes, array $Settings = [])
     {
         if (is_array($Nodes)) {
             foreach ($Nodes as $Key => $NodeID) {
@@ -452,7 +452,7 @@ class Spring
                 }
             }
         }
-        return array("X" => $X / $Cpt, "Y" => $Y / $Cpt);
+        return ["X" => $X / $Cpt, "Y" => $Y / $Cpt];
     }
 
     /**
@@ -657,11 +657,11 @@ class Spring
                         if ($Distance < $FreeZone) {
                             $Force = log(pow(2, $FreeZone - $Distance));
                             if ($Force > 1) {
-                                $this->Data[$Key]["Vectors"][] = array(
+                                $this->Data[$Key]["Vectors"][] = [
                                     "Type"  => "R",
                                     "Angle" => $Angle % 360,
                                     "Force" => $Force
-                                );
+                                ];
                             }
                         }
                     }
@@ -686,11 +686,11 @@ class Spring
                             }
 
                             if ($Force > 1) {
-                                $this->Data[$Key]["Vectors"][] = array(
+                                $this->Data[$Key]["Vectors"][] = [
                                     "Type"  => "A",
                                     "Angle" => $Angle % 360,
                                     "Force" => $Force
-                                );
+                                ];
                             }
                         }
                     }
@@ -748,7 +748,7 @@ class Spring
         }
 
         /* Dump all links */
-        $Links = array();
+        $Links = [];
         foreach ($this->Data as $Key => $Settings) {
             $X1 = $Settings["X"];
             $Y1 = $Settings["Y"];
@@ -759,14 +759,14 @@ class Spring
                         $X2 = $this->Data[$NodeID]["X"];
                         $Y2 = $this->Data[$NodeID]["Y"];
 
-                        $Links[] = array(
+                        $Links[] = [
                             "X1" => $X1,
                             "Y1" => $Y1,
                             "X2" => $X2,
                             "Y2" => $Y2,
                             "Source" => $Settings["Name"],
                             "Destination" => $this->Data[$NodeID]["Name"]
-                        );
+                        ];
                     }
                 }
             }
@@ -860,7 +860,7 @@ class Spring
      * @param string $Settings
      * @return array
      */
-    public function drawSpring(Image $Object, array $Settings = array())
+    public function drawSpring(Image $Object, array $Settings = [])
     {
         $this->pChartObject = $Object;
 
@@ -913,7 +913,7 @@ class Spring
         }
 
         /* Draw the connections */
-        $Drawn = array();
+        $Drawn = [];
         foreach ($this->Data as $Key => $Settings) {
             $X = $Settings["X"];
             $Y = $Settings["Y"];
@@ -931,21 +931,21 @@ class Spring
                         && !isset($Drawn[$Key][$NodeID])
                         && !isset($Drawn[$NodeID][$Key])
                     ) {
-                        $Color = array(
+                        $Color = [
                             "R" => $this->Default["LinkR"],
                             "G" => $this->Default["LinkG"],
                             "B" => $this->Default["LinkB"],
                             "Alpha" => $this->Default["Alpha"]
-                        );
+                        ];
 
                         if (count($this->Links)) {
                             if (isset($this->Links[$Key][$NodeID]["R"])) {
-                                $Color = array(
+                                $Color = [
                                     "R" => $this->Links[$Key][$NodeID]["R"],
                                     "G" => $this->Links[$Key][$NodeID]["G"],
                                     "B" => $this->Links[$Key][$NodeID]["B"],
                                     "Alpha" => $this->Links[$Key][$NodeID]["Alpha"]
-                                );
+                                ];
                             }
 
                             if (isset($this->Links[$Key][$NodeID]["Ticks"])) {
@@ -996,7 +996,7 @@ class Spring
                     $X,
                     $Y,
                     $FreeZone,
-                    array("R" => 0, "G" => 0, "B" => 0, "Alpha" => 2)
+                    ["R" => 0, "G" => 0, "B" => 0, "Alpha" => 2]
                 );
             }
         }
@@ -1011,7 +1011,7 @@ class Spring
             $Shape = $Settings["Shape"];
             $Size = $Settings["Size"];
 
-            $Color = array(
+            $Color = [
                 "R" => $Settings["R"],
                 "G" => $Settings["G"],
                 "B" => $Settings["B"],
@@ -1020,12 +1020,12 @@ class Spring
                 "BorderG" => $Settings["BorderG"],
                 "BorderB" => $Settings["BorderB"],
                 "BorderApha" => $Settings["BorderAlpha"]
-            );
+            ];
 
             if ($Shape == NODE_SHAPE_CIRCLE) {
                 $this->pChartObject->drawFilledCircle($X, $Y, $Size, $Color);
             } elseif ($Shape == NODE_SHAPE_TRIANGLE) {
-                $Points = array();
+                $Points = [];
                 $Points[] = cos(deg2rad(270)) * $Size + $X;
                 $Points[] = sin(deg2rad(270)) * $Size + $Y;
                 $Points[] = cos(deg2rad(45)) * $Size + $X;
@@ -1046,12 +1046,12 @@ class Spring
             }
 
             if ($Name != "") {
-                $LabelOptions = array(
+                $LabelOptions = [
                     "R" => $this->Labels["R"],
                     "G" => $this->Labels["G"],
                     "B" => $this->Labels["B"],
                     "Alpha" => $this->Labels["Alpha"]
-                );
+                ];
 
                 if ($this->Labels["Type"] == LABEL_LIGHT) {
                     $LabelOptions["Align"] = TEXT_ALIGN_BOTTOMLEFT;
@@ -1083,8 +1083,8 @@ class Spring
                         $Angle = $Vector["Angle"];
                         $Factor = $Type == "A" ? $this->MagneticForceA : $this->MagneticForceR;
                         $Color = $Type == "A"
-                            ? array("FillR" => 255, "FillG" => 0, "FillB" => 0)
-                            : array("FillR" => 0, "FillG" => 255, "FillB" => 0)
+                            ? ["FillR" => 255, "FillG" => 0, "FillB" => 0]
+                            : ["FillR" => 0, "FillG" => 255, "FillB" => 0]
                         ;
 
                         $X2 = cos(deg2rad($Angle)) * $Force * $Factor + $X1;
@@ -1096,7 +1096,7 @@ class Spring
             }
         }
 
-        return array("Pass" => $Jobs, "Conflicts" => $Conflicts);
+        return ["Pass" => $Jobs, "Conflicts" => $Conflicts];
     }
 
     /**

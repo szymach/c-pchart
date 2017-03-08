@@ -42,7 +42,7 @@ class Stock
      * @param array $Format
      * @return integer|null
      */
-    public function drawStockChart(array $Format = array())
+    public function drawStockChart(array $Format = [])
     {
         $SerieOpen = isset($Format["SerieOpen"]) ? $Format["SerieOpen"] : "Open";
         $SerieClose = isset($Format["SerieClose"]) ? $Format["SerieClose"] : "Close";
@@ -114,19 +114,19 @@ class Stock
         ) {
             return STOCK_MISSING_SERIE;
         }
-        $Plots = array();
+        $Plots = [];
         foreach ($Data["Series"][$SerieOpen]["Data"] as $Key => $Value) {
-            $Point = array();
+            $Point = [];
             if (isset($Data["Series"][$SerieClose]["Data"][$Key])
                 || isset($Data["Series"][$SerieMin]["Data"][$Key])
                 || isset($Data["Series"][$SerieMax]["Data"][$Key])
             ) {
-                $Point = array(
+                $Point = [
                     $Value,
                     $Data["Series"][$SerieClose]["Data"][$Key],
                     $Data["Series"][$SerieMin]["Data"][$Key],
                     $Data["Series"][$SerieMax]["Data"][$Key]
-                );
+                ];
             }
             if ($SerieMedian != null && isset($Data["Series"][$SerieMedian]["Data"][$Key])) {
                 $Point[] = $Data["Series"][$SerieMedian]["Data"][$Key];
@@ -137,20 +137,20 @@ class Stock
         $AxisID = $Data["Series"][$SerieOpen]["Axis"];
         $Format = $Data["Axis"][$AxisID]["Format"];
 
-        $YZero = $this->pChartObject->scaleComputeY(0, array("AxisID" => $AxisID));
+        $YZero = $this->pChartObject->scaleComputeY(0, ["AxisID" => $AxisID]);
         $XStep = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1 - $XMargin * 2) / $XDivs;
 
         $X = $this->pChartObject->GraphAreaX1 + $XMargin;
         $Y = $this->pChartObject->GraphAreaY1 + $XMargin;
 
-        $LineSettings = array("R" => $LineR, "G" => $LineG, "B" => $LineB, "Alpha" => $LineAlpha);
-        $ExtremitySettings = array(
+        $LineSettings = ["R" => $LineR, "G" => $LineG, "B" => $LineB, "Alpha" => $LineAlpha];
+        $ExtremitySettings = [
             "R" => $ExtremityR,
             "G" => $ExtremityG,
             "B" => $ExtremityB,
             "Alpha" => $ExtremityAlpha
-        );
-        $BoxUpSettings = array(
+        ];
+        $BoxUpSettings = [
             "R" => $BoxUpR,
             "G" => $BoxUpG,
             "B" => $BoxUpB,
@@ -159,8 +159,8 @@ class Stock
             "BorderG" => $BoxUpBorderG,
             "BorderB" => $BoxUpBorderB,
             "BorderAlpha" => $BoxUpBorderAlpha
-        );
-        $BoxDownSettings = array(
+        ];
+        $BoxDownSettings = [
             "R" => $BoxDownR,
             "G" => $BoxDownG,
             "B" => $BoxDownB,
@@ -169,11 +169,11 @@ class Stock
             "BorderG" => $BoxDownBorderG,
             "BorderB" => $BoxDownBorderB,
             "BorderAlpha" => $BoxDownBorderAlpha
-        );
-        $MedianSettings = array("R" => $MedianR, "G" => $MedianG, "B" => $MedianB, "Alpha" => $MedianAlpha);
+        ];
+        $MedianSettings = ["R" => $MedianR, "G" => $MedianG, "B" => $MedianB, "Alpha" => $MedianAlpha];
 
         foreach ($Plots as $Key => $Points) {
-            $PosArray = $this->pChartObject->scaleComputeY($Points, array("AxisID" => $AxisID));
+            $PosArray = $this->pChartObject->scaleComputeY($Points, ["AxisID" => $AxisID]);
 
             $Values = "Open :" . $Data["Series"][$SerieOpen]["Data"][$Key]
                     . "<BR>Close : " . $Data["Series"][$SerieClose]["Data"][$Key]

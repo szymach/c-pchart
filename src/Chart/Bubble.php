@@ -46,10 +46,10 @@ class Bubble
     public function bubbleScale($DataSeries, $WeightSeries)
     {
         if (!is_array($DataSeries)) {
-            $DataSeries = array($DataSeries);
+            $DataSeries = [$DataSeries];
         }
         if (!is_array($WeightSeries)) {
-            $WeightSeries = array($WeightSeries);
+            $WeightSeries = [$WeightSeries];
         }
 
         /* Parse each data series to find the new min & max boundaries to scale */
@@ -146,10 +146,10 @@ class Bubble
         $RecordImageMap = isset($Format["RecordImageMap"]) ? $Format["RecordImageMap"] : false;
 
         if (!is_array($DataSeries)) {
-            $DataSeries = array($DataSeries);
+            $DataSeries = [$DataSeries];
         }
         if (!is_array($WeightSeries)) {
-            $WeightSeries = array($WeightSeries);
+            $WeightSeries = [$WeightSeries];
         }
 
         $Data = $this->pDataObject->getData();
@@ -183,12 +183,12 @@ class Bubble
             $X = $this->pChartObject->GraphAreaX1 + $XMargin;
             $Y = $this->pChartObject->GraphAreaY1 + $XMargin;
 
-            $Color = array(
+            $Color = [
                 "R" => $Palette[$Key]["R"],
                 "G" => $Palette[$Key]["G"],
                 "B" => $Palette[$Key]["B"],
                 "Alpha" => $Palette[$Key]["Alpha"]
-            );
+            ];
 
             if ($ForceAlpha != VOID) {
                 $Color["Alpha"] = $ForceAlpha;
@@ -204,12 +204,12 @@ class Bubble
                     if ($ForceAlpha != VOID) {
                         $BorderAlpha = $ForceAlpha / 2;
                     }
-                    $BorderColor = array(
+                    $BorderColor = [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $BorderAlpha
-                    );
+                    ];
                 } else {
                     $Color["BorderAlpha"] = $BorderAlpha;
 
@@ -233,11 +233,11 @@ class Bubble
 
                 $PosArray = $this->pChartObject->scaleComputeY(
                     $Point,
-                    array("AxisID" => $AxisID)
+                    ["AxisID" => $AxisID]
                 );
                 $WeightArray = $this->pChartObject->scaleComputeY(
                     $Weight,
-                    array("AxisID" => $AxisID)
+                    ["AxisID" => $AxisID]
                 );
 
                 if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
@@ -419,7 +419,7 @@ class Bubble
 
         if (!is_array($Points)) {
             $Point = $Points;
-            $Points = array();
+            $Points = [];
             $Points[] = $Point;
         }
 
@@ -441,16 +441,16 @@ class Bubble
         $X = $InitialX = $this->pChartObject->GraphAreaX1 + $XMargin;
         $Y = $InitialY = $this->pChartObject->GraphAreaY1 + $XMargin;
 
-        $Color = array(
+        $Color = [
             "R" => $Data["Series"][$SerieName]["Color"]["R"],
             "G" => $Data["Series"][$SerieName]["Color"]["G"],
             "B" => $Data["Series"][$SerieName]["Color"]["B"],
             "Alpha" => $Data["Series"][$SerieName]["Color"]["Alpha"]
-        );
+        ];
 
         foreach ($Points as $Key => $Point) {
             $Value = $Data["Series"][$SerieName]["Data"][$Point];
-            $PosArray = $this->pChartObject->scaleComputeY($Value, array("AxisID" => $AxisID));
+            $PosArray = $this->pChartObject->scaleComputeY($Value, ["AxisID" => $AxisID]);
 
             if (isset($Data["Abscissa"]) && isset($Data["Series"][$Data["Abscissa"]]["Data"][$Point])) {
                 $Abscissa = $Data["Series"][$Data["Abscissa"]]["Data"][$Point] . " : ";
@@ -497,14 +497,14 @@ class Bubble
                     $X,
                     $Y,
                     3,
-                    array(
+                    [
                         "R" => 255,
                         "G" => 255,
                         "B" => 255,
                         "BorderR" => 0,
                         "BorderG" => 0,
                         "BorderB" => 0
-                    )
+                    ]
                 );
             } elseif ($DrawPoint == LABEL_POINT_BOX) {
                 $this->pChartObject->drawFilledRectangle(
@@ -512,14 +512,14 @@ class Bubble
                     $Y - 2,
                     $X + 2,
                     $Y + 2,
-                    array(
+                    [
                         "R" => 255,
                         "G" => 255,
                         "B" => 255,
                         "BorderR" => 0,
                         "BorderG" => 0,
                         "BorderB" => 0
-                    )
+                    ]
                 );
             }
 

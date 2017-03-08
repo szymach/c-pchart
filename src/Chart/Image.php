@@ -65,7 +65,7 @@ class Image extends Draw
      * @param boolean $Enabled
      * @param array $Format
      */
-    public function setShadow($Enabled = true, array $Format = array())
+    public function setShadow($Enabled = true, array $Format = [])
     {
         $X = isset($Format["X"]) ? $Format["X"] : 2;
         $Y = isset($Format["Y"]) ? $Format["Y"] : 2;
@@ -241,7 +241,7 @@ class Image extends Draw
         $a = deg2rad($Angle);
         $ca = cos($a);
         $sa = sin($a);
-        $RealPos = array();
+        $RealPos = [];
         for ($i = 0; $i < 7; $i += 2) {
             $RealPos[$i / 2]["X"] = $X + round($coords[$i] * $ca + $coords[$i + 1] * $sa);
             $RealPos[$i / 2]["Y"] = $Y + round($coords[$i + 1] * $ca - $coords[$i] * $sa);
@@ -273,7 +273,7 @@ class Image extends Draw
      * Set current font properties
      * @param array $Format
      */
-    public function setFontProperties($Format = array())
+    public function setFontProperties($Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : -1;
         $G = isset($Format["G"]) ? $Format["G"] : -1;
@@ -411,7 +411,7 @@ class Image extends Draw
             if (!isset($_SESSION)) {
                 $this->initialiseImageMap();
             }
-            $_SESSION[$this->ImageMapIndex][] = array($Type, $Plots, $Color, $Title, $Message);
+            $_SESSION[$this->ImageMapIndex][] = [$Type, $Plots, $Color, $Title, $Message];
         } elseif ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE) {
             $Handle = fopen(
                 sprintf("%s/%s.map", $this->ImageMapStorageFolder, $this->ImageMapFileName),
@@ -448,7 +448,7 @@ class Image extends Draw
             return -1;
         }
 
-        $Result = array();
+        $Result = [];
         foreach ($this->DataSet->Data["Series"][$SerieName]["Data"] as $Key => $Value) {
             if ($Value != VOID && isset($Values[$Key])) {
                 $Result[] = $Values[$Key];
@@ -493,15 +493,15 @@ class Image extends Draw
                 }
             }
         } elseif ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE) {
-            $TempArray = array();
+            $TempArray = [];
             $Handle = $this->openFileHandle();
             if ($Handle) {
                 while (($Buffer = fgets($Handle, 4096)) !== false) {
                     $Fields = preg_split(
                         sprintf("/%s/", IMAGE_MAP_DELIMITER),
-                        str_replace(array(chr(10), chr(13)), "", $Buffer)
+                        str_replace([chr(10), chr(13)], "", $Buffer)
                     );
-                    $TempArray[] = array($Fields[0], $Fields[1], $Fields[2], $Fields[3], $Fields[4]);
+                    $TempArray[] = [$Fields[0], $Fields[1], $Fields[2], $Fields[3], $Fields[4]];
                 }
                 fclose($Handle);
 
@@ -571,15 +571,15 @@ class Image extends Draw
                 }
             }
         } elseif ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE) {
-            $TempArray = array();
+            $TempArray = [];
             $Handle = $this->openFileHandle();
             if ($Handle) {
                 while (($Buffer = fgets($Handle, 4096)) !== false) {
                     $Fields = preg_split(
                         "/" . IMAGE_MAP_DELIMITER . "/",
-                        str_replace(array(chr(10), chr(13)), "", $Buffer)
+                        str_replace([chr(10), chr(13)], "", $Buffer)
                     );
-                    $TempArray[] = array($Fields[0], $Fields[1], $Fields[2], $Fields[3], $Fields[4]);
+                    $TempArray[] = [$Fields[0], $Fields[1], $Fields[2], $Fields[3], $Fields[4]];
                 }
                 fclose($Handle);
 
@@ -691,7 +691,7 @@ class Image extends Draw
      */
     public function reversePlots(array $Plots)
     {
-        $Result = array();
+        $Result = [];
         for ($i = count($Plots) - 2; $i >= 0; $i = $i - 2) {
             $Result[] = $Plots[$i];
             $Result[] = $Plots[$i + 1];
@@ -707,7 +707,7 @@ class Image extends Draw
      * @param int $Height
      * @param array $Format
      */
-    public function drawAreaMirror($X, $Y, $Width, $Height, array $Format = array())
+    public function drawAreaMirror($X, $Y, $Width, $Height, array $Format = [])
     {
         $StartAlpha = isset($Format["StartAlpha"]) ? $Format["StartAlpha"] : 80;
         $EndAlpha = isset($Format["EndAlpha"]) ? $Format["EndAlpha"] : 0;

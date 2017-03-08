@@ -57,8 +57,8 @@ class Barcode39
     public function __construct($BasePath = "", $EnableMOD43 = false)
     {
         $this->MOD43 = (boolean) $EnableMOD43;
-        $this->Codes = array();
-        $this->Reverse = array();
+        $this->Codes = [];
+        $this->Reverse = [];
         if (file_exists($BasePath . "data/39.db")) {
             $FileHandle = @fopen($BasePath . "data/39.db", "r");
             $filePath = $BasePath . "data/39.db";
@@ -116,7 +116,7 @@ class Barcode39
         $AreaWidth = max(abs($X1), abs($X2));
         $AreaHeight = max(abs($Y1), abs($Y2));
 
-        return array("Width" => $AreaWidth, "Height" => $AreaHeight);
+        return ["Width" => $AreaWidth, "Height" => $AreaHeight];
     }
 
     /**
@@ -206,15 +206,15 @@ class Barcode39
             $X4 = $X3 + cos(($Angle + 180) * PI / 180) * (strlen($this->Result) + 20);
             $Y4 = $Y3 + sin(($Angle + 180) * PI / 180) * (strlen($this->Result) + 20);
 
-            $Polygon = array($X1, $Y1, $X2, $Y2, $X3, $Y3, $X4, $Y4);
-            $Settings = array(
+            $Polygon = [$X1, $Y1, $X2, $Y2, $X3, $Y3, $X4, $Y4];
+            $Settings = [
                 "R" => $AreaR,
                 "G" => $AreaG,
                 "B" => $AreaB,
                 "BorderR" => $AreaBorderR,
                 "BorderG" => $AreaBorderG,
                 "BorderB" => $AreaBorderB
-            );
+            ];
             $this->pChartObject->drawPolygon($Polygon, $Settings);
         }
 
@@ -225,7 +225,7 @@ class Barcode39
                 $X2 = $X1 + cos(($Angle + 90) * PI / 180) * $Height;
                 $Y2 = $Y1 + sin(($Angle + 90) * PI / 180) * $Height;
 
-                $Settings = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha);
+                $Settings = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
                 $this->pChartObject->drawLine($X1, $Y1, $X2, $Y2, $Settings);
             }
         }
@@ -237,14 +237,14 @@ class Barcode39
             $LegendX = $X1 + cos(($Angle + 90) * PI / 180) * ($Height + $LegendOffset);
             $LegendY = $Y1 + sin(($Angle + 90) * PI / 180) * ($Height + $LegendOffset);
 
-            $Settings = array(
+            $Settings = [
                 "R" => $R,
                 "G" => $G,
                 "B" => $B,
                 "Alpha" => $Alpha,
                 "Angle" => -$Angle,
                 "Align" => TEXT_ALIGN_TOPMIDDLE
-            );
+            ];
             $this->pChartObject->drawText($LegendX, $LegendY, $TextString, $Settings);
         }
     }

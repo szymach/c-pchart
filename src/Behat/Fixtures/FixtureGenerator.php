@@ -52,18 +52,18 @@ class FixtureGenerator
      */
     public function setSplineData(Image $image)
     {
-        $coordinates = array(
-            array(40, 80),
-            array(280, 60),
-            array(340, 166),
-            array(590, 120)
-        );
-        $settings = array(
+        $coordinates = [
+            [40, 80],
+            [280, 60],
+            [340, 166],
+            [590, 120]
+        ];
+        $settings = [
             "R" => 255,
             "G" => 255,
             "B" => 255,
             "ShowControl" => true
-        );
+        ];
         $image->drawSpline($coordinates, $settings);
     }
 }

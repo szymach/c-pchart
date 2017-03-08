@@ -47,7 +47,7 @@ abstract class BaseDraw
      * Already drawn pixels mask (Filled circle implementation)
      * @var array
      */
-    public $Mask = array();
+    public $Mask = [];
 
     /**
      * Just to know if we need to flush the alpha channels when rendering
@@ -167,7 +167,7 @@ abstract class BaseDraw
      * Array containing the image map
      * @var array
      */
-    public $ImageMap = array();
+    public $ImageMap = [];
 
     /**
      * Name of the session array
@@ -324,7 +324,7 @@ abstract class BaseDraw
             $Type = 3;
         }
 
-        return array($Width, $Height, $Type);
+        return [$Width, $Height, $Type];
     }
 
     /**
@@ -339,12 +339,12 @@ abstract class BaseDraw
     public function computeScale($XMin, $XMax, $MaxDivs, array $Factors, $AxisID = 0)
     {
         /* Compute each factors */
-        $Results = array();
+        $Results = [];
         foreach ($Factors as $Key => $Factor) {
-            $Results[$Factor] = $this->processScale($XMin, $XMax, $MaxDivs, array($Factor), $AxisID);
+            $Results[$Factor] = $this->processScale($XMin, $XMax, $MaxDivs, [$Factor], $AxisID);
         }
         /* Remove scales that are creating to much decimals */
-        $GoodScaleFactors = array();
+        $GoodScaleFactors = [];
         foreach ($Results as $Key => $Result) {
             $Decimals = preg_split("/\./", $Result["RowHeight"]);
             if ((!isset($Decimals[1])) || (strlen($Decimals[1]) < 6)) {
@@ -394,7 +394,7 @@ abstract class BaseDraw
             $Mode = $this->DataSet->Data["Axis"][$AxisID]["Display"];
         }
 
-        $Scale = array();
+        $Scale = [];
         if ($XMin != $XMax) {
             $Found = false;
             $Rescaled = false;
@@ -578,7 +578,7 @@ abstract class BaseDraw
      */
     public function fixBoxCoordinates($Xa, $Ya, $Xb, $Yb)
     {
-        return array(min($Xa, $Xb), min($Ya, $Yb), max($Xa, $Xb), max($Ya, $Yb));
+        return [min($Xa, $Xb), min($Ya, $Yb), max($Xa, $Xb), max($Ya, $Yb)];
     }
 
     /**
@@ -602,13 +602,13 @@ abstract class BaseDraw
             if ($Value == .8) {
                 return .6;
             }
-            if (in_array($Value, array(.4, .7))) {
+            if (in_array($Value, [.4, .7])) {
                 return .7;
             }
-            if (in_array($Value, array(.2, .3, .6))) {
+            if (in_array($Value, [.2, .3, .6])) {
                 return .8;
             }
-            if (in_array($Value, array(0, 1, .1, .9))) {
+            if (in_array($Value, [0, 1, .1, .9])) {
                 return .9;
             }
         }
@@ -632,16 +632,16 @@ abstract class BaseDraw
             if ($Value == .7) {
                 return .7;
             }
-            if (in_array($Value, array(.6, .8))) {
+            if (in_array($Value, [.6, .8])) {
                 return .8;
             }
-            if (in_array($Value, array(1, .9))) {
+            if (in_array($Value, [1, .9])) {
                 return .9;
             }
         }
 
         if ($Mode == 3) {
-            if (in_array($Value, array(1, .1))) {
+            if (in_array($Value, [1, .1])) {
                 return .1;
             }
             if ($Value == .2) {
@@ -650,7 +650,7 @@ abstract class BaseDraw
             if ($Value == .3) {
                 return .3;
             }
-            if (in_array($Value, array(.4, .8))) {
+            if (in_array($Value, [.4, .8])) {
                 return .4;
             }
             if ($Value == .5) {
@@ -671,7 +671,7 @@ abstract class BaseDraw
             if ($Value == 1) {
                 return -1;
             }
-            if (in_array($Value, array(.1, .4, .7, .8, .9))) {
+            if (in_array($Value, [.1, .4, .7, .8, .9])) {
                 return .1;
             }
             if ($Value == .2) {
@@ -694,7 +694,7 @@ abstract class BaseDraw
      * @param array $Format
      * @return array
      */
-    public function getLegendSize(array $Format = array())
+    public function getLegendSize(array $Format = [])
     {
         $FontName = isset($Format["FontName"]) ? $this->loadFont($Format["FontName"], 'fonts') : $this->FontName;
         $FontSize = isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
@@ -730,7 +730,7 @@ abstract class BaseDraw
         $X = 100;
         $Y = 100;
 
-        $Boundaries = array();
+        $Boundaries = [];
         $Boundaries["L"] = $X;
         $Boundaries["T"] = $Y;
         $Boundaries["R"] = 0;
@@ -802,7 +802,7 @@ abstract class BaseDraw
         $Width = ($Boundaries["R"] + $Margin) - ($Boundaries["L"] - $Margin);
         $Height = ($Boundaries["B"] + $Margin) - ($Boundaries["T"] - $Margin);
 
-        return array("Width" => $Width, "Height" => $Height);
+        return ["Width" => $Width, "Height" => $Height];
     }
 
     /**
@@ -827,12 +827,12 @@ abstract class BaseDraw
      */
     public function getRandomColor($Alpha = 100)
     {
-        return array(
+        return [
             "R" => rand(0, 255),
             "G" => rand(0, 255),
             "B" => rand(0, 255),
             "Alpha" => $Alpha
-        );
+        ];
     }
 
     /**
@@ -843,7 +843,7 @@ abstract class BaseDraw
      */
     public function validatePalette($Colors, $Surrounding = null)
     {
-        $Result = array();
+        $Result = [];
 
         if (!is_array($Colors)) {
             return $this->getRandomColor();
@@ -910,7 +910,7 @@ abstract class BaseDraw
      * @param boolean $ReturnOnly0Height
      * @return int|float|array
      */
-    public function scaleComputeY($Values, array $Option = array(), $ReturnOnly0Height = false)
+    public function scaleComputeY($Values, array $Option = [], $ReturnOnly0Height = false)
     {
         $AxisID = isset($Option["AxisID"]) ? $Option["AxisID"] : 0;
         $SerieName = isset($Option["SerieName"]) ? $Option["SerieName"] : null;
@@ -925,11 +925,11 @@ abstract class BaseDraw
         }
         if (!is_array($Values)) {
             $tmp = $Values;
-            $Values = array();
+            $Values = [];
             $Values[0] = $tmp;
         }
 
-        $Result = array();
+        $Result = [];
         if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
             $Height = ($this->GraphAreaY2 - $this->GraphAreaY1) - $Data["Axis"][$AxisID]["Margin"] * 2;
             $ScaleHeight = $Data["Axis"][$AxisID]["ScaleMax"] - $Data["Axis"][$AxisID]["ScaleMin"];
@@ -1002,7 +1002,7 @@ abstract class BaseDraw
             if ($Value == 0) {
                 return "0B";
             }
-            $Units = array("B", "KB", "MB", "GB", "TB", "PB");
+            $Units = ["B", "KB", "MB", "GB", "TB", "PB"];
             $Sign = "";
             if ($Value < 0) {
                 $Value = abs($Value);
@@ -1062,7 +1062,7 @@ abstract class BaseDraw
         $Data = $this->DataSet->getData();
         foreach ($Data["Axis"] as $Settings) {
             if ($Settings["Identity"] == AXIS_X) {
-                return array($Settings["Margin"], $Settings["Rows"]);
+                return [$Settings["Margin"], $Settings["Rows"]];
             }
         }
     }
@@ -1103,7 +1103,7 @@ abstract class BaseDraw
         $BoxBorderB = isset($Format["BoxBorderB"]) ? $Format["BoxBorderB"] : 255;
         $BoxBorderAlpha = isset($Format["BoxBorderAlpha"]) ? $Format["BoxBorderAlpha"] : 100;
 
-        $CaptionSettings = array(
+        $CaptionSettings = [
             "DrawBox" => $DrawBox,
             "DrawBoxBorder" => $DrawBoxBorder,
             "BorderOffset" => $BorderOffset,
@@ -1118,7 +1118,7 @@ abstract class BaseDraw
             "BoxBorderG" => $BoxBorderG,
             "BoxBorderB" => $BoxBorderB,
             "BoxBorderAlpha" => $BoxBorderAlpha
-        );
+        ];
 
         list($XMargin, $XDivs) = $this->scaleGetXSettings();
 
@@ -1153,7 +1153,7 @@ abstract class BaseDraw
 
                 $PosArray = $this->scaleComputeY(
                     $Serie["Data"],
-                    array("AxisID" => $Serie["Axis"])
+                    ["AxisID" => $Serie["Axis"]]
                 );
 
                 if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
@@ -1352,7 +1352,7 @@ abstract class BaseDraw
      * @param array $Indexes
      * @param array $Format
      */
-    public function writeLabel($SeriesName, $Indexes, array $Format = array())
+    public function writeLabel($SeriesName, $Indexes, array $Format = [])
     {
         $OverrideTitle = isset($Format["OverrideTitle"]) ? $Format["OverrideTitle"] : null;
         $ForceLabels = isset($Format["ForceLabels"]) ? $Format["ForceLabels"] : null;
@@ -1369,22 +1369,22 @@ abstract class BaseDraw
 
         if (!is_array($Indexes)) {
             $Index = $Indexes;
-            $Indexes = array();
+            $Indexes = [];
             $Indexes[] = $Index;
         }
         if (!is_array($SeriesName)) {
             $SerieName = $SeriesName;
-            $SeriesName = array();
+            $SeriesName = [];
             $SeriesName[] = $SerieName;
         }
         if ($ForceLabels != null && !is_array($ForceLabels)) {
             $ForceLabel = $ForceLabels;
-            $ForceLabels = array();
+            $ForceLabels = [];
             $ForceLabels[] = $ForceLabel;
         }
 
         foreach ($Indexes as $Key => $Index) {
-            $Series = array();
+            $Series = [];
 
             if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
                 if ($XDivs == 0) {
@@ -1400,13 +1400,13 @@ abstract class BaseDraw
                         $this->GraphAreaY1 + $Data["YMargin"],
                         $X,
                         $this->GraphAreaY2 - $Data["YMargin"],
-                        array(
+                        [
                             "R" => $VerticalLineR,
                             "G" => $VerticalLineG,
                             "B" => $VerticalLineB,
                             "Alpha" => $VerticalLineAlpha,
                             "Ticks" => $VerticalLineTicks
-                        )
+                        ]
                     );
                 }
 
@@ -1497,7 +1497,7 @@ abstract class BaseDraw
                         }
 
                         $X = floor($this->GraphAreaX1 + $XMargin + $Index * $XStep + $SerieOffset);
-                        $Y = floor($this->scaleComputeY($Value, array("AxisID" => $AxisID)));
+                        $Y = floor($this->scaleComputeY($Value, ["AxisID" => $AxisID]));
 
                         if ($Y < $MinY) {
                             $MinY = $Y;
@@ -1508,14 +1508,14 @@ abstract class BaseDraw
                                 $X,
                                 $Y,
                                 3,
-                                array(
+                                [
                                     "R" => 255,
                                     "G" => 255,
                                     "B" => 255,
                                     "BorderR" => 0,
                                     "BorderG" => 0,
                                     "BorderB" => 0
-                                )
+                                ]
                             );
                         } elseif ($DrawPoint == LABEL_POINT_BOX) {
                             $this->drawFilledRectangle(
@@ -1523,17 +1523,17 @@ abstract class BaseDraw
                                 $Y - 2,
                                 $X + 2,
                                 $Y + 2,
-                                array(
+                                [
                                     "R" => 255,
                                     "G" => 255,
                                     "B" => 255,
                                     "BorderR" => 0,
                                     "BorderG" => 0,
                                     "BorderB" => 0
-                                )
+                                ]
                             );
                         }
-                        $Series[] = array("Format" => $Serie, "Caption" => $Caption);
+                        $Series[] = ["Format" => $Serie, "Caption" => $Caption];
                     }
                 }
                 $this->drawLabelBox($X, $MinY - 3, $Description, $Series, $Format);
@@ -1551,13 +1551,13 @@ abstract class BaseDraw
                         $Y,
                         $this->GraphAreaX2 - $Data["YMargin"],
                         $Y,
-                        array(
+                        [
                             "R" => $VerticalLineR,
                             "G" => $VerticalLineG,
                             "B" => $VerticalLineB,
                             "Alpha" => $VerticalLineAlpha,
                             "Ticks" => $VerticalLineTicks
-                        )
+                        ]
                     );
                 }
 
@@ -1657,7 +1657,7 @@ abstract class BaseDraw
                             }
                         }
 
-                        $X = floor($this->scaleComputeY($Value, array("AxisID" => $AxisID)));
+                        $X = floor($this->scaleComputeY($Value, ["AxisID" => $AxisID]));
                         $Y = floor($this->GraphAreaY1 + $XMargin + $Index * $XStep + $SerieOffset);
 
                         if ($X < $MinX) {
@@ -1669,14 +1669,14 @@ abstract class BaseDraw
                                 $X,
                                 $Y,
                                 3,
-                                array(
+                                [
                                     "R" => 255,
                                     "G" => 255,
                                     "B" => 255,
                                     "BorderR" => 0,
                                     "BorderG" => 0,
                                     "BorderB" => 0
-                                )
+                                ]
                             );
                         } elseif ($DrawPoint == LABEL_POINT_BOX) {
                             $this->drawFilledRectangle(
@@ -1684,17 +1684,17 @@ abstract class BaseDraw
                                 $Y - 2,
                                 $X + 2,
                                 $Y + 2,
-                                array(
+                                [
                                     "R" => 255,
                                     "G" => 255,
                                     "B" => 255,
                                     "BorderR" => 0,
                                     "BorderG" => 0,
                                     "BorderB" => 0
-                                )
+                                ]
                             );
                         }
-                        $Series[] = array("Format" => $Serie, "Caption" => $Caption);
+                        $Series[] = ["Format" => $Serie, "Caption" => $Caption];
                     }
                 }
                 $this->drawLabelBox($MinX, $Y - 3, $Description, $Series, $Format);
