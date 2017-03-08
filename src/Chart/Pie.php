@@ -15,7 +15,6 @@ namespace CpChart\Chart;
  *
  *  You can find the whole class documentation on the pChart web site.
  */
-
 class Pie
 {
     /**
@@ -380,7 +379,7 @@ class Pie
                 }
 
                 if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Display = round(( 100 / $SerieSum ) * $Value, $Precision) . "%";
+                    $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
                 } elseif ($WriteValues == PIE_VALUE_NATURAL) {
                     $Display = $Value . $ValueSuffix;
                 }
@@ -555,16 +554,16 @@ class Pie
                 $Xc = cos(($i - 90) * PI / 180) * $Radius + $X;
                 $Yc = sin(($i - 90) * PI / 180) * $Radius * $SkewFactor + $Y;
 
-                if (($SecondPass || $RestoreShadow ) && ( $i < 90 )) {
+                if (($SecondPass || $RestoreShadow ) && ($i < 90)) {
                     $Yc++;
                 }
-                if (($SecondPass || $RestoreShadow ) && ( $i > 90 && $i < 180 )) {
+                if (($SecondPass || $RestoreShadow ) && ($i > 90 && $i < 180)) {
                     $Xc++;
                 }
-                if (($SecondPass || $RestoreShadow ) && ( $i > 180 && $i < 270 )) {
+                if (($SecondPass || $RestoreShadow ) && ($i > 180 && $i < 270)) {
                     $Xc++;
                 }
-                if (($SecondPass || $RestoreShadow ) && ( $i >= 270 )) {
+                if (($SecondPass || $RestoreShadow ) && ($i >= 270)) {
                     $Xc++;
                     $Yc++;
                 }
@@ -580,7 +579,7 @@ class Pie
         }
 
         /* Draw the bottom shadow if needed */
-        if ($RestoreShadow && ($this->pChartObject->ShadowX != 0 || $this->pChartObject->ShadowY != 0 )) {
+        if ($RestoreShadow && ($this->pChartObject->ShadowX != 0 || $this->pChartObject->ShadowY != 0)) {
             foreach ($Slices as $SliceID => $Plots) {
                 $ShadowPie = array();
                 for ($i = 0; $i < count($Plots); $i = $i + 2) {
@@ -651,9 +650,9 @@ class Pie
         $SliceColors = array_reverse($SliceColors);
         foreach ($Slices as $SliceID => $Plots) {
             $Settings = $SliceColors[$SliceID];
-            $Settings["R"]+= 10;
-            $Settings["G"]+= 10;
-            $Settings["B"]+= 10;
+            $Settings["R"] += 10;
+            $Settings["G"] += 10;
+            $Settings["B"] += 10;
             $Settings["NoBorder"] = true;
             /* Empty error handling */
             if ($Visible[$SliceID]["Start"] && isset($Plots[2])) {
@@ -681,9 +680,9 @@ class Pie
         $SliceColors = array_reverse($SliceColors);
         foreach ($Slices as $SliceID => $Plots) {
             $Settings = $SliceColors[$SliceID];
-            $Settings["R"]+= 10;
-            $Settings["G"]+= 10;
-            $Settings["B"]+= 10;
+            $Settings["R"] += 10;
+            $Settings["G"] += 10;
+            $Settings["B"] += 10;
             $Settings["NoBorder"] = true;
             if ($Visible[$SliceID]["End"]) {
                 $this->pChartObject->drawLine(
@@ -710,9 +709,9 @@ class Pie
         /* Draw the rounded edges */
         foreach ($Slices as $SliceID => $Plots) {
             $Settings = $SliceColors[$SliceID];
-            $Settings["R"]+= 10;
-            $Settings["G"]+= 10;
-            $Settings["B"]+= 10;
+            $Settings["R"] += 10;
+            $Settings["G"] += 10;
+            $Settings["B"] += 10;
             $Settings["NoBorder"] = true;
 
             for ($j = 2; $j < count($Plots) - 2; $j = $j + 2) {
@@ -734,9 +733,9 @@ class Pie
             if ($SecondPass) {
                 $Settings = $SliceColors[$SliceID];
                 if (count($Border)) {
-                    $Settings["R"]+= 30;
-                    $Settings["G"]+= 30;
-                    $Settings["B"]+= 30;
+                    $Settings["R"] += 30;
+                    $Settings["G"] += 30;
+                    $Settings["B"] += 30;
                 }
 
                 /* Empty error handling */
@@ -779,9 +778,9 @@ class Pie
         /* Draw the top splice */
         foreach ($Slices as $SliceID => $Plots) {
             $Settings = $SliceColors[$SliceID];
-            $Settings["R"]+= 20;
-            $Settings["G"]+= 20;
-            $Settings["B"]+= 20;
+            $Settings["R"] += 20;
+            $Settings["G"] += 20;
+            $Settings["B"] += 20;
 
             $Top = array();
             for ($j = 0; $j < count($Plots); $j = $j + 2) {
@@ -906,7 +905,7 @@ class Pie
                 }
 
                 if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Display = round(( 100 / $SerieSum ) * $Value, $Precision) . "%";
+                    $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
                 } elseif ($WriteValues == PIE_VALUE_NATURAL) {
                     $Display = $Value . $ValueSuffix;
                 }
@@ -1643,7 +1642,7 @@ class Pie
                 }
 
                 if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Display = round(( 100 / $SerieSum ) * $Value, $Precision) . "%";
+                    $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
                 } elseif ($WriteValues == PIE_VALUE_NATURAL) {
                     $Display = $Value . $ValueSuffix;
                 } else {
@@ -1996,7 +1995,7 @@ class Pie
                 if ($Angle == VOID) {
                     $Outer = false;
                     $Inner = true;
-                } elseif ($Inner && ($Angle < 90 || $Angle > 270 ) && isset($Plots["BottomPoly"][$ID * 2])) {
+                } elseif ($Inner && ($Angle < 90 || $Angle > 270) && isset($Plots["BottomPoly"][$ID * 2])) {
                     $Xo = $Plots["BottomPoly"][$ID * 2];
                     $Yo = $Plots["BottomPoly"][$ID * 2 + 1];
 
@@ -2112,7 +2111,7 @@ class Pie
                 if ($Angle == VOID) {
                     $Outer = false;
                     $Inner = true;
-                } elseif ($Outer && ($Angle > 90 && $Angle < 270 ) && isset($Plots["BottomPoly"][$ID * 2])) {
+                } elseif ($Outer && ($Angle > 90 && $Angle < 270) && isset($Plots["BottomPoly"][$ID * 2])) {
                     $Xo = $Plots["BottomPoly"][$ID * 2];
                     $Yo = $Plots["BottomPoly"][$ID * 2 + 1];
 
@@ -2209,7 +2208,7 @@ class Pie
 
                 $Label = "";
                 if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Label = $Display = round(( 100 / $SerieSum ) * $Value, $Precision) . "%";
+                    $Label = $Display = round(( 100 / $SerieSum) * $Value, $Precision) . "%";
                 } elseif ($WriteValues == PIE_VALUE_NATURAL) {
                     $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$Key];
                 }

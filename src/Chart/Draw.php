@@ -2557,7 +2557,7 @@ abstract class Draw extends BaseDraw
         $SkippedOuterTickWidth = isset($Format["SkippedOuterTickWidth"]) ? $Format["SkippedOuterTickWidth"] : 2;
 
         /* Floating scale require X & Y margins to be set manually */
-        if ($Floating && ( $XMargin == AUTO || $YMargin == 0 )) {
+        if ($Floating && ($XMargin == AUTO || $YMargin == 0)) {
             $Floating = false;
         }
 
@@ -4202,7 +4202,7 @@ abstract class Draw extends BaseDraw
         }
 
         if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
-            $XStep = (($this->GraphAreaX2 - $this->GraphAreaX1) - $XScale[0] * 2 ) / $XScale[1];
+            $XStep = (($this->GraphAreaX2 - $this->GraphAreaX1) - $XScale[0] * 2) / $XScale[1];
             $XPos = $this->GraphAreaX1 + $XScale[0] + $XStep * $Value;
             $YPos1 = $this->GraphAreaY1 + $Data["YMargin"];
             $YPos2 = $this->GraphAreaY2 - $Data["YMargin"];
@@ -4268,7 +4268,7 @@ abstract class Draw extends BaseDraw
                 return array("X" => $XPos);
             }
         } elseif ($Data["Orientation"] == SCALE_POS_TOPBOTTOM) {
-            $XStep = (($this->GraphAreaY2 - $this->GraphAreaY1) - $XScale[0] * 2 ) / $XScale[1];
+            $XStep = (($this->GraphAreaY2 - $this->GraphAreaY1) - $XScale[0] * 2) / $XScale[1];
             $XPos = $this->GraphAreaY1 + $XScale[0] + $XStep * $Value;
             $YPos1 = $this->GraphAreaX1 + $Data["YMargin"];
             $YPos2 = $this->GraphAreaX2 - $Data["YMargin"];
@@ -4377,7 +4377,7 @@ abstract class Draw extends BaseDraw
         $XScale = $this->scaleGetXSettings();
 
         if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
-            $XStep = (($this->GraphAreaX2 - $this->GraphAreaX1) - $XScale[0] * 2 ) / $XScale[1];
+            $XStep = (($this->GraphAreaX2 - $this->GraphAreaX1) - $XScale[0] * 2) / $XScale[1];
             $XPos1 = $this->GraphAreaX1 + $XScale[0] + $XStep * $Value1;
             $XPos2 = $this->GraphAreaX1 + $XScale[0] + $XStep * $Value2;
             $YPos1 = $this->GraphAreaY1 + $Data["YMargin"];
@@ -4474,7 +4474,7 @@ abstract class Draw extends BaseDraw
             $this->Shadow = $RestoreShadow;
             return array("X1" => $XPos1, "X2" => $XPos2);
         } elseif ($Data["Orientation"] == SCALE_POS_TOPBOTTOM) {
-            $XStep = (($this->GraphAreaY2 - $this->GraphAreaY1) - $XScale[0] * 2 ) / $XScale[1];
+            $XStep = (($this->GraphAreaY2 - $this->GraphAreaY1) - $XScale[0] * 2) / $XScale[1];
             $XPos1 = $this->GraphAreaY1 + $XScale[0] + $XStep * $Value1;
             $XPos2 = $this->GraphAreaY1 + $XScale[0] + $XStep * $Value2;
             $YPos1 = $this->GraphAreaX1 + $Data["YMargin"];
@@ -8325,7 +8325,7 @@ abstract class Draw extends BaseDraw
                                 }
 
                                 if ($DisplayOrientation == ORIENTATION_VERTICAL
-                                    || ( $DisplayOrientation == ORIENTATION_AUTO && !$Done)
+                                    || ($DisplayOrientation == ORIENTATION_AUTO && !$Done)
                                 ) {
                                     if ($TxtHeight < $BarWidth && $TxtWidth < $BarHeight) {
                                         $this->drawText(
@@ -8529,7 +8529,7 @@ abstract class Draw extends BaseDraw
                                 $TxtHeight = abs($TxtPos[2]["Y"] - $TxtPos[0]["Y"]);
                                 $TxtWidth = abs($TxtPos[1]["X"] - $TxtPos[0]["X"]);
 
-                                $XCenter = ( $X2 - $X1 ) / 2 + $X1;
+                                $XCenter = ($X2 - $X1) / 2 + $X1;
                                 $YCenter = (($Y + $YOffset + $YSize) - ($Y + $YOffset)) / 2 + $Y + $YOffset;
 
                                 $Done = false;
@@ -8560,7 +8560,7 @@ abstract class Draw extends BaseDraw
                                 }
 
                                 if ($DisplayOrientation == ORIENTATION_VERTICAL
-                                    || ( $DisplayOrientation == ORIENTATION_AUTO && !$Done)
+                                    || ($DisplayOrientation == ORIENTATION_AUTO && !$Done)
                                 ) {
                                     if ($TxtHeight < $BarWidth && $TxtWidth < $BarHeight) {
                                         $this->drawText(
@@ -10194,7 +10194,7 @@ abstract class Draw extends BaseDraw
                         if ($Y1 == $Y2) {
                             $X = $X1;
                         } else {
-                            $X = $X1 + (($Y - $Y1) * $X2 - ($Y - $Y1) * $X1 ) / ($Y2 - $Y1);
+                            $X = $X1 + (($Y - $Y1) * $X2 - ($Y - $Y1) * $X1) / ($Y2 - $Y1);
                         }
 
                         $X = floor($X);
@@ -10235,7 +10235,7 @@ abstract class Draw extends BaseDraw
                         if (is_array($Intersections)
                             && in_array($X, $Intersections)
                             && $LastSlope == "="
-                            && ($Slope == "-" )
+                            && ($Slope == "-")
                         ) {
                             $Intersections[] = $X;
                         }

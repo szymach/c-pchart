@@ -1168,13 +1168,13 @@ abstract class BaseDraw
 
                     if ($Type == BOUND_MAX || $Type == BOUND_BOTH) {
                         if ($MaxLabelPos == BOUND_LABEL_POS_TOP
-                            || ( $MaxLabelPos == BOUND_LABEL_POS_AUTO && $MaxValue >= 0)
+                            || ($MaxLabelPos == BOUND_LABEL_POS_AUTO && $MaxValue >= 0)
                         ) {
                             $YPos = $PosArray[$MaxPos] - $DisplayOffset + 2;
                             $Align = TEXT_ALIGN_BOTTOMMIDDLE;
                         }
                         if ($MaxLabelPos == BOUND_LABEL_POS_BOTTOM
-                            || ( $MaxLabelPos == BOUND_LABEL_POS_AUTO && $MaxValue < 0)
+                            || ($MaxLabelPos == BOUND_LABEL_POS_AUTO && $MaxValue < 0)
                         ) {
                             $YPos = $PosArray[$MaxPos] + $DisplayOffset + 2;
                             $Align = TEXT_ALIGN_TOPMIDDLE;

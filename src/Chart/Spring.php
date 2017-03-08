@@ -70,7 +70,7 @@ class Spring
     /**
      * @var boolean
      */
-    public $AutoComputeFreeZone= false;
+    public $AutoComputeFreeZone = false;
 
     public function __construct()
     {
@@ -790,7 +790,7 @@ class Spring
                             $X4 = $Link["X2"];
                             $Y4 = $Link["Y2"];
 
-                            if (!($X1 == $X3 && $X2 == $X4 && $Y1 == $Y3 && $Y2 == $Y4 )) {
+                            if (!($X1 == $X3 && $X2 == $X4 && $Y1 == $Y3 && $Y2 == $Y4)) {
                                 if ($this->intersect($X1, $Y1, $X2, $Y2, $X3, $Y3, $X4, $Y4)) {
                                     if ($Link["Source"] != $Settings["Name"]
                                         && $Link["Source"] != $this->Data[$NodeID]["Name"]
