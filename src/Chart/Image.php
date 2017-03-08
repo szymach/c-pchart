@@ -89,7 +89,7 @@ class Image extends Draw
      * @param int $Y1
      * @param int $X2
      * @param int $Y2
-     * @return int | null
+     * @return int|null
      */
     public function setGraphArea($X1, $Y1, $X2, $Y2)
     {

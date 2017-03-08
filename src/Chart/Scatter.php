@@ -2037,8 +2037,8 @@ class Scatter
 
     /**
      * Draw a Scatter threshold area
-     * @param int | float $Value1
-     * @param int | float $Value2
+     * @param int|float $Value1
+     * @param int|float $Value2
      * @param array $Format
      * @return type
      */

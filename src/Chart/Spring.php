@@ -168,7 +168,7 @@ class Spring
      * @param int $FromNode
      * @param int $ToNode
      * @param array $Settings
-     * @return null | int
+     * @return null|int
      */
     public function linkProperties($FromNode, $ToNode, array $Settings)
     {
@@ -262,7 +262,7 @@ class Spring
      * Add a node
      * @param int $NodeID
      * @param array $Settings
-     * @return null | int
+     * @return null|int
      */
     public function addNode($NodeID, array $Settings = array())
     {
@@ -332,7 +332,7 @@ class Spring
 
     /**
      * Set color attribute for a list of nodes
-     * @param array | string $Nodes
+     * @param array|string $Nodes
      * @param array $Settings
      */
     public function setNodesColor($Nodes, array $Settings = array())
@@ -415,9 +415,9 @@ class Spring
 
     /**
      * Check if a connection exists and create it if required
-     * @param string | int $SourceID
-     * @param string | int $TargetID
-     * @return boolean | null
+     * @param string|int $SourceID
+     * @param string|int $TargetID
+     * @return boolean|null
      */
     public function checkConnection($SourceID, $TargetID)
     {
@@ -721,7 +721,7 @@ class Spring
     }
 
     /**
-     * @return int | float
+     * @return int|float
      */
     public function lastPass()
     {
@@ -1105,7 +1105,7 @@ class Spring
      * @param int $Y1
      * @param int $X2
      * @param int $Y2
-     * @return int | float
+     * @return int|float
      */
     public function getDistance($X1, $Y1, $X2, $Y2)
     {
@@ -1118,7 +1118,7 @@ class Spring
      * @param int $Y1
      * @param int $X2
      * @param int $Y2
-     * @return int | float
+     * @return int|float
      */
     public function getAngle($X1, $Y1, $X2, $Y2)
     {

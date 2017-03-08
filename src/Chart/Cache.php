@@ -361,7 +361,7 @@ class Cache
     /**
      * Get file from cache
      * @param string $ID
-     * @return string | null
+     * @return string|null
      */
     public function getFromCache($ID)
     {

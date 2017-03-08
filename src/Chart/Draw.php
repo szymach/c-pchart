@@ -843,10 +843,10 @@ abstract class Draw extends BaseDraw
 
     /**
      * Draw a line between two points
-     * @param int $X1
-     * @param int $Y1
-     * @param int $X2
-     * @param int $Y2
+     * @param int|float $X1
+     * @param int|float $Y1
+     * @param int|float $X2
+     * @param int|float $Y2
      * @param array $Format
      * @return array|int
      */
@@ -1177,8 +1177,8 @@ abstract class Draw extends BaseDraw
 
     /**
      * Write text
-     * @param int $X
-     * @param int $Y
+     * @param int|float $X
+     * @param int|float $Y
      * @param string $Text
      * @param array $Format
      * @return array
@@ -1324,7 +1324,7 @@ abstract class Draw extends BaseDraw
      * @param int $Y2
      * @param int $Direction
      * @param array $Format
-     * @return null
+     * @return null|integer
      */
     public function drawGradientArea($X1, $Y1, $X2, $Y2, $Direction, array $Format = array())
     {
@@ -1527,7 +1527,7 @@ abstract class Draw extends BaseDraw
      * @param int $R
      * @param int $G
      * @param int $B
-     * @return null
+     * @return null|integer
      */
     public function drawAlphaPixel($X, $Y, $Alpha, $R, $G, $B)
     {
@@ -10058,7 +10058,7 @@ abstract class Draw extends BaseDraw
      *
      * @param array $Points
      * @param array $Format
-     * @return null
+     * @return null|integer
      */
     public function drawPolygonChart(array $Points, array $Format = array())
     {
@@ -10179,7 +10179,7 @@ abstract class Draw extends BaseDraw
         $YStep = 1;
 
         if (!$NoFill) {
-            //if ( $DebugLine ) { $MinY = $DebugLine; $MaxY = $DebugLine; }
+            //if ($DebugLine ) { $MinY = $DebugLine; $MaxY = $DebugLine; }
             for ($Y = $MinY; $Y <= $MaxY; $Y = $Y + $YStep) {
                 $Intersections = [];
                 $LastSlope = null;

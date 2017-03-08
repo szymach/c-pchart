@@ -562,7 +562,7 @@ class Data
     /**
      * Return the Coefficient of variation of the given serie
      * @param string $Serie
-     * @return float | null
+     * @return float|null
      */
     public function getCoefficientOfVariation($Serie)
     {

@@ -554,16 +554,16 @@ class Pie
                 $Xc = cos(($i - 90) * PI / 180) * $Radius + $X;
                 $Yc = sin(($i - 90) * PI / 180) * $Radius * $SkewFactor + $Y;
 
-                if (($SecondPass || $RestoreShadow ) && ($i < 90)) {
+                if (($SecondPass || $RestoreShadow) && ($i < 90)) {
                     $Yc++;
                 }
-                if (($SecondPass || $RestoreShadow ) && ($i > 90 && $i < 180)) {
+                if (($SecondPass || $RestoreShadow) && ($i > 90 && $i < 180)) {
                     $Xc++;
                 }
-                if (($SecondPass || $RestoreShadow ) && ($i > 180 && $i < 270)) {
+                if (($SecondPass || $RestoreShadow) && ($i > 180 && $i < 270)) {
                     $Xc++;
                 }
-                if (($SecondPass || $RestoreShadow ) && ($i >= 270)) {
+                if (($SecondPass || $RestoreShadow) && ($i >= 270)) {
                     $Xc++;
                     $Yc++;
                 }
@@ -2208,7 +2208,7 @@ class Pie
 
                 $Label = "";
                 if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Label = $Display = round(( 100 / $SerieSum) * $Value, $Precision) . "%";
+                    $Label = $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
                 } elseif ($WriteValues == PIE_VALUE_NATURAL) {
                     $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$Key];
                 }

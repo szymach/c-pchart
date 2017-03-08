@@ -295,7 +295,7 @@ abstract class BaseDraw
 
     /**
      * Convert apha to base 10
-     * @param int |float $AlphaValue
+     * @param int|float $AlphaValue
      * @return integer
      */
     public function convertAlpha($AlphaValue)
@@ -502,8 +502,8 @@ abstract class BaseDraw
 
     /**
      *
-     * @param int | float $Value1
-     * @param int | float $Value2
+     * @param int|float $Value1
+     * @param int|float $Value2
      * @return double
      */
     public function modulo($Value1, $Value2)
@@ -583,9 +583,9 @@ abstract class BaseDraw
 
     /**
      * Apply AALias correction to the rounded box boundaries
-     * @param int | float $Value
+     * @param int|float $Value
      * @param int $Mode
-     * @return int | float
+     * @return int|float
      */
     public function offsetCorrection($Value, $Mode)
     {
@@ -838,7 +838,7 @@ abstract class BaseDraw
     /**
      * Validate a palette
      * @param mixed $Colors
-     * @param int | float $Surrounding
+     * @param int|float $Surrounding
      * @return array
      */
     public function validatePalette($Colors, $Surrounding = null)
@@ -908,7 +908,7 @@ abstract class BaseDraw
      * @param mixed $Values
      * @param array $Option
      * @param boolean $ReturnOnly0Height
-     * @return array | int | float
+     * @return int|float|array
      */
     public function scaleComputeY($Values, array $Option = array(), $ReturnOnly0Height = false)
     {
@@ -1055,7 +1055,7 @@ abstract class BaseDraw
     }
 
     /**
-     * @return array | null
+     * @return array|null
      */
     public function scaleGetXSettings()
     {
