@@ -466,8 +466,7 @@ class Bubble
             } else {
                 $Description = "No description";
             }
-            $Series = "";
-            $Series[] = array("Format" => $Color, "Caption" => $Caption);
+            $Series = [["Format" => $Color, "Caption" => $Caption]];
 
             if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
                 if ($XDivs == 0) {

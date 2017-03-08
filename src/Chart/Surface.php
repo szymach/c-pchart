@@ -344,7 +344,7 @@ class Surface
      */
     public function computeMissing()
     {
-        $Missing = "";
+        $Missing = [];
         for ($X = 0; $X <= $this->GridSizeX; $X++) {
             for ($Y = 0; $Y <= $this->GridSizeY; $Y++) {
                 if ($this->Points[$X][$Y] == UNKNOWN) {
@@ -354,7 +354,7 @@ class Surface
         }
         shuffle($Missing);
 
-        foreach ($Missing as $Key => $Pos) {
+        foreach ($Missing as $Pos) {
             $Pos = preg_split("/,/", $Pos);
             $X = $Pos[0];
             $Y = $Pos[1];

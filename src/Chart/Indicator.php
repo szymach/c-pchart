@@ -106,7 +106,7 @@ class Indicator
             $X2 = $X1 + ($Settings["End"] - $Settings["Start"]) * $XScale;
 
             if ($Key == 0 && $DrawLeftHead) {
-                $Poly = "";
+                $Poly = [];
                 $Poly[] = $X1 - 1;
                 $Poly[] = $Y;
                 $Poly[] = $X1 - 1;
