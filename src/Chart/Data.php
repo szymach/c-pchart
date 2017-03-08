@@ -22,21 +22,21 @@ class Data
     /**
      * @var array
      */
-    public $Data = array();
+    public $Data = [];
 
     /**
      * @var array
      */
-    public $Palette = array(
-        "0" => array("R" => 188, "G" => 224, "B" => 46, "Alpha" => 100),
-        "1" => array("R" => 224, "G" => 100, "B" => 46, "Alpha" => 100),
-        "2" => array("R" => 224, "G" => 214, "B" => 46, "Alpha" => 100),
-        "3" => array("R" => 46, "G" => 151, "B" => 224, "Alpha" => 100),
-        "4" => array("R" => 176, "G" => 46, "B" => 224, "Alpha" => 100),
-        "5" => array("R" => 224, "G" => 46, "B" => 117, "Alpha" => 100),
-        "6" => array("R" => 92, "G" => 224, "B" => 46, "Alpha" => 100),
-        "7" => array("R" => 224, "G" => 176, "B" => 46, "Alpha" => 100)
-    );
+    public $Palette = [
+        "0" => ["R" => 188, "G" => 224, "B" => 46, "Alpha" => 100],
+        "1" => ["R" => 224, "G" => 100, "B" => 46, "Alpha" => 100],
+        "2" => ["R" => 224, "G" => 214, "B" => 46, "Alpha" => 100],
+        "3" => ["R" => 46, "G" => 151, "B" => 224, "Alpha" => 100],
+        "4" => ["R" => 176, "G" => 46, "B" => 224, "Alpha" => 100],
+        "5" => ["R" => 224, "G" => 46, "B" => 117, "Alpha" => 100],
+        "6" => ["R" => 92, "G" => 224, "B" => 46, "Alpha" => 100],
+        "7" => ["R" => 224, "G" => 176, "B" => 46, "Alpha" => 100]
+    ];
 
     public function __construct()
     {
@@ -91,9 +91,9 @@ class Data
     public function stripVOID($Values)
     {
         if (!is_array($Values)) {
-            return array();
+            return [];
         }
-        $Result = array();
+        $Result = [];
         foreach ($Values as $Value) {
             if ($Value != VOID) {
                 $Result[] = $Value;
@@ -471,7 +471,7 @@ class Data
         $this->Data["Min"] = $GlobalMin;
         $this->Data["Max"] = $GlobalMax;
 
-        return array($GlobalMin, $GlobalMax);
+        return [$GlobalMin, $GlobalMax];
     }
 
     /**
@@ -628,7 +628,7 @@ class Data
      * @param string $SerieName
      * @param array $Options
      */
-    public function addRandomValues($SerieName = "Serie1", array $Options = array())
+    public function addRandomValues($SerieName = "Serie1", array $Options = [])
     {
         $Values = isset($Options["Values"]) ? $Options["Values"] : 20;
         $Min = isset($Options["Min"]) ? $Options["Min"] : 0;
@@ -829,7 +829,7 @@ class Data
             return null;
         }
 
-        $Result = array();
+        $Result = [];
         $Result["R"] = $this->Data["Series"][$Serie]["Color"]["R"];
         $Result["G"] = $this->Data["Series"][$Serie]["Color"]["G"];
         $Result["B"] = $this->Data["Series"][$Serie]["Color"]["B"];
@@ -843,7 +843,7 @@ class Data
      * @param mixed $Series
      * @param array $Format
      */
-    public function setPalette($Series, array $Format = array())
+    public function setPalette($Series, array $Format = [])
     {
         if (!is_array($Series)) {
             $Series = $this->convertToArray($Series);
@@ -896,7 +896,7 @@ class Data
         }
 
         if ($Overwrite) {
-            $this->Palette = array();
+            $this->Palette = [];
         }
 
         while (!feof($fileHandle)) {
@@ -904,7 +904,7 @@ class Data
             if (preg_match("/,/", $buffer)) {
                 list($R, $G, $B, $Alpha) = preg_split("/,/", $buffer);
                 $ID = count($this->Palette);
-                $this->Palette[$ID] = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha);
+                $this->Palette[$ID] = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
             }
         }
         fclose($fileHandle);
@@ -914,7 +914,7 @@ class Data
         if (isset($this->Data["Series"])) {
             foreach ($this->Data["Series"] as $Key => $Value) {
                 if (!isset($this->Palette[$ID])) {
-                    $this->Data["Series"][$Key]["Color"] = array("R" => 0, "G" => 0, "B" => 0, "Alpha" => 0);
+                    $this->Data["Series"][$Key]["Color"] = ["R" => 0, "G" => 0, "B" => 0, "Alpha" => 0];
                 } else {
                     $this->Data["Series"][$Key]["Color"] = $this->Palette[$ID];
                 }
@@ -990,7 +990,7 @@ class Data
     {
         $Abscissa = $this->Data["Abscissa"];
 
-        $SelectedSeries = array();
+        $SelectedSeries = [];
         $MaxVal = 0;
         foreach (array_keys($this->Data["Axis"]) as $AxisID) {
             if ($UnitChange != null) {
@@ -1052,17 +1052,17 @@ class Data
      * @param string $FileName
      * @param array $Options
      */
-    public function importFromCSV($FileName, array $Options = array())
+    public function importFromCSV($FileName, array $Options = [])
     {
         $Delimiter = isset($Options["Delimiter"]) ? $Options["Delimiter"] : ",";
         $GotHeader = isset($Options["GotHeader"]) ? $Options["GotHeader"] : false;
-        $SkipColumns = isset($Options["SkipColumns"]) ? $Options["SkipColumns"] : array(-1);
+        $SkipColumns = isset($Options["SkipColumns"]) ? $Options["SkipColumns"] : [-1];
         $DefaultSerieName = isset($Options["DefaultSerieName"]) ? $Options["DefaultSerieName"] : "Serie";
 
         $Handle = @fopen($FileName, "r");
         if ($Handle) {
             $HeaderParsed = false;
-            $SerieNames = array();
+            $SerieNames = [];
             while (!feof($Handle)) {
                 $Buffer = fgets($Handle, 4096);
                 $Buffer = str_replace(chr(10), "", $Buffer);
@@ -1105,7 +1105,7 @@ class Data
      * @param array $Options
      * @return null
      */
-    public function createFunctionSerie($SerieName, $Formula = "", array $Options = array())
+    public function createFunctionSerie($SerieName, $Formula = "", array $Options = [])
     {
         $MinX = isset($Options["MinX"]) ? $Options["MinX"] : -10;
         $MaxX = isset($Options["MaxX"]) ? $Options["MaxX"] : 10;
@@ -1163,7 +1163,7 @@ class Data
         }
         foreach ($Series as $Key => $SerieName) {
             if (isset($this->Data["Series"][$SerieName])) {
-                $Data = array();
+                $Data = [];
                 foreach ($this->Data["Series"][$SerieName]["Data"] as $Key => $Value) {
                     if ($Value == VOID) {
                         $Data[] = VOID;
@@ -1255,7 +1255,7 @@ class Data
      */
     public function convertToArray($Value)
     {
-        return array($Value);
+        return [$Value];
     }
 
     /**

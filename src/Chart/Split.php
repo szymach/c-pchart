@@ -28,7 +28,7 @@ class Split
      * @param Data $Values
      * @param array $Format
      */
-    public function drawSplitPath(Image $Object, Data $Values, array $Format = array())
+    public function drawSplitPath(Image $Object, Data $Values, array $Format = [])
     {
         $this->pChartObject = $Object;
 
@@ -48,7 +48,7 @@ class Split
         $Palette = $Values->getPalette();
 
         $LabelSerie = $Data["Abscissa"];
-        $DataSerie = array();
+        $DataSerie = [];
 
         foreach ($Data["Series"] as $SerieName => $Value) {
             if ($SerieName != $LabelSerie && $DataSerie == "") {
@@ -95,7 +95,7 @@ class Split
             $RightY1 = $RightY + $Spacing;
             $RightY2 = $RightY + $Spacing + $Value * $YScale;
 
-            $Settings = array(
+            $Settings = [
                 "R" => $Palette[$Key]["R"],
                 "G" => $Palette[$Key]["G"],
                 "B" => $Palette[$Key]["B"],
@@ -103,7 +103,7 @@ class Split
                 "NoDraw" => true,
                 "Segments" => $Segments,
                 "Surrounding" => $Surrounding
-            );
+            ];
 
 
             $Angle = $Object->getAngle($X2, $RightY1, $X1, $LeftY1);
@@ -160,14 +160,14 @@ class Split
                     $X2 + $TextPadding,
                     ($RightY2 - $RightY1) / 2 + $RightY1,
                     $Label,
-                    array("Align" => TEXT_ALIGN_MIDDLELEFT)
+                    ["Align" => TEXT_ALIGN_MIDDLELEFT]
                 );
             } else {
                 $Object->drawText(
                     $X2,
                     $RightY1 - $TextPadding,
                     $Label,
-                    array("Align" => TEXT_ALIGN_BOTTOMRIGHT)
+                    ["Align" => TEXT_ALIGN_BOTTOMRIGHT]
                 );
             }
             $LeftY = $LeftY2;

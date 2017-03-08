@@ -35,7 +35,7 @@ class Cache
     /**
      * @param array $Settings
      */
-    public function __construct(array $Settings = array())
+    public function __construct(array $Settings = [])
     {
         $CacheFolder = isset($Settings["CacheFolder"]) ? $Settings["CacheFolder"] : __DIR__ . "/../../app/cache";
         $CacheIndex = isset($Settings["CacheIndex"]) ? $Settings["CacheIndex"] : "index.db";
@@ -123,7 +123,7 @@ class Cache
      */
     public function removeOlderThan($Expiry)
     {
-        $this->dbRemoval(array("Expiry" => $Expiry));
+        $this->dbRemoval(["Expiry" => $Expiry]);
     }
 
     /**
@@ -132,7 +132,7 @@ class Cache
      */
     public function remove($ID)
     {
-        $this->dbRemoval(array("Name" => $ID));
+        $this->dbRemoval(["Name" => $ID]);
     }
 
     /**
@@ -280,12 +280,12 @@ class Cache
                     }
 
                     if ($Verbose) {
-                        return array(
+                        return [
                             "DBPos" => $DBPos,
                             "PicSize" => $PicSize,
                             "GeneratedTS" => $GeneratedTS,
                             "Hits" => $Hits
-                        );
+                        ];
                     } else {
                         return true;
                     }

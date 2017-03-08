@@ -30,7 +30,7 @@ class Pie
     /**
      * @var array
      */
-    public $LabelPos = array();
+    public $LabelPos = [];
 
     /**
      * @param Image $pChartObject
@@ -49,7 +49,7 @@ class Pie
      * @param array $Format
      * @return int
      */
-    public function draw2DPie($X, $Y, array $Format = array())
+    public function draw2DPie($X, $Y, array $Format = [])
     {
         $Radius = isset($Format["Radius"]) ? $Format["Radius"] : 60;
         $Precision = isset($Format["Precision"]) ? $Format["Precision"] : 0;
@@ -111,7 +111,7 @@ class Pie
         }
 
         /* Dump the real number of data to draw */
-        $Values = array();
+        $Values = [];
         foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) {
             if ($Value != 0) {
                 $Values[] = $Value;
@@ -147,24 +147,24 @@ class Pie
         $ID = 0;
         foreach ($Values as $Key => $Value) {
             if ($Shadow) {
-                $Settings = array(
+                $Settings = [
                     "R" => $this->pChartObject->ShadowR,
                     "G" => $this->pChartObject->ShadowG,
                     "B" => $this->pChartObject->ShadowB,
                     "Alpha" => $this->pChartObject->Shadowa
-                );
+                ];
             } else {
                 if (!isset($Palette[$ID]["R"])) {
                     $Color = $this->pChartObject->getRandomColor();
                     $Palette[$ID] = $Color;
                     $this->pDataObject->savePalette($ID, $Color);
                 }
-                $Settings = array(
+                $Settings = [
                     "R" => $Palette[$ID]["R"],
                     "G" => $Palette[$ID]["G"],
                     "B" => $Palette[$ID]["B"],
                     "Alpha" => $Palette[$ID]["Alpha"]
-                );
+                ];
             }
 
             if (!$SecondPass && !$Shadow) {
@@ -191,7 +191,7 @@ class Pie
                 $Y0 = sin(($Angle - 90) * PI / 180) * $DataGapRadius + $Y;
             }
 
-            $Plots = array($X0, $Y0);
+            $Plots = [$X0, $Y0];
 
             for ($i = $Offset; $i <= $EndAngle; $i = $i + $Step) {
                 $Xc = cos(($i - 90) * PI / 180) * $Radius + $X;
@@ -229,19 +229,19 @@ class Pie
 
             if ($DrawLabels && !$Shadow && !$SecondPass) {
                 if ($LabelColor == PIE_LABEL_COLOR_AUTO) {
-                    $Settings = array(
+                    $Settings = [
                         "FillR" => $Palette[$ID]["R"],
                         "FillG" => $Palette[$ID]["G"],
                         "FillB" => $Palette[$ID]["B"],
                         "Alpha" => $Palette[$ID]["Alpha"]
-                    );
+                    ];
                 } else {
-                    $Settings = array(
+                    $Settings = [
                         "FillR" => $LabelR,
                         "FillG" => $LabelG,
                         "FillB" => $LabelB,
                         "Alpha" => $LabelAlpha
-                    );
+                    ];
                 }
 
                 $Angle = ($EndAngle - $Offset) / 2 + $Offset;
@@ -269,22 +269,22 @@ class Pie
             foreach ($Values as $Key => $Value) {
                 $FirstPoint = true;
                 if ($Shadow) {
-                    $Settings = array(
+                    $Settings = [
                         "R" => $this->pChartObject->ShadowR,
                         "G" => $this->pChartObject->ShadowG,
                         "B" => $this->pChartObject->ShadowB,
                         "Alpha" => $this->pChartObject->Shadowa
-                    );
+                    ];
                 } else {
                     if ($Border) {
-                        $Settings = array("R" => $BorderR, "G" => $BorderG, "B" => $BorderB);
+                        $Settings = ["R" => $BorderR, "G" => $BorderG, "B" => $BorderB];
                     } else {
-                        $Settings = array(
+                        $Settings = [
                             "R" => $Palette[$ID]["R"],
                             "G" => $Palette[$ID]["G"],
                             "B" => $Palette[$ID]["B"],
                             "Alpha" => $Palette[$ID]["Alpha"]
-                        );
+                        ];
                     }
                 }
 
@@ -319,19 +319,19 @@ class Pie
 
                 if ($DrawLabels && !$Shadow) {
                     if ($LabelColor == PIE_LABEL_COLOR_AUTO) {
-                        $Settings = array(
+                        $Settings = [
                             "FillR" => $Palette[$ID]["R"],
                             "FillG" => $Palette[$ID]["G"],
                             "FillB" => $Palette[$ID]["B"],
                             "Alpha" => $Palette[$ID]["Alpha"]
-                        );
+                        ];
                     } else {
-                        $Settings = array(
+                        $Settings = [
                             "FillR" => $LabelR,
                             "FillG" => $LabelG,
                             "FillB" => $LabelB,
                             "Alpha" => $LabelAlpha
-                        );
+                        ];
                     }
 
                     $Angle = ($EndAngle - $Offset) / 2 + $Offset;
@@ -356,13 +356,13 @@ class Pie
             $Step = 360 / (2 * PI * $Radius);
             $Offset = 0;
             $ID = count($Values) - 1;
-            $Settings = array(
+            $Settings = [
                 "Align" => TEXT_ALIGN_MIDDLEMIDDLE,
                 "R" => $ValueR,
                 "G" => $ValueG,
                 "B" => $ValueB,
                 "Alpha" => $ValueAlpha
-            );
+            ];
             foreach ($Values as $Key => $Value) {
                 $EndAngle = ($Value * $ScaleFactor) + $Offset;
                 if ((int) $EndAngle > 360) {
@@ -406,7 +406,7 @@ class Pie
      * @param array $Format
      * @return int
      */
-    public function draw3DPie($X, $Y, array $Format = array())
+    public function draw3DPie($X, $Y, array $Format = [])
     {
         /* Rendering layout */
         $Radius = isset($Format["Radius"]) ? $Format["Radius"] : 80;
@@ -474,7 +474,7 @@ class Pie
         }
 
         /* Dump the real number of data to draw */
-        $Values = array();
+        $Values = [];
         foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) {
             if ($Value != 0) {
                 $Values[] = $Value;
@@ -502,22 +502,22 @@ class Pie
         $ID = count($Values) - 1;
         $Values = array_reverse($Values);
         $Slice = 0;
-        $Slices = array();
-        $SliceColors = array();
-        $Visible = array();
-        $SliceAngle = array();
+        $Slices = [];
+        $SliceColors = [];
+        $Visible = [];
+        $SliceAngle = [];
         foreach ($Values as $Key => $Value) {
             if (!isset($Palette[$ID]["R"])) {
                 $Color = $this->pChartObject->getRandomColor();
                 $Palette[$ID] = $Color;
                 $this->pDataObject->savePalette($ID, $Color);
             }
-            $Settings = array(
+            $Settings = [
                 "R" => $Palette[$ID]["R"],
                 "G" => $Palette[$ID]["G"],
                 "B" => $Palette[$ID]["B"],
                 "Alpha" => $Palette[$ID]["Alpha"]
-            );
+            ];
 
             $SliceColors[$Slice] = $Settings;
 
@@ -581,19 +581,19 @@ class Pie
         /* Draw the bottom shadow if needed */
         if ($RestoreShadow && ($this->pChartObject->ShadowX != 0 || $this->pChartObject->ShadowY != 0)) {
             foreach ($Slices as $SliceID => $Plots) {
-                $ShadowPie = array();
+                $ShadowPie = [];
                 for ($i = 0; $i < count($Plots); $i = $i + 2) {
                     $ShadowPie[] = $Plots[$i] + $this->pChartObject->ShadowX;
                     $ShadowPie[] = $Plots[$i + 1] + $this->pChartObject->ShadowY;
                 }
 
-                $Settings = array(
+                $Settings = [
                     "R" => $this->pChartObject->ShadowR,
                     "G" => $this->pChartObject->ShadowG,
                     "B" => $this->pChartObject->ShadowB,
                     "Alpha" => $this->pChartObject->Shadowa,
                     "NoBorder" => true
-                );
+                ];
                 $this->pChartObject->drawPolygon($ShadowPie, $Settings);
             }
 
@@ -661,9 +661,9 @@ class Pie
                     $Plots[3],
                     $Plots[2],
                     $Plots[3] - $SliceHeight,
-                    array("R" => $Settings["R"], "G" => $Settings["G"], "B" => $Settings["B"])
+                    ["R" => $Settings["R"], "G" => $Settings["G"], "B" => $Settings["B"]]
                 );
-                $Border = array();
+                $Border = [];
                 $Border[] = $Plots[0];
                 $Border[] = $Plots[1];
                 $Border[] = $Plots[0];
@@ -690,10 +690,10 @@ class Pie
                     $Plots[count($Plots) - 1],
                     $Plots[count($Plots) - 2],
                     $Plots[count($Plots) - 1] - $SliceHeight,
-                    array("R" => $Settings["R"], "G" => $Settings["G"], "B" => $Settings["B"])
+                    ["R" => $Settings["R"], "G" => $Settings["G"], "B" => $Settings["B"]]
                 );
 
-                $Border = array();
+                $Border = [];
                 $Border[] = $Plots[0];
                 $Border[] = $Plots[1];
                 $Border[] = $Plots[0];
@@ -717,7 +717,7 @@ class Pie
             for ($j = 2; $j < count($Plots) - 2; $j = $j + 2) {
                 $Angle = $SliceAngle[$SliceID][$j / 2];
                 if ($Angle < 270 && $Angle > 90) {
-                    $Border = array();
+                    $Border = [];
                     $Border[] = $Plots[$j];
                     $Border[] = $Plots[$j + 1];
                     $Border[] = $Plots[$j + 2];
@@ -782,7 +782,7 @@ class Pie
             $Settings["G"] += 20;
             $Settings["B"] += 20;
 
-            $Top = array();
+            $Top = [];
             for ($j = 0; $j < count($Plots); $j = $j + 2) {
                 $Top[] = $Plots[$j];
                 $Top[] = $Plots[$j + 1] - $SliceHeight;
@@ -813,27 +813,27 @@ class Pie
             foreach ($Values as $Key => $Value) {
                 $FirstPoint = true;
                 if ($Shadow) {
-                    $Settings = array(
+                    $Settings = [
                         "R" => $this->pChartObject->ShadowR,
                         "G" => $this->pChartObject->ShadowG,
                         "B" => $this->pChartObject->ShadowB,
                         "Alpha" => $this->pChartObject->Shadowa
-                    );
+                    ];
                 } else {
                     if ($Border) {
-                        $Settings = array(
+                        $Settings = [
                             "R" => $Palette[$ID]["R"] + 30,
                             "G" => $Palette[$ID]["G"] + 30,
                             "B" => $Palette[$ID]["B"] + 30,
                             "Alpha" => $Palette[$ID]["Alpha"]
-                        );
+                        ];
                     } else {
-                        $Settings = array(
+                        $Settings = [
                             "R" => $Palette[$ID]["R"],
                             "G" => $Palette[$ID]["G"],
                             "B" => $Palette[$ID]["B"],
                             "Alpha" => $Palette[$ID]["Alpha"]
-                        );
+                        ];
                     }
                 }
 
@@ -878,13 +878,13 @@ class Pie
             $Step = 360 / (2 * PI * $Radius);
             $Offset = 360;
             $ID = count($Values) - 1;
-            $Settings = array(
+            $Settings = [
                 "Align" => TEXT_ALIGN_MIDDLEMIDDLE,
                 "R" => $ValueR,
                 "G" => $ValueG,
                 "B" => $ValueB,
                 "Alpha" => $ValueAlpha
-            );
+            ];
             foreach ($Values as $Key => $Value) {
                 $EndAngle = $Offset - ($Value * $ScaleFactor);
                 if ($EndAngle < 0) {
@@ -923,19 +923,19 @@ class Pie
             $ID = count($Values) - 1;
             foreach ($Values as $Key => $Value) {
                 if ($LabelColor == PIE_LABEL_COLOR_AUTO) {
-                    $Settings = array(
+                    $Settings = [
                         "FillR" => $Palette[$ID]["R"],
                         "FillG" => $Palette[$ID]["G"],
                         "FillB" => $Palette[$ID]["B"],
                         "Alpha" => $Palette[$ID]["Alpha"]
-                    );
+                    ];
                 } else {
-                    $Settings = array(
+                    $Settings = [
                         "FillR" => $LabelR,
                         "FillG" => $LabelG,
                         "FillB" => $LabelB,
                         "Alpha" => $LabelAlpha
-                    );
+                    ];
                 }
 
                 $EndAngle = $Offset - ($Value * $ScaleFactor);
@@ -978,7 +978,7 @@ class Pie
      * @param array $Format
      * @return int
      */
-    public function drawPieLegend($X, $Y, array $Format = array())
+    public function drawPieLegend($X, $Y, array $Format = [])
     {
         $FontName = isset($Format["FontName"]) ? $Format["FontName"] : $this->pChartObject->FontName;
         $FontSize = isset($Format["FontSize"]) ? $Format["FontSize"] : $this->pChartObject->FontSize;
@@ -1016,7 +1016,7 @@ class Pie
             return PIE_NO_ABSCISSA;
         }
 
-        $Boundaries = array();
+        $Boundaries = [];
         $Boundaries["L"] = $X;
         $Boundaries["T"] = $Y;
         $Boundaries["R"] = 0;
@@ -1072,7 +1072,7 @@ class Pie
                 $Boundaries["R"] + $Margin,
                 $Boundaries["B"] + $Margin,
                 $Margin,
-                array(
+                [
                     "R" => $R,
                     "G" => $G,
                     "B" => $B,
@@ -1080,7 +1080,7 @@ class Pie
                     "BorderR" => $BorderR,
                     "BorderG" => $BorderG,
                     "BorderB" => $BorderB
-                )
+                ]
             );
         } elseif ($Style == LEGEND_BOX) {
             $this->pChartObject->drawFilledRectangle(
@@ -1088,7 +1088,7 @@ class Pie
                 $Boundaries["T"] - $Margin,
                 $Boundaries["R"] + $Margin,
                 $Boundaries["B"] + $Margin,
-                array(
+                [
                     "R" => $R,
                     "G" => $G,
                     "B" => $B,
@@ -1096,7 +1096,7 @@ class Pie
                     "BorderR" => $BorderR,
                     "BorderG" => $BorderG,
                     "BorderB" => $BorderB
-                )
+                ]
             );
         }
         $RestoreShadow = $this->pChartObject->Shadow;
@@ -1111,28 +1111,28 @@ class Pie
                 $Y + 1,
                 $X + $BoxSize + 1,
                 $Y + $BoxSize + 1,
-                array("R" => 0, "G" => 0, "B" => 0, "Alpha" => 20)
+                ["R" => 0, "G" => 0, "B" => 0, "Alpha" => 20]
             );
             $this->pChartObject->drawFilledRectangle(
                 $X,
                 $Y,
                 $X + $BoxSize,
                 $Y + $BoxSize,
-                array("R" => $R, "G" => $G, "B" => $B, "Surrounding" => 20)
+                ["R" => $R, "G" => $G, "B" => $B, "Surrounding" => 20]
             );
             if ($Mode == LEGEND_VERTICAL) {
                 $this->pChartObject->drawText(
                     $X + $BoxSize + 4,
                     $Y + $BoxSize / 2,
                     $Value,
-                    array(
+                    [
                         "R" => $FontR,
                         "G" => $FontG,
                         "B" => $FontB,
                         "Align" => TEXT_ALIGN_MIDDLELEFT,
                         "FontName" => $FontName,
                         "FontSize" => $FontSize
-                    )
+                    ]
                 );
                 $Y = $Y + $YStep;
             } elseif ($Mode == LEGEND_HORIZONTAL) {
@@ -1140,14 +1140,14 @@ class Pie
                     $X + $BoxSize + 4,
                     $Y + $BoxSize / 2,
                     $Value,
-                    array(
+                    [
                         "R" => $FontR,
                         "G" => $FontG,
                         "B" => $FontB,
                         "Align" => TEXT_ALIGN_MIDDLELEFT,
                         "FontName" => $FontName,
                         "FontSize" => $FontSize
-                    )
+                    ]
                 );
                 $X = $BoxArray[1]["X"] + 2 + $XStep;
             }
@@ -1161,7 +1161,7 @@ class Pie
      * @param mixed $SliceID
      * @param array $Format
      */
-    public function setSliceColor($SliceID, array $Format = array())
+    public function setSliceColor($SliceID, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -1258,7 +1258,7 @@ class Pie
                 }
             }
 
-            $LabelSettings = array(
+            $LabelSettings = [
                 "YTop" => $YTop,
                 "YBottom" => $YBottom,
                 "Label" => $Label,
@@ -1267,7 +1267,7 @@ class Pie
                 "Y1" => $Y,
                 "X2" => $X2,
                 "Y2" => $Y2
-            );
+            ];
             if ($Angle <= 180) {
                 $LabelSettings["X3"] = $Xc + $Radius + $LabelOffset;
             }
@@ -1317,13 +1317,13 @@ class Pie
             $Angle = $Settings["Angle"];
             $Label = $Settings["Label"];
 
-            $this->pChartObject->drawArrow($X2, $Y2, $X1, $Y1, array("Size" => 8));
+            $this->pChartObject->drawArrow($X2, $Y2, $X1, $Y1, ["Size" => 8]);
             if ($Angle <= 180) {
                 $this->pChartObject->drawLine($X2, $Y2, $X3, $Y2);
-                $this->pChartObject->drawText($X3 + 2, $Y2, $Label, array("Align" => TEXT_ALIGN_MIDDLELEFT));
+                $this->pChartObject->drawText($X3 + 2, $Y2, $Label, ["Align" => TEXT_ALIGN_MIDDLELEFT]);
             } else {
                 $this->pChartObject->drawLine($X2, $Y2, $X3, $Y2);
-                $this->pChartObject->drawText($X3 - 2, $Y2, $Label, array("Align" => TEXT_ALIGN_MIDDLERIGHT));
+                $this->pChartObject->drawText($X3 - 2, $Y2, $Label, ["Align" => TEXT_ALIGN_MIDDLERIGHT]);
             }
         }
     }
@@ -1335,7 +1335,7 @@ class Pie
      * @param array $Format
      * @return int
      */
-    public function draw2DRing($X, $Y, array $Format = array())
+    public function draw2DRing($X, $Y, array $Format = [])
     {
         $OuterRadius = isset($Format["Radius"]) ? $Format["Radius"] : 60; // For compatibility
         $OuterRadius = isset($Format["OuterRadius"]) ? $Format["OuterRadius"] : $OuterRadius;
@@ -1398,7 +1398,7 @@ class Pie
         }
 
         /* Dump the real number of data to draw */
-        $Values = array();
+        $Values = [];
         foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) {
             if ($Value != 0) {
                 $Values[] = $Value;
@@ -1434,12 +1434,12 @@ class Pie
         $ID = 0;
         foreach ($Values as $Key => $Value) {
             if ($Shadow) {
-                $Settings = array(
+                $Settings = [
                     "R" => $this->pChartObject->ShadowR,
                     "G" => $this->pChartObject->ShadowG,
                     "B" => $this->pChartObject->ShadowB,
                     "Alpha" => $this->pChartObject->Shadowa
-                );
+                ];
                 $BorderColor = $Settings;
             } else {
                 if (!isset($Palette[$ID]["R"])) {
@@ -1447,28 +1447,28 @@ class Pie
                     $Palette[$ID] = $Color;
                     $this->pDataObject->savePalette($ID, $Color);
                 }
-                $Settings = array(
+                $Settings = [
                     "R" => $Palette[$ID]["R"],
                     "G" => $Palette[$ID]["G"],
                     "B" => $Palette[$ID]["B"],
                     "Alpha" => $Palette[$ID]["Alpha"]
-                );
+                ];
 
                 if ($Border) {
-                    $BorderColor = array(
+                    $BorderColor = [
                         "R" => $BorderR,
                         "G" => $BorderG,
                         "B" => $BorderB,
                         "Alpha" => $BorderAlpha
-                    );
+                    ];
                 } else {
                     $BorderColor = $Settings;
                 }
             }
 
-            $Plots = array();
-            $Boundaries = array();
-            $AAPixels = array();
+            $Plots = [];
+            $Boundaries = [];
+            $AAPixels = [];
             $EndAngle = $Offset + ($Value * $ScaleFactor);
             if ($EndAngle > 360) {
                 $EndAngle = 360;
@@ -1481,7 +1481,7 @@ class Pie
                     $Boundaries[0]["X1"] = $Xc;
                     $Boundaries[0]["Y1"] = $Yc;
                 }
-                $AAPixels[] = array($Xc, $Yc);
+                $AAPixels[] = [$Xc, $Yc];
 
                 if ($i < 90) {
                     $Yc++;
@@ -1509,7 +1509,7 @@ class Pie
                     $Boundaries[1]["X2"] = $Xc;
                     $Boundaries[1]["Y2"] = $Yc;
                 }
-                $AAPixels[] = array($Xc, $Yc);
+                $AAPixels[] = [$Xc, $Yc];
 
                 $Xc = cos(($i - 90) * PI / 180) * $InnerRadius + $X;
                 $Yc = sin(($i - 90) * PI / 180) * $InnerRadius + $Y;
@@ -1568,19 +1568,19 @@ class Pie
 
             if ($DrawLabels && !$Shadow) {
                 if ($LabelColor == PIE_LABEL_COLOR_AUTO) {
-                    $Settings = array(
+                    $Settings = [
                         "FillR" => $Palette[$ID]["R"],
                         "FillG" => $Palette[$ID]["G"],
                         "FillB" => $Palette[$ID]["B"],
                         "Alpha" => $Palette[$ID]["Alpha"]
-                    );
+                    ];
                 } else {
-                    $Settings = array(
+                    $Settings = [
                         "FillR" => $LabelR,
                         "FillG" => $LabelG,
                         "FillB" => $LabelB,
                         "Alpha" => $LabelAlpha
-                    );
+                    ];
                 }
 
                 $Angle = ($EndAngle - $Offset) / 2 + $Offset;
@@ -1652,7 +1652,7 @@ class Pie
                     $Xc,
                     $Yc,
                     $Display,
-                    array("Align" => $Align, "R" => $ValueR, "G" => $ValueG, "B" => $ValueB)
+                    ["Align" => $Align, "R" => $ValueR, "G" => $ValueG, "B" => $ValueB]
                 );
                 $Offset = $EndAngle;
             }
@@ -1670,7 +1670,7 @@ class Pie
      * @param array $Format
      * @return int
      */
-    public function draw3DRing($X, $Y, array $Format = array())
+    public function draw3DRing($X, $Y, array $Format = [])
     {
         $OuterRadius = isset($Format["OuterRadius"]) ? $Format["OuterRadius"] : 100;
         $Precision = isset($Format["Precision"]) ? $Format["Precision"] : 0;
@@ -1738,7 +1738,7 @@ class Pie
         }
 
         /* Dump the real number of data to draw */
-        $Values = array();
+        $Values = [];
         foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value) {
             if ($Value != 0) {
                 $Values[] = $Value;
@@ -1765,22 +1765,22 @@ class Pie
         $ID = count($Values) - 1;
         $Values = array_reverse($Values);
         $Slice = 0;
-        $Slices = array();
-        $SliceColors = array();
-        $Visible = array();
-        $SliceAngle = array();
+        $Slices = [];
+        $SliceColors = [];
+        $Visible = [];
+        $SliceAngle = [];
         foreach ($Values as $Key => $Value) {
             if (!isset($Palette[$ID]["R"])) {
                 $Color = $this->pChartObject->getRandomColor();
                 $Palette[$ID] = $Color;
                 $this->pDataObject->savePalette($ID, $Color);
             }
-            $Settings = array(
+            $Settings = [
                 "R" => $Palette[$ID]["R"],
                 "G" => $Palette[$ID]["G"],
                 "B" => $Palette[$ID]["B"],
                 "Alpha" => $Palette[$ID]["Alpha"]
-            );
+            ];
 
             $SliceColors[$Slice] = $Settings;
 
@@ -1807,11 +1807,11 @@ class Pie
             for ($i = $Offset; $i >= $EndAngle; $i = $i - $Step) {
                 $Xc = cos(($i - 90) * PI / 180) * ($OuterRadius + $DataGapRadius - 2) + $X;
                 $Yc = sin(($i - 90) * PI / 180) * ($OuterRadius + $DataGapRadius - 2) * $SkewFactor + $Y;
-                $Slices[$Slice]["AA"][] = array($Xc, $Yc);
+                $Slices[$Slice]["AA"][] = [$Xc, $Yc];
 
                 $Xc = cos(($i - 90) * PI / 180) * ($OuterRadius + $DataGapRadius - 1) + $X;
                 $Yc = sin(($i - 90) * PI / 180) * ($OuterRadius + $DataGapRadius - 1) * $SkewFactor + $Y;
-                $Slices[$Slice]["AA"][] = array($Xc, $Yc);
+                $Slices[$Slice]["AA"][] = [$Xc, $Yc];
 
                 $Xc = cos(($i - 90) * PI / 180) * ($OuterRadius + $DataGapRadius) + $X;
                 $Yc = sin(($i - 90) * PI / 180) * ($OuterRadius + $DataGapRadius) * $SkewFactor + $Y;
@@ -1854,11 +1854,11 @@ class Pie
             for ($i = $EndAngle; $i <= $Offset; $i = $i + $Step) {
                 $Xc = cos(($i - 90) * PI / 180) * ($InnerRadius + $DataGapRadius - 1) + $X;
                 $Yc = sin(($i - 90) * PI / 180) * ($InnerRadius + $DataGapRadius - 1) * $SkewFactor + $Y;
-                $Slices[$Slice]["AA"][] = array($Xc, $Yc);
+                $Slices[$Slice]["AA"][] = [$Xc, $Yc];
 
                 $Xc = cos(($i - 90) * PI / 180) * ($InnerRadius + $DataGapRadius) + $X;
                 $Yc = sin(($i - 90) * PI / 180) * ($InnerRadius + $DataGapRadius) * $SkewFactor + $Y;
-                $Slices[$Slice]["AA"][] = array($Xc, $Yc);
+                $Slices[$Slice]["AA"][] = [$Xc, $Yc];
 
                 if ($InX1 == VOID) {
                     $InX1 = $Xc;
@@ -1989,8 +1989,8 @@ class Pie
 
             $Outer = true;
             $Inner = false;
-            $InnerPlotsA = array();
-            $InnerPlotsB = array();
+            $InnerPlotsA = [];
+            $InnerPlotsB = [];
             foreach ($Plots["Angle"] as $ID => $Angle) {
                 if ($Angle == VOID) {
                     $Outer = false;
@@ -2028,7 +2028,7 @@ class Pie
             }
 
             if ($StartAngle < 180) {
-                $Points = array();
+                $Points = [];
                 $Points[] = $Plots["InX2"];
                 $Points[] = $Plots["InY2"];
                 $Points[] = $Plots["InX2"];
@@ -2042,7 +2042,7 @@ class Pie
             }
 
             if ($EndAngle > 180) {
-                $Points = array();
+                $Points = [];
                 $Points[] = $Plots["InX1"];
                 $Points[] = $Plots["InY1"];
                 $Points[] = $Plots["InX1"];
@@ -2103,10 +2103,10 @@ class Pie
 
             $Outer = true;
             $Inner = false;
-            $OuterPlotsA = array();
-            $OuterPlotsB = array();
-            $InnerPlotsA = array();
-            $InnerPlotsB = array();
+            $OuterPlotsA = [];
+            $OuterPlotsB = [];
+            $InnerPlotsA = [];
+            $InnerPlotsB = [];
             foreach ($Plots["Angle"] as $ID => $Angle) {
                 if ($Angle == VOID) {
                     $Outer = false;
@@ -2187,19 +2187,19 @@ class Pie
                 }
 
                 if ($LabelColor == PIE_LABEL_COLOR_AUTO) {
-                    $Settings = array(
+                    $Settings = [
                         "FillR" => $Palette[$ID]["R"],
                         "FillG" => $Palette[$ID]["G"],
                         "FillB" => $Palette[$ID]["B"],
                         "Alpha" => $Palette[$ID]["Alpha"]
-                    );
+                    ];
                 } else {
-                    $Settings = array(
+                    $Settings = [
                         "FillR" => $LabelR,
                         "FillG" => $LabelG,
                         "FillB" => $LabelB,
                         "Alpha" => $LabelAlpha
-                    );
+                    ];
                 }
 
                 $Angle = ($EndAngle - $Offset) / 2 + $Offset;
@@ -2268,7 +2268,7 @@ class Pie
      */
     public function arrayReverse(array $Plots)
     {
-        $Result = array();
+        $Result = [];
 
         for ($i = count($Plots) - 1; $i >= 0; $i = $i - 2) {
             $Result[] = $Plots[$i - 1];
@@ -2288,9 +2288,9 @@ class Pie
      */
     public function clean0Values(array $Data, array $Palette, $DataSerie, $AbscissaSerie)
     {
-        $NewPalette = array();
-        $NewData = array();
-        $NewAbscissa = array();
+        $NewPalette = [];
+        $NewData = [];
+        $NewAbscissa = [];
 
         /* Remove unused series */
         foreach (array_keys($Data["Series"]) as $SerieName) {
@@ -2312,6 +2312,6 @@ class Pie
         $Data["Series"][$DataSerie]["Data"] = $NewData;
         $Data["Series"][$AbscissaSerie]["Data"] = $NewAbscissa;
 
-        return array($Data, $NewPalette);
+        return [$Data, $NewPalette];
     }
 }

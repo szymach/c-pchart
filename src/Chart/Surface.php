@@ -35,7 +35,7 @@ class Surface
     /**
      * @var array
      */
-    public $Points = array();
+    public $Points = [];
 
     /**
      * @param Image $pChartObject
@@ -93,7 +93,7 @@ class Surface
      * @param array $Format
      * @return null|int
      */
-    public function writeXLabels(array $Format = array())
+    public function writeXLabels(array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : $this->pChartObject->FontColorR;
         $G = isset($Format["G"]) ? $Format["G"] : $this->pChartObject->FontColorG;
@@ -107,13 +107,13 @@ class Surface
 
         if ($Labels != null && !is_array($Labels)) {
             $Label = $Labels;
-            $Labels = array($Label);
+            $Labels = [$Label];
         }
 
         $X0 = $this->pChartObject->GraphAreaX1;
         $XSize = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1) / ($this->GridSizeX + 1);
 
-        $Settings = array("Angle" => $Angle, "R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha);
+        $Settings = ["Angle" => $Angle, "R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
         if ($Position == LABEL_POSITION_TOP) {
             $YPos = $this->pChartObject->GraphAreaY1 - $Padding;
             if ($Angle == 0) {
@@ -150,7 +150,7 @@ class Surface
      * @param array $Format
      * @return type
      */
-    public function writeYLabels(array $Format = array())
+    public function writeYLabels(array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : $this->pChartObject->FontColorR;
         $G = isset($Format["G"]) ? $Format["G"] : $this->pChartObject->FontColorG;
@@ -164,13 +164,13 @@ class Surface
 
         if ($Labels != null && !is_array($Labels)) {
             $Label = $Labels;
-            $Labels = array($Label);
+            $Labels = [$Label];
         }
 
         $Y0 = $this->pChartObject->GraphAreaY1;
         $YSize = ($this->pChartObject->GraphAreaY2 - $this->pChartObject->GraphAreaY1) / ($this->GridSizeY + 1);
 
-        $Settings = array("Angle" => $Angle, "R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha);
+        $Settings = ["Angle" => $Angle, "R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
         if ($Position == LABEL_POSITION_LEFT) {
             $XPos = $this->pChartObject->GraphAreaX1 - $Padding;
             $Settings["Align"] = TEXT_ALIGN_MIDDLERIGHT;
@@ -197,7 +197,7 @@ class Surface
      * @param int|float $Threshold
      * @param array $Format
      */
-    public function drawContour($Threshold, array $Format = array())
+    public function drawContour($Threshold, array $Format = [])
     {
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
@@ -211,7 +211,7 @@ class Surface
         $XSize = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1) / ($this->GridSizeX + 1);
         $YSize = ($this->pChartObject->GraphAreaY2 - $this->pChartObject->GraphAreaY1) / ($this->GridSizeY + 1);
 
-        $Color = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks);
+        $Color = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha, "Ticks" => $Ticks];
 
         for ($X = 0; $X <= $this->GridSizeX; $X++) {
             for ($Y = 0; $Y <= $this->GridSizeY; $Y++) {
@@ -258,7 +258,7 @@ class Surface
      * Draw the surface chart
      * @param array $Format
      */
-    public function drawSurface(array $Format = array())
+    public function drawSurface(array $Format = [])
     {
         $Palette = isset($Format["Palette"]) ? $Format["Palette"] : null;
         $ShadeR1 = isset($Format["ShadeR1"]) ? $Format["ShadeR1"] : 77;
@@ -321,7 +321,7 @@ class Surface
                         $Alpha = (($ShadeA2 - $ShadeA1) / 100) * $Value + $ShadeA1;
                     }
 
-                    $Settings = array("R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha);
+                    $Settings = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
                     if ($Border) {
                         $Settings["BorderR"] = $BorderR;
                         $Settings["BorderG"] = $BorderG;

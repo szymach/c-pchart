@@ -28,7 +28,7 @@ class Radar
      * @param Data $Values
      * @param array $Format
      */
-    public function drawRadar(Image $Object, Data $Values, array $Format = array())
+    public function drawRadar(Image $Object, Data $Values, array $Format = [])
     {
         $this->pChartObject = $Object;
 
@@ -138,7 +138,7 @@ class Radar
                 }
             }
             $MaxSegments = $EdgeHeight / 20;
-            $Scale = $Object->computeScale(0, $Max, $MaxSegments, array(1, 2, 5));
+            $Scale = $Object->computeScale(0, $Max, $MaxSegments, [1, 2, 5]);
 
             $Segments = $Scale["Rows"];
             $SegmentHeight = $Scale["RowHeight"];
@@ -159,25 +159,25 @@ class Radar
 
             if ($BackgroundGradient == null) {
                 if ($Layout == RADAR_LAYOUT_STAR) {
-                    $Color = array(
+                    $Color = [
                         "R" => $BackgroundR,
                         "G" => $BackgroundG,
                         "B" => $BackgroundB,
                         "Alpha" => $BackgroundAlpha
-                    );
-                    $PointArray = array();
+                    ];
+                    $PointArray = [];
                     for ($i = 0; $i <= 360; $i = $i + (360 / $Points)) {
                         $PointArray[] = cos(deg2rad($i + $AxisRotation)) * $EdgeHeight + $CenterX;
                         $PointArray[] = sin(deg2rad($i + $AxisRotation)) * $EdgeHeight + $CenterY;
                     }
                     $Object->drawPolygon($PointArray, $Color);
                 } elseif ($Layout == RADAR_LAYOUT_CIRCLE) {
-                    $Color = array(
+                    $Color = [
                         "R" => $BackgroundR,
                         "G" => $BackgroundG,
                         "B" => $BackgroundB,
                         "Alpha" => $BackgroundAlpha
-                    );
+                    ];
                     $Object->drawFilledCircle(
                         $CenterX,
                         $CenterY,
@@ -195,13 +195,13 @@ class Radar
 
                 if ($Layout == RADAR_LAYOUT_STAR) {
                     for ($j = $Segments; $j >= 1; $j--) {
-                        $Color = array(
+                        $Color = [
                             "R" => $BackgroundGradient["StartR"] + $GradientROffset * $j,
                             "G" => $BackgroundGradient["StartG"] + $GradientGOffset * $j,
                             "B" => $BackgroundGradient["StartB"] + $GradientBOffset * $j,
                             "Alpha" => $BackgroundGradient["StartAlpha"] + $GradientAlphaOffset * $j
-                        );
-                        $PointArray = array();
+                        ];
+                        $PointArray = [];
 
                         for ($i = 0; $i <= 360; $i = $i + (360 / $Points)) {
                             $PointArray[] = cos(deg2rad($i + $AxisRotation))
@@ -215,12 +215,12 @@ class Radar
                     }
                 } elseif ($Layout == RADAR_LAYOUT_CIRCLE) {
                     for ($j = $Segments; $j >= 1; $j--) {
-                        $Color = array(
+                        $Color = [
                             "R" => $BackgroundGradient["StartR"] + $GradientROffset * $j,
                             "G" => $BackgroundGradient["StartG"] + $GradientGOffset * $j,
                             "B" => $BackgroundGradient["StartB"] + $GradientBOffset * $j,
                             "Alpha" => $BackgroundGradient["StartAlpha"] + $GradientAlphaOffset * $j
-                        );
+                        ];
                         $Object->drawFilledCircle(
                             $CenterX,
                             $CenterY,
@@ -234,14 +234,14 @@ class Radar
         }
 
         /* Axis to axis lines */
-        $Color = array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha);
-        $ColorDotted = array(
+        $Color = ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha];
+        $ColorDotted = [
             "R" => $AxisR,
             "G" => $AxisG,
             "B" => $AxisB,
             "Alpha" => $AxisAlpha * .8,
             "Ticks" => 2
-        );
+        ];
         if ($Layout == RADAR_LAYOUT_STAR) {
             for ($j = 1; $j <= $Segments; $j++) {
                 for ($i = 0; $i < 360; $i = $i + (360 / $Points)) {
@@ -266,16 +266,16 @@ class Radar
 
         if ($DrawAxisValues) {
             if ($LabelsBackground) {
-                $Options = array(
+                $Options = [
                     "DrawBox"  => true,
                     "Align"  => TEXT_ALIGN_MIDDLEMIDDLE,
                     "BoxR" => $LabelsBGR,
                     "BoxG" => $LabelsBGG,
                     "BoxB" => $LabelsBGB,
                     "BoxAlpha" => $LabelsBGAlpha
-                );
+                ];
             } else {
-                $Options = array("Align" => TEXT_ALIGN_MIDDLEMIDDLE);
+                $Options = ["Align" => TEXT_ALIGN_MIDDLEMIDDLE];
             }
             if ($AxisBoxRounded) {
                 $Options["BoxRounded"] = true;
@@ -343,10 +343,10 @@ class Radar
                             $LabelX,
                             $LabelY,
                             $Label,
-                            array(
+                            [
                                 "Angle" => (360 - ($i + $AxisRotation + $Axisoffset)) - 90,
                                 "Align" => TEXT_ALIGN_BOTTOMMIDDLE
-                            )
+                            ]
                         );
                     } else {
                         if ((floor($LabelX) == floor($CenterX)) && (floor($LabelY) < floor($CenterY))) {
@@ -354,7 +354,7 @@ class Radar
                                 $LabelX,
                                 $LabelY,
                                 $Label,
-                                array("Align" => TEXT_ALIGN_BOTTOMMIDDLE)
+                                ["Align" => TEXT_ALIGN_BOTTOMMIDDLE]
                             );
                         }
                         if ((floor($LabelX) > floor($CenterX)) && (floor($LabelY) < floor($CenterY))) {
@@ -362,7 +362,7 @@ class Radar
                                 $LabelX,
                                 $LabelY,
                                 $Label,
-                                array("Align" => TEXT_ALIGN_BOTTOMLEFT)
+                                ["Align" => TEXT_ALIGN_BOTTOMLEFT]
                             );
                         }
                         if ((floor($LabelX) > floor($CenterX)) && (floor($LabelY) == floor($CenterY))) {
@@ -370,7 +370,7 @@ class Radar
                                 $LabelX,
                                 $LabelY,
                                 $Label,
-                                array("Align" => TEXT_ALIGN_MIDDLELEFT)
+                                ["Align" => TEXT_ALIGN_MIDDLELEFT]
                             );
                         }
                         if ((floor($LabelX) > floor($CenterX)) && (floor($LabelY) > floor($CenterY))) {
@@ -378,7 +378,7 @@ class Radar
                                 $LabelX,
                                 $LabelY,
                                 $Label,
-                                array("Align" => TEXT_ALIGN_TOPLEFT)
+                                ["Align" => TEXT_ALIGN_TOPLEFT]
                             );
                         }
                         if ((floor($LabelX) < floor($CenterX)) && (floor($LabelY) < floor($CenterY))) {
@@ -386,7 +386,7 @@ class Radar
                                 $LabelX,
                                 $LabelY,
                                 $Label,
-                                array("Align" => TEXT_ALIGN_BOTTOMRIGHT)
+                                ["Align" => TEXT_ALIGN_BOTTOMRIGHT]
                             );
                         }
                         if ((floor($LabelX) < floor($CenterX)) && (floor($LabelY) == floor($CenterY))) {
@@ -394,7 +394,7 @@ class Radar
                                 $LabelX,
                                 $LabelY,
                                 $Label,
-                                array("Align" => TEXT_ALIGN_MIDDLERIGHT)
+                                ["Align" => TEXT_ALIGN_MIDDLERIGHT]
                             );
                         }
                         if ((floor($LabelX) < floor($CenterX)) && (floor($LabelY) > floor($CenterY))) {
@@ -402,7 +402,7 @@ class Radar
                                 $LabelX,
                                 $LabelY,
                                 $Label,
-                                array("Align" => TEXT_ALIGN_TOPRIGHT)
+                                ["Align" => TEXT_ALIGN_TOPRIGHT]
                             );
                         }
                         if ((floor($LabelX) == floor($CenterX)) && (floor($LabelY) > floor($CenterY))) {
@@ -410,7 +410,7 @@ class Radar
                                 $LabelX,
                                 $LabelY,
                                 $Label,
-                                array("Align" => TEXT_ALIGN_TOPMIDDLE)
+                                ["Align" => TEXT_ALIGN_TOPMIDDLE]
                             );
                         }
                     }
@@ -421,16 +421,16 @@ class Radar
 
         /* Compute the plots position */
         $ID = 0;
-        $Plot = array();
+        $Plot = [];
         foreach ($Data["Series"] as $SerieName => $DataS) {
             if ($SerieName != $LabelSerie) {
-                $Color = array(
+                $Color = [
                     "R" => $Palette[$ID]["R"],
                     "G" => $Palette[$ID]["G"],
                     "B" => $Palette[$ID]["B"],
                     "Alpha" => $Palette[$ID]["Alpha"],
                     "Surrounding" => $PointSurrounding
-                );
+                ];
                 foreach ($DataS["Data"] as $Key => $Value) {
                     $Angle = (360 / $Points) * $Key;
                     $Length = ($EdgeHeight / ($Segments * $SegmentHeight)) * $Value;
@@ -438,7 +438,7 @@ class Radar
                     $X = cos(deg2rad($Angle + $AxisRotation)) * $Length + $CenterX;
                     $Y = sin(deg2rad($Angle + $AxisRotation)) * $Length + $CenterY;
 
-                    $Plot[$ID][] = array($X, $Y, $Value);
+                    $Plot[$ID][] = [$X, $Y, $Value];
 
                     if ($RecordImageMap) {
                         $this->pChartObject->addToImageMap(
@@ -460,26 +460,26 @@ class Radar
 
         /* Draw all that stuff! */
         foreach ($Plot as $ID => $Points) {
-            $Color = array(
+            $Color = [
                 "R" => $Palette[$ID]["R"],
                 "G" => $Palette[$ID]["G"],
                 "B" => $Palette[$ID]["B"],
                 "Alpha" => $Palette[$ID]["Alpha"],
                 "Surrounding" => $PointSurrounding
-            );
+            ];
 
             /* Draw the polygons */
             if ($DrawPoly) {
                 if ($PolyAlpha != null) {
-                    $Color = array(
+                    $Color = [
                         "R" => $Palette[$ID]["R"],
                         "G" => $Palette[$ID]["G"],
                         "B" => $Palette[$ID]["B"],
                         "Alpha" => $PolyAlpha,
                         "Surrounding" => $PointSurrounding
-                    );
+                    ];
                 }
-                $PointsArray = array();
+                $PointsArray = [];
                 for ($i = 0; $i < count($Points); $i++) {
                     $PointsArray[] = $Points[$i][0];
                     $PointsArray[] = $Points[$i][1];
@@ -487,43 +487,43 @@ class Radar
                 $Object->drawPolygon($PointsArray, $Color);
             }
 
-            $Color = array(
+            $Color = [
                 "R" => $Palette[$ID]["R"],
                 "G" => $Palette[$ID]["G"],
                 "B" => $Palette[$ID]["B"],
                 "Alpha" => $Palette[$ID]["Alpha"],
                 "Surrounding" => $PointSurrounding
-            );
+            ];
 
             /* Bubble and labels settings */
-            $TextSettings = array(
+            $TextSettings = [
                 "Align"  => TEXT_ALIGN_MIDDLEMIDDLE,
                 "FontName" => $ValueFontName,
                 "FontSize" => $ValueFontSize,
                 "R"  => $Palette[$ID]["R"],
                 "G"  => $Palette[$ID]["G"],
                 "B"  => $Palette[$ID]["B"]
-            );
-            $InnerColor = array(
+            ];
+            $InnerColor = [
                 "R" => $InnerBubbleR,
                 "G" => $InnerBubbleG,
                 "B" => $InnerBubbleB,
                 "Alpha" => $InnerBubbleAlpha
-            );
+            ];
             if ($OuterBubbleR != VOID) {
-                $OuterColor = array(
+                $OuterColor = [
                     "R" => $OuterBubbleR,
                     "G" => $OuterBubbleG,
                     "B" => $OuterBubbleB,
                     "Alpha" => $OuterBubbleAlpha
-                );
+                ];
             } else {
-                $OuterColor = array(
+                $OuterColor = [
                     "R" => $Palette[$ID]["R"] + 20,
                     "G" => $Palette[$ID]["G"] + 20,
                     "B" => $Palette[$ID]["B"] + 20,
                     "Alpha" => $Palette[$ID]["Alpha"]
-                );
+                ];
             }
             /* Loop to the starting points if asked */
             if ($LineLoopStart && $DrawLines) {
@@ -598,7 +598,7 @@ class Radar
      * @param Data $Values
      * @param array $Format
      */
-    public function drawPolar(Image $Object, Data $Values, array $Format = array())
+    public function drawPolar(Image $Object, Data $Values, array $Format = [])
     {
         $this->pChartObject = $Object;
 
@@ -713,7 +713,7 @@ class Radar
                 }
             }
             $MaxSegments = $EdgeHeight / 20;
-            $Scale = $Object->computeScale(0, $Max, $MaxSegments, array(1, 2, 5));
+            $Scale = $Object->computeScale(0, $Max, $MaxSegments, [1, 2, 5]);
 
             $Segments = $Scale["Rows"];
             $SegmentHeight = $Scale["RowHeight"];
@@ -726,12 +726,12 @@ class Radar
             $Object->Shadow = false;
 
             if ($BackgroundGradient == null) {
-                $Color = array(
+                $Color = [
                     "R" => $BackgroundR,
                     "G" => $BackgroundG,
                     "B" => $BackgroundB,
                     "Alpha" => $BackgroundAlpha
-                );
+                ];
                 $Object->drawFilledCircle(
                     $CenterX,
                     $CenterY,
@@ -747,12 +747,12 @@ class Radar
                 ;
 
                 for ($j = $Segments; $j >= 1; $j--) {
-                    $Color = array(
+                    $Color = [
                         "R" => $BackgroundGradient["StartR"] + $GradientROffset * $j,
                         "G" => $BackgroundGradient["StartG"] + $GradientGOffset * $j,
                         "B" => $BackgroundGradient["StartB"] + $GradientBOffset * $j,
                         "Alpha" => $BackgroundGradient["StartAlpha"] + $GradientAlphaOffset * $j
-                    );
+                    ];
                     $Object->drawFilledCircle(
                         $CenterX,
                         $CenterY,
@@ -765,7 +765,7 @@ class Radar
         }
 
         /* Axis to axis lines */
-        $Color = array("R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha);
+        $Color = ["R" => $AxisR, "G" => $AxisG, "B" => $AxisB, "Alpha" => $AxisAlpha];
         for ($j = 1; $j <= $Segments; $j++) {
             $Radius = ($EdgeHeight / $Segments) * $j;
             $Object->drawCircle($CenterX, $CenterY, $Radius, $Radius, $Color);
@@ -773,16 +773,16 @@ class Radar
 
         if ($DrawAxisValues) {
             if ($LabelsBackground) {
-                $Options = array(
+                $Options = [
                     "DrawBox"  => true,
                     "Align"  => TEXT_ALIGN_MIDDLEMIDDLE,
                     "BoxR" => $LabelsBGR,
                     "BoxG" => $LabelsBGG,
                     "BoxB" => $LabelsBGB,
                     "BoxAlpha" => $LabelsBGAlpha
-                );
+                ];
             } else {
-                $Options = array("Align" => TEXT_ALIGN_MIDDLEMIDDLE);
+                $Options = ["Align" => TEXT_ALIGN_MIDDLEMIDDLE];
             }
 
             if ($AxisBoxRounded) {
@@ -824,7 +824,7 @@ class Radar
                         $LabelX,
                         $LabelY,
                         $Label,
-                        array("Angle" => (360 - $i), "Align" => TEXT_ALIGN_BOTTOMMIDDLE)
+                        ["Angle" => (360 - $i), "Align" => TEXT_ALIGN_BOTTOMMIDDLE]
                     );
                 } else {
                     if ((floor($LabelX) == floor($CenterX)) && (floor($LabelY) < floor($CenterY))) {
@@ -832,7 +832,7 @@ class Radar
                             $LabelX,
                             $LabelY,
                             $Label,
-                            array("Align" => TEXT_ALIGN_BOTTOMMIDDLE)
+                            ["Align" => TEXT_ALIGN_BOTTOMMIDDLE]
                         );
                     }
                     if ((floor($LabelX) > floor($CenterX)) && (floor($LabelY) < floor($CenterY))) {
@@ -840,7 +840,7 @@ class Radar
                             $LabelX,
                             $LabelY,
                             $Label,
-                            array("Align" => TEXT_ALIGN_BOTTOMLEFT)
+                            ["Align" => TEXT_ALIGN_BOTTOMLEFT]
                         );
                     }
                     if ((floor($LabelX) > floor($CenterX)) && (floor($LabelY) == floor($CenterY))) {
@@ -848,7 +848,7 @@ class Radar
                             $LabelX,
                             $LabelY,
                             $Label,
-                            array("Align" => TEXT_ALIGN_MIDDLELEFT)
+                            ["Align" => TEXT_ALIGN_MIDDLELEFT]
                         );
                     }
                     if ((floor($LabelX) > floor($CenterX)) && (floor($LabelY) > floor($CenterY))) {
@@ -856,7 +856,7 @@ class Radar
                             $LabelX,
                             $LabelY,
                             $Label,
-                            array("Align" => TEXT_ALIGN_TOPLEFT)
+                            ["Align" => TEXT_ALIGN_TOPLEFT]
                         );
                     }
                     if ((floor($LabelX) < floor($CenterX)) && (floor($LabelY) < floor($CenterY))) {
@@ -864,7 +864,7 @@ class Radar
                             $LabelX,
                             $LabelY,
                             $Label,
-                            array("Align" => TEXT_ALIGN_BOTTOMRIGHT)
+                            ["Align" => TEXT_ALIGN_BOTTOMRIGHT]
                         );
                     }
                     if ((floor($LabelX) < floor($CenterX)) && (floor($LabelY) == floor($CenterY))) {
@@ -872,7 +872,7 @@ class Radar
                             $LabelX,
                             $LabelY,
                             $Label,
-                            array("Align" => TEXT_ALIGN_MIDDLERIGHT)
+                            ["Align" => TEXT_ALIGN_MIDDLERIGHT]
                         );
                     }
                     if ((floor($LabelX) < floor($CenterX)) && (floor($LabelY) > floor($CenterY))) {
@@ -880,7 +880,7 @@ class Radar
                             $LabelX,
                             $LabelY,
                             $Label,
-                            array("Align" => TEXT_ALIGN_TOPRIGHT)
+                            ["Align" => TEXT_ALIGN_TOPRIGHT]
                         );
                     }
                     if ((floor($LabelX) == floor($CenterX)) && (floor($LabelY) > floor($CenterY))) {
@@ -888,7 +888,7 @@ class Radar
                             $LabelX,
                             $LabelY,
                             $Label,
-                            array("Align" => TEXT_ALIGN_TOPMIDDLE)
+                            ["Align" => TEXT_ALIGN_TOPMIDDLE]
                         );
                     }
                 }
@@ -898,16 +898,16 @@ class Radar
 
         /* Compute the plots position */
         $ID = 0;
-        $Plot = array();
+        $Plot = [];
         foreach ($Data["Series"] as $SerieName => $DataSet) {
             if ($SerieName != $LabelSerie) {
-                $Color = array(
+                $Color = [
                     "R" => $Palette[$ID]["R"],
                     "G" => $Palette[$ID]["G"],
                     "B" => $Palette[$ID]["B"],
                     "Alpha" => $Palette[$ID]["Alpha"],
                     "Surrounding" => $PointSurrounding
-                );
+                ];
                 foreach ($DataSet["Data"] as $Key => $Value) {
                     $Angle = $Data["Series"][$LabelSerie]["Data"][$Key];
                     $Length = ($EdgeHeight / ($Segments * $SegmentHeight)) * $Value;
@@ -929,7 +929,7 @@ class Radar
                         );
                     }
 
-                    $Plot[$ID][] = array($X, $Y, $Value);
+                    $Plot[$ID][] = [$X, $Y, $Value];
                 }
                 $ID++;
             }
@@ -937,26 +937,26 @@ class Radar
 
         /* Draw all that stuff! */
         foreach ($Plot as $ID => $Points) {
-            $Color = array(
+            $Color = [
                 "R" => $Palette[$ID]["R"],
                 "G" => $Palette[$ID]["G"],
                 "B" => $Palette[$ID]["B"],
                 "Alpha" => $Palette[$ID]["Alpha"],
                 "Surrounding" => $PointSurrounding
-            );
+            ];
 
             /* Draw the polygons */
             if ($DrawPoly) {
                 if ($PolyAlpha != null) {
-                    $Color = array(
+                    $Color = [
                         "R" => $Palette[$ID]["R"],
                         "G" => $Palette[$ID]["G"],
                         "B" => $Palette[$ID]["B"],
                         "Alpha" => $PolyAlpha,
                         "Surrounding" => $PointSurrounding
-                    );
+                    ];
                 }
-                $PointsArray = array();
+                $PointsArray = [];
                 for ($i = 0; $i < count($Points); $i++) {
                     $PointsArray[] = $Points[$i][0];
                     $PointsArray[] = $Points[$i][1];
@@ -965,43 +965,43 @@ class Radar
                 $Object->drawPolygon($PointsArray, $Color);
             }
 
-            $Color = array(
+            $Color = [
                 "R" => $Palette[$ID]["R"],
                 "G" => $Palette[$ID]["G"],
                 "B" => $Palette[$ID]["B"],
                 "Alpha" => $Palette[$ID]["Alpha"],
                 "Surrounding" => $PointSurrounding
-            );
+            ];
 
             /* Bubble and labels settings */
-            $TextSettings = array(
+            $TextSettings = [
                 "Align"  => TEXT_ALIGN_MIDDLEMIDDLE,
                 "FontName" => $ValueFontName,
                 "FontSize" => $ValueFontSize,
                 "R"  => $Palette[$ID]["R"],
                 "G"  => $Palette[$ID]["G"],
                 "B"  => $Palette[$ID]["B"]
-            );
-            $InnerColor = array(
+            ];
+            $InnerColor = [
                 "R" => $InnerBubbleR,
                 "G" => $InnerBubbleG,
                 "B" => $InnerBubbleB,
                 "Alpha" => $InnerBubbleAlpha
-            );
+            ];
             if ($OuterBubbleR != VOID) {
-                $OuterColor = array(
+                $OuterColor = [
                     "R" => $OuterBubbleR,
                     "G" => $OuterBubbleG,
                     "B" => $OuterBubbleB,
                     "Alpha" => $OuterBubbleAlpha
-                );
+                ];
             } else {
-                $OuterColor = array(
+                $OuterColor = [
                     "R" => $Palette[$ID]["R"] + 20,
                     "G" => $Palette[$ID]["G"] + 20,
                     "B" => $Palette[$ID]["B"] + 20,
                     "Alpha" => $Palette[$ID]["Alpha"]
-                );
+                ];
             }
             /* Loop to the starting points if asked */
             if ($LineLoopStart && $DrawLines) {
