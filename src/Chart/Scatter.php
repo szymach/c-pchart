@@ -42,7 +42,7 @@ class Scatter
     /**
      * Prepare the scale
      * @param array $Format
-     * @return null | int
+     * @return null|int
      * @throws Exception
      */
     public function drawScatterScale(array $Format = array())
@@ -1735,7 +1735,7 @@ class Scatter
      * @param string $ScatterSerieID
      * @param mixed $Points
      * @param array $Format
-     * @return null | int
+     * @return null|int
      */
     public function writeScatterLabel($ScatterSerieID, $Points, array $Format = array())
     {
@@ -2037,8 +2037,8 @@ class Scatter
 
     /**
      * Draw a Scatter threshold area
-     * @param int | float $Value1
-     * @param int | float $Value2
+     * @param int|float $Value1
+     * @param int|float $Value2
      * @param array $Format
      * @return type
      */

@@ -295,8 +295,8 @@ abstract class BaseDraw
 
     /**
      * Convert apha to base 10
-     * @param int |float $AlphaValue
-     * @return int | float
+     * @param int|float $AlphaValue
+     * @return integer
      */
     public function convertAlpha($AlphaValue)
     {
@@ -502,9 +502,9 @@ abstract class BaseDraw
 
     /**
      *
-     * @param int | float $Value1
-     * @param int | float $Value2
-     * @return int | float
+     * @param int|float $Value1
+     * @param int|float $Value2
+     * @return double
      */
     public function modulo($Value1, $Value2)
     {
@@ -527,8 +527,8 @@ abstract class BaseDraw
     /**
      * @param mixed $Value
      * @param mixed $LastValue
-     * @param mixed $LabelingMethod
-     * @param mixed $ID
+     * @param integer $LabelingMethod
+     * @param integer $ID
      * @param boolean $LabelSkip
      * @return boolean
      */
@@ -574,23 +574,18 @@ abstract class BaseDraw
      * @param int $Ya
      * @param int $Xb
      * @param int $Yb
-     * @return array
+     * @return integer[]
      */
     public function fixBoxCoordinates($Xa, $Ya, $Xb, $Yb)
     {
-        return array(
-            min($Xa, $Xb),
-            min($Ya, $Yb),
-            max($Xa, $Xb),
-            max($Ya, $Yb)
-        );
+        return array(min($Xa, $Xb), min($Ya, $Yb), max($Xa, $Xb), max($Ya, $Yb));
     }
 
     /**
      * Apply AALias correction to the rounded box boundaries
-     * @param int | float $Value
+     * @param int|float $Value
      * @param int $Mode
-     * @return int | float
+     * @return int|float
      */
     public function offsetCorrection($Value, $Mode)
     {
@@ -843,7 +838,7 @@ abstract class BaseDraw
     /**
      * Validate a palette
      * @param mixed $Colors
-     * @param int | float $Surrounding
+     * @param int|float $Surrounding
      * @return array
      */
     public function validatePalette($Colors, $Surrounding = null)
@@ -913,7 +908,7 @@ abstract class BaseDraw
      * @param mixed $Values
      * @param array $Option
      * @param boolean $ReturnOnly0Height
-     * @return array | int | float
+     * @return int|float|array
      */
     public function scaleComputeY($Values, array $Option = array(), $ReturnOnly0Height = false)
     {
@@ -1060,7 +1055,7 @@ abstract class BaseDraw
     }
 
     /**
-     * @return array | null
+     * @return array|null
      */
     public function scaleGetXSettings()
     {
@@ -1168,13 +1163,13 @@ abstract class BaseDraw
 
                     if ($Type == BOUND_MAX || $Type == BOUND_BOTH) {
                         if ($MaxLabelPos == BOUND_LABEL_POS_TOP
-                            || ( $MaxLabelPos == BOUND_LABEL_POS_AUTO && $MaxValue >= 0)
+                            || ($MaxLabelPos == BOUND_LABEL_POS_AUTO && $MaxValue >= 0)
                         ) {
                             $YPos = $PosArray[$MaxPos] - $DisplayOffset + 2;
                             $Align = TEXT_ALIGN_BOTTOMMIDDLE;
                         }
                         if ($MaxLabelPos == BOUND_LABEL_POS_BOTTOM
-                            || ( $MaxLabelPos == BOUND_LABEL_POS_AUTO && $MaxValue < 0)
+                            || ($MaxLabelPos == BOUND_LABEL_POS_AUTO && $MaxValue < 0)
                         ) {
                             $YPos = $PosArray[$MaxPos] + $DisplayOffset + 2;
                             $Align = TEXT_ALIGN_TOPMIDDLE;

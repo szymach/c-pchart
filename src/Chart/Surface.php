@@ -66,7 +66,7 @@ class Surface
      * Add a point on the grid
      * @param int $X
      * @param int $Y
-     * @param int | float $Value
+     * @param int|float $Value
      * @param boolean $Force
      * @return null
      */
@@ -91,7 +91,7 @@ class Surface
     /**
      * Write the X labels
      * @param array $Format
-     * @return null | int
+     * @return null|int
      */
     public function writeXLabels(array $Format = array())
     {
@@ -194,7 +194,7 @@ class Surface
 
     /**
      * Draw the area arround the specified Threshold
-     * @param int | float $Threshold
+     * @param int|float $Threshold
      * @param array $Format
      */
     public function drawContour($Threshold, array $Format = array())
@@ -344,7 +344,7 @@ class Surface
      */
     public function computeMissing()
     {
-        $Missing = "";
+        $Missing = [];
         for ($X = 0; $X <= $this->GridSizeX; $X++) {
             for ($Y = 0; $Y <= $this->GridSizeY; $Y++) {
                 if ($this->Points[$X][$Y] == UNKNOWN) {
@@ -354,7 +354,7 @@ class Surface
         }
         shuffle($Missing);
 
-        foreach ($Missing as $Key => $Pos) {
+        foreach ($Missing as $Pos) {
             $Pos = preg_split("/,/", $Pos);
             $X = $Pos[0];
             $Y = $Pos[1];

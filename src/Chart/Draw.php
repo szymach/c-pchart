@@ -126,9 +126,9 @@ abstract class Draw extends BaseDraw
      * @param int $Y1
      * @param int $X2
      * @param int $Y2
-     * @param int | float $Radius
+     * @param int|float $Radius
      * @param array $Format
-     * @return null | 0
+     * @return null|integer
      */
     public function drawRoundedRectangle($X1, $Y1, $X2, $Y2, $Radius, array $Format = array())
     {
@@ -192,9 +192,9 @@ abstract class Draw extends BaseDraw
      * @param int $Y1
      * @param int $X2
      * @param int $Y2
-     * @param int | float $Radius
+     * @param int|float $Radius
      * @param array $Format
-     * @return null | 0
+     * @return null|integer
      */
     public function drawRoundedFilledRectangle($X1, $Y1, $X2, $Y2, $Radius, array $Format = array())
     {
@@ -262,7 +262,7 @@ abstract class Draw extends BaseDraw
         $YBottom = $Y2 - $Radius;
 
         $Step = 360 / (2 * PI * $Radius);
-        $Positions = "";
+        $Positions = [];
         $Radius--;
         $MinY = null;
         $MaxY = null;
@@ -726,7 +726,7 @@ abstract class Draw extends BaseDraw
 
             for ($j = 0; $j <= 3; $j++) {
                 if (!isset($Q[$ID])) {
-                    $Q[$ID] = "";
+                    $Q[$ID] = [];
                 }
                 if (!isset($Q[$ID]["X"])) {
                     $Q[$ID]["X"] = 0;
@@ -843,12 +843,12 @@ abstract class Draw extends BaseDraw
 
     /**
      * Draw a line between two points
-     * @param int $X1
-     * @param int $Y1
-     * @param int $X2
-     * @param int $Y2
+     * @param int|float $X1
+     * @param int|float $Y1
+     * @param int|float $X2
+     * @param int|float $Y2
      * @param array $Format
-     * @return array | int
+     * @return array|int
      */
     public function drawLine($X1, $Y1, $X2, $Y2, array $Format = array())
     {
@@ -995,8 +995,8 @@ abstract class Draw extends BaseDraw
      * Draw a circle
      * @param int $Xc
      * @param int $Yc
-     * @param int | float $Height
-     * @param int | float $Width
+     * @param int|float $Height
+     * @param int|float $Width
      * @param array $Format
      */
     public function drawCircle($Xc, $Yc, $Height, $Width, array $Format = array())
@@ -1088,7 +1088,7 @@ abstract class Draw extends BaseDraw
      * Draw a filled circle
      * @param int $X
      * @param int $Y
-     * @param int | float $Radius
+     * @param int|float $Radius
      * @param array $Format
      */
     public function drawFilledCircle($X, $Y, $Radius, array $Format = array())
@@ -1177,8 +1177,8 @@ abstract class Draw extends BaseDraw
 
     /**
      * Write text
-     * @param int $X
-     * @param int $Y
+     * @param int|float $X
+     * @param int|float $Y
      * @param string $Text
      * @param array $Format
      * @return array
@@ -1324,7 +1324,7 @@ abstract class Draw extends BaseDraw
      * @param int $Y2
      * @param int $Direction
      * @param array $Format
-     * @return null
+     * @return null|integer
      */
     public function drawGradientArea($X1, $Y1, $X2, $Y2, $Direction, array $Format = array())
     {
@@ -1440,7 +1440,7 @@ abstract class Draw extends BaseDraw
      * @param int $X
      * @param int $Y
      * @param array $Format
-     * @return int | null
+     * @return int|null
      */
     public function drawAntialiasPixel($X, $Y, array $Format = array())
     {
@@ -1527,7 +1527,7 @@ abstract class Draw extends BaseDraw
      * @param int $R
      * @param int $G
      * @param int $B
-     * @return null
+     * @return null|integer
      */
     public function drawAlphaPixel($X, $Y, $Alpha, $R, $G, $B)
     {
@@ -1609,7 +1609,7 @@ abstract class Draw extends BaseDraw
      * @param string $FileName
      * @param int $X
      * @param int $Y
-     * @return null | 0
+     * @return null|integer
      */
     public function drawFromPicture($PicType, $FileName, $X, $Y)
     {
@@ -1949,7 +1949,7 @@ abstract class Draw extends BaseDraw
      * Draw a progress bar filled with specified %
      * @param int $X
      * @param int $Y
-     * @param int | float $Percent
+     * @param int|float $Percent
      * @param array $Format
      */
     public function drawProgress($X, $Y, $Percent, array $Format = array())
@@ -2557,7 +2557,7 @@ abstract class Draw extends BaseDraw
         $SkippedOuterTickWidth = isset($Format["SkippedOuterTickWidth"]) ? $Format["SkippedOuterTickWidth"] : 2;
 
         /* Floating scale require X & Y margins to be set manually */
-        if ($Floating && ( $XMargin == AUTO || $YMargin == 0 )) {
+        if ($Floating && ($XMargin == AUTO || $YMargin == 0)) {
             $Floating = false;
         }
 
@@ -4114,7 +4114,7 @@ abstract class Draw extends BaseDraw
      * Draw an X threshold
      * @param mixed $Value
      * @param boolean $Format
-     * @return array | null | 0
+     * @return array|null|integer
      */
     public function drawXThreshold($Value, array $Format = array())
     {
@@ -4202,7 +4202,7 @@ abstract class Draw extends BaseDraw
         }
 
         if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
-            $XStep = (($this->GraphAreaX2 - $this->GraphAreaX1) - $XScale[0] * 2 ) / $XScale[1];
+            $XStep = (($this->GraphAreaX2 - $this->GraphAreaX1) - $XScale[0] * 2) / $XScale[1];
             $XPos = $this->GraphAreaX1 + $XScale[0] + $XStep * $Value;
             $YPos1 = $this->GraphAreaY1 + $Data["YMargin"];
             $YPos2 = $this->GraphAreaY2 - $Data["YMargin"];
@@ -4268,7 +4268,7 @@ abstract class Draw extends BaseDraw
                 return array("X" => $XPos);
             }
         } elseif ($Data["Orientation"] == SCALE_POS_TOPBOTTOM) {
-            $XStep = (($this->GraphAreaY2 - $this->GraphAreaY1) - $XScale[0] * 2 ) / $XScale[1];
+            $XStep = (($this->GraphAreaY2 - $this->GraphAreaY1) - $XScale[0] * 2) / $XScale[1];
             $XPos = $this->GraphAreaY1 + $XScale[0] + $XStep * $Value;
             $YPos1 = $this->GraphAreaX1 + $Data["YMargin"];
             $YPos2 = $this->GraphAreaX2 - $Data["YMargin"];
@@ -4342,7 +4342,7 @@ abstract class Draw extends BaseDraw
      * @param mixed $Value1
      * @param mixed $Value2
      * @param array $Format
-     * @return array | null
+     * @return array|null
      */
     public function drawXThresholdArea($Value1, $Value2, array $Format = array())
     {
@@ -4377,7 +4377,7 @@ abstract class Draw extends BaseDraw
         $XScale = $this->scaleGetXSettings();
 
         if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
-            $XStep = (($this->GraphAreaX2 - $this->GraphAreaX1) - $XScale[0] * 2 ) / $XScale[1];
+            $XStep = (($this->GraphAreaX2 - $this->GraphAreaX1) - $XScale[0] * 2) / $XScale[1];
             $XPos1 = $this->GraphAreaX1 + $XScale[0] + $XStep * $Value1;
             $XPos2 = $this->GraphAreaX1 + $XScale[0] + $XStep * $Value2;
             $YPos1 = $this->GraphAreaY1 + $Data["YMargin"];
@@ -4474,7 +4474,7 @@ abstract class Draw extends BaseDraw
             $this->Shadow = $RestoreShadow;
             return array("X1" => $XPos1, "X2" => $XPos2);
         } elseif ($Data["Orientation"] == SCALE_POS_TOPBOTTOM) {
-            $XStep = (($this->GraphAreaY2 - $this->GraphAreaY1) - $XScale[0] * 2 ) / $XScale[1];
+            $XStep = (($this->GraphAreaY2 - $this->GraphAreaY1) - $XScale[0] * 2) / $XScale[1];
             $XPos1 = $this->GraphAreaY1 + $XScale[0] + $XStep * $Value1;
             $XPos2 = $this->GraphAreaY1 + $XScale[0] + $XStep * $Value2;
             $YPos1 = $this->GraphAreaX1 + $Data["YMargin"];
@@ -4562,7 +4562,7 @@ abstract class Draw extends BaseDraw
      * Draw an Y threshold with the computed scale
      * @param mixed $Value
      * @param array $Format
-     * @return array | int
+     * @return array|int
      */
     public function drawThreshold($Value, array $Format = array())
     {
@@ -4783,7 +4783,7 @@ abstract class Draw extends BaseDraw
      * @param mixed $Value1
      * @param mixed $Value2
      * @param array $Format
-     * @return array | int | null
+     * @return array|int|null
      */
     public function drawThresholdArea($Value1, $Value2, array $Format = array())
     {
@@ -6122,7 +6122,7 @@ abstract class Draw extends BaseDraw
      * @param string $SerieA
      * @param string $SerieB
      * @param array $Format
-     * @return null | 0
+     * @return null|integer
      */
     public function drawZoneChart($SerieA, $SerieB, array $Format = array())
     {
@@ -7077,7 +7077,7 @@ abstract class Draw extends BaseDraw
                     if ($this->Shadow) {
                         $ShadowArea = array();
                         foreach ($Areas as $Key => $Points) {
-                            $ShadowArea[$Key] = "";
+                            $ShadowArea[$Key] = [];
                             foreach ($Points as $Key2 => $Value) {
                                 if ($Key2 % 2 == 0) {
                                     $ShadowArea[$Key][] = $Value + $this->ShadowX;
@@ -7209,7 +7209,7 @@ abstract class Draw extends BaseDraw
                     if ($this->Shadow) {
                         $ShadowArea = array();
                         foreach ($Areas as $Key => $Points) {
-                            $ShadowArea[$Key] = "";
+                            $ShadowArea[$Key] = [];
                             foreach ($Points as $Key2 => $Value) {
                                 if ($Key2 % 2 == 0) {
                                     $ShadowArea[$Key][] = $Value + $this->ShadowX;
@@ -8148,7 +8148,7 @@ abstract class Draw extends BaseDraw
                             }
 
                             if (!isset($LastY[$Key])) {
-                                $LastY[$Key] = "";
+                                $LastY[$Key] = [];
                             }
                             if (!isset($LastY[$Key][$Pos])) {
                                 $LastY[$Key][$Pos] = $YZero;
@@ -8325,7 +8325,7 @@ abstract class Draw extends BaseDraw
                                 }
 
                                 if ($DisplayOrientation == ORIENTATION_VERTICAL
-                                    || ( $DisplayOrientation == ORIENTATION_AUTO && !$Done)
+                                    || ($DisplayOrientation == ORIENTATION_AUTO && !$Done)
                                 ) {
                                     if ($TxtHeight < $BarWidth && $TxtWidth < $BarHeight) {
                                         $this->drawText(
@@ -8386,7 +8386,7 @@ abstract class Draw extends BaseDraw
                             }
 
                             if (!isset($LastX[$Key])) {
-                                $LastX[$Key] = "";
+                                $LastX[$Key] = [];
                             }
                             if (!isset($LastX[$Key][$Pos])) {
                                 $LastX[$Key][$Pos] = $YZero;
@@ -8529,7 +8529,7 @@ abstract class Draw extends BaseDraw
                                 $TxtHeight = abs($TxtPos[2]["Y"] - $TxtPos[0]["Y"]);
                                 $TxtWidth = abs($TxtPos[1]["X"] - $TxtPos[0]["X"]);
 
-                                $XCenter = ( $X2 - $X1 ) / 2 + $X1;
+                                $XCenter = ($X2 - $X1) / 2 + $X1;
                                 $YCenter = (($Y + $YOffset + $YSize) - ($Y + $YOffset)) / 2 + $Y + $YOffset;
 
                                 $Done = false;
@@ -8560,7 +8560,7 @@ abstract class Draw extends BaseDraw
                                 }
 
                                 if ($DisplayOrientation == ORIENTATION_VERTICAL
-                                    || ( $DisplayOrientation == ORIENTATION_AUTO && !$Done)
+                                    || ($DisplayOrientation == ORIENTATION_AUTO && !$Done)
                                 ) {
                                     if ($TxtHeight < $BarWidth && $TxtWidth < $BarHeight) {
                                         $this->drawText(
@@ -8627,7 +8627,6 @@ abstract class Draw extends BaseDraw
         $this->Shadow = false;
 
         /* Build the offset data series */
-        $OffsetData = "";
         $OverallOffset = "";
         $SerieOrder = "";
         foreach ($Data["Series"] as $SerieName => $Serie) {
@@ -9890,11 +9889,11 @@ abstract class Draw extends BaseDraw
      * @param int $R
      * @param int $G
      * @param int $B
-     * @param int | float $Alpha
+     * @param int|float $Alpha
      * @param int $BorderR
      * @param int $BorderG
      * @param int $BorderB
-     * @param int | float $BorderAlpha
+     * @param int|float $BorderAlpha
      */
     public function drawShape(
         $X,
@@ -10059,7 +10058,7 @@ abstract class Draw extends BaseDraw
      *
      * @param array $Points
      * @param array $Format
-     * @return null
+     * @return null|integer
      */
     public function drawPolygonChart(array $Points, array $Format = array())
     {
@@ -10180,9 +10179,9 @@ abstract class Draw extends BaseDraw
         $YStep = 1;
 
         if (!$NoFill) {
-            //if ( $DebugLine ) { $MinY = $DebugLine; $MaxY = $DebugLine; }
+            //if ($DebugLine ) { $MinY = $DebugLine; $MaxY = $DebugLine; }
             for ($Y = $MinY; $Y <= $MaxY; $Y = $Y + $YStep) {
-                $Intersections = "";
+                $Intersections = [];
                 $LastSlope = null;
                 $RestoreLast = "-";
                 foreach ($Segments as $Key => $Coords) {
@@ -10195,7 +10194,7 @@ abstract class Draw extends BaseDraw
                         if ($Y1 == $Y2) {
                             $X = $X1;
                         } else {
-                            $X = $X1 + (($Y - $Y1) * $X2 - ($Y - $Y1) * $X1 ) / ($Y2 - $Y1);
+                            $X = $X1 + (($Y - $Y1) * $X2 - ($Y - $Y1) * $X1) / ($Y2 - $Y1);
                         }
 
                         $X = floor($X);
@@ -10236,7 +10235,7 @@ abstract class Draw extends BaseDraw
                         if (is_array($Intersections)
                             && in_array($X, $Intersections)
                             && $LastSlope == "="
-                            && ($Slope == "-" )
+                            && ($Slope == "-")
                         ) {
                             $Intersections[] = $X;
                         }

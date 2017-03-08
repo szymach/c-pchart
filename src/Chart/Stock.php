@@ -40,7 +40,7 @@ class Stock
     /**
      * Draw a stock chart
      * @param array $Format
-     * @return type
+     * @return integer|null
      */
     public function drawStockChart(array $Format = array())
     {

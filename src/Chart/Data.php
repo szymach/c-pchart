@@ -179,7 +179,7 @@ class Data
     /**
      * Return the sum of the serie values
      * @param string $Serie
-     * @return int | null
+     * @return int|null
      */
     public function getSum($Serie)
     {
@@ -233,7 +233,7 @@ class Data
 
     /**
      * Set the description of a given serie
-     * @param mixed $Series
+     * @param string|array $Series
      * @param string $Description
      */
     public function setSerieDescription($Series, $Description = "My serie")
@@ -250,7 +250,7 @@ class Data
 
     /**
      * Set a serie as "drawable" while calling a rendering public function
-     * @param mixed $Series
+     * @param string|array $Series
      * @param boolean $Drawable
      */
     public function setSerieDrawable($Series, $Drawable = true)
@@ -489,7 +489,7 @@ class Data
     /**
      * Return the average value of the given serie
      * @param string $Serie
-     * @return int | null
+     * @return int|null
      */
     public function getSerieAverage($Serie)
     {
@@ -497,13 +497,14 @@ class Data
             $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
             return array_sum($SerieData) / sizeof($SerieData);
         }
+
         return null;
     }
 
     /**
      * Return the geometric mean of the given serie
      * @param string $Serie
-     * @return int | null
+     * @return int|null
      */
     public function getGeometricMean($Serie)
     {
@@ -515,13 +516,14 @@ class Data
             }
             return pow($Seriesum, 1 / sizeof($SerieData));
         }
+
         return null;
     }
 
     /**
      * Return the harmonic mean of the given serie
      * @param string $Serie
-     * @return int | null
+     * @return int|null
      */
     public function getHarmonicMean($Serie)
     {
@@ -540,7 +542,7 @@ class Data
     /**
      * Return the standard deviation of the given serie
      * @param string $Serie
-     * @return int | float | null
+     * @return double|null
      */
     public function getStandardDeviation($Serie)
     {
@@ -560,7 +562,7 @@ class Data
     /**
      * Return the Coefficient of variation of the given serie
      * @param string $Serie
-     * @return float | null
+     * @return float|null
      */
     public function getCoefficientOfVariation($Serie)
     {
@@ -578,7 +580,7 @@ class Data
     /**
      * Return the median value of the given serie
      * @param string $Serie
-     * @return int | float
+     * @return int|float
      */
     public function getSerieMedian($Serie)
     {
@@ -598,7 +600,7 @@ class Data
      * Return the x th percentil of the given serie
      * @param string $Serie
      * @param int $Percentil
-     * @return int | float | null
+     * @return int|float| null
      */
     public function getSeriePercentile($Serie = "Serie1", $Percentil = 95)
     {
@@ -645,7 +647,7 @@ class Data
 
     /**
      * Test if we have valid data
-     * @return boolean
+     * @return boolean|null
      */
     public function containsData()
     {
@@ -660,6 +662,8 @@ class Data
                 return true;
             }
         }
+
+        return null;
     }
 
     /**
@@ -922,12 +926,12 @@ class Data
     /**
      * Initialise a given scatter serie
      * @param int $ID
-     * @return null | int
+     * @return null
      */
     public function initScatterSerie($ID)
     {
         if (isset($this->Data["ScatterSeries"][$ID])) {
-            return 0;
+            return null;
         }
 
         $this->Data["ScatterSeries"][$ID]["Description"] = "Scatter " . $ID;
@@ -1095,10 +1099,11 @@ class Data
 
     /**
      * Create a dataset based on a formula
+     *
      * @param string $SerieName
      * @param string $Formula
      * @param array $Options
-     * @return null | int
+     * @return null
      */
     public function createFunctionSerie($SerieName, $Formula = "", array $Options = array())
     {
@@ -1110,11 +1115,11 @@ class Data
         $AbscissaSerie = isset($Options["AbscissaSerie"]) ? $Options["AbscissaSerie"] : "Abscissa";
 
         if ($Formula == "") {
-            return 0;
+            return null;
         }
 
-        $Result = "";
-        $Abscissa = "";
+        $Result = [];
+        $Abscissa = [];
         for ($i = $MinX; $i <= $MaxX; $i = $i + $XStep) {
             $Expression = "\$return = '!'.(" . str_replace("z", $i, $Formula) . ");";
             if (@eval($Expression) === false) {
@@ -1188,7 +1193,8 @@ class Data
 
     /**
      * Save a palette element
-     * @param id $ID
+     *
+     * @param integer $ID
      * @param string $Color
      */
     public function savePalette($ID, $Color)

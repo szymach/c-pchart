@@ -32,12 +32,13 @@ class Indicator
 
     /**
      * Draw an indicator
+     *
      * @param int $X
      * @param int $Y
      * @param int $Width
      * @param int $Height
      * @param array $Format
-     * @return null | int
+     * @return null|int
      */
     public function draw($X, $Y, $Width, $Height, array $Format = array())
     {
@@ -105,7 +106,7 @@ class Indicator
             $X2 = $X1 + ($Settings["End"] - $Settings["Start"]) * $XScale;
 
             if ($Key == 0 && $DrawLeftHead) {
-                $Poly = "";
+                $Poly = [];
                 $Poly[] = $X1 - 1;
                 $Poly[] = $Y;
                 $Poly[] = $X1 - 1;

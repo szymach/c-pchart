@@ -89,7 +89,7 @@ class Image extends Draw
      * @param int $Y1
      * @param int $X2
      * @param int $Y2
-     * @return int | null
+     * @return int|null
      */
     public function setGraphArea($X1, $Y1, $X2, $Y2)
     {
@@ -369,9 +369,10 @@ class Image extends Draw
 
     /**
      * Add a zone to the image map
-     * @param mixed $Type
-     * @param mixed $Plots
-     * @param mixed $Color
+     *
+     * @param string $Type
+     * @param string $Plots
+     * @param string|null $Color
      * @param string $Title
      * @param string $Message
      * @param boolean $HTMLEncode
@@ -459,8 +460,8 @@ class Image extends Draw
     /**
      * Replace the title of one image map serie
      * @param string $OldTitle
-     * @param string | array $NewTitle
-     * @return null | int
+     * @param string|array $NewTitle
+     * @return null|int
      */
     public function replaceImageMapTitle($OldTitle, $NewTitle)
     {
@@ -547,7 +548,7 @@ class Image extends Draw
      * Replace the values of the image map contents
      * @param string $Title
      * @param array $Values
-     * @return null | int
+     * @return null|int
      */
     public function replaceImageMapValues($Title, array $Values)
     {

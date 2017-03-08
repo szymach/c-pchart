@@ -105,7 +105,6 @@ class Split
                 "Surrounding" => $Surrounding
             );
 
-            $PolyGon = "";
 
             $Angle = $Object->getAngle($X2, $RightY1, $X1, $LeftY1);
             $VectorX1 = cos(deg2rad($Angle + 90)) * $Force + ($X2 - $X1) / 2 + $X1;
@@ -124,6 +123,8 @@ class Split
                 $VectorY2,
                 $Settings
             );
+
+            $PolyGon = [];
             foreach ($Points as $Key => $Pos) {
                 $PolyGon[] = $Pos["X"];
                 $PolyGon[] = $Pos["Y"];
