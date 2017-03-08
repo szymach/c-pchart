@@ -1,5 +1,6 @@
 Table of contents:
 ==================
+* [Support](#support)
 * [About](#about)
 * [License](#license)
 * [Contributing](#contributing)
@@ -12,23 +13,26 @@ Table of contents:
 * [References](#references)
 * [Links](#links)
 
-About:
-=====
+Support:
+========
 
-This project is no longer actively developed, since I do not use it personally and decided
-that I have already put enough work into modernizing it. Should any issues or errors arise,
-I will still try to resolve them as soon as I can, so the base support will still be maintained.
+This project is supported in a basic manner and no new features will be introduced.
+Issues and pull requests will be reviewed and resolved if need be, so feel free
+to post them.
+
+About:
+======
 
 A project bringing Composer support and some basic PHP 5 standards to pChart 2.0 library.
 The aim is to allow pChart integration into modern frameworks like Symfony2.
 
-This is the 2.0 version, which aims to further update the code, but without changing 
+This is the 2.0 version, which aims to further update the code, but without changing
 the functionality if possible. It will introduce some minor backwards compatibility breaks,
 so if that's a concern, use the 1.* version.
 
 What was done:
 
-- Updated the supported PHP version to 5.5.
+- Added support for PHP versions from 5.4 to 7.1.
 
 - Made a full port of the library's functionality.
 
@@ -42,8 +46,8 @@ may occur.
 
 - Added a factory service for loading the classes.
 
-- Moved all constants to a single file `src/Resources/data/constants.php`. This file is *required*
-for the library to function and is now loaded via Composer.
+- Moved all constants to a single file `src/Resources/data/constants.php`. It is loaded automatically,
+so no need for manual action.
 
 License:
 ========
@@ -65,7 +69,7 @@ For composer installation, add:
 
 ```json
 "require": {
-    "szymach/c-pchart": "~2.0@dev"
+    "szymach/c-pchart": "^2.0@dev"
 },
 ```
 
@@ -75,10 +79,7 @@ to your composer.json file and update your dependencies. Or you can run:
 $ composer require szymach/c-pchart
 ```
 
-in your project directory, where the composer.json file is.
-
-After that, all classes are available under `CpChart\Chart` namespace or
-`CpChart\Factory` for the factory.
+in your project's root directory.
 
 Usage:
 ======
