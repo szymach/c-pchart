@@ -8051,8 +8051,8 @@ abstract class Draw extends BaseDraw
 
         $RestoreShadow = $this->Shadow;
 
-        $LastX = null;
-        $LastY = null;
+        $LastX = [];
+        $LastY = [];
         foreach ($Data["Series"] as $SerieName => $Serie) {
             if ($Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"]) {
                 $R = $Serie["Color"]["R"];
