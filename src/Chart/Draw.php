@@ -5048,7 +5048,7 @@ abstract class Draw extends BaseDraw
                 $R = $Serie["Color"]["R"];
                 $G = $Serie["Color"]["G"];
                 $B = $Serie["Color"]["B"];
-                $Alpha = $Serie["Color"]["Alpha"];
+                $Alpha = (int) $Serie["Color"]["Alpha"];
                 $Ticks = $Serie["Ticks"];
                 if ($Surrounding != null) {
                     $BorderR = $R + $Surrounding;
