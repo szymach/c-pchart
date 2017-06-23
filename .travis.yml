@@ -22,7 +22,8 @@ before_install:
     - phpenv config-rm xdebug.ini
 
 before_script:
-    - composer update $COMPOSER_FLAGS -n --prefer-dist -v
+    - composer update -n --prefer-dist -v $COMPOSER_FLAGS 
 
 script:
     - bin/phpcs --standard=PSR2 --encoding=UTF-8 --ignore="*.db,*.color,*.ttf" src/
+    - bin/codecept run unit

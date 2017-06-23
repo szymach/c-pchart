@@ -1,6 +1,6 @@
 ---
 filter:
-    excluded_paths: [vendor/*, bin/*]
+    excluded_paths: [vendor/*, bin/*, tests/*]
 
 checks:
     php:
@@ -10,4 +10,4 @@ checks:
 tools:
     php_cpd: true
     php_pdepend:
-        excluded_dirs: [vendor, bin]
+        excluded_dirs: [vendor, bin, tests]

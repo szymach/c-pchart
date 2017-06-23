@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -20,7 +19,8 @@ class UnitTester extends \Codeception\Actor
 {
     use _generated\UnitTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+    public function getOutputPathForChart($chartFilename)
+    {
+        return sprintf("%s/../_output/charts/%s", __DIR__, $chartFilename);
+    }
 }

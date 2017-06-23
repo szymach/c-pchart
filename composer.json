@@ -21,6 +21,9 @@
         "psr-4": { "CpChart\\": "src/" },
         "files": ["src/Resources/data/constants.php"]
     },
+    "autoload-dev": {
+        "psr-4": { "Test\\CpChart\\": "tests/" }
+    },
     "require": {
         "php": ">=5.4",
         "ext-gd": "*"
