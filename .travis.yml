@@ -10,6 +10,8 @@ sudo: false
 matrix:
     include:
         - php: 5.4
+          env:
+            - COMPOSER_FLAGS='--prefer-lowest'
         - php: 5.5
         - php: 5.6
         - php: 7.0
@@ -20,7 +22,7 @@ before_install:
     - phpenv config-rm xdebug.ini
 
 before_script:
-    - composer install -n --prefer-dist -v
+    - composer update $COMPOSER_FLAGS -n --prefer-dist -v
 
 script:
     - bin/phpcs --standard=PSR2 --encoding=UTF-8 --ignore="*.db,*.color,*.ttf" src/
