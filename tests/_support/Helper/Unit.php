@@ -3,11 +3,10 @@ namespace Helper;
 
 use Codeception\Module;
 use Codeception\Module\Filesystem;
-use Codeception\TestInterface;
 
 class Unit extends Module
 {
-    public function _before(TestInterface $test)
+    public function _beforeSuite($settings = [])
     {
         $chartDir = $this->getChartDirectoryPath();
         if (!is_dir($chartDir)) {
@@ -17,7 +16,7 @@ class Unit extends Module
         $this->clearChartDirectory();
     }
 
-    public function _after(TestInterface $test)
+    public function _afterSuite($settings = [])
     {
         $this->clearChartDirectory();
     }
