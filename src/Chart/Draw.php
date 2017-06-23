@@ -6118,7 +6118,8 @@ abstract class Draw extends BaseDraw
     }
 
     /**
-     * Draw a line chart
+     * Draw a zone chart
+     *
      * @param string $SerieA
      * @param string $SerieB
      * @param array $Format
@@ -8627,8 +8628,8 @@ abstract class Draw extends BaseDraw
         $this->Shadow = false;
 
         /* Build the offset data series */
-        $OverallOffset = "";
-        $SerieOrder = "";
+        $OverallOffset = [];
+        $SerieOrder = [];
         foreach ($Data["Series"] as $SerieName => $Serie) {
             if ($Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"]) {
                 $SerieOrder[] = $SerieName;
@@ -8642,8 +8643,7 @@ abstract class Draw extends BaseDraw
                     } else {
                         $Sign = "-";
                     }
-                    if (!isset($OverallOffset[$Key]) || !isset($OverallOffset[$Key][$Sign])
-                    ) {
+                    if (!isset($OverallOffset[$Key]) || !isset($OverallOffset[$Key][$Sign])) {
                         $OverallOffset[$Key][$Sign] = 0;
                     }
 
@@ -8672,7 +8672,6 @@ abstract class Draw extends BaseDraw
                 }
 
                 $Color = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
-
                 if ($LineSurrounding != null) {
                     $LineColor = [
                         "R" => $R + $LineSurrounding,

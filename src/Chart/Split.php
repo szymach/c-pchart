@@ -51,7 +51,7 @@ class Split
         $DataSerie = [];
 
         foreach ($Data["Series"] as $SerieName => $Value) {
-            if ($SerieName != $LabelSerie && $DataSerie == "") {
+            if ($SerieName != $LabelSerie && empty($DataSerie)) {
                 $DataSerie = $SerieName;
             }
         }
