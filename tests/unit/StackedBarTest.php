@@ -25,11 +25,11 @@ class StackedBarTest extends Unit
         $data->setAbscissa("Time");
         $data->setXAxisUnit("h");
         $image = new Image(700, 230, $data);
-        $Settings = ["R" => 170, "G" => 183, "B" => 87, "Dash" => 1, "DashR" => 190, "DashG" => 203, "DashB" => 107];
-        $image->drawFilledRectangle(0, 0, 700, 230, $Settings);
-        $Settings = ["StartR" => 219, "StartG" => 231, "StartB" => 139, "EndR" => 1, "EndG" => 138, "EndB" => 68, "Alpha" => 50];
-        $image->drawGradientArea(0, 0, 700, 230, DIRECTION_VERTICAL, $Settings);
-        $image->setFontProperties(["FontName" => "../fonts/pf_arma_five.ttf", "FontSize" => 6]);
+        $settings = ["R" => 170, "G" => 183, "B" => 87, "Dash" => 1, "DashR" => 190, "DashG" => 203, "DashB" => 107];
+        $image->drawFilledRectangle(0, 0, 700, 230, $settings);
+        $settings = ["StartR" => 219, "StartG" => 231, "StartB" => 139, "EndR" => 1, "EndG" => 138, "EndB" => 68, "Alpha" => 50];
+        $image->drawGradientArea(0, 0, 700, 230, DIRECTION_VERTICAL, $settings);
+        $image->setFontProperties(["FontName" => "pf_arma_five.ttf", "FontSize" => 6]);
         $image->setGraphArea(60, 30, 650, 190);
         $image->drawScale(["CycleBackground" => true, "DrawSubTicks" => true, "GridR" => 0, "GridG" => 0, "GridB" => 0, "GridAlpha" => 10, "Mode" => SCALE_MODE_ADDALL]);
         $image->setShadow(true, ["X" => 1, "Y" => 1, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);

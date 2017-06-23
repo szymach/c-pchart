@@ -33,7 +33,7 @@ class BarTest extends Unit
             230,
             ["R" => 170, "G" => 183, "B" => 87, "Dash" => 1, "DashR" => 190, "DashG" => 203, "DashB" => 107]
         );
-        $Settings = [
+        $settings = [
             "StartR" => 219,
             "StartG" => 231,
             "StartB" => 139,
@@ -42,7 +42,7 @@ class BarTest extends Unit
             "EndB"   => 68,
             "Alpha"  => 50
         ];
-        $image->drawGradientArea(0, 0, 700, 230, DIRECTION_VERTICAL, $Settings);
+        $image->drawGradientArea(0, 0, 700, 230, DIRECTION_VERTICAL, $settings);
         $image->drawGradientArea(
             0,
             0,

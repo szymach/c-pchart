@@ -26,10 +26,10 @@ class StepTest extends Unit
         $data->setSerieDescription("Labels", "Months");
         $data->setAbscissa("Labels");
         $image = new Image(700, 230, $data);
-        $Settings = ["R" => 170, "G" => 183, "B" => 87, "Dash" => 1, "DashR" => 190, "DashG" => 203, "DashB" => 107];
-        $image->drawFilledRectangle(0, 0, 700, 230, $Settings);
-        $Settings = ["StartR" => 219, "StartG" => 231, "StartB" => 139, "EndR" => 1, "EndG" => 138, "EndB" => 68, "Alpha" => 50];
-        $image->drawGradientArea(0, 0, 700, 230, DIRECTION_VERTICAL, $Settings);
+        $settings = ["R" => 170, "G" => 183, "B" => 87, "Dash" => 1, "DashR" => 190, "DashG" => 203, "DashB" => 107];
+        $image->drawFilledRectangle(0, 0, 700, 230, $settings);
+        $settings = ["StartR" => 219, "StartG" => 231, "StartB" => 139, "EndR" => 1, "EndG" => 138, "EndB" => 68, "Alpha" => 50];
+        $image->drawGradientArea(0, 0, 700, 230, DIRECTION_VERTICAL, $settings);
         $image->drawGradientArea(0, 0, 700, 20, DIRECTION_VERTICAL, ["StartR" => 0, "StartG" => 0, "StartB" => 0, "EndR" => 50, "EndG" => 50, "EndB" => 50, "Alpha" => 80]);
         $image->drawRectangle(0, 0, 699, 229, ["R" => 0, "G" => 0, "B" => 0]);
         $image->setFontProperties(["FontName" => "Silkscreen.ttf", "FontSize" => 6]);
