@@ -265,52 +265,16 @@ try {
 Notes:
 ------
 
-Basically, all should work as defined in the pChart 2.0 documentation with added
-support for try/catch functionality. The factory class has methods to load all types of
-classes present in the pChart library.
+Basically, all should work as defined in the pChart 2.0 documentation.
 
 **IMPORTANT!** If you want to use any of the fonts or palletes files, provide only
 the name of the actual file, do not add the 'fonts' or 'palettes' folder to the
 string given into the function. If you want to load them from a different directory
 than the default, you need to add the full path to the file (ex. `__DIR__.'/folder/to/my/palletes`).
 
-Changelog
-=========
-1.0 Stable version with basic functionality.
-
-1.1 Added factory service.
-
-1.1.1 Changed chart loading via factory a bit (see class annotations).
-
-1.1.2 Updated service class with Exception handling regarding missing / wrong class name.
-
-1.1.3 The file with classes' constants is now loaded via Composer (thanks to ThaDafinser).
-
-1.1.4 Fixed code-breaking typ (thanks to subtronic).
-
-1.1.5 Added an option to hide the X axis or only it's values (thanks to julien-gm).
-
-1.1.6 Added support for closures in formatting scale (thanks to funkjedi)
-
-2.0 Updated all classes to PSR-2 standard, added typehinting where possible, updated
-    annotations in methods to be as accurate as possible. Added Behat testing and
-    restructed the namespaces into more sensible structure.
-
 References
 ==========
 [The original pChart website](http://www.pchart.net/)
-
-[Composer](https://getcomposer.org/)
-
-PHP Framework Interoperability Group at GitHub on PHP coding standards:
-
-[PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
-
-[PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
-
-[PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
-
-[PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
 
 Links
 =====
