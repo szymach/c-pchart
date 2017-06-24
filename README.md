@@ -6,8 +6,8 @@ Table of contents:
 * [Contributing](#contributing)
 * [Installation](#installation-via-composer)
 * [Usage](#usage)
-    - [Draw a chart through Image class only](#draw-a-chart-through-image-class-only)
-    - [Draw a chart with a dedicated class](#draw-a-chart-with-a-dedicated-class)
+    - [Charts created through Image class](#charts-created-through-image-class)
+    - [Standalone charts](#standalone-charts)
     - [Notes](#notes)
 * [Changelog](#changelog)
 * [References](#references)
@@ -86,18 +86,30 @@ Usage:
 
 Now you can autoload or use the classes via their namespaces. If you want to, you
 may utilize the provided factory class. Below are examples of how to use the library,
-the charts themselves are borrowed from the official documentation.
+the charts themselves are borrowed from the [official wiki](http://wiki.pchart.net/).
 
-Charts that can be drawn with the Image class only
+Charts created through Image class
 ---------------------------------------
 
 Not all charts need to be created through a seperate class (ex. bar or spline charts),
 some are created via the Image class (check the official documentation before drawing).
 Below is a list of example code you can use to create these charts:
 
+- [area](examples/area.md)
+- [bar](examples/bar.md)
+- [best fit](examples/best_fit.md)
+- [filled spline](examples/filled_spline.md)
+- [filled step](examples/filled_step.md)
+- [line](examples/line.md)
+- [plot](examples/plot.md)
+- [progress](examples/progress.md)
 - [spline](examples/spline.md)
+- [split path](examples/split_path.md)
+- [stacked area](examples/stacked_area.md)
+- [stacked bar](examples/stacked_bar.md)
+- [step](examples/step.md)
 
-Chart with a dedicated class:
+Standalone charts:
 ------------------------------------
 
 Some charts require using a dedicated class, which you can create via the factory.
@@ -105,6 +117,9 @@ Notice that you specify the type of chart, not the class name. An example for a 
 chart below:
 
 - [pie](examples/pie.md)
+- [polar](examples/polar.md)
+- [radar](examples/radar.md)
+- [spring](examples/spring.md)
 
 Notes:
 ------

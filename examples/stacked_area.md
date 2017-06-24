@@ -1,4 +1,4 @@
-# Drawing a stacked chart
+# Drawing a stacked area chart
 
 ```php
 require '/path/to/your/vendor/autoload.php';
