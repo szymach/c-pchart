@@ -104,7 +104,6 @@ Below is a list of example code you can use to create these charts:
 - [plot](examples/plot.md)
 - [progress](examples/progress.md)
 - [spline](examples/spline.md)
-- [split path](examples/split_path.md)
 - [stacked area](examples/stacked_area.md)
 - [stacked bar](examples/stacked_bar.md)
 - [step](examples/step.md)
@@ -119,6 +118,7 @@ chart below:
 - [pie](examples/pie.md)
 - [polar](examples/polar.md)
 - [radar](examples/radar.md)
+- [split path](examples/split_path.md)
 - [spring](examples/spring.md)
 
 Notes:
