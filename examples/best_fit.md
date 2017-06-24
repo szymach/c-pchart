@@ -1,66 +1,68 @@
 # Drawing a best fit chart
 
 ``` php
-    use CpChart\Chart\Data;
-    use CpChart\Chart\Image;
+require '/path/to/your/vendor/autoload.php';
 
-    /* Create and populate the pData object */
-    $data = new Data();
-    for ($i = 0; $i <= 20; $i++) {
-        $data->addPoints(rand(10, 30) + $i, "Probe 1");
-    }
-    for ($i = 0; $i <= 20; $i++) {
-        $data->addPoints(rand(0, 10) + $i, "Probe 2");
-    }
-    $data->setAxisName(0, "Temperatures");
+use CpChart\Chart\Data;
+use CpChart\Chart\Image;
 
-    /* Create the pChart object */
-    $image = new Image(700, 230, $data);
+/* Create and populate the pData object */
+$data = new Data();
+for ($i = 0; $i <= 20; $i++) {
+    $data->addPoints(rand(10, 30) + $i, "Probe 1");
+}
+for ($i = 0; $i <= 20; $i++) {
+    $data->addPoints(rand(0, 10) + $i, "Probe 2");
+}
+$data->setAxisName(0, "Temperatures");
 
-    /* Turn of Antialiasing */
-    $image->Antialias = false;
+/* Create the pChart object */
+$image = new Image(700, 230, $data);
 
-    /* Add a border to the picture */
-    $image->drawRectangle(0, 0, 699, 229, ["R" => 0, "G" => 0, "B" => 0]);
+/* Turn of Antialiasing */
+$image->Antialias = false;
 
-    /* Write the chart title */
-    $image->setFontProperties(["FontName" => ".Forgotte.ttf", "FontSize" => 11]);
-    $image->drawText(150, 35, "Average temperature", ["FontSize" => 20, "Align" => TEXT_ALIGN_BOTTOMMIDDLE]);
+/* Add a border to the picture */
+$image->drawRectangle(0, 0, 699, 229, ["R" => 0, "G" => 0, "B" => 0]);
 
-    /* Set the default font */
-    $image->setFontProperties(["FontName" => ".pf_arma_five.ttf", "FontSize" => 6]);
+/* Write the chart title */
+$image->setFontProperties(["FontName" => ".Forgotte.ttf", "FontSize" => 11]);
+$image->drawText(150, 35, "Average temperature", ["FontSize" => 20, "Align" => TEXT_ALIGN_BOTTOMMIDDLE]);
 
-    /* Define the chart area */
-    $image->setGraphArea(60, 40, 650, 200);
+/* Set the default font */
+$image->setFontProperties(["FontName" => ".pf_arma_five.ttf", "FontSize" => 6]);
 
-    /* Draw the scale */
-    $scaleSettings = [
-        "XMargin" => 10,
-        "YMargin" => 10,
-        "Floating" => true,
-        "GridR" => 200,
-        "GridG" => 200,
-        "GridB" => 200,
-        "DrawSubTicks" => true,
-        "CycleBackground" => true
-    ];
-    $image->drawScale($scaleSettings);
+/* Define the chart area */
+$image->setGraphArea(60, 40, 650, 200);
 
-    /* Turn on Antialiasing */
-    $image->Antialias = true;
+/* Draw the scale */
+$scaleSettings = [
+    "XMargin" => 10,
+    "YMargin" => 10,
+    "Floating" => true,
+    "GridR" => 200,
+    "GridG" => 200,
+    "GridB" => 200,
+    "DrawSubTicks" => true,
+    "CycleBackground" => true
+];
+$image->drawScale($scaleSettings);
 
-    /* Draw the line of best fit */
-    $image->drawBestFit();
+/* Turn on Antialiasing */
+$image->Antialias = true;
 
-    /* Turn on shadows */
-    $image->setShadow(true, ["X" => 1, "Y" => 1, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);
+/* Draw the line of best fit */
+$image->drawBestFit();
 
-    /* Draw the line chart */
-    $image->drawPlotChart();
+/* Turn on shadows */
+$image->setShadow(true, ["X" => 1, "Y" => 1, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);
 
-    /* Write the chart legend */
-    $image->drawLegend(580, 20, ["Style" => LEGEND_NOBORDER, "Mode" => LEGEND_HORIZONTAL]);
+/* Draw the line chart */
+$image->drawPlotChart();
 
-    /* Render the picture (choose the best way) */
-    $image->autoOutput("pictures/example.drawBestFit.png");
+/* Write the chart legend */
+$image->drawLegend(580, 20, ["Style" => LEGEND_NOBORDER, "Mode" => LEGEND_HORIZONTAL]);
+
+/* Render the picture (choose the best way) */
+$image->autoOutput("example.drawBestFit.png");
 ```
