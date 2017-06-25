@@ -8,7 +8,7 @@ Table of contents:
 * [Usage](#usage)
     - [Charts created through Image class](#charts-created-through-image-class)
     - [Standalone charts](#standalone-charts)
-    - [Notes](#notes)
+    - [Fonts and palletes](#fonts-and-palletes)
 * [Changelog](#changelog)
 * [References](#references)
 * [Links](#links)
@@ -34,33 +34,35 @@ What was done:
 
 - Added support for PHP versions from 5.4 to 7.1.
 
-- Made a full port of the library's functionality.
+- Made a full port of the library's functionality. I have touched very little of
+the actual logic, so most code from the original library should work.
 
 - Defined and added namespaces to all classes.
 
-- Replaced all `exit()` / `die()` commands with `throw` statements to allow a degree of error control.
+- Replaced all `exit()` / `die()` commands with `throw` statements.
 
 - Refactored the code to meet PSR-2 standard and added annotations (as best as I could figure them out).
 to methods Also, typehinting was added to methods where possible, so some backwards compatibility breaks
-may occur.
+may occur if you did some weird things.
 
-- Added a factory service for loading the classes.
-
-- Moved all constants to a single file `src/Resources/data/constants.php`. It is loaded automatically,
-so no need for manual action.
+- Moved all constants to a single file `src/Resources/data/constants.php`. It is loaded automatically
+through Composer, so no need for manual action.
 
 License:
 ========
 
-It was previously stated that this package is on [MIT](https://opensource.org/licenses/MIT) license, which did not meet the requirements
-set by the original author. It is now under the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
-license, so if you wish to use it in a commercial project, you need to pay an [appropriate fee](http://www.pchart.net/license).
+It was previously stated that this package is on [MIT](https://opensource.org/licenses/MIT) license,
+which did not meet the requirements set by the original author. It is now under the
+[GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) license, so if you wish to
+use it in a commercial project, you need to pay an [appropriate fee](http://www.pchart.net/license).
 
 Contributing:
 =============
 
-If you wish to contribute to the `1.*` version, there is a branch called `legacy` to which you
-may submit pull requests. Otherwise feel free to use the `master` branch.
+All in all, this is a legacy library ported over from PHP 4, so the code is neither
+beautiful nor easy to understand. I did my best to modernize and cover it with
+some basic tests, but there is much more that could be done. If you are willing and
+have time to fix or improve anything, feel free to post a PR or issue.
 
 Installation (via Composer):
 ============================
@@ -69,7 +71,7 @@ For composer installation, add:
 
 ```json
 "require": {
-    "szymach/c-pchart": "^2.0@dev"
+    "szymach/c-pchart": "^2.0"
 },
 ```
 
@@ -91,9 +93,8 @@ the charts themselves are borrowed from the [official wiki](http://wiki.pchart.n
 Charts created through Image class
 ---------------------------------------
 
-Not all charts need to be created through a seperate class (ex. bar or spline charts),
-some are created via the Image class (check the official documentation before drawing).
-Below is a list of example code you can use to create these charts:
+Most of the basic charts are created through methods of the `CpChart\Chart\Image`
+class. Below you can find a full list of these charts, alongside example code.
 
 - [area](examples/area.md)
 - [bar](examples/bar.md)
@@ -111,22 +112,32 @@ Below is a list of example code you can use to create these charts:
 Standalone charts:
 ------------------------------------
 
-Some charts require using a dedicated class, which you can create via the factory.
-Notice that you specify the type of chart, not the class name. An example for a pie
-chart below:
+The more advanced charts have their own separate class you need to use in order
+to create them. As before, below is a full list of these, with example code.
 
-- [pie](examples/pie.md)
+- [2D pie](examples/2d_pie.md)
+- [3D pie](examples/3d_pie.md)
+- [2D ring](examples/2d_ring.md)
+- [3D ring](examples/3d_ring.md)
+- [bubble](examples/bubble.md)
+- [contour](examples/contour.md)
 - [polar](examples/polar.md)
 - [radar](examples/radar.md)
+- [scatter best fit](examples/scatter_best_fit.md)
+- [scatter line](examples/scatter_line.md)
+- [scatter plot](examples/scatter_plot.md)
+- [scatter spline](examples/scatter_spline.md)
+- [scatter threshold](examples/scatter_threshold.md)
+- [scatter threshold area](examples/scatter_threshold_area.md)
 - [split path](examples/split_path.md)
 - [spring](examples/spring.md)
+- [stock](examples/stock.md)
+- [surface](examples/surface.md)
 
-Notes:
-------
+Fonts and palletes
+------------------
 
-Basically, all should work as defined in the pChart 2.0 documentation.
-
-**IMPORTANT!** If you want to use any of the fonts or palletes files, provide only
+If you want to use any of the fonts or palletes files, provide only
 the name of the actual file, do not add the 'fonts' or 'palettes' folder to the
 string given into the function. If you want to load them from a different directory
 than the default, you need to add the full path to the file (ex. `__DIR__.'/folder/to/my/palletes`).
