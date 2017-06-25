@@ -38,7 +38,7 @@ $image->setFontProperties(["FontName" => "Forgotte.ttf", "FontSize" => 9, "R" =>
 $image->setShadow(true, ["X" => 2, "Y" => 2, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);
 
 /* Create the pSpring object */
-$springCharts = new Spring();
+$springChart = new Spring();
 
 /* Set the nodes default settings */
 $springChart->setNodeDefaults(["FreeZone" => 50]);

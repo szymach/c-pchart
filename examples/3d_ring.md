@@ -63,13 +63,13 @@ $image->setFontProperties([
 $image->setShadow(true, ["X" => 2, "Y" => 2, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 50]);
 
 /* Create the pPie object */
-$PieChart = new Pie($image, $data);
+$pieChart = new Pie($image, $data);
 
 /* Draw an AA pie chart */
-$PieChart->draw3DRing(200, 200, ["DrawLabels" => true, "LabelStacked" => true, "Border" => true]);
+$pieChart->draw3DRing(200, 200, ["DrawLabels" => true, "LabelStacked" => true, "Border" => true]);
 
 /* Write the legend box */
-$PieChart->drawPieLegend(80, 360, ["Mode" => LEGEND_HORIZONTAL, "Style" => LEGEND_NOBORDER, "Alpha" => 20]);
+$pieChart->drawPieLegend(80, 360, ["Mode" => LEGEND_HORIZONTAL, "Style" => LEGEND_NOBORDER, "Alpha" => 20]);
 
 /* Render the picture (choose the best way) */
 $image->autoOutput("example.draw3DRing.png");

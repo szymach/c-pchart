@@ -1,4 +1,4 @@
-# Creating a 3D pie chart
+# Drawing a 3D pie chart
 
 ```php
 require '/path/to/your/vendor/autoload.php';
@@ -63,24 +63,24 @@ $image->setFontProperties(["FontName" => "Forgotte.ttf", "FontSize" => 10,
     "R" => 80, "G" => 80, "B" => 80]);
 
 /* Create the pPie object */
-$PieChart = new Pie($image, $data);
+$pieChart = new Pie($image, $data);
 
 /* Define the slice color */
-$PieChart->setSliceColor(0, ["R" => 143, "G" => 197, "B" => 0]);
-$PieChart->setSliceColor(1, ["R" => 97, "G" => 77, "B" => 63]);
-$PieChart->setSliceColor(2, ["R" => 97, "G" => 113, "B" => 63]);
+$pieChart->setSliceColor(0, ["R" => 143, "G" => 197, "B" => 0]);
+$pieChart->setSliceColor(1, ["R" => 97, "G" => 77, "B" => 63]);
+$pieChart->setSliceColor(2, ["R" => 97, "G" => 113, "B" => 63]);
 
 /* Draw a simple pie chart */
-$PieChart->draw3DPie(120, 125, ["SecondPass" => false]);
+$pieChart->draw3DPie(120, 125, ["SecondPass" => false]);
 
 /* Draw an AA pie chart */
-$PieChart->draw3DPie(340, 125, ["DrawLabels" => true, "Border" => true]);
+$pieChart->draw3DPie(340, 125, ["DrawLabels" => true, "Border" => true]);
 
 /* Enable shadow computing */
 $image->setShadow(true, ["X" => 3, "Y" => 3, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);
 
 /* Draw a splitted pie chart */
-$PieChart->draw3DPie(560, 125, ["WriteValues" => true, "DataGapAngle" => 10, "DataGapRadius" => 6, "Border" => true]);
+$pieChart->draw3DPie(560, 125, ["WriteValues" => true, "DataGapAngle" => 10, "DataGapRadius" => 6, "Border" => true]);
 
 /* Write the legend */
 $image->setFontProperties(["FontName" => "pf_arma_five.ttf", "FontSize" => 6]);
@@ -110,7 +110,7 @@ $image->setFontProperties([
     "G" => 255,
     "B" => 255
 ]);
-$PieChart->drawPieLegend(600, 8, ["Style" => LEGEND_NOBORDER, "Mode" => LEGEND_HORIZONTAL]);
+$pieChart->drawPieLegend(600, 8, ["Style" => LEGEND_NOBORDER, "Mode" => LEGEND_HORIZONTAL]);
 
 /* Render the picture (choose the best way) */
 $image->autoOutput("example.draw3DPie.png");

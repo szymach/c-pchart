@@ -53,26 +53,26 @@ $image->drawFilledRectangle(20, 40, 380, 380, [
 $image->setShadow(true, ["X" => 1, "Y" => 1]);
 
 /* Create the surface object */
-$mySurface = new Surface($image);
+$surfaceChart = new Surface($image);
 
 /* Set the grid size */
-$mySurface->setGrid(20, 20);
+$surfaceChart->setGrid(20, 20);
 
 /* Write the axis labels */
 $image->setFontProperties(["FontName" => "pf_arma_five.ttf", "FontSize" => 6]);
-$mySurface->writeXLabels();
-$mySurface->writeYLabels();
+$surfaceChart->writeXLabels();
+$surfaceChart->writeYLabels();
 
 /* Add random values */
 for ($i = 0; $i <= 50; $i++) {
-    $mySurface->addPoint(rand(0, 20), rand(0, 20), rand(0, 100));
+    $surfaceChart->addPoint(rand(0, 20), rand(0, 20), rand(0, 100));
 }
 
 /* Compute the missing points */
-$mySurface->computeMissing();
+$surfaceChart->computeMissing();
 
 /* Draw the surface chart */
-$mySurface->drawSurface(["Border" => true, "Surrounding" => 40]);
+$surfaceChart->drawSurface(["Border" => true, "Surrounding" => 40]);
 
 /* Render the picture (choose the best way) */
 $image->autoOutput("example.surface.png");

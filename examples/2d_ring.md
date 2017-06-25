@@ -56,14 +56,14 @@ $image->setFontProperties([
 $image->setShadow(true, ["X" => 2, "Y" => 2, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 50]);
 
 /* Create the pPie object */
-$PieChart = new Pie($image, $data);
+$pieChart = new Pie($image, $data);
 
 /* Draw an AA pie chart */
-$PieChart->draw2DRing(160, 140, ["DrawLabels" => true, "LabelStacked" => true, "Border" => true]);
+$pieChart->draw2DRing(160, 140, ["DrawLabels" => true, "LabelStacked" => true, "Border" => true]);
 
 /* Write the legend box */
 $image->setShadow(false);
-$PieChart->drawPieLegend(15, 40, ["Alpha" => 20]);
+$pieChart->drawPieLegend(15, 40, ["Alpha" => 20]);
 
 /* Render the picture (choose the best way) */
 $image->autoOutput("example.draw2DRing.png");

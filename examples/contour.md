@@ -61,29 +61,29 @@ $image->drawFilledRectangle(20, 40, 380, 380, [
 $image->setShadow(true, ["X" => 1, "Y" => 1]);
 
 /* Create the surface object */
-$mySurface = new Surface($image);
+$surfaceChart = new Surface($image);
 
 /* Set the grid size */
-$mySurface->setGrid(20, 20);
+$surfaceChart->setGrid(20, 20);
 
 /* Write the axis labels */
 $image->setFontProperties(["FontName" => "pf_arma_five.ttf", "FontSize" => 6]);
-$mySurface->writeXLabels(["Position" => LABEL_POSITION_BOTTOM]);
-$mySurface->writeYLabels();
+$surfaceChart->writeXLabels(["Position" => LABEL_POSITION_BOTTOM]);
+$surfaceChart->writeYLabels();
 
 /* Add random values */
 for ($i = 0; $i <= 50; $i++) {
-    $mySurface->addPoint(rand(0, 20), rand(0, 20), rand(0, 100));
+    $surfaceChart->addPoint(rand(0, 20), rand(0, 20), rand(0, 100));
 }
 
 /* Compute the missing points */
-$mySurface->computeMissing();
+$surfaceChart->computeMissing();
 
 /* Draw the surface chart */
-$mySurface->drawSurface(["Border" => true, "Surrounding" => 40]);
+$surfaceChart->drawSurface(["Border" => true, "Surrounding" => 40]);
 
 /* Draw the contour with a threshold of 50 */
-$mySurface->drawContour(50, ["R" => 0, "G" => 0, "B" => 0]);
+$surfaceChart->drawContour(50, ["R" => 0, "G" => 0, "B" => 0]);
 
 /* Render the picture (choose the best way) */
 $image->autoOutput("example.surface.png");

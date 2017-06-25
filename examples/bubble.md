@@ -66,12 +66,12 @@ $image->drawText(40, 55, "Current Stock / Needs chart", ["FontSize" => 14, "Alig
 $image->setFontProperties(["FontName" => "pf_arma_five.ttf", "FontSize" => 6]);
 
 /* Create the Bubble chart object and scale up */
-$myBubbleChart = new Bubble($image, $data);
+$bubbleChart = new Bubble($image, $data);
 
 /* Scale up for the bubble chart */
 $bubbleDataSeries = ["Probe1", "Probe2"];
 $bubbleWeightSeries = ["Probe1Weight", "Probe2Weight"];
-$myBubbleChart->bubbleScale($bubbleDataSeries, $bubbleWeightSeries);
+$bubbleChart->bubbleScale($bubbleDataSeries, $bubbleWeightSeries);
 
 /* Draw the 1st chart */
 $image->setGraphArea(40, 60, 430, 190);
@@ -79,7 +79,7 @@ $image->drawFilledRectangle(40, 60, 430, 190, ["R" => 255, "G" => 255, "B" => 25
     "Surrounding" => -200, "Alpha" => 10]);
 $image->drawScale(["DrawSubTicks" => true, "CycleBackground" => true]);
 $image->setShadow(true, ["X" => 1, "Y" => 1, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 30]);
-$myBubbleChart->drawBubbleChart($bubbleDataSeries, $bubbleWeightSeries);
+$bubbleChart->drawBubbleChart($bubbleDataSeries, $bubbleWeightSeries);
 
 /* Draw the 2nd scale */
 $image->setShadow(false);
@@ -95,7 +95,7 @@ $image->drawScale(["Pos" => SCALE_POS_TOPBOTTOM, "DrawSubTicks" => true]);
 
 /* Draw the 2nd stock chart */
 $image->setShadow(true, ["X" => 1, "Y" => 1, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 30]);
-$myBubbleChart->drawbubbleChart($bubbleDataSeries, $bubbleWeightSeries);
+$bubbleChart->drawbubbleChart($bubbleDataSeries, $bubbleWeightSeries);
 
 /* Write the chart legend */
 $image->drawLegend(550, 215, ["Style" => LEGEND_NOBORDER, "Mode" => LEGEND_HORIZONTAL]);

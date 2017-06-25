@@ -24,9 +24,9 @@ About:
 ======
 
 This library is a port of the excellent pChart statistics library created by Jean-Damien Pogolotti,
-and aims to allow the usage of the pChart library in modern applications. This was
-done through applying PSR standards to code, introducing namespaces and typehints,
-along with some basic annotations to methods.
+and aims to allow the usage of it in modern applications. This was done through
+applying PSR standards to code, introducing namespaces and typehints, along with
+some basic annotations to methods.
 
 This is the `2.x` version, which aims to further update the code, but with the least
 backwards compatibility breaks possible. However if you cannot risk any of these,
@@ -43,7 +43,7 @@ the actual logic, so most code from the original library should work.
 
 - Replaced all `exit()` / `die()` commands with `throw` statements.
 
-- Refactored the code to meet PSR-2 standard and added annotations (as best as I could figure them out).
+- Refactored the code to meet PSR-2 standard and added annotations (as best as I could figure them out)
 to methods Also, typehinting was added to methods where possible, so some backwards compatibility breaks
 may occur if you did some weird things.
 
@@ -89,7 +89,7 @@ Usage:
 ======
 
 Your best source to understanding how to use the library is still the [official wiki](http://wiki.pchart.net/).
-However, I have ported at least one example for each chart into markdown files,
+However, I have ported at least one example for each chart into Markdown files,
 so you can compare each version and figure out how to use the current implementation.
 
 Charts created through Image class
