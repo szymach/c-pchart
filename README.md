@@ -23,16 +23,18 @@ to post them.
 About:
 ======
 
-A project bringing Composer support and some basic PHP 5 standards to pChart 2.0 library.
-The aim is to allow pChart integration into modern frameworks like Symfony2.
+This library is a port of the excellent pChart statistics library created by Jean-Damien Pogolotti,
+and aims to allow the usage of the pChart library in modern applications. This was
+done through applying PSR standards to code, introducing namespaces and typehints,
+along with some basic annotations to methods.
 
-This is the 2.0 version, which aims to further update the code, but without changing
-the functionality if possible. It will introduce some minor backwards compatibility breaks,
-so if that's a concern, use the 1.* version.
+This is the `2.x` version, which aims to further update the code, but with the least
+backwards compatibility breaks possible. However if you cannot risk any of these,
+you will need to use the `1.x` branch.
 
 What was done:
 
-- Added support for PHP versions from 5.4 to 7.1.
+- Support for PHP versions from 5.4 to 7.1.
 
 - Made a full port of the library's functionality. I have touched very little of
 the actual logic, so most code from the original library should work.
@@ -86,9 +88,9 @@ in your project's root directory.
 Usage:
 ======
 
-Now you can autoload or use the classes via their namespaces. If you want to, you
-may utilize the provided factory class. Below are examples of how to use the library,
-the charts themselves are borrowed from the [official wiki](http://wiki.pchart.net/).
+Your best source to understanding how to use the library is still the [official wiki](http://wiki.pchart.net/).
+However, I have ported at least one example for each chart into markdown files,
+so you can compare each version and figure out how to use the current implementation.
 
 Charts created through Image class
 ---------------------------------------
@@ -138,7 +140,7 @@ Fonts and palletes
 ------------------
 
 If you want to use any of the fonts or palletes files, provide only
-the name of the actual file, do not add the 'fonts' or 'palettes' folder to the
+the name of the actual file, do not add the `fonts` or `palettes` folder to the
 string given into the function. If you want to load them from a different directory
 than the default, you need to add the full path to the file (ex. `__DIR__.'/folder/to/my/palletes`).
 
