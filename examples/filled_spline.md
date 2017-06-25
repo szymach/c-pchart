@@ -6,7 +6,7 @@ require '/path/to/your/vendor/autoload.php';
 use CpChart\Chart\Data;
 use CpChart\Chart\Image;
 
-/* Create and populate the pData object */
+/* Create and populate the Data object */
 $data = new Data();
 $data->setAxisName(0, "Strength");
 for ($i = 0; $i <= 720; $i = $i + 20) {
@@ -14,7 +14,7 @@ for ($i = 0; $i <= 720; $i = $i + 20) {
     $data->addPoints(cos(deg2rad($i + 90)) * 60, "Probe 2");
 }
 
-/* Create the pChart object */
+/* Create the Image object */
 $image = new Image(847, 304, $data);
 $image->drawGradientArea(0, 0, 847, 304, DIRECTION_VERTICAL, [
     "StartR" => 47,

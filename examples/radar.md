@@ -18,7 +18,7 @@ $data->setSerieDescription("ScoreB", "Application B");
 $data->addPoints(["Size", "Speed", "Reliability", "Functionalities", "Ease of use", "Weight"], "Labels");
 $data->setAbscissa("Labels");
 
-/* Create the pChart object */
+/* Create the Image object */
 $image = new Image(700, 230, $data);
 
 /* Draw a solid background */
@@ -54,7 +54,7 @@ $image->setFontProperties([
     "G" => 80,
     "B" => 80
 ]);
-$image->setShadow(TRUE, ["X" => 2, "Y" => 2, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);
+$image->setShadow(true, ["X" => 2, "Y" => 2, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);
 
 /* Create the radar object */
 $radarChart = new Radar();

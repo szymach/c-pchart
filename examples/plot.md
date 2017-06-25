@@ -6,7 +6,7 @@ require '/path/to/your/vendor/autoload.php';
 use CpChart\Chart\Data;
 use CpChart\Chart\Image;
 
-/* Create and populate the pData object */
+/* Create and populate the Data object */
 $data = new Data();
 for ($i = 0; $i <= 20; $i++) {
     $data->addPoints(rand(0, 20), "Probe 1");
@@ -18,7 +18,7 @@ $data->setSerieShape("Probe 1", SERIE_SHAPE_FILLEDTRIANGLE);
 $data->setSerieShape("Probe 2", SERIE_SHAPE_FILLEDSQUARE);
 $data->setAxisName(0, "Temperatures");
 
-/* Create the pChart object */
+/* Create the Image object */
 $image = new Image(700, 230, $data);
 
 /* Turn of Antialiasing */

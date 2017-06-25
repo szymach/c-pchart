@@ -7,7 +7,7 @@ use CpChart\Chart\Data;
 use CpChart\Chart\Image;
 use CpChart\Chart\Split;
 
-/* Create the pChart object */
+/* Create the Image object */
 $data = new Image(700, 230);
 
 /* Draw the background */
@@ -42,7 +42,7 @@ $data->setFontProperties(["FontName" => "Forgotte.ttf", "FontSize" => 10, "R" =>
 /* Enable shadow computing */
 $data->setShadow(true, ["X" => 2, "Y" => 2, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);
 
-/* Create and populate the pData object */
+/* Create and populate the Data object */
 $data = new Data();
 $data->addPoints([30, 20, 15, 10, 8, 4], "Score");
 $data->addPoints(["End of visit", "Home Page", "Product Page", "Sales", "Statistics", "Prints"], "Labels");
@@ -56,7 +56,7 @@ $settings = ["TextPos" => TEXT_POS_RIGHT, "TextPadding" => 10, "Spacing" => 20, 
 $data->setGraphArea(10, 20, 340, 230);
 $splitChart->drawSplitPath($data, $data, $settings);
 
-/* Create and populate the pData object */
+/* Create and populate the Data object */
 $data2 = new Data();
 $data2->addPoints([30, 20, 15], "Score");
 $data2->addPoints(["UK", "FR", "ES"], "Labels");

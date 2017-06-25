@@ -6,7 +6,7 @@ require '/path/to/your/vendor/autoload.php';
 use CpChart\Chart\Data;
 use CpChart\Chart\Image;
 
-/* Create and populate the pData object */
+/* Create and populate the Data object */
 $data = new Data();
 $data->addPoints([13251, 4118, 3087, 1460, 1248, 156, 26, 9, 8], "Hits");
 $data->setAxisName(0, "Hits");
@@ -14,7 +14,7 @@ $data->addPoints(["Firefox", "Chrome", "Internet Explorer", "Opera", "Safari", "
 $data->setSerieDescription("Browsers", "Browsers");
 $data->setAbscissa("Browsers");
 
-/* Create the pChart object */
+/* Create the Image object */
 $image = new Image(500, 500, $data);
 $image->drawGradientArea(0, 0, 500, 500, DIRECTION_VERTICAL, [
     "StartR" => 240,

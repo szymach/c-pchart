@@ -6,7 +6,7 @@ require '/path/to/your/vendor/autoload.php';
 use CpChart\Chart\Data;
 use CpChart\Chart\Image;
 
-/* Create and populate the pData object */
+/* Create and populate the Data object */
 $data = new Data();
 $data->addPoints([1, -2, -1, 2, 1, 0], "Probe 1");
 $data->addPoints([1, -2, -3, 2, 1, 8], "Probe 2");
@@ -17,7 +17,7 @@ $data->addPoints(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], "Labels");
 $data->setSerieDescription("Labels", "Months");
 $data->setAbscissa("Labels");
 
-/* Create the pChart object */
+/* Create the Image object */
 $image = new Image(700, 230, $data);
 
 /* Draw the background */

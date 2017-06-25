@@ -6,7 +6,7 @@ require '/path/to/your/vendor/autoload.php';
 use CpChart\Chart\Data;
 use CpChart\Chart\Image;
 
-/* Create and populate the pData object */
+/* Create and populate the Data object */
 $data = new Data();
 $data->addPoints([-7, -8, -15, -20, -18, -12, 8, -19, 9, 16, -20, 8, 10, -10, -14, -20, 8, -9, -19], "Probe 3");
 $data->addPoints([19, 0, -8, 8, -8, 12, -19, -10, 5, 12, -20, -8, 10, -11, -12, 8, -17, -14, 0], "Probe 4");
@@ -16,7 +16,7 @@ $data->setSerieDescription("Time", "Hour of the day");
 $data->setAbscissa("Time");
 $data->setXAxisUnit("h");
 
-/* Create the pChart object */
+/* Create the Image object */
 $image = new Image(700, 230, $data);
 
 /* Draw the background */

@@ -7,7 +7,7 @@ use CpChart\Chart\Data;
 use CpChart\Chart\Image;
 use CpChart\Chart\Radar;
 
-/* Create and populate the pData object */
+/* Create and populate the Data object */
 $data = new Data();
 $data->addPoints([10, 20, 30, 40, 50, 60, 70, 80, 90], "ScoreA");
 $data->addPoints([20, 40, 50, 12, 10, 30, 40, 50, 60], "ScoreB");
@@ -18,7 +18,7 @@ $data->setSerieDescription("ScoreB", "Coverage B");
 $data->addPoints([40, 80, 120, 160, 200, 240, 280, 320, 360], "Coord");
 $data->setAbscissa("Coord");
 
-/* Create the pChart object */
+/* Create the Image object */
 $image = new Image(700, 230, $data);
 
 /* Draw a solid background */
@@ -51,7 +51,7 @@ $image->setFontProperties(["FontName" => "Forgotte.ttf", "FontSize" => 10,
     "R" => 80, "G" => 80, "B" => 80]);
 
 /* Enable shadow computing */
-$image->setShadow(TRUE, ["X" => 2, "Y" => 2, "R" => 0, "G" => 0, "B" => 0,
+$image->setShadow(true, ["X" => 2, "Y" => 2, "R" => 0, "G" => 0, "B" => 0,
     "Alpha" => 10]);
 
 /* Create the pRadar object */
@@ -80,7 +80,7 @@ $options = [
         "EndG" => 109, "EndB" => 174, "EndAlpha" => 30
     ],
     "AxisRotation" => 0,
-    "DrawPoly" => TRUE,
+    "DrawPoly" => true,
     "PolyAlpha" => 50
 ];
 $radarChart->drawPolar($image, $data, $options);

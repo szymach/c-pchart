@@ -1,4 +1,4 @@
-# Drawing a bar chart
+# Drawing a 2D pie chart
 
 ```php
 require '/path/to/your/vendor/autoload.php';

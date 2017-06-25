@@ -6,7 +6,7 @@ require '/path/to/your/vendor/autoload.php';
 use CpChart\Chart\Image;
 use CpChart\Chart\Spring;
 
-/* Create the pChart object */
+/* Create the Image object */
 $image = new Image(300, 300);
 
 /* Background customization */

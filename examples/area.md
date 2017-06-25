@@ -13,7 +13,7 @@ for ($i = 0; $i <= 30; $i++) {
 $data->setSerieTicks("Probe 2", 4);
 $data->setAxisName(0, "Temperatures");
 
-// Create the pChart object
+// Create the Image object
 $image = new Image(700, 230, $data);
 
 /* Turn of Antialiasing */
