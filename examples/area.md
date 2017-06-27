@@ -55,7 +55,7 @@ $image->Antialias = true;
 $image->setShadow(true, ["X" => 1, "Y" => 1, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);
 
 /* Draw the area chart */
-$Threshold = "";
+$Threshold = [];
 $Threshold[] = ["Min" => 0, "Max" => 5, "R" => 207, "G" => 240, "B" => 20, "Alpha" => 70];
 $Threshold[] = ["Min" => 5, "Max" => 10, "R" => 240, "G" => 232, "B" => 20, "Alpha" => 70];
 $Threshold[] = ["Min" => 10, "Max" => 20, "R" => 240, "G" => 191, "B" => 20, "Alpha" => 70];
