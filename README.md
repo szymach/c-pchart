@@ -148,7 +148,7 @@ can find links to examples on creating them:
 Cache
 -----
 
-If you find yourself creating charts out of a set of data more then once, you may
+If you find yourself creating charts out of a set of data more than once, you may
 consider using the cache component of the library. Head on to the [dedicated part](examples/cache.md)
 of the documentation for information on how to do that.
 

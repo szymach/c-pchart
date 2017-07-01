@@ -41,6 +41,7 @@ $image->drawText(10, 13, "Test of the pCache class", ["R" => 255, "G" => 255, "B
 
 // Create a cache object and store the chart in it
 $cache = new Cache([
+    // Optionally change the default directory and file names
     'CacheFolder' => 'path/to/your/cache/directory',
     'CacheIndex' => 'name_of_the_index_file.db',
     'CacheDB' => 'name_of_the_database_file.db'
