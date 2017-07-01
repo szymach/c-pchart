@@ -10,7 +10,6 @@ checks:
 tools:
     external_code_coverage:
         timeout: 1200
-        runs: 5
     sensiolabs_security_checker: true
     php_cpd:
         enabled: true
