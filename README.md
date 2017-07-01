@@ -27,7 +27,7 @@ to post them.
 Build status:
 =============
 [![Build Status](https://scrutinizer-ci.com/g/szymach/c-pchart/badges/build.png?b=master)](https://scrutinizer-ci.com/g/szymach/c-pchart/build-status/master) 
-[![Build Status](https://scrutinizer-ci.com/g/szymach/c-pchart/badges/build.png?b=2.0)](https://scrutinizer-ci.com/g/szymach/c-pchart/build-status/2.0)
+[![Build Status](https://travis-ci.org/szymach/c-pchart.svg?branch=2.0)](https://travis-ci.org/szymach/c-pchart)
 
 Code quality:
 =============
