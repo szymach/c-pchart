@@ -1,6 +1,5 @@
 composer.phar
 composer.lock
+app/cache/*.db
 bin/
-features/fixtures/output
 vendor
-vendor/*

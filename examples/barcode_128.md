@@ -1,4 +1,4 @@
-# Drawing a barcode 129
+# Drawing a barcode 128
 
 ```php
 require '/path/to/your/vendor/autoload.php';

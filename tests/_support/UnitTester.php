@@ -23,4 +23,9 @@ class UnitTester extends \Codeception\Actor
     {
         return sprintf("%s/../_output/charts/%s", __DIR__, $chartFilename);
     }
+
+    public function getCacheDirectory()
+    {
+        return sprintf("%s/../../app/cache", __DIR__);
+    }
 }

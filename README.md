@@ -53,7 +53,7 @@ through Composer, so no need for manual action.
 License:
 ========
 
-It was previously stated that this package is on [MIT](https://opensource.org/licenses/MIT) license,
+It was previously stated that this package uses the [MIT](https://opensource.org/licenses/MIT) license,
 which did not meet the requirements set by the original author. It is now under the
 [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) license, so if you wish to
 use it in a commercial project, you need to pay an [appropriate fee](http://www.pchart.net/license).
@@ -144,6 +144,13 @@ can find links to examples on creating them:
 
 - [barcode39](examples/barcode_39.md)
 - [barcode128](examples/barcode_128.md)
+
+Cache
+-----
+
+If you find yourself creating charts out of a set of data more then once, you may
+consider using the cache component of the library. Head on to the [dedicated part](examples/cache.md)
+of the documentation for information on how to do that.
 
 Fonts and palletes
 ------------------

@@ -13,15 +13,15 @@ class Unit extends Module
             mkdir($chartDir);
         }
 
-        $this->clearChartDirectory();
+        $this->clearOutputDirectory();
     }
 
     public function _afterSuite($settings = [])
     {
-        $this->clearChartDirectory();
+        $this->clearOutputDirectory();
     }
 
-    private function clearChartDirectory()
+    private function clearOutputDirectory()
     {
         $this->getFileSystem()->cleanDir($this->getChartDirectoryPath());
     }
