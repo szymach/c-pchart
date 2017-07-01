@@ -17,18 +17,17 @@ matrix:
         - php: 7.0
         - php: 7.1
           env:
-            - COVERAGE=true
+            - COVERAGE='--coverage --coverage-xml'
 
 before_install:
-    - "if [ -z {COVERAGE+x} ]; then phpenv config-rm xdebug.ini fi"
+    - if [[ ! $COVERAGE ]]; then phpenv config-rm xdebug.ini; fi;
 
 before_script:
     - composer update -n --prefer-dist -v $COMPOSER_FLAGS
 
 script:
     - bin/phpcs
-    - bin/codecept run unit --coverage --coverage-xml
+    - bin/codecept run unit $COVERAGE
 
 after_script:
-    - "[ ! -f bin/ocular.phar ] && [ -z {COVERAGE+x} ] then wget -O bin/ocular.phar https://scrutinizer-ci.com/ocular.phar fi"
-    - "if [ -z {COVERAGE+x} ]; then php bin/ocular.phar code-coverage:upload --format=php-clover tests/_output/coverage.xml fi"
+    - if [[ $COVERAGE ]]; then ./coverage.sh; fi;
