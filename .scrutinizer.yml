@@ -1,6 +1,6 @@
 ---
 filter:
-    excluded_paths: [vendor/*, bin/*, tests/*]
+    excluded_paths: [vendor/, bin/, tests/]
 
 checks:
     php:
@@ -8,6 +8,12 @@ checks:
         duplication: true
 
 tools:
-    php_cpd: true
+    external_code_coverage:
+        timeout: 1200
+        runs: 5
+    sensiolabs_security_checker: true
+    php_cpd:
+        enabled: true
+        excluded_dirs: [vendor, bin, tests]
     php_pdepend:
         excluded_dirs: [vendor, bin, tests]

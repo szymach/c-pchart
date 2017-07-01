@@ -17,13 +17,13 @@ matrix:
         - php: 7.0
         - php: 7.1
 
-
-before_install:
-    - phpenv config-rm xdebug.ini
-
 before_script:
     - composer update -n --prefer-dist -v $COMPOSER_FLAGS
 
 script:
     - bin/phpcs
-    - bin/codecept run unit
+    - bin/codecept run unit --coverage --coverage-xml
+
+after_script:
+    - "[ ! -f bin/ocular.phar ] && wget -O bin/ocular.phar https://scrutinizer-ci.com/ocular.phar"
+    - php bin/ocular.phar code-coverage:upload --format=php-clover tests/_output/coverage.xml
