@@ -892,7 +892,7 @@ class Data
 
         $fileHandle = @fopen($path, "r");
         if (!$fileHandle) {
-            throw new Exception('The requested palette ' . $FileName . ' was not found!');
+            throw new Exception(sprintf('The requested palette %s was not found!', $FileName));
         }
 
         if ($Overwrite) {

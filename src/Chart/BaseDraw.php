@@ -212,8 +212,7 @@ abstract class BaseDraw
     }
 
     /**
-     * Set the path to the folder containing library resources (fonts, data,
-     * palletes).
+     * Set the path to the folder containing library resources (fonts, data, palettes).
      *
      * @param string $path
      * @throws Exception
@@ -222,12 +221,10 @@ abstract class BaseDraw
     {
         $escapedPath = rtrim($path, '/');
         if (!file_exists($escapedPath)) {
-            throw new Exception(
-                sprintf(
-                    "The path '%s' to resources' folder does not exist!",
-                    $escapedPath
-                )
-            );
+            throw new Exception(sprintf(
+                "The path '%s' to resources' folder does not exist!",
+                $escapedPath
+            ));
         }
 
         $this->resourcePath = $escapedPath;
