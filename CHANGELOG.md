@@ -35,3 +35,6 @@
 2.0.6 A fix for PHP 7.1 (thanks to dehrk).
 
 2.0.7 A fix for computing color alpha (thanks to dehrk).
+
+2.0.8 Covered most basic functionality with tests, added a lot of documentation
+      and a PHP 7.1 fix. Deprecated the `\CpChart\Factory\Factory` class.
