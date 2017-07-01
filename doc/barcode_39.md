@@ -8,7 +8,7 @@ require '/path/to/your/vendor/autoload.php';
 use CpChart\Chart\Barcode39;
 use CpChart\Chart\Image;
 
-/* Create the pChart object */
+/* Create the Image object */
 $image = new Image(700, 230);
 
 /* Draw the background */

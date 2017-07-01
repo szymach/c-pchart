@@ -18,7 +18,7 @@ $data->setAxisName(0, "Temperatures");
 // Create the Image object
 $image = new Image(700, 230, $data);
 
-/* Turn of Antialiasing */
+/* Turn off Antialiasing */
 $image->Antialias = false;
 
 /* Add a border to the picture */
