@@ -113,19 +113,19 @@ Charts created through Image class
 Most of the basic charts are created through methods of the `CpChart\Image`
 class. Below you can find a full list of these charts, alongside example code.
 
-- [area](doc/area.md)
-- [bar](doc/bar.md)
-- [best fit](doc/best_fit.md)
-- [filled spline](doc/filled_spline.md)
-- [filled step](doc/filled_step.md)
-- [line](doc/line.md)
-- [plot](doc/plot.md)
-- [progress](doc/progress.md)
-- [spline](doc/spline.md)
-- [stacked area](doc/stacked_area.md)
-- [stacked bar](doc/stacked_bar.md)
-- [step](doc/step.md)
-- [zone](doc/zone.md)
+- [area](resources/doc/area.md)
+- [bar](resources/doc/bar.md)
+- [best fit](resources/doc/best_fit.md)
+- [filled spline](resources/doc/filled_spline.md)
+- [filled step](resources/doc/filled_step.md)
+- [line](resources/doc/line.md)
+- [plot](resources/doc/plot.md)
+- [progress](resources/doc/progress.md)
+- [spline](resources/doc/spline.md)
+- [stacked area](resources/doc/stacked_area.md)
+- [stacked bar](resources/doc/stacked_bar.md)
+- [step](resources/doc/step.md)
+- [zone](resources/doc/zone.md)
 
 Standalone charts:
 ------------------------------------
@@ -133,24 +133,24 @@ Standalone charts:
 The more advanced charts have their own separate class you need to use in order
 to create them. As before, below is a full list of these, with example code.
 
-- [2D pie](doc/2d_pie.md)
-- [3D pie](doc/3d_pie.md)
-- [2D ring](doc/2d_ring.md)
-- [3D ring](doc/3d_ring.md)
-- [bubble](doc/bubble.md)
-- [contour](doc/contour.md)
-- [polar](doc/polar.md)
-- [radar](doc/radar.md)
-- [scatter best fit](doc/scatter_best_fit.md)
-- [scatter line](doc/scatter_line.md)
-- [scatter plot](doc/scatter_plot.md)
-- [scatter spline](doc/scatter_spline.md)
-- [scatter threshold](doc/scatter_threshold.md)
-- [scatter threshold area](doc/scatter_threshold_area.md)
-- [split path](doc/split_path.md)
-- [spring](doc/spring.md)
-- [stock](doc/stock.md)
-- [surface](doc/surface.md)
+- [2D pie](resources/doc/2d_pie.md)
+- [3D pie](resources/doc/3d_pie.md)
+- [2D ring](resources/doc/2d_ring.md)
+- [3D ring](resources/doc/3d_ring.md)
+- [bubble](resources/doc/bubble.md)
+- [contour](resources/doc/contour.md)
+- [polar](resources/doc/polar.md)
+- [radar](resources/doc/radar.md)
+- [scatter best fit](resources/doc/scatter_best_fit.md)
+- [scatter line](resources/doc/scatter_line.md)
+- [scatter plot](resources/doc/scatter_plot.md)
+- [scatter spline](resources/doc/scatter_spline.md)
+- [scatter threshold](resources/doc/scatter_threshold.md)
+- [scatter threshold area](resources/doc/scatter_threshold_area.md)
+- [split path](resources/doc/split_path.md)
+- [spring](resources/doc/spring.md)
+- [stock](resources/doc/stock.md)
+- [surface](resources/doc/surface.md)
 
 Barcodes
 --------
@@ -158,14 +158,14 @@ Barcodes
 The pChart library also provides a way to render barcodes 39 and 128. Below you
 can find links to doc on creating them:
 
-- [barcode39](doc/barcode_39.md)
-- [barcode128](doc/barcode_128.md)
+- [barcode39](resources/doc/barcode_39.md)
+- [barcode128](resources/doc/barcode_128.md)
 
 Cache
 -----
 
 If you find yourself creating charts out of a set of data more than once, you may
-consider using the cache component of the library. Head on to the [dedicated part](doc/cache.md)
+consider using the cache component of the library. Head on to the [dedicated part](resources/doc/cache.md)
 of the documentation for information on how to do that.
 
 Fonts and palletes
