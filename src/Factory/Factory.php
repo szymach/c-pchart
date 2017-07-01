@@ -10,10 +10,11 @@ use CpChart\Exception\IncorrectBarcodeNumberException;
 use CpChart\Exception\NotSupportedChartException;
 
 /**
- * A simple service class utilizing the Factory design pattern. It has three
- * class specific methods, as well as a generic loader for the chart classes.
+ * @deprecated since version 2.0.8
  *
- * @author szymach @ http://github.com/szymach
+ * This class was a hacky attempt at making the chart creation a bit easier, but
+ * ended up confusing people and was not well executed overall. It is now deprecated
+ * and will be removed in version 3.0
  */
 class Factory
 {
@@ -23,8 +24,10 @@ class Factory
     {
         $this->namespace = $namespace;
     }
-    
+
     /**
+     * @deprecated since version 2.0.8
+     *
      * Loads a new chart class (scatter, pie etc.). Some classes require instances of
      * Image and Data classes passed into their constructor. These classes are:
      * Bubble, Pie, Scatter, Stock, Surface and Indicator. Otherwise the
@@ -47,7 +50,7 @@ class Factory
     ) {
         $this->checkChartType($chartType);
         $className = $this->prependNamespace(ucfirst($chartType));
-        
+
         if (!class_exists($className)) {
             throw new NotSupportedChartException();
         }
@@ -55,6 +58,8 @@ class Factory
     }
 
     /**
+     * @deprecated since version 2.0.8
+     *
      * Checks if the requested chart type is created via one of the methods in
      * the Draw class, instead through a seperate class. If a method in Draw
      * exists, an exception with proper information is thrown.
@@ -66,7 +71,7 @@ class Factory
     {
         $chart = ucfirst($chartType);
         $methods = [sprintf('draw%sChart', $chart), sprintf('draw%s', $chart)];
-        
+
         foreach ($methods as $method) {
             if (method_exists($this->prependNamespace('Image'), $method)) {
                 throw new ChartIsAMethodException($method);
@@ -75,6 +80,8 @@ class Factory
     }
 
     /**
+     * @deprecated since version 2.0.8
+     *
      * Creates a new Data class with an option to pass the data to form a serie.
      *
      * @param array $points - points to be added to serie
@@ -92,6 +99,8 @@ class Factory
     }
 
     /**
+     * @deprecated since version 2.0.8
+     *
      * Create a new Image class. It requires the size of axes to be properly
      * constructed.
      *
@@ -117,6 +126,8 @@ class Factory
     }
 
     /**
+     * @deprecated since version 2.0.8
+     *
      * Create one of the Barcode classes. Only the number is required (39 or 128),
      * the class name is contructed on the fly. Passing the constructor's parameters
      * is also available, but not mandatory.
@@ -136,7 +147,7 @@ class Factory
 
         return new $className($BasePath, $EnableMOD43);
     }
-    
+
     private function prependNamespace($class)
     {
         return sprintf('%s\%s', $this->namespace, $class);
