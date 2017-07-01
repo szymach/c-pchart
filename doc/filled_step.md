@@ -1,5 +1,7 @@
 # Drawing a filled step chart
 
+[Reference](http://wiki.pchart.net/doc.chart.drawfilledstepchart.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

@@ -1,5 +1,7 @@
 # Drawing a stacked area chart
 
+[Reference](http://wiki.pchart.net/doc.chart.drawstackedareachart.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

@@ -1,5 +1,7 @@
 # Drawing a scatter spline chart
 
+[Reference](http://wiki.pchart.net/doc.scatter.drawscattersplineChart.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

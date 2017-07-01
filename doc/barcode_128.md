@@ -1,5 +1,7 @@
 # Drawing a barcode 128
 
+[Reference](http://wiki.pchart.net/doc.barcode128.pBarcode128.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

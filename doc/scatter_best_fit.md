@@ -1,5 +1,7 @@
 # Drawing a scatter best fit chart
 
+[Reference](http://wiki.pchart.net/doc.scatter.drawscatterbestfit.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

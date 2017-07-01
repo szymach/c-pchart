@@ -1,5 +1,7 @@
 # Drawing a stacked bar chart
 
+[Reference](http://wiki.pchart.net/doc.chart.drawstackedbarchart.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

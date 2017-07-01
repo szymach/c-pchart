@@ -1,5 +1,7 @@
 # Drawing a split path chart
 
+[Reference](http://wiki.pchart.net/doc.chart.drawsplitpath.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

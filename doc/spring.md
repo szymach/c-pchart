@@ -1,5 +1,7 @@
 # Drawing a spring chart
 
+[Reference](http://wiki.pchart.net/doc.spring.drawspring.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

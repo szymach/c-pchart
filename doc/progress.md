@@ -1,5 +1,7 @@
 # Drawing a progress chart
 
+[Reference](http://wiki.pchart.net/doc.chart.drawprogress.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

@@ -1,5 +1,7 @@
 # Drawing a stock chart
 
+[Reference](http://wiki.pchart.net/doc.stocks.drawstockchart.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

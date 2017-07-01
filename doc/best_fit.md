@@ -1,5 +1,7 @@
 # Drawing a best fit chart
 
+[Reference](http://wiki.pchart.net/doc.chart.drawbestfit.html)
+
 ``` php
 require '/path/to/your/vendor/autoload.php';
 

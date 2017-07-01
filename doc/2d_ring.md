@@ -1,5 +1,7 @@
 # Drawing a 2D ring chart
 
+[Reference](http://wiki.pchart.net/doc.pie.draw2dring.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

@@ -1,5 +1,7 @@
 # Cache operations
 
+[Reference](http://wiki.pchart.net/doc.pcache.pcache.html)
+
 To speed up the process of creating charts, you can store them in the cache files
 using the `CpChart\Chart\Cache` class. It will create two files - `cache.db` and
 `index.db` in a dedicated directory (`app\cache` by default, relative to the library's

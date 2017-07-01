@@ -1,5 +1,7 @@
 # Drawing a spline chart
 
+[Reference](http://wiki.pchart.net/doc.chart.drawsplinechart.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

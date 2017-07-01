@@ -1,5 +1,7 @@
 # Drawing a linear bubble chart
 
+[Reference](http://wiki.pchart.net/doc.bubble.drawbubblechart.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 

@@ -1,5 +1,7 @@
 # Drawing a scatter threshold chart
 
+[Reference](http://wiki.pchart.net/doc.scatter.drawscatterthreshold.html)
+
 ```php
 require '/path/to/your/vendor/autoload.php';
 
