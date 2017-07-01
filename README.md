@@ -136,6 +136,15 @@ to create them. As before, below is a full list of these, with example code.
 - [stock](examples/stock.md)
 - [surface](examples/surface.md)
 
+Barcodes
+--------
+
+The pChart library also provides a way to render barcodes 39 and 128. Below you
+can find links to examples on creating them:
+
+- [barcode39](examples/barcode_39.md)
+- [barcode128](examples/barcode_128.md)
+
 Fonts and palletes
 ------------------
 
