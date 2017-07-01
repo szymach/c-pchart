@@ -123,6 +123,7 @@ class. Below you can find a full list of these charts, alongside example code.
 - [stacked area](doc/stacked_area.md)
 - [stacked bar](doc/stacked_bar.md)
 - [step](doc/step.md)
+- [zone](doc/zone.md)
 
 Standalone charts:
 ------------------------------------
