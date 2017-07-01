@@ -1,6 +1,8 @@
 Table of contents:
 ==================
 * [Support](#support)
+* [Build status](#build-status)
+* [Code quality](#code-quality)
 * [About](#about)
 * [License](#license)
 * [Contributing](#contributing)
@@ -21,6 +23,15 @@ Support:
 This project is supported in a basic manner and no new features will be introduced.
 Issues and pull requests will be reviewed and resolved if need be, so feel free
 to post them.
+
+Build status:
+=============
+[![Build Status](https://scrutinizer-ci.com/g/szymach/c-pchart/badges/build.png?b=master)](https://scrutinizer-ci.com/g/szymach/c-pchart/build-status/master)
+
+Code quality:
+=============
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/szymach/c-pchart/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/szymach/c-pchart/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/szymach/c-pchart/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/szymach/c-pchart/?branch=master)
 
 About:
 ======
