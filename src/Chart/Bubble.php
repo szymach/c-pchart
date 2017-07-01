@@ -2,8 +2,11 @@
 
 namespace CpChart\Chart;
 
+use CpChart\Data;
+use CpChart\Image;
+
 /**
- *  pBubble - class to draw bubble charts
+ *  Bubble - class to draw bubble charts
  *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI

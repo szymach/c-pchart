@@ -3,7 +3,7 @@
 [Reference](http://wiki.pchart.net/doc.pcache.pcache.html)
 
 To speed up the process of creating charts, you can store them in the cache files
-using the `CpChart\Chart\Cache` class. It will create two files - `cache.db` and
+using the `CpChart\Cache` class. It will create two files - `cache.db` and
 `index.db` in a dedicated directory (`app\cache` by default, relative to the library's
 root directory), but you can change these using the `$settings` array passed
 to the object's constructor.
@@ -16,9 +16,9 @@ how you can do that.
 ```php
 require '/path/to/your/vendor/autoload.php';
 
-use CpChart\Chart\Cache;
-use CpChart\Chart\Data;
-use CpChart\Chart\Image;
+use CpChart\Cache;
+use CpChart\Data;
+use CpChart\Image;
 
 // Standard chart creation
 $data = new Data();
@@ -77,7 +77,7 @@ $cache->removeOlderThan(60 * 60 * 24); // Remove data older than 24 hours
 $cache->flush();
 ```
 
-There is also the function called `CpChart\Chart\Cache::dbRemoval(array $settings)`,
+There is also the function called `CpChart\Cache::dbRemoval(array $settings)`,
 but it only covers two use cases - removing by chart hash and age. Since there
 are dedicated methods for each of them (`remove` and `removeOlderThan`, respectively),
 there is no reason to cover it any further.

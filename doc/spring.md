@@ -5,7 +5,7 @@
 ```php
 require '/path/to/your/vendor/autoload.php';
 
-use CpChart\Chart\Image;
+use CpChart\Image;
 use CpChart\Chart\Spring;
 
 /* Create the Image object */

@@ -1,9 +1,9 @@
 <?php
 
-namespace CpChart\Chart;
+namespace CpChart;
 
 /**
- * Image - The actual class to do most of the drawing. Extends the pDraw class
+ * Image - The actual class to do most of the drawing. Extends the Draw class
  * with the bulk of drawing methods.
  *
  * Version     : 2.1.4

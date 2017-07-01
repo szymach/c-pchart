@@ -5,8 +5,8 @@
 ```php
 require '/path/to/your/vendor/autoload.php';
 
-use CpChart\Chart\Data;
-use CpChart\Chart\Image;
+use CpChart\Data;
+use CpChart\Image;
 use CpChart\Chart\Scatter;
 
 /* Create the Data object */

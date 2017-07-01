@@ -2,8 +2,10 @@
 
 namespace CpChart\Chart;
 
+use CpChart\Image;
+
 /**
- *  pSpring - class to draw spring graphs
+ *  Spring - class to draw spring graphs
  *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI

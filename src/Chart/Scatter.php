@@ -2,10 +2,12 @@
 
 namespace CpChart\Chart;
 
+use CpChart\Data;
+use CpChart\Image;
 use Exception;
 
 /**
- *  pScatter - class to draw scatter charts
+ *  Scatter - class to draw scatter charts
  *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI

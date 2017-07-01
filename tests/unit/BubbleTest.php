@@ -4,8 +4,8 @@ namespace Test\CpChart;
 
 use Codeception\Test\Unit;
 use CpChart\Chart\Bubble;
-use CpChart\Chart\Data;
-use CpChart\Chart\Image;
+use CpChart\Data;
+use CpChart\Image;
 use UnitTester;
 
 class BubbleTest extends Unit

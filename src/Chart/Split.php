@@ -2,8 +2,11 @@
 
 namespace CpChart\Chart;
 
+use CpChart\Data;
+use CpChart\Image;
+
 /**
- *    pSplit - class to draw spline splitted charts
+ *    Split - class to draw spline splitted charts
  *
  *    Version     : 2.1.4
  *    Made by     : Jean-Damien POGOLOTTI

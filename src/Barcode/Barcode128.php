@@ -1,7 +1,8 @@
 <?php
 
-namespace CpChart\Chart;
+namespace CpChart\Barcode;
 
+use CpChart\Image;
 use Exception;
 
 /**
@@ -45,21 +46,18 @@ class Barcode128
     public $CRC;
 
     /**
-     * @param string $BasePath
+     * @param string $filePath
      * @throws Exception
      */
-    public function __construct($BasePath = "")
+    public function __construct($filePath = '')
     {
         $this->Codes = [];
         $this->Reverse = [];
-        if (file_exists($BasePath . "data/128B.db")) {
-            $FileHandle = @fopen($BasePath . "data/128B.db", "r");
-            $filePath = $BasePath . "data/128B.db";
-        } else {
-            $FileHandle = @fopen(__DIR__ . '/../Resources/data/128B.db', "r");
-            $filePath = "/../Resources/data/128B.db";
+        if (!file_exists($filePath)) {
+            $filePath = sprintf('%s/../../resources/barcode/128B.db', __DIR__);
         }
 
+        $FileHandle = @fopen($filePath, "r");
         if (!$FileHandle) {
             throw new Exception(
                 sprintf("Cannot find barcode database (%s).", $filePath)

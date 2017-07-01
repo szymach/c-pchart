@@ -1,9 +1,9 @@
 <?php
 
-namespace CpChart\Chart;
+namespace CpChart;
 
 /**
- * pCache - speed up the rendering by caching up the pictures
+ * Cache - speed up the rendering by caching up the pictures
  *
  * Version     : 2.1.4
  * Made by     : Jean-Damien POGOLOTTI
@@ -37,7 +37,7 @@ class Cache
      */
     public function __construct(array $Settings = [])
     {
-        $CacheFolder = isset($Settings["CacheFolder"]) ? $Settings["CacheFolder"] : __DIR__ . "/../../app/cache";
+        $CacheFolder = isset($Settings["CacheFolder"]) ? $Settings["CacheFolder"] : __DIR__ . "/../cache";
         $CacheIndex = isset($Settings["CacheIndex"]) ? $Settings["CacheIndex"] : "index.db";
         $CacheDB = isset($Settings["CacheDB"]) ? $Settings["CacheDB"] : "cache.db";
 

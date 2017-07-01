@@ -2,8 +2,10 @@
 
 namespace CpChart\Chart;
 
+use CpChart\Image;
+
 /**
- *  pSurface - class to draw surface charts
+ *  Surface - class to draw surface charts
  *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI

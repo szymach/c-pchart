@@ -2,8 +2,10 @@
 
 namespace CpChart\Chart;
 
+use CpChart\Image;
+
 /**
- *  pIndicator - class to draw indicators
+ *  Indicator - class to draw indicators
  *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI

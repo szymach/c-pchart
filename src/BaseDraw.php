@@ -1,6 +1,6 @@
 <?php
 
-namespace CpChart\Chart;
+namespace CpChart;
 
 use Exception;
 
@@ -207,7 +207,7 @@ abstract class BaseDraw
 
     public function __construct()
     {
-        $this->resourcePath = sprintf('%s/../Resources', __DIR__);
+        $this->resourcePath = sprintf('%s/../resources', __DIR__);
         $this->FontName = $this->loadFont($this->FontName, 'fonts');
     }
 

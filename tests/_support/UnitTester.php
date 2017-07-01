@@ -26,6 +26,6 @@ class UnitTester extends \Codeception\Actor
 
     public function getCacheDirectory()
     {
-        return sprintf("%s/../../app/cache", __DIR__);
+        return sprintf("%s/../../cache", __DIR__);
     }
 }

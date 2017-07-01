@@ -41,9 +41,11 @@ and aims to allow the usage of it in modern applications. This was done through
 applying PSR standards to code, introducing namespaces and typehints, along with
 some basic annotations to methods.
 
-This is the `2.x` version, which aims to further update the code, but with the least
-backwards compatibility breaks possible. However if you cannot risk any of these,
-you will need to use the `1.x` branch.
+This is the `3.x` version, which removes the factory service and reorganizes the
+file structure a bit. It does not introduce any new features, but the changes are
+not compatibile with the `2.x` branch. BC compatibility with the original library
+is mostly retained, however you can still use the `1.x` version if you cannot risk
+any of these.
 
 What was done:
 
@@ -60,7 +62,7 @@ the actual logic, so most code from the original library should work.
 to methods Also, typehinting was added to methods where possible, so some backwards compatibility breaks
 may occur if you did some weird things.
 
-- Moved all constants to a single file `src/Resources/data/constants.php`. It is loaded automatically
+- Moved all constants to a [single file](constants.php). It is loaded automatically
 through Composer, so no need for manual action.
 
 License:
@@ -86,7 +88,7 @@ For composer installation, add:
 
 ```json
 "require": {
-    "szymach/c-pchart": "^2.0"
+    "szymach/c-pchart": "^3.0"
 },
 ```
 
@@ -108,7 +110,7 @@ so you can compare each version and figure out how to use the current implementa
 Charts created through Image class
 ---------------------------------------
 
-Most of the basic charts are created through methods of the `CpChart\Chart\Image`
+Most of the basic charts are created through methods of the `CpChart\Image`
 class. Below you can find a full list of these charts, alongside example code.
 
 - [area](doc/area.md)

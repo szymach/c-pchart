@@ -5,8 +5,8 @@
 ```php
 require '/path/to/your/vendor/autoload.php';
 
-use CpChart\Chart\Barcode128;
-use CpChart\Chart\Image;
+use CpChart\Barcode\Barcode128;
+use CpChart\Image;
 
 /* Create the Image object */
 $image = new Image(700, 230);

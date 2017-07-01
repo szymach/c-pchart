@@ -38,3 +38,11 @@
 
 2.0.8 Covered most basic functionality with tests, added a lot of documentation
       and a PHP 7.1 fix. Deprecated the `\CpChart\Factory\Factory` class.
+
+## 3.x
+
+3.0 Deleted the `\CpChart\Factory\Factory` class and everything related to it.
+    Moved drawing and cache classes outside of `Chart` namespace.
+    Moved barcode to a `Barcode` namespace.
+    Moved `cache` and `resources` directories to library root.
+    Renamed `resources\data` to `resources\barcode`.

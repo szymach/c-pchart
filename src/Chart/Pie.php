@@ -2,8 +2,11 @@
 
 namespace CpChart\Chart;
 
+use CpChart\Data;
+use CpChart\Image;
+
 /**
- *  pPie - class to draw pie charts
+ *  Pie - class to draw pie charts
  *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI

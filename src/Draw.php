@@ -1,11 +1,11 @@
 <?php
 
-namespace CpChart\Chart;
+namespace CpChart;
 
 use Exception;
 
 /**
- *  pDraw - class extension with drawing methods
+ *  Draw - class extension with drawing methods
  *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI

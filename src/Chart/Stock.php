@@ -2,8 +2,11 @@
 
 namespace CpChart\Chart;
 
+use CpChart\Data;
+use CpChart\Image;
+
 /**
- *  pStock - class to draw stock charts
+ *  Stock - class to draw stock charts
  *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI

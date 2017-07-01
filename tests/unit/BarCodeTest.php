@@ -3,9 +3,9 @@
 namespace Test\CpChart;
 
 use Codeception\Test\Unit;
-use CpChart\Chart\Barcode128;
-use CpChart\Chart\Barcode39;
-use CpChart\Chart\Image;
+use CpChart\Barcode\Barcode128;
+use CpChart\Barcode\Barcode39;
+use CpChart\Image;
 use UnitTester;
 
 class BarCodeTest extends Unit

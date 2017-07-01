@@ -19,7 +19,7 @@
     ],
     "autoload": {
         "psr-4": { "CpChart\\": "src/" },
-        "files": ["src/Resources/data/constants.php"]
+        "files": ["constants.php"]
     },
     "autoload-dev": {
         "psr-4": { "Test\\CpChart\\": "tests/" }
@@ -38,7 +38,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0.x-dev"
+            "dev-master": "3.0.x-dev",
+            "2.0": "2.0.x-dev"
         }
     }
 }

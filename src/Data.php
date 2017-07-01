@@ -1,11 +1,11 @@
 <?php
 
-namespace CpChart\Chart;
+namespace CpChart;
 
 use Exception;
 
 /**
- *  pDraw - class to manipulate data arrays
+ *  Data - class to manipulate data arrays
  *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI

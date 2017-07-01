@@ -3,9 +3,9 @@
 namespace Test\CpChart;
 
 use Codeception\Test\Unit;
-use CpChart\Chart\Cache;
-use CpChart\Chart\Data;
-use CpChart\Chart\Image;
+use CpChart\Cache;
+use CpChart\Data;
+use CpChart\Image;
 use UnitTester;
 
 class CacheTest extends Unit

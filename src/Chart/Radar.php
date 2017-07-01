@@ -2,8 +2,11 @@
 
 namespace CpChart\Chart;
 
+use CpChart\Data;
+use CpChart\Image;
+
 /**
- * pRadar - class to draw radar charts
+ * Radar - class to draw radar charts
  *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI
