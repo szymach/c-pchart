@@ -8,6 +8,8 @@ Table of contents:
 * [Usage](#usage)
     - [Charts created through Image class](#charts-created-through-image-class)
     - [Standalone charts](#standalone-charts)
+    - [Barcodes](#barcodes)
+    - [Cache](#cache)
     - [Fonts and palletes](#fonts-and-palletes)
 * [Changelog](#changelog)
 * [References](#references)
