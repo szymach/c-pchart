@@ -5,9 +5,9 @@
 ```php
 require '/path/to/your/vendor/autoload.php';
 
+use CpChart\Chart\Radar;
 use CpChart\Data;
 use CpChart\Image;
-use CpChart\Chart\Radar;
 
 /* Prepare some nice data & axis config */
 $data = new Data();

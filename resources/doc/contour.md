@@ -5,9 +5,9 @@
 ```php
 require '/path/to/your/vendor/autoload.php';
 
+use CpChart\Chart\Surface;
 use CpChart\Data;
 use CpChart\Image;
-use CpChart\Chart\Surface;
 
 /* Create the Image object */
 $image = new Image(400, 400);

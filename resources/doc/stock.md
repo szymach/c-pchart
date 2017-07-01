@@ -5,9 +5,9 @@
 ```php
 require '/path/to/your/vendor/autoload.php';
 
+use CpChart\Chart\Stock;
 use CpChart\Data;
 use CpChart\Image;
-use CpChart\Chart\Stock;
 
 /* Create and populate the Data object */
 $data = new Data();

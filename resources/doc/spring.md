@@ -5,8 +5,8 @@
 ```php
 require '/path/to/your/vendor/autoload.php';
 
-use CpChart\Image;
 use CpChart\Chart\Spring;
+use CpChart\Image;
 
 /* Create the Image object */
 $image = new Image(300, 300);
