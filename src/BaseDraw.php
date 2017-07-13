@@ -785,7 +785,6 @@ abstract class BaseDraw
                     }
 
                     $vX = max($Width) + $XStep;
-                    unset($Width);
                 }
             }
         }
