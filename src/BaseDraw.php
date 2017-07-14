@@ -760,7 +760,7 @@ abstract class BaseDraw
                     $vY = $vY + max($this->FontSize * count($Lines), $IconAreaHeight) + 5;
                 } elseif ($Mode == LEGEND_HORIZONTAL) {
                     $Lines = preg_split("/\n/", $Serie["Description"]);
-                    $Width = "";
+                    $Width = [];
                     foreach ($Lines as $Key => $Value) {
                         $BoxArray = $this->getTextBox(
                             $vX + $IconAreaWidth + 6,
