@@ -40,8 +40,8 @@ class Bubble
     /**
      * Prepare the scale
      *
-     * @param type $DataSeries
-     * @param type $WeightSeries
+     * @param mixed $DataSeries
+     * @param mixed $WeightSeries
      */
     public function bubbleScale($DataSeries, $WeightSeries)
     {
@@ -53,8 +53,8 @@ class Bubble
         }
 
         /* Parse each data series to find the new min & max boundaries to scale */
-        $NewPositiveSerie = "";
-        $NewNegativeSerie = "";
+        $NewPositiveSerie = [];
+        $NewNegativeSerie = [];
         $MaxValues = 0;
         $LastPositive = 0;
         $LastNegative = 0;
@@ -92,7 +92,7 @@ class Bubble
         }
 
         /* Check for missing values and all the fake positive serie */
-        if ($NewPositiveSerie != "") {
+        if (count($NewPositiveSerie)) {
             for ($i = 0; $i < $MaxValues; $i++) {
                 if (!isset($NewPositiveSerie[$i])) {
                     $NewPositiveSerie[$i] = $LastPositive;
@@ -102,7 +102,7 @@ class Bubble
         }
 
         /* Check for missing values and all the fake negative serie */
-        if ($NewNegativeSerie != "") {
+        if (count($NewNegativeSerie)) {
             for ($i = 0; $i < $MaxValues; $i++) {
                 if (!isset($NewNegativeSerie[$i])) {
                     $NewNegativeSerie[$i] = $LastNegative;

@@ -149,9 +149,9 @@ class Barcode128
      * @param string $Value
      * @param int $X
      * @param int $Y
-     * @param string $Format
+     * @param array $Format
      */
-    public function draw(Image $Object, $Value, $X, $Y, $Format = "")
+    public function draw(Image $Object, $Value, $X, $Y, $Format = [])
     {
         $this->pChartObject = $Object;
 

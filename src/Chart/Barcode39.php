@@ -160,7 +160,7 @@ class Barcode39
      * @param type $Y
      * @param array $Format
      */
-    public function draw(Image $Object, $Value, $X, $Y, $Format = "")
+    public function draw(Image $Object, $Value, $X, $Y, $Format = [])
     {
         $this->pChartObject = $Object;
 
