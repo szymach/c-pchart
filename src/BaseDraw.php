@@ -1408,7 +1408,7 @@ abstract class BaseDraw
                 }
 
                 $MinY = $this->GraphAreaY2;
-                foreach ($SeriesName as $iKey => $SerieName) {
+                foreach ($SeriesName as $SerieName) {
                     if (isset($Data["Series"][$SerieName]["Data"][$Index])) {
                         $AxisID = $Data["Series"][$SerieName]["Axis"];
                         $XAxisMode = $Data["XAxisDisplay"];
@@ -1417,6 +1417,7 @@ abstract class BaseDraw
                         $AxisMode = $Data["Axis"][$AxisID]["Display"];
                         $AxisFormat = $Data["Axis"][$AxisID]["Format"];
                         $AxisUnit = $Data["Axis"][$AxisID]["Unit"];
+                        $XLabel = "";
 
                         if (isset($Data["Abscissa"])
                             && isset($Data["Series"][$Data["Abscissa"]]["Data"][$Index])
@@ -1427,9 +1428,8 @@ abstract class BaseDraw
                                 $XAxisFormat,
                                 $XAxisUnit
                             );
-                        } else {
-                            $XLabel = "";
                         }
+
                         if ($OverrideTitle != null) {
                             $Description = $OverrideTitle;
                         } elseif (count($SeriesName) == 1) {
@@ -1439,12 +1439,13 @@ abstract class BaseDraw
                         ) {
                             $Description = $XLabel;
                         }
-                        $Serie = "";
-                        $Serie["R"] = $Data["Series"][$SerieName]["Color"]["R"];
-                        $Serie["G"] = $Data["Series"][$SerieName]["Color"]["G"];
-                        $Serie["B"] = $Data["Series"][$SerieName]["Color"]["B"];
-                        $Serie["Alpha"] = $Data["Series"][$SerieName]["Color"]["Alpha"];
 
+                        $Serie = [
+                            "R" => $Data["Series"][$SerieName]["Color"]["R"],
+                            "G" => $Data["Series"][$SerieName]["Color"]["G"],
+                            "B" => $Data["Series"][$SerieName]["Color"]["B"],
+                            "Alpha" => $Data["Series"][$SerieName]["Color"]["Alpha"]
+                        ];
                         if (count($SeriesName) == 1
                             && isset($Data["Series"][$SerieName]["XOffset"])
                         ) {
@@ -1568,6 +1569,7 @@ abstract class BaseDraw
                         $AxisMode = $Data["Axis"][$AxisID]["Display"];
                         $AxisFormat = $Data["Axis"][$AxisID]["Format"];
                         $AxisUnit = $Data["Axis"][$AxisID]["Unit"];
+                        $XLabel = "";
 
                         if (isset($Data["Abscissa"])
                             && isset($Data["Series"][$Data["Abscissa"]]["Data"][$Index])
@@ -1578,9 +1580,8 @@ abstract class BaseDraw
                                 $XAxisFormat,
                                 $XAxisUnit
                             );
-                        } else {
-                            $XLabel = "";
                         }
+
                         if ($OverrideTitle != null) {
                             $Description = $OverrideTitle;
                         } elseif (count($SeriesName) == 1) {
@@ -1594,7 +1595,7 @@ abstract class BaseDraw
                         ) {
                             $Description = $XLabel;
                         }
-                        $Serie = "";
+                        $Serie = [];
                         if (isset($Data["Extended"]["Palette"][$Index])) {
                             $Serie["R"] = $Data["Extended"]["Palette"][$Index]["R"];
                             $Serie["G"] = $Data["Extended"]["Palette"][$Index]["G"];
