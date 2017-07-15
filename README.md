@@ -31,8 +31,8 @@ Build status:
 
 Code quality:
 =============
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/szymach/c-pchart/badges/quality-score.png?b=2.0)](https://scrutinizer-ci.com/g/szymach/c-pchart/?branch=2.0)
-[![Code Coverage](https://scrutinizer-ci.com/g/szymach/c-pchart/badges/coverage.png?b=2.0)](https://scrutinizer-ci.com/g/szymach/c-pchart/?branch=2.0)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/szymach/c-pchart/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/szymach/c-pchart/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/szymach/c-pchart/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/szymach/c-pchart/?branch=master)
 
 About:
 ======
