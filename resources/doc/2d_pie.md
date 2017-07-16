@@ -10,7 +10,8 @@ use CpChart\Data;
 use CpChart\Image;
 
 // Create and populate data
-$data = new Data([40, 60, 15, 10, 6, 4], "ScoreA");
+$data = new Data();
+$data->addPoints([40, 60, 15, 10, 6, 4], "ScoreA");
 $data->setSerieDescription("ScoreA", "Application A");
 
 // Define the absissa serie

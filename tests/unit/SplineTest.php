@@ -16,7 +16,8 @@ class SplineTest extends Unit
 
     public function testChartRender()
     {
-        $data = new Data([], "Serie1");
+        $data = new Data();
+        $data->addPoints([], "Serie1");
         $image = new Image(700, 230, $data);
         $image->setShadow(
             true,

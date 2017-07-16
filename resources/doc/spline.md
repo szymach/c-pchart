@@ -9,7 +9,8 @@ use CpChart\Data;
 use CpChart\Image;
 
 // Create and populate data
-$data = new Data([], "Serie1");
+$data = new Data();
+$data->addPoints([], "Serie1")
 
 // Create the image and set the data
 $image = $factory->newImage(700, 230, $data);

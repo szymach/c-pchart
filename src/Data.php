@@ -479,7 +479,7 @@ class Data
      */
     public function drawAll()
     {
-        foreach ($this->Data["Series"] as $Key => $Value) {
+        foreach (array_keys($this->Data["Series"]) as $Key) {
             if ($this->Data["Abscissa"] != $Key) {
                 $this->Data["Series"][$Key]["isDrawable"] = true;
             }
@@ -534,9 +534,9 @@ class Data
                 $Seriesum = $Seriesum + 1 / $Value;
             }
             return sizeof($SerieData) / $Seriesum;
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -636,11 +636,7 @@ class Data
         $withFloat = isset($Options["withFloat"]) ? $Options["withFloat"] : false;
 
         for ($i = 0; $i <= $Values; $i++) {
-            if ($withFloat) {
-                $Value = rand($Min * 100, $Max * 100) / 100;
-            } else {
-                $Value = rand($Min, $Max);
-            }
+            $Value = $withFloat ? rand($Min * 100, $Max * 100) / 100 : rand($Min, $Max);
             $this->addPoints($Value, $SerieName);
         }
     }
@@ -979,6 +975,7 @@ class Data
             $this->Data["Series"][$Serie]["Color"]["B"] = rand(0, 255);
             $this->Data["Series"][$Serie]["Color"]["Alpha"] = 100;
         }
+        $this->Data["Series"][$Serie]["Data"] = [];
     }
 
     /**
