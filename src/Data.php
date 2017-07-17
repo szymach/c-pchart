@@ -883,7 +883,7 @@ class Data
     {
         $path = file_exists($FileName)
             ? $FileName
-            : sprintf('%s/../Resources/palettes/%s', __DIR__, ltrim($FileName, '/'))
+            : sprintf('%s/../resources/palettes/%s', __DIR__, ltrim($FileName, '/'))
         ;
 
         $fileHandle = @fopen($path, "r");
