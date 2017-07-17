@@ -881,14 +881,18 @@ class Data
      */
     public function loadPalette($FileName, $Overwrite = false)
     {
-        $path = sprintf('%s/../Resources/palettes/%s', __DIR__, ltrim($FileName, '/'));
-        if (file_exists($FileName)) {
-            $path = $FileName;
-        }
+        $path = file_exists($FileName)
+            ? $FileName
+            : sprintf('%s/../Resources/palettes/%s', __DIR__, ltrim($FileName, '/'))
+        ;
 
         $fileHandle = @fopen($path, "r");
         if (!$fileHandle) {
-            throw new Exception(sprintf('The requested palette %s was not found!', $FileName));
+            throw new Exception(sprintf(
+                'The requested palette "%s" was not found at path "%s"!',
+                $FileName,
+                $path
+            ));
         }
 
         if ($Overwrite) {
