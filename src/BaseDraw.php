@@ -88,7 +88,7 @@ abstract class BaseDraw
     /**
      * @var string
      */
-    public $FontName = "GeosansLight.ttf";
+    public $FontName = "verdana.ttf";
 
     /**
      * @var int
@@ -208,7 +208,7 @@ abstract class BaseDraw
     public function __construct()
     {
         $this->resourcePath = sprintf('%s/../resources', __DIR__);
-        $this->FontName = $this->loadFont($this->FontName, 'fonts');
+        $this->FontName = $this->loadFont($this->getFontName(), 'fonts');
     }
 
     /**
@@ -245,6 +245,7 @@ abstract class BaseDraw
 
         $path = sprintf('%s/%s/%s', $this->resourcePath, $type, $name);
         if (file_exists($path)) {
+            $this->setFontName($path);
             return $path;
         }
 
@@ -693,7 +694,7 @@ abstract class BaseDraw
      */
     public function getLegendSize(array $Format = [])
     {
-        $FontName = isset($Format["FontName"]) ? $this->loadFont($Format["FontName"], 'fonts') : $this->FontName;
+        $FontName = isset($Format["FontName"]) ? $this->loadFont($Format["FontName"], 'fonts') : $this->getFontName();
         $FontSize = isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
         $Margin = isset($Format["Margin"]) ? $Format["Margin"] : 5;
         $Mode = isset($Format["Mode"]) ? $Format["Mode"] : LEGEND_VERTICAL;
@@ -740,7 +741,7 @@ abstract class BaseDraw
                     $BoxArray = $this->getTextBox(
                         $vX + $IconAreaWidth + 4,
                         $vY + $IconAreaHeight / 2,
-                        $FontName,
+                        $this->getFontName(),
                         $FontSize,
                         0,
                         $Serie["Description"]
@@ -765,7 +766,7 @@ abstract class BaseDraw
                         $BoxArray = $this->getTextBox(
                             $vX + $IconAreaWidth + 6,
                             $Y + $IconAreaHeight / 2 + (($this->FontSize + 3) * $Key),
-                            $FontName,
+                            $this->getFontName(),
                             $FontSize,
                             0,
                             $Value
@@ -1179,7 +1180,7 @@ abstract class BaseDraw
                             $this->scaleFormat(round($MaxValue, $Decimals), $Mode, $Format, $Unit)
                         );
 
-                        $TxtPos = $this->getTextBox($XPos, $YPos, $this->FontName, $this->FontSize, 0, $Label);
+                        $TxtPos = $this->getTextBox($XPos, $YPos, $this->getFontName(), $this->FontSize, 0, $Label);
                         $XOffset = 0;
                         $YOffset = 0;
                         if ($TxtPos[0]["X"] < $this->GraphAreaX1) {
@@ -1224,7 +1225,7 @@ abstract class BaseDraw
                             $this->scaleFormat(round($MinValue, $Decimals), $Mode, $Format, $Unit)
                         );
 
-                        $TxtPos = $this->getTextBox($XPos, $YPos, $this->FontName, $this->FontSize, 0, $Label);
+                        $TxtPos = $this->getTextBox($XPos, $YPos, $this->getFontName(), $this->FontSize, 0, $Label);
                         $XOffset = 0;
                         $YOffset = 0;
                         if ($TxtPos[0]["X"] < $this->GraphAreaX1) {
@@ -1274,7 +1275,7 @@ abstract class BaseDraw
                         $XPos = $X + $MaxPos * $XStep + $SerieOffset;
                         $Label = $MaxLabelTxt . $this->scaleFormat($MaxValue, $Mode, $Format, $Unit);
 
-                        $TxtPos = $this->getTextBox($YPos, $XPos, $this->FontName, $this->FontSize, 0, $Label);
+                        $TxtPos = $this->getTextBox($YPos, $XPos, $this->getFontName(), $this->FontSize, 0, $Label);
                         $XOffset = 0;
                         $YOffset = 0;
                         if ($TxtPos[0]["X"] < $this->GraphAreaX1) {
@@ -1315,7 +1316,7 @@ abstract class BaseDraw
                         $XPos = $X + $MinPos * $XStep + $SerieOffset;
                         $Label = $MinLabelTxt . $this->scaleFormat($MinValue, $Mode, $Format, $Unit);
 
-                        $TxtPos = $this->getTextBox($YPos, $XPos, $this->FontName, $this->FontSize, 0, $Label);
+                        $TxtPos = $this->getTextBox($YPos, $XPos, $this->getFontName(), $this->FontSize, 0, $Label);
                         $XOffset = 0;
                         $YOffset = 0;
                         if ($TxtPos[0]["X"] < $this->GraphAreaX1) {
@@ -1698,5 +1699,23 @@ abstract class BaseDraw
                 $this->drawLabelBox($MinX, $Y - 3, $Description, $Series, $Format);
             }
         }
+    }
+
+    /**
+     * Get FontName variable
+     * @return string
+     */
+    public function getFontName()
+    {
+        return $this->FontName;
+    }
+
+    /**
+     * Set FontName variable
+     * @param string $FontName
+     */
+    public function setFontName($FontName)
+    {
+        $this->FontName = $FontName;
     }
 }
