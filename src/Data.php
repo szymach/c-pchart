@@ -3,6 +3,7 @@
 namespace CpChart;
 
 use Exception;
+use RuntimeException;
 
 /**
  *  Data - class to manipulate data arrays
@@ -900,12 +901,28 @@ class Data
         }
 
         while (!feof($fileHandle)) {
-            $buffer = fgets($fileHandle, 4096);
-            if (preg_match("/,/", $buffer)) {
-                list($R, $G, $B, $Alpha) = preg_split("/,/", $buffer);
-                $ID = count($this->Palette);
-                $this->Palette[$ID] = ["R" => $R, "G" => $G, "B" => $B, "Alpha" => $Alpha];
+            $line = fgets($fileHandle, 4096);
+            if (false === $line) {
+                continue;
             }
+            $row = explode(',', $line);
+            if (empty($row)) {
+                continue;
+            }
+            if (count($row) !== 4) {
+                throw new RuntimeException(sprintf(
+                    'A palette row must supply R, G, B and Alpha components, %s given!',
+                    var_export($row, true)
+                ));
+            }
+            list($R, $G, $B, $Alpha) = $row;
+            $ID = count($this->Palette);
+            $this->Palette[$ID] = [
+                "R" => trim($R),
+                "G" => trim($G),
+                "B" => trim($B),
+                "Alpha" => trim($Alpha)
+            ];
         }
         fclose($fileHandle);
 
