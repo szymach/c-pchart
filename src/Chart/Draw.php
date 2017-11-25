@@ -7256,7 +7256,7 @@ abstract class Draw extends BaseDraw
         $DisplayValues = isset($Format["DisplayValues"]) ? $Format["DisplayValues"] : false;
         $DisplayOffset = isset($Format["DisplayOffset"]) ? $Format["DisplayOffset"] : 2;
         $DisplayColor = isset($Format["DisplayColor"]) ? $Format["DisplayColor"] : DISPLAY_MANUAL;
-        $DisplayFont = isset($Format["DisplaySize"]) ? $Format["DisplaySize"] : $this->FontName;
+        $DisplayFont = isset($Format["DisplayFont"]) ? $Format["DisplayFont"] : $this->FontName;
         $DisplaySize = isset($Format["DisplaySize"]) ? $Format["DisplaySize"] : $this->FontSize;
         $DisplayPos = isset($Format["DisplayPos"]) ? $Format["DisplayPos"] : LABEL_POS_OUTSIDE;
         $DisplayShadow = isset($Format["DisplayShadow"]) ? $Format["DisplayShadow"] : true;
