@@ -6,7 +6,7 @@ use Exception;
 
 /**
  *  Draw - class extension with drawing methods
- *©
+ *
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI
  *  Last Update : 19/01/2014
