@@ -1,6 +1,6 @@
 {
     "name": "szymach/c-pchart",
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-only",
     "type": "project",
     "description": "Port of \"pChart\" library into PHP 5",
     "keywords": ["pchart", "pChart", "statistics", "charts", "CpChart", "c-pChart"],
