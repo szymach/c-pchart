@@ -10,7 +10,7 @@ use Exception;
  *  Version     : 2.1.4
  *  Made by     : Jean-Damien POGOLOTTI
  *  Last Update : 19/01/2014
- *
+ *©
  *  This file can be distributed under the license you can find at :
  *
  *  http://www.pchart.net/license
@@ -2744,7 +2744,7 @@ abstract class Draw extends BaseDraw
                     $Height = $this->GraphAreaY2 - $this->GraphAreaY1;
                 }
 
-                if ($Points == 1) {
+                if ($Points == 0 || $Points == 1) {
                     $Data["Axis"][$AxisID]["Margin"] = $Height / 2;
                 } else {
                     $Data["Axis"][$AxisID]["Margin"] = ($Height / $Points) / 2;
