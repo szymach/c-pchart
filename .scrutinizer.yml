@@ -6,6 +6,10 @@ checks:
     php:
         code_rating: true
         duplication: true
+        indentation:
+            general:
+                use_tabs: false
+                size: 4
 
 tools:
     external_code_coverage:
