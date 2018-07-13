@@ -16,6 +16,7 @@ matrix:
         - php: 5.6
         - php: 7.0
         - php: 7.1
+        - php: 7.2
           env:
             - COVERAGE='--coverage --coverage-xml'
     # Travis has some issues with php-gd/freetype libs, not going to bother
@@ -30,8 +31,8 @@ before_script:
     - composer update -n --prefer-dist -v $COMPOSER_FLAGS
 
 script:
-    - bin/phpcs
-    - bin/codecept run unit $COVERAGE
+    - vendor/bin/phpcs
+    - vendor/bin/codecept run unit $COVERAGE
 
 after_script:
     - if [[ $COVERAGE ]]; then ./coverage.sh; fi;

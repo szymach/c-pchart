@@ -2,7 +2,7 @@
     "name": "szymach/c-pchart",
     "license": "GPL-3.0-only",
     "type": "project",
-    "description": "Port of \"pChart\" library into PHP 5",
+    "description": "Port of \"pChart\" library into PHP 5+",
     "keywords": ["pchart", "pChart", "statistics", "charts", "CpChart", "c-pChart"],
     "homepage": "https://github.com/szymach/c-pchart",
     "authors": [
@@ -29,12 +29,12 @@
         "ext-gd": "*"
     },
     "require-dev" : {
-        "codeception/codeception": "^2.3",
-        "phpunit/phpunit": "^4.8|6.1",
-        "squizlabs/php_codesniffer": "^2.8|3.0"
+        "codeception/codeception": "^2.4",
+        "phpunit/phpunit": "^4.8|^7.1",
+        "squizlabs/php_codesniffer": "^2.8|^3.3"
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "vendor/bin"
     },
     "extra": {
         "branch-alias": {
