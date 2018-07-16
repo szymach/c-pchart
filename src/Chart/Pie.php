@@ -906,9 +906,9 @@ class Pie
                     ;
                 } else {
                     $Xc = cos(($Angle - 90) * PI / 180) * ($PercentValueRadius/100 * $Radius) + $X;
-                    $Yc = sin(($Angle - 90) * PI / 180) 
-                    * (($PercentValueRadius/100 * $Radius) * $SkewFactor) 
-                    + $Y 
+                    $Yc = sin(($Angle - 90) * PI / 180)
+                    * (($PercentValueRadius/100 * $Radius) * $SkewFactor)
+                    + $Y
                     - $SliceHeight;
                 }
 
@@ -1371,7 +1371,8 @@ class Pie
         $ValueB = isset($Format["ValueB"]) ? $Format["ValueB"] : 255;
         $ValueAlpha = isset($Format["ValueAlpha"]) ? $Format["ValueAlpha"] : 100;
         $RecordImageMap = isset($Format["RecordImageMap"]) ? $Format["RecordImageMap"] : false;
-        $PercentValueRadius = isset($Format["PercentValueRadius"]) ? $Format["PercentValueRadius"] : ($OuterRadius-$InnerRadius)/2;
+        $PercentValueRadius =
+            isset($Format["PercentValueRadius"]) ? $Format["PercentValueRadius"] : ($OuterRadius-$InnerRadius)/2;
 
         /* Data Processing */
         $Data = $this->pDataObject->getData();
