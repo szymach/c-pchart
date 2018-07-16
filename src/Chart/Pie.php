@@ -80,7 +80,7 @@ class Pie
         $ValueB = isset($Format["ValueB"]) ? $Format["ValueB"] : 255;
         $ValueAlpha = isset($Format["ValueAlpha"]) ? $Format["ValueAlpha"] : 100;
         $RecordImageMap = isset($Format["RecordImageMap"]) ? $Format["RecordImageMap"] : false;
-        $PercentValueRadius = isset($Format["PercentValueRadius"]) ? $Format["PercentValueRadius"] : $Radius/2; //Between 0 and 100.
+        $PercentValueRadius = isset($Format["PercentValueRadius"]) ? $Format["PercentValueRadius"] : $Radius/2;
 
         $Data = $this->pDataObject->getData();
         $Palette = $this->pDataObject->getPalette();
@@ -438,7 +438,7 @@ class Pie
         $ValueB = isset($Format["ValueB"]) ? $Format["ValueB"] : 255;
         $ValueAlpha = isset($Format["ValueAlpha"]) ? $Format["ValueAlpha"] : 100;
         $RecordImageMap = isset($Format["RecordImageMap"]) ? $Format["RecordImageMap"] : false;
-        $PercentValueRadius = isset($Format["PercentValueRadius"]) ? $Format["PercentValueRadius"] : $Radius/2; //Between 0 and 100.
+        $PercentValueRadius = isset($Format["PercentValueRadius"]) ? $Format["PercentValueRadius"] : $Radius/2;
 
         /* Error correction for overlaying rounded corners */
         if ($SkewFactor < .5) {
@@ -906,7 +906,10 @@ class Pie
                     ;
                 } else {
                     $Xc = cos(($Angle - 90) * PI / 180) * ($PercentValueRadius/100 * $Radius) + $X;
-                    $Yc = sin(($Angle - 90) * PI / 180) * (($PercentValueRadius/100 * $Radius) * $SkewFactor) + $Y - $SliceHeight;
+                    $Yc = sin(($Angle - 90) * PI / 180) 
+                    * (($PercentValueRadius/100 * $Radius) * $SkewFactor) 
+                    + $Y 
+                    - $SliceHeight;
                 }
 
                 if ($WriteValues == PIE_VALUE_PERCENTAGE) {
@@ -1368,7 +1371,7 @@ class Pie
         $ValueB = isset($Format["ValueB"]) ? $Format["ValueB"] : 255;
         $ValueAlpha = isset($Format["ValueAlpha"]) ? $Format["ValueAlpha"] : 100;
         $RecordImageMap = isset($Format["RecordImageMap"]) ? $Format["RecordImageMap"] : false;
-        $PercentValueRadius = isset($Format["PercentValueRadius"]) ? $Format["PercentValueRadius"] : ($OuterRadius-$InnerRadius)/2; //Between 0 and $Radius.
+        $PercentValueRadius = isset($Format["PercentValueRadius"]) ? $Format["PercentValueRadius"] : ($OuterRadius-$InnerRadius)/2;
 
         /* Data Processing */
         $Data = $this->pDataObject->getData();
