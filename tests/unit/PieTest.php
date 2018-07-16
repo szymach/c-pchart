@@ -22,20 +22,20 @@ class PieTest extends Unit
         $data->setSerieDescription("ScoreA", "Application A");
         $data->addPoints(["<10", "10<>20", "20<>40", "40<>60", "60<>80", ">80"], "Labels");
         $data->setAbscissa("Labels");
-        $image = new Image(700, 230, $data);
-        $image->drawFilledRectangle(0, 0, 700, 230, [
+        $image = new Image(1300, 230, $data);
+        $image->drawFilledRectangle(0, 0, 1300, 230, [
             "R" => 173, "G" => 152, "B" => 217, "Dash" => 1, "DashR" => 193,
             "DashG" => 172, "DashB" => 237
         ]);
-        $image->drawGradientArea(0, 0, 700, 230, DIRECTION_VERTICAL, [
+        $image->drawGradientArea(0, 0, 1300, 230, DIRECTION_VERTICAL, [
             "StartR" => 209, "StartG" => 150, "StartB" => 231, "EndR" => 111,
             "EndG" => 3, "EndB" => 138, "Alpha" => 50
         ]);
-        $image->drawGradientArea(0, 0, 700, 20, DIRECTION_VERTICAL, [
+        $image->drawGradientArea(0, 0, 1300, 20, DIRECTION_VERTICAL, [
             "StartR" => 0, "StartG" => 0, "StartB" => 0, "EndR" => 50, "EndG" => 50,
             "EndB" => 50, "Alpha" => 100
         ]);
-        $image->drawRectangle(0, 0, 699, 229, ["R" => 0, "G" => 0, "B" => 0]);
+        $image->drawRectangle(0, 0, 1299, 229, ["R" => 0, "G" => 0, "B" => 0]);
         $image->setFontProperties(["FontName" => "Silkscreen.ttf", "FontSize" => 6]);
         $image->drawText(10, 13, "pPie - Draw 2D pie charts", ["R" => 255, "G" => 255, "B" => 255]);
         $image->setFontProperties(["FontName" => "Forgotte.ttf", "FontSize" => 10, "R" => 80, "G" => 80, "B" => 80]);
@@ -46,6 +46,24 @@ class PieTest extends Unit
         $pieChart->draw2DPie(540, 125, [
             "DataGapAngle" => 10, "DataGapRadius" => 6, "Border" => true,
             "BorderR" => 255, "BorderG" => 255, "BorderB" => 255
+        ]);
+        $pieChart->draw2DPie(740, 125, [
+            "Border" => true, "BorderR" => 255, "BorderG" => 255, "BorderB" => 255,
+            "ValuePosition"=> PIE_VALUE_INSIDE,
+            "WriteValues" => PIE_VALUE_NATURAL,
+            "PercentValueRadius" => 10
+        ]);
+        $pieChart->draw2DPie(940, 125, [
+            "Border" => true, "BorderR" => 255, "BorderG" => 255, "BorderB" => 255,
+            "ValuePosition"=> PIE_VALUE_INSIDE,
+            "WriteValues" => PIE_VALUE_NATURAL,
+            "PercentValueRadius" => 50
+        ]);
+        $pieChart->draw2DPie(1140, 125, [
+            "Border" => true, "BorderR" => 255, "BorderG" => 255, "BorderB" => 255,
+            "ValuePosition"=> PIE_VALUE_INSIDE,
+            "WriteValues" => PIE_VALUE_NATURAL,
+            "PercentValueRadius" => 90
         ]);
 
         $image->setFontProperties(["FontName" => "MankSans.ttf", "FontSize" => 11]);
@@ -71,19 +89,36 @@ class PieTest extends Unit
         $data->setSerieDescription("ScoreA", "Application A");
         $data->addPoints(["A0", "B1", "C2", "D3", "E4", "F5", "G6", "H7", "I8", "J9"], "Labels");
         $data->setAbscissa("Labels");
-        $image = new Image(300, 260, $data);
+        $image = new Image(1000, 260, $data);
         $settings = ["R" => 170, "G" => 183, "B" => 87, "Dash" => 1, "DashR" => 190, "DashG" => 203, "DashB" => 107];
-        $image->drawFilledRectangle(0, 0, 300, 300, $settings);
+        $image->drawFilledRectangle(0, 0, 1000, 260, $settings);
         $settings = ["StartR" => 219, "StartG" => 231, "StartB" => 139, "EndR" => 1, "EndG" => 138, "EndB" => 68, "Alpha" => 50];
-        $image->drawGradientArea(0, 0, 300, 260, DIRECTION_VERTICAL, $settings);
-        $image->drawGradientArea(0, 0, 300, 20, DIRECTION_VERTICAL, ["StartR" => 0, "StartG" => 0, "StartB" => 0, "EndR" => 50, "EndG" => 50, "EndB" => 50, "Alpha" => 100]);
-        $image->drawRectangle(0, 0, 299, 259, ["R" => 0, "G" => 0, "B" => 0]);
+        $image->drawGradientArea(0, 0, 1000, 260, DIRECTION_VERTICAL, $settings);
+        $image->drawGradientArea(0, 0, 1000, 20, DIRECTION_VERTICAL, ["StartR" => 0, "StartG" => 0, "StartB" => 0, "EndR" => 50, "EndG" => 50, "EndB" => 50, "Alpha" => 100]);
+        $image->drawRectangle(0, 0, 999, 259, ["R" => 0, "G" => 0, "B" => 0]);
         $image->setFontProperties(["FontName" => "Silkscreen.ttf", "FontSize" => 6]);
         $image->drawText(10, 13, "pPie - Draw 2D ring charts", ["R" => 255, "G" => 255, "B" => 255]);
         $image->setFontProperties(["FontName" => "Forgotte.ttf", "FontSize" => 10, "R" => 80, "G" => 80, "B" => 80]);
         $image->setShadow(true, ["X" => 2, "Y" => 2, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 50]);
         $pieChart = new Pie($image, $data);
         $pieChart->draw2DRing(160, 140, ["DrawLabels" => true, "LabelStacked" => true, "Border" => true]);
+        
+        $pieChart->draw2DRing(360, 140, ["DrawLabels" => true, "LabelStacked" => true, "Border" => true,
+            "ValuePosition"=> PIE_VALUE_INSIDE,
+            "WriteValues" => PIE_VALUE_NATURAL,
+            "PercentValueRadius" => 10
+            ]);
+        $pieChart->draw2DRing(560, 140, ["DrawLabels" => true, "LabelStacked" => true, "Border" => true,
+            "ValuePosition"=> PIE_VALUE_INSIDE,
+            "WriteValues" => PIE_VALUE_NATURAL,
+            "PercentValueRadius" => 50
+            ]);
+        $pieChart->draw2DRing(760, 140, ["DrawLabels" => true, "LabelStacked" => true, "Border" => true,
+            "ValuePosition"=> PIE_VALUE_INSIDE,
+            "WriteValues" => PIE_VALUE_NATURAL,
+            "PercentValueRadius" => 90
+            ]);
+        
         $image->setShadow(false);
         $pieChart->drawPieLegend(15, 40, ["Alpha" => 20]);
 
@@ -101,13 +136,13 @@ class PieTest extends Unit
         $data->setSerieDescription("ScoreA", "Application A");
         $data->addPoints(["A", "B", "C"], "Labels");
         $data->setAbscissa("Labels");
-        $image = new Image(700, 230, $data, true);
+        $image = new Image(1100, 230, $data, true);
         $settings = ["R" => 173, "G" => 152, "B" => 217, "Dash" => 1, "DashR" => 193, "DashG" => 172, "DashB" => 237];
-        $image->drawFilledRectangle(0, 0, 700, 230, $settings);
+        $image->drawFilledRectangle(0, 0, 1100, 230, $settings);
         $settings = ["StartR" => 209, "StartG" => 150, "StartB" => 231, "EndR" => 111, "EndG" => 3, "EndB" => 138, "Alpha" => 50];
-        $image->drawGradientArea(0, 0, 700, 230, DIRECTION_VERTICAL, $settings);
-        $image->drawGradientArea(0, 0, 700, 20, DIRECTION_VERTICAL, ["StartR" => 0, "StartG" => 0, "StartB" => 0, "EndR" => 50, "EndG" => 50, "EndB" => 50, "Alpha" => 100]);
-        $image->drawRectangle(0, 0, 699, 229, ["R" => 0, "G" => 0, "B" => 0]);
+        $image->drawGradientArea(0, 0, 1100, 230, DIRECTION_VERTICAL, $settings);
+        $image->drawGradientArea(0, 0, 1100, 20, DIRECTION_VERTICAL, ["StartR" => 0, "StartG" => 0, "StartB" => 0, "EndR" => 50, "EndG" => 50, "EndB" => 50, "Alpha" => 100]);
+        $image->drawRectangle(0, 0, 1099, 229, ["R" => 0, "G" => 0, "B" => 0]);
         $image->setFontProperties(["FontName" => "Silkscreen.ttf", "FontSize" => 6]);
         $image->drawText(10, 13, "pPie - Draw 3D pie charts", ["R" => 255, "G" => 255, "B" => 255]);
         $image->setFontProperties(["FontName" => "Forgotte.ttf", "FontSize" => 10, "R" => 80, "G" => 80, "B" => 80]);
@@ -117,6 +152,24 @@ class PieTest extends Unit
         $pieChart->setSliceColor(2, ["R" => 97, "G" => 113, "B" => 63]);
         $pieChart->draw3DPie(120, 125, ["SecondPass" => false]);
         $pieChart->draw3DPie(340, 125, ["DrawLabels" => true, "Border" => true]);
+        
+        $pieChart->draw3DPie(540, 125, ["Border" => true,
+            "ValuePosition"=> PIE_VALUE_INSIDE,
+            "WriteValues" => PIE_VALUE_NATURAL,
+            "PercentValueRadius" => 10
+            ]);
+        $pieChart->draw3DPie(740, 125, ["Border" => true,
+            "ValuePosition"=> PIE_VALUE_INSIDE,
+            "WriteValues" => PIE_VALUE_NATURAL,
+            "PercentValueRadius" => 10
+            ]);
+        $pieChart->draw3DPie(940, 125, ["Border" => true,
+            "ValuePosition"=> PIE_VALUE_INSIDE,
+            "WriteValues" => PIE_VALUE_NATURAL,
+            "PercentValueRadius" => 10
+            ]);
+
+
         $image->setShadow(true, ["X" => 3, "Y" => 3, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);
         $pieChart->draw3DPie(560, 125, ["WriteValues" => true, "DataGapAngle" => 10, "DataGapRadius" => 6, "Border" => true]);
         $image->setFontProperties(["FontName" => "pf_arma_five.ttf", "FontSize" => 6]);
