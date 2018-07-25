@@ -23,7 +23,7 @@ class Unit extends Module
 
     private function clearOutputDirectory()
     {
-        $this->getFileSystem()->cleanDir($this->getChartDirectoryPath());
+        //$this->getFileSystem()->cleanDir($this->getChartDirectoryPath());
     }
 
     private function getChartDirectoryPath()

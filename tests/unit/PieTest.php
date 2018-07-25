@@ -161,17 +161,16 @@ class PieTest extends Unit
         $pieChart->draw3DPie(740, 125, ["Border" => true,
             "ValuePosition"=> PIE_VALUE_INSIDE,
             "WriteValues" => PIE_VALUE_NATURAL,
-            "PercentValueRadius" => 10
+            "PercentValueRadius" => 50
             ]);
         $pieChart->draw3DPie(940, 125, ["Border" => true,
             "ValuePosition"=> PIE_VALUE_INSIDE,
             "WriteValues" => PIE_VALUE_NATURAL,
-            "PercentValueRadius" => 10
+            "PercentValueRadius" => 90
             ]);
 
 
         $image->setShadow(true, ["X" => 3, "Y" => 3, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);
-        $pieChart->draw3DPie(560, 125, ["WriteValues" => true, "DataGapAngle" => 10, "DataGapRadius" => 6, "Border" => true]);
         $image->setFontProperties(["FontName" => "pf_arma_five.ttf", "FontSize" => 6]);
         $image->setShadow(true, ["X" => 1, "Y" => 1, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 20]);
         $image->drawText(120, 200, "Single AA pass", ["DrawBox" => true, "BoxRounded" => true, "R" => 0, "G" => 0, "B" => 0, "Align" => TEXT_ALIGN_TOPMIDDLE]);
