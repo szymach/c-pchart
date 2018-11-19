@@ -88,7 +88,7 @@ class Cache
     public function writeToCache($ID, Image $pChartObject)
     {
         /* Compute the paths */
-        $TemporaryFile = tempnam($this->CacheFolder, "tmp_");
+        $TemporaryFile = tempnam($this->CacheFolder, "tmp_") . ".png";
         $Database = $this->CacheFolder . "/" . $this->CacheDB;
         $Index = $this->CacheFolder . "/" . $this->CacheIndex;
         /* Flush the picture to a temporary file */
