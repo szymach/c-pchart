@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\CpChart;
+namespace CpChart\Test;
 
 use Codeception\Test\Unit;
 use CpChart\Data;

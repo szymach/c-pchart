@@ -1,7 +1,7 @@
 {
     "name": "szymach/c-pchart",
     "license": "GPL-3.0-only",
-    "type": "project",
+    "type": "library",
     "description": "Port of \"pChart\" library into PHP 5+",
     "keywords": ["pchart", "pChart", "statistics", "charts", "CpChart", "c-pChart"],
     "homepage": "https://github.com/szymach/c-pchart",
@@ -22,7 +22,7 @@
         "files": ["constants.php"]
     },
     "autoload-dev": {
-        "psr-4": { "Test\\CpChart\\": "tests/" }
+        "psr-4": { "CpChart\\Test\\": "tests/" }
     },
     "require": {
         "php": ">=5.4",
