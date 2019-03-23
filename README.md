@@ -50,7 +50,7 @@ any of these.
 
 What was done:
 
-- Support for PHP versions from 5.4 to 7.2.
+- Support for PHP versions from 5.4 to 7.3.
 
 - Made a full port of the library's functionality. I have touched very little of
 the actual logic, so most code from the original library should work.

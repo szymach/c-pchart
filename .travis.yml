@@ -2,7 +2,6 @@ language: php
 
 cache:
   directories:
-    - bin
     - vendor
 
 matrix:
@@ -15,6 +14,7 @@ matrix:
         - php: 7.0
         - php: 7.1
         - php: 7.2
+        - php: 7.3
           env:
             - COVERAGE='--coverage --coverage-xml'
     # Travis has some issues with php-gd/freetype libs, not going to bother
@@ -25,8 +25,7 @@ matrix:
 before_install:
     - if [[ ! $COVERAGE ]]; then phpenv config-rm xdebug.ini; fi;
 
-before_script:
-    - composer update -n $COMPOSER_FLAGS
+before_script: composer update -n $COMPOSER_FLAGS
 
 script:
     - vendor/bin/phpcs
