@@ -8,20 +8,18 @@ use Exception;
  * This class exists only to try and reduce the number of methods and properties
  * in the Draw class. Basically all methods not named 'drawX' were moved in here,
  * as well as all the class fields.
- *
- * @author Piotr Szymaszek
  */
 abstract class BaseDraw
 {
     /**
      * Width of the picture
-     * @var type
+     * @var int
      */
     public $XSize;
 
     /**
      * Height of the picture
-     * @var type
+     * @var int
      */
     public $YSize;
 
@@ -39,7 +37,7 @@ abstract class BaseDraw
 
     /**
      * Quality of the antialiasing implementation (0-1)
-     * @var type
+     * @var int
      */
     public $AntialiasQuality = 0;
 
