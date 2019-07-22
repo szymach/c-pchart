@@ -7485,7 +7485,7 @@ abstract class Draw extends BaseDraw
                                     $this->addToImageMap(
                                         "RECT",
                                         sprintf(
-                                            "%s,%s,%s,%s,%s",
+                                            "%s,%s,%s,%s",
                                             floor($X + $XOffset + $XSpace),
                                             floor($Y1),
                                             floor($X + $XOffset + $XSize - $XSpace),
