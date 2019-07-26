@@ -7485,13 +7485,13 @@ abstract class Draw extends BaseDraw
                                     $this->addToImageMap(
                                         "RECT",
                                         sprintf(
-                                            "%s,%s,%s,%s,%s",
+                                            "%s,%s,%s,%s",
                                             floor($X + $XOffset + $XSpace),
                                             floor($Y1),
                                             floor($X + $XOffset + $XSize - $XSpace),
-                                            floor($Y2),
-                                            $this->toHTMLColor($R, $G, $B)
+                                            floor($Y2)
                                         ),
+                                        $this->toHTMLColor($R, $G, $B),
                                         $SerieDescription,
                                         $this->scaleFormat($Serie["Data"][$Key], $Mode, $Format, $Unit)
                                     );
