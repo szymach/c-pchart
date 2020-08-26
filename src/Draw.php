@@ -2489,7 +2489,7 @@ abstract class Draw extends BaseDraw
      */
     public function drawScale(array $Format = [])
     {
-	    $FloatingOffset = 0;
+        $FloatingOffset = 0;
         $Pos = isset($Format["Pos"]) ? $Format["Pos"] : SCALE_POS_LEFTRIGHT;
         $Floating = isset($Format["Floating"]) ? $Format["Floating"] : false;
         $Mode = isset($Format["Mode"]) ? $Format["Mode"] : SCALE_MODE_FLOATING;
