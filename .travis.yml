@@ -6,21 +6,15 @@ cache:
 
 matrix:
     include:
-        - php: 5.4
-          env:
-            - COMPOSER_FLAGS='--prefer-lowest'
         - php: 5.5
         - php: 5.6
         - php: 7.0
         - php: 7.1
         - php: 7.2
         - php: 7.3
+        - php: 7.4
           env:
             - COVERAGE='--coverage --coverage-xml'
-    # Travis has some issues with php-gd/freetype libs, not going to bother
-    # trying to fix them
-    allow_failures:
-        - php: 5.5
 
 before_install:
     - if [[ ! $COVERAGE ]]; then phpenv config-rm xdebug.ini; fi;
