@@ -34,10 +34,7 @@ class Image extends Draw
 
         $this->TransparentBackground = $TransparentBackground;
 
-        if ($DataSet) {
-            $this->DataSet = $DataSet;
-        }
-
+        $this->DataSet = null !== $DataSet ? $DataSet : new Data();
         $this->XSize = $XSize;
         $this->YSize = $YSize;
         $this->Picture = imagecreatetruecolor($XSize, $YSize);
