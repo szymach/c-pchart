@@ -70,6 +70,21 @@ class Spring
     public $Y2;
 
     /**
+     * @var int
+     */
+    public $RingSize;
+
+    /**
+     * @var int
+     */
+    public $MagneticForceA;
+
+    /**
+     * @var float
+     */
+    public $MagneticForceR;
+
+    /**
      * @var boolean
      */
     public $AutoComputeFreeZone = false;
@@ -399,9 +414,9 @@ class Spring
                 $this->Data[$Nodes]["BorderAlpha"] = $Settings["BorderAlpha"];
             }
             if (isset($Settings["Surrounding"])) {
-                $this->Data[$Nodes]["BorderR"] = $this->Data[$NodeID]["R"] + $Settings["Surrounding"];
-                $this->Data[$NodeID]["BorderG"] = $this->Data[$NodeID]["G"] + $Settings["Surrounding"];
-                $this->Data[$NodeID]["BorderB"] = $this->Data[$NodeID]["B"] + $Settings["Surrounding"];
+                $this->Data[$Nodes]["BorderR"] = $this->Data[$Nodes]["R"] + $Settings["Surrounding"];
+                $this->Data[$Nodes]["BorderG"] = $this->Data[$Nodes]["G"] + $Settings["Surrounding"];
+                $this->Data[$Nodes]["BorderB"] = $this->Data[$Nodes]["B"] + $Settings["Surrounding"];
             }
         }
     }

@@ -682,6 +682,8 @@ abstract class BaseDraw
                 return .8;
             }
         }
+
+        return null;
     }
 
     /**
@@ -1697,4 +1699,60 @@ abstract class BaseDraw
             }
         }
     }
+
+    /**
+     * @param int $X
+     * @param int $Y
+     * @param string $FontName
+     * @param int $FontSize
+     * @param int $Angle
+     * @param int $Text
+     * @return array
+     */
+    abstract public function getTextBox($X, $Y, $FontName, $FontSize, $Angle, $Text);
+
+    /**
+     * @param int|float $X
+     * @param int|float $Y
+     * @param string $Text
+     * @param array $Format
+     * @return array
+     */
+    abstract public function drawText($X, $Y, $Text, array $Format = []);
+
+    /**
+     * @param int $X
+     * @param int $Y
+     * @param int|float $Radius
+     * @param array $Format
+     */
+    abstract public function drawFilledCircle($X, $Y, $Radius, array $Format = []);
+
+    /**
+     * @param int|float $X1
+     * @param int|float $Y1
+     * @param int|float $X2
+     * @param int|float $Y2
+     * @param array $Format
+     * @return array|int
+     */
+    abstract public function drawLine($X1, $Y1, $X2, $Y2, array $Format = []);
+
+    /**
+     * @param int $X
+     * @param int $Y
+     * @param string $Title
+     * @param array $Captions
+     * @param array $Format
+     */
+    abstract public function drawLabelBox($X, $Y, $Title, array $Captions, array $Format = []);
+
+    /**
+     * @param int $X1
+     * @param int $Y1
+     * @param int $X2
+     * @param int $Y2
+     * @param array $Format
+     */
+    abstract public function drawFilledRectangle($X1, $Y1, $X2, $Y2, array $Format = []);
 }

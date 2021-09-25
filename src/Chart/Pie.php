@@ -36,6 +36,11 @@ class Pie
     public $LabelPos = [];
 
     /**
+     * @var bool
+     */
+    public $Shadow;
+
+    /**
      * @param Image $pChartObject
      * @param Data $pDataObject
      */
@@ -979,7 +984,7 @@ class Pie
      * @param int $X
      * @param int $Y
      * @param array $Format
-     * @return int
+     * @return int|null
      */
     public function drawPieLegend($X, $Y, array $Format = [])
     {
@@ -1157,6 +1162,8 @@ class Pie
         }
 
         $this->Shadow = $RestoreShadow;
+
+        return null;
     }
 
     /**

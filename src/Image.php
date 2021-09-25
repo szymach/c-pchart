@@ -19,6 +19,16 @@ namespace CpChart;
 class Image extends Draw
 {
     /**
+     * @var string
+     */
+    public $ImageMapFileName;
+
+    /**
+     * @var string
+     */
+    public $ImageMapStorageFolder;
+
+    /**
      * @param int $XSize
      * @param int $YSize
      * @param Data $DataSet
@@ -373,7 +383,7 @@ class Image extends Draw
      * @param string $Title
      * @param string $Message
      * @param boolean $HTMLEncode
-     */
+    */
     public function addToImageMap(
         $Type,
         $Plots,
@@ -654,9 +664,6 @@ class Image extends Draw
                 }
             }
         }
-
-        /* When the image map is returned to the client, the script ends */
-        exit();
     }
 
     /**

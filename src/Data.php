@@ -57,7 +57,7 @@ class Data
      * Add a single point or an array to the given serie
      * @param mixed $Values
      * @param string $SerieName
-     * @return int
+     * @return int|null
      */
     public function addPoints($Values, $SerieName = "Serie1")
     {
@@ -82,6 +82,8 @@ class Data
             $this->Data["Series"][$SerieName]["Max"] = max($StrippedData);
             $this->Data["Series"][$SerieName]["Min"] = min($StrippedData);
         }
+
+        return null;
     }
 
     /**

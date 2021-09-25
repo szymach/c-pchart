@@ -32,6 +32,11 @@ class Scatter
     public $pDataObject;
 
     /**
+     * @var bool
+     */
+    public $Shadow;
+
+    /**
      * @param Image $pChartObject
      * @param Data $pDataObject
      */
@@ -1855,7 +1860,7 @@ class Scatter
      * Draw a Scatter threshold
      * @param mixed $Value
      * @param array $Format
-     * @return array
+     * @return array|int|null
      */
     public function drawScatterThreshold($Value, array $Format = [])
     {
@@ -2035,6 +2040,8 @@ class Scatter
 
             return ["X" => $X];
         }
+
+        return null;
     }
 
     /**
@@ -2042,7 +2049,7 @@ class Scatter
      * @param int|float $Value1
      * @param int|float $Value2
      * @param array $Format
-     * @return type
+     * @return int|array|null
      */
     public function drawScatterThresholdArea($Value1, $Value2, array $Format = [])
     {
@@ -2251,5 +2258,7 @@ class Scatter
             $this->pChartObject->Shadow = $RestoreShadow;
             return ["Y1" => $Y1, "Y2" => $Y2];
         }
+
+        return null;
     }
 }

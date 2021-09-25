@@ -4563,7 +4563,7 @@ abstract class Draw extends BaseDraw
      * Draw an Y threshold with the computed scale
      * @param mixed $Value
      * @param array $Format
-     * @return array|int
+     * @return array|int|null
      */
     public function drawThreshold($Value, array $Format = [])
     {
@@ -4777,6 +4777,8 @@ abstract class Draw extends BaseDraw
 
             return ["Y" => $XPos];
         }
+
+        return null;
     }
 
     /**
@@ -10350,4 +10352,75 @@ abstract class Draw extends BaseDraw
 
         $this->Shadow = $RestoreShadow;
     }
+
+    /**
+     * Returns the 1st decimal values (used to correct AA bugs)
+     *
+     * @param mixed $Value
+     * @return mixed
+     */
+    abstract public function getFirstDecimal($Value);
+
+    /**
+     * Return the HTML converted color from the RGB composite values
+     *
+     * @param int $R
+     * @param int $G
+     * @param int $B
+     * @return string
+     */
+    abstract public function toHTMLColor($R, $G, $B);
+
+    /**
+     * Add a zone to the image map
+     *
+     * @param string $Type
+     * @param string $Plots
+     * @param string|null $Color
+     * @param string $Title
+     * @param string $Message
+     * @param boolean $HTMLEncode
+     */
+    abstract public function addToImageMap(
+        $Type,
+        $Plots,
+        $Color = null,
+        $Title = null,
+        $Message = null,
+        $HTMLEncode = false
+    );
+
+    /**
+     * Return the orientation of a line
+     *
+     * @param int $X1
+     * @param int $Y1
+     * @param int $X2
+     * @param int $Y2
+     * @return int
+     */
+    abstract public function getAngle($X1, $Y1, $X2, $Y2);
+
+    /**
+     * Return the length between two points
+     * @param int $X1
+     * @param int $Y1
+     * @param int $X2
+     * @param int $Y2
+     * @return float
+     */
+    abstract public function getLength($X1, $Y1, $X2, $Y2);
+
+    /**
+     * Set current font properties
+     * @param array $Format
+     */
+    abstract public function setFontProperties($Format = []);
+
+    /**
+     * Reverse an array of points
+     * @param array $Plots
+     * @return array
+     */
+    abstract public function reversePlots(array $Plots);
 }

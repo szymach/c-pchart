@@ -155,12 +155,8 @@ class Cache
 
         /* Single file removal */
         if ($ID != null) {
-            /* Retrieve object informations */
-            $Object = $this->isInCache($ID, true);
-
-            /* If it's not in the cache DB, go away */
-            if (!$Object) {
-                return(0);
+            if (false === $this->isInCache($ID, true)) {
+                return 0;
             }
         }
 
@@ -226,6 +222,8 @@ class Cache
         /* Swap the temp & prod DB */
         rename($DatabaseTemp, $Database);
         rename($IndexTemp, $Index);
+
+        return 0;
     }
 
     /**
