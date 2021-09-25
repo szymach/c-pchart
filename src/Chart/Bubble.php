@@ -274,7 +274,7 @@ class Bubble
                             );
                         }
 
-                        if ($BorderWidth != 1) {
+                        if (true === isset($BorderColor) && $BorderWidth != 1) {
                             $this->pChartObject->drawFilledRectangle(
                                 $X - $CircleRadius - $BorderWidth,
                                 $Y - $CircleRadius - $BorderWidth,
@@ -313,7 +313,7 @@ class Bubble
                             );
                         }
 
-                        if ($BorderWidth != 1) {
+                        if (true === isset($BorderColor) && $BorderWidth != 1) {
                             $this->pChartObject->drawFilledCircle(
                                 $X,
                                 $Y,
@@ -358,7 +358,7 @@ class Bubble
                             );
                         }
 
-                        if ($BorderWidth != 1) {
+                        if (true === isset($BorderColor) && $BorderWidth != 1) {
                             $this->pChartObject->drawFilledRectangle(
                                 $X - $CircleRadius - $BorderWidth,
                                 $Y - $CircleRadius - $BorderWidth,
@@ -397,7 +397,7 @@ class Bubble
                             );
                         }
 
-                        if ($BorderWidth != 1) {
+                        if (true === isset($BorderColor) && $BorderWidth != 1) {
                             $this->pChartObject->drawFilledCircle(
                                 $X,
                                 $Y,

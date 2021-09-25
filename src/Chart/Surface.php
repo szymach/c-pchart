@@ -150,7 +150,7 @@ class Surface
     /**
      * Write the Y labels
      * @param array $Format
-     * @return type
+     * @return int|null
      */
     public function writeYLabels(array $Format = [])
     {
@@ -182,6 +182,7 @@ class Surface
         } else {
             return -1;
         }
+
         for ($Y = 0; $Y <= $this->GridSizeY; $Y++) {
             $YPos = floor($Y0 + $Y * $YSize + $YSize / 2);
 
@@ -192,6 +193,8 @@ class Surface
             }
             $this->pChartObject->drawText($XPos, $YPos, $Value, $Settings);
         }
+
+        return null;
     }
 
     /**

@@ -17,19 +17,19 @@ class ResourceTest extends Unit
     public function testInvalidResourceLoading()
     {
         $data = new Data();
-        $this->tester->expectException('\Exception', function() use ($data) {
+        $this->tester->expectThrowable('\Exception', function() use ($data) {
             $data->loadPalette('nonExistantPalette');
         });
 
         $image = new Image(700, 230, $data);
 
-        $this->tester->expectException('\Exception', function() use ($image) {
+        $this->tester->expectThrowable('\Exception', function() use ($image) {
             $image->setResourcePath('nonExistantDirectory');
         });
-        $this->tester->expectException('\Exception', function() use ($image) {
+        $this->tester->expectThrowable('\Exception', function() use ($image) {
             $image->setFontProperties(["FontName" => "nonExistantFont"]);
         });
-        $this->tester->expectException('\Exception', function() use ($image) {
+        $this->tester->expectThrowable('\Exception', function() use ($image) {
             $image->getLegendSize(['Font' => 'nonExistantFont']);
         });
     }
@@ -51,8 +51,8 @@ class ResourceTest extends Unit
     public function testInvalidPaletteLoading()
     {
         $data = new Data();
-        $this->tester->expectException('\Exception', function() use ($data) {
-            $data->loadPalette(sprintf('non_existant_palette', __DIR__), true);
+        $this->tester->expectThrowable('\Exception', function() use ($data) {
+            $data->loadPalette('non_existant_palette', true);
         });
     }
 }

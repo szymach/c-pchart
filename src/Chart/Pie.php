@@ -36,6 +36,11 @@ class Pie
     public $LabelPos = [];
 
     /**
+     * @var bool
+     */
+    public $Shadow;
+
+    /**
      * @param Image $pChartObject
      * @param Data $pDataObject
      */
@@ -148,6 +153,8 @@ class Pie
         $Step = 360 / (2 * PI * $Radius);
         $Offset = 0;
         $ID = 0;
+        $Xc = 0;
+        $Yc = 0;
         foreach ($Values as $Key => $Value) {
             if ($Shadow) {
                 $Settings = [
@@ -385,7 +392,10 @@ class Pie
                     $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
                 } elseif ($WriteValues == PIE_VALUE_NATURAL) {
                     $Display = $Value . $ValueSuffix;
+                } elseif (false === isset($Display)) {
+                    $Display = '';
                 }
+
                 $this->pChartObject->drawText($Xc, $Yc, $Display, $Settings);
 
                 $Offset = $EndAngle + $DataGapAngle;
@@ -509,18 +519,20 @@ class Pie
         $SliceColors = [];
         $Visible = [];
         $SliceAngle = [];
+        $Xc = 0;
+        $Yc = 0;
+        $Settings = [
+            "R" => $Palette[$ID]["R"],
+            "G" => $Palette[$ID]["G"],
+            "B" => $Palette[$ID]["B"],
+            "Alpha" => $Palette[$ID]["Alpha"]
+        ];
         foreach ($Values as $Key => $Value) {
-            if (!isset($Palette[$ID]["R"])) {
+            if (false === isset($Palette[$ID]["R"])) {
                 $Color = $this->pChartObject->getRandomColor();
                 $Palette[$ID] = $Color;
                 $this->pDataObject->savePalette($ID, $Color);
             }
-            $Settings = [
-                "R" => $Palette[$ID]["R"],
-                "G" => $Palette[$ID]["G"],
-                "B" => $Palette[$ID]["B"],
-                "Alpha" => $Palette[$ID]["Alpha"]
-            ];
 
             $SliceColors[$Slice] = $Settings;
 
@@ -911,6 +923,8 @@ class Pie
                     $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
                 } elseif ($WriteValues == PIE_VALUE_NATURAL) {
                     $Display = $Value . $ValueSuffix;
+                } elseif (false === isset($Display)) {
+                    $Display = '';
                 }
 
                 $this->pChartObject->drawText($Xc, $Yc, $Display, $Settings);
@@ -979,7 +993,7 @@ class Pie
      * @param int $X
      * @param int $Y
      * @param array $Format
-     * @return int
+     * @return int|null
      */
     public function drawPieLegend($X, $Y, array $Format = [])
     {
@@ -1157,6 +1171,8 @@ class Pie
         }
 
         $this->Shadow = $RestoreShadow;
+
+        return null;
     }
 
     /**
@@ -1435,6 +1451,8 @@ class Pie
         $Step = 360 / (2 * PI * $OuterRadius);
         $Offset = 0;
         $ID = 0;
+        $Xc = 0;
+        $Yc = 0;
         foreach ($Values as $Key => $Value) {
             if ($Shadow) {
                 $Settings = [
@@ -1622,15 +1640,14 @@ class Pie
                     $Yc = sin(($Angle - 90) * PI / 180) * ($OuterRadius + $ValuePadding) + $Y;
                     if ($Angle >= 0 && $Angle <= 90) {
                         $Align = TEXT_ALIGN_BOTTOMLEFT;
-                    }
-                    if ($Angle > 90 && $Angle <= 180) {
+                    } elseif ($Angle > 90 && $Angle <= 180) {
                         $Align = TEXT_ALIGN_TOPLEFT;
-                    }
-                    if ($Angle > 180 && $Angle <= 270) {
+                    } elseif ($Angle > 180 && $Angle <= 270) {
                         $Align = TEXT_ALIGN_TOPRIGHT;
-                    }
-                    if ($Angle > 270) {
+                    } elseif ($Angle > 270) {
                         $Align = TEXT_ALIGN_BOTTOMRIGHT;
+                    } else {
+                        $Align = TEXT_ALIGN_MIDDLEMIDDLE;
                     }
                 } else {
                     $Xc = cos(($Angle - 90) * PI / 180)
@@ -1807,6 +1824,8 @@ class Pie
             $Step = (360 / (2 * PI * $OuterRadius)) / 2;
             $OutX1 = VOID;
             $OutY1 = VOID;
+            $Xc = 0;
+            $Yc = 0;
             for ($i = $Offset; $i >= $EndAngle; $i = $i - $Step) {
                 $Xc = cos(($i - 90) * PI / 180) * ($OuterRadius + $DataGapRadius - 2) + $X;
                 $Yc = sin(($i - 90) * PI / 180) * ($OuterRadius + $DataGapRadius - 2) * $SkewFactor + $Y;
@@ -2024,6 +2043,7 @@ class Pie
             $Settings["B"] = $Settings["B"] + $Cf * 1.5;
 
             $StartAngle = $Plots["Angle"][0];
+            $EndAngle = 0;
             foreach ($Plots["Angle"] as $Key => $Angle) {
                 if ($Angle == VOID) {
                     $EndAngle = $Plots["Angle"][$Key - 1];
@@ -2069,6 +2089,7 @@ class Pie
             $Settings["B"] = $Settings["B"] + $Cf;
 
             $StartAngle = $Plots["Angle"][0];
+            $EndAngle = 0;
             foreach ($Plots["Angle"] as $Key => $Angle) {
                 if ($Angle == VOID) {
                     $EndAngle = $Plots["Angle"][$Key - 1];

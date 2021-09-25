@@ -57,9 +57,10 @@ abstract class Draw extends BaseDraw
         }
 
         $RestoreShadow = $this->Shadow;
-        if (!$NoFill) {
+        if (false === $NoFill) {
             if ($this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0) {
                 $this->Shadow = false;
+                $Shadow = [];
                 for ($i = 0; $i <= count($Points) - 1; $i = $i + 2) {
                     $Shadow[] = $Points[$i] + $this->ShadowX;
                     $Shadow[] = $Points[$i + 1] + $this->ShadowY;
@@ -622,6 +623,10 @@ abstract class Draw extends BaseDraw
             $Y1 = $Coordinates[$i - 1][1];
             $X2 = $Coordinates[$i][0];
             $Y2 = $Coordinates[$i][1];
+            // These will not be used on first iteration, but added a definition
+            // to prevent static code analysis errors
+            $XLast = 0;
+            $YLast = 0;
 
             if ($Forces != null) {
                 $Force = $Forces[$i];
@@ -1366,8 +1371,7 @@ abstract class Draw extends BaseDraw
 
         if ($Direction == DIRECTION_VERTICAL) {
             $Width = abs($Y2 - $Y1);
-        }
-        if ($Direction == DIRECTION_HORIZONTAL) {
+        } else {//if ($Direction == DIRECTION_HORIZONTAL) {
             $Width = abs($X2 - $X1);
         }
 
@@ -2599,6 +2603,7 @@ abstract class Draw extends BaseDraw
 
         /* Build the scale settings */
         $GotXAxis = false;
+        $AxisID = null;
         foreach ($Data["Axis"] as $AxisID => $AxisParameter) {
             if ($AxisParameter["Identity"] == AXIS_X) {
                 $GotXAxis = true;
@@ -2819,17 +2824,17 @@ abstract class Draw extends BaseDraw
                         if ($LabelRotation == 0) {
                             $LabelAlign = TEXT_ALIGN_TOPMIDDLE;
                             $YLabelOffset = 2;
-                        }
-                        if ($LabelRotation > 0 && $LabelRotation < 190) {
+                        } elseif ($LabelRotation > 0 && $LabelRotation < 190) {
                             $LabelAlign = TEXT_ALIGN_MIDDLERIGHT;
                             $YLabelOffset = 5;
-                        }
-                        if ($LabelRotation == 180) {
+                        } elseif ($LabelRotation == 180) {
                             $LabelAlign = TEXT_ALIGN_BOTTOMMIDDLE;
                             $YLabelOffset = 5;
-                        }
-                        if ($LabelRotation > 180 && $LabelRotation < 360) {
+                        } elseif ($LabelRotation > 180 && $LabelRotation < 360) {
                             $LabelAlign = TEXT_ALIGN_MIDDLELEFT;
+                            $YLabelOffset = 2;
+                        } else {
+                            $LabelAlign = TEXT_ALIGN_TOPMIDDLE;
                             $YLabelOffset = 2;
                         }
 
@@ -2992,18 +2997,18 @@ abstract class Draw extends BaseDraw
                         if ($LabelRotation == 0) {
                             $LabelAlign = TEXT_ALIGN_BOTTOMMIDDLE;
                             $YLabelOffset = 2;
-                        }
-                        if ($LabelRotation > 0 && $LabelRotation < 190) {
+                        } elseif ($LabelRotation > 0 && $LabelRotation < 190) {
                             $LabelAlign = TEXT_ALIGN_MIDDLELEFT;
                             $YLabelOffset = 2;
-                        }
-                        if ($LabelRotation == 180) {
+                        } elseif ($LabelRotation == 180) {
                             $LabelAlign = TEXT_ALIGN_TOPMIDDLE;
                             $YLabelOffset = 5;
-                        }
-                        if ($LabelRotation > 180 && $LabelRotation < 360) {
+                        } elseif ($LabelRotation > 180 && $LabelRotation < 360) {
                             $LabelAlign = TEXT_ALIGN_MIDDLERIGHT;
                             $YLabelOffset = 5;
+                        } else {
+                            $LabelAlign = TEXT_ALIGN_BOTTOMMIDDLE;
+                            $YLabelOffset = 2;
                         }
 
                         if (!$RemoveXAxis) {
@@ -3170,18 +3175,18 @@ abstract class Draw extends BaseDraw
                         if ($LabelRotation == 0) {
                             $LabelAlign = TEXT_ALIGN_MIDDLERIGHT;
                             $XLabelOffset = -2;
-                        }
-                        if ($LabelRotation > 0 && $LabelRotation < 190) {
+                        } elseif ($LabelRotation > 0 && $LabelRotation < 190) {
                             $LabelAlign = TEXT_ALIGN_MIDDLERIGHT;
                             $XLabelOffset = -6;
-                        }
-                        if ($LabelRotation == 180) {
+                        } elseif ($LabelRotation == 180) {
                             $LabelAlign = TEXT_ALIGN_MIDDLELEFT;
                             $XLabelOffset = -2;
-                        }
-                        if ($LabelRotation > 180 && $LabelRotation < 360) {
+                        } elseif ($LabelRotation > 180 && $LabelRotation < 360) {
                             $LabelAlign = TEXT_ALIGN_MIDDLELEFT;
                             $XLabelOffset = -5;
+                        } else {
+                            $LabelAlign = TEXT_ALIGN_MIDDLERIGHT;
+                            $XLabelOffset = -2;
                         }
 
                         if (!$RemoveXAxis) {
@@ -3347,18 +3352,18 @@ abstract class Draw extends BaseDraw
                         if ($LabelRotation == 0) {
                             $LabelAlign = TEXT_ALIGN_MIDDLELEFT;
                             $XLabelOffset = 2;
-                        }
-                        if ($LabelRotation > 0 && $LabelRotation < 190) {
+                        } elseif ($LabelRotation > 0 && $LabelRotation < 190) {
                             $LabelAlign = TEXT_ALIGN_MIDDLELEFT;
                             $XLabelOffset = 6;
-                        }
-                        if ($LabelRotation == 180) {
+                        } elseif ($LabelRotation == 180) {
                             $LabelAlign = TEXT_ALIGN_MIDDLERIGHT;
                             $XLabelOffset = 5;
-                        }
-                        if ($LabelRotation > 180 && $LabelRotation < 360) {
+                        } elseif ($LabelRotation > 180 && $LabelRotation < 360) {
                             $LabelAlign = TEXT_ALIGN_MIDDLERIGHT;
                             $XLabelOffset = 7;
+                        } else {
+                            $LabelAlign = TEXT_ALIGN_MIDDLELEFT;
+                            $XLabelOffset = 2;
                         }
 
                         if (!$RemoveXAxis) {
@@ -4563,7 +4568,7 @@ abstract class Draw extends BaseDraw
      * Draw an Y threshold with the computed scale
      * @param mixed $Value
      * @param array $Format
-     * @return array|int
+     * @return array|int|null
      */
     public function drawThreshold($Value, array $Format = [])
     {
@@ -4777,6 +4782,8 @@ abstract class Draw extends BaseDraw
 
             return ["Y" => $XPos];
         }
+
+        return null;
     }
 
     /**
@@ -5059,9 +5066,13 @@ abstract class Draw extends BaseDraw
                 if (isset($Serie["Picture"])) {
                     $Picture = $Serie["Picture"];
                     list($PicWidth, $PicHeight, $PicType) = $this->getPicInfo($Picture);
+                    $PicOffset = $PicHeight / 2;
                 } else {
                     $Picture = null;
                     $PicOffset = 0;
+                    $PicWidth = 0;
+                    $PicHeight = 0;
+                    $PicType = 3;
                 }
 
                 if ($DisplayColor == DISPLAY_AUTO) {
@@ -5093,7 +5104,6 @@ abstract class Draw extends BaseDraw
                         $XStep = ($this->GraphAreaX2 - $this->GraphAreaX1 - $XMargin * 2) / $XDivs;
                     }
                     if ($Picture != null) {
-                        $PicOffset = $PicHeight / 2;
                         $SerieWeight = 0;
                     }
                     $X = $this->GraphAreaX1 + $XMargin;
@@ -5521,6 +5531,7 @@ abstract class Draw extends BaseDraw
         $this->LastChartLayout = CHART_LAST_LAYOUT_REGULAR;
 
         $Data = $this->DataSet->getData();
+        $YZero = 0;
         list($XMargin, $XDivs) = $this->scaleGetXSettings();
         foreach ($Data["Series"] as $SerieName => $Serie) {
             if ($Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"]) {
@@ -5626,7 +5637,9 @@ abstract class Draw extends BaseDraw
                                         }
                                         $Corners[] = $Point["Y"] + 1;
                                     }
-                                    $Corners[] = $Points[$subKey]["X"] - 1;
+                                    if (true === isset($subKey)) {
+                                        $Corners[] = $Points[$subKey]["X"] - 1;
+                                    }
                                     $Corners[] = $YZero;
 
                                     $this->drawPolygonChart(
@@ -5675,7 +5688,9 @@ abstract class Draw extends BaseDraw
                                 }
                                 $Corners[] = $Point["Y"] + 1;
                             }
-                            $Corners[] = $Points[$subKey]["X"] - 1;
+                            if (true === isset($subKey)) {
+                                $Corners[] = $Points[$subKey]["X"] - 1;
+                            }
                             $Corners[] = $YZero;
 
                             $this->drawPolygonChart(
@@ -5762,7 +5777,9 @@ abstract class Draw extends BaseDraw
                                         $Corners[] = $Point["Y"];
                                     }
                                     $Corners[] = $YZero;
-                                    $Corners[] = $Points[$subKey]["Y"] - 1;
+                                    if (true === isset($subKey)) {
+                                        $Corners[] = $Points[$subKey]["Y"] - 1;
+                                    }
 
                                     $this->drawPolygonChart(
                                         $Corners,
@@ -5813,8 +5830,11 @@ abstract class Draw extends BaseDraw
                                 }
                                 $Corners[] = $Point["Y"];
                             }
+
                             $Corners[] = $YZero;
-                            $Corners[] = $Points[$subKey]["Y"] - 1;
+                            if (true === isset($subKey)) {
+                                $Corners[] = $Points[$subKey]["Y"] - 1;
+                            }
 
                             $this->drawPolygonChart(
                                 $Corners,
@@ -6317,6 +6337,7 @@ abstract class Draw extends BaseDraw
         $this->LastChartLayout = CHART_LAST_LAYOUT_REGULAR;
 
         $Data = $this->DataSet->getData();
+        $XStep = 0;
         list($XMargin, $XDivs) = $this->scaleGetXSettings();
         foreach ($Data["Series"] as $SerieName => $Serie) {
             if ($Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"]) {
@@ -6528,7 +6549,7 @@ abstract class Draw extends BaseDraw
                         }
                         $X = $X + $XStep;
                     }
-                    if ($ReCenter) {
+                    if ($ReCenter && isset($Key)) {
                         $this->drawLine($LastX, $LastY, $this->GraphAreaX2 - $XMargin, $LastY, $Color);
                         if ($RecordImageMap) {
                             $this->addToImageMap(
@@ -6694,7 +6715,7 @@ abstract class Draw extends BaseDraw
                         }
                         $Y = $Y + $YStep;
                     }
-                    if ($ReCenter) {
+                    if ($ReCenter && isset($Key)) {
                         $this->drawLine($LastX, $LastY, $LastX, $this->GraphAreaY2 - $XMargin, $Color);
                         if ($RecordImageMap) {
                             $this->addToImageMap(
@@ -6724,6 +6745,7 @@ abstract class Draw extends BaseDraw
     public function drawFilledStepChart(array $Format = [])
     {
         $ReCenter = isset($Format["ReCenter"]) ? $Format["ReCenter"] : true;
+        // TODO unused
         $DisplayValues = isset($Format["DisplayValues"]) ? $Format["DisplayValues"] : false;
         $DisplayOffset = isset($Format["DisplayOffset"]) ? $Format["DisplayOffset"] : 2;
         $DisplayColor = isset($Format["DisplayColor"]) ? $Format["DisplayColor"] : DISPLAY_MANUAL;
@@ -8899,9 +8921,11 @@ abstract class Draw extends BaseDraw
         list($XMargin, $XDivs) = $this->scaleGetXSettings();
 
         if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
+            $XPos = 0;
             $YPos = $this->DataSet->Data["GraphArea"]["Y2"] + $Offset;
         } else {
             $XPos = $this->DataSet->Data["GraphArea"]["X2"] + $Offset;
+            $YPos = 0;
         }
         foreach ($Data["Series"] as $SerieName => $Serie) {
             if ($Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"]) {
@@ -10199,6 +10223,8 @@ abstract class Draw extends BaseDraw
 
                         $X = floor($X);
 
+                        // Initializing variable for static code analysis
+                        $Slope = '';
                         if ($X2 == $X1) {
                             $Slope = "!";
                         } else {
@@ -10350,4 +10376,75 @@ abstract class Draw extends BaseDraw
 
         $this->Shadow = $RestoreShadow;
     }
+
+    /**
+     * Returns the 1st decimal values (used to correct AA bugs)
+     *
+     * @param mixed $Value
+     * @return mixed
+     */
+    abstract public function getFirstDecimal($Value);
+
+    /**
+     * Return the HTML converted color from the RGB composite values
+     *
+     * @param int $R
+     * @param int $G
+     * @param int $B
+     * @return string
+     */
+    abstract public function toHTMLColor($R, $G, $B);
+
+    /**
+     * Add a zone to the image map
+     *
+     * @param string $Type
+     * @param string $Plots
+     * @param string|null $Color
+     * @param string $Title
+     * @param string $Message
+     * @param boolean $HTMLEncode
+     */
+    abstract public function addToImageMap(
+        $Type,
+        $Plots,
+        $Color = null,
+        $Title = null,
+        $Message = null,
+        $HTMLEncode = false
+    );
+
+    /**
+     * Return the orientation of a line
+     *
+     * @param int $X1
+     * @param int $Y1
+     * @param int $X2
+     * @param int $Y2
+     * @return int
+     */
+    abstract public function getAngle($X1, $Y1, $X2, $Y2);
+
+    /**
+     * Return the length between two points
+     * @param int $X1
+     * @param int $Y1
+     * @param int $X2
+     * @param int $Y2
+     * @return float
+     */
+    abstract public function getLength($X1, $Y1, $X2, $Y2);
+
+    /**
+     * Set current font properties
+     * @param array $Format
+     */
+    abstract public function setFontProperties($Format = []);
+
+    /**
+     * Reverse an array of points
+     * @param array $Plots
+     * @return array
+     */
+    abstract public function reversePlots(array $Plots);
 }

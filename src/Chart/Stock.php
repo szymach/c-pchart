@@ -104,7 +104,10 @@ class Stock
 
         if ($LineWidth != 1) {
             $LineOffset = $LineWidth / 2;
+        } else {
+            $LineOffset = 0;
         }
+
         $BoxOffset = $BoxWidth / 2;
 
         $Data = $this->pChartObject->DataSet->getData();
@@ -210,6 +213,8 @@ class Stock
                 if ($ShadowOnBoxesOnly) {
                     $RestoreShadow = $this->pChartObject->Shadow;
                     $this->pChartObject->Shadow = false;
+                } else {
+                    $RestoreShadow = false;
                 }
 
                 if ($LineWidth == 1) {
@@ -350,6 +355,8 @@ class Stock
                 if ($ShadowOnBoxesOnly) {
                     $RestoreShadow = $this->pChartObject->Shadow;
                     $this->pChartObject->Shadow = false;
+                } else {
+                    $RestoreShadow = false;
                 }
 
                 if ($ExtremityWidth == 1) {
