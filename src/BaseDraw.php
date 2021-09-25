@@ -395,6 +395,9 @@ abstract class BaseDraw
             $Rescaled = false;
             $Scaled10Factor = .0001;
             $Result = 0;
+            $XMinRescaled = $XMin;
+            $XMaxRescaled = $XMax;
+            $ScaleHeightRescaled = abs($XMaxRescaled - $XMinRescaled);
             while (!$Found) {
                 foreach ($Factors as $Key => $Factor) {
                     if (!$Found) {
@@ -1120,6 +1123,8 @@ abstract class BaseDraw
         list($XMargin, $XDivs) = $this->scaleGetXSettings();
 
         $Data = $this->DataSet->getData();
+        $XPos = 0;
+        $YPos = 0;
         foreach ($Data["Series"] as $SerieName => $Serie) {
             if ($Serie["isDrawable"] == true
                 && $SerieName != $Data["Abscissa"]
@@ -1164,11 +1169,12 @@ abstract class BaseDraw
                         ) {
                             $YPos = $PosArray[$MaxPos] - $DisplayOffset + 2;
                             $Align = TEXT_ALIGN_BOTTOMMIDDLE;
-                        }
-                        if ($MaxLabelPos == BOUND_LABEL_POS_BOTTOM
+                        } elseif ($MaxLabelPos == BOUND_LABEL_POS_BOTTOM
                             || ($MaxLabelPos == BOUND_LABEL_POS_AUTO && $MaxValue < 0)
                         ) {
                             $YPos = $PosArray[$MaxPos] + $DisplayOffset + 2;
+                            $Align = TEXT_ALIGN_TOPMIDDLE;
+                        } else {
                             $Align = TEXT_ALIGN_TOPMIDDLE;
                         }
 
@@ -1209,12 +1215,13 @@ abstract class BaseDraw
                         ) {
                             $YPos = $PosArray[$MinPos] - $DisplayOffset + 2;
                             $Align = TEXT_ALIGN_BOTTOMMIDDLE;
-                        }
-                        if ($MinLabelPos == BOUND_LABEL_POS_BOTTOM
+                        } elseif ($MinLabelPos == BOUND_LABEL_POS_BOTTOM
                             || ($MinLabelPos == BOUND_LABEL_POS_AUTO && $MinValue < 0)
                         ) {
                             $YPos = $PosArray[$MinPos] + $DisplayOffset + 2;
                             $Align = TEXT_ALIGN_TOPMIDDLE;
+                        } else {
+                            $Align = TEXT_ALIGN_MIDDLELEFT;
                         }
 
                         $XPos = $X + $MinPos * $XStep + $SerieOffset;
@@ -1263,12 +1270,13 @@ abstract class BaseDraw
                         ) {
                             $YPos = $PosArray[$MaxPos] + $DisplayOffset + 2;
                             $Align = TEXT_ALIGN_MIDDLELEFT;
-                        }
-                        if ($MaxLabelPos == BOUND_LABEL_POS_BOTTOM
+                        } elseif ($MaxLabelPos == BOUND_LABEL_POS_BOTTOM
                             || ($MaxLabelPos == BOUND_LABEL_POS_AUTO && $MaxValue < 0)
                         ) {
                             $YPos = $PosArray[$MaxPos] - $DisplayOffset + 2;
                             $Align = TEXT_ALIGN_MIDDLERIGHT;
+                        } else {
+                            $Align = TEXT_ALIGN_MIDDLELEFT;
                         }
 
                         $XPos = $X + $MaxPos * $XStep + $SerieOffset;
@@ -1304,12 +1312,13 @@ abstract class BaseDraw
                         ) {
                             $YPos = $PosArray[$MinPos] + $DisplayOffset + 2;
                             $Align = TEXT_ALIGN_MIDDLELEFT;
-                        }
-                        if ($MinLabelPos == BOUND_LABEL_POS_BOTTOM
+                        } elseif ($MinLabelPos == BOUND_LABEL_POS_BOTTOM
                             || ($MinLabelPos == BOUND_LABEL_POS_AUTO && $MinValue < 0)
                         ) {
                             $YPos = $PosArray[$MinPos] - $DisplayOffset + 2;
                             $Align = TEXT_ALIGN_MIDDLERIGHT;
+                        } else {
+                            $Align = TEXT_ALIGN_MIDDLELEFT;
                         }
 
                         $XPos = $X + $MinPos * $XStep + $SerieOffset;
@@ -1408,6 +1417,7 @@ abstract class BaseDraw
                 }
 
                 $MinY = $this->GraphAreaY2;
+                $Description = '';
                 foreach ($SeriesName as $SerieName) {
                     if (isset($Data["Series"][$SerieName]["Data"][$Index])) {
                         $AxisID = $Data["Series"][$SerieName]["Axis"];
@@ -1560,6 +1570,7 @@ abstract class BaseDraw
                 }
 
                 $MinX = $this->GraphAreaX2;
+                $Description = '';
                 foreach ($SeriesName as $Key => $SerieName) {
                     if (isset($Data["Series"][$SerieName]["Data"][$Index])) {
                         $AxisID = $Data["Series"][$SerieName]["Axis"];

@@ -588,7 +588,7 @@ class Spring
                                         $Done = true;
                                     }
                                 }
-                                if (!$Done) {
+                                if (!$Done || false === isset($Angle)) {
                                     $Angle = rand(0, 360);
                                     $this->Data[$BiggestPartner]["Angular"][$Angle] = $Angle;
                                 }

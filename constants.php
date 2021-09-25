@@ -1,12 +1,9 @@
 <?php
 
 /**
- * @filesource src/Resources/data/configuration.php
- *
- * All the class constants moved into a single file for compatibility
- * with the factory service class. This file is *required* for the library
- * to function.
+ * All of the class constants moved into a single file.
  */
+
 /**
  * pBubble
  */

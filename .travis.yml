@@ -26,6 +26,7 @@ before_script: composer update -n $COMPOSER_FLAGS
 
 script:
     - vendor/bin/phpcs
+    - vendor/bin/phpstan analyse -c phpstan.neon
     - vendor/bin/codecept run unit $COVERAGE
 
 after_script:

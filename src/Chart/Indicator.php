@@ -99,6 +99,7 @@ class Indicator
         $XScale = $RealWidth / ($OverallMax - $OverallMin);
 
         $X1 = $X;
+        $X2 = 0;
         $ValuesPos = [];
         foreach ($IndicatorSections as $Key => $Settings) {
             $Color = ["R" => $Settings["R"], "G" => $Settings["G"], "B" => $Settings["B"]];

@@ -243,17 +243,17 @@ class Scatter
                     if ($XLabelsRotation == 0) {
                         $LabelAlign = TEXT_ALIGN_TOPMIDDLE;
                         $LabelOffset = 2;
-                    }
-                    if ($XLabelsRotation > 0 && $XLabelsRotation < 190) {
+                    } elseif ($XLabelsRotation > 0 && $XLabelsRotation < 190) {
                         $LabelAlign = TEXT_ALIGN_MIDDLERIGHT;
                         $LabelOffset = 5;
-                    }
-                    if ($XLabelsRotation == 180) {
+                    } elseif ($XLabelsRotation == 180) {
                         $LabelAlign = TEXT_ALIGN_BOTTOMMIDDLE;
                         $LabelOffset = 5;
-                    }
-                    if ($XLabelsRotation > 180 && $XLabelsRotation < 360) {
+                    } elseif ($XLabelsRotation > 180 && $XLabelsRotation < 360) {
                         $LabelAlign = TEXT_ALIGN_MIDDLELEFT;
+                        $LabelOffset = 2;
+                    } else {
+                        $LabelAlign = TEXT_ALIGN_TOPMIDDLE;
                         $LabelOffset = 2;
                     }
 
@@ -401,18 +401,18 @@ class Scatter
                     if ($XLabelsRotation == 0) {
                         $LabelAlign = TEXT_ALIGN_BOTTOMMIDDLE;
                         $LabelOffset = 2;
-                    }
-                    if ($XLabelsRotation > 0 && $XLabelsRotation < 190) {
+                    } elseif ($XLabelsRotation > 0 && $XLabelsRotation < 190) {
                         $LabelAlign = TEXT_ALIGN_MIDDLELEFT;
                         $LabelOffset = 2;
-                    }
-                    if ($XLabelsRotation == 180) {
+                    } elseif ($XLabelsRotation == 180) {
                         $LabelAlign = TEXT_ALIGN_TOPMIDDLE;
                         $LabelOffset = 5;
-                    }
-                    if ($XLabelsRotation > 180 && $XLabelsRotation < 360) {
+                    } elseif ($XLabelsRotation > 180 && $XLabelsRotation < 360) {
                         $LabelAlign = TEXT_ALIGN_MIDDLERIGHT;
                         $LabelOffset = 5;
+                    } else {
+                        $LabelAlign = TEXT_ALIGN_BOTTOMMIDDLE;
+                        $LabelOffset = 2;
                     }
 
                     if ($Floating) {
@@ -913,6 +913,9 @@ class Scatter
                     list($PicWidth, $PicHeight, $PicType) = $this->pChartObject->getPicInfo($Picture);
                 } else {
                     $Picture = null;
+                    $PicWidth = 0;
+                    $PicHeight = 0;
+                    $PicType = "image/jpeg";
                 }
 
                 $PosArrayX = $this->getPosArray($SerieValuesX, $SerieXAxis);
@@ -1564,7 +1567,8 @@ class Scatter
         $Y = 100;
 
         $Data = $this->pDataObject->getData();
-
+        $IconAreaWidth = 0;
+        $IconAreaHeight = 0;
         foreach ($Data["ScatterSeries"] as $Key => $Series) {
             if ($Series["isDrawable"] == true && isset($Series["Picture"])) {
                 list($PicWidth, $PicHeight) = $this->pChartObject->getPicInfo($Series["Picture"]);

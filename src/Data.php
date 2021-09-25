@@ -1140,6 +1140,7 @@ class Data
 
         $Result = [];
         $Abscissa = [];
+        $return = VOID;
         for ($i = $MinX; $i <= $MaxX; $i = $i + $XStep) {
             $Expression = "\$return = '!'.(" . str_replace("z", $i, $Formula) . ");";
             if (@eval($Expression) === false) {

@@ -139,7 +139,7 @@ class Cache
      * Remove with specified criterias.
      *
      * @param array $Settings
-     * @return int
+     * @return int|null
      */
     public function dbRemoval(array $Settings)
     {
@@ -223,7 +223,7 @@ class Cache
         rename($DatabaseTemp, $Database);
         rename($IndexTemp, $Index);
 
-        return 0;
+        return null;
     }
 
     /**

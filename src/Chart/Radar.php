@@ -151,7 +151,7 @@ class Radar
             $Axisoffset = (360 / $Points) / 2;
         } elseif ($LabelMiddle && $SkipLabels != 1) {
             $Axisoffset = (360 / ($Points / $SkipLabels)) / 2;
-        } elseif (!$LabelMiddle) {
+        } else {//if (!$LabelMiddle) {
             $Axisoffset = 0;
         }
 
@@ -308,7 +308,9 @@ class Radar
                     $EdgeY1 = ($EdgeY2 - $EdgeY1) / 2 + $EdgeY1;
                 }
 
-                $Object->drawText($EdgeX1, $EdgeY1, $Label, $Options);
+                if (isset($EdgeX1) && isset($EdgeY1)) {
+                    $Object->drawText($EdgeX1, $EdgeY1, $Label, $Options);
+                }
             }
         }
 
