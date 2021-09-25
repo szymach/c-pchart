@@ -27,6 +27,7 @@ to post them.
 Build status:
 =============
 - [![Build Status](https://travis-ci.org/szymach/c-pchart.svg?branch=master)](https://travis-ci.org/szymach/c-pchart) master
+- [![Build Status](https://travis-ci.org/szymach/c-pchart.svg?branch=3.0)](https://travis-ci.org/szymach/c-pchart) 3.0
 - [![Build Status](https://travis-ci.org/szymach/c-pchart.svg?branch=2.0)](https://travis-ci.org/szymach/c-pchart) 2.0
 
 About:

@@ -14,19 +14,25 @@ matrix:
         - php: 7.2
         - php: 7.3
         - php: 7.4
+          env:
+            - PHPSTAN=1
         - php: 8.0
           env:
             - COVERAGE='--coverage --coverage-xml'
               XDEBUG_MODE=coverage
+            - PHPSTAN=1
 
 before_install:
     - if [[ ! $COVERAGE ]]; then phpenv config-rm xdebug.ini; fi;
 
-before_script: composer update -n $COMPOSER_FLAGS
+before_script:
+    - composer update -n $COMPOSER_FLAGS
+    - if [[ $PHPSTAN ]]; then composer require --dev phpstan/phpstan ^0.12.99; fi;
 
 script:
+    - vendor/bin/codecept build
     - vendor/bin/phpcs
-    - vendor/bin/phpstan analyse -c phpstan.neon
+    - if [[ $PHPSTAN ]]; then vendor/bin/phpstan analyse -c phpstan.neon; fi;
     - vendor/bin/codecept run unit $COVERAGE
 
 after_script:
