@@ -295,7 +295,7 @@ abstract class BaseDraw
      */
     public function convertAlpha($AlphaValue)
     {
-        return round((127 / 100) * (100 - $AlphaValue));
+        return floor((127 / 100) * (100 - $AlphaValue));
     }
 
     /**
@@ -516,7 +516,7 @@ abstract class BaseDraw
             $Factor = $Factor * 10;
         }
 
-        return round($Value1 * $Factor) % round($Value2 * $Factor);
+        return floor($Value1 * $Factor) % floor($Value2 * $Factor);
     }
 
     /**
