@@ -79,7 +79,7 @@ abstract class Draw extends BaseDraw
             $FillColor = $this->allocateColor($this->Picture, $R, $G, $B, $Alpha);
 
             if (count($Points) >= 6) {
-                ImageFilledPolygon($this->Picture, $Points, count($Points) / 2, $FillColor);
+                ImageFilledPolygon($this->Picture, $Points, $FillColor);
             }
         }
 
@@ -1742,7 +1742,7 @@ abstract class Draw extends BaseDraw
         }
 
         $ArrowColor = $this->allocateColor($this->Picture, $FillR, $FillG, $FillB, $Alpha);
-        ImageFilledPolygon($this->Picture, $Points, 4, $ArrowColor);
+        ImageFilledPolygon($this->Picture, $Points, $ArrowColor);
 
         $this->drawLine(
             $Points[0],
@@ -1792,7 +1792,7 @@ abstract class Draw extends BaseDraw
             }
 
             $ArrowColor = $this->allocateColor($this->Picture, $FillR, $FillG, $FillB, $Alpha);
-            ImageFilledPolygon($this->Picture, $Points, 4, $ArrowColor);
+            ImageFilledPolygon($this->Picture, $Points, $ArrowColor);
 
             $this->drawLine(
                 $Points[0],
