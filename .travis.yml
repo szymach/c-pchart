@@ -29,5 +29,4 @@ script:
     - vendor/bin/phpcs
     - vendor/bin/codecept run unit $COVERAGE
 
-after_script:
-    - if [[ $COVERAGE ]]; then ./coverage.sh; fi;
+after_script: if [[ $COVERAGE ]]; then ./coverage.sh; fi;
