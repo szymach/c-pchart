@@ -1697,4 +1697,24 @@ abstract class BaseDraw
             }
         }
     }
+
+    /**
+     * @param GdImage|resource $image
+     * @param array $points
+     * @param int $numPoints
+     * @param int $color
+     * @return void
+     */
+    protected function imageFilledPolygonWrapper(
+        $image,
+        array $points,
+        $numPoints,
+        $color
+    ) {
+        if (version_compare(PHP_VERSION, '8.1.0') === -1) {
+            imagefilledpolygon($image, $points, $numPoints, $color);
+        } else {
+            imagefilledpolygon($image, $points, $color);
+        }
+    }
 }
