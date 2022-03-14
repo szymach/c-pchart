@@ -25,7 +25,7 @@
         "psr-4": { "CpChart\\Test\\": "tests/" }
     },
     "require": {
-        "php": "^5.4|^7.0|8.0.*",
+        "php": "^5.4|^7.0|^8.0",
         "ext-gd": "*"
     },
     "require-dev" : {
