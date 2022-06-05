@@ -46,7 +46,7 @@ any of these.
 
 What was done:
 
-- Support for PHP versions from 5.4 to 8.0.
+- Support for PHP versions from 5.4 to 8.1.
 
 - Made a full port of the library's functionality. I have touched very little of
 the actual logic, so most code from the original library should work.
