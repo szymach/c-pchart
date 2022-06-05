@@ -4,8 +4,8 @@
     <rule ref="PSR2"/>
 
     <file>src</file>
+    <file>tests</file>
 
-    <exclude-pattern>tests/*</exclude-pattern>
     <exclude-pattern>vendor/*</exclude-pattern>
     <exclude-pattern>*.db</exclude-pattern>
     <exclude-pattern>*.color</exclude-pattern>
@@ -17,5 +17,10 @@
     <arg name="report-width" value="120"/>
     <arg name="colors"/>
     <arg value="p"/>
+
+    <rule ref="PSR2.Methods.MethodDeclaration">
+        <exclude-pattern>tests/unit/*Test.php</exclude-pattern>
+        <exclude-pattern>tests/_support/Helper/Unit.php</exclude-pattern>
+    </rule>
 
 </ruleset>

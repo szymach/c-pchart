@@ -1,5 +1,7 @@
 <?php
 
+namespace Test\CpChart;
+
 /**
  * Inherited Methods
  * @method void wantToTest($text)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Helper;
+namespace Test\CpChart\Helper;
 
 use Codeception\Module;
 use Codeception\Module\Filesystem;
