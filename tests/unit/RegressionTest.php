@@ -1,21 +1,12 @@
 <?php
 
-/**
- * (c) FSi sp. z o.o. <info@fsi.pl>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-declare(strict_types=1);
-
 namespace Test\CpChart;
 
 use Codeception\Test\Unit;
 use CpChart\Chart\Radar;
 use CpChart\Data;
 use CpChart\Image;
-use UnitTester;
+use Test\CpChart\UnitTester;
 
 use const RADAR_LAYOUT_CIRCLE;
 

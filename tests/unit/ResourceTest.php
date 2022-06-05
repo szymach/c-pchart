@@ -5,7 +5,7 @@ namespace Test\CpChart;
 use Codeception\Test\Unit;
 use CpChart\Data;
 use CpChart\Image;
-use UnitTester;
+use Test\CpChart\UnitTester;
 
 class ResourceTest extends Unit
 {
@@ -17,21 +17,33 @@ class ResourceTest extends Unit
     public function testInvalidResourceLoading()
     {
         $data = new Data();
-        $this->tester->expectException('\Exception', function() use ($data) {
-            $data->loadPalette('nonExistantPalette');
-        });
+        $this->tester->expectThrowable(
+            '\Exception',
+            function () use ($data) {
+                $data->loadPalette('nonExistantPalette');
+            }
+        );
 
         $image = new Image(700, 230, $data);
 
-        $this->tester->expectException('\Exception', function() use ($image) {
-            $image->setResourcePath('nonExistantDirectory');
-        });
-        $this->tester->expectException('\Exception', function() use ($image) {
-            $image->setFontProperties(["FontName" => "nonExistantFont"]);
-        });
-        $this->tester->expectException('\Exception', function() use ($image) {
-            $image->getLegendSize(['Font' => 'nonExistantFont']);
-        });
+        $this->tester->expectThrowable(
+            '\Exception',
+            function () use ($image) {
+                $image->setResourcePath('nonExistantDirectory');
+            }
+        );
+        $this->tester->expectThrowable(
+            '\Exception',
+            function () use ($image) {
+                $image->setFontProperties(['FontName' => 'nonExistantFont']);
+            }
+        );
+        $this->tester->expectThrowable(
+            '\Exception',
+            function () use ($image) {
+                $image->getLegendSize(['Font' => 'nonExistantFont']);
+            }
+        );
     }
 
     public function testValidPaletteLoading()
@@ -41,7 +53,7 @@ class ResourceTest extends Unit
 
         $image = new Image(700, 230, $data);
         $firstCoordinates = [[40, 80], [280, 60], [340, 166], [590, 120]];
-        $fistSplineSettings = ["R" => 255, "G" => 255, "B" => 255, "ShowControl" => true];
+        $fistSplineSettings = ['R' => 255, 'G' => 255, 'B' => 255, 'ShowControl' => true];
         $image->drawSpline($firstCoordinates, $fistSplineSettings);
         $filename = $this->tester->getOutputPathForChart('drawSpline.png');
         $image->render($filename);
@@ -51,8 +63,11 @@ class ResourceTest extends Unit
     public function testInvalidPaletteLoading()
     {
         $data = new Data();
-        $this->tester->expectException('\Exception', function() use ($data) {
-            $data->loadPalette(sprintf('non_existant_palette', __DIR__), true);
-        });
+        $this->tester->expectThrowable(
+            '\Exception',
+            function () use ($data) {
+                $data->loadPalette(sprintf('non_existant_palette', __DIR__), true);
+            }
+        );
     }
 }

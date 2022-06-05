@@ -6,13 +6,12 @@ use Codeception\Test\Unit;
 use CpChart\Cache;
 use CpChart\Data;
 use CpChart\Image;
-use UnitTester;
+use Test\CpChart\UnitTester;
+
+use const DIRECTION_VERTICAL;
 
 class CacheTest extends Unit
 {
-    const CACHE_DB = 'cache.db';
-    const INDEX_DB = 'index.db';
-
     /**
      * @var UnitTester
      */
@@ -26,8 +25,8 @@ class CacheTest extends Unit
         $cache = new Cache();
         $chartHash = $cache->getHash($data);
         $cache->writeToCache($chartHash, $image);
-        $this->tester->seeFileFound($this->getCacheFilePath(self::CACHE_DB));
-        $this->tester->seeFileFound($this->getCacheFilePath(self::INDEX_DB));
+        $this->tester->seeFileFound($this->getCacheFilePath('cache.db'));
+        $this->tester->seeFileFound($this->getCacheFilePath('index.db'));
         $this->tester->assertEquals(true, $cache->isInCache($chartHash));
 
         // Render and then remove the chart
@@ -89,29 +88,45 @@ class CacheTest extends Unit
         $data->addPoints([1, 3, 4, 3, 5]);
 
         $image = new Image(700, 230, $data);
-        $image->setFontProperties(["FontName" => "Forgotte.ttf", "FontSize" => 11]);
+        $image->setFontProperties(['FontName' => 'Forgotte.ttf', 'FontSize' => 11]);
         $image->setGraphArea(60, 40, 670, 190);
         $image->drawScale();
         $image->drawSplineChart();
-        $image->drawGradientArea(0, 0, 700, 20, DIRECTION_VERTICAL,
-            ["StartR" => 0, "StartG" => 0, "StartB" => 0, "EndR" => 50, "EndG" => 50, "EndB" => 50, "Alpha" => 100]
+        $image->drawGradientArea(
+            0,
+            0,
+            700,
+            20,
+            DIRECTION_VERTICAL,
+            [   'StartR' => 0, 'StartG' => 0, 'StartB' => 0, 'EndR' => 50, 'EndG' => 50,
+                'EndB' => 50, 'Alpha' => 100
+            ]
         );
-        $image->setFontProperties(["FontName" => "Silkscreen.ttf", "FontSize" => 6]);
-        $image->drawText(10, 13, "Test of the pCache class", ["R" => 255, "G" => 255, "B" => 255]);
+        $image->setFontProperties(['FontName' => 'Silkscreen.ttf', 'FontSize' => 6]);
+        $image->drawText(
+            10,
+            13,
+            'Test of the pCache class',
+            ['R' => 255, 'G' => 255, 'B' => 255]
+        );
 
         return [$data, $image];
     }
 
     private function clearCache()
     {
-        foreach ([self::CACHE_DB, self::INDEX_DB] as $cacheFile) {
+        foreach (['cache.db', 'index.db'] as $cacheFile) {
             $filename = $this->getCacheFilePath($cacheFile);
-            if (file_exists($filename)) {
+            if (true === file_exists($filename)) {
                 unlink($filename);
             }
         }
     }
 
+    /**
+     * @param string $filename
+     * @return string
+     */
     private function getCacheFilePath($filename)
     {
         return sprintf('%s/%s', $this->tester->getCacheDirectory(), $filename);
