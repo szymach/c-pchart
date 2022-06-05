@@ -6,3 +6,7 @@ parameters:
     excludes_analyse:
         - %currentWorkingDirectory%/_data/*
         - %currentWorkingDirectory%/_output/*
+    ignoreErrors:
+        -
+            message: '#Function imagefilledpolygon invoked with 3 parameters\, 4 required\.#'
+            path: %currentWorkingDirectory%/src/BaseDraw.php
