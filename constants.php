@@ -1,7 +1,9 @@
 <?php
 
 /**
- * All of the class constants moved into a single file.
+ * @filesource src/Resources/data/configuration.php
+ *
+ * All the class constants that were previously in class files are moved here into a single file.
  */
 
 /**

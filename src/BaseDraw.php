@@ -295,7 +295,7 @@ abstract class BaseDraw
      */
     public function convertAlpha($AlphaValue)
     {
-        return (127 / 100) * (100 - $AlphaValue);
+        return floor((127 / 100) * (100 - $AlphaValue));
     }
 
     /**
@@ -510,7 +510,7 @@ abstract class BaseDraw
             return 0;
         }
         if (floor($Value2) != 0) {
-            return $Value1 % $Value2;
+            return (int) $Value1 % (int) $Value2;
         }
 
         $MinValue = min($Value1, $Value2);
@@ -519,7 +519,7 @@ abstract class BaseDraw
             $Factor = $Factor * 10;
         }
 
-        return ($Value1 * $Factor) % ($Value2 * $Factor);
+        return floor($Value1 * $Factor) % floor($Value2 * $Factor);
     }
 
     /**
@@ -1712,6 +1712,7 @@ abstract class BaseDraw
     }
 
     /**
+<<<<<<< HEAD
      * @param int $X
      * @param int $Y
      * @param string $FontName
@@ -1766,4 +1767,24 @@ abstract class BaseDraw
      * @param array $Format
      */
     abstract public function drawFilledRectangle($X1, $Y1, $X2, $Y2, array $Format = []);
+
+    /**
+     * @param GdImage|resource $image
+     * @param array $points
+     * @param int $numPoints
+     * @param int $color
+     * @return void
+     */
+    protected function imageFilledPolygonWrapper(
+        $image,
+        array $points,
+        $numPoints,
+        $color
+    ) {
+        if (version_compare(PHP_VERSION, '8.1.0') === -1) {
+            imagefilledpolygon($image, $points, $numPoints, $color);
+        } else {
+            imagefilledpolygon($image, $points, $color);
+        }
+    }
 }
