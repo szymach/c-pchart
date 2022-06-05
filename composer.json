@@ -22,7 +22,12 @@
         "files": ["constants.php"]
     },
     "autoload-dev": {
-        "psr-4": { "Test\\CpChart\\": "tests/" }
+        "psr-4": {
+            "Test\\CpChart\\": [
+                "tests/unit/",
+                "tests/_support/"
+            ]
+        }
     },
     "require": {
         "php": "^5.4|^7.0|^8.0",

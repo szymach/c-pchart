@@ -26,9 +26,9 @@ to post them.
 
 Build status:
 =============
-- [![Build Status](https://travis-ci.org/szymach/c-pchart.svg?branch=master)](https://travis-ci.org/szymach/c-pchart) master
-- [![Build Status](https://travis-ci.org/szymach/c-pchart.svg?branch=3.0)](https://travis-ci.org/szymach/c-pchart) 3.0
-- [![Build Status](https://travis-ci.org/szymach/c-pchart.svg?branch=2.0)](https://travis-ci.org/szymach/c-pchart) 2.0
+- [![Build Status](https://app.travis-ci.com/szymach/c-pchart.svg?branch=master)](https://app.travis-ci.com/szymach/c-pchart) master
+- [![Build Status](https://app.travis-ci.com/szymach/c-pchart.svg?branch=3.0)](https://app.travis-ci.com/szymach/c-pchart) 3.0
+- [![Build Status](https://app.travis-ci.com/szymach/c-pchart.svg?branch=2.0)](https://app.travis-ci.com/szymach/c-pchart) 2.0
 
 About:
 ======
@@ -46,7 +46,7 @@ any of these.
 
 What was done:
 
-- Support for PHP versions from 5.4 to 8.0.
+- Support for PHP versions from 5.4 to 8.1.
 
 - Made a full port of the library's functionality. I have touched very little of
 the actual logic, so most code from the original library should work.
