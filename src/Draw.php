@@ -208,10 +208,10 @@ abstract class Draw extends BaseDraw
         $Surrounding = isset($Format["Surrounding"]) ? $Format["Surrounding"] : null;
 
         /* Temporary fix for AA issue */
-        $Y1 = floor($Y1);
-        $Y2 = floor($Y2);
-        $X1 = floor($X1);
-        $X2 = floor($X2);
+        $Y1 = (int) floor($Y1);
+        $Y2 = (int) floor($Y2);
+        $X1 = (int) floor($X1);
+        $X2 = (int) floor($X2);
 
         if ($Surrounding != null) {
             $BorderR = $R + $Surrounding;
@@ -227,10 +227,10 @@ abstract class Draw extends BaseDraw
         list($X1, $Y1, $X2, $Y2) = $this->fixBoxCoordinates($X1, $Y1, $X2, $Y2);
 
         if ($X2 - $X1 < $Radius * 2) {
-            $Radius = floor((($X2 - $X1)) / 4);
+            $Radius = (int) floor((($X2 - $X1)) / 4);
         }
         if ($Y2 - $Y1 < $Radius * 2) {
-            $Radius = floor((($Y2 - $Y1)) / 4);
+            $Radius = (int) floor((($Y2 - $Y1)) / 4);
         }
 
         $RestoreShadow = $this->Shadow;
@@ -269,7 +269,7 @@ abstract class Draw extends BaseDraw
         for ($i = 0; $i <= 90; $i = $i + $Step) {
             $Xp1 = cos(($i + 180) * PI / 180) * $Radius + $X1 + $Radius;
             $Xp2 = cos(((90 - $i) + 270) * PI / 180) * $Radius + $X2 - $Radius;
-            $Yp = floor(sin(($i + 180) * PI / 180) * $Radius + $YTop);
+            $Yp = (int) floor(sin(($i + 180) * PI / 180) * $Radius + $YTop);
             if (null === $MinY || $Yp > $MinY) {
                 $MinY = $Yp;
             }
@@ -292,7 +292,7 @@ abstract class Draw extends BaseDraw
 
             $Xp1 = cos(($i + 90) * PI / 180) * $Radius + $X1 + $Radius;
             $Xp2 = cos((90 - $i) * PI / 180) * $Radius + $X2 - $Radius;
-            $Yp = floor(sin(($i + 90) * PI / 180) * $Radius + $YBottom);
+            $Yp = (int) floor(sin(($i + 90) * PI / 180) * $Radius + $YBottom);
             if (null === $MaxY || $Yp < $MaxY) {
                 $MaxY = $Yp;
             }
@@ -316,19 +316,19 @@ abstract class Draw extends BaseDraw
 
         $ManualColor = $this->allocateColor($this->Picture, $R, $G, $B, $Alpha);
         foreach ($Positions as $Yp => $Bounds) {
-            $X1 = $Bounds["X1"];
+            $X1 = (int) $Bounds["X1"];
             $X1Dec = $this->getFirstDecimal($X1);
             if ($X1Dec != 0) {
-                $X1 = floor($X1) + 1;
+                $X1 = (int) floor($X1) + 1;
             }
-            $X2 = $Bounds["X2"];
+            $X2 = (int) $Bounds["X2"];
             $X2Dec = $this->getFirstDecimal($X2);
             if ($X2Dec != 0) {
-                $X2 = floor($X2) - 1;
+                $X2 = (int) floor($X2) - 1;
             }
             imageline($this->Picture, $X1, $Yp, $X2, $Yp, $ManualColor);
         }
-        $this->drawFilledRectangle($X1, $MinY + 1, floor($X2), $MaxY - 1, $Color);
+        $this->drawFilledRectangle($X1, $MinY + 1, (int) floor($X2), $MaxY - 1, $Color);
 
         $Radius++;
         $this->drawRoundedRectangle(
@@ -852,6 +852,10 @@ abstract class Draw extends BaseDraw
      */
     public function drawLine($X1, $Y1, $X2, $Y2, array $Format = [])
     {
+        $X1 = (int) $X1;
+        $Y1 = (int) $Y1;
+        $X2 = (int) $X2;
+        $Y2 = (int) $Y2;
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
         $B = isset($Format["B"]) ? $Format["B"] : 0;
@@ -1112,8 +1116,8 @@ abstract class Draw extends BaseDraw
             $BorderG = $G + $Surrounding;
             $BorderB = $B + $Surrounding;
         }
-        $X = floor($X);
-        $Y = floor($Y);
+        $X = (int) floor($X);
+        $Y = (int) floor($Y);
 
         $Radius = abs($Radius);
 
@@ -1138,9 +1142,8 @@ abstract class Draw extends BaseDraw
         $Color = $this->allocateColor($this->Picture, $R, $G, $B, $Alpha);
         for ($i = 0; $i <= $Radius * 2; $i++) {
             $Slice = sqrt($Radius * $Radius - ($Radius - $i) * ($Radius - $i));
-            $XPos = floor($Slice);
-            $YPos = $Y + $i - $Radius;
-            $AAlias = $Slice - floor($Slice);
+            $XPos = (int) floor($Slice);
+            $YPos = (int) ($Y + $i - $Radius);
 
             $this->Mask[$X - $XPos][$YPos] = true;
             $this->Mask[$X + $XPos][$YPos] = true;
@@ -1185,6 +1188,8 @@ abstract class Draw extends BaseDraw
      */
     public function drawText($X, $Y, $Text, array $Format = [])
     {
+        $X = (int) $X;
+        $Y = (int) $Y;
         $R = isset($Format["R"]) ? $Format["R"] : $this->FontColorR;
         $G = isset($Format["G"]) ? $Format["G"] : $this->FontColorG;
         $B = isset($Format["B"]) ? $Format["B"] : $this->FontColorB;
@@ -1285,8 +1290,8 @@ abstract class Draw extends BaseDraw
             }
         }
 
-        $X = $X - $TxtPos[$Align]["X"] + $X;
-        $Y = $Y - $TxtPos[$Align]["Y"] + $Y;
+        $X = (int) ($X - $TxtPos[$Align]["X"] + $X);
+        $Y = (int) ($Y - $TxtPos[$Align]["Y"] + $Y);
 
         if ($this->Shadow && $this->ShadowX != 0 && $this->ShadowY != 0) {
             $C_ShadowColor = $this->allocateColor(
@@ -1300,9 +1305,9 @@ abstract class Draw extends BaseDraw
                 $this->Picture,
                 $FontSize,
                 $Angle,
-                $X + $this->ShadowX,
-                $Y + $this->ShadowY,
-                $C_ShadowColor,
+                (int) ($X + $this->ShadowX),
+                (int) ($Y + $this->ShadowY),
+                (int) $C_ShadowColor,
                 $FontName,
                 $Text
             );
@@ -1444,6 +1449,8 @@ abstract class Draw extends BaseDraw
      */
     public function drawAntialiasPixel($X, $Y, array $Format = [])
     {
+        $X = (int) $X;
+        $Y = (int) $Y;
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
         $B = isset($Format["B"]) ? $Format["B"] : 0;
@@ -1455,17 +1462,20 @@ abstract class Draw extends BaseDraw
 
         if ($R < 0) {
             $R = 0;
-        } if ($R > 255) {
+        }
+        if ($R > 255) {
             $R = 255;
         }
         if ($G < 0) {
             $G = 0;
-        } if ($G > 255) {
+        }
+        if ($G > 255) {
             $G = 255;
         }
         if ($B < 0) {
             $B = 0;
-        } if ($B > 255) {
+        }
+        if ($B > 255) {
             $B = 255;
         }
 
@@ -1531,6 +1541,9 @@ abstract class Draw extends BaseDraw
      */
     public function drawAlphaPixel($X, $Y, $Alpha, $R, $G, $B)
     {
+        $X = (int) $X;
+        $Y = (int) $Y;
+
         if (isset($this->Mask[$X]) && isset($this->Mask[$X][$Y])) {
             return 0;
         }
@@ -1563,7 +1576,12 @@ abstract class Draw extends BaseDraw
                 $this->ShadowB,
                 $AlphaFactor
             );
-            imagesetpixel($this->Picture, $X + $this->ShadowX, $Y + $this->ShadowY, $ShadowColor);
+            imagesetpixel(
+                $this->Picture,
+                (int) ($X + $this->ShadowX),
+                (int) ($Y + $this->ShadowY),
+                $ShadowColor
+            );
         }
 
         $C_Aliased = $this->allocateColor($this->Picture, $R, $G, $B, $Alpha);
@@ -1613,6 +1631,9 @@ abstract class Draw extends BaseDraw
      */
     public function drawFromPicture($PicType, $FileName, $X, $Y)
     {
+        $X = (int) $X;
+        $Y = (int) $Y;
+
         if (file_exists($FileName)) {
             list($Width, $Height) = $this->getPicInfo($FileName);
 
@@ -1855,7 +1876,7 @@ abstract class Draw extends BaseDraw
         $FontSize = isset($Format["FontSize"]) ? $Format["FontSize"] : $this->FontSize;
         $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
         $Length = isset($Format["Length"]) ? $Format["Length"] : 50;
-        $Angle = isset($Format["Angle"]) ? $Format["Angle"] : 315;
+        $Angle = isset($Format["Angle"]) ? ((int) $Format["Angle"]) : 315;
         $Size = isset($Format["Size"]) ? $Format["Size"] : 10;
         $Position = isset($Format["Position"]) ? $Format["Position"] : POSITION_TOP;
         $RoundPos = isset($Format["RoundPos"]) ? $Format["RoundPos"] : false;

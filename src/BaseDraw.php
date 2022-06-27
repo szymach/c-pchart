@@ -264,17 +264,20 @@ abstract class BaseDraw
     {
         if ($R < 0) {
             $R = 0;
-        } if ($R > 255) {
+        }
+        if ($R > 255) {
             $R = 255;
         }
         if ($G < 0) {
             $G = 0;
-        } if ($G > 255) {
+        }
+        if ($G > 255) {
             $G = 255;
         }
         if ($B < 0) {
             $B = 0;
-        } if ($B > 255) {
+        }
+        if ($B > 255) {
             $B = 255;
         }
         if ($Alpha < 0) {
@@ -285,7 +288,7 @@ abstract class BaseDraw
         }
 
         $Alpha = $this->convertAlpha($Alpha);
-        return imagecolorallocatealpha($Picture, $R, $G, $B, $Alpha);
+        return imagecolorallocatealpha($Picture, (int) $R, (int) $G, (int) $B, (int) $Alpha);
     }
 
     /**
@@ -573,7 +576,12 @@ abstract class BaseDraw
      */
     public function fixBoxCoordinates($Xa, $Ya, $Xb, $Yb)
     {
-        return [min($Xa, $Xb), min($Ya, $Yb), max($Xa, $Xb), max($Ya, $Yb)];
+        return [
+            (int) min($Xa, $Xb),
+            (int) min($Ya, $Yb),
+            (int) max($Xa, $Xb),
+            (int) max($Ya, $Yb)
+        ];
     }
 
     /**
