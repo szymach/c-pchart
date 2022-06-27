@@ -13,3 +13,9 @@ coverage:
     enabled: true
     include:
         - src/*
+settings:
+    be_strict_about_changes_to_global_state: true
+    convert_deprecations_to_exceptions: true
+    colors: true
+    error_level: E_ALL | E_STRICT | E_DEPRECATED
+    report_useless_tests: true
