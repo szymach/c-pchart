@@ -6,6 +6,7 @@ parameters:
     excludePaths:
         - %currentWorkingDirectory%/_data/*
         - %currentWorkingDirectory%/_output/*
+    reportUnmatchedIgnoredErrors: false
     ignoreErrors:
         -
             message: '#Function imagefilledpolygon invoked with 3 parameters\, 4 required\.#'
