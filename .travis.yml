@@ -28,7 +28,7 @@ before_install:
 
 before_script:
     - composer update -n $COMPOSER_FLAGS
-    - if [[ $PHPSTAN ]]; then composer require --dev phpstan/phpstan ^0.12.99; fi;
+    - if [[ $PHPSTAN ]]; then composer require --dev phpstan/phpstan ^1.7; fi;
 
 script:
     - vendor/bin/codecept build

@@ -908,9 +908,6 @@ class Data
                 continue;
             }
             $row = explode(',', $line);
-            if (empty($row)) {
-                continue;
-            }
             if (count($row) !== 4) {
                 throw new RuntimeException(sprintf(
                     'A palette row must supply R, G, B and Alpha components, %s given!',
