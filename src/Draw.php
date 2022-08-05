@@ -1488,7 +1488,7 @@ abstract class Draw extends BaseDraw
             }
 
             $PlotColor = $this->allocateColor($this->Picture, $R, $G, $B, $Alpha);
-            imagesetpixel($this->Picture, $X, $Y, $PlotColor);
+            imagesetpixel($this->Picture, (int) $X, (int) $Y, $PlotColor);
 
             return 0;
         }
