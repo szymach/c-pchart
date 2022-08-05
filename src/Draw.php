@@ -852,10 +852,6 @@ abstract class Draw extends BaseDraw
      */
     public function drawLine($X1, $Y1, $X2, $Y2, array $Format = [])
     {
-        $X1 = (int) $X1;
-        $Y1 = (int) $Y1;
-        $X2 = (int) $X2;
-        $Y2 = (int) $Y2;
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
         $B = isset($Format["B"]) ? $Format["B"] : 0;
@@ -877,16 +873,16 @@ abstract class Draw extends BaseDraw
                 );
                 imageline(
                     $this->Picture,
-                    $X1 + $this->ShadowX,
-                    $Y1 + $this->ShadowY,
-                    $X2 + $this->ShadowX,
-                    $Y2 + $this->ShadowY,
+                    intval($X1 + $this->ShadowX),
+                    intval($Y1 + $this->ShadowY),
+                    intval($X2 + $this->ShadowX),
+                    intval($Y2 + $this->ShadowY),
                     $ShadowColor
                 );
             }
 
             $Color = $this->allocateColor($this->Picture, $R, $G, $B, $Alpha);
-            imageline($this->Picture, $X1, $Y1, $X2, $Y2, $Color);
+            imageline($this->Picture, (int) $X1, (int) $Y1, (int) $X2, (int) $Y2, $Color);
             return 0;
         }
 
@@ -1188,8 +1184,6 @@ abstract class Draw extends BaseDraw
      */
     public function drawText($X, $Y, $Text, array $Format = [])
     {
-        $X = (int) $X;
-        $Y = (int) $Y;
         $R = isset($Format["R"]) ? $Format["R"] : $this->FontColorR;
         $G = isset($Format["G"]) ? $Format["G"] : $this->FontColorG;
         $B = isset($Format["B"]) ? $Format["B"] : $this->FontColorB;
@@ -1449,8 +1443,6 @@ abstract class Draw extends BaseDraw
      */
     public function drawAntialiasPixel($X, $Y, array $Format = [])
     {
-        $X = (int) $X;
-        $Y = (int) $Y;
         $R = isset($Format["R"]) ? $Format["R"] : 0;
         $G = isset($Format["G"]) ? $Format["G"] : 0;
         $B = isset($Format["B"]) ? $Format["B"] : 0;
@@ -1488,11 +1480,11 @@ abstract class Draw extends BaseDraw
                     $this->ShadowB,
                     $this->Shadowa
                 );
-                imagesetpixel($this->Picture, $X + $this->ShadowX, $Y + $this->ShadowY, $ShadowColor);
+                imagesetpixel($this->Picture, intval($X + $this->ShadowX), intval($Y + $this->ShadowY), $ShadowColor);
             }
 
             $PlotColor = $this->allocateColor($this->Picture, $R, $G, $B, $Alpha);
-            imagesetpixel($this->Picture, $X, $Y, $PlotColor);
+            imagesetpixel($this->Picture, (int) $X, (int) $Y, $PlotColor);
 
             return 0;
         }
@@ -1541,9 +1533,6 @@ abstract class Draw extends BaseDraw
      */
     public function drawAlphaPixel($X, $Y, $Alpha, $R, $G, $B)
     {
-        $X = (int) $X;
-        $Y = (int) $Y;
-
         if (isset($this->Mask[$X]) && isset($this->Mask[$X][$Y])) {
             return 0;
         }
@@ -1585,7 +1574,7 @@ abstract class Draw extends BaseDraw
         }
 
         $C_Aliased = $this->allocateColor($this->Picture, $R, $G, $B, $Alpha);
-        imagesetpixel($this->Picture, $X, $Y, $C_Aliased);
+        imagesetpixel($this->Picture, (int) $X, (int) $Y, $C_Aliased);
     }
 
     /**
