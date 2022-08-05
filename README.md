@@ -26,7 +26,7 @@ to post them.
 
 Build status:
 =============
-- [![Build Status](https://app.travis-ci.com/szymach/c-pchart.svg?branch=master)](https://app.travis-ci.com/szymach/c-pchart) master
+- [![Build Status](https://app.travis-ci.com/szymach/c-pchart.svg?branch=main)](https://app.travis-ci.com/szymach/c-pchart) main
 - [![Build Status](https://app.travis-ci.com/szymach/c-pchart.svg?branch=3.0)](https://app.travis-ci.com/szymach/c-pchart) 3.0
 - [![Build Status](https://app.travis-ci.com/szymach/c-pchart.svg?branch=2.0)](https://app.travis-ci.com/szymach/c-pchart) 2.0
 
