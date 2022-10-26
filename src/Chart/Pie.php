@@ -388,14 +388,7 @@ class Pie
                     $Yc = sin(($Angle - 90) * PI / 180) * ($Radius) / 2 + $Y;
                 }
 
-                if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
-                } elseif ($WriteValues == PIE_VALUE_NATURAL) {
-                    $Display = $Value . $ValueSuffix;
-                } elseif (false === isset($Display)) {
-                    $Display = '';
-                }
-
+                $Display = $this->getDisplayValue($Value, $WriteValues, $SerieSum, $Precision, $ValueSuffix);
                 $this->pChartObject->drawText($Xc, $Yc, $Display, $Settings);
 
                 $Offset = $EndAngle + $DataGapAngle;
@@ -919,14 +912,7 @@ class Pie
                     $Yc = sin(($Angle - 90) * PI / 180) * ($Radius * $SkewFactor) / 2 + $Y - $SliceHeight;
                 }
 
-                if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
-                } elseif ($WriteValues == PIE_VALUE_NATURAL) {
-                    $Display = $Value . $ValueSuffix;
-                } elseif (false === isset($Display)) {
-                    $Display = '';
-                }
-
+                $Display = $this->getDisplayValue($Value, $WriteValues, $SerieSum, $Precision, $ValueSuffix);
                 $this->pChartObject->drawText($Xc, $Yc, $Display, $Settings);
 
                 $Offset = $EndAngle - $DataGapAngle;
@@ -1661,13 +1647,7 @@ class Pie
                     $Align = TEXT_ALIGN_MIDDLEMIDDLE;
                 }
 
-                if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
-                } elseif ($WriteValues == PIE_VALUE_NATURAL) {
-                    $Display = $Value . $ValueSuffix;
-                } else {
-                    $Display = "";
-                }
+                $Display = $this->getDisplayValue($Value, $WriteValues, $SerieSum, $Precision, $ValueSuffix);
                 $this->pChartObject->drawText(
                     $Xc,
                     $Yc,
@@ -2337,5 +2317,49 @@ class Pie
         $Data["Series"][$AbscissaSerie]["Data"] = $NewAbscissa;
 
         return [$Data, $NewPalette];
+    }
+
+    /**
+     * Returns the value to display on a pie chart.
+     *
+     * @param int|float $Value
+     *   The value of current item.
+     * @param int $WriteValues
+     *   The type of value to write:
+     *   - PIE_VALUE_NATURAL for an absolute value;
+     *   - PIE_VALUE_PERCENTAGE for a percentage value;
+     *   - PIE_VALUE_BOTH for both an absolute and percentage value.
+     * @param int $SerieSum
+     *   The sum of all items.
+     * @param int $Precision
+     *   The number of decimal digits to round to, in case of displaying a percentage.
+     * @param string $ValueSuffix
+     *   The text to display after the value, in case an absolute value gets displayed.
+     *
+     * @return string
+     *   The value to use for display.
+     */
+    protected function getDisplayValue($Value, $WriteValues, $SerieSum, $Precision, $ValueSuffix)
+    {
+        if ($WriteValues == PIE_VALUE_NATURAL || $WriteValues == PIE_VALUE_BOTH) {
+            $Absolute = $Value . $ValueSuffix;
+        }
+        if ($WriteValues == PIE_VALUE_PERCENTAGE || $WriteValues == PIE_VALUE_BOTH) {
+            $Percentage = round((100 / $SerieSum) * $Value, $Precision) . '%';
+        }
+
+        switch ($WriteValues) {
+            case PIE_VALUE_NATURAL:
+                return $Absolute;
+
+            case PIE_VALUE_PERCENTAGE:
+                return $Percentage;
+
+            case PIE_VALUE_BOTH:
+                return $Absolute . "\n(" . $Percentage . ')';
+        }
+
+        /* If an invalid option was chosen for $WriteValues, return an empty string. */
+        return '';
     }
 }
