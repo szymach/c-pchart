@@ -427,6 +427,7 @@ class Radar
         $Plot = [];
         foreach ($Data["Series"] as $SerieName => $DataS) {
             if ($SerieName != $LabelSerie) {
+                $Series[$ID] = &$Data["Series"][$SerieName]; // Map $ID to series to allow customisation
                 $Color = [
                     "R" => $Palette[$ID]["R"],
                     "G" => $Palette[$ID]["G"],
@@ -535,7 +536,7 @@ class Radar
                     $Points[count($Points) - 1][1],
                     $Points[0][0],
                     $Points[0][1],
-                    $Color
+                    $Color + (isset($Format['LineWeight']) ? [ 'Weight' => $Format['LineWeight'] ] : [] ),
                 );
             }
 
@@ -547,16 +548,26 @@ class Radar
                         $Points[$i][1],
                         $Points[$i + 1][0],
                         $Points[$i + 1][1],
-                        $Color
+                        $Color + (isset($Format['LineWeight']) ? [ 'Weight' => $Format['LineWeight'] ] : [] ),
                     );
                 }
                 if ($DrawPoints) {
-                    $Object->drawFilledCircle(
+                    $Object->drawShape(
                         $Points[$i][0],
                         $Points[$i][1],
+                        (isset($Series[$ID]['Shape']) ? $Series[$ID]['Shape'] : SERIE_SHAPE_CIRCLE),
                         $PointRadius,
-                        $Color
-                    );
+                        true,
+                        1,
+                        $Color['R'],
+                        $Color['G'],
+                        $Color['B'],
+                        $Color['Alpha'],
+                        0,
+                        0,
+                        0,
+                        100
+                    );      
                 }
                 if ($WriteValuesInBubble && $WriteValues) {
                     $TxtPos = $this->pChartObject->getTextBox(

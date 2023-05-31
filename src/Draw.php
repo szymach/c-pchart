@@ -2383,6 +2383,7 @@ abstract class Draw extends BaseDraw
                 $B = $Serie["Color"]["B"];
                 $Ticks = $Serie["Ticks"];
                 $Weight = $Serie["Weight"];
+                $Shape = (isset($Serie['Shape']) ? $Serie['Shape'] : SERIE_SHAPE_CIRCLE ); // Modified to allow setting a shape for the series
 
                 if (isset($Serie["Picture"])) {
                     $Picture = $Serie["Picture"];
@@ -2443,6 +2444,23 @@ abstract class Draw extends BaseDraw
                             $X + $IconAreaWidth,
                             $Y + $IconAreaHeight / 2,
                             ["R" => $R, "G" => $G, "B" => $B, "Ticks" => $Ticks, "Weight" => $Weight]
+                        );
+                    } elseif ($Family == LEGEND_FAMILY_ASDEFINED) {
+                        $this->drawShape(
+                            $X + $IconAreaWidth / 2,
+                            $Y,
+                            $Shape,
+                            min($IconAreaHeight, $IconAreaWidth ) - 1,
+                            true,
+                            1,
+                            $R,
+                            $G,
+                            $B,
+                            100,
+                            0,
+                            0,
+                            0,
+                            100
                         );
                     }
                 }
