@@ -1170,7 +1170,7 @@ class Pie
             }
         }
 
-        $this->Shadow = $RestoreShadow;
+        $this->pChartObject->Shadow = $RestoreShadow;
 
         return null;
     }

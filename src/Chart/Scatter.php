@@ -1424,7 +1424,7 @@ class Scatter
             );
         }
         $RestoreShadow = $this->pChartObject->Shadow;
-        $this->Shadow = false;
+        $this->pChartObject->Shadow = false;
         foreach ($Data["ScatterSeries"] as $Key => $Series) {
             if ($Series["isDrawable"] == true) {
                 $R = $Series["Color"]["R"];
@@ -1543,7 +1543,7 @@ class Scatter
             }
         }
 
-        $this->Shadow = $RestoreShadow;
+        $this->pChartObject->Shadow = $RestoreShadow;
     }
 
     /**
@@ -2255,7 +2255,7 @@ class Scatter
                     ]
                 );
                 if ($DisableShadowOnArea) {
-                    $this->Shadow = false;
+                    $$this->pChartObject->Shadow = false;
                 }
             }
 
