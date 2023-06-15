@@ -11,6 +11,7 @@ use Test\CpChart\UnitTester;
 use const DIRECTION_VERTICAL;
 use const LEGEND_HORIZONTAL;
 use const LEGEND_NOBORDER;
+use const PIE_VALUE_BOTH;
 use const TEXT_ALIGN_TOPMIDDLE;
 
 class PieTest extends Unit
@@ -229,7 +230,7 @@ class PieTest extends Unit
         $pieChart->draw3DPie(
             560,
             125,
-            ['WriteValues' => true, 'DataGapAngle' => 10, 'DataGapRadius' => 6, 'Border' => true]
+            ['WriteValues' => PIE_VALUE_BOTH, 'DataGapAngle' => 10, 'DataGapRadius' => 6, 'Border' => true]
         );
         $image->setFontProperties(['FontName' => 'pf_arma_five.ttf', 'FontSize' => 6]);
         $image->setShadow(

@@ -4,6 +4,34 @@ namespace CpChart\Chart;
 
 use CpChart\Data;
 use CpChart\Image;
+use UI\Exception\RuntimeException;
+
+use function count;
+
+use const LEGEND_BOX;
+use const LEGEND_HORIZONTAL;
+use const LEGEND_ROUND;
+use const LEGEND_VERTICAL;
+use const PI;
+use const PIE_LABEL_COLOR_AUTO;
+use const PIE_LABEL_COLOR_MANUAL;
+use const PIE_NO_ABSCISSA;
+use const PIE_NO_DATASERIE;
+use const PIE_RENDERED;
+use const PIE_SUMISNULL;
+use const PIE_VALUE_BOTH;
+use const PIE_VALUE_INSIDE;
+use const PIE_VALUE_NATURAL;
+use const PIE_VALUE_OUTSIDE;
+use const PIE_VALUE_PERCENTAGE;
+use const TEXT_ALIGN_BOTTOMLEFT;
+use const TEXT_ALIGN_BOTTOMRIGHT;
+use const TEXT_ALIGN_MIDDLELEFT;
+use const TEXT_ALIGN_MIDDLEMIDDLE;
+use const TEXT_ALIGN_MIDDLERIGHT;
+use const TEXT_ALIGN_TOPLEFT;
+use const TEXT_ALIGN_TOPRIGHT;
+use const VOID;
 
 /**
  *  Pie - class to draw pie charts
@@ -381,11 +409,7 @@ class Pie
                     $Yc = sin(($Angle - 90) * PI / 180) * ($Radius) / 2 + $Y;
                 }
 
-                if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
-                } elseif ($WriteValues == PIE_VALUE_NATURAL) {
-                    $Display = $Value . $ValueSuffix;
-                }
+                $Display = $this->getDisplayValue($Value, $WriteValues, $SerieSum, $Precision, $ValueSuffix);
                 $this->pChartObject->drawText($Xc, $Yc, $Display, $Settings);
 
                 $Offset = $EndAngle + $DataGapAngle;
@@ -907,12 +931,7 @@ class Pie
                     $Yc = sin(($Angle - 90) * PI / 180) * ($Radius * $SkewFactor) / 2 + $Y - $SliceHeight;
                 }
 
-                if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
-                } elseif ($WriteValues == PIE_VALUE_NATURAL) {
-                    $Display = $Value . $ValueSuffix;
-                }
-
+                $Display = $this->getDisplayValue($Value, $WriteValues, $SerieSum, $Precision, $ValueSuffix);
                 $this->pChartObject->drawText($Xc, $Yc, $Display, $Settings);
 
                 $Offset = $EndAngle - $DataGapAngle;
@@ -1644,13 +1663,7 @@ class Pie
                     $Align = TEXT_ALIGN_MIDDLEMIDDLE;
                 }
 
-                if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Display = round((100 / $SerieSum) * $Value, $Precision) . "%";
-                } elseif ($WriteValues == PIE_VALUE_NATURAL) {
-                    $Display = $Value . $ValueSuffix;
-                } else {
-                    $Display = "";
-                }
+                $Display = $this->getDisplayValue($Value, $WriteValues, $SerieSum, $Precision, $ValueSuffix);
                 $this->pChartObject->drawText(
                     $Xc,
                     $Yc,
@@ -2316,5 +2329,59 @@ class Pie
         $Data["Series"][$AbscissaSerie]["Data"] = $NewAbscissa;
 
         return [$Data, $NewPalette];
+    }
+
+    /**
+     * Returns the value to display on a pie chart.
+     *
+     * @param int|float $Value
+     *   The value of current item.
+     * @param int $WriteValues
+     *   The type of value to write:
+     *   - PIE_VALUE_NATURAL for an absolute value;
+     *   - PIE_VALUE_PERCENTAGE for a percentage value;
+     *   - PIE_VALUE_BOTH for both an absolute and percentage value.
+     * @param int $SerieSum
+     *   The sum of all items.
+     * @param int $Precision
+     *   The number of decimal digits to round to, in case of displaying a percentage.
+     * @param string $ValueSuffix
+     *   The text to display after the value, in case an absolute value gets displayed.
+     *
+     * @return string
+     *   The value to use for display.
+     */
+    private function getDisplayValue($Value, $WriteValues, $SerieSum, $Precision, $ValueSuffix)
+    {
+        $ValidWriteValues = [PIE_VALUE_NATURAL, PIE_VALUE_PERCENTAGE, PIE_VALUE_BOTH];
+        if (false === in_array($WriteValues, $ValidWriteValues, true)) {
+            return '';
+        }
+
+        $BothOrNatural = in_array($WriteValues, [PIE_VALUE_NATURAL, PIE_VALUE_BOTH], true);
+        $BothOrPercentage = in_array($WriteValues, [PIE_VALUE_PERCENTAGE, PIE_VALUE_BOTH], true);
+
+        $Absolute = true === $BothOrNatural ? ($Value . $ValueSuffix) : null;
+        $Percentage = true === $BothOrPercentage
+            ? sprintf('%s%%', round((100 / $SerieSum) * $Value, $Precision))
+            : null
+        ;
+
+        if (null === $Absolute && null === $Percentage) {
+            throw new RuntimeException(
+                "Neither absolute nor percentage display value was calculated"
+                . " for display value \"{$WriteValues}\"."
+            );
+        }
+
+        if (null !== $Absolute && null !== $Percentage) {
+            $Result = "{$Absolute}\n({$Percentage})";
+        } elseif (null !== $Absolute) {
+            $Result = $Absolute;
+        } elseif (null !== $Percentage) {
+            $Result = $Percentage;
+        }
+
+        return $Result;
     }
 }
