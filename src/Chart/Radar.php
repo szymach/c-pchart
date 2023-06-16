@@ -536,7 +536,7 @@ class Radar
                     $Points[count($Points) - 1][1],
                     $Points[0][0],
                     $Points[0][1],
-                    $Color + (isset($Format['LineWeight']) ? [ 'Weight' => $Format['LineWeight'] ] : [] ),
+                    $Color + (isset($Format['LineWeight']) ? [ 'Weight' => $Format['LineWeight'] ] : [] )
                 );
             }
 
