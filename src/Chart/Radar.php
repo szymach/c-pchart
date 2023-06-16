@@ -567,7 +567,7 @@ class Radar
                         0,
                         0,
                         100
-                    );      
+                    );    
                 }
                 if ($WriteValuesInBubble && $WriteValues) {
                     $TxtPos = $this->pChartObject->getTextBox(
