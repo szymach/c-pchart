@@ -2,6 +2,22 @@
 
 namespace CpChart;
 
+use RuntimeException;
+
+use const IMAGE_MAP_DELIMITER;
+use const IMAGE_MAP_STORAGE_FILE;
+use const IMAGE_MAP_STORAGE_SESSION;
+use const TEXT_ALIGN_BOTTOMLEFT;
+use const TEXT_ALIGN_BOTTOMMIDDLE;
+use const TEXT_ALIGN_BOTTOMRIGHT;
+use const TEXT_ALIGN_MIDDLELEFT;
+use const TEXT_ALIGN_MIDDLEMIDDLE;
+use const TEXT_ALIGN_MIDDLERIGHT;
+use const TEXT_ALIGN_TOPLEFT;
+use const TEXT_ALIGN_TOPMIDDLE;
+use const TEXT_ALIGN_TOPRIGHT;
+use const VOID;
+
 /**
  * Image - The actual class to do most of the drawing. Extends the Draw class
  * with the bulk of drawing methods.
@@ -57,27 +73,39 @@ class Image extends Draw
         }
     }
 
-    /**
-     * Enable / Disable and set shadow properties
-     * @param bool $Enabled
-     * @param array $Format
-     */
-    public function setShadow($Enabled = true, array $Format = [])
+    public function __toString(): string
     {
-        $X = isset($Format["X"]) ? $Format["X"] : 2;
-        $Y = isset($Format["Y"]) ? $Format["Y"] : 2;
-        $R = isset($Format["R"]) ? $Format["R"] : 0;
-        $G = isset($Format["G"]) ? $Format["G"] : 0;
-        $B = isset($Format["B"]) ? $Format["B"] : 0;
-        $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 10;
+        if ($this->TransparentBackground) {
+            imagealphablending($this->Picture, false);
+            imagesavealpha($this->Picture, true);
+        }
 
-        $this->Shadow = $Enabled;
-        $this->ShadowX = $X;
-        $this->ShadowY = $Y;
-        $this->ShadowR = $R;
-        $this->ShadowG = $G;
-        $this->ShadowB = $B;
-        $this->Shadowa = $Alpha;
+        ob_start();
+        imagepng($this->Picture);
+
+        $return = ob_get_clean();
+        if ($return === false) {
+            throw new RuntimeException('Unable to cast the image to string');
+        }
+
+        return $return;
+    }
+
+    /**
+     * Enable / disable and set shadow properties
+     *
+     * @param bool $Enabled
+     * @param array{ X?: int, Y?: int, R?: int, G?: int, B?: int } $Format
+     */
+    public function setShadow($Enabled = true, array $Format = []): void
+    {
+        $this->Shadow = (bool) $Enabled;
+        $this->ShadowX = $Format["X"] ?? 2;
+        $this->ShadowY = $Format["Y"] ?? 2;
+        $this->ShadowR = $Format["R"] ?? 0;
+        $this->ShadowG = $Format["G"] ?? 0;
+        $this->ShadowB = $Format["B"] ?? 0;
+        $this->Shadowa = $Format["Alpha"] ?? 10;
     }
 
     /**
@@ -88,7 +116,7 @@ class Image extends Draw
      * @param int $Y2
      * @return int|null
      */
-    public function setGraphArea($X1, $Y1, $X2, $Y2)
+    public function setGraphArea($X1, $Y1, $X2, $Y2): ?int
     {
         if ($X2 < $X1 || $X1 == $X2 || $Y2 < $Y1 || $Y1 == $Y2) {
             return -1;
@@ -102,6 +130,8 @@ class Image extends Draw
         $this->DataSet->Data["GraphArea"]["X2"] = $X2;
         $this->GraphAreaY2 = $Y2;
         $this->DataSet->Data["GraphArea"]["Y2"] = $Y2;
+
+        return null;
     }
 
     /**
@@ -126,7 +156,7 @@ class Image extends Draw
      * Render the picture to a file
      * @param string $FileName
      */
-    public function render($FileName)
+    public function render($FileName): void
     {
         if ($this->TransparentBackground) {
             imagealphablending($this->Picture, false);
@@ -135,28 +165,18 @@ class Image extends Draw
         imagepng($this->Picture, $FileName);
     }
 
-    public function __toString()
-    {
-        if ($this->TransparentBackground) {
-            imagealphablending($this->Picture, false);
-            imagesavealpha($this->Picture, true);
-        }
-
-        ob_start();
-        imagepng($this->Picture);
-        return ob_get_clean();
-    }
-
-    public function toDataURI()
+    public function toDataURI(): string
     {
         return 'data:image/png;base64,' . base64_encode($this->__toString());
     }
 
     /**
+     * @FIXME better way to do this?
+     *
      * Render the picture to a web browser stream
      * @param bool $BrowserExpire
      */
-    public function stroke($BrowserExpire = false)
+    public function stroke($BrowserExpire = false): void
     {
         if ($this->TransparentBackground) {
             imagealphablending($this->Picture, false);
@@ -177,7 +197,7 @@ class Image extends Draw
      * Automatic output method based on the calling interface
      * @param string $FileName
      */
-    public function autoOutput($FileName = "output.png")
+    public function autoOutput($FileName = "output.png"): void
     {
         if (php_sapi_name() == "cli") {
             $this->Render($FileName);
@@ -194,7 +214,7 @@ class Image extends Draw
      * @param int $Y2
      * @return float
      */
-    public function getLength($X1, $Y1, $X2, $Y2)
+    public function getLength($X1, $Y1, $X2, $Y2): float
     {
         return sqrt(
             pow(max($X1, $X2) - min($X1, $X2), 2) + pow(max($Y1, $Y2) - min($Y1, $Y2), 2)
@@ -207,18 +227,15 @@ class Image extends Draw
      * @param int $Y1
      * @param int $X2
      * @param int $Y2
-     * @return int
+     * @return float|int
      */
-    public function getAngle($X1, $Y1, $X2, $Y2)
+    public function getAngle($X1, $Y1, $X2, $Y2): float|int
     {
         $Opposite = $Y2 - $Y1;
         $Adjacent = $X2 - $X1;
         $Angle = rad2deg(atan2($Opposite, $Adjacent));
-        if ($Angle > 0) {
-            return $Angle;
-        } else {
-            return 360 - abs($Angle);
-        }
+
+        return ($Angle > 0) ? $Angle : (360 - abs($Angle));
     }
 
     /**
@@ -229,9 +246,9 @@ class Image extends Draw
      * @param int $FontSize
      * @param int $Angle
      * @param int $Text
-     * @return array
+     * @return array<int, array{ X: int, Y: int }>
      */
-    public function getTextBox($X, $Y, $FontName, $FontSize, $Angle, $Text)
+    public function getTextBox($X, $Y, $FontName, $FontSize, $Angle, $Text): array
     {
         $coords = imagettfbbox($FontSize, 0, $this->loadFont($FontName, 'fonts'), $Text);
 
@@ -267,17 +284,23 @@ class Image extends Draw
     }
 
     /**
-     * Set current font properties
-     * @param array $Format
+     * @param array{
+     *  R?: int,
+     *  G?: int,
+     *  B?: int,
+     *  Alpha?: int,
+     *  FontName?: string,
+     *  FontSize?: int
+     * } $Format
      */
-    public function setFontProperties($Format = [])
+    public function setFontProperties($Format = []): void
     {
-        $R = isset($Format["R"]) ? $Format["R"] : -1;
-        $G = isset($Format["G"]) ? $Format["G"] : -1;
-        $B = isset($Format["B"]) ? $Format["B"] : -1;
-        $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-        $FontName = isset($Format["FontName"]) ? $Format["FontName"] : null;
-        $FontSize = isset($Format["FontSize"]) ? $Format["FontSize"] : null;
+        $R = $Format["R"] ?? -1;
+        $G = $Format["G"] ?? -1;
+        $B = $Format["B"] ?? -1;
+        $Alpha = $Format["Alpha"] ?? 100;
+        $FontName = $Format["FontName"] ?? null;
+        $FontSize = $Format["FontSize"] ?? null;
 
         if ($R != -1) {
             $this->FontColorR = $R;
@@ -305,21 +328,16 @@ class Image extends Draw
      * @param mixed $Value
      * @return mixed
      */
-    public function getFirstDecimal($Value)
+    public function getFirstDecimal($Value): string|int
     {
         $Values = preg_split("/\./", $Value);
-        if (isset($Values[1])) {
-            return substr($Values[1], 0, 1);
-        } else {
-            return 0;
-        }
+        return isset($Values[1]) ? substr($Values[1], 0, 1) : 0;
     }
 
     /**
      * Attach a dataset to your pChart Object
-     * @param Data $DataSet
      */
-    public function setDataSet(Data $DataSet)
+    public function setDataSet(Data $DataSet): void
     {
         $this->DataSet = $DataSet;
     }
@@ -327,7 +345,7 @@ class Image extends Draw
     /**
      * Print attached dataset contents to STDOUT
      */
-    public function printDataSet()
+    public function printDataSet(): void
     {
         print_r($this->DataSet);
     }
@@ -344,11 +362,12 @@ class Image extends Draw
         $StorageMode = IMAGE_MAP_STORAGE_SESSION,
         $UniqueID = "imageMap",
         $StorageFolder = "tmp"
-    ) {
+    ): void {
         $this->ImageMapIndex = $Name;
         $this->ImageMapStorageMode = $StorageMode;
 
         if ($StorageMode == IMAGE_MAP_STORAGE_SESSION) {
+            // @FIXME looks like something potentially problematic
             if (!isset($_SESSION)) {
                 session_start();
             }
@@ -381,7 +400,7 @@ class Image extends Draw
         $Title = null,
         $Message = null,
         $HTMLEncode = false
-    ) {
+    ): void {
         if ($this->ImageMapStorageMode == null) {
             $this->initialiseImageMap();
         }
@@ -437,9 +456,9 @@ class Image extends Draw
      * Remove VOID values from an imagemap custom values array
      * @param string $SerieName
      * @param array $Values
-     * @return array
+     * @return list<float|int|string>
      */
-    public function removeVOIDFromArray($SerieName, array $Values)
+    public function removeVOIDFromArray($SerieName, array $Values): array|int
     {
         if (!isset($this->DataSet->Data["Series"][$SerieName])) {
             return -1;
@@ -451,6 +470,7 @@ class Image extends Draw
                 $Result[] = $Values[$Key];
             }
         }
+
         return $Result;
     }
 
@@ -460,7 +480,7 @@ class Image extends Draw
      * @param string|array $NewTitle
      * @return null|int
      */
-    public function replaceImageMapTitle($OldTitle, $NewTitle)
+    public function replaceImageMapTitle($OldTitle, $NewTitle): ?int
     {
         if ($this->ImageMapStorageMode == null) {
             return -1;
@@ -491,7 +511,7 @@ class Image extends Draw
             }
         } elseif ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE) {
             $TempArray = [];
-            $Handle = $this->openFileHandle();
+            $Handle = $this->openImageStorageFileHandle();
             if ($Handle) {
                 while (($Buffer = fgets($Handle, 4096)) !== false) {
                     $Fields = preg_split(
@@ -518,7 +538,7 @@ class Image extends Draw
                     }
                 }
 
-                $Handle = $this->openFileHandle("w");
+                $Handle = $this->openImageStorageFileHandle("w");
                 foreach ($TempArray as $Key => $Settings) {
                     fwrite(
                         $Handle,
@@ -539,6 +559,8 @@ class Image extends Draw
                 fclose($Handle);
             }
         }
+
+        return null;
     }
 
     /**
@@ -547,7 +569,7 @@ class Image extends Draw
      * @param array $Values
      * @return null|int
      */
-    public function replaceImageMapValues($Title, array $Values)
+    public function replaceImageMapValues($Title, array $Values): ?int
     {
         if ($this->ImageMapStorageMode == null) {
             return -1;
@@ -569,7 +591,7 @@ class Image extends Draw
             }
         } elseif ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE) {
             $TempArray = [];
-            $Handle = $this->openFileHandle();
+            $Handle = $this->openImageStorageFileHandle();
             if ($Handle) {
                 while (($Buffer = fgets($Handle, 4096)) !== false) {
                     $Fields = preg_split(
@@ -589,7 +611,7 @@ class Image extends Draw
                     }
                 }
 
-                $Handle = $this->openFileHandle("w");
+                $Handle = $this->openImageStorageFileHandle("w");
                 foreach ($TempArray as $Key => $Settings) {
                     fwrite(
                         $Handle,
@@ -610,6 +632,8 @@ class Image extends Draw
                 fclose($Handle);
             }
         }
+
+        return null;
     }
 
     /**
@@ -624,7 +648,7 @@ class Image extends Draw
         $StorageMode = IMAGE_MAP_STORAGE_SESSION,
         $UniqueID = "imageMap",
         $StorageFolder = "tmp"
-    ) {
+    ): void {
         $this->ImageMapIndex = $Name;
         $this->ImageMapStorageMode = $StorageMode;
 
@@ -654,9 +678,6 @@ class Image extends Draw
                 }
             }
         }
-
-        /* When the image map is returned to the client, the script ends */
-        exit();
     }
 
     /**
@@ -666,7 +687,7 @@ class Image extends Draw
      * @param int $B
      * @return string
      */
-    public function toHTMLColor($R, $G, $B)
+    public function toHTMLColor($R, $G, $B): string
     {
         $R = intval($R);
         $G = intval($G);
@@ -684,29 +705,31 @@ class Image extends Draw
     /**
      * Reverse an array of points
      * @param array $Plots
-     * @return array
+     * @return list<int|float|string>
      */
-    public function reversePlots(array $Plots)
+    public function reversePlots(array $Plots): array
     {
         $Result = [];
         for ($i = count($Plots) - 2; $i >= 0; $i = $i - 2) {
             $Result[] = $Plots[$i];
             $Result[] = $Plots[$i + 1];
         }
+
         return $Result;
     }
 
     /**
      * Mirror Effect
+     *
      * @param int $X
      * @param int $Y
      * @param int $Width
      * @param int $Height
-     * @param array $Format
+     * @param array{ StartAlpha?: int, EndAlpha?: int } $Format
      */
-    public function drawAreaMirror($X, $Y, $Width, $Height, array $Format = [])
+    public function drawAreaMirror($X, $Y, $Width, $Height, array $Format = []): void
     {
-        $StartAlpha = isset($Format["StartAlpha"]) ? $Format["StartAlpha"] : 80;
+        $StartAlpha = $Format["StartAlpha"] ?? 80;
         $EndAlpha = isset($Format["EndAlpha"]) ? $Format["EndAlpha"] : 0;
 
         $AlphaStep = ($StartAlpha - $EndAlpha) / $Height;
@@ -734,14 +757,13 @@ class Image extends Draw
     }
 
     /**
-     * Open a handle to image storage file.
      * @param string $mode
      * @return resource
      */
-    private function openFileHandle($mode = "r")
+    private function openImageStorageFileHandle($mode = "r"): mixed
     {
-        return @fopen(
-            sprintf("%s/%s.map", $this->ImageMapStorageFolder, $this->ImageMapFileName),
+        return fopen(
+            "$this->ImageMapStorageFolder/$this->ImageMapFileName.map",
             $mode
         );
     }
