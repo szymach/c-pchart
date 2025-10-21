@@ -133,7 +133,8 @@ class Scatter
             $AxisMax = OUT_OF_SIGHT;
             if ($Mode == SCALE_MODE_FLOATING) {
                 foreach ($Data["Series"] as $SerieID => $SerieParameter) {
-                    if ($SerieParameter["Axis"] == $AxisID
+                    if (
+                        $SerieParameter["Axis"] == $AxisID
                         && $Data["Series"][$SerieID]["isDrawable"]
                     ) {
                         $AxisMax = max($AxisMax, $Data["Series"][$SerieID]["Max"]);
@@ -145,7 +146,8 @@ class Scatter
                 $Data["Axis"][$AxisID]["Min"] = $AxisMin - $AutoMargin;
                 $Data["Axis"][$AxisID]["Max"] = $AxisMax + $AutoMargin;
             } elseif ($Mode == SCALE_MODE_MANUAL) {
-                if (isset($ManualScale[$AxisID]["Min"])
+                if (
+                    isset($ManualScale[$AxisID]["Min"])
                     && isset($ManualScale[$AxisID]["Max"])
                 ) {
                     $Data["Axis"][$AxisID]["Min"] = $ManualScale[$AxisID]["Min"];
@@ -314,7 +316,8 @@ class Scatter
                                 "Alpha" => $BackgroundAlpha2
                             ];
                         }
-                        if ($LastX != null
+                        if (
+                            $LastX != null
                             && $CycleBackground
                             && ($DrawXLines == ALL || in_array($AxisID, $DrawXLines))
                         ) {
@@ -477,7 +480,8 @@ class Scatter
                                 "Alpha" => $BackgroundAlpha2
                             ];
                         }
-                        if ($LastX != null
+                        if (
+                            $LastX != null
                             && $CycleBackground
                             && ($DrawXLines == ALL || in_array($AxisID, $DrawXLines))
                         ) {
@@ -626,7 +630,8 @@ class Scatter
                                 "Alpha" => $BackgroundAlpha2
                             ];
                         }
-                        if ($LastY != null
+                        if (
+                            $LastY != null
                             && $CycleBackground
                             && ($DrawYLines == ALL || in_array($AxisID, $DrawYLines))
                         ) {
@@ -639,7 +644,11 @@ class Scatter
                             );
                         }
 
-                        if (($YPos != $this->pChartObject->GraphAreaY1 && $YPos != $this->pChartObject->GraphAreaY2)
+                        if (
+                            (
+                                $YPos != $this->pChartObject->GraphAreaY1
+                                && $YPos != $this->pChartObject->GraphAreaY2
+                            )
                             && ($DrawYLines == ALL || in_array($AxisID, $DrawYLines))
                         ) {
                             $this->pChartObject->drawLine(
@@ -775,7 +784,8 @@ class Scatter
                                 "Alpha" => $BackgroundAlpha2
                             ];
                         }
-                        if ($LastY != null
+                        if (
+                            $LastY != null
                             && $CycleBackground
                             && ($DrawYLines == ALL || in_array($AxisID, $DrawYLines))
                         ) {
@@ -788,7 +798,8 @@ class Scatter
                             );
                         }
 
-                        if (($YPos != $this->pChartObject->GraphAreaY1
+                        if (
+                            ($YPos != $this->pChartObject->GraphAreaY1
                             && $YPos != $this->pChartObject->GraphAreaY2)
                             && ($DrawYLines == ALL || in_array($AxisID, $DrawYLines))
                         ) {

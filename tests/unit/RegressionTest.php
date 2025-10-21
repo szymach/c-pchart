@@ -39,7 +39,7 @@ final class RegressionTest extends Unit
             ['X' => 2, 'Y' => 2, 'R' => 0, 'G' => 0, 'B' => 0, 'Alpha' => 10]
         );
 
-        $radar = new Radar;
+        $radar = new Radar();
         $image->setGraphArea(0, 0, $width, $height);
         $options = [
             'DrawPoly' => true,

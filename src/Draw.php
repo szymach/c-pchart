@@ -98,7 +98,8 @@ abstract class Draw extends BaseDraw
             }
 
             for ($i = 0; $i <= count($Points) - 1; $i = $i + 2) {
-                if (isset($Points[$i + 2])
+                if (
+                    isset($Points[$i + 2])
                     && !($Points[$i] == $Points[$i + 2] && $Points[$i] == $SkipX)
                     && !($Points[$i + 1] == $Points[$i + 3] && $Points[$i + 1] == $SkipY)
                 ) {
@@ -109,7 +110,8 @@ abstract class Draw extends BaseDraw
                         $Points[$i + 3],
                         $BorderSettings
                     );
-                } elseif (!($Points[$i] == $Points[0] && $Points[$i] == $SkipX)
+                } elseif (
+                    !($Points[$i] == $Points[0] && $Points[$i] == $SkipX)
                     && !($Points[$i + 1] == $Points[1] && $Points[$i + 1] == $SkipY)
                 ) {
                     $this->drawLine($Points[$i], $Points[$i + 1], $Points[0], $Points[1], $BorderSettings);
@@ -2252,7 +2254,8 @@ abstract class Draw extends BaseDraw
         $Data = $this->DataSet->getData();
 
         foreach ($Data["Series"] as $SerieName => $Serie) {
-            if ($Serie["isDrawable"] == true
+            if (
+                $Serie["isDrawable"] == true
                 && $SerieName != $Data["Abscissa"]
                 && isset($Serie["Picture"])
             ) {
@@ -2647,7 +2650,8 @@ abstract class Draw extends BaseDraw
             $AxisMax = OUT_OF_SIGHT;
             if ($Mode == SCALE_MODE_FLOATING || $Mode == SCALE_MODE_START0) {
                 foreach ($Data["Series"] as $SerieID => $SerieParameter) {
-                    if ($SerieParameter["Axis"] == $AxisID
+                    if (
+                        $SerieParameter["Axis"] == $AxisID
                         && $Data["Series"][$SerieID]["isDrawable"]
                         && $Data["Abscissa"] != $SerieID
                     ) {
@@ -2663,7 +2667,10 @@ abstract class Draw extends BaseDraw
                     $Data["Axis"][$AxisID]["Min"] = 0;
                 }
             } elseif ($Mode == SCALE_MODE_MANUAL) {
-                if (isset($ManualScale[$AxisID]["Min"]) && isset($ManualScale[$AxisID]["Max"])) {
+                if (
+                    isset($ManualScale[$AxisID]["Min"])
+                    && isset($ManualScale[$AxisID]["Max"])
+                ) {
                     $Data["Axis"][$AxisID]["Min"] = $ManualScale[$AxisID]["Min"];
                     $Data["Axis"][$AxisID]["Max"] = $ManualScale[$AxisID]["Max"];
                 } else {
@@ -2672,7 +2679,8 @@ abstract class Draw extends BaseDraw
             } elseif ($Mode == SCALE_MODE_ADDALL || $Mode == SCALE_MODE_ADDALL_START0) {
                 $Series = [];
                 foreach ($Data["Series"] as $SerieID => $SerieParameter) {
-                    if ($SerieParameter["Axis"] == $AxisID
+                    if (
+                        $SerieParameter["Axis"] == $AxisID
                         && $SerieParameter["isDrawable"]
                         && $Data["Abscissa"] != $SerieID
                     ) {
@@ -2684,7 +2692,8 @@ abstract class Draw extends BaseDraw
                     $PointMin = 0;
                     $PointMax = 0;
                     foreach ($Series as $SerieID => $ValuesCount) {
-                        if (isset($Data["Series"][$SerieID]["Data"][$ID])
+                        if (
+                            isset($Data["Series"][$SerieID]["Data"][$ID])
                             && $Data["Series"][$SerieID]["Data"][$ID] != null
                         ) {
                             $Value = $Data["Series"][$SerieID]["Data"][$ID];
@@ -2918,7 +2927,10 @@ abstract class Draw extends BaseDraw
                                 }
                             } else {
                                 $Value = $i;
-                                if (isset($Parameters["ScaleMin"]) && isset($Parameters["RowHeight"])) {
+                                if (
+                                    isset($Parameters["ScaleMin"])
+                                    && isset($Parameters["RowHeight"])
+                                ) {
                                     $Value = $this->scaleFormat(
                                         $Parameters["ScaleMin"] + $Parameters["RowHeight"] * $i,
                                         $Data["XAxisDisplay"],
@@ -2930,7 +2942,14 @@ abstract class Draw extends BaseDraw
 
                             $ID++;
                             $Skipped = true;
-                            if ($this->isValidLabel($Value, $LastValue, $LabelingMethod, $ID, $LabelSkip)
+                            if (
+                                $this->isValidLabel(
+                                    $Value,
+                                    $LastValue,
+                                    $LabelingMethod,
+                                    $ID,
+                                    $LabelSkip
+                                )
                                 && !$RemoveXAxis
                             ) {
                                 $Bounds = $this->drawText(
@@ -2959,7 +2978,8 @@ abstract class Draw extends BaseDraw
                                         $SkippedAxisColor
                                     );
                                 }
-                                if (($SkippedInnerTickWidth != 0 || $SkippedOuterTickWidth != 0)
+                                if (
+                                    ($SkippedInnerTickWidth != 0 || $SkippedOuterTickWidth != 0)
                                     && !$RemoveXAxis
                                     && !$RemoveSkippedAxis
                                 ) {
@@ -2972,7 +2992,8 @@ abstract class Draw extends BaseDraw
                                     );
                                 }
                             } else {
-                                if ($DrawXLines
+                                if (
+                                    $DrawXLines
                                     && ($XPos != $this->GraphAreaX1 && $XPos != $this->GraphAreaX2)
                                 ) {
                                     $this->drawLine(
@@ -3103,7 +3124,14 @@ abstract class Draw extends BaseDraw
 
                             $ID++;
                             $Skipped = true;
-                            if ($this->isValidLabel($Value, $LastValue, $LabelingMethod, $ID, $LabelSkip)
+                            if (
+                                $this->isValidLabel(
+                                    $Value,
+                                    $LastValue,
+                                    $LabelingMethod,
+                                    $ID,
+                                    $LabelSkip
+                                )
                                 && !$RemoveXAxis
                             ) {
                                 $Bounds = $this->drawText(
@@ -3132,7 +3160,11 @@ abstract class Draw extends BaseDraw
                                         $SkippedAxisColor
                                     );
                                 }
-                                if (($SkippedInnerTickWidth != 0 || $SkippedOuterTickWidth != 0)
+                                if (
+                                    (
+                                        $SkippedInnerTickWidth != 0
+                                        || $SkippedOuterTickWidth != 0
+                                    )
                                     && !$RemoveXAxis
                                     && !$RemoveSkippedAxis
                                 ) {
@@ -3286,7 +3318,8 @@ abstract class Draw extends BaseDraw
 
                             $ID++;
                             $Skipped = true;
-                            if ($this->isValidLabel($Value, $LastValue, $LabelingMethod, $ID, $LabelSkip)
+                            if (
+                                $this->isValidLabel($Value, $LastValue, $LabelingMethod, $ID, $LabelSkip)
                                 && !$RemoveXAxis
                             ) {
                                 $Bounds = $this->drawText(
@@ -3315,7 +3348,8 @@ abstract class Draw extends BaseDraw
                                         $SkippedAxisColor
                                     );
                                 }
-                                if (($SkippedInnerTickWidth != 0 || $SkippedOuterTickWidth != 0)
+                                if (
+                                    ($SkippedInnerTickWidth != 0 || $SkippedOuterTickWidth != 0)
                                     && !$RemoveXAxis
                                     && !$RemoveSkippedAxis
                                 ) {
@@ -3328,8 +3362,9 @@ abstract class Draw extends BaseDraw
                                     );
                                 }
                             } else {
-                                if ($DrawXLines &&
-                                    ($YPos != $this->GraphAreaY1 && $YPos != $this->GraphAreaY2)
+                                if (
+                                    $DrawXLines
+                                    && ($YPos != $this->GraphAreaY1 && $YPos != $this->GraphAreaY2)
                                 ) {
                                     $this->drawLine(
                                         $this->GraphAreaX1 + $FloatingOffset,
@@ -3463,7 +3498,14 @@ abstract class Draw extends BaseDraw
 
                             $ID++;
                             $Skipped = true;
-                            if ($this->isValidLabel($Value, $LastValue, $LabelingMethod, $ID, $LabelSkip)
+                            if (
+                                $this->isValidLabel(
+                                    $Value,
+                                    $LastValue,
+                                    $LabelingMethod,
+                                    $ID,
+                                    $LabelSkip
+                                )
                                 && !$RemoveXAxis
                             ) {
                                 $Bounds = $this->drawText(
@@ -3492,7 +3534,8 @@ abstract class Draw extends BaseDraw
                                         $SkippedAxisColor
                                     );
                                 }
-                                if (($SkippedInnerTickWidth != 0 || $SkippedOuterTickWidth != 0)
+                                if (
+                                    ($SkippedInnerTickWidth != 0 || $SkippedOuterTickWidth != 0)
                                     && !$RemoveXAxis
                                     && !$RemoveSkippedAxis
                                 ) {
@@ -3624,7 +3667,8 @@ abstract class Draw extends BaseDraw
                                     "Alpha" => $BackgroundAlpha2
                                 ];
                             }
-                            if ($LastY != null
+                            if (
+                                $LastY != null
                                 && $CycleBackground
                                 && ($DrawYLines == ALL || in_array($AxisID, $DrawYLines))
                             ) {
@@ -3769,7 +3813,8 @@ abstract class Draw extends BaseDraw
                                     "Alpha" => $BackgroundAlpha2
                                 ];
                             }
-                            if ($LastY != null
+                            if (
+                                $LastY != null
                                 && $CycleBackground
                                 && ($DrawYLines == ALL || in_array($AxisID, $DrawYLines))
                             ) {
@@ -3913,7 +3958,8 @@ abstract class Draw extends BaseDraw
                                     "Alpha" => $BackgroundAlpha2
                                 ];
                             }
-                            if ($LastX != null
+                            if (
+                                $LastX != null
                                 && $CycleBackground
                                 && ($DrawYLines == ALL || in_array($AxisID, $DrawYLines))
                             ) {
@@ -4056,7 +4102,8 @@ abstract class Draw extends BaseDraw
                                     "Alpha" => $BackgroundAlpha2
                                 ];
                             }
-                            if ($LastX != null
+                            if (
+                                $LastX != null
                                 && $CycleBackground
                                 && ($DrawYLines == ALL || in_array($AxisID, $DrawYLines))
                             ) {
@@ -4142,7 +4189,7 @@ abstract class Draw extends BaseDraw
     /**
      * Draw an X threshold
      * @param mixed $Value
-     * @param boolean $Format
+     * @param bool $Format
      * @return array|null|integer
      */
     public function drawXThreshold($Value, array $Format = [])
@@ -4223,7 +4270,8 @@ abstract class Draw extends BaseDraw
 
         if ($Caption == null) {
             $Caption = $Value;
-            if (isset($Data["Abscissa"])
+            if (
+                isset($Data["Abscissa"])
                 && isset($Data["Series"][$Data["Abscissa"]]["Data"][$Value])
             ) {
                 $Caption = $Data["Series"][$Data["Abscissa"]]["Data"][$Value];
@@ -4236,7 +4284,8 @@ abstract class Draw extends BaseDraw
             $YPos1 = $this->GraphAreaY1 + $Data["YMargin"];
             $YPos2 = $this->GraphAreaY2 - $Data["YMargin"];
 
-            if ($XPos >= $this->GraphAreaX1 + $AbscissaMargin
+            if (
+                $XPos >= $this->GraphAreaX1 + $AbscissaMargin
                 && $XPos <= $this->GraphAreaX2 - $AbscissaMargin
             ) {
                 $this->drawLine(
@@ -4302,7 +4351,8 @@ abstract class Draw extends BaseDraw
             $YPos1 = $this->GraphAreaX1 + $Data["YMargin"];
             $YPos2 = $this->GraphAreaX2 - $Data["YMargin"];
 
-            if ($XPos >= $this->GraphAreaY1 + $AbscissaMargin
+            if (
+                $XPos >= $this->GraphAreaY1 + $AbscissaMargin
                 && $XPos <= $this->GraphAreaY2 - $AbscissaMargin
             ) {
                 $this->drawLine(
@@ -4671,7 +4721,8 @@ abstract class Draw extends BaseDraw
 
         if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
             $YPos = $this->scaleComputeY($Value, ["AxisID" => $AxisID]);
-            if ($YPos >= $this->GraphAreaY1 + $Data["Axis"][$AxisID]["Margin"]
+            if (
+                $YPos >= $this->GraphAreaY1 + $Data["Axis"][$AxisID]["Margin"]
                 && $YPos <= $this->GraphAreaY2 - $Data["Axis"][$AxisID]["Margin"]
             ) {
                 $X1 = $this->GraphAreaX1 + $AbscissaMargin;
@@ -4739,8 +4790,9 @@ abstract class Draw extends BaseDraw
 
         if ($Data["Orientation"] == SCALE_POS_TOPBOTTOM) {
             $XPos = $this->scaleComputeY($Value, ["AxisID" => $AxisID]);
-            if ($XPos >= $this->GraphAreaX1 + $Data["Axis"][$AxisID]["Margin"]
-                    && $XPos <= $this->GraphAreaX2 - $Data["Axis"][$AxisID]["Margin"]
+            if (
+                $XPos >= $this->GraphAreaX1 + $Data["Axis"][$AxisID]["Margin"]
+                && $XPos <= $this->GraphAreaX2 - $Data["Axis"][$AxisID]["Margin"]
             ) {
                 $Y1 = $this->GraphAreaY1 + $AbscissaMargin;
                 $Y2 = $this->GraphAreaY2 - $AbscissaMargin;
@@ -6170,7 +6222,8 @@ abstract class Draw extends BaseDraw
         $this->LastChartLayout = CHART_LAST_LAYOUT_REGULAR;
 
         $Data = $this->DataSet->getData();
-        if (!isset($Data["Series"][$SerieA]["Data"])
+        if (
+            !isset($Data["Series"][$SerieA]["Data"])
             || !isset($Data["Series"][$SerieB]["Data"])
         ) {
             return 0;
@@ -8328,7 +8381,8 @@ abstract class Draw extends BaseDraw
                                 ;
 
                                 $Done = false;
-                                if ($DisplayOrientation == ORIENTATION_HORIZONTAL
+                                if (
+                                    $DisplayOrientation == ORIENTATION_HORIZONTAL
                                     || $DisplayOrientation == ORIENTATION_AUTO
                                 ) {
                                     if ($TxtHeight < $BarHeight && $TxtWidth < $BarWidth) {
@@ -8354,7 +8408,8 @@ abstract class Draw extends BaseDraw
                                     }
                                 }
 
-                                if ($DisplayOrientation == ORIENTATION_VERTICAL
+                                if (
+                                    $DisplayOrientation == ORIENTATION_VERTICAL
                                     || ($DisplayOrientation == ORIENTATION_AUTO && !$Done)
                                 ) {
                                     if ($TxtHeight < $BarWidth && $TxtWidth < $BarHeight) {
@@ -8563,7 +8618,8 @@ abstract class Draw extends BaseDraw
                                 $YCenter = (($Y + $YOffset + $YSize) - ($Y + $YOffset)) / 2 + $Y + $YOffset;
 
                                 $Done = false;
-                                if ($DisplayOrientation == ORIENTATION_HORIZONTAL
+                                if (
+                                    $DisplayOrientation == ORIENTATION_HORIZONTAL
                                     || $DisplayOrientation == ORIENTATION_AUTO
                                 ) {
                                     if ($TxtHeight < $BarHeight && $TxtWidth < $BarWidth) {
@@ -8589,7 +8645,8 @@ abstract class Draw extends BaseDraw
                                     }
                                 }
 
-                                if ($DisplayOrientation == ORIENTATION_VERTICAL
+                                if (
+                                    $DisplayOrientation == ORIENTATION_VERTICAL
                                     || ($DisplayOrientation == ORIENTATION_AUTO && !$Done)
                                 ) {
                                     if ($TxtHeight < $BarWidth && $TxtWidth < $BarHeight) {
@@ -10260,7 +10317,8 @@ abstract class Draw extends BaseDraw
                             }
                         }
 
-                        if (is_array($Intersections)
+                        if (
+                            is_array($Intersections)
                             && in_array($X, $Intersections)
                             && $LastSlope == "="
                             && ($Slope == "-")
@@ -10309,7 +10367,8 @@ abstract class Draw extends BaseDraw
                                 $Color = $DefaultColor;
                                 if ($Threshold != null) {
                                     foreach ($Threshold as $Key => $Parameters) {
-                                        if ($Y <= $Parameters["MinX"]
+                                        if (
+                                            $Y <= $Parameters["MinX"]
                                             && $Y >= $Parameters["MaxX"]
                                         ) {
                                             if (isset($Parameters["R"])) {

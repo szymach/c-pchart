@@ -31,7 +31,7 @@ final class Unit extends Module
 
     private function getChartDirectoryPath(): string
     {
-        return sprintf(__DIR__."/../../_output/charts");
+        return sprintf(__DIR__ . '/../../_output/charts');
     }
 
     private function getFileSystem(): Filesystem

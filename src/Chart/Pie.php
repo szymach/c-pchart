@@ -782,7 +782,8 @@ class Pie
                     $this->pChartObject->drawLine($Xc, $Yc, $Xc, $Yc - $SliceHeight, $Settings);
                 }
 
-                if (isset($SliceAngle[$SliceID][1])
+                if (
+                    isset($SliceAngle[$SliceID][1])
                     && $SliceAngle[$SliceID][1] > 270
                     && $SliceAngle[$SliceID][count($SliceAngle[$SliceID]) - 1] < 270
                 ) {
@@ -791,7 +792,8 @@ class Pie
                     $this->pChartObject->drawLine($Xc, $Yc, $Xc, $Yc - $SliceHeight, $Settings);
                 }
 
-                if (isset($SliceAngle[$SliceID][1])
+                if (
+                    isset($SliceAngle[$SliceID][1])
                     && $SliceAngle[$SliceID][1] > 90
                     && $SliceAngle[$SliceID][count($SliceAngle[$SliceID]) - 1] < 90
                 ) {
@@ -1203,11 +1205,11 @@ class Pie
      * @param string $Label
      * @param int|float $Angle
      * @param array $Settings
-     * @param boolean $Stacked
+     * @param bool $Stacked
      * @param int $Xc
      * @param int $Yc
      * @param int $Radius
-     * @param boolean $Reversed
+     * @param bool $Reversed
      */
     public function writePieLabel(
         $X,
@@ -1249,27 +1251,31 @@ class Pie
                             && $YBottom <= $Settings["YBottom"]
                         );
 
-                        if ($Angle <= 90
+                        if (
+                            $Angle <= 90
                             && ($yTopAboveTopBelowBottom || $yBottomAboveTopBelowBottom)
                         ) {
                             $this->shift(0, 180, -($Height + 2), $Reversed);
                             $Done = true;
                         }
-                        if ($Angle > 90
+                        if (
+                            $Angle > 90
                             && $Angle <= 180
                             && ($yTopAboveTopBelowBottom || $yBottomAboveTopBelowBottom)
                         ) {
                             $this->shift(0, 180, -($Height + 2), $Reversed);
                             $Done = true;
                         }
-                        if ($Angle > 180
+                        if (
+                            $Angle > 180
                             && $Angle <= 270
                             && ($yTopAboveTopBelowBottom || $yBottomAboveTopBelowBottom)
                         ) {
                             $this->shift(180, 360, ($Height + 2), $Reversed);
                             $Done = true;
                         }
-                        if ($Angle > 270
+                        if (
+                            $Angle > 270
                             && $Angle <= 360
                             && ($yTopAboveTopBelowBottom || $yBottomAboveTopBelowBottom)
                         ) {
@@ -1305,7 +1311,7 @@ class Pie
      * @param int $StartAngle
      * @param int $EndAngle
      * @param int $Offset
-     * @param boolean $Reversed
+     * @param bool $Reversed
      */
     public function shift($StartAngle, $EndAngle, $Offset, $Reversed)
     {

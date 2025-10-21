@@ -252,7 +252,7 @@ class Data
     /**
      * Set a serie as "drawable" while calling a rendering public function
      * @param string|array $Series
-     * @param boolean $Drawable
+     * @param bool $Drawable
      */
     public function setSerieDrawable($Series, $Drawable = true)
     {
@@ -395,7 +395,7 @@ class Data
     /**
      * Set a scatter serie as "drawable" while calling a rendering public function
      * @param int $ID
-     * @param boolean $Drawable
+     * @param bool $Drawable
      */
     public function setScatterSerieDrawable($ID, $Drawable = true)
     {
@@ -458,7 +458,8 @@ class Data
         $GlobalMax = ABSOLUTE_MIN;
 
         foreach (array_keys($this->Data["Series"]) as $Key) {
-            if ($this->Data["Abscissa"] != $Key
+            if (
+                $this->Data["Abscissa"] != $Key
                 && $this->Data["Series"][$Key]["isDrawable"] == true
             ) {
                 if ($GlobalMin > $this->Data["Series"][$Key]["Min"]) {
@@ -644,7 +645,7 @@ class Data
 
     /**
      * Test if we have valid data
-     * @return boolean|null
+     * @return bool|null
      */
     public function containsData()
     {
@@ -653,7 +654,8 @@ class Data
         }
 
         foreach (array_keys($this->Data["Series"]) as $Key) {
-            if ($this->Data["Abscissa"] != $Key
+            if (
+                $this->Data["Abscissa"] != $Key
                 && $this->Data["Series"][$Key]["isDrawable"] == true
             ) {
                 return true;
@@ -877,7 +879,7 @@ class Data
     /**
      * Load a palette file
      * @param string $FileName
-     * @param boolean $Overwrite
+     * @param bool $Overwrite
      * @throws Exception
      */
     public function loadPalette($FileName, $Overwrite = false)
@@ -1016,7 +1018,8 @@ class Data
             }
 
             foreach ($this->Data["Series"] as $SerieName => $Serie) {
-                if ($Serie["Axis"] == $AxisID
+                if (
+                    $Serie["Axis"] == $AxisID
                     && $Serie["isDrawable"] == true
                     && $SerieName != $Abscissa
                 ) {

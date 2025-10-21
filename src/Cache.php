@@ -232,9 +232,9 @@ class Cache
      * Is the file in cache?
      *
      * @param string $ID
-     * @param boolean $Verbose
-     * @param boolean $UpdateHitsCount
-     * @return boolean
+     * @param bool $Verbose
+     * @param bool $UpdateHitsCount
+     * @return bool
      */
     public function isInCache($ID, $Verbose = false, $UpdateHitsCount = false)
     {
@@ -315,7 +315,7 @@ class Cache
     /**
      * Show image from cache
      * @param string $ID
-     * @return boolean
+     * @return bool
      */
     public function strokeFromCache($ID)
     {
@@ -337,7 +337,7 @@ class Cache
      * Save file from cache.
      * @param string $ID
      * @param string $Destination
-     * @return boolean
+     * @return bool
      */
     public function saveFromCache($ID, $Destination)
     {

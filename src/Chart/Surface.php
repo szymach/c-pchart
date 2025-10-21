@@ -69,7 +69,7 @@ class Surface
      * @param int $X
      * @param int $Y
      * @param int|float $Value
-     * @param boolean $Force
+     * @param bool $Force
      * @return null
      */
     public function addPoint($X, $Y, $Value, $Force = true)
@@ -225,26 +225,30 @@ class Surface
                     $X2 = floor($X0 + $X * $XSize + $XSize);
                     $Y2 = floor($Y0 + $Y * $YSize + $YSize);
 
-                    if ($X > 0 && $this->Points[$X - 1][$Y] != UNKNOWN
+                    if (
+                        $X > 0 && $this->Points[$X - 1][$Y] != UNKNOWN
                         && $this->Points[$X - 1][$Y] != IGNORED
                         && $this->Points[$X - 1][$Y] < $Threshold
                     ) {
                         $this->pChartObject->drawLine($X1, $Y1, $X1, $Y2, $Color);
                     }
-                    if ($Y > 0 && $this->Points[$X][$Y - 1] != UNKNOWN
+                    if (
+                        $Y > 0 && $this->Points[$X][$Y - 1] != UNKNOWN
                         && $this->Points[$X][$Y - 1] != IGNORED
                         && $this->Points[$X][$Y - 1] < $Threshold
                     ) {
                         $this->pChartObject->drawLine($X1, $Y1, $X2, $Y1, $Color);
                     }
-                    if ($X < $this->GridSizeX
+                    if (
+                        $X < $this->GridSizeX
                         && $this->Points[$X + 1][$Y] != UNKNOWN
                         && $this->Points[$X + 1][$Y] != IGNORED
                         && $this->Points[$X + 1][$Y] < $Threshold
                     ) {
                         $this->pChartObject->drawLine($X2, $Y1, $X2, $Y2, $Color);
                     }
-                    if ($Y < $this->GridSizeY
+                    if (
+                        $Y < $this->GridSizeY
                         && $this->Points[$X][$Y + 1] != UNKNOWN
                         && $this->Points[$X][$Y + 1] != IGNORED
                         && $this->Points[$X][$Y + 1] < $Threshold
@@ -368,7 +372,8 @@ class Surface
                 $Points = 0;
                 for ($Xi = $X - $NearestNeighbor; $Xi <= $X + $NearestNeighbor; $Xi++) {
                     for ($Yi = $Y - $NearestNeighbor; $Yi <= $Y + $NearestNeighbor; $Yi++) {
-                        if ($Xi >= 0
+                        if (
+                            $Xi >= 0
                             && $Yi >= 0
                             && $Xi <= $this->GridSizeX
                             && $Yi <= $this->GridSizeY
