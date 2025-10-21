@@ -1,20 +1,19 @@
 <?php
 
-namespace Test\CpChart;
+declare(strict_types=1);
+
+namespace Test\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Data;
 use CpChart\Image;
-use Test\CpChart\UnitTester;
+use Test\CpChart\Support\UnitTester;
 
-class SplineTest extends Unit
+final class SplineTest extends Unit
 {
-    /**
-     * @var UnitTester
-     */
-    protected $tester;
+    protected UnitTester $tester;
 
-    public function testChartRender()
+    public function testChartRender(): void
     {
         $data = new Data();
         $data->addPoints([], 'Serie1');

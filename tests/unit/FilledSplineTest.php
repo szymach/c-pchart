@@ -1,11 +1,13 @@
 <?php
 
-namespace Test\CpChart;
+declare(strict_types=1);
+
+namespace Test\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Data;
 use CpChart\Image;
-use Test\CpChart\UnitTester;
+use Test\CpChart\Support\UnitTester;
 
 use const BOUND_BOTH;
 use const DIRECTION_VERTICAL;
@@ -13,14 +15,11 @@ use const LEGEND_NOBORDER;
 use const TEXT_ALIGN_BOTTOMLEFT;
 use const TEXT_ALIGN_MIDDLEMIDDLE;
 
-class FilledSplineTest extends Unit
+final class FilledSplineTest extends Unit
 {
-    /**
-     * @var UnitTester
-     */
-    protected $tester;
+    protected UnitTester $tester;
 
-    public function testChartRender()
+    public function testChartRender(): void
     {
         $data = new Data();
         $data->setAxisName(0, 'Strength');

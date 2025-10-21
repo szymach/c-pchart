@@ -1,12 +1,14 @@
 <?php
 
-namespace Test\CpChart;
+declare(strict_types=1);
+
+namespace Test\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Chart\Pie;
 use CpChart\Data;
 use CpChart\Image;
-use Test\CpChart\UnitTester;
+use Test\CpChart\Support\UnitTester;
 
 use const DIRECTION_VERTICAL;
 use const LEGEND_HORIZONTAL;
@@ -14,14 +16,11 @@ use const LEGEND_NOBORDER;
 use const PIE_VALUE_BOTH;
 use const TEXT_ALIGN_TOPMIDDLE;
 
-class PieTest extends Unit
+final class PieTest extends Unit
 {
-    /**
-     * @var UnitTester
-     */
-    protected $tester;
+    protected UnitTester $tester;
 
-    public function test2dPieRender()
+    public function test2dPieRender(): void
     {
         $data = new Data();
         $data->addPoints([40, 60, 15, 10, 6, 4], 'ScoreA');
@@ -113,7 +112,7 @@ class PieTest extends Unit
         $this->tester->seeFileFound($filename);
     }
 
-    public function test2dRingRender()
+    public function test2dRingRender(): void
     {
         $data = new Data();
         $data->addPoints([50, 2, 3, 4, 7, 10, 25, 48, 41, 10], 'ScoreA');
@@ -176,7 +175,7 @@ class PieTest extends Unit
         $this->tester->seeFileFound($filename);
     }
 
-    public function test3dPieRender()
+    public function test3dPieRender(): void
     {
         $data = new Data();
         $data->addPoints([40, 30, 20], 'ScoreA');
@@ -272,7 +271,7 @@ class PieTest extends Unit
         $this->tester->seeFileFound($filename);
     }
 
-    public function test3dRingRender()
+    public function test3dRingRender(): void
     {
         $data = new Data();
         $data->addPoints([50, 2, 3, 4, 7, 10, 25, 48, 41, 10], 'ScoreA');

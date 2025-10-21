@@ -1,23 +1,22 @@
 <?php
 
-namespace Test\CpChart;
+declare(strict_types=1);
+
+namespace Test\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Chart\Radar;
 use CpChart\Data;
 use CpChart\Image;
-use Test\CpChart\UnitTester;
+use Test\CpChart\Support\UnitTester;
 
 use const RADAR_LAYOUT_CIRCLE;
 
 final class RegressionTest extends Unit
 {
-    /**
-     * @var UnitTester
-     */
-    protected $tester;
+    protected UnitTester $tester;
 
-    public function testNoDeprecationThrownOnFractionalValues()
+    public function testNoDeprecationThrownOnFractionalValues(): void
     {
         $values = [9, 9.29, 10, 10, 8.5];
 
