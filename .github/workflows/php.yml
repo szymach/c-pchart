@@ -31,9 +31,6 @@ jobs:
         
     - name: Setup problem matchers for PHPUnit
       run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-        
-    - name: Setup problem matchers for Codeception
-      run: echo "::add-matcher::${{ runner.tool_cache }}/codeception.json"
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
