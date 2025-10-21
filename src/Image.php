@@ -21,13 +21,13 @@ class Image extends Draw
     /**
      * @param int $XSize
      * @param int $YSize
-     * @param Data $DataSet
+     * @param ?Data $DataSet
      * @param boolean $TransparentBackground
      */
     public function __construct(
         $XSize,
         $YSize,
-        Data $DataSet = null,
+        ?Data $DataSet = null,
         $TransparentBackground = false
     ) {
         parent::__construct();
