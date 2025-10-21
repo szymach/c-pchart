@@ -23,7 +23,7 @@ class Data
     /**
      * @var array
      */
-    public $Data = [];
+    public array $Data = [];
 
     /**
      * @var array

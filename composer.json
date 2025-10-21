@@ -40,7 +40,8 @@
         "phpunit/phpunit": "^12.4",
         "squizlabs/php_codesniffer": "^4.0",
         "codeception/module-asserts": "^3.2",
-        "codeception/module-filesystem": "^3.0"
+        "codeception/module-filesystem": "^3.0",
+        "phpstan/phpstan": "^2.1"
     },
     "config": {
         "bin-dir": "vendor/bin"
@@ -55,6 +56,7 @@
     },
     "scripts": {
         "sniffer": "vendor/bin/phpcs",
-        "codecept": "vendor/bin/codecept run"
+        "codecept": "vendor/bin/codecept run",
+        "stan": "vendor/bin/phpstan analyze src/Image.php -l 7"
     }
 }

@@ -18,17 +18,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Install PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-versions }}
         extensions: gd
-        tools: composer, phpcs, codeception
-        
+        tools: codeception, composer, phpcs, phpstan
+
     - name: Setup problem matchers for PHP
       run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-        
+
     - name: Setup problem matchers for PHPUnit
       run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
@@ -49,6 +49,9 @@ jobs:
 
     - name: Run Codesniffer
       run: phpcs
-      
+
+    - name: Run PHPStan
+      run: phpstan analyze src/Image.php -l 7
+
     - name: Run Codeception test suites
       run: codeception run

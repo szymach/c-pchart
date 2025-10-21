@@ -3,6 +3,37 @@
 namespace CpChart;
 
 use Exception;
+use GdImage;
+
+use const AXIS_FORMAT_CURRENCY;
+use const AXIS_FORMAT_CUSTOM;
+use const AXIS_FORMAT_DATE;
+use const AXIS_FORMAT_DEFAULT;
+use const AXIS_FORMAT_METRIC;
+use const AXIS_FORMAT_TIME;
+use const AXIS_FORMAT_TRAFFIC;
+use const AXIS_X;
+use const BOUND_BOTH;
+use const BOUND_LABEL_POS_AUTO;
+use const BOUND_LABEL_POS_BOTTOM;
+use const BOUND_LABEL_POS_TOP;
+use const BOUND_MAX;
+use const BOUND_MIN;
+use const CHART_LAST_LAYOUT_REGULAR;
+use const CHART_LAST_LAYOUT_STACKED;
+use const DISPLAY_MANUAL;
+use const LABEL_POINT_BOX;
+use const LABEL_POINT_CIRCLE;
+use const LABELING_ALL;
+use const LABELING_DIFFERENT;
+use const LEGEND_HORIZONTAL;
+use const LEGEND_VERTICAL;
+use const SCALE_POS_LEFTRIGHT;
+use const TEXT_ALIGN_BOTTOMMIDDLE;
+use const TEXT_ALIGN_MIDDLELEFT;
+use const TEXT_ALIGN_MIDDLERIGHT;
+use const TEXT_ALIGN_TOPMIDDLE;
+use const VOID;
 
 /**
  * This class exists only to try and reduce the number of methods and properties
@@ -13,19 +44,19 @@ abstract class BaseDraw
 {
     /**
      * Width of the picture
-     * @var int
+     * @var int<1, max>
      */
     public $XSize;
 
     /**
      * Height of the picture
-     * @var int
+     * @var int<1, max>
      */
     public $YSize;
 
     /**
      * GD picture object
-     * @var resource
+     * @var GdImage
      */
     public $Picture;
 
@@ -169,7 +200,7 @@ abstract class BaseDraw
 
     /**
      * Name of the session array
-     * @var int
+     * @var string
      */
     public $ImageMapIndex = "pChart";
 
@@ -253,12 +284,12 @@ abstract class BaseDraw
 
     /**
      * Allocate a color with transparency
-     * @param resource $Picture
+     * @param GdImage $Picture
      * @param int $R
      * @param int $G
      * @param int $B
      * @param int $Alpha
-     * @return int
+     * @return int<0, max>
      */
     public function allocateColor($Picture, $R, $G, $B, $Alpha = 100)
     {
@@ -287,25 +318,33 @@ abstract class BaseDraw
             $Alpha = 100;
         }
 
-        $Alpha = $this->convertAlpha($Alpha);
-        return imagecolorallocatealpha($Picture, (int) $R, (int) $G, (int) $B, (int) $Alpha);
+        /** @var int<0, max> $result */
+        $result = imagecolorallocatealpha(
+            $Picture,
+            (int) $R,
+            (int) $G,
+            (int) $B,
+            (int) $this->convertAlpha($Alpha)
+        );
+
+        return $result;
     }
 
     /**
      * Convert apha to base 10
      * @param int|float $AlphaValue
-     * @return integer
+     * @return float
      */
-    public function convertAlpha($AlphaValue)
+    public function convertAlpha($AlphaValue): float
     {
         return floor((127 / 100) * (100 - $AlphaValue));
     }
 
     /**
      * @param string $FileName
-     * @return array
+     * @return array{ 0: int|float, 1: int|float, 2: string }
      */
-    public function getPicInfo($FileName)
+    public function getPicInfo($FileName): array
     {
         $Infos = getimagesize($FileName);
         $Width = $Infos[0];
