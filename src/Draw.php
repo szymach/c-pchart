@@ -4,6 +4,10 @@ namespace CpChart;
 
 use Exception;
 
+/**
+ * @deprecated
+ * @internal
+ */
 abstract class Draw extends BaseDraw
 {
     /**

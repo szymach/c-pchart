@@ -33,7 +33,7 @@ class Image extends Draw
     /**
      * @param int<1, max> $XSize
      * @param int<1, max> $YSize
-     * @param ?Data $DataSet
+     * @param Data|null $DataSet
      * @param bool $TransparentBackground
      */
     public function __construct(

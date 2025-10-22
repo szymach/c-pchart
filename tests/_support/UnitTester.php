@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\CpChart\Support;
 
+use Codeception\Actor;
+use Codeception\Lib\Friend;
+use Tests\CpChart\Support\_generated\UnitTesterActions;
+
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -15,13 +19,13 @@ namespace Tests\CpChart\Support;
  * @method void am($role)
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
- * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
 */
-class UnitTester extends \Codeception\Actor
+final class UnitTester extends Actor
 {
-    use _generated\UnitTesterActions;
+    use UnitTesterActions;
 
     public function getOutputPathForChart(string $chartFilename): string
     {

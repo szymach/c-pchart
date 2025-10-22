@@ -47,6 +47,9 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
+    - name: Initialize Codeception classes for analysis
+      run: codeception build
+
     - name: Run Codesniffer
       run: phpcs
 
