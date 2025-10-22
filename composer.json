@@ -57,6 +57,7 @@
     "scripts": {
         "sniffer": "vendor/bin/phpcs",
         "codecept": "vendor/bin/codecept run",
-        "stan": "vendor/bin/phpstan analyze -c phpstan.neon"
+        "stan_7": "vendor/bin/phpstan analyze -c phpstan_7.neon",
+        "stan_max": "vendor/bin/phpstan analyze -c phpstan_max.neon"
     }
 }

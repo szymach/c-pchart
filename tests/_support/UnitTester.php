@@ -23,7 +23,7 @@ class UnitTester extends \Codeception\Actor
 {
     use _generated\UnitTesterActions;
 
-    public function getOutputPathForChart($chartFilename): string
+    public function getOutputPathForChart(string $chartFilename): string
     {
         return sprintf("%s/../_output/charts/%s", __DIR__, $chartFilename);
     }

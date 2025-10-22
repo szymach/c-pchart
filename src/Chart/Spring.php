@@ -338,7 +338,7 @@ class Spring
 
     /**
      * Set color attribute for a list of nodes
-     * @param array|string $Nodes
+     * @param array|string|number $Nodes
      * @param array $Settings
      */
     public function setNodesColor($Nodes, array $Settings = [])

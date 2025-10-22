@@ -81,6 +81,9 @@ final class CacheTest extends Unit
         $this->clearCache();
     }
 
+    /**
+     * @return array{ 0: Data, 1: Image }
+     */
     private function createImageData(): array
     {
         $data = new Data();

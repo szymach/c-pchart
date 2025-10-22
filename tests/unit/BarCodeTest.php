@@ -16,7 +16,7 @@ final class BarCodeTest extends Unit
 {
     protected UnitTester $tester;
 
-    public function test39Code()
+    public function test39Code(): void
     {
         $image = new Image(700, 230);
         $settings = [
@@ -70,7 +70,7 @@ final class BarCodeTest extends Unit
         $this->tester->seeFileFound($filename);
     }
 
-    public function test128Code()
+    public function test128Code(): void
     {
         $image = new Image(700, 230);
         $settings = [

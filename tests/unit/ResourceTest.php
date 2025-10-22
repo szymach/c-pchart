@@ -66,7 +66,7 @@ final class ResourceTest extends Unit
         $this->tester->expectThrowable(
             Exception::class,
             function () use ($data) {
-                $data->loadPalette(sprintf('non_existant_palette', __DIR__), true);
+                $data->loadPalette(sprintf('%s/../_data/non_existant_palette', __DIR__), true);
             }
         );
     }

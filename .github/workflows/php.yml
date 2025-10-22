@@ -50,8 +50,11 @@ jobs:
     - name: Run Codesniffer
       run: phpcs
 
-    - name: Run PHPStan
-      run: phpstan analyze -c phpstan.neon
+    - name: Run PHPStan 7
+      run: phpstan analyze -c phpstan_7.neon
+
+    - name: Run PHPStan max
+      run: phpstan analyze -c phpstan_max.neon
 
     - name: Run Codeception test suites
       run: codeception run

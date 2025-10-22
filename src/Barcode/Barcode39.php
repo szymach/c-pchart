@@ -140,10 +140,11 @@ class Barcode39
     /**
      * Create the encoded string
      * @param Image $Object
-     * @param type $Value
-     * @param type $X
-     * @param type $Y
+     * @param string $Value
+     * @param int $X
+     * @param int $Y
      * @param array $Format
+     * @return void
      */
     public function draw(Image $Object, $Value, $X, $Y, $Format = [])
     {

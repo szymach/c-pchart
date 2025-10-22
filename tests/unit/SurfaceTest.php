@@ -16,7 +16,7 @@ final class SurfaceTest extends Unit
 {
     protected UnitTester $tester;
 
-    public function testSurfaceChartRender()
+    public function testSurfaceChartRender(): void
     {
         $image = new Image(400, 400);
         $settings = [
@@ -75,7 +75,7 @@ final class SurfaceTest extends Unit
         $this->tester->seeFileFound($filename);
     }
 
-    public function testContourChartRender()
+    public function testContourChartRender(): void
     {
         $image = new Image(400, 400);
         $image->drawFilledRectangle(
