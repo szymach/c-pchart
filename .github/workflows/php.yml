@@ -51,7 +51,7 @@ jobs:
       run: phpcs
 
     - name: Run PHPStan
-      run: phpstan analyze src/Image.php -l 7
+      run: phpstan analyze -c phpstan.neon
 
     - name: Run Codeception test suites
       run: codeception run

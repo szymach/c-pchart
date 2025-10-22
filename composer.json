@@ -57,6 +57,6 @@
     "scripts": {
         "sniffer": "vendor/bin/phpcs",
         "codecept": "vendor/bin/codecept run",
-        "stan": "vendor/bin/phpstan analyze src/Image.php -l 7"
+        "stan": "vendor/bin/phpstan analyze -c phpstan.neon"
     }
 }
