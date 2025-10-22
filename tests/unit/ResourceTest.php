@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Test\CpChart\Unit;
+namespace Tests\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Data;
 use CpChart\Image;
 use Exception;
-use Test\CpChart\Support\UnitTester;
+use Tests\CpChart\Support\UnitTester;
 
 final class ResourceTest extends Unit
 {
@@ -66,7 +66,7 @@ final class ResourceTest extends Unit
         $this->tester->expectThrowable(
             Exception::class,
             function () use ($data) {
-                $data->loadPalette(sprintf('non_existant_palette', __DIR__), true);
+                $data->loadPalette(sprintf('%s/../_data/non_existant_palette', __DIR__), true);
             }
         );
     }

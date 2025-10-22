@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Test\CpChart\Support\Helper;
+namespace Tests\CpChart\Support\Helper;
 
 use Codeception\Module;
 use Codeception\Module\Filesystem;
 
 final class Unit extends Module
 {
+    /**
+     * @param array<string, mixed> $settings
+     */
     public function _beforeSuite(array $settings = []): void
     {
         $chartDir = $this->getChartDirectoryPath();

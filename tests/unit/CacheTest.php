@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Test\CpChart\Unit;
+namespace Tests\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Cache;
 use CpChart\Data;
 use CpChart\Image;
-use Test\CpChart\Support\UnitTester;
+use Tests\CpChart\Support\UnitTester;
 
 use const DIRECTION_VERTICAL;
 
@@ -71,17 +71,20 @@ final class CacheTest extends Unit
         $this->tester->assertEquals(false, $cache->isInCache($chartHash));
     }
 
-    protected function _before()
+    protected function _before(): void
     {
         $this->clearCache();
     }
 
-    protected function _after()
+    protected function _after(): void
     {
         $this->clearCache();
     }
 
-    private function createImageData()
+    /**
+     * @return array{ 0: Data, 1: Image }
+     */
+    private function createImageData(): array
     {
         $data = new Data();
         $data->addPoints([1, 3, 4, 3, 5]);

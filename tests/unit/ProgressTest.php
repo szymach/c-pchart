@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Test\CpChart\Unit;
+namespace Tests\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Image;
-use Test\CpChart\Support\UnitTester;
+use Tests\CpChart\Support\UnitTester;
 
 use const LABEL_POS_BOTTOM;
 use const LABEL_POS_CENTER;

@@ -23,10 +23,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Test\\CpChart\\Unit\\": [
+            "Tests\\CpChart\\Unit\\": [
                 "tests/unit/"
             ],
-            "Test\\CpChart\\Support\\": [
+            "Tests\\CpChart\\Support\\": [
                 "tests/_support/"
             ]
         }
@@ -40,7 +40,8 @@
         "phpunit/phpunit": "^12.4",
         "squizlabs/php_codesniffer": "^4.0",
         "codeception/module-asserts": "^3.2",
-        "codeception/module-filesystem": "^3.0"
+        "codeception/module-filesystem": "^3.0",
+        "phpstan/phpstan": "^2.1"
     },
     "config": {
         "bin-dir": "vendor/bin"
@@ -55,6 +56,8 @@
     },
     "scripts": {
         "sniffer": "vendor/bin/phpcs",
-        "codecept": "vendor/bin/codecept run"
+        "codecept": "vendor/bin/codecept run",
+        "stan_7": "vendor/bin/phpstan analyze -c phpstan_7.neon",
+        "stan_max": "vendor/bin/phpstan analyze -c phpstan_max.neon"
     }
 }

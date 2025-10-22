@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Test\CpChart\Unit;
+namespace Tests\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Chart\Radar;
 use CpChart\Data;
 use CpChart\Image;
-use Test\CpChart\Support\UnitTester;
+use Tests\CpChart\Support\UnitTester;
 
 use const RADAR_LAYOUT_CIRCLE;
 

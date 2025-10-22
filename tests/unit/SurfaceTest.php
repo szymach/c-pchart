@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Test\CpChart\Unit;
+namespace Tests\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Chart\Surface;
 use CpChart\Image;
-use Test\CpChart\Support\UnitTester;
+use Tests\CpChart\Support\UnitTester;
 
 use const DIRECTION_VERTICAL;
 use const LABEL_POSITION_BOTTOM;
@@ -16,7 +16,7 @@ final class SurfaceTest extends Unit
 {
     protected UnitTester $tester;
 
-    public function testSurfaceChartRender()
+    public function testSurfaceChartRender(): void
     {
         $image = new Image(400, 400);
         $settings = [
@@ -75,7 +75,7 @@ final class SurfaceTest extends Unit
         $this->tester->seeFileFound($filename);
     }
 
-    public function testContourChartRender()
+    public function testContourChartRender(): void
     {
         $image = new Image(400, 400);
         $image->drawFilledRectangle(

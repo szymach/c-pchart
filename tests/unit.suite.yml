@@ -3,4 +3,4 @@ modules:
     enabled:
         - Asserts
         - Filesystem
-        - Test\CpChart\Support\Helper\Unit
+        - Tests\CpChart\Support\Helper\Unit

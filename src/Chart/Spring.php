@@ -4,19 +4,6 @@ namespace CpChart\Chart;
 
 use CpChart\Image;
 
-/**
- *  Spring - class to draw spring graphs
- *
- *  Version     : 2.1.4
- *  Made by     : Jean-Damien POGOLOTTI
- *  Last Update : 19/01/2014
- *
- *  This file can be distributed under the license you can find at :
- *
- *  http://www.pchart.net/license
- *
- *  You can find the whole class documentation on the pChart web site.
- */
 class Spring
 {
     /**
@@ -92,6 +79,7 @@ class Spring
     public function __construct()
     {
         /* Set nodes defaults */
+        // @FIXME instantiate as an array
         $this->Default["R"] = 255;
         $this->Default["G"] = 255;
         $this->Default["B"] = 255;
@@ -115,6 +103,7 @@ class Spring
         $this->Default["LinkB"] = 0;
         $this->Default["LinkAlpha"] = 0;
 
+        // @FIXME instantiate as an array
         $this->Labels["Type"] = LABEL_CLASSIC;
         $this->Labels["R"] = 0;
         $this->Labels["G"] = 0;
@@ -349,7 +338,7 @@ class Spring
 
     /**
      * Set color attribute for a list of nodes
-     * @param array|string $Nodes
+     * @param array|string|number $Nodes
      * @param array $Settings
      */
     public function setNodesColor($Nodes, array $Settings = [])
