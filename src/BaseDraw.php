@@ -335,7 +335,7 @@ abstract class BaseDraw
      * @param int|float $AlphaValue
      * @return float
      */
-    public function convertAlpha($AlphaValue): float
+    public function convertAlpha($AlphaValue)
     {
         return floor((127 / 100) * (100 - $AlphaValue));
     }
@@ -344,7 +344,7 @@ abstract class BaseDraw
      * @param string $FileName
      * @return array{ 0: int|float, 1: int|float, 2: string }
      */
-    public function getPicInfo($FileName): array
+    public function getPicInfo($FileName)
     {
         $Infos = getimagesize($FileName);
         $Width = $Infos[0];

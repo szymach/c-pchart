@@ -85,7 +85,7 @@ class Image extends Draw
         }
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         if ($this->TransparentBackground) {
             imagealphablending($this->Picture, false);
@@ -108,8 +108,9 @@ class Image extends Draw
      *
      * @param bool $Enabled
      * @param array{ X?: int, Y?: int, R?: int, G?: int, B?: int, Alpha?: int } $Format
+     * @return void
      */
-    public function setShadow($Enabled = true, array $Format = []): void
+    public function setShadow($Enabled = true, array $Format = [])
     {
         $this->Shadow = (bool) $Enabled;
         $this->ShadowX = $Format["X"] ?? 2;
@@ -128,7 +129,7 @@ class Image extends Draw
      * @param int $Y2
      * @return int|null
      */
-    public function setGraphArea($X1, $Y1, $X2, $Y2): ?int
+    public function setGraphArea($X1, $Y1, $X2, $Y2)
     {
         if ($X2 < $X1 || $X1 == $X2 || $Y2 < $Y1 || $Y1 == $Y2) {
             return -1;
@@ -167,8 +168,9 @@ class Image extends Draw
     /**
      * Render the picture to a file
      * @param string $FileName
+     * @return void
      */
-    public function render($FileName): void
+    public function render($FileName)
     {
         if ($this->TransparentBackground) {
             imagealphablending($this->Picture, false);
@@ -177,7 +179,10 @@ class Image extends Draw
         imagepng($this->Picture, $FileName);
     }
 
-    public function toDataURI(): string
+    /**
+     * @return non-empty-string
+     */
+    public function toDataURI()
     {
         return 'data:image/png;base64,' . base64_encode($this->__toString());
     }
@@ -187,8 +192,9 @@ class Image extends Draw
      *
      * Render the picture to a web browser stream
      * @param bool $BrowserExpire
+     * @return void
      */
-    public function stroke($BrowserExpire = false): void
+    public function stroke($BrowserExpire = false)
     {
         if ($this->TransparentBackground) {
             imagealphablending($this->Picture, false);
@@ -208,8 +214,9 @@ class Image extends Draw
     /**
      * Automatic output method based on the calling interface
      * @param string $FileName
+     * @return void
      */
-    public function autoOutput($FileName = "output.png"): void
+    public function autoOutput($FileName = "output.png")
     {
         if (php_sapi_name() == "cli") {
             $this->Render($FileName);
@@ -226,7 +233,7 @@ class Image extends Draw
      * @param int $Y2
      * @return float
      */
-    public function getLength($X1, $Y1, $X2, $Y2): float
+    public function getLength($X1, $Y1, $X2, $Y2)
     {
         return sqrt(
             pow(max($X1, $X2) - min($X1, $X2), 2) + pow(max($Y1, $Y2) - min($Y1, $Y2), 2)
@@ -241,7 +248,7 @@ class Image extends Draw
      * @param int $Y2
      * @return float|int
      */
-    public function getAngle($X1, $Y1, $X2, $Y2): float|int
+    public function getAngle($X1, $Y1, $X2, $Y2)
     {
         $Opposite = $Y2 - $Y1;
         $Adjacent = $X2 - $X1;
@@ -260,7 +267,7 @@ class Image extends Draw
      * @param string $Text
      * @return array<int<0, max>, array{ X: float, Y: float }>
      */
-    public function getTextBox($X, $Y, $FontName, $FontSize, $Angle, $Text): array
+    public function getTextBox($X, $Y, $FontName, $FontSize, $Angle, $Text)
     {
         $coords = imagettfbbox($FontSize, 0, $this->loadFont($FontName, 'fonts'), $Text);
         if ($coords === false) {
@@ -345,8 +352,9 @@ class Image extends Draw
      *  FontName?: string,
      *  FontSize?: int
      * } $Format
+     * @return void
      */
-    public function setFontProperties($Format = []): void
+    public function setFontProperties($Format = [])
     {
         $R = $Format["R"] ?? -1;
         $G = $Format["G"] ?? -1;
@@ -379,8 +387,9 @@ class Image extends Draw
     /**
      * Returns the 1st decimal values (used to correct AA bugs)
      * @param string $Value
+     * @return string|int
      */
-    public function getFirstDecimal($Value): string|int
+    public function getFirstDecimal($Value)
     {
         $Values = preg_split("/\./", $Value);
         return isset($Values[1]) ? substr($Values[1], 0, 1) : 0;
@@ -388,16 +397,18 @@ class Image extends Draw
 
     /**
      * Attach a dataset to your pChart Object
+     * @return void
      */
-    public function setDataSet(Data $DataSet): void
+    public function setDataSet(Data $DataSet)
     {
         $this->DataSet = $DataSet;
     }
 
     /**
      * Print attached dataset contents to STDOUT
+     * @return void
      */
-    public function printDataSet(): void
+    public function printDataSet()
     {
         print_r($this->DataSet);
     }
@@ -408,13 +419,14 @@ class Image extends Draw
      * @param int $StorageMode
      * @param string $UniqueID
      * @param string $StorageFolder
+     * @return void
      */
     public function initialiseImageMap(
         $Name = "pChart",
         $StorageMode = IMAGE_MAP_STORAGE_SESSION,
         $UniqueID = "imageMap",
         $StorageFolder = "tmp"
-    ): void {
+    ) {
         $this->ImageMapIndex = $Name;
         $this->ImageMapStorageMode = $StorageMode;
 
@@ -444,6 +456,7 @@ class Image extends Draw
      * @param string $Title
      * @param string $Message
      * @param bool $HTMLEncode
+     * @return void
      */
     public function addToImageMap(
         $Type,
@@ -452,7 +465,7 @@ class Image extends Draw
         $Title = null,
         $Message = null,
         $HTMLEncode = false
-    ): void {
+    ) {
         if ($this->ImageMapStorageMode == null) {
             $this->initialiseImageMap();
         }
@@ -509,9 +522,9 @@ class Image extends Draw
      * Remove VOID values from an imagemap custom values array
      * @param string $SerieName
      * @param array<int|float|numeric-string, int|float|numeric-string> $Values
-     * @return list<float|int|numeric-string>
+     * @return list<float|int|numeric-string>|int
      */
-    public function removeVOIDFromArray($SerieName, array $Values): array|int
+    public function removeVOIDFromArray($SerieName, array $Values)
     {
         if (!isset($this->DataSet->Data["Series"][$SerieName])) {
             return -1;
@@ -533,7 +546,7 @@ class Image extends Draw
      * @param array<int|float|numeric-string, int|float|numeric-string>|string $NewTitle
      * @return null|int
      */
-    public function replaceImageMapTitle($OldTitle, $NewTitle): ?int
+    public function replaceImageMapTitle($OldTitle, $NewTitle)
     {
         if ($this->ImageMapStorageMode == null) {
             return -1;
@@ -627,7 +640,7 @@ class Image extends Draw
      * @param list<int|float|numeric-string> $Values
      * @return null|int
      */
-    public function replaceImageMapValues($Title, array $Values): ?int
+    public function replaceImageMapValues($Title, array $Values)
     {
         if ($this->ImageMapStorageMode == null) {
             return -1;
@@ -705,13 +718,14 @@ class Image extends Draw
      * @param int $StorageMode
      * @param string $UniqueID
      * @param string $StorageFolder
+     * @return void
      */
     public function dumpImageMap(
         $Name = "pChart",
         $StorageMode = IMAGE_MAP_STORAGE_SESSION,
         $UniqueID = "imageMap",
         $StorageFolder = "tmp"
-    ): void {
+    ) {
         $this->ImageMapIndex = $Name;
         $this->ImageMapStorageMode = $StorageMode;
 
@@ -750,7 +764,7 @@ class Image extends Draw
      * @param int $B
      * @return string
      */
-    public function toHTMLColor($R, $G, $B): string
+    public function toHTMLColor($R, $G, $B)
     {
         $R = intval($R);
         $G = intval($G);
@@ -770,7 +784,7 @@ class Image extends Draw
      * @param array<int, int|float|numeric-string> $Plots
      * @return list<int|float|numeric-string>
      */
-    public function reversePlots(array $Plots): array
+    public function reversePlots(array $Plots)
     {
         $Result = [];
         for ($i = count($Plots) - 2; $i >= 0; $i = $i - 2) {
@@ -789,8 +803,9 @@ class Image extends Draw
      * @param int $Width
      * @param int $Height
      * @param array{ StartAlpha?: int, EndAlpha?: int } $Format
+     * @return void
      */
-    public function drawAreaMirror($X, $Y, $Width, $Height, array $Format = []): void
+    public function drawAreaMirror($X, $Y, $Width, $Height, array $Format = [])
     {
         $StartAlpha = $Format["StartAlpha"] ?? 80;
         $EndAlpha = isset($Format["EndAlpha"]) ? $Format["EndAlpha"] : 0;

@@ -23,7 +23,7 @@ class Data
     /**
      * @var array
      */
-    public array $Data = [];
+    public $Data = [];
 
     /**
      * @var array
@@ -36,7 +36,7 @@ class Data
         "4" => ["R" => 176, "G" => 46, "B" => 224, "Alpha" => 100],
         "5" => ["R" => 224, "G" => 46, "B" => 117, "Alpha" => 100],
         "6" => ["R" => 92, "G" => 224, "B" => 46, "Alpha" => 100],
-        "7" => ["R" => 224, "G" => 176, "B" => 46, "Alpha" => 100]
+        "7" => ["R" => 224, "G" => 176, "B" => 46, "Alpha" => 100],
     ];
 
     public function __construct()

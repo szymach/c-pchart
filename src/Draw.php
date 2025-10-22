@@ -4,19 +4,6 @@ namespace CpChart;
 
 use Exception;
 
-/**
- *  Draw - class extension with drawing methods
- *
- *  Version     : 2.1.4
- *  Made by     : Jean-Damien POGOLOTTI
- *  Last Update : 19/01/2014
- *
- *  This file can be distributed under the license you can find at :
- *
- *  http://www.pchart.net/license
- *
- *  You can find the whole class documentation on the pChart web site.
- */
 abstract class Draw extends BaseDraw
 {
     /**
