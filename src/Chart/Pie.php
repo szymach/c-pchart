@@ -33,7 +33,6 @@ use const TEXT_ALIGN_TOPLEFT;
 use const TEXT_ALIGN_TOPRIGHT;
 use const VOID;
 
-
 class Pie
 {
     /**

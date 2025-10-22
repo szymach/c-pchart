@@ -5,7 +5,13 @@ namespace CpChart;
 use RuntimeException;
 
 /**
- * @phpstan-type SettingsArray array{ 0: numeric-string, 1: numeric-string, 2: numeric-string, 3: numeric-string, 4: numeric-string }
+ * @phpstan-type SettingsArray array{
+ *  0: numeric-string,
+ *  1: numeric-string,
+ *  2: numeric-string,
+ *  3: numeric-string,
+ *  4: numeric-string
+ * }
  */
 class Cache
 {
@@ -104,7 +110,7 @@ class Cache
         $DBSize = filesize($Database);
 
         /* Save the index */
-        $Handle = fopen($Index, "a");
+        $Handle = @fopen($Index, "a");
         if ($Handle === false) {
             throw new RuntimeException("Unable to open file $Index");
         }
@@ -112,18 +118,20 @@ class Cache
         fclose($Handle);
 
         /* Get the picture raw contents */
-        $Handle = fopen($TemporaryFile, "r");
+        $Handle = @fopen($TemporaryFile, "r");
         if ($Handle === false) {
             throw new RuntimeException("Unable to open file $TemporaryFile");
         }
         $Raw = fread($Handle, $PictureSize);
         if ($Raw === false) {
-            throw new RuntimeException("Unable to open file $TemporaryFile");
+            throw new RuntimeException(
+                "Unable to read $PictureSize from file $TemporaryFile"
+            );
         }
         fclose($Handle);
 
         /* Save the picture in the solid database file */
-        $Handle = fopen($Database, "a");
+        $Handle = @fopen($Database, "a");
         if ($Handle === false) {
             throw new RuntimeException("Unable to open file $Database");
         }
@@ -192,25 +200,25 @@ class Cache
         }
 
         /* Open the file handles */
-        $IndexHandle = fopen($Index, "r");
+        $IndexHandle = @fopen($Index, "r");
         if ($IndexHandle === false) {
             throw new RuntimeException("Unable to open file $Index");
         }
 
-        $IndexTempHandle = fopen($IndexTemp, "w");
+        $IndexTempHandle = @fopen($IndexTemp, "w");
         if ($IndexTempHandle === false) {
             fclose($IndexHandle);
             throw new RuntimeException("Unable to open file $IndexTemp");
         }
 
-        $DBHandle = fopen($Database, "r");
+        $DBHandle = @fopen($Database, "r");
         if ($DBHandle === false) {
             fclose($IndexHandle);
             fclose($IndexTempHandle);
             throw new RuntimeException("Unable to open file $Database");
         }
 
-        $DBTempHandle = fopen($DatabaseTemp, "w");
+        $DBTempHandle = @fopen($DatabaseTemp, "w");
         if ($DBTempHandle === false) {
             fclose($IndexHandle);
             fclose($IndexTempHandle);
@@ -219,17 +227,12 @@ class Cache
         }
 
         /* Remove the selected ID from the database */
-        while (!feof($IndexHandle)) {
+        while (feof($IndexHandle) === false) {
             $Entry = fgets($IndexHandle, 4096);
             if ($Entry === false) {
-                fclose($IndexHandle);
-                fclose($IndexTempHandle);
-                fclose($DBHandle);
-                fclose($DBTempHandle);
-                throw new RuntimeException(
-                    "Unable to read an entry from $Index"
-                );
+                break;
             }
+
             $Entry = str_replace("\r", "", $Entry);
             $Entry = str_replace("\n", "", $Entry);
             /** @var SettingsArray|false $Settings */
@@ -318,7 +321,7 @@ class Cache
         $filePath = "$this->CacheFolder/$this->CacheIndex";
 
         /* Search the picture in the index file */
-        $handle = fopen($filePath, "r");
+        $handle = @fopen($filePath, "r");
         if ($handle === false) {
             throw new RuntimeException("Unable to open file $filePath");
         }
@@ -345,7 +348,7 @@ class Cache
                             $hits = $hits . str_repeat(" ", 7 - strlen($hitsAsString));
                         }
 
-                        $handle = fopen($filePath, "r+");
+                        $handle = @fopen($filePath, "r+");
                         if ($handle === false) {
                             throw new RuntimeException("Unable to open file $filePath");
                         }
@@ -437,7 +440,7 @@ class Cache
             return false;
         }
 
-        $handle = fopen($Destination, "w");
+        $handle = @fopen($Destination, "w");
         if ($handle === false) {
             throw new RuntimeException("Unable to open file $Destination");
         }
@@ -469,7 +472,7 @@ class Cache
         /** @var int<1, max> $pictureSize */
         $pictureSize = (int) $cacheInfo["PicSize"];
 
-        $handle = fopen($filePath, "r");
+        $handle = @fopen($filePath, "r");
         if ($handle === false) {
             throw new RuntimeException("Unable to open file $filePath");
         }

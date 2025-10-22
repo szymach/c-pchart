@@ -71,17 +71,17 @@ final class CacheTest extends Unit
         $this->tester->assertEquals(false, $cache->isInCache($chartHash));
     }
 
-    protected function _before()
+    protected function _before(): void
     {
         $this->clearCache();
     }
 
-    protected function _after()
+    protected function _after(): void
     {
         $this->clearCache();
     }
 
-    private function createImageData()
+    private function createImageData(): array
     {
         $data = new Data();
         $data->addPoints([1, 3, 4, 3, 5]);

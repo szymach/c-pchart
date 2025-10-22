@@ -727,9 +727,10 @@ class Image extends Draw
                 }
             }
         } elseif ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE) {
-            if (file_exists($StorageFolder . "/" . $UniqueID . ".map")) {
-                $Handle = fopen($StorageFolder . "/" . $UniqueID . ".map", "r");
-                if ($Handle) {
+            $storageFileMapFilePath = "$StorageFolder/$UniqueID.map";
+            if (file_exists($storageFileMapFilePath)) {
+                $Handle = @fopen($storageFileMapFilePath, "r");
+                if ($Handle !== false) {
                     while (($Buffer = fgets($Handle, 4096)) !== false) {
                         echo $Buffer;
                     }
@@ -737,7 +738,7 @@ class Image extends Draw
                 }
 
                 if ($this->ImageMapAutoDelete) {
-                    unlink($StorageFolder . "/" . $UniqueID . ".map");
+                    unlink($storageFileMapFilePath);
                 }
             }
         }
@@ -825,7 +826,7 @@ class Image extends Draw
      */
     private function openImageStorageFileHandle($mode = "r"): mixed
     {
-        return fopen(
+        return @fopen(
             "$this->ImageMapStorageFolder/$this->ImageMapFileName.map",
             $mode
         );
