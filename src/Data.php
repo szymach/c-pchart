@@ -5,15 +5,33 @@ namespace CpChart;
 use Exception;
 use RuntimeException;
 
+use const ABSOLUTE_MAX;
+use const ABSOLUTE_MIN;
+use const AXIS_FORMAT_DEFAULT;
+use const AXIS_POSITION_BOTTOM;
+use const AXIS_POSITION_LEFT;
+use const AXIS_Y;
+use const SERIE_SHAPE_FILLEDCIRCLE;
+use const VOID;
+
+/**
+ * @phpstan-type FormatArray array{ R?: int, G?: int, B?: int, Alpha?: int }
+ * @phpstan-type PaletteArray array<int|numeric-string, array{
+ *  R: int,
+ *  G: int,
+ *  B: int,
+ *  Alpha: int
+ * }|string>
+ */
 class Data
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     public $Data = [];
 
     /**
-     * @var array
+     * @var PaletteArray
      */
     public $Palette = [
         "0" => ["R" => 188, "G" => 224, "B" => 46, "Alpha" => 100],
@@ -42,16 +60,17 @@ class Data
 
     /**
      * Add a single point or an array to the given serie
-     * @param mixed $Values
+     * @param list<number|string>|float|string $Values
      * @param string $SerieName
-     * @return int
+     * @return int|null
      */
-    public function addPoints($Values, $SerieName = "Serie1")
+    public function addPoints($Values, $SerieName = "Serie1"): ?int
     {
-        if (!isset($this->Data["Series"][$SerieName])) {
+        if (isset($this->Data["Series"][$SerieName]) === false) {
             $this->initialise($SerieName);
         }
-        if (is_array($Values)) {
+
+        if (is_array($Values) === true) {
             foreach ($Values as $Value) {
                 $this->Data["Series"][$SerieName]["Data"][] = $Value;
             }
@@ -60,34 +79,38 @@ class Data
         }
 
         if ($Values != VOID) {
+            /** @var list<float|int> $StrippedData */
             $StrippedData = $this->stripVOID($this->Data["Series"][$SerieName]["Data"]);
             if (empty($StrippedData)) {
                 $this->Data["Series"][$SerieName]["Max"] = 0;
                 $this->Data["Series"][$SerieName]["Min"] = 0;
                 return 0;
             }
+
             $this->Data["Series"][$SerieName]["Max"] = max($StrippedData);
             $this->Data["Series"][$SerieName]["Min"] = min($StrippedData);
         }
+
+        return null;
     }
 
     /**
      * Strip VOID values
-     * @param mixed $Values
-     * @return array
+     * @param float|int|string|null|array<float|int|numeric-string|string|null> $values
+     * @return array<float|int|numeric-string|string>
      */
-    public function stripVOID($Values)
+    public function stripVOID($values)
     {
-        if (!is_array($Values)) {
+        if (is_array($values) === false) {
             return [];
         }
-        $Result = [];
-        foreach ($Values as $Value) {
-            if ($Value != VOID) {
-                $Result[] = $Value;
-            }
-        }
-        return $Result;
+
+        $filteredValues = array_filter(
+            $values,
+            static fn($value): bool => $value != VOID
+        );
+
+        return array_values($filteredValues);
     }
 
     /**
@@ -97,21 +120,24 @@ class Data
      */
     public function getSerieCount($Serie)
     {
-        if (isset($this->Data["Series"][$Serie]["Data"])) {
-            return sizeof($this->Data["Series"][$Serie]["Data"]);
+        if (isset($this->Data["Series"][$Serie]["Data"]) === false) {
+            return 0;
         }
-        return 0;
+
+        return sizeof($this->Data["Series"][$Serie]["Data"]);
     }
 
     /**
      * Remove a serie from the pData object
-     * @param mixed $Series
+     * @param string|list<string> $Series
+     * @return void
      */
     public function removeSerie($Series)
     {
         if (!is_array($Series)) {
             $Series = $this->convertToArray($Series);
         }
+
         foreach ($Series as $Serie) {
             if (isset($this->Data["Series"][$Serie])) {
                 unset($this->Data["Series"][$Serie]);
@@ -148,7 +174,8 @@ class Data
 
     /**
      * Reverse the values in the given serie
-     * @param mixed $Series
+     * @param string|list<string> $Series
+     * @return void
      */
     public function reverseSerie($Series)
     {
@@ -180,7 +207,7 @@ class Data
     /**
      * Return the max value of a given serie
      * @param string $Serie
-     * @return float|int
+     * @return float|int|null
      */
     public function getMax($Serie)
     {
@@ -193,7 +220,7 @@ class Data
 
     /**
      * @param string $Serie
-     * @return float|int
+     * @return float|int|null
      */
     public function getMin($Serie)
     {
@@ -206,75 +233,92 @@ class Data
 
     /**
      * Set the description of a given serie
-     * @param mixed $Series
+     * @param string|list<string> $Series
      * @param int $Shape
+     * @return void
      */
     public function setSerieShape($Series, $Shape = SERIE_SHAPE_FILLEDCIRCLE)
     {
-        if (!is_array($Series)) {
+        if (is_array($Series) === false) {
             $Series = $this->convertToArray($Series);
         }
+
         foreach ($Series as $Serie) {
-            if (isset($this->Data["Series"][$Serie])) {
-                $this->Data["Series"][$Serie]["Shape"] = $Shape;
+            if (isset($this->Data["Series"][$Serie]) === false) {
+                continue;
             }
+
+            $this->Data["Series"][$Serie]["Shape"] = $Shape;
         }
     }
 
     /**
      * Set the description of a given serie
-     * @param string|array $Series
+     * @param string|list<string> $Series
      * @param string $Description
+     * @return void
      */
     public function setSerieDescription($Series, $Description = "My serie")
     {
-        if (!is_array($Series)) {
+        if (is_array($Series) === false) {
             $Series = $this->convertToArray($Series);
         }
+
         foreach ($Series as $Serie) {
-            if (isset($this->Data["Series"][$Serie])) {
-                $this->Data["Series"][$Serie]["Description"] = $Description;
+            if (isset($this->Data["Series"][$Serie]) === false) {
+                continue;
             }
+
+            $this->Data["Series"][$Serie]["Description"] = $Description;
         }
     }
 
     /**
      * Set a serie as "drawable" while calling a rendering public function
-     * @param string|array $Series
+     * @param string|list<string> $Series
      * @param bool $Drawable
+     * @return void
      */
     public function setSerieDrawable($Series, $Drawable = true)
     {
-        if (!is_array($Series)) {
+        if (is_array($Series) === false) {
             $Series = $this->convertToArray($Series);
         }
+
         foreach ($Series as $Serie) {
-            if (isset($this->Data["Series"][$Serie])) {
-                $this->Data["Series"][$Serie]["isDrawable"] = $Drawable;
+            if (isset($this->Data["Series"][$Serie]) === false) {
+                continue;
             }
+
+            $this->Data["Series"][$Serie]["isDrawable"] = $Drawable;
         }
     }
 
     /**
      * Set the icon associated to a given serie
-     * @param mixed $Series
+     * @param string|list<string> $Series
      * @param mixed $Picture
+     * @return void
      */
     public function setSeriePicture($Series, $Picture = null)
     {
-        if (!is_array($Series)) {
+        if (is_array($Series) === false) {
             $Series = $this->convertToArray($Series);
         }
+
         foreach ($Series as $Serie) {
-            if (isset($this->Data["Series"][$Serie])) {
-                $this->Data["Series"][$Serie]["Picture"] = $Picture;
+            if (isset($this->Data["Series"][$Serie]) === false) {
+                continue;
             }
+
+            $this->Data["Series"][$Serie]["Picture"] = $Picture;
         }
     }
 
     /**
      * Set the name of the X Axis
      * @param string $Name
+     * @return void
      */
     public function setXAxisName($Name)
     {
@@ -284,7 +328,8 @@ class Data
     /**
      * Set the display mode of the  X Axis
      * @param int $Mode
-     * @param array $Format
+     * @param array<string, mixed> $Format
+     * @return void
      */
     public function setXAxisDisplay($Mode, $Format = null)
     {
@@ -295,6 +340,7 @@ class Data
     /**
      * Set the unit that will be displayed on the X axis
      * @param string $Unit
+     * @return void
      */
     public function setXAxisUnit($Unit)
     {
@@ -304,6 +350,7 @@ class Data
     /**
      * Set the serie that will be used as abscissa
      * @param string $Serie
+     * @return void
      */
     public function setAbscissa($Serie)
     {
@@ -315,6 +362,7 @@ class Data
     /**
      * Set the position of the abscissa axis
      * @param int $Position
+     * @return void
      */
     public function setAbsicssaPosition($Position = AXIS_POSITION_BOTTOM)
     {
@@ -324,6 +372,7 @@ class Data
     /**
      * Set the name of the abscissa axis
      * @param string $Name
+     * @return void
      */
     public function setAbscissaName($Name)
     {
@@ -335,6 +384,7 @@ class Data
      * @param string $SerieX
      * @param string $SerieY
      * @param int $ID
+     * @return void
      */
     public function setScatterSerie($SerieX, $SerieY, $ID = 0)
     {
@@ -349,6 +399,7 @@ class Data
      *  Set the shape of a given sctatter serie
      * @param int $ID
      * @param int $Shape
+     * @return void
      */
     public function setScatterSerieShape($ID, $Shape = SERIE_SHAPE_FILLEDCIRCLE)
     {
@@ -361,6 +412,7 @@ class Data
      * Set the description of a given scatter serie
      * @param int $ID
      * @param string $Description
+     * @return void
      */
     public function setScatterSerieDescription($ID, $Description = "My serie")
     {
@@ -373,6 +425,7 @@ class Data
      * Set the icon associated to a given scatter serie
      * @param int $ID
      * @param mixed $Picture
+     * @return void
      */
     public function setScatterSeriePicture($ID, $Picture = null)
     {
@@ -385,6 +438,7 @@ class Data
      * Set a scatter serie as "drawable" while calling a rendering public function
      * @param int $ID
      * @param bool $Drawable
+     * @return void
      */
     public function setScatterSerieDrawable($ID, $Drawable = true)
     {
@@ -397,6 +451,7 @@ class Data
      * Define if a scatter serie should be draw with ticks
      * @param int $ID
      * @param int $Width
+     * @return void
      */
     public function setScatterSerieTicks($ID, $Width = 0)
     {
@@ -409,6 +464,7 @@ class Data
      * Define if a scatter serie should be draw with a special weight
      * @param int $ID
      * @param int $Weight
+     * @return void
      */
     public function setScatterSerieWeight($ID, $Weight = 0)
     {
@@ -420,26 +476,29 @@ class Data
     /**
      * Associate a color to a scatter serie
      * @param int $ID
-     * @param array $Format
+     * @param FormatArray $Format
+     * @return void
      */
     public function setScatterSerieColor($ID, array $Format)
     {
-        $R = isset($Format["R"]) ? $Format["R"] : 0;
-        $G = isset($Format["G"]) ? $Format["G"] : 0;
-        $B = isset($Format["B"]) ? $Format["B"] : 0;
-        $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $R = $Format["R"] ?? 0;
+        $G = $Format["G"] ?? 0;
+        $B = $Format["B"] ?? 0;
+        $Alpha = $Format["Alpha"] ?? 100;
 
-        if (isset($this->Data["ScatterSeries"][$ID])) {
-            $this->Data["ScatterSeries"][$ID]["Color"]["R"] = $R;
-            $this->Data["ScatterSeries"][$ID]["Color"]["G"] = $G;
-            $this->Data["ScatterSeries"][$ID]["Color"]["B"] = $B;
-            $this->Data["ScatterSeries"][$ID]["Color"]["Alpha"] = $Alpha;
+        if (isset($this->Data["ScatterSeries"][$ID]) === false) {
+            return;
         }
+
+        $this->Data["ScatterSeries"][$ID]["Color"]["R"] = $R;
+        $this->Data["ScatterSeries"][$ID]["Color"]["G"] = $G;
+        $this->Data["ScatterSeries"][$ID]["Color"]["B"] = $B;
+        $this->Data["ScatterSeries"][$ID]["Color"]["Alpha"] = $Alpha;
     }
 
     /**
      * Compute the series limits for an individual and global point of view
-     * @return array
+     * @return array{ 0: int, 1: int }
      */
     public function limits()
     {
@@ -467,13 +526,16 @@ class Data
 
     /**
      * Mark all series as drawable
+     * @return void
      */
     public function drawAll()
     {
         foreach (array_keys($this->Data["Series"]) as $Key) {
-            if ($this->Data["Abscissa"] != $Key) {
-                $this->Data["Series"][$Key]["isDrawable"] = true;
+            if ($this->Data["Abscissa"] == $Key) {
+                continue;
             }
+
+            $this->Data["Series"][$Key]["isDrawable"] = true;
         }
     }
 
@@ -514,20 +576,22 @@ class Data
     /**
      * Return the harmonic mean of the given serie
      * @param string $Serie
-     * @return int|null
+     * @return float|int|null
      */
     public function getHarmonicMean($Serie)
     {
-        if (isset($this->Data["Series"][$Serie])) {
-            $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
-            $Seriesum = 0;
-            foreach ($SerieData as $Value) {
-                $Seriesum = $Seriesum + 1 / $Value;
-            }
-            return sizeof($SerieData) / $Seriesum;
+        if (isset($this->Data["Series"][$Serie]) === false) {
+            return null;
         }
 
-        return null;
+        $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
+        $Seriesum = 0;
+        /** @var float|int $Value */
+        foreach ($SerieData as $Value) {
+            $Seriesum = $Seriesum + 1 / $Value;
+        }
+
+        return sizeof($SerieData) / $Seriesum;
     }
 
     /**
@@ -537,17 +601,20 @@ class Data
      */
     public function getStandardDeviation($Serie)
     {
-        if (isset($this->Data["Series"][$Serie])) {
-            $Average = $this->getSerieAverage($Serie);
-            $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
-
-            $DeviationSum = 0;
-            foreach ($SerieData as $Key => $Value) {
-                $DeviationSum = $DeviationSum + ($Value - $Average) * ($Value - $Average);
-            }
-            return sqrt($DeviationSum / count($SerieData));
+        if (isset($this->Data["Series"][$Serie]) === false) {
+            return null;
         }
-        return null;
+
+        $Average = $this->getSerieAverage($Serie);
+        $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
+
+        $DeviationSum = 0;
+        /** @var float|int $Value */
+        foreach ($SerieData as $Value) {
+            $DeviationSum = $DeviationSum + ($Value - $Average) * ($Value - $Average);
+        }
+
+        return sqrt($DeviationSum / count($SerieData));
     }
 
     /**
@@ -557,45 +624,51 @@ class Data
      */
     public function getCoefficientOfVariation($Serie)
     {
-        if (isset($this->Data["Series"][$Serie])) {
-            $Average = $this->getSerieAverage($Serie);
-            $StandardDeviation = $this->getStandardDeviation($Serie);
-
-            if ($StandardDeviation != 0) {
-                return $StandardDeviation / $Average;
-            }
+        if (isset($this->Data["Series"][$Serie]) === false) {
+            return null;
         }
-        return null;
+
+        $Average = $this->getSerieAverage($Serie);
+        $StandardDeviation = $this->getStandardDeviation($Serie);
+
+        if ($StandardDeviation == 0) {
+            return null;
+        }
+
+        return $StandardDeviation / $Average;
     }
 
     /**
      * Return the median value of the given serie
      * @param string $Serie
-     * @return int|float
+     * @return int|float|string|null
      */
     public function getSerieMedian($Serie)
     {
-        if (isset($this->Data["Series"][$Serie])) {
-            $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
-            sort($SerieData);
-            $SerieCenter = floor(sizeof($SerieData) / 2);
-
-            if (isset($SerieData[$SerieCenter])) {
-                return $SerieData[$SerieCenter];
-            }
+        if (isset($this->Data["Series"][$Serie]) === false) {
+            return null;
         }
-        return null;
+
+        $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
+        sort($SerieData);
+        $SerieCenter = (int) floor(sizeof($SerieData) / 2);
+
+        if (isset($SerieData[$SerieCenter]) === false) {
+            return null;
+        }
+
+        return $SerieData[$SerieCenter];
     }
 
     /**
      * Return the x th percentil of the given serie
      * @param string $Serie
      * @param int $Percentil
-     * @return int|float| null
+     * @return int|float|string|null
      */
     public function getSeriePercentile($Serie = "Serie1", $Percentil = 95)
     {
-        if (!isset($this->Data["Series"][$Serie]["Data"])) {
+        if (isset($this->Data["Series"][$Serie]["Data"]) === false) {
             return null;
         }
 
@@ -608,23 +681,25 @@ class Data
         $SortedValues = $this->Data["Series"][$Serie]["Data"];
         sort($SortedValues);
 
-        if (is_numeric($SortedValues[$PercentilID])) {
-            return $SortedValues[$PercentilID];
+        if (is_numeric($SortedValues[$PercentilID]) === false) {
+            return null;
         }
-        return null;
+
+        return $SortedValues[$PercentilID];
     }
 
     /**
      * Add random values to a given serie
      * @param string $SerieName
-     * @param array $Options
+     * @param array{ Values?: int, Min?: int, Max?: int, withFloat?: bool } $Options
+     * @return void
      */
     public function addRandomValues($SerieName = "Serie1", array $Options = [])
     {
-        $Values = isset($Options["Values"]) ? $Options["Values"] : 20;
-        $Min = isset($Options["Min"]) ? $Options["Min"] : 0;
-        $Max = isset($Options["Max"]) ? $Options["Max"] : 100;
-        $withFloat = isset($Options["withFloat"]) ? $Options["withFloat"] : false;
+        $Values = $Options["Values"] ?? 20;
+        $Min = $Options["Min"] ?? 0;
+        $Max = $Options["Max"] ?? 100;
+        $withFloat = $Options["withFloat"] ?? false;
 
         for ($i = 0; $i <= $Values; $i++) {
             $Value = $withFloat ? rand($Min * 100, $Max * 100) / 100 : rand($Min, $Max);
@@ -723,15 +798,15 @@ class Data
     /**
      * Associate a color to an axis
      * @param int $AxisID
-     * @param array $Format
+     * @param FormatArray $Format
      * @return void
      */
     public function setAxisColor($AxisID, array $Format)
     {
-        $R = isset($Format["R"]) ? $Format["R"] : 0;
-        $G = isset($Format["G"]) ? $Format["G"] : 0;
-        $B = isset($Format["B"]) ? $Format["B"] : 0;
-        $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        $R = $Format["R"] ?? 0;
+        $G = $Format["G"] ?? 0;
+        $B = $Format["B"] ?? 0;
+        $Alpha = $Format["Alpha"] ?? 100;
 
         if (isset($this->Data["Axis"][$AxisID]) === false) {
             return;
@@ -760,7 +835,7 @@ class Data
 
     /**
      * Associate one data serie with one axis
-     * @param mixed $Series
+     * @param string|list<string> $Series
      * @param int $AxisID
      * @return void
      */
@@ -796,8 +871,9 @@ class Data
 
     /**
      * Define if a serie should be draw with ticks
-     * @param mixed $Series
+     * @param string|list<string> $Series
      * @param int $Width
+     * @return void
      */
     public function setSerieTicks($Series, $Width = 0)
     {
@@ -816,8 +892,9 @@ class Data
 
     /**
      * Define if a serie should be draw with a special weight
-     * @param mixed $Series
+     * @param string|list<string> $Series
      * @param int $Weight
+     * @return void
      */
     public function setSerieWeight($Series, $Weight = 0)
     {
@@ -833,58 +910,63 @@ class Data
 
     /**
      * Returns the palette of the given serie
-     * @param type $Serie
-     * @return null
+     * @param string $Serie
+     * @return array{ R: int, G: int, B: int, Alpha: int }|null
      */
     public function getSeriePalette($Serie)
     {
-        if (!isset($this->Data["Series"][$Serie])) {
+        if (isset($this->Data["Series"][$Serie]) === false) {
             return null;
         }
 
-        $Result = [];
-        $Result["R"] = $this->Data["Series"][$Serie]["Color"]["R"];
-        $Result["G"] = $this->Data["Series"][$Serie]["Color"]["G"];
-        $Result["B"] = $this->Data["Series"][$Serie]["Color"]["B"];
-        $Result["Alpha"] = $this->Data["Series"][$Serie]["Color"]["Alpha"];
-
-        return $Result;
+        return [
+            "R" => $this->Data["Series"][$Serie]["Color"]["R"],
+            "G" => $this->Data["Series"][$Serie]["Color"]["G"],
+            "B" => $this->Data["Series"][$Serie]["Color"]["B"],
+            "Alpha" => $this->Data["Series"][$Serie]["Color"]["Alpha"],
+        ];
     }
 
     /**
      * Set the color of one serie
-     * @param mixed $Series
-     * @param array $Format
+     * @param string|list<string> $Series
+     * @param FormatArray $Format
+     * @return void
      */
     public function setPalette($Series, array $Format = [])
     {
-        if (!is_array($Series)) {
+        if (is_array($Series) === false) {
             $Series = $this->convertToArray($Series);
         }
 
-        foreach ($Series as $Key => $Serie) {
-            $R = isset($Format["R"]) ? $Format["R"] : 0;
-            $G = isset($Format["G"]) ? $Format["G"] : 0;
-            $B = isset($Format["B"]) ? $Format["B"] : 0;
-            $Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
+        foreach ($Series as $Serie) {
+            $R = $Format["R"] ?? 0;
+            $G = $Format["G"] ?? 0;
+            $B = $Format["B"] ?? 0;
+            $Alpha = $Format["Alpha"] ?? 100;
 
-            if (isset($this->Data["Series"][$Serie])) {
-                $OldR = $this->Data["Series"][$Serie]["Color"]["R"];
-                $OldG = $this->Data["Series"][$Serie]["Color"]["G"];
-                $OldB = $this->Data["Series"][$Serie]["Color"]["B"];
-                $this->Data["Series"][$Serie]["Color"]["R"] = $R;
-                $this->Data["Series"][$Serie]["Color"]["G"] = $G;
-                $this->Data["Series"][$Serie]["Color"]["B"] = $B;
-                $this->Data["Series"][$Serie]["Color"]["Alpha"] = $Alpha;
+            if (isset($this->Data["Series"][$Serie]) === false) {
+                continue;
+            }
 
-                /* Do reverse processing on the internal palette array */
-                foreach ($this->Palette as $Key => $Value) {
-                    if ($Value["R"] == $OldR && $Value["G"] == $OldG && $Value["B"] == $OldB) {
-                        $this->Palette[$Key]["R"] = $R;
-                        $this->Palette[$Key]["G"] = $G;
-                        $this->Palette[$Key]["B"] = $B;
-                        $this->Palette[$Key]["Alpha"] = $Alpha;
-                    }
+            $OldR = $this->Data["Series"][$Serie]["Color"]["R"];
+            $OldG = $this->Data["Series"][$Serie]["Color"]["G"];
+            $OldB = $this->Data["Series"][$Serie]["Color"]["B"];
+            $this->Data["Series"][$Serie]["Color"]["R"] = $R;
+            $this->Data["Series"][$Serie]["Color"]["G"] = $G;
+            $this->Data["Series"][$Serie]["Color"]["B"] = $B;
+            $this->Data["Series"][$Serie]["Color"]["Alpha"] = $Alpha;
+
+            /* Do reverse processing on the internal palette array */
+            /** @var array{ R: int, G: int, B: int, Alpha: int } $Value */
+            foreach ($this->Palette as $Key => $Value) {
+                if ($Value["R"] == $OldR && $Value["G"] == $OldG && $Value["B"] == $OldB) {
+                    $this->Palette[$Key] = [
+                        "R" => $R,
+                        "G" => $G,
+                        "B" => $B,
+                        "Alpha" => $Alpha
+                    ];
                 }
             }
         }
@@ -922,10 +1004,8 @@ class Data
             if ($line === false) {
                 continue;
             }
+
             $row = explode(',', $line);
-            if (empty($row)) {
-                continue;
-            }
             if (count($row) !== 4) {
                 throw new RuntimeException(sprintf(
                     'A palette row must supply R, G, B and Alpha components, %s given!',
@@ -935,10 +1015,10 @@ class Data
             [$R, $G, $B, $Alpha] = $row;
             $ID = count($this->Palette);
             $this->Palette[$ID] = [
-                "R" => trim($R),
-                "G" => trim($G),
-                "B" => trim($B),
-                "Alpha" => trim($Alpha)
+                "R" => (int) trim($R),
+                "G" => (int) trim($G),
+                "B" => (int) trim($B),
+                "Alpha" => (int) trim($Alpha)
             ];
         }
         fclose($fileHandle);
@@ -949,12 +1029,13 @@ class Data
             return;
         }
 
-        foreach ($this->Data["Series"] as $Key => $Value) {
-            if (!isset($this->Palette[$ID])) {
-                $this->Data["Series"][$Key]["Color"] = ["R" => 0, "G" => 0, "B" => 0, "Alpha" => 0];
-            } else {
-                $this->Data["Series"][$Key]["Color"] = $this->Palette[$ID];
-            }
+        foreach (array_keys($this->Data["Series"]) as $Key) {
+            $this->Data["Series"][$Key]["Color"] =
+                (isset($this->Palette[$ID]) === false)
+                    ? ["R" => 0, "G" => 0, "B" => 0, "Alpha" => 0]
+                    : $this->Palette[$ID]
+            ;
+
             $ID++;
         }
     }
@@ -963,7 +1044,6 @@ class Data
      * Initialise a given scatter serie
      * @param int $ID
      * @return null
-     * @return void
      */
     public function initScatterSerie($ID)
     {
@@ -971,7 +1051,7 @@ class Data
             return null;
         }
 
-        $this->Data["ScatterSeries"][$ID]["Description"] = "Scatter " . $ID;
+        $this->Data["ScatterSeries"][$ID]["Description"] = "Scatter $ID";
         $this->Data["ScatterSeries"][$ID]["isDrawable"] = true;
         $this->Data["ScatterSeries"][$ID]["Picture"] = null;
         $this->Data["ScatterSeries"][$ID]["Ticks"] = 0;
@@ -985,6 +1065,8 @@ class Data
             $this->Data["ScatterSeries"][$ID]["Color"]["B"] = rand(0, 255);
             $this->Data["ScatterSeries"][$ID]["Color"]["Alpha"] = 100;
         }
+
+        return null;
     }
 
     /**
@@ -1009,7 +1091,7 @@ class Data
         $this->Data["Series"][$Serie]["Weight"] = 0;
         $this->Data["Series"][$Serie]["Shape"] = SERIE_SHAPE_FILLEDCIRCLE;
 
-        if (isset($this->Palette[$ID])) {
+        if (isset($this->Palette[$ID]) === true) {
             $this->Data["Series"][$Serie]["Color"] = $this->Palette[$ID];
         } else {
             $this->Data["Series"][$Serie]["Color"]["R"] = rand(0, 255);
@@ -1079,37 +1161,52 @@ class Data
         }
 
         foreach ($SelectedSeries as $Key => $SerieName) {
-            $this->Data["Series"][$SerieName]["Max"] = max(
-                $this->stripVOID($this->Data["Series"][$SerieName]["Data"])
+            /** @var non-empty-list<float|int> $strippedData */
+            $strippedData = $this->stripVOID(
+                $this->Data["Series"][$SerieName]["Data"]
             );
-            $this->Data["Series"][$SerieName]["Min"] = min(
-                $this->stripVOID($this->Data["Series"][$SerieName]["Data"])
-            );
+            $this->Data["Series"][$SerieName]["Max"] = max($strippedData);
+            $this->Data["Series"][$SerieName]["Min"] = min($strippedData);
         }
     }
 
     /**
      * Load data from a CSV (or similar) data source
      * @param string $FileName
-     * @param array $Options
+     * @param array{
+     *  Delimiter?: string,
+     *  GotHeader?: bool,
+     *  SkipColumns?: list<int>,
+     *  DefaultSerieName?: string
+     * } $Options
      * @return void
      */
     public function importFromCSV($FileName, array $Options = [])
     {
-        $Delimiter = isset($Options["Delimiter"]) ? $Options["Delimiter"] : ",";
-        $GotHeader = isset($Options["GotHeader"]) ? $Options["GotHeader"] : false;
-        $SkipColumns = isset($Options["SkipColumns"]) ? $Options["SkipColumns"] : [-1];
-        $DefaultSerieName = isset($Options["DefaultSerieName"]) ? $Options["DefaultSerieName"] : "Serie";
+        $Delimiter = $Options["Delimiter"] ?? ",";
+        $GotHeader = $Options["GotHeader"] ?? false;
+        $SkipColumns = $Options["SkipColumns"] ?? [-1];
+        $DefaultSerieName = $Options["DefaultSerieName"] ?? "Serie";
 
         $Handle = @fopen($FileName, "r");
-        if ($Handle) {
+        if ($Handle !== false) {
             $HeaderParsed = false;
             $SerieNames = [];
-            while (!feof($Handle)) {
+            while (feof($Handle) === false) {
                 $Buffer = fgets($Handle, 4096);
+                if ($Buffer === false) {
+                    throw new RuntimeException('Unable to parse buffer');
+                }
+
                 $Buffer = str_replace(chr(10), "", $Buffer);
                 $Buffer = str_replace(chr(13), "", $Buffer);
-                $Values = preg_split("/" . $Delimiter . "/", $Buffer);
+
+                $Values = preg_split("/$Delimiter/", $Buffer);
+                if ($Values === false) {
+                    throw new RuntimeException(
+                        "Unable to parse $Buffer with $Delimiter delimiter"
+                    );
+                }
 
                 if ($Buffer != "") {
                     if ($GotHeader && !$HeaderParsed) {
@@ -1144,17 +1241,24 @@ class Data
      *
      * @param string $SerieName
      * @param string $Formula
-     * @param array $Options
+     * @param array{
+     *  MinX?: int,
+     *  MaxX?: int,
+     *  XStep?: int,
+     *  AutoDescription?: bool,
+     *  RecordAbscissa?: bool,
+     *  AbscissaSerie?: string
+     * } $Options
      * @return null
      */
     public function createFunctionSerie($SerieName, $Formula = "", array $Options = [])
     {
-        $MinX = isset($Options["MinX"]) ? $Options["MinX"] : -10;
-        $MaxX = isset($Options["MaxX"]) ? $Options["MaxX"] : 10;
-        $XStep = isset($Options["XStep"]) ? $Options["XStep"] : 1;
-        $AutoDescription = isset($Options["AutoDescription"]) ? $Options["AutoDescription"] : false;
-        $RecordAbscissa = isset($Options["RecordAbscissa"]) ? $Options["RecordAbscissa"] : false;
-        $AbscissaSerie = isset($Options["AbscissaSerie"]) ? $Options["AbscissaSerie"] : "Abscissa";
+        $MinX = $Options["MinX"] ?? -10;
+        $MaxX = $Options["MaxX"] ?? 10;
+        $XStep = $Options["XStep"] ?? 1;
+        $AutoDescription = $Options["AutoDescription"] ?? false;
+        $RecordAbscissa = $Options["RecordAbscissa"] ?? false;
+        $AbscissaSerie = $Options["AbscissaSerie"] ?? "Abscissa";
 
         if ($Formula == "") {
             return null;
@@ -1164,21 +1268,34 @@ class Data
         $Abscissa = [];
         for ($i = $MinX; $i <= $MaxX; $i = $i + $XStep) {
             // @FIXME replace this with something different
-            $Expression = "\$return = '!'.(" . str_replace("z", $i, $Formula) . ");";
+            $Expression = "\$return = '!'.("
+                . str_replace("z", (string) $i, $Formula)
+                . ");"
+            ;
+
             if (@eval($Expression) === false) {
                 $return = VOID;
             }
+
+            if (isset($return) === false) {
+                $return = VOID;
+            }
+
             if ($return == "!") {
                 $return = VOID;
             } else {
-                $return = $this->right($return, strlen($return) - 1);
+                $returnAsString = (string) $return;
+                $return = $this->right($returnAsString, strlen($returnAsString) - 1);
             }
+
             if ($return == "NAN") {
                 $return = VOID;
             }
+
             if ($return == "INF") {
                 $return = VOID;
             }
+
             if ($return == "-INF") {
                 $return = VOID;
             }
@@ -1199,7 +1316,7 @@ class Data
     }
 
     /**
-     * @param mixed $Series
+     * @param string|list<string> $Series
      * @return void
      */
     public function negateValues($Series)
@@ -1209,29 +1326,33 @@ class Data
         }
 
         foreach ($Series as $Key => $SerieName) {
-            if (isset($this->Data["Series"][$SerieName])) {
-                $Data = [];
-                foreach ($this->Data["Series"][$SerieName]["Data"] as $Key => $Value) {
-                    if ($Value == VOID) {
-                        $Data[] = VOID;
-                    } else {
-                        $Data[] = -$Value;
-                    }
-                }
-                $this->Data["Series"][$SerieName]["Data"] = $Data;
-                $this->Data["Series"][$SerieName]["Max"] = max(
-                    $this->stripVOID($this->Data["Series"][$SerieName]["Data"])
-                );
-                $this->Data["Series"][$SerieName]["Min"] = min(
-                    $this->stripVOID($this->Data["Series"][$SerieName]["Data"])
-                );
+            if (isset($this->Data["Series"][$SerieName]) === false) {
+                continue;
             }
+
+            $Data = [];
+            foreach ($this->Data["Series"][$SerieName]["Data"] as $Key => $Value) {
+                if ($Value == VOID) {
+                    $Data[] = VOID;
+                } else {
+                    $Data[] = -$Value;
+                }
+            }
+
+            /** @var non-empty-list<float|int> $strippedData */
+            $strippedData = $this->stripVOID(
+                $this->Data["Series"][$SerieName]["Data"]
+            );
+
+            $this->Data["Series"][$SerieName]["Data"] = $Data;
+            $this->Data["Series"][$SerieName]["Max"] = max($strippedData);
+            $this->Data["Series"][$SerieName]["Min"] = min($strippedData);
         }
     }
 
     /**
      * Return the data & configuration of the series
-     * @return array
+     * @return array<string, mixed>
      */
     public function getData()
     {
@@ -1252,7 +1373,7 @@ class Data
 
     /**
      * Return the palette of the series
-     * @return array
+     * @return PaletteArray
      */
     public function getPalette()
     {
@@ -1302,8 +1423,8 @@ class Data
 
     /**
      * Convert a string to a single elements array
-     * @param mixed $Value
-     * @return array
+     * @param number|string $Value
+     * @return list<int|float|string>
      */
     public function convertToArray($Value)
     {
