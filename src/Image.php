@@ -18,20 +18,6 @@ use const TEXT_ALIGN_TOPMIDDLE;
 use const TEXT_ALIGN_TOPRIGHT;
 use const VOID;
 
-/**
- * Image - The actual class to do most of the drawing. Extends the Draw class
- * with the bulk of drawing methods.
- *
- * Version     : 2.1.4
- * Made by     : Jean-Damien POGOLOTTI
- * Last Update : 19/01/2014
- *
- * This file can be distributed under the license you can find at :
- *
- *                http://www.pchart.net/license
- *
- * You can find the whole class documentation on the pChart web site.
- */
 class Image extends Draw
 {
     /**

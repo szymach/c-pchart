@@ -5,18 +5,6 @@ namespace CpChart;
 use RuntimeException;
 
 /**
- * Cache - speed up the rendering by caching up the pictures
- *
- * Version     : 2.1.4
- * Made by     : Jean-Damien POGOLOTTI
- * Last Update : 19/01/2014
- *
- * This file can be distributed under the license you can find at :
- *
- *                http://www.pchart.net/license
- *
- * You can find the whole class documentation on the pChart web site.
- *
  * @phpstan-type SettingsArray array{ 0: numeric-string, 1: numeric-string, 2: numeric-string, 3: numeric-string, 4: numeric-string }
  */
 class Cache
