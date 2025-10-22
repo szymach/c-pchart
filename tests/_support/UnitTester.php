@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\CpChart\Support;
+namespace Tests\CpChart\Support;
 
 /**
  * Inherited Methods

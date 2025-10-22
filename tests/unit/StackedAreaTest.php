@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Test\CpChart\Unit;
+namespace Tests\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Data;
 use CpChart\Image;
-use Test\CpChart\Support\UnitTester;
+use Tests\CpChart\Support\UnitTester;
 
 use const DIRECTION_HORIZONTAL;
 use const DIRECTION_VERTICAL;

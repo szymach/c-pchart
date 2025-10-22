@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Test\CpChart\Unit;
+namespace Tests\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Barcode\Barcode128;
 use CpChart\Barcode\Barcode39;
 use CpChart\Image;
-use Test\CpChart\Support\UnitTester;
+use Tests\CpChart\Support\UnitTester;
 
 use const DIRECTION_VERTICAL;
 
