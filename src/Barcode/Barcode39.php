@@ -46,18 +46,18 @@ class Barcode39
     public $CRC;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $MOD43;
 
     /**
      * @param string $filePath
-     * @param boolean $EnableMOD43
+     * @param bool $EnableMOD43
      * @throws Exception
      */
     public function __construct($filePath = "", $EnableMOD43 = false)
     {
-        $this->MOD43 = (boolean) $EnableMOD43;
+        $this->MOD43 = (bool) $EnableMOD43;
         $this->Codes = [];
         $this->Reverse = [];
         if (!file_exists($filePath)) {

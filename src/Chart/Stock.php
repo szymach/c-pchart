@@ -113,7 +113,8 @@ class Stock
         $Data = $this->pChartObject->DataSet->getData();
         list($XMargin, $XDivs) = $this->pChartObject->scaleGetXSettings();
 
-        if (!isset($Data["Series"][$SerieOpen])
+        if (
+            !isset($Data["Series"][$SerieOpen])
             || !isset($Data["Series"][$SerieClose])
             || !isset($Data["Series"][$SerieMin])
             || !isset($Data["Series"][$SerieMax])
@@ -123,7 +124,8 @@ class Stock
         $Plots = [];
         foreach ($Data["Series"][$SerieOpen]["Data"] as $Key => $Value) {
             $Point = [];
-            if (isset($Data["Series"][$SerieClose]["Data"][$Key])
+            if (
+                isset($Data["Series"][$SerieClose]["Data"][$Key])
                 || isset($Data["Series"][$SerieMin]["Data"][$Key])
                 || isset($Data["Series"][$SerieMax]["Data"][$Key])
             ) {

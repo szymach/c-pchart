@@ -1,21 +1,20 @@
 <?php
 
-namespace Test\CpChart;
+declare(strict_types=1);
+
+namespace Test\CpChart\Unit;
 
 use Codeception\Test\Unit;
 use CpChart\Barcode\Barcode128;
 use CpChart\Barcode\Barcode39;
 use CpChart\Image;
-use Test\CpChart\UnitTester;
+use Test\CpChart\Support\UnitTester;
 
 use const DIRECTION_VERTICAL;
 
-class BarCodeTest extends Unit
+final class BarCodeTest extends Unit
 {
-    /**
-     * @var UnitTester
-     */
-    protected $tester;
+    protected UnitTester $tester;
 
     public function test39Code()
     {

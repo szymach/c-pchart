@@ -31,13 +31,13 @@ class Image extends Draw
     /**
      * @param int $XSize
      * @param int $YSize
-     * @param Data $DataSet
-     * @param boolean $TransparentBackground
+     * @param ?Data $DataSet
+     * @param bool $TransparentBackground
      */
     public function __construct(
         $XSize,
         $YSize,
-        Data $DataSet = null,
+        ?Data $DataSet = null,
         $TransparentBackground = false
     ) {
         parent::__construct();
@@ -69,7 +69,7 @@ class Image extends Draw
 
     /**
      * Enable / Disable and set shadow properties
-     * @param boolean $Enabled
+     * @param bool $Enabled
      * @param array $Format
      */
     public function setShadow($Enabled = true, array $Format = [])
@@ -164,7 +164,7 @@ class Image extends Draw
 
     /**
      * Render the picture to a web browser stream
-     * @param boolean $BrowserExpire
+     * @param bool $BrowserExpire
      */
     public function stroke($BrowserExpire = false)
     {
@@ -382,8 +382,8 @@ class Image extends Draw
      * @param string|null $Color
      * @param string $Title
      * @param string $Message
-     * @param boolean $HTMLEncode
-    */
+     * @param bool $HTMLEncode
+     */
     public function addToImageMap(
         $Type,
         $Plots,

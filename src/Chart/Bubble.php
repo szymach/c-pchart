@@ -428,7 +428,8 @@ class Bubble
 
         $Data = $this->pDataObject->getData();
 
-        if (!isset($Data["Series"][$SerieName])
+        if (
+            !isset($Data["Series"][$SerieName])
             || !isset($Data["Series"][$SerieWeightName])
         ) {
             return(0);

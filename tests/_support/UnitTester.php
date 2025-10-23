@@ -1,6 +1,8 @@
 <?php
 
-namespace Test\CpChart;
+declare(strict_types=1);
+
+namespace Test\CpChart\Support;
 
 /**
  * Inherited Methods
@@ -21,12 +23,12 @@ class UnitTester extends \Codeception\Actor
 {
     use _generated\UnitTesterActions;
 
-    public function getOutputPathForChart($chartFilename)
+    public function getOutputPathForChart($chartFilename): string
     {
         return sprintf("%s/../_output/charts/%s", __DIR__, $chartFilename);
     }
 
-    public function getCacheDirectory()
+    public function getCacheDirectory(): string
     {
         return sprintf("%s/../../cache", __DIR__);
     }
