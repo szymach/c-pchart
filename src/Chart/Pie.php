@@ -281,7 +281,13 @@ class Pie
 
                 $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$Key];
                 if ($DrawLabelValues) {
-                    $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}";
+                    $Label .= " {$this->getDisplayValue(
+                        $Values[$Key],
+                        $DrawLabelValues,
+                        $SerieSum,
+                        $Precision,
+                        $ValueSuffix
+                    )}";
                 }
 
                 // Store label data for batch processing if overlap prevention is enabled
@@ -394,7 +400,13 @@ class Pie
 
                     $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$Key];
                     if ($DrawLabelValues) {
-                        $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}";
+                        $Label .= " {$this->getDisplayValue(
+                            $Values[$Key],
+                            $DrawLabelValues,
+                            $SerieSum,
+                            $Precision,
+                            $ValueSuffix
+                        )}";
                     }
 
                     // Store label data for batch processing if overlap prevention is enabled
@@ -544,7 +556,13 @@ class Pie
 
         // Process labels with overlap prevention after all pie elements are drawn
         if ($DrawLabels && $PreventOverlap && isset($this->labelData) && !empty($this->labelData)) {
-            $this->processLabelsWithOverlapPrevention($MinLabelDistance, $LeaderLineR, $LeaderLineG, $LeaderLineB, $LeaderLineAlpha);
+            $this->processLabelsWithOverlapPrevention(
+                $MinLabelDistance,
+                $LeaderLineR,
+                $LeaderLineG,
+                $LeaderLineB,
+                $LeaderLineAlpha
+            );
             unset($this->labelData); // Clean up
         }
 
@@ -1206,7 +1224,13 @@ class Pie
 
         // Process labels with overlap prevention
         if ($DrawLabels && $PreventOverlap && isset($this->labelData) && !empty($this->labelData)) {
-            $this->processLabelsWithOverlapPrevention($MinLabelDistance, $LeaderLineR, $LeaderLineG, $LeaderLineB, $LeaderLineAlpha);
+            $this->processLabelsWithOverlapPrevention(
+                $MinLabelDistance,
+                $LeaderLineR,
+                $LeaderLineG,
+                $LeaderLineB,
+                $LeaderLineAlpha
+            );
             unset($this->labelData);
         }
 
@@ -1912,7 +1936,13 @@ class Pie
 
         // Process labels with overlap prevention
         if ($DrawLabels && $PreventOverlap && isset($this->labelData) && !empty($this->labelData)) {
-            $this->processLabelsWithOverlapPrevention($MinLabelDistance, $LeaderLineR, $LeaderLineG, $LeaderLineB, $LeaderLineAlpha);
+            $this->processLabelsWithOverlapPrevention(
+                $MinLabelDistance,
+                $LeaderLineR,
+                $LeaderLineG,
+                $LeaderLineB,
+                $LeaderLineAlpha
+            );
             unset($this->labelData);
         }
 
@@ -2795,8 +2825,13 @@ class Pie
     /**
      * Process labels with chart-type specific handling
      */
-    private function processLabelsWithOverlapPrevention($minDistance, $leaderLineR, $leaderLineG, $leaderLineB, $leaderLineAlpha)
-    {
+    private function processLabelsWithOverlapPrevention(
+        $minDistance,
+        $leaderLineR,
+        $leaderLineG,
+        $leaderLineB,
+        $leaderLineAlpha
+    ) {
         // Sort labels by angle to process them in order around the pie
         usort($this->labelData, function ($a, $b) {
             return $a['angle'] - $b['angle'];
@@ -2813,8 +2848,13 @@ class Pie
             }
 
             // Calculate pie edge position for leader line anchor
-            $pieEdgeX = cos(($labelInfo['angle'] - 90) * PI / 180) * $labelInfo['radius'] + $labelInfo['pieX'];
-            $pieEdgeY = sin(($labelInfo['angle'] - 90) * PI / 180) * $labelInfo['radius'] * $skewFactor + $labelInfo['pieY'];
+            $pieEdgeX = cos(($labelInfo['angle'] - 90) * PI / 180)
+                * $labelInfo['radius']
+                + $labelInfo['pieX'];
+            $pieEdgeY = sin(($labelInfo['angle'] - 90) * PI / 180)
+                * $labelInfo['radius']
+                * $skewFactor
+                + $labelInfo['pieY'];
 
             // Chart-specific preferred distance calculation
             if ($is3D) {
@@ -3169,11 +3209,15 @@ class Pie
         $characterCount = strlen($text);
 
         // Account for different character widths more precisely
-        $wideChars = substr_count($text, 'W') + substr_count($text, 'M') + substr_count($text, 'O') + substr_count($text, 'Q');
-        $narrowChars = substr_count($text, 'i') + substr_count($text, 'l') + substr_count($text, 't') + substr_count($text, 'j');
-        $mediumWideChars = substr_count($text, 'B') + substr_count($text, 'D') + substr_count($text, 'H') + substr_count($text, 'R');
+        $wideChars = substr_count($text, 'W') + substr_count($text, 'M')
+            + substr_count($text, 'O') + substr_count($text, 'Q');
+        $narrowChars = substr_count($text, 'i') + substr_count($text, 'l')
+            + substr_count($text, 't') + substr_count($text, 'j');
+        $mediumWideChars = substr_count($text, 'B') + substr_count($text, 'D')
+            + substr_count($text, 'H') + substr_count($text, 'R');
 
-        $adjustedWidth = ($characterCount * $baseWidth) + ($wideChars * 3) + ($mediumWideChars * 1) - ($narrowChars * 2);
+        $adjustedWidth = ($characterCount * $baseWidth) + ($wideChars * 3)
+            + ($mediumWideChars * 1) - ($narrowChars * 2);
 
         // Add some safety margin
         return max($adjustedWidth * 1.1, $characterCount * 6.5);
