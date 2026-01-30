@@ -1008,7 +1008,8 @@ class Pie
                     $this->pChartObject->drawLine($Xc, $Yc, $Xc, $Yc - $SliceHeight, $Settings);
                 }
 
-                if (isset($SliceAngle[$SliceID][1])
+                if (
+                    isset($SliceAngle[$SliceID][1])
                     && $SliceAngle[$SliceID][1] > 90
                     && $SliceAngle[$SliceID][count($SliceAngle[$SliceID]) - 1] < 90
                 ) {
@@ -2547,7 +2548,9 @@ class Pie
 
                 if (isset($Data["Series"][$Data["Abscissa"]]["Data"][$ID])) {
                     $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$ID];
-                    if ($DrawLabelValues) { $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}"; }
+                    if ($DrawLabelValues) {
+                        $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}";
+                    }
 
                     if ($LabelStacked) {
                         $this->writePieLabel($Xc, $Yc, $Label, $Angle, $Settings, true, $X, $Y, $OuterRadius, true);
@@ -2891,8 +2894,14 @@ class Pie
                     $labelInfo['radius']
                 );
             } else {
-                $this->writePieLabel($placement['finalX'], $placement['finalY'], $labelInfo['label'],
-                                $labelInfo['angle'], $labelInfo['settings'], false);
+                $this->writePieLabel(
+                    $placement['finalX'],
+                    $placement['finalY'],
+                    $labelInfo['label'],
+                    $labelInfo['angle'],
+                    $labelInfo['settings'],
+                    false
+                );
             }
         }
     }
@@ -2923,10 +2932,19 @@ class Pie
 
                 $hasOverlap = false;
                 foreach ($finalPlacements as $existingPlacement) {
-                    if ($this->labelsOverlap2D($testX, $testY, $textWidth, $textHeight,
-                                        $existingPlacement['finalX'], $existingPlacement['finalY'],
-                                        $existingPlacement['width'], $existingPlacement['height'],
-                                        $minDistance)) {
+                    if (
+                        $this->labelsOverlap2D(
+                            $testX,
+                            $testY,
+                            $textWidth,
+                            $textHeight,
+                            $existingPlacement['finalX'],
+                            $existingPlacement['finalY'],
+                            $existingPlacement['width'],
+                            $existingPlacement['height'],
+                            $minDistance
+                        )
+                    ) {
                         $hasOverlap = true;
                         break;
                     }
@@ -3027,10 +3045,17 @@ class Pie
 
                 $hasOverlap = false;
                 foreach ($finalPlacements as $existingPlacement) {
-                    $overlapResult = $this->labelsOverlap3D($testX, $testY, $textWidth, $textHeight,
-                                        $existingPlacement['finalX'], $existingPlacement['finalY'],
-                                        $existingPlacement['width'], $existingPlacement['height'],
-                                        $minDistance);
+                    $overlapResult = $this->labelsOverlap3D(
+                        $testX,
+                        $testY,
+                        $textWidth,
+                        $textHeight,
+                        $existingPlacement['finalX'],
+                        $existingPlacement['finalY'],
+                        $existingPlacement['width'],
+                        $existingPlacement['height'],
+                        $minDistance
+                    );
 
                     if ($overlapResult) {
                         $hasOverlap = true;
@@ -3108,11 +3133,11 @@ class Pie
         $arrowAngle = ($angle - 90) * PI / 180;
 
         $baseOffset = $arrowSize * 0.6;
-        $point1X = $pieEdgeX + cos($arrowAngle + PI/2) * $baseOffset;
-        $point1Y = $pieEdgeY + sin($arrowAngle + PI/2) * $baseOffset;
+        $point1X = $pieEdgeX + cos($arrowAngle + PI / 2) * $baseOffset;
+        $point1Y = $pieEdgeY + sin($arrowAngle + PI / 2) * $baseOffset;
 
-        $point2X = $pieEdgeX + cos($arrowAngle - PI/2) * $baseOffset;
-        $point2Y = $pieEdgeY + sin($arrowAngle - PI/2) * $baseOffset;
+        $point2X = $pieEdgeX + cos($arrowAngle - PI / 2) * $baseOffset;
+        $point2Y = $pieEdgeY + sin($arrowAngle - PI / 2) * $baseOffset;
 
         $tipDistance = $arrowSize * 1.2;
         $point3X = $pieEdgeX + cos($arrowAngle) * $tipDistance;
