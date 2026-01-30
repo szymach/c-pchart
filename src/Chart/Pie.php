@@ -50,6 +50,11 @@ class Pie
      */
     public $LabelPos = [];
 
+    /**
+     * @var array
+     */
+    public $labelData = [];
+
     public function __construct(Image $pChartObject, Data $pDataObject)
     {
         $this->pChartObject = $pChartObject;
@@ -76,7 +81,7 @@ class Pie
         $BorderB = isset($Format["BorderB"]) ? $Format["BorderB"] : 255;
         $Shadow = isset($Format["Shadow"]) ? $Format["Shadow"] : false;
         $DrawLabels = isset($Format["DrawLabels"]) ? $Format["DrawLabels"] : false;
-        $DrawLabelValues = isset($Format["DrawLabelValues"]) ? $Format["DrawLabelValues"] : null;        
+        $DrawLabelValues = isset($Format["DrawLabelValues"]) ? $Format["DrawLabelValues"] : null;
         $LabelStacked = isset($Format["LabelStacked"]) ? $Format["LabelStacked"] : false;
         $LabelColor = isset($Format["LabelColor"]) ? $Format["LabelColor"] : PIE_LABEL_COLOR_MANUAL;
         $LabelR = isset($Format["LabelR"]) ? $Format["LabelR"] : 0;
@@ -253,7 +258,7 @@ class Pie
                 if (!isset($this->labelData)) {
                     $this->labelData = [];
                 }
-                
+
                 if ($LabelColor == PIE_LABEL_COLOR_AUTO) {
                     $LabelSettings = [
                         "FillR" => $Palette[$ID]["R"],
@@ -275,8 +280,8 @@ class Pie
                 $Yc = sin(($Angle - 90) * PI / 180) * $Radius + $Y;
 
                 $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$Key];
-                if ($DrawLabelValues) { 
-                    $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}"; 
+                if ($DrawLabelValues) {
+                    $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}";
                 }
 
                 // Store label data for batch processing if overlap prevention is enabled
@@ -366,7 +371,7 @@ class Pie
                     if (!isset($this->labelData)) {
                         $this->labelData = [];
                     }
-                    
+
                     if ($LabelColor == PIE_LABEL_COLOR_AUTO) {
                         $LabelSettings = [
                             "FillR" => $Palette[$ID]["R"],
@@ -388,8 +393,8 @@ class Pie
                     $Yc = sin(($Angle - 90) * PI / 180) * $Radius + $Y;
 
                     $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$Key];
-                    if ($DrawLabelValues) { 
-                        $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}"; 
+                    if ($DrawLabelValues) {
+                        $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}";
                     }
 
                     // Store label data for batch processing if overlap prevention is enabled
@@ -397,14 +402,16 @@ class Pie
                         // Check if this label is already stored from first pass
                         $labelExists = false;
                         foreach ($this->labelData as $existingLabel) {
-                            if ($existingLabel['label'] == $Label && 
-                                abs($existingLabel['x'] - $Xc) < 1 && 
-                                abs($existingLabel['y'] - $Yc) < 1) {
+                            if (
+                                $existingLabel['label'] == $Label &&
+                                abs($existingLabel['x'] - $Xc) < 1 &&
+                                abs($existingLabel['y'] - $Yc) < 1
+                            ) {
                                 $labelExists = true;
                                 break;
                             }
                         }
-                        
+
                         if (!$labelExists) {
                             $this->labelData[] = [
                                 'x' => $Xc,
@@ -471,7 +478,7 @@ class Pie
                 }
 
                 $Display = $this->getDisplayValue($Value, $WriteValues, $SerieSum, $Precision, $ValueSuffix);
-                
+
                 $valueData[] = [
                     'key' => $Key,
                     'value' => $Value,
@@ -496,9 +503,9 @@ class Pie
                 // Apply overlap prevention if enabled and position is outside
                 if ($PreventOverlap && $ValuePosition == PIE_VALUE_OUTSIDE) {
                     list($finalX, $finalY, $needsLeaderLine) = $this->resolveValueOverlap(
-                        $data['initialX'], 
-                        $data['initialY'], 
-                        $data['display'], 
+                        $data['initialX'],
+                        $data['initialY'],
+                        $data['display'],
                         $labelPositions,
                         $MinLabelDistance
                     );
@@ -513,17 +520,17 @@ class Pie
                         "Alpha" => $LeaderLineAlpha
                     ];
                     $this->pChartObject->drawLine(
-                        $data['pieEdgeX'], 
-                        $data['pieEdgeY'], 
-                        $finalX, 
-                        $finalY, 
+                        $data['pieEdgeX'],
+                        $data['pieEdgeY'],
+                        $finalX,
+                        $finalY,
                         $leaderSettings
                     );
                 }
 
                 // Draw the value text
                 $this->pChartObject->drawText($finalX, $finalY, $data['display'], $Settings);
-                
+
                 // Store position for future overlap checks
                 $labelPositions[] = [
                     'x' => $finalX,
@@ -560,31 +567,31 @@ class Pie
         $maxAttempts = 36; // Try different angles
         $radiusIncrement = 5;
         $needsLeaderLine = false;
-        
+
         // Check if initial position overlaps
         if (!$this->hasOverlap($initialX, $initialY, $textWidth, $textHeight, $existingPositions, $minDistance)) {
             return [$initialX, $initialY, false];
         }
-        
+
         $needsLeaderLine = true;
-        
+
         // Try repositioning in a spiral pattern
         for ($radius = $minDistance; $radius <= 100; $radius += $radiusIncrement) {
             for ($attempt = 0; $attempt < $maxAttempts; $attempt++) {
                 $angle = ($attempt * 360 / $maxAttempts) * PI / 180;
                 $testX = $initialX + cos($angle) * $radius;
                 $testY = $initialY + sin($angle) * $radius;
-                
+
                 if (!$this->hasOverlap($testX, $testY, $textWidth, $textHeight, $existingPositions, $minDistance)) {
                     return [$testX, $testY, $needsLeaderLine];
                 }
             }
         }
-        
+
         // If no position found, use offset position
         return [$initialX + $minDistance, $initialY + $minDistance, $needsLeaderLine];
     }
-    
+
     /**
      * Check if a position would overlap with existing labels (improved collision detection)
      */
@@ -593,29 +600,33 @@ class Pie
         foreach ($existingPositions as $pos) {
             // Check center-to-center distance first (faster)
             $centerDistance = sqrt(pow($x - $pos['x'], 2) + pow($y - $pos['y'], 2));
-            
+
             if ($centerDistance < $minDistance) {
                 return true;
             }
-            
+
             // More precise bounding box overlap check
             $left1 = $x - $width / 2;
             $right1 = $x + $width / 2;
             $top1 = $y - $height / 2;
             $bottom1 = $y + $height / 2;
-            
+
             $left2 = $pos['x'] - $pos['width'] / 2;
             $right2 = $pos['x'] + $pos['width'] / 2;
             $top2 = $pos['y'] - $pos['height'] / 2;
             $bottom2 = $pos['y'] + $pos['height'] / 2;
-            
+
             // Add extra padding to bounding boxes
             $padding = 3;
-            $left1 -= $padding; $right1 += $padding;
-            $top1 -= $padding; $bottom1 += $padding;
-            $left2 -= $padding; $right2 += $padding;
-            $top2 -= $padding; $bottom2 += $padding;
-            
+            $left1 -= $padding;
+            $right1 += $padding;
+            $top1 -= $padding;
+            $bottom1 += $padding;
+            $left2 -= $padding;
+            $right2 += $padding;
+            $top2 -= $padding;
+            $bottom2 += $padding;
+
             // Check for bounding box intersection
             if ($left1 < $right2 && $right1 > $left2 && $top1 < $bottom2 && $bottom1 > $top2) {
                 return true;
@@ -644,7 +655,7 @@ class Pie
         $Border = isset($Format["Border"]) ? $Format["Border"] : false;
         $Shadow = isset($Format["Shadow"]) ? $Format["Shadow"] : false;
         $DrawLabels = isset($Format["DrawLabels"]) ? $Format["DrawLabels"] : false;
-        $DrawLabelValues = isset($Format["DrawLabelValues"]) ? $Format["DrawLabelValues"] : null;        
+        $DrawLabelValues = isset($Format["DrawLabelValues"]) ? $Format["DrawLabelValues"] : null;
         $LabelStacked = isset($Format["LabelStacked"]) ? $Format["LabelStacked"] : false;
         $LabelColor = isset($Format["LabelColor"]) ? $Format["LabelColor"] : PIE_LABEL_COLOR_MANUAL;
         $LabelR = isset($Format["LabelR"]) ? $Format["LabelR"] : 0;
@@ -987,7 +998,8 @@ class Pie
                     $this->pChartObject->drawLine($Xc, $Yc, $Xc, $Yc - $SliceHeight, $Settings);
                 }
 
-                if (isset($SliceAngle[$SliceID][1])
+                if (
+                    isset($SliceAngle[$SliceID][1])
                     && $SliceAngle[$SliceID][1] > 270
                     && $SliceAngle[$SliceID][count($SliceAngle[$SliceID]) - 1] < 270
                 ) {
@@ -1159,9 +1171,31 @@ class Pie
 
                 if (isset($Data["Series"][$Data["Abscissa"]]["Data"][$ID])) {
                     // Pass SkewFactor as additional parameter for 3D positioning
-                    $this->storeLabelData3D($ID, $Key, $Value, $Values, $Angle, $X, $Y, $Radius, $SliceHeight, 
-                                    $Data, $Palette, $LabelColor, $LabelR, $LabelG, $LabelB, $LabelAlpha, 
-                                    $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix, $LabelStacked, $PreventOverlap, $SkewFactor);
+                    $this->storeLabelData3D(
+                        $ID,
+                        $Key,
+                        $Value,
+                        $Values,
+                        $Angle,
+                        $X,
+                        $Y,
+                        $Radius,
+                        $SliceHeight,
+                        $Data,
+                        $Palette,
+                        $LabelColor,
+                        $LabelR,
+                        $LabelG,
+                        $LabelB,
+                        $LabelAlpha,
+                        $DrawLabelValues,
+                        $SerieSum,
+                        $Precision,
+                        $ValueSuffix,
+                        $LabelStacked,
+                        $PreventOverlap,
+                        $SkewFactor
+                    );
                 }
 
                 $Offset = $EndAngle - $DataGapAngle;
@@ -1436,31 +1470,36 @@ class Pie
                 foreach ($this->LabelPos as $Key => $Settings) {
                     if (!$Done) {
                         $yTopAboveTopBelowBottom = ($YTop >= $Settings["YTop"] && $YTop <= $Settings["YBottom"]);
-                        $yBottomAboveTopBelowBottom = ($YBottom >= $Settings["YTop"]
+                        $yBottomAboveTopBelowBottom = (
+                            $YBottom >= $Settings["YTop"]
                             && $YBottom <= $Settings["YBottom"]
                         );
 
-                        if ($Angle <= 90
+                        if (
+                            $Angle <= 90
                             && ($yTopAboveTopBelowBottom || $yBottomAboveTopBelowBottom)
                         ) {
                             $this->shift(0, 180, -($Height + 2), $Reversed);
                             $Done = true;
                         }
-                        if ($Angle > 90
+                        if (
+                            $Angle > 90
                             && $Angle <= 180
                             && ($yTopAboveTopBelowBottom || $yBottomAboveTopBelowBottom)
                         ) {
                             $this->shift(0, 180, -($Height + 2), $Reversed);
                             $Done = true;
                         }
-                        if ($Angle > 180
+                        if (
+                            $Angle > 180
                             && $Angle <= 270
                             && ($yTopAboveTopBelowBottom || $yBottomAboveTopBelowBottom)
                         ) {
                             $this->shift(180, 360, ($Height + 2), $Reversed);
                             $Done = true;
                         }
-                        if ($Angle > 270
+                        if (
+                            $Angle > 270
                             && $Angle <= 360
                             && ($yTopAboveTopBelowBottom || $yBottomAboveTopBelowBottom)
                         ) {
@@ -1561,7 +1600,7 @@ class Pie
         $BorderAlpha = isset($Format["BorderAlpha"]) ? $Format["BorderAlpha"] : 100;
         $Shadow = isset($Format["Shadow"]) ? $Format["Shadow"] : false;
         $DrawLabels = isset($Format["DrawLabels"]) ? $Format["DrawLabels"] : false;
-        $DrawLabelValues = isset($Format["DrawLabelValues"]) ? $Format["DrawLabelValues"] : null;        
+        $DrawLabelValues = isset($Format["DrawLabelValues"]) ? $Format["DrawLabelValues"] : null;
         $LabelStacked = isset($Format["LabelStacked"]) ? $Format["LabelStacked"] : false;
         $LabelColor = isset($Format["LabelColor"]) ? $Format["LabelColor"] : PIE_LABEL_COLOR_MANUAL;
         $LabelR = isset($Format["LabelR"]) ? $Format["LabelR"] : 0;
@@ -1788,9 +1827,30 @@ class Pie
 
             if ($DrawLabels && !$Shadow) {
                 $Angle = ($EndAngle - $Offset) / 2 + $Offset;
-                $this->storeLabelData($ID, $Key, $Value, $Values, $Angle, $X, $Y, $OuterRadius, 0, 
-                                $Data, $Palette, $LabelColor, $LabelR, $LabelG, $LabelB, $LabelAlpha, 
-                                $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix, $LabelStacked, $PreventOverlap);
+                $this->storeLabelData(
+                    $ID,
+                    $Key,
+                    $Value,
+                    $Values,
+                    $Angle,
+                    $X,
+                    $Y,
+                    $OuterRadius,
+                    0,
+                    $Data,
+                    $Palette,
+                    $LabelColor,
+                    $LabelR,
+                    $LabelG,
+                    $LabelB,
+                    $LabelAlpha,
+                    $DrawLabelValues,
+                    $SerieSum,
+                    $Precision,
+                    $ValueSuffix,
+                    $LabelStacked,
+                    $PreventOverlap
+                );
             }
 
             $Offset = $Lasti;
@@ -1968,7 +2028,7 @@ class Pie
         $SliceColors = [];
         $Visible = [];
         $SliceAngle = [];
-        
+
         foreach ($Values as $Key => $Value) {
             if (!isset($Palette[$ID]["R"])) {
                 $Color = $this->pChartObject->getRandomColor();
@@ -2046,7 +2106,7 @@ class Pie
                 // Polygon was too small and failed to calculate
                 return $this->draw2DRing($X, $Y, $Format);
             }
-            
+
             $OutX2 = $Xc;
             $OutY2 = $Yc;
 
@@ -2383,7 +2443,7 @@ class Pie
         }
 
         if ($DrawLabels) {
-            $Offset = 360; 
+            $Offset = 360;
             foreach ($Values as $Key => $Value) {
                 $StartAngle = $Offset;
                 $EndAngle = $Offset - ($Value * $ScaleFactor);
@@ -2410,13 +2470,13 @@ class Pie
                 $Angle = ($EndAngle - $Offset) / 2 + $Offset;
                 $Xc = cos(($Angle - 90) * PI / 180) * ($OuterRadius + $DataGapRadius) + $X;
                 $Yc = sin(($Angle - 90) * PI / 180) * ($OuterRadius + $DataGapRadius) * $SkewFactor + $Y;
-                
+
                 $Offset = $EndAngle - $DataGapAngle;
                 $ID--;
                 $Slice++;
             }
         }
-        
+
         if ($WriteValues != null && !$Shadow) {
             $Step = 360 / (2 * PI * $OuterRadius);
             $Offset = 360;
@@ -2454,7 +2514,7 @@ class Pie
                 $ID--;
             }
         }
-        
+
         if ($DrawLabels) {
             $Step = 360 / (2 * PI * $OuterRadius);
             $Offset = 360;
@@ -2640,14 +2700,34 @@ class Pie
     /**
      * Update storeLabelData to NOT use skewFactor for 2D rings
      */
-    private function storeLabelData($ID, $Key, $Value, $Values, $Angle, $X, $Y, $Radius, $SliceHeight, 
-                                $Data, $Palette, $LabelColor, $LabelR, $LabelG, $LabelB, $LabelAlpha, 
-                                $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix, $LabelStacked, $PreventOverlap)
-    {
+    private function storeLabelData(
+        $ID,
+        $Key,
+        $Value,
+        $Values,
+        $Angle,
+        $X,
+        $Y,
+        $Radius,
+        $SliceHeight,
+        $Data,
+        $Palette,
+        $LabelColor,
+        $LabelR,
+        $LabelG,
+        $LabelB,
+        $LabelAlpha,
+        $DrawLabelValues,
+        $SerieSum,
+        $Precision,
+        $ValueSuffix,
+        $LabelStacked,
+        $PreventOverlap
+    ) {
         if (!isset($this->labelData)) {
             $this->labelData = [];
         }
-        
+
         if ($LabelColor == PIE_LABEL_COLOR_AUTO) {
             $LabelSettings = [
                 "FillR" => $Palette[$ID]["R"],
@@ -2669,21 +2749,23 @@ class Pie
         $Yc = sin(($Angle - 90) * PI / 180) * $Radius + $Y - $SliceHeight;
 
         $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$Key];
-        if ($DrawLabelValues) { 
-            $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}"; 
+        if ($DrawLabelValues) {
+            $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}";
         }
 
         if ($PreventOverlap) {
             $labelExists = false;
             foreach ($this->labelData as $existingLabel) {
-                if ($existingLabel['label'] == $Label && 
-                    abs($existingLabel['x'] - $Xc) < 1 && 
-                    abs($existingLabel['y'] - $Yc) < 1) {
+                if (
+                    $existingLabel['label'] == $Label &&
+                    abs($existingLabel['x'] - $Xc) < 1 &&
+                    abs($existingLabel['y'] - $Yc) < 1
+                ) {
                     $labelExists = true;
                     break;
                 }
             }
-            
+
             if (!$labelExists) {
                 $this->labelData[] = [
                     'x' => $Xc,
@@ -2713,10 +2795,10 @@ class Pie
     private function processLabelsWithOverlapPrevention($minDistance, $leaderLineR, $leaderLineG, $leaderLineB, $leaderLineAlpha)
     {
         // Sort labels by angle to process them in order around the pie
-        usort($this->labelData, function($a, $b) {
+        usort($this->labelData, function ($a, $b) {
             return $a['angle'] - $b['angle'];
         });
-        
+
         $labelPlacements = [];
         $any3D = false;
         foreach ($this->labelData as $i => $labelInfo) {
@@ -2726,11 +2808,11 @@ class Pie
             if ($is3D) {
                 $any3D = true;
             }
-            
+
             // Calculate pie edge position for leader line anchor
             $pieEdgeX = cos(($labelInfo['angle'] - 90) * PI / 180) * $labelInfo['radius'] + $labelInfo['pieX'];
             $pieEdgeY = sin(($labelInfo['angle'] - 90) * PI / 180) * $labelInfo['radius'] * $skewFactor + $labelInfo['pieY'];
-            
+
             // Chart-specific preferred distance calculation
             if ($is3D) {
                 // 3D charts need more space due to perspective compression
@@ -2739,10 +2821,10 @@ class Pie
                 // 2D charts can use tighter spacing
                 $preferredDistance = $labelInfo['radius'] + $minDistance + 15;
             }
-            
+
             $preferredX = cos(($labelInfo['angle'] - 90) * PI / 180) * $preferredDistance + $labelInfo['pieX'];
             $preferredY = sin(($labelInfo['angle'] - 90) * PI / 180) * $preferredDistance * $skewFactor + $labelInfo['pieY'];
-            
+
             $labelPlacements[] = [
                 'labelInfo' => $labelInfo,
                 'pieEdgeX' => $pieEdgeX,
@@ -2755,53 +2837,61 @@ class Pie
                 'is3D' => $is3D
             ];
         }
-        
+
         // Use chart-type specific overlap resolution
-        if ($any3D) { 
+        if ($any3D) {
             $finalPlacements = $this->resolveRadialOverlaps3D($labelPlacements, $minDistance);
         } else {
             $finalPlacements = $this->resolveRadialOverlaps2D($labelPlacements, $minDistance);
         }
-        
+
         foreach ($finalPlacements as $placement) {
             $labelInfo = $placement['labelInfo'];
             $labelInfo['settings']['Size'] = 4;
             $labelInfo['settings']['Length'] = 3;
-            
+
             $leaderSettings = [
                 "R" => $leaderLineR,
                 "G" => $leaderLineG,
                 "B" => $leaderLineB,
                 "Alpha" => $leaderLineAlpha
             ];
-            
+
             // Only draw leader line if label was moved significantly
-            $pieEdgeDistance = sqrt(pow($placement['finalX'] - $placement['pieEdgeX'], 2) + 
+            $pieEdgeDistance = sqrt(pow($placement['finalX'] - $placement['pieEdgeX'], 2) +
                                 pow($placement['finalY'] - $placement['pieEdgeY'], 2));
-            
+
             if ($pieEdgeDistance > 8) { // Lowered threshold for 2D rings
                 $this->pChartObject->drawLine(
-                    $placement['pieEdgeX'], 
-                    $placement['pieEdgeY'], 
-                    $placement['finalX'], 
-                    $placement['finalY'], 
+                    $placement['pieEdgeX'],
+                    $placement['pieEdgeY'],
+                    $placement['finalX'],
+                    $placement['finalY'],
                     $leaderSettings
                 );
-                
+
                 $this->drawLeaderArrow(
-                    $placement['pieEdgeX'], 
-                    $placement['pieEdgeY'], 
+                    $placement['pieEdgeX'],
+                    $placement['pieEdgeY'],
                     $placement['angle'],
                     $leaderSettings
                 );
             }
-            
+
             if ($labelInfo['stacked']) {
-                $this->writePieLabel($placement['finalX'], $placement['finalY'], $labelInfo['label'], 
-                                $labelInfo['angle'], $labelInfo['settings'], true, 
-                                $labelInfo['pieX'], $labelInfo['pieY'], $labelInfo['radius']);
+                $this->writePieLabel(
+                    $placement['finalX'],
+                    $placement['finalY'],
+                    $labelInfo['label'],
+                    $labelInfo['angle'],
+                    $labelInfo['settings'],
+                    true,
+                    $labelInfo['pieX'],
+                    $labelInfo['pieY'],
+                    $labelInfo['radius']
+                );
             } else {
-                $this->writePieLabel($placement['finalX'], $placement['finalY'], $labelInfo['label'], 
+                $this->writePieLabel($placement['finalX'], $placement['finalY'], $labelInfo['label'],
                                 $labelInfo['angle'], $labelInfo['settings'], false);
             }
         }
@@ -2813,24 +2903,24 @@ class Pie
     private function resolveRadialOverlaps2D($labelPlacements, $minDistance)
     {
         $finalPlacements = [];
-        
+
         foreach ($labelPlacements as $i => $placement) {
             $labelInfo = $placement['labelInfo'];
             $angle = $placement['angle'];
-            $baseDistance = sqrt(pow($placement['preferredX'] - $labelInfo['pieX'], 2) + 
+            $baseDistance = sqrt(pow($placement['preferredX'] - $labelInfo['pieX'], 2) +
                             pow($placement['preferredY'] - $labelInfo['pieY'], 2));
-            
+
             $finalDistance = $baseDistance;
             $maxAttempts = 20;
             $distanceIncrement = 8;
-            
+
             $textWidth = $this->getTextWidth($labelInfo['label']);
             $textHeight = $this->getTextHeight($labelInfo['label']);
-            
+
             for ($attempt = 0; $attempt < $maxAttempts; $attempt++) {
                 $testX = cos(($angle - 90) * PI / 180) * $finalDistance + $labelInfo['pieX'];
                 $testY = sin(($angle - 90) * PI / 180) * $finalDistance + $labelInfo['pieY'];
-                
+
                 $hasOverlap = false;
                 foreach ($finalPlacements as $existingPlacement) {
                     if ($this->labelsOverlap2D($testX, $testY, $textWidth, $textHeight,
@@ -2841,17 +2931,17 @@ class Pie
                         break;
                     }
                 }
-                
+
                 if (!$hasOverlap) {
                     break;
                 }
-                
+
                 $finalDistance += $distanceIncrement;
             }
-            
+
             $finalX = cos(($angle - 90) * PI / 180) * $finalDistance + $labelInfo['pieX'];
             $finalY = sin(($angle - 90) * PI / 180) * $finalDistance + $labelInfo['pieY'];
-            
+
             $finalPlacements[] = [
                 'labelInfo' => $labelInfo,
                 'pieEdgeX' => $placement['pieEdgeX'],
@@ -2863,7 +2953,7 @@ class Pie
                 'angle' => $angle
             ];
         }
-        
+
         return $finalPlacements;
     }
 
@@ -2877,18 +2967,18 @@ class Pie
         if ($centerDistance < $minDistance) {
             return true;
         }
-        
+
         $padding = 4;
         $left1 = $x1 - $w1 / 2 - $padding;
         $right1 = $x1 + $w1 / 2 + $padding;
         $top1 = $y1 - $h1 / 2 - $padding;
         $bottom1 = $y1 + $h1 / 2 + $padding;
-        
+
         $left2 = $x2 - $w2 / 2 - $padding;
         $right2 = $x2 + $w2 / 2 + $padding;
         $top2 = $y2 - $h2 / 2 - $padding;
         $bottom2 = $y2 + $h2 / 2 + $padding;
-        
+
         return !($left1 >= $right2 || $right1 <= $left2 || $top1 >= $bottom2 || $bottom1 <= $top2);
     }
 
@@ -2898,67 +2988,67 @@ class Pie
     private function resolveRadialOverlaps3D($labelPlacements, $minDistance)
     {
         $finalPlacements = [];
-        
+
         // Sort by angle to process in order
-        usort($labelPlacements, function($a, $b) {
+        usort($labelPlacements, function ($a, $b) {
             return $a['angle'] - $b['angle'];
         });
-        
+
         foreach ($labelPlacements as $i => $placement) {
             $labelInfo = $placement['labelInfo'];
             $angle = $placement['angle'];
             $skewFactor = $placement['skewFactor'];
             $is3D = $placement['is3D'];
-            
+
             // Calculate base distance from pie center to preferred position
-            $baseDistance = sqrt(pow($placement['preferredX'] - $labelInfo['pieX'], 2) + 
+            $baseDistance = sqrt(pow($placement['preferredX'] - $labelInfo['pieX'], 2) +
                             pow(($placement['preferredY'] - $labelInfo['pieY']) / $skewFactor, 2));
-            
+
             // Chart-type specific minimum distance
             $minRadialDistance = $labelInfo['radius'] + $minDistance + 8;
             $maxAttempts = 3000;
             $baseIncrement = 4;
-            
+
             $finalDistance = max($baseDistance, $minRadialDistance);
-            
+
             $textWidth = $this->getTextWidth($labelInfo['label']);
             $textHeight = $this->getTextHeight($labelInfo['label']);
-            
+
             // 3D-specific adaptive increment
             $normalizedAngle = fmod($angle + 360, 360);
-            $isCompressedArea = ($normalizedAngle < 45 || $normalizedAngle > 315 || 
+            $isCompressedArea = ($normalizedAngle < 45 || $normalizedAngle > 315 ||
                                 ($normalizedAngle > 135 && $normalizedAngle < 225));
             $distanceIncrement = $isCompressedArea ? $baseIncrement * 0.6 : $baseIncrement;
-            
+
             for ($attempt = 0; $attempt < $maxAttempts; $attempt++) {
                 // Apply skew factor to Y coordinate for 3D perspective
                 $testX = cos(($angle - 90) * PI / 180) * $finalDistance + $labelInfo['pieX'];
                 $testY = sin(($angle - 90) * PI / 180) * $finalDistance * $skewFactor + $labelInfo['pieY'];
-                
+
                 $hasOverlap = false;
                 foreach ($finalPlacements as $existingPlacement) {
                     $overlapResult = $this->labelsOverlap3D($testX, $testY, $textWidth, $textHeight,
                                         $existingPlacement['finalX'], $existingPlacement['finalY'],
                                         $existingPlacement['width'], $existingPlacement['height'],
                                         $minDistance);
-                    
+
                     if ($overlapResult) {
                         $hasOverlap = true;
                         break;
                     }
                 }
-                
+
                 if (!$hasOverlap) {
                     break;
                 }
-                
+
                 $finalDistance += $distanceIncrement;
             }
 
             // Calculate final position with skew factor
             $finalX = cos(($angle - 90) * PI / 180) * $finalDistance + $labelInfo['pieX'];
             $finalY = sin(($angle - 90) * PI / 180) * $finalDistance * $skewFactor + $labelInfo['pieY'];
-            
+
             $finalPlacements[] = [
                 'labelInfo' => $labelInfo,
                 'pieEdgeX' => $placement['pieEdgeX'],
@@ -2971,7 +3061,7 @@ class Pie
                 'is3D' => $is3D
             ];
         }
-        
+
         return $finalPlacements;
     }
 
@@ -2986,26 +3076,26 @@ class Pie
         if ($centerDistance < $minDistance * 1.2) { // Increase minimum distance for 3D
             return true;
         }
-        
+
         // Enhanced bounding box overlap check with adaptive padding
         $basePadding = 0; // Increased base padding
-        
+
         // Add extra padding for labels in compressed areas (top/bottom of 3D pie)
         $avgY = ($y1 + $y2) / 2;
         $extraPadding = abs($avgY) > 100 ? 2 : 0; // More padding if far from center vertically
-        
+
         $padding = $basePadding + $extraPadding;
-        
+
         $left1 = $x1 - $w1 / 2 - $padding;
         $right1 = $x1 + $w1 / 2 + $padding;
         $top1 = $y1 - $h1 / 2 - $padding;
         $bottom1 = $y1 + $h1 / 2 + $padding;
-        
+
         $left2 = $x2 - $w2 / 2 - $padding;
         $right2 = $x2 + $w2 / 2 + $padding;
         $top2 = $y2 - $h2 / 2 - $padding;
         $bottom2 = $y2 + $h2 / 2 + $padding;
-        
+
         return !($left1 >= $right2 || $right1 <= $left2 || $top1 >= $bottom2 || $bottom1 <= $top2);
     }
 
@@ -3016,31 +3106,31 @@ class Pie
     {
         $arrowSize = 5;
         $arrowAngle = ($angle - 90) * PI / 180;
-        
+
         $baseOffset = $arrowSize * 0.6;
         $point1X = $pieEdgeX + cos($arrowAngle + PI/2) * $baseOffset;
         $point1Y = $pieEdgeY + sin($arrowAngle + PI/2) * $baseOffset;
-        
+
         $point2X = $pieEdgeX + cos($arrowAngle - PI/2) * $baseOffset;
         $point2Y = $pieEdgeY + sin($arrowAngle - PI/2) * $baseOffset;
-        
+
         $tipDistance = $arrowSize * 1.2;
         $point3X = $pieEdgeX + cos($arrowAngle) * $tipDistance;
         $point3Y = $pieEdgeY + sin($arrowAngle) * $tipDistance;
-        
+
         $arrowPoints = [
             $point1X, $point1Y,
-            $point2X, $point2Y,  
+            $point2X, $point2Y,
             $point3X, $point3Y
         ];
-        
+
         $arrowSettings = [
             "R" => $settings["R"],
-            "G" => $settings["G"], 
+            "G" => $settings["G"],
             "B" => $settings["B"],
             "Alpha" => min($settings["Alpha"] + 30, 100)
         ];
-        
+
         $this->pChartObject->drawPolygon($arrowPoints, $arrowSettings);
     }
 
@@ -3052,14 +3142,14 @@ class Pie
         // More accurate approximation for overlap detection
         $baseWidth = 7.5; // Slightly larger base width
         $characterCount = strlen($text);
-        
+
         // Account for different character widths more precisely
         $wideChars = substr_count($text, 'W') + substr_count($text, 'M') + substr_count($text, 'O') + substr_count($text, 'Q');
         $narrowChars = substr_count($text, 'i') + substr_count($text, 'l') + substr_count($text, 't') + substr_count($text, 'j');
         $mediumWideChars = substr_count($text, 'B') + substr_count($text, 'D') + substr_count($text, 'H') + substr_count($text, 'R');
-        
+
         $adjustedWidth = ($characterCount * $baseWidth) + ($wideChars * 3) + ($mediumWideChars * 1) - ($narrowChars * 2);
-        
+
         // Add some safety margin
         return max($adjustedWidth * 1.1, $characterCount * 6.5);
     }
@@ -3073,25 +3163,50 @@ class Pie
         $hasDescenders = preg_match('/[gjpqy]/', $text);
         $hasAscenders = preg_match('/[bdfhklt]/', $text);
         $baseHeight = 14; // Slightly larger base height
-        
+
         $height = $baseHeight;
-        if ($hasDescenders) $height += 3;
-        if ($hasAscenders) $height += 2;
-        
+        if ($hasDescenders) {
+            $height += 3;
+        }
+        if ($hasAscenders) {
+            $height += 2;
+        }
+
         return $height;
     }
 
     /**
      * Store label data for 3D charts with skew factor
      */
-    private function storeLabelData3D($ID, $Key, $Value, $Values, $Angle, $X, $Y, $Radius, $SliceHeight, 
-                                $Data, $Palette, $LabelColor, $LabelR, $LabelG, $LabelB, $LabelAlpha, 
-                                $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix, $LabelStacked, $PreventOverlap, $SkewFactor)
-    {
+    private function storeLabelData3D(
+        $ID,
+        $Key,
+        $Value,
+        $Values,
+        $Angle,
+        $X,
+        $Y,
+        $Radius,
+        $SliceHeight,
+        $Data,
+        $Palette,
+        $LabelColor,
+        $LabelR,
+        $LabelG,
+        $LabelB,
+        $LabelAlpha,
+        $DrawLabelValues,
+        $SerieSum,
+        $Precision,
+        $ValueSuffix,
+        $LabelStacked,
+        $PreventOverlap,
+        $SkewFactor
+    ) {
         if (!isset($this->labelData)) {
             $this->labelData = [];
         }
-        
+
         if ($LabelColor == PIE_LABEL_COLOR_AUTO) {
             $LabelSettings = [
                 "FillR" => $Palette[$ID]["R"],
@@ -3113,21 +3228,23 @@ class Pie
         $Yc = sin(($Angle - 90) * PI / 180) * $Radius * $SkewFactor + $Y - $SliceHeight;
 
         $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$Key];
-        if ($DrawLabelValues) { 
-            $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}"; 
+        if ($DrawLabelValues) {
+            $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}";
         }
 
         if ($PreventOverlap) {
             $labelExists = false;
             foreach ($this->labelData as $existingLabel) {
-                if ($existingLabel['label'] == $Label && 
-                    abs($existingLabel['x'] - $Xc) < 1 && 
-                    abs($existingLabel['y'] - $Yc) < 1) {
+                if (
+                    $existingLabel['label'] == $Label &&
+                    abs($existingLabel['x'] - $Xc) < 1 &&
+                    abs($existingLabel['y'] - $Yc) < 1
+                ) {
                     $labelExists = true;
                     break;
                 }
             }
-            
+
             if (!$labelExists) {
                 $this->labelData[] = [
                     'x' => $Xc,
