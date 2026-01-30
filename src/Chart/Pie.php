@@ -2579,7 +2579,13 @@ class Pie
                 if (isset($Data["Series"][$Data["Abscissa"]]["Data"][$ID])) {
                     $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$ID];
                     if ($DrawLabelValues) {
-                        $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}";
+                        $Label .= " {$this->getDisplayValue(
+                            $Values[$Key],
+                            $DrawLabelValues,
+                            $SerieSum,
+                            $Precision,
+                            $ValueSuffix
+                        )}";
                     }
 
                     if ($LabelStacked) {
@@ -2865,8 +2871,13 @@ class Pie
                 $preferredDistance = $labelInfo['radius'] + $minDistance + 15;
             }
 
-            $preferredX = cos(($labelInfo['angle'] - 90) * PI / 180) * $preferredDistance + $labelInfo['pieX'];
-            $preferredY = sin(($labelInfo['angle'] - 90) * PI / 180) * $preferredDistance * $skewFactor + $labelInfo['pieY'];
+            $preferredX = cos(($labelInfo['angle'] - 90) * PI / 180)
+                * $preferredDistance
+                + $labelInfo['pieX'];
+            $preferredY = sin(($labelInfo['angle'] - 90) * PI / 180)
+                * $preferredDistance
+                * $skewFactor
+                + $labelInfo['pieY'];
 
             $labelPlacements[] = [
                 'labelInfo' => $labelInfo,
