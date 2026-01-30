@@ -2410,30 +2410,7 @@ class Pie
                 $Angle = ($EndAngle - $Offset) / 2 + $Offset;
                 $Xc = cos(($Angle - 90) * PI / 180) * ($OuterRadius + $DataGapRadius) + $X;
                 $Yc = sin(($Angle - 90) * PI / 180) * ($OuterRadius + $DataGapRadius) * $SkewFactor + $Y;
-
-                /*$Label = "";
-                if ($WriteValues == PIE_VALUE_PERCENTAGE) {
-                    $Label = round((100 / $SerieSum) * $Value, $Precision) . "%";
-                } elseif ($WriteValues == PIE_VALUE_NATURAL) {
-                    $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$Key];
-                    if ($DrawLabelValues) { $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}"; }
-                }
-
-                if ($LabelStacked) {
-                    $this->writePieLabel(
-                        $Xc,
-                        $Yc - $SliceHeight,
-                        $Label,
-                        $Angle,
-                        $Settings,
-                        true,
-                        $X,
-                        $Y,
-                        $OuterRadius
-                    );
-                } else {
-                    $this->writePieLabel($Xc, $Yc - $SliceHeight, $Label, $Angle, $Settings, false);
-                } */
+                
                 $Offset = $EndAngle - $DataGapAngle;
                 $ID--;
                 $Slice++;
