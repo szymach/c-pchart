@@ -2789,7 +2789,13 @@ class Pie
 
         $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$Key];
         if ($DrawLabelValues) {
-            $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}";
+            $Label .= " {$this->getDisplayValue(
+                $Values[$Key],
+                $DrawLabelValues,
+                $SerieSum,
+                $Precision,
+                $ValueSuffix
+            )}";
         }
 
         if ($PreventOverlap) {
@@ -3309,7 +3315,13 @@ class Pie
 
         $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$Key];
         if ($DrawLabelValues) {
-            $Label .= " {$this->getDisplayValue($Values[$Key], $DrawLabelValues, $SerieSum, $Precision, $ValueSuffix)}";
+            $Label .= " {$this->getDisplayValue(
+                $Values[$Key],
+                $DrawLabelValues,
+                $SerieSum,
+                $Precision,
+                $ValueSuffix
+            )}";
         }
 
         if ($PreventOverlap) {
