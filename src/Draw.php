@@ -1671,7 +1671,6 @@ abstract class Draw extends BaseDraw
             $this->Shadow = $RestoreShadow;
 
             imagecopy($this->Picture, $Raster, $X, $Y, 0, 0, $Width, $Height);
-            imagedestroy($Raster);
         }
     }
 
