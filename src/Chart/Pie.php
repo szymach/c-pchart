@@ -3313,7 +3313,7 @@ class Pie
         $Xc = cos(($Angle - 90) * PI / 180) * $Radius + $X;
         $Yc = sin(($Angle - 90) * PI / 180) * $Radius * $SkewFactor + $Y - $SliceHeight;
 
-        $Label = $Data["Series"][$Data["Abscissa"]]["Data"][ID];
+        $Label = $Data["Series"][$Data["Abscissa"]]["Data"][$ID];
         if ($DrawLabelValues) {
             $Label .= " {$this->getDisplayValue(
                 $Values[$Key],
