@@ -33,7 +33,7 @@ use const TEXT_ALIGN_BOTTOMMIDDLE;
 use const TEXT_ALIGN_MIDDLELEFT;
 use const TEXT_ALIGN_MIDDLERIGHT;
 use const TEXT_ALIGN_TOPMIDDLE;
-use const VOID;
+use const VOID_NULL;
 
 /**
  * This class exists only to try and reduce the number of methods and properties
@@ -986,16 +986,16 @@ abstract class BaseDraw
 
             if ($ReturnOnly0Height) {
                 foreach ($Values as $Key => $Value) {
-                    if ($Value == VOID) {
-                        $Result[] = VOID;
+                    if ($Value == VOID_NULL) {
+                        $Result[] = VOID_NULL;
                     } else {
                         $Result[] = $Step * $Value;
                     }
                 }
             } else {
                 foreach ($Values as $Key => $Value) {
-                    if ($Value == VOID) {
-                        $Result[] = VOID;
+                    if ($Value == VOID_NULL) {
+                        $Result[] = VOID_NULL;
                     } else {
                         $Result[] = $this->GraphAreaY2
                             - $Data["Axis"][$AxisID]["Margin"]
@@ -1011,16 +1011,16 @@ abstract class BaseDraw
 
             if ($ReturnOnly0Height) {
                 foreach ($Values as $Key => $Value) {
-                    if ($Value == VOID) {
-                        $Result[] = VOID;
+                    if ($Value == VOID_NULL) {
+                        $Result[] = VOID_NULL;
                     } else {
                         $Result[] = $Step * $Value;
                     }
                 }
             } else {
                 foreach ($Values as $Key => $Value) {
-                    if ($Value == VOID) {
-                        $Result[] = VOID;
+                    if ($Value == VOID_NULL) {
+                        $Result[] = VOID_NULL;
                     } else {
                         $Result[] = $this->GraphAreaX1
                             + $Data["Axis"][$AxisID]["Margin"]
@@ -1043,7 +1043,7 @@ abstract class BaseDraw
      */
     public function scaleFormat($Value, $Mode = null, $Format = null, $Unit = null)
     {
-        if ($Value == VOID) {
+        if ($Value == VOID_NULL) {
             return "";
         }
 
@@ -1185,10 +1185,10 @@ abstract class BaseDraw
                 $MinValue = $this->DataSet->getMin($SerieName);
                 $MaxValue = $this->DataSet->getMax($SerieName);
 
-                $MinPos = VOID;
-                $MaxPos = VOID;
+                $MinPos = VOID_NULL;
+                $MaxPos = VOID_NULL;
                 foreach ($Serie["Data"] as $Key => $Value) {
-                    if ($Value == $MinValue && $MinPos == VOID) {
+                    if ($Value == $MinValue && $MinPos == VOID_NULL) {
                         $MinPos = $Key;
                     }
                     if ($Value == $MaxValue) {
@@ -1518,7 +1518,7 @@ abstract class BaseDraw
                             $SerieOffset = 0;
                         }
                         $Value = $Data["Series"][$SerieName]["Data"][$Index];
-                        if ($Value == VOID) {
+                        if ($Value == VOID_NULL) {
                             $Value = "NaN";
                         }
 
@@ -1544,7 +1544,7 @@ abstract class BaseDraw
                                 ) {
                                     if (
                                         isset($Data["Series"][$Name]["Data"][$Index])
-                                        && $Data["Series"][$Name]["Data"][$Index] != VOID
+                                        && $Data["Series"][$Name]["Data"][$Index] != VOID_NULL
                                     ) {
                                         if ($Data["Series"][$Name]["Data"][$Index] >= 0 && $LookFor == "+") {
                                             $Value = $Value + $Data["Series"][$Name]["Data"][$Index];
@@ -1690,7 +1690,7 @@ abstract class BaseDraw
                         } else {
                             $Caption = $this->scaleFormat($Value, $AxisMode, $AxisFormat, $AxisUnit);
                         }
-                        if ($Value == VOID) {
+                        if ($Value == VOID_NULL) {
                             $Value = "NaN";
                         }
 
@@ -1711,7 +1711,7 @@ abstract class BaseDraw
                                 ) {
                                     if (
                                         isset($Data["Series"][$Name]["Data"][$Index])
-                                        && $Data["Series"][$Name]["Data"][$Index] != VOID
+                                        && $Data["Series"][$Name]["Data"][$Index] != VOID_NULL
                                     ) {
                                         if ($Data["Series"][$Name]["Data"][$Index] >= 0 && $LookFor == "+") {
                                             $Value = $Value + $Data["Series"][$Name]["Data"][$Index];

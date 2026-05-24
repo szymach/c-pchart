@@ -5188,7 +5188,7 @@ abstract class Draw extends BaseDraw
                                 ]
                             );
                         }
-                        if ($Y != VOID) {
+                        if ($Y != VOID_NULL) {
                             if ($RecordImageMap) {
                                 $this->addToImageMap(
                                     "CIRCLE",
@@ -5264,7 +5264,7 @@ abstract class Draw extends BaseDraw
                                 ]
                             );
                         }
-                        if ($X != VOID) {
+                        if ($X != VOID_NULL) {
                             if ($RecordImageMap) {
                                 $this->addToImageMap(
                                     "CIRCLE",
@@ -5416,7 +5416,7 @@ abstract class Draw extends BaseDraw
                                 ]
                             );
                         }
-                        if ($RecordImageMap && $Y != VOID) {
+                        if ($RecordImageMap && $Y != VOID_NULL) {
                             $this->addToImageMap(
                                 "CIRCLE",
                                 floor($X) . "," . floor($Y) . "," . $ImageMapPlotSize,
@@ -5426,7 +5426,7 @@ abstract class Draw extends BaseDraw
                             );
                         }
 
-                        if ($Y == VOID && $LastY != null) {
+                        if ($Y == VOID_NULL && $LastY != null) {
                             $this->drawSpline(
                                 $WayPoints,
                                 [
@@ -5442,18 +5442,18 @@ abstract class Draw extends BaseDraw
                             $WayPoints = [];
                         }
 
-                        if ($Y != VOID && $LastY == null && $LastGoodY != null && !$BreakVoid) {
+                        if ($Y != VOID_NULL && $LastY == null && $LastGoodY != null && !$BreakVoid) {
                             $this->drawLine($LastGoodX, $LastGoodY, $X, $Y, $BreakSettings);
                         }
 
-                        if ($Y != VOID) {
+                        if ($Y != VOID_NULL) {
                             $WayPoints[] = [$X, $Y];
                         }
-                        if ($Y != VOID) {
+                        if ($Y != VOID_NULL) {
                             $LastGoodY = $Y;
                             $LastGoodX = $X;
                         }
-                        if ($Y == VOID) {
+                        if ($Y == VOID_NULL) {
                             $Y = null;
                         }
 
@@ -5512,7 +5512,7 @@ abstract class Draw extends BaseDraw
                                 ]
                             );
                         }
-                        if ($RecordImageMap && $X != VOID) {
+                        if ($RecordImageMap && $X != VOID_NULL) {
                             $this->addToImageMap(
                                 "CIRCLE",
                                 floor($X) . "," . floor($Y) . "," . $ImageMapPlotSize,
@@ -5522,7 +5522,7 @@ abstract class Draw extends BaseDraw
                             );
                         }
 
-                        if ($X == VOID && $LastX != null) {
+                        if ($X == VOID_NULL && $LastX != null) {
                             $this->drawSpline(
                                 $WayPoints,
                                 [
@@ -5538,18 +5538,18 @@ abstract class Draw extends BaseDraw
                             $WayPoints = [];
                         }
 
-                        if ($X != VOID && $LastX == null && $LastGoodX != null && !$BreakVoid) {
+                        if ($X != VOID_NULL && $LastX == null && $LastGoodX != null && !$BreakVoid) {
                             $this->drawLine($LastGoodX, $LastGoodY, $X, $Y, $BreakSettings);
                         }
 
-                        if ($X != VOID) {
+                        if ($X != VOID_NULL) {
                             $WayPoints[] = [$X, $Y];
                         }
-                        if ($X != VOID) {
+                        if ($X != VOID_NULL) {
                             $LastGoodX = $X;
                             $LastGoodY = $Y;
                         }
-                        if ($X == VOID) {
+                        if ($X == VOID_NULL) {
                             $X = null;
                         }
 
@@ -5678,7 +5678,7 @@ abstract class Draw extends BaseDraw
                                 ]
                             );
                         }
-                        if ($Y == VOID) {
+                        if ($Y == VOID_NULL) {
                             $Area = $this->drawSpline(
                                 $WayPoints,
                                 ["Force" => $Force, "PathOnly" => true]
@@ -5813,7 +5813,7 @@ abstract class Draw extends BaseDraw
                                 ]
                             );
                         }
-                        if ($X == VOID) {
+                        if ($X == VOID_NULL) {
                             $Area = $this->drawSpline(
                                 $WayPoints,
                                 ["Force" => $Force, "PathOnly" => true]
@@ -6022,7 +6022,7 @@ abstract class Draw extends BaseDraw
                     $LastGoodY = null;
                     $LastGoodX = null;
                     foreach ($PosArray as $Key => $Y) {
-                        if ($DisplayValues && $Serie["Data"][$Key] != VOID) {
+                        if ($DisplayValues && $Serie["Data"][$Key] != VOID_NULL) {
                             if ($Serie["Data"][$Key] > 0) {
                                 $Align = TEXT_ALIGN_BOTTOMMIDDLE;
                                 $Offset = $DisplayOffset;
@@ -6048,7 +6048,7 @@ abstract class Draw extends BaseDraw
                             );
                         }
 
-                        if ($RecordImageMap && $Y != VOID) {
+                        if ($RecordImageMap && $Y != VOID_NULL) {
                             $this->addToImageMap(
                                 "CIRCLE",
                                 floor($X) . "," . floor($Y) . "," . $ImageMapPlotSize,
@@ -6058,7 +6058,7 @@ abstract class Draw extends BaseDraw
                             );
                         }
 
-                        if ($Y != VOID && $LastX != null && $LastY != null) {
+                        if ($Y != VOID_NULL && $LastX != null && $LastY != null) {
                             $this->drawLine(
                                 $LastX,
                                 $LastY,
@@ -6074,7 +6074,7 @@ abstract class Draw extends BaseDraw
                                 ]
                             );
                         }
-                        if ($Y != VOID && $LastY == null && $LastGoodY != null && !$BreakVoid) {
+                        if ($Y != VOID_NULL && $LastY == null && $LastGoodY != null && !$BreakVoid) {
                             $this->drawLine(
                                 $LastGoodX,
                                 $LastGoodY,
@@ -6085,11 +6085,11 @@ abstract class Draw extends BaseDraw
                             $LastGoodY = null;
                         }
 
-                        if ($Y != VOID) {
+                        if ($Y != VOID_NULL) {
                             $LastGoodY = $Y;
                             $LastGoodX = $X;
                         }
-                        if ($Y == VOID) {
+                        if ($Y == VOID_NULL) {
                             $Y = null;
                         }
 
@@ -6115,7 +6115,7 @@ abstract class Draw extends BaseDraw
                     $LastGoodY = null;
                     $LastGoodX = null;
                     foreach ($PosArray as $Key => $X) {
-                        if ($DisplayValues && $Serie["Data"][$Key] != VOID) {
+                        if ($DisplayValues && $Serie["Data"][$Key] != VOID_NULL) {
                             $this->drawText(
                                 $X + $DisplayOffset + $Weight,
                                 $Y,
@@ -6135,7 +6135,7 @@ abstract class Draw extends BaseDraw
                             );
                         }
 
-                        if ($RecordImageMap && $X != VOID) {
+                        if ($RecordImageMap && $X != VOID_NULL) {
                             $this->addToImageMap(
                                 "CIRCLE",
                                 floor($X) . "," . floor($Y) . "," . $ImageMapPlotSize,
@@ -6145,7 +6145,7 @@ abstract class Draw extends BaseDraw
                             );
                         }
 
-                        if ($X != VOID && $LastX != null && $LastY != null) {
+                        if ($X != VOID_NULL && $LastX != null && $LastY != null) {
                             $this->drawLine(
                                 $LastX,
                                 $LastY,
@@ -6161,7 +6161,7 @@ abstract class Draw extends BaseDraw
                                 ]
                             );
                         }
-                        if ($X != VOID && $LastX == null && $LastGoodY != null && !$BreakVoid) {
+                        if ($X != VOID_NULL && $LastX == null && $LastGoodY != null && !$BreakVoid) {
                             $this->drawLine(
                                 $LastGoodX,
                                 $LastGoodY,
@@ -6172,11 +6172,11 @@ abstract class Draw extends BaseDraw
                             $LastGoodY = null;
                         }
 
-                        if ($X != VOID) {
+                        if ($X != VOID_NULL) {
                             $LastGoodY = $Y;
                             $LastGoodX = $X;
                         }
-                        if ($X == VOID) {
+                        if ($X == VOID_NULL) {
                             $X = null;
                         }
 
@@ -6469,7 +6469,7 @@ abstract class Draw extends BaseDraw
                     $LastGoodX = null;
                     $Init = false;
                     foreach ($PosArray as $Key => $Y) {
-                        if ($DisplayValues && $Serie["Data"][$Key] != VOID) {
+                        if ($DisplayValues && $Serie["Data"][$Key] != VOID_NULL) {
                             if ($Y <= $LastY) {
                                 $Align = TEXT_ALIGN_BOTTOMMIDDLE;
                                 $Offset = $DisplayOffset;
@@ -6485,7 +6485,7 @@ abstract class Draw extends BaseDraw
                             );
                         }
 
-                        if ($Y != VOID && $LastX != null && $LastY != null) {
+                        if ($Y != VOID_NULL && $LastX != null && $LastY != null) {
                             $this->drawLine($LastX, $LastY, $X, $LastY, $Color);
                             $this->drawLine($X, $LastY, $X, $Y, $Color);
                             if ($ReCenter && $X + $XStep < $this->GraphAreaX2 - $XMargin) {
@@ -6524,7 +6524,7 @@ abstract class Draw extends BaseDraw
                             }
                         }
 
-                        if ($Y != VOID && $LastY == null && $LastGoodY != null && !$BreakVoid) {
+                        if ($Y != VOID_NULL && $LastY == null && $LastGoodY != null && !$BreakVoid) {
                             if ($ReCenter) {
                                 $this->drawLine($LastGoodX + $XStep, $LastGoodY, $X, $LastGoodY, $BreakSettings);
                                 if ($RecordImageMap) {
@@ -6562,7 +6562,7 @@ abstract class Draw extends BaseDraw
 
                             $this->drawLine($X, $LastGoodY, $X, $Y, $BreakSettings);
                             $LastGoodY = null;
-                        } elseif (!$BreakVoid && $LastGoodY == null && $Y != VOID) {
+                        } elseif (!$BreakVoid && $LastGoodY == null && $Y != VOID_NULL) {
                             $this->drawLine($this->GraphAreaX1 + $XMargin, $Y, $X, $Y, $BreakSettings);
                             if ($RecordImageMap) {
                                 $this->addToImageMap(
@@ -6581,11 +6581,11 @@ abstract class Draw extends BaseDraw
                             }
                         }
 
-                        if ($Y != VOID) {
+                        if ($Y != VOID_NULL) {
                             $LastGoodY = $Y;
                             $LastGoodX = $X;
                         }
-                        if ($Y == VOID) {
+                        if ($Y == VOID_NULL) {
                             $Y = null;
                         }
 
@@ -6637,7 +6637,7 @@ abstract class Draw extends BaseDraw
                     $LastGoodX = null;
                     $Init = false;
                     foreach ($PosArray as $Key => $X) {
-                        if ($DisplayValues && $Serie["Data"][$Key] != VOID) {
+                        if ($DisplayValues && $Serie["Data"][$Key] != VOID_NULL) {
                             if ($X >= $LastX) {
                                 $Align = TEXT_ALIGN_MIDDLELEFT;
                                 $Offset = $DisplayOffset;
@@ -6658,7 +6658,7 @@ abstract class Draw extends BaseDraw
                             );
                         }
 
-                        if ($X != VOID && $LastX != null && $LastY != null) {
+                        if ($X != VOID_NULL && $LastX != null && $LastY != null) {
                             $this->drawLine($LastX, $LastY, $LastX, $Y, $Color);
                             $this->drawLine($LastX, $Y, $X, $Y, $Color);
 
@@ -6679,7 +6679,7 @@ abstract class Draw extends BaseDraw
                             }
                         }
 
-                        if ($X != VOID && $LastX == null && $LastGoodY != null && !$BreakVoid) {
+                        if ($X != VOID_NULL && $LastX == null && $LastGoodY != null && !$BreakVoid) {
                             $this->drawLine(
                                 $LastGoodX,
                                 $LastGoodY,
@@ -6728,7 +6728,7 @@ abstract class Draw extends BaseDraw
 
                             $this->drawLine($LastGoodX, $Y, $X, $Y, $BreakSettings);
                             $LastGoodY = null;
-                        } elseif ($X != VOID && $LastGoodY == null && !$BreakVoid) {
+                        } elseif ($X != VOID_NULL && $LastGoodY == null && !$BreakVoid) {
                             $this->drawLine($X, $this->GraphAreaY1 + $XMargin, $X, $Y, $BreakSettings);
                             if ($RecordImageMap) {
                                 $this->addToImageMap(
@@ -6747,11 +6747,11 @@ abstract class Draw extends BaseDraw
                             }
                         }
 
-                        if ($X != VOID) {
+                        if ($X != VOID_NULL) {
                             $LastGoodY = $Y;
                             $LastGoodX = $X;
                         }
-                        if ($X == VOID) {
+                        if ($X == VOID_NULL) {
                             $X = null;
                         }
 
@@ -6868,7 +6868,7 @@ abstract class Draw extends BaseDraw
                     $Points = [];
                     $Init = false;
                     foreach ($PosArray as $Key => $Y) {
-                        if ($Y == VOID && $LastX != null && $LastY != null && count($Points)) {
+                        if ($Y == VOID_NULL && $LastX != null && $LastY != null && count($Points)) {
                             $Points[] = $LastX;
                             $Points[] = $LastY;
                             $Points[] = $X;
@@ -6879,7 +6879,7 @@ abstract class Draw extends BaseDraw
                             $Points = [];
                         }
 
-                        if ($Y != VOID && $LastX != null && $LastY != null) {
+                        if ($Y != VOID_NULL && $LastX != null && $LastY != null) {
                             if (count($Points)) {
                                 $Points[] = $LastX;
                                 $Points[] = $YZero;
@@ -6892,11 +6892,11 @@ abstract class Draw extends BaseDraw
                             $Points[] = $Y;
                         }
 
-                        if ($Y != VOID) {
+                        if ($Y != VOID_NULL) {
                             $LastGoodY = $Y;
                             $LastGoodX = $X;
                         }
-                        if ($Y == VOID) {
+                        if ($Y == VOID_NULL) {
                             $Y = null;
                         }
 
@@ -6949,7 +6949,7 @@ abstract class Draw extends BaseDraw
                     $LastGoodX = null;
                     $Points = [];
                     foreach ($PosArray as $Key => $X) {
-                        if ($X == VOID && $LastX != null && $LastY != null && count($Points)) {
+                        if ($X == VOID_NULL && $LastX != null && $LastY != null && count($Points)) {
                             $Points[] = $LastX;
                             $Points[] = $LastY;
                             $Points[] = $LastX;
@@ -6960,7 +6960,7 @@ abstract class Draw extends BaseDraw
                             $Points = [];
                         }
 
-                        if ($X != VOID && $LastX != null && $LastY != null) {
+                        if ($X != VOID_NULL && $LastX != null && $LastY != null) {
                             if (count($Points)) {
                                 $Points[] = $YZero;
                                 $Points[] = $LastY;
@@ -6973,11 +6973,11 @@ abstract class Draw extends BaseDraw
                             $Points[] = $Y;
                         }
 
-                        if ($X != VOID) {
+                        if ($X != VOID_NULL) {
                             $LastGoodY = $Y;
                             $LastGoodX = $X;
                         }
-                        if ($X == VOID) {
+                        if ($X == VOID_NULL) {
                             $X = null;
                         }
 
@@ -7094,7 +7094,7 @@ abstract class Draw extends BaseDraw
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $Y) {
-                        if ($DisplayValues && $Serie["Data"][$Key] != VOID) {
+                        if ($DisplayValues && $Serie["Data"][$Key] != VOID_NULL) {
                             if ($Serie["Data"][$Key] > 0) {
                                 $Align = TEXT_ALIGN_BOTTOMMIDDLE;
                                 $Offset = $DisplayOffset;
@@ -7110,7 +7110,7 @@ abstract class Draw extends BaseDraw
                             );
                         }
 
-                        if ($Y == VOID && isset($Areas[$AreaID])) {
+                        if ($Y == VOID_NULL && isset($Areas[$AreaID])) {
                             if ($LastX == null) {
                                 $Areas[$AreaID][] = $X;
                             } else {
@@ -7123,7 +7123,7 @@ abstract class Draw extends BaseDraw
                                 $Areas[$AreaID][] = $this->GraphAreaY2 - 1;
                             }
                             $AreaID++;
-                        } elseif ($Y != VOID) {
+                        } elseif ($Y != VOID_NULL) {
                             if (!isset($Areas[$AreaID])) {
                                 $Areas[$AreaID][] = $X;
                                 if ($AroundZero) {
@@ -7218,7 +7218,7 @@ abstract class Draw extends BaseDraw
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $X) {
-                        if ($DisplayValues && $Serie["Data"][$Key] != VOID) {
+                        if ($DisplayValues && $Serie["Data"][$Key] != VOID_NULL) {
                             if ($Serie["Data"][$Key] > 0) {
                                 $Align = TEXT_ALIGN_BOTTOMMIDDLE;
                                 $Offset = $DisplayOffset;
@@ -7240,7 +7240,7 @@ abstract class Draw extends BaseDraw
                             );
                         }
 
-                        if ($X == VOID && isset($Areas[$AreaID])) {
+                        if ($X == VOID_NULL && isset($Areas[$AreaID])) {
                             if ($AroundZero) {
                                 $Areas[$AreaID][] = $YZero;
                             } else {
@@ -7254,7 +7254,7 @@ abstract class Draw extends BaseDraw
                             }
 
                             $AreaID++;
-                        } elseif ($X != VOID) {
+                        } elseif ($X != VOID_NULL) {
                             if (!isset($Areas[$AreaID])) {
                                 if ($AroundZero) {
                                     $Areas[$AreaID][] = $YZero;
@@ -7527,7 +7527,7 @@ abstract class Draw extends BaseDraw
                             }
                         }
 
-                        if ($Y2 != VOID) {
+                        if ($Y2 != VOID_NULL) {
                             $BarHeight = $Y1 - $Y2;
 
                             if ($Serie["Data"][$Key] == 0) {
@@ -7702,7 +7702,7 @@ abstract class Draw extends BaseDraw
                                 }
                             }
 
-                            if ($DisplayValues && $Serie["Data"][$Key] != VOID) {
+                            if ($DisplayValues && $Serie["Data"][$Key] != VOID_NULL) {
                                 if ($DisplayShadow) {
                                     $this->Shadow = true;
                                 }
@@ -7844,7 +7844,7 @@ abstract class Draw extends BaseDraw
                             }
                         }
 
-                        if ($X2 != VOID) {
+                        if ($X2 != VOID_NULL) {
                             $BarWidth = $X2 - $X1;
                             if ($Serie["Data"][$Key] == 0) {
                                 $this->drawLine(
@@ -8018,7 +8018,7 @@ abstract class Draw extends BaseDraw
                                 }
                             }
 
-                            if ($DisplayValues && $Serie["Data"][$Key] != VOID) {
+                            if ($DisplayValues && $Serie["Data"][$Key] != VOID_NULL) {
                                 if ($DisplayShadow) {
                                     $this->Shadow = true;
                                 }
@@ -8214,7 +8214,7 @@ abstract class Draw extends BaseDraw
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $Height) {
-                        if ($Height != VOID && $Serie["Data"][$Key] != 0) {
+                        if ($Height != VOID_NULL && $Serie["Data"][$Key] != 0) {
                             if ($Serie["Data"][$Key] > 0) {
                                 $Pos = "+";
                             } else {
@@ -8454,7 +8454,7 @@ abstract class Draw extends BaseDraw
                         $PosArray[0] = $Value;
                     }
                     foreach ($PosArray as $Key => $Width) {
-                        if ($Width != VOID && $Serie["Data"][$Key] != 0) {
+                        if ($Width != VOID_NULL && $Serie["Data"][$Key] != 0) {
                             if ($Serie["Data"][$Key] > 0) {
                                 $Pos = "+";
                             } else {
@@ -8682,9 +8682,9 @@ abstract class Draw extends BaseDraw
     {
         $DrawLine = isset($Format["DrawLine"]) ? $Format["DrawLine"] : false;
         $LineSurrounding = isset($Format["LineSurrounding"]) ? $Format["LineSurrounding"] : null;
-        $LineR = isset($Format["LineR"]) ? $Format["LineR"] : VOID;
-        $LineG = isset($Format["LineG"]) ? $Format["LineG"] : VOID;
-        $LineB = isset($Format["LineB"]) ? $Format["LineB"] : VOID;
+        $LineR = isset($Format["LineR"]) ? $Format["LineR"] : VOID_NULL;
+        $LineG = isset($Format["LineG"]) ? $Format["LineG"] : VOID_NULL;
+        $LineB = isset($Format["LineB"]) ? $Format["LineB"] : VOID_NULL;
         $LineAlpha = isset($Format["LineAlpha"]) ? $Format["LineAlpha"] : 100;
         $DrawPlot = isset($Format["DrawPlot"]) ? $Format["DrawPlot"] : false;
         $PlotRadius = isset($Format["PlotRadius"]) ? $Format["PlotRadius"] : 2;
@@ -8712,7 +8712,7 @@ abstract class Draw extends BaseDraw
                 $SerieOrder[] = $SerieName;
 
                 foreach ($Serie["Data"] as $Key => $Value) {
-                    if ($Value == VOID) {
+                    if ($Value == VOID_NULL) {
                         $Value = 0;
                     }
                     if ($Value >= 0) {
@@ -8756,7 +8756,7 @@ abstract class Draw extends BaseDraw
                         "B" => $B + $LineSurrounding,
                         "Alpha" => $Alpha
                     ];
-                } elseif ($LineR != VOID) {
+                } elseif ($LineR != VOID_NULL) {
                     $LineColor = [
                         "R" => $LineR,
                         "G" => $LineG,
@@ -8818,7 +8818,7 @@ abstract class Draw extends BaseDraw
                     $Plots[] = $X;
                     $Plots[] = $YZero;
                     foreach ($PosArray as $Key => $Height) {
-                        if ($Height != VOID) {
+                        if ($Height != VOID_NULL) {
                             $Plots[] = $X;
                             $Plots[] = $YZero - $Height;
                         }
@@ -8880,7 +8880,7 @@ abstract class Draw extends BaseDraw
                     $Plots[] = $YZero;
                     $Plots[] = $Y;
                     foreach ($PosArray as $Key => $Height) {
-                        if ($Height != VOID) {
+                        if ($Height != VOID_NULL) {
                             $Plots[] = $YZero + $Height;
                             $Plots[] = $Y;
                         }
@@ -9107,7 +9107,7 @@ abstract class Draw extends BaseDraw
                     $MinSlope = 0;
                     $MaxSlope = 1;
                     foreach ($PosArray as $Key => $Y) {
-                        if ($Y != VOID && $LastX != null) {
+                        if ($Y != VOID_NULL && $LastX != null) {
                             $Slope = ($LastY - $Y);
                             if ($Slope > $MaxSlope) {
                                 $MaxSlope = $Slope;
@@ -9116,7 +9116,7 @@ abstract class Draw extends BaseDraw
                             }
                         }
 
-                        if ($Y == VOID) {
+                        if ($Y == VOID_NULL) {
                             $LastX = null;
                             $LastY = null;
                         } else {
@@ -9129,7 +9129,7 @@ abstract class Draw extends BaseDraw
                     $LastY = null;
                     $LastColor = null;
                     foreach ($PosArray as $Key => $Y) {
-                        if ($Y != VOID && $LastY != null) {
+                        if ($Y != VOID_NULL && $LastY != null) {
                             $Slope = ($LastY - $Y);
 
                             if ($Slope >= 0) {
@@ -9187,7 +9187,7 @@ abstract class Draw extends BaseDraw
                             $LastColor = $Color;
                         }
 
-                        if ($Y == VOID) {
+                        if ($Y == VOID_NULL) {
                             $LastY = null;
                         } else {
                             $LastX = $X;
@@ -9311,7 +9311,7 @@ abstract class Draw extends BaseDraw
                     $MinSlope = 0;
                     $MaxSlope = 1;
                     foreach ($PosArray as $Key => $X) {
-                        if ($X != VOID && $LastX != null) {
+                        if ($X != VOID_NULL && $LastX != null) {
                             $Slope = ($X - $LastX);
                             if ($Slope > $MaxSlope) {
                                 $MaxSlope = $Slope;
@@ -9321,7 +9321,7 @@ abstract class Draw extends BaseDraw
                             }
                         }
 
-                        if ($X == VOID) {
+                        if ($X == VOID_NULL) {
                             $LastX = null;
                         } else {
                             $LastX = $X;
@@ -9332,7 +9332,7 @@ abstract class Draw extends BaseDraw
                     $LastY = null;
                     $LastColor = null;
                     foreach ($PosArray as $Key => $X) {
-                        if ($X != VOID && $LastX != null) {
+                        if ($X != VOID_NULL && $LastX != null) {
                             $Slope = ($X - $LastX);
 
                             if ($Slope >= 0) {
@@ -9391,7 +9391,7 @@ abstract class Draw extends BaseDraw
                             $LastColor = $Color;
                         }
 
-                        if ($X == VOID) {
+                        if ($X == VOID_NULL) {
                             $LastX = null;
                         } else {
                             $LastX = $X;
@@ -9415,17 +9415,17 @@ abstract class Draw extends BaseDraw
     public function drawBestFit(array $Format = [])
     {
         $OverrideTicks = isset($Format["Ticks"]) ? $Format["Ticks"] : null;
-        $OverrideR = isset($Format["R"]) ? $Format["R"] : VOID;
-        $OverrideG = isset($Format["G"]) ? $Format["G"] : VOID;
-        $OverrideB = isset($Format["B"]) ? $Format["B"] : VOID;
-        $OverrideAlpha = isset($Format["Alpha"]) ? $Format["Alpha"] : VOID;
+        $OverrideR = isset($Format["R"]) ? $Format["R"] : VOID_NULL;
+        $OverrideG = isset($Format["G"]) ? $Format["G"] : VOID_NULL;
+        $OverrideB = isset($Format["B"]) ? $Format["B"] : VOID_NULL;
+        $OverrideAlpha = isset($Format["Alpha"]) ? $Format["Alpha"] : VOID_NULL;
 
         $Data = $this->DataSet->getData();
         list($XMargin, $XDivs) = $this->scaleGetXSettings();
 
         foreach ($Data["Series"] as $SerieName => $Serie) {
             if ($Serie["isDrawable"] == true && $SerieName != $Data["Abscissa"]) {
-                if ($OverrideR != VOID && $OverrideG != VOID && $OverrideB != VOID) {
+                if ($OverrideR != VOID_NULL && $OverrideG != VOID_NULL && $OverrideB != VOID_NULL) {
                     $R = $OverrideR;
                     $G = $OverrideG;
                     $B = $OverrideB;
@@ -9439,7 +9439,7 @@ abstract class Draw extends BaseDraw
                 } else {
                     $Ticks = $OverrideTicks;
                 }
-                if ($OverrideAlpha == VOID) {
+                if ($OverrideAlpha == VOID_NULL) {
                     $Alpha = $Serie["Color"]["Alpha"];
                 } else {
                     $Alpha = $OverrideAlpha;
@@ -9470,7 +9470,7 @@ abstract class Draw extends BaseDraw
                     $Sy = 0;
                     $Sxx = 0;
                     foreach ($PosArray as $Key => $Y) {
-                        if ($Y != VOID) {
+                        if ($Y != VOID_NULL) {
                             $Sxy = $Sxy + $X * $Y;
                             $Sx = $Sx + $X;
                             $Sy = $Sy + $Y;
@@ -9479,7 +9479,7 @@ abstract class Draw extends BaseDraw
 
                         $X = $X + $XStep;
                     }
-                    $n = count($this->DataSet->stripVOID($PosArray)); //$n = count($PosArray);
+                    $n = count($this->DataSet->stripVOID_NULL($PosArray)); //$n = count($PosArray);
                     $M = (($n * $Sxy) - ($Sx * $Sy)) / (($n * $Sxx) - ($Sx * $Sx));
                     $B = (($Sy) - ($M * $Sx)) / ($n);
 
@@ -9524,7 +9524,7 @@ abstract class Draw extends BaseDraw
                     $Sy = 0;
                     $Sxx = 0;
                     foreach ($PosArray as $Key => $X) {
-                        if ($X != VOID) {
+                        if ($X != VOID_NULL) {
                             $Sxy = $Sxy + $X * $Y;
                             $Sx = $Sx + $Y;
                             $Sy = $Sy + $X;
@@ -9533,7 +9533,7 @@ abstract class Draw extends BaseDraw
 
                         $Y = $Y + $YStep;
                     }
-                    $n = count($this->DataSet->stripVOID($PosArray)); //$n = count($PosArray);
+                    $n = count($this->DataSet->stripVOID_NULL($PosArray)); //$n = count($PosArray);
                     $M = (($n * $Sxy) - ($Sx * $Sy)) / (($n * $Sxx) - ($Sx * $Sx));
                     $B = (($Sy) - ($M * $Sx)) / ($n);
 
@@ -10187,7 +10187,7 @@ abstract class Draw extends BaseDraw
         /* Simplify straight lines */
         $Result = [];
         $inHorizon = false;
-        $LastX = VOID;
+        $LastX = VOID_NULL;
         foreach ($Segments as $Key => $Pos) {
             if ($Pos["Y1"] != $Pos["Y2"]) {
                 if ($inHorizon) {

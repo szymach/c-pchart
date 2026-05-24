@@ -22,7 +22,7 @@ class Radar
     {
         $this->pChartObject = $Object;
 
-        $FixedMax = isset($Format["FixedMax"]) ? $Format["FixedMax"] : VOID;
+        $FixedMax = isset($Format["FixedMax"]) ? $Format["FixedMax"] : VOID_NULL;
         $AxisR = isset($Format["AxisR"]) ? $Format["AxisR"] : 60;
         $AxisG = isset($Format["AxisG"]) ? $Format["AxisG"] : 60;
         $AxisB = isset($Format["AxisB"]) ? $Format["AxisB"] : 60;
@@ -42,9 +42,9 @@ class Radar
         ;
         $ValuePadding = isset($Format["ValuePadding"]) ? $Format["ValuePadding"] : 4;
         $OuterBubbleRadius = isset($Format["OuterBubbleRadius"]) ? $Format["OuterBubbleRadius"] : 2;
-        $OuterBubbleR = isset($Format["OuterBubbleR"]) ? $Format["OuterBubbleR"] : VOID;
-        $OuterBubbleG = isset($Format["OuterBubbleG"]) ? $Format["OuterBubbleG"] : VOID;
-        $OuterBubbleB = isset($Format["OuterBubbleB"]) ? $Format["OuterBubbleB"] : VOID;
+        $OuterBubbleR = isset($Format["OuterBubbleR"]) ? $Format["OuterBubbleR"] : VOID_NULL;
+        $OuterBubbleG = isset($Format["OuterBubbleG"]) ? $Format["OuterBubbleG"] : VOID_NULL;
+        $OuterBubbleB = isset($Format["OuterBubbleB"]) ? $Format["OuterBubbleB"] : VOID_NULL;
         $OuterBubbleAlpha = isset($Format["OuterBubbleAlpha"]) ? $Format["OuterBubbleAlpha"] : 100;
         $InnerBubbleR = isset($Format["InnerBubbleR"]) ? $Format["InnerBubbleR"] : 255;
         $InnerBubbleG = isset($Format["InnerBubbleG"]) ? $Format["InnerBubbleG"] : 255;
@@ -115,7 +115,7 @@ class Radar
         }
         /* Determine the scale if set to automatic */
         if ($SegmentHeight == SEGMENT_HEIGHT_AUTO) {
-            if ($FixedMax != VOID) {
+            if ($FixedMax != VOID_NULL) {
                 $Max = $FixedMax;
             } else {
                 $Max = 0;
@@ -501,7 +501,7 @@ class Radar
                 "B" => $InnerBubbleB,
                 "Alpha" => $InnerBubbleAlpha
             ];
-            if ($OuterBubbleR != VOID) {
+            if ($OuterBubbleR != VOID_NULL) {
                 $OuterColor = [
                     "R" => $OuterBubbleR,
                     "G" => $OuterBubbleG,
@@ -603,7 +603,7 @@ class Radar
     {
         $this->pChartObject = $Object;
 
-        $FixedMax = isset($Format["FixedMax"]) ? $Format["FixedMax"] : VOID;
+        $FixedMax = isset($Format["FixedMax"]) ? $Format["FixedMax"] : VOID_NULL;
         $AxisR = isset($Format["AxisR"]) ? $Format["AxisR"] : 60;
         $AxisG = isset($Format["AxisG"]) ? $Format["AxisG"] : 60;
         $AxisB = isset($Format["AxisB"]) ? $Format["AxisB"] : 60;
@@ -625,9 +625,9 @@ class Radar
         ;
         $ValuePadding = isset($Format["ValuePadding"]) ? $Format["ValuePadding"] : 4;
         $OuterBubbleRadius = isset($Format["OuterBubbleRadius"]) ? $Format["OuterBubbleRadius"] : 2;
-        $OuterBubbleR = isset($Format["OuterBubbleR"]) ? $Format["OuterBubbleR"] : VOID;
-        $OuterBubbleG = isset($Format["OuterBubbleG"]) ? $Format["OuterBubbleG"] : VOID;
-        $OuterBubbleB = isset($Format["OuterBubbleB"]) ? $Format["OuterBubbleB"] : VOID;
+        $OuterBubbleR = isset($Format["OuterBubbleR"]) ? $Format["OuterBubbleR"] : VOID_NULL;
+        $OuterBubbleG = isset($Format["OuterBubbleG"]) ? $Format["OuterBubbleG"] : VOID_NULL;
+        $OuterBubbleB = isset($Format["OuterBubbleB"]) ? $Format["OuterBubbleB"] : VOID_NULL;
         $OuterBubbleAlpha = isset($Format["OuterBubbleAlpha"]) ? $Format["OuterBubbleAlpha"] : 100;
         $InnerBubbleR = isset($Format["InnerBubbleR"]) ? $Format["InnerBubbleR"] : 255;
         $InnerBubbleG = isset($Format["InnerBubbleG"]) ? $Format["InnerBubbleG"] : 255;
@@ -701,7 +701,7 @@ class Radar
 
         /* Determine the scale if set to automatic */
         if ($SegmentHeight == SEGMENT_HEIGHT_AUTO) {
-            if ($FixedMax != VOID) {
+            if ($FixedMax != VOID_NULL) {
                 $Max = $FixedMax;
             } else {
                 $Max = 0;
@@ -989,7 +989,7 @@ class Radar
                 "B" => $InnerBubbleB,
                 "Alpha" => $InnerBubbleAlpha
             ];
-            if ($OuterBubbleR != VOID) {
+            if ($OuterBubbleR != VOID_NULL) {
                 $OuterColor = [
                     "R" => $OuterBubbleR,
                     "G" => $OuterBubbleG,

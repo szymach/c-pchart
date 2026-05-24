@@ -12,7 +12,7 @@ use const AXIS_POSITION_BOTTOM;
 use const AXIS_POSITION_LEFT;
 use const AXIS_Y;
 use const SERIE_SHAPE_FILLEDCIRCLE;
-use const VOID;
+use const VOID_NULL;
 
 /**
  * @phpstan-type FormatArray array{ R?: int, G?: int, B?: int, Alpha?: int }
@@ -78,9 +78,9 @@ class Data
             $this->Data["Series"][$SerieName]["Data"][] = $Values;
         }
 
-        if ($Values != VOID) {
+        if ($Values != VOID_NULL) {
             /** @var list<float|int> $StrippedData */
-            $StrippedData = $this->stripVOID($this->Data["Series"][$SerieName]["Data"]);
+            $StrippedData = $this->stripVOID_NULL($this->Data["Series"][$SerieName]["Data"]);
             if (empty($StrippedData)) {
                 $this->Data["Series"][$SerieName]["Max"] = 0;
                 $this->Data["Series"][$SerieName]["Min"] = 0;
@@ -95,11 +95,11 @@ class Data
     }
 
     /**
-     * Strip VOID values
+     * Strip VOID_NULL values
      * @param float|int|string|null|array<float|int|numeric-string|string|null> $values
      * @return array<float|int|numeric-string|string>
      */
-    public function stripVOID($values)
+    public function stripVOID_NULL($values)
     {
         if (is_array($values) === false) {
             return [];
@@ -107,7 +107,7 @@ class Data
 
         $filteredValues = array_filter(
             $values,
-            static fn($value): bool => $value != VOID
+            static fn($value): bool => $value != VOID_NULL
         );
 
         return array_values($filteredValues);
@@ -550,7 +550,7 @@ class Data
             return null;
         }
 
-        $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
+        $SerieData = $this->stripVOID_NULL($this->Data["Series"][$Serie]["Data"]);
         return array_sum($SerieData) / sizeof($SerieData);
     }
 
@@ -562,7 +562,7 @@ class Data
     public function getGeometricMean($Serie)
     {
         if (isset($this->Data["Series"][$Serie])) {
-            $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
+            $SerieData = $this->stripVOID_NULL($this->Data["Series"][$Serie]["Data"]);
             $Seriesum = 1;
             foreach ($SerieData as $Value) {
                 $Seriesum = $Seriesum * $Value;
@@ -584,7 +584,7 @@ class Data
             return null;
         }
 
-        $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
+        $SerieData = $this->stripVOID_NULL($this->Data["Series"][$Serie]["Data"]);
         $Seriesum = 0;
         /** @var float|int $Value */
         foreach ($SerieData as $Value) {
@@ -606,7 +606,7 @@ class Data
         }
 
         $Average = $this->getSerieAverage($Serie);
-        $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
+        $SerieData = $this->stripVOID_NULL($this->Data["Series"][$Serie]["Data"]);
 
         $DeviationSum = 0;
         /** @var float|int $Value */
@@ -649,7 +649,7 @@ class Data
             return null;
         }
 
-        $SerieData = $this->stripVOID($this->Data["Series"][$Serie]["Data"]);
+        $SerieData = $this->stripVOID_NULL($this->Data["Series"][$Serie]["Data"]);
         sort($SerieData);
         $SerieCenter = (int) floor(sizeof($SerieData) / 2);
 
@@ -1138,7 +1138,7 @@ class Data
             $Factor = 0;
             foreach ($SelectedSeries as $Key => $SerieName) {
                 $Value = $this->Data["Series"][$SerieName]["Data"][$i];
-                if ($Value != VOID) {
+                if ($Value != VOID_NULL) {
                     $Factor = $Factor + abs($Value);
                 }
             }
@@ -1149,10 +1149,10 @@ class Data
                 foreach ($SelectedSeries as $Key => $SerieName) {
                     $Value = $this->Data["Series"][$SerieName]["Data"][$i];
 
-                    if ($Value != VOID && $Factor != $NormalizationFactor) {
+                    if ($Value != VOID_NULL && $Factor != $NormalizationFactor) {
                         $this->Data["Series"][$SerieName]["Data"][$i] = round(abs($Value) * $Factor, $Round);
-                    } elseif ($Value == VOID || $Value == 0) {
-                        $this->Data["Series"][$SerieName]["Data"][$i] = VOID;
+                    } elseif ($Value == VOID_NULL || $Value == 0) {
+                        $this->Data["Series"][$SerieName]["Data"][$i] = VOID_NULL;
                     } elseif ($Factor == $NormalizationFactor) {
                         $this->Data["Series"][$SerieName]["Data"][$i] = $NormalizationFactor;
                     }
@@ -1162,7 +1162,7 @@ class Data
 
         foreach ($SelectedSeries as $Key => $SerieName) {
             /** @var non-empty-list<float|int> $strippedData */
-            $strippedData = $this->stripVOID(
+            $strippedData = $this->stripVOID_NULL(
                 $this->Data["Series"][$SerieName]["Data"]
             );
             $this->Data["Series"][$SerieName]["Max"] = max($strippedData);
@@ -1274,30 +1274,30 @@ class Data
             ;
 
             if (@eval($Expression) === false) {
-                $return = VOID;
+                $return = VOID_NULL;
             }
 
             if (isset($return) === false) {
-                $return = VOID;
+                $return = VOID_NULL;
             }
 
             if ($return == "!") {
-                $return = VOID;
+                $return = VOID_NULL;
             } else {
                 $returnAsString = (string) $return;
                 $return = $this->right($returnAsString, strlen($returnAsString) - 1);
             }
 
             if ($return == "NAN") {
-                $return = VOID;
+                $return = VOID_NULL;
             }
 
             if ($return == "INF") {
-                $return = VOID;
+                $return = VOID_NULL;
             }
 
             if ($return == "-INF") {
-                $return = VOID;
+                $return = VOID_NULL;
             }
 
             $Abscissa[] = $i;
@@ -1332,15 +1332,15 @@ class Data
 
             $Data = [];
             foreach ($this->Data["Series"][$SerieName]["Data"] as $Key => $Value) {
-                if ($Value == VOID) {
-                    $Data[] = VOID;
+                if ($Value == VOID_NULL) {
+                    $Data[] = VOID_NULL;
                 } else {
                     $Data[] = -$Value;
                 }
             }
 
             /** @var non-empty-list<float|int> $strippedData */
-            $strippedData = $this->stripVOID(
+            $strippedData = $this->stripVOID_NULL(
                 $this->Data["Series"][$SerieName]["Data"]
             );
 

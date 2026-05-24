@@ -31,7 +31,7 @@ use const TEXT_ALIGN_MIDDLEMIDDLE;
 use const TEXT_ALIGN_MIDDLERIGHT;
 use const TEXT_ALIGN_TOPLEFT;
 use const TEXT_ALIGN_TOPRIGHT;
-use const VOID;
+use const VOID_NULL;
 
 class Pie
 {
@@ -1807,8 +1807,8 @@ class Pie
             }
 
             $Step = (360 / (2 * PI * $OuterRadius)) / 2;
-            $OutX1 = VOID;
-            $OutY1 = VOID;
+            $OutX1 = VOID_NULL;
+            $OutY1 = VOID_NULL;
             for ($i = $Offset; $i >= $EndAngle; $i = $i - $Step) {
                 $Xc = cos(($i - 90) * PI / 180) * ($OuterRadius + $DataGapRadius - 2) + $X;
                 $Yc = sin(($i - 90) * PI / 180) * ($OuterRadius + $DataGapRadius - 2) * $SkewFactor + $Y;
@@ -1822,7 +1822,7 @@ class Pie
                 $Yc = sin(($i - 90) * PI / 180) * ($OuterRadius + $DataGapRadius) * $SkewFactor + $Y;
                 $this->pChartObject->drawAntialiasPixel($Xc, $Yc, $Settings);
 
-                if ($OutX1 == VOID) {
+                if ($OutX1 == VOID_NULL) {
                     $OutX1 = $Xc;
                     $OutY1 = $Yc;
                 }
@@ -1850,12 +1850,12 @@ class Pie
             $OutX2 = $Xc;
             $OutY2 = $Yc;
 
-            $Slices[$Slice]["Angle"][] = VOID;
+            $Slices[$Slice]["Angle"][] = VOID_NULL;
             $Lasti = $i;
 
             $Step = (360 / (2 * PI * $InnerRadius)) / 2;
-            $InX1 = VOID;
-            $InY1 = VOID;
+            $InX1 = VOID_NULL;
+            $InY1 = VOID_NULL;
             for ($i = $EndAngle; $i <= $Offset; $i = $i + $Step) {
                 $Xc = cos(($i - 90) * PI / 180) * ($InnerRadius + $DataGapRadius - 1) + $X;
                 $Yc = sin(($i - 90) * PI / 180) * ($InnerRadius + $DataGapRadius - 1) * $SkewFactor + $Y;
@@ -1865,7 +1865,7 @@ class Pie
                 $Yc = sin(($i - 90) * PI / 180) * ($InnerRadius + $DataGapRadius) * $SkewFactor + $Y;
                 $Slices[$Slice]["AA"][] = [$Xc, $Yc];
 
-                if ($InX1 == VOID) {
+                if ($InX1 == VOID_NULL) {
                     $InX1 = $Xc;
                     $InY1 = $Yc;
                 }
@@ -1945,7 +1945,7 @@ class Pie
 
             $StartAngle = $Plots["Angle"][0];
             foreach ($Plots["Angle"] as $Key => $Angle) {
-                if ($Angle == VOID) {
+                if ($Angle == VOID_NULL) {
                     $EndAngle = $Plots["Angle"][$Key - 1];
                 }
             }
@@ -1997,7 +1997,7 @@ class Pie
             $InnerPlotsA = [];
             $InnerPlotsB = [];
             foreach ($Plots["Angle"] as $ID => $Angle) {
-                if ($Angle == VOID) {
+                if ($Angle == VOID_NULL) {
                     $Outer = false;
                     $Inner = true;
                 } elseif ($Inner && ($Angle < 90 || $Angle > 270) && isset($Plots["BottomPoly"][$ID * 2])) {
@@ -2027,7 +2027,7 @@ class Pie
 
             $StartAngle = $Plots["Angle"][0];
             foreach ($Plots["Angle"] as $Key => $Angle) {
-                if ($Angle == VOID) {
+                if ($Angle == VOID_NULL) {
                     $EndAngle = $Plots["Angle"][$Key - 1];
                 }
             }
@@ -2072,7 +2072,7 @@ class Pie
 
             $StartAngle = $Plots["Angle"][0];
             foreach ($Plots["Angle"] as $Key => $Angle) {
-                if ($Angle == VOID) {
+                if ($Angle == VOID_NULL) {
                     $EndAngle = $Plots["Angle"][$Key - 1];
                 }
             }
@@ -2113,7 +2113,7 @@ class Pie
             $InnerPlotsA = [];
             $InnerPlotsB = [];
             foreach ($Plots["Angle"] as $ID => $Angle) {
-                if ($Angle == VOID) {
+                if ($Angle == VOID_NULL) {
                     $Outer = false;
                     $Inner = true;
                 } elseif ($Outer && ($Angle > 90 && $Angle < 270) && isset($Plots["BottomPoly"][$ID * 2])) {

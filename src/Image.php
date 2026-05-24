@@ -16,7 +16,7 @@ use const TEXT_ALIGN_MIDDLERIGHT;
 use const TEXT_ALIGN_TOPLEFT;
 use const TEXT_ALIGN_TOPMIDDLE;
 use const TEXT_ALIGN_TOPRIGHT;
-use const VOID;
+use const VOID_NULL;
 
 class Image extends Draw
 {
@@ -505,12 +505,12 @@ class Image extends Draw
     }
 
     /**
-     * Remove VOID values from an imagemap custom values array
+     * Remove VOID_NULL values from an imagemap custom values array
      * @param string $SerieName
      * @param array<int|float|numeric-string, int|float|numeric-string> $Values
      * @return list<float|int|numeric-string>|int
      */
-    public function removeVOIDFromArray($SerieName, array $Values)
+    public function removeVOID_NULLFromArray($SerieName, array $Values)
     {
         if (!isset($this->DataSet->Data["Series"][$SerieName])) {
             return -1;
@@ -518,7 +518,7 @@ class Image extends Draw
 
         $Result = [];
         foreach ($this->DataSet->Data["Series"][$SerieName]["Data"] as $Key => $Value) {
-            if ($Value != VOID && isset($Values[$Key])) {
+            if ($Value != VOID_NULL && isset($Values[$Key])) {
                 $Result[] = $Values[$Key];
             }
         }
@@ -539,7 +539,7 @@ class Image extends Draw
         }
 
         if (is_array($NewTitle)) {
-            $NewTitle = $this->removeVOIDFromArray($OldTitle, $NewTitle);
+            $NewTitle = $this->removeVOID_NULLFromArray($OldTitle, $NewTitle);
         }
 
         if ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_SESSION) {
@@ -632,7 +632,7 @@ class Image extends Draw
             return -1;
         }
 
-        $Values = $this->removeVOIDFromArray($Title, $Values);
+        $Values = $this->removeVOID_NULLFromArray($Title, $Values);
         $ID = 0;
         if ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_SESSION) {
             if (!isset($_SESSION)) {
