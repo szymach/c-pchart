@@ -15,7 +15,7 @@ use const LEGEND_HORIZONTAL;
 use const LEGEND_NOBORDER;
 use const SCALE_POS_TOPBOTTOM;
 use const TEXT_ALIGN_BOTTOMMIDDLE;
-use const VOID;
+use const VOID_NULL;
 
 final class FilledStepTest extends Unit
 {
@@ -24,7 +24,7 @@ final class FilledStepTest extends Unit
     public function testChartRender(): void
     {
         $data = new Data();
-        $data->addPoints([-4, 2, VOID, 12, 8, 3], 'Probe 1');
+        $data->addPoints([-4, 2, VOID_NULL, 12, 8, 3], 'Probe 1');
         $data->addPoints([3, 12, 15, 8, 5, -5], 'Probe 2');
         $data->addPoints([2, 7, 5, 18, 19, 22], 'Probe 3');
         $data->setSerieTicks('Probe 2', 4);

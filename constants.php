@@ -43,7 +43,7 @@ define("AXIS_Y", 682002);
 define("ABSOLUTE_MIN", -10000000000000);
 define("ABSOLUTE_MAX", 10000000000000);
 /* Replacement to the PHP null keyword */
-define("VOID", 0.123456789);
+define("VOID_NULL", 0.123456789);
 /* Euro symbol for GD fonts */
 define("EURO_SYMBOL", "&#8364;");
 

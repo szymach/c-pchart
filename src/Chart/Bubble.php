@@ -118,7 +118,7 @@ class Bubble
 
     public function drawBubbleChart($DataSeries, $WeightSeries, $Format = "")
     {
-        $ForceAlpha = isset($Format["ForceAlpha"]) ? $Format["ForceAlpha"] : VOID;
+        $ForceAlpha = isset($Format["ForceAlpha"]) ? $Format["ForceAlpha"] : VOID_NULL;
         $DrawBorder = isset($Format["DrawBorder"]) ? $Format["DrawBorder"] : true;
         $BorderWidth = isset($Format["BorderWidth"]) ? $Format["BorderWidth"] : 1;
         $Shape = isset($Format["Shape"]) ? $Format["Shape"] : BUBBLE_SHAPE_ROUND;
@@ -174,7 +174,7 @@ class Bubble
                 "Alpha" => $Palette[$Key]["Alpha"]
             ];
 
-            if ($ForceAlpha != VOID) {
+            if ($ForceAlpha != VOID_NULL) {
                 $Color["Alpha"] = $ForceAlpha;
             }
 
@@ -185,7 +185,7 @@ class Bubble
                         $BorderG = $Palette[$Key]["G"] + $Surrounding;
                         $BorderB = $Palette[$Key]["B"] + $Surrounding;
                     }
-                    if ($ForceAlpha != VOID) {
+                    if ($ForceAlpha != VOID_NULL) {
                         $BorderAlpha = $ForceAlpha / 2;
                     }
                     $BorderColor = [
@@ -206,7 +206,7 @@ class Bubble
                         $Color["BorderG"] = $BorderG;
                         $Color["BorderB"] = $BorderB;
                     }
-                    if ($ForceAlpha != VOID) {
+                    if ($ForceAlpha != VOID_NULL) {
                         $Color["BorderAlpha"] = $ForceAlpha / 2;
                     }
                 }

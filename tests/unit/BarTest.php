@@ -15,7 +15,7 @@ use const LEGEND_HORIZONTAL;
 use const LEGEND_NOBORDER;
 use const SCALE_POS_TOPBOTTOM;
 use const TEXT_ALIGN_BOTTOMMIDDLE;
-use const VOID;
+use const VOID_NULL;
 
 final class BarTest extends Unit
 {
@@ -24,7 +24,7 @@ final class BarTest extends Unit
     public function testChartRender(): void
     {
         $data = new Data();
-        $data->addPoints([-4, VOID, VOID, 12, 8, 3], 'Probe 1');
+        $data->addPoints([-4, VOID_NULL, VOID_NULL, 12, 8, 3], 'Probe 1');
         $data->addPoints([3, 12, 15, 8, 5, -5], 'Probe 2');
         $data->addPoints([2, 0, 5, 18, 19, 22], 'Probe 3');
         $data->setSerieTicks('Probe 2', 4);

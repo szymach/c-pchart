@@ -28,7 +28,7 @@ class Indicator
      */
     public function draw($X, $Y, $Width, $Height, array $Format = [])
     {
-        $Values = isset($Format["Values"]) ? $Format["Values"] : VOID;
+        $Values = isset($Format["Values"]) ? $Format["Values"] : VOID_NULL;
         $IndicatorSections = isset($Format["IndicatorSections"]) ? $Format["IndicatorSections"] : null;
         $ValueDisplay = isset($Format["ValueDisplay"]) ? $Format["ValueDisplay"] : INDICATOR_VALUE_BUBBLE;
         $SectionsMargin = isset($Format["SectionsMargin"]) ? $Format["SectionsMargin"] : 4;

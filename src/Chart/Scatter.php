@@ -928,7 +928,7 @@ class Scatter
                     $X = $Value;
                     $Y = $PosArrayY[$Key];
 
-                    if ($X != VOID && $Y != VOID) {
+                    if ($X != VOID_NULL && $Y != VOID_NULL) {
                         $RealValue = sprintf(
                             "%s / %s",
                             round($Data["Series"][$Series["X"]]["Data"][$Key], 2),
@@ -1053,13 +1053,13 @@ class Scatter
                     $Color["Weight"] = $Weight;
                 }
 
-                $LastX = VOID;
-                $LastY = VOID;
+                $LastX = VOID_NULL;
+                $LastY = VOID_NULL;
                 foreach ($PosArrayX as $Key => $Value) {
                     $X = $Value;
                     $Y = $PosArrayY[$Key];
 
-                    if ($X != VOID && $Y != VOID) {
+                    if ($X != VOID_NULL && $Y != VOID_NULL) {
                         $RealValue = sprintf(
                             "%s / %s",
                             round($Data["Series"][$Series["X"]]["Data"][$Key], 2),
@@ -1080,7 +1080,7 @@ class Scatter
                         }
                     }
 
-                    if ($X != VOID && $Y != VOID && $LastX != VOID && $LastY != VOID) {
+                    if ($X != VOID_NULL && $Y != VOID_NULL && $LastX != VOID_NULL && $LastY != VOID_NULL) {
                         $this->pChartObject->drawLine($LastX, $LastY, $X, $Y, $Color);
                     }
                     $LastX = $X;
@@ -1148,8 +1148,8 @@ class Scatter
                     $SplineSettings["Weight"] = $Weight;
                 }
 
-                $LastX = VOID;
-                $LastY = VOID;
+                $LastX = VOID_NULL;
+                $LastY = VOID_NULL;
                 $WayPoints = [];
                 $Forces = [];
                 foreach ($PosArrayX as $Key => $Value) {
@@ -1157,7 +1157,7 @@ class Scatter
                     $Y = $PosArrayY[$Key];
                     $Force = $this->pChartObject->getLength($LastX, $LastY, $X, $Y) / 5;
 
-                    if ($X != VOID && $Y != VOID) {
+                    if ($X != VOID_NULL && $Y != VOID_NULL) {
                         $RealValue = sprintf(
                             "%s / %s",
                             round($Data["Series"][$Series["X"]]["Data"][$Key], 2),
@@ -1178,12 +1178,12 @@ class Scatter
                         }
                     }
 
-                    if ($X != VOID && $Y != VOID) {
+                    if ($X != VOID_NULL && $Y != VOID_NULL) {
                         $WayPoints[] = [$X, $Y];
                         $Forces[] = $Force;
                     }
 
-                    if ($Y == VOID || $X == VOID) {
+                    if ($Y == VOID_NULL || $X == VOID_NULL) {
                         $SplineSettings["Forces"] = $Forces;
                         $this->pChartObject->drawSpline($WayPoints, $SplineSettings);
                         $WayPoints = [];
@@ -1222,8 +1222,8 @@ class Scatter
 
             $Result = [];
             foreach ($Values as $Key => $Value) {
-                if ($Value == VOID) {
-                    $Result[] = VOID;
+                if ($Value == VOID_NULL) {
+                    $Result[] = VOID_NULL;
                 } else {
                     $Result[] = $this->pChartObject->GraphAreaX1
                         + $Data["Axis"][$AxisID]["Margin"]
@@ -1240,8 +1240,8 @@ class Scatter
 
             $Result = [];
             foreach ($Values as $Key => $Value) {
-                if ($Value == VOID) {
-                    $Result[] = VOID;
+                if ($Value == VOID_NULL) {
+                    $Result[] = VOID_NULL;
                 } else {
                     $Result[] = $this->pChartObject->GraphAreaY2
                         - $Data["Axis"][$AxisID]["Margin"]
